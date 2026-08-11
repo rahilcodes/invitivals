@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" preserveAspectRatio="xMidYMid slice">
+  <defs>
+    <linearGradient id="g55" x1="0" y1="0" x2="0.9" y2="1">
+      <stop offset="0" stop-color="#e9e0d2"/><stop offset="1" stop-color="#cbb9a2"/>
+    </linearGradient>
+    <radialGradient id="g55w0" cx="0.20" cy="0.31" r="0.75">
+        <stop offset="0" stop-color="#a98f6f" stop-opacity=".62"/>
+        <stop offset="1" stop-color="#a98f6f" stop-opacity="0"/>
+      </radialGradient><radialGradient id="g55w1" cx="0.34" cy="0.36" r="0.56">
+        <stop offset="0" stop-color="#efe9dd" stop-opacity=".62"/>
+        <stop offset="1" stop-color="#efe9dd" stop-opacity="0"/>
+      </radialGradient>
+  </defs>
+  <rect width="800" height="500" fill="url(#g55)"/>
+  <rect width="800" height="500" fill="url(#g55w0)"/>
+  <rect width="800" height="500" fill="url(#g55w1)"/>
+  <g fill="none" stroke="#7b654c" stroke-opacity=".38" stroke-width="1.4"><path d="M 448.9741792985929 408.755942744907 Q 447.9 394.4 458.2 381.6 Q 456.7 367.3 466.6 354.1 Q 463.6 340.0 472.1 325.9 Q 466.4 312.7 471.9 297.2 Q 463.4 285.6 465.4 269.2 Q 459.2 256.3 464.1 240.5 Q 455.4 229.1 457.0 212.7"/></g><g fill="#7b654c" fill-opacity=".16"><ellipse cx="466.6" cy="354.1" rx="15.0" ry="5.7" transform="rotate(-18.1 466.6 354.1)"/><ellipse cx="472.1" cy="325.9" rx="15.5" ry="5.9" transform="rotate(-133.9 472.1 325.9)"/><ellipse cx="471.9" cy="297.2" rx="10.8" ry="4.1" transform="rotate(-35.4 471.9 297.2)"/><ellipse cx="465.4" cy="269.2" rx="14.5" ry="5.5" transform="rotate(-158.1 465.4 269.2)"/><ellipse cx="464.1" cy="240.5" rx="15.8" ry="6.0" transform="rotate(-37.6 464.1 240.5)"/><ellipse cx="457.0" cy="212.7" rx="11.7" ry="4.4" transform="rotate(-159.4 457.0 212.7)"/></g>
+  <g fill="none" stroke="#7b654c" stroke-opacity=".38" stroke-width="1.4"><path d="M 357.1041351529808 383.7860791094472 Q 344.7 369.0 345.9 346.9 Q 334.3 331.4 336.6 309.4 Q 327.7 292.2 333.6 270.9 Q 324.4 253.9 329.8 232.5 Q 316.8 218.2 317.0 196.1 Q 307.4 179.3 312.4 157.7 Q 299.3 143.6 299.2 121.5"/></g><g fill="#7b654c" fill-opacity=".16"><ellipse cx="336.6" cy="309.4" rx="15.0" ry="5.7" transform="rotate(-48.9 336.6 309.4)"/><ellipse cx="333.6" cy="270.9" rx="15.5" ry="5.9" transform="rotate(-149.5 333.6 270.9)"/><ellipse cx="329.8" cy="232.5" rx="10.8" ry="4.1" transform="rotate(-40.6 329.8 232.5)"/><ellipse cx="317.0" cy="196.1" rx="14.5" ry="5.5" transform="rotate(-164.4 317.0 196.1)"/><ellipse cx="312.4" cy="157.7" rx="15.8" ry="6.0" transform="rotate(-41.8 312.4 157.7)"/><ellipse cx="299.2" cy="121.5" rx="11.7" ry="4.4" transform="rotate(-165.1 299.2 121.5)"/></g>
+</svg>

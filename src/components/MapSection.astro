@@ -1,0 +1,107 @@
+---
+import config from '../wedding.config';
+import { mapsEmbedUrl, mapsViewUrl, mapsDirectionsUrl } from '../lib/helpers';
+---
+
+<section class="map" data-screen="map-and-directions" aria-labelledby="map-h">
+  <div class="head rv-rise">
+    <div class="overline">Getting there</div>
+    <h2 id="map-h">Find your way</h2>
+  </div>
+
+  <div class="embed rv-zoom" style="--rvr:entry 15% cover 38%">
+    <iframe
+      src={mapsEmbedUrl()}
+      title={`Map showing ${config.venue.name}`}
+      loading="lazy"
+      allowfullscreen
+      referrerpolicy="no-referrer-when-downgrade"
+    ></iframe>
+  </div>
+
+  <div class="actions">
+    <a class="pill primary" href={mapsDirectionsUrl()} target="_blank" rel="noopener">Get directions</a>
+    <a class="pill" href={mapsViewUrl()} target="_blank" rel="noopener">View on map</a>
+  </div>
+
+  <p class="notes">
+    {config.venue.travelNotes.map((line, i) => (
+      <>
+        {i > 0 && <br />}
+        {line}
+      </>
+    ))}
+  </p>
+</section>
+
+<style>
+  .map {
+    padding: 96px 24px;
+    max-width: 680px;
+    margin: 0 auto;
+  }
+  .head {
+    text-align: center;
+  }
+  .overline {
+    font-size: 11px;
+    letter-spacing: 0.32em;
+    color: var(--gold);
+    text-transform: uppercase;
+  }
+  h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 500;
+    font-size: clamp(34px, 6vw, 52px);
+    margin: 12px 0 0;
+  }
+  .embed {
+    margin-top: 48px;
+    height: 300px;
+    border: 1px solid var(--goldSoft);
+    background: var(--bg2);
+  }
+  iframe {
+    width: 100%;
+    height: 100%;
+    border: 0;
+    display: block;
+    filter: saturate(0.82) contrast(0.98);
+  }
+  .actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    justify-content: center;
+    margin-top: 26px;
+  }
+  .pill {
+    border: 1px solid var(--goldSoft);
+    color: var(--mut);
+    padding: 14px 26px;
+    border-radius: 999px;
+    font-size: 11px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    transition: border-color 0.3s ease, color 0.3s ease, background 0.3s ease;
+  }
+  .pill:hover {
+    border-color: var(--gold);
+    color: var(--gold);
+  }
+  .pill.primary {
+    border-color: var(--ink);
+    color: var(--ink);
+  }
+  .pill.primary:hover {
+    background: var(--ink);
+    color: var(--bg);
+  }
+  .notes {
+    text-align: center;
+    font-size: 13px;
+    line-height: 1.9;
+    color: var(--mut);
+    margin: 30px 0 0;
+  }
+</style>

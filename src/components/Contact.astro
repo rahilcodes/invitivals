@@ -1,0 +1,88 @@
+---
+import config from '../wedding.config';
+import { whatsappUrl } from '../lib/helpers';
+---
+
+<section class="contact" data-screen="contact" aria-labelledby="contact-h">
+  <div class="inner rv-rise" style="--rvr:entry 10% cover 35%">
+    <div class="overline">Questions?</div>
+    <h2 id="contact-h">{config.contact.heading}</h2>
+    <p>{config.contact.intro}</p>
+    <div class="actions">
+      <a class="call" href={`tel:${config.contact.phone}`}>{config.contact.callLabel}</a>
+      <a class="wa" href={whatsappUrl()} target="_blank" rel="noopener">WhatsApp</a>
+      <button class="share" id="wl-share" type="button">Share</button>
+    </div>
+  </div>
+</section>
+
+<style>
+  .contact {
+    padding: 0 24px 110px;
+    text-align: center;
+  }
+  .inner {
+    max-width: 520px;
+    margin: 0 auto;
+  }
+  .overline {
+    font-size: 11px;
+    letter-spacing: 0.32em;
+    color: var(--gold);
+    text-transform: uppercase;
+  }
+  h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 500;
+    font-size: clamp(30px, 5.5vw, 42px);
+    margin: 12px 0 8px;
+  }
+  p {
+    font-size: 14px;
+    color: var(--mut);
+    line-height: 1.7;
+    margin: 0 0 30px;
+  }
+  .actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    justify-content: center;
+  }
+  .actions > * {
+    padding: 16px 30px;
+    border-radius: 999px;
+    font-size: 11px;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    min-height: 48px;
+    box-sizing: border-box;
+    transition: background 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+  }
+  .call {
+    background: var(--ink);
+    color: var(--bg);
+  }
+  .call:hover {
+    background: var(--gold);
+    color: var(--bg);
+  }
+  .wa {
+    border: 1px solid var(--ink);
+    color: var(--ink);
+  }
+  .wa:hover {
+    background: var(--ink);
+    color: var(--bg);
+  }
+  .share {
+    border: 1px solid var(--goldSoft);
+    background: none;
+    color: var(--mut);
+    cursor: pointer;
+  }
+  .share:hover {
+    border-color: var(--gold);
+    color: var(--gold);
+  }
+</style>

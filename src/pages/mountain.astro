@@ -1,0 +1,966 @@
+---
+import '@fontsource/cormorant/400.css';
+import '@fontsource/cormorant/500.css';
+import '@fontsource/cormorant-infant/400.css';
+import '@fontsource/cormorant-upright/400.css';
+import '@fontsource/cormorant-unicase/400.css';
+import '@fontsource/gotu/400.css';
+import '@fontsource/manrope/600.css';
+
+/* ── The Mountain — a moonlit pahadi shaadi, night to day in one scroll ── */
+
+const title = 'Vihaan & Anaya — March 8, 2027';
+const description =
+  'With the heavenly blessings of our families — Vihaan & Anaya invite you to their wedding celebrations. The Deodar Palace, Mussoorie · March 5–9, 2027.';
+
+const MAPS = 'https://maps.google.com/?q=Mussoorie,+Uttarakhand';
+const RSVP = 'https://wa.me/919999999999?text=' + encodeURIComponent('We would love to join Vihaan & Anaya in Mussoorie! RSVP from: ');
+const INSTAGRAM = 'https://instagram.com/myinvite.in';
+const SHAADI_ISO = '2027-03-08T18:00:00+05:30';
+
+const events = [
+  { key: 'mehendi',   name: 'Mehendi',     date: 'Friday, March 5th 2027',   venue: 'The Deodar Palace, Mussoorie', time: '4pm Onwards' },
+  { key: 'haldi',     name: 'Haldi',       date: 'Saturday, March 6th 2027', venue: 'The Deodar Palace, Mussoorie', time: '10am Onwards' },
+  { key: 'cocktail',  name: 'Cocktail',    date: 'Saturday, March 6th 2027', venue: 'The Deodar Palace, Mussoorie', time: '7pm Onwards' },
+  { key: 'prewed',    name: 'Pre-Wedding', date: 'Sunday, March 7th 2027',   venue: 'The Deodar Palace, Mussoorie', time: '6pm Onwards' },
+  { key: 'shaadi',    name: 'Shaadi',      date: 'Monday, March 8th 2027',   venue: 'The Deodar Palace, Mussoorie', time: '6pm Onwards' },
+  { key: 'reception', name: 'Reception',   date: 'Tuesday, March 9th 2027',  venue: 'The Deodar Palace, Mussoorie', time: '7pm Onwards' },
+];
+
+const know = [
+  { key: 'hashtag', head: 'Hashtag', body: 'While posting photos and stories on social media, please use our hashtag — #AnayaWedsVihaan' },
+  { key: 'weather', head: 'Weather', body: 'March evenings in the hills dip to about 8°C — do carry a shawl or a smart jacket for the outdoor functions' },
+  { key: 'staff',   head: 'Staff',   body: 'Comfortable rooms for accompanying staff and drivers are arranged at Cedar Lodge, two minutes from the venue' },
+  { key: 'parking', head: 'Parking', body: 'Valet parking will be available at the main gate of the venue for all our guests' },
+];
+
+/* star field: top%, left%, scale, delay(s) */
+const stars = [
+  [6, 12, 1, 0], [9, 74, 0.7, 0.9], [14, 40, 0.55, 1.6], [18, 88, 0.9, 0.4],
+  [22, 8, 0.6, 2.1], [26, 58, 1, 1.2], [31, 26, 0.7, 0.2], [34, 80, 0.55, 1.8],
+  [42, 14, 0.8, 0.7], [46, 66, 0.6, 2.4], [54, 36, 0.9, 1.1], [58, 90, 0.7, 0.5],
+  [66, 20, 0.55, 1.4], [72, 72, 0.8, 2.0], [80, 46, 0.6, 0.8], [86, 10, 0.9, 1.7],
+];
+
+const poms = Array.from({ length: 12 }, (_, i) => i);
+const pines = Array.from({ length: 13 }, (_, i) => i);
+
+const favicon =
+  'data:image/svg+xml,' +
+  encodeURIComponent(
+    '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><rect width="64" height="64" rx="32" fill="#022938"/><path d="M40 12 a20 20 0 1 0 12 30 a16 16 0 1 1 -12 -30 Z" fill="#c9b06a"/><circle cx="44" cy="20" r="2" fill="#c9b06a"/></svg>'
+  );
+---
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="theme-color" content="#022938" />
+    <link rel="icon" href={favicon} />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content="/art/mountain/hero.svg" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <script is:inline>document.documentElement.classList.replace('no-js', 'js');</script>
+  </head>
+
+  <body>
+    <!-- ── shared svg defs ─────────────────────────────────────────── -->
+    <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+      <defs>
+        <linearGradient id="archsky" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stop-color="#04374a"></stop>
+          <stop offset="1" stop-color="#11576a"></stop>
+        </linearGradient>
+        <radialGradient id="moonglow" cx="0.5" cy="0.5" r="0.5">
+          <stop offset="0" stop-color="#f3e9d2" stop-opacity=".45"></stop>
+          <stop offset="1" stop-color="#f3e9d2" stop-opacity="0"></stop>
+        </radialGradient>
+        <path
+          id="archp"
+          d="M28 332 V168 Q28 112 62 84 Q78 71 88 56 Q100 38 112 32 Q122 27 126 16 L130 8 L134 16 Q138 27 148 32 Q160 38 172 56 Q182 71 198 84 Q232 112 232 168 V332 Z"
+        ></path>
+        <clipPath id="archclip">
+          <path
+            d="M28 332 V168 Q28 112 62 84 Q78 71 88 56 Q100 38 112 32 Q122 27 126 16 L130 8 L134 16 Q138 27 148 32 Q160 38 172 56 Q182 71 198 84 Q232 112 232 168 V332 Z"
+          ></path>
+        </clipPath>
+        <path
+          id="cloudp"
+          d="M14 58 Q0 54 4 42 Q-2 28 16 26 Q20 8 42 12 Q52 -4 72 6 Q94 -2 100 18 Q120 18 116 38 Q126 52 108 58 Q104 64 92 62 L26 62 Q16 64 14 58 Z"
+        ></path>
+        <g id="starp">
+          <path d="M0 -9 L2.2 -2.2 L9 0 L2.2 2.2 L0 9 L-2.2 2.2 L-9 0 L-2.2 -2.2 Z"></path>
+        </g>
+        <g id="pinep">
+          <path d="M14 0 L26 26 L20 24 L29 46 L21 44 L28 62 L0 62 L7 44 L-1 46 L8 24 L2 26 Z"></path>
+          <rect x="11" y="62" width="6" height="9" rx="1"></rect>
+        </g>
+        <g id="palaceg">
+          <g stroke="#97854f" stroke-width="2">
+            <rect x="10" y="96" width="220" height="22" fill="#efe2c4"></rect>
+            <rect x="60" y="38" width="120" height="58" fill="#f1e4c8"></rect>
+            <path d="M120 -22 Q88 -8 92 38 L148 38 Q152 -8 120 -22 Z" fill="#c9a24b"></path>
+            <path d="M120 -22 L120 -40" stroke-linecap="round"></path>
+            <path d="M120 -40 L136 -34 L120 -28 Z" fill="#b0533b" stroke="none"></path>
+            <rect x="20" y="26" width="34" height="70" fill="#f1e4c8"></rect>
+            <rect x="186" y="26" width="34" height="70" fill="#f1e4c8"></rect>
+            <path d="M37 8 Q24 14 24 26 L50 26 Q50 14 37 8 Z" fill="#c9a24b"></path>
+            <path d="M203 8 Q190 14 190 26 L216 26 Q216 14 203 8 Z" fill="#c9a24b"></path>
+          </g>
+          <g fill="#0c4860">
+            <path d="M84 96 v-20 q0 -12 12 -12 q12 0 12 12 v20 Z"></path>
+            <path d="M132 96 v-20 q0 -12 12 -12 q12 0 12 12 v20 Z"></path>
+            <rect x="31" y="52" width="12" height="20" rx="6"></rect>
+            <rect x="197" y="52" width="12" height="20" rx="6"></rect>
+          </g>
+          <g fill="#c9a24b">
+            <circle cx="96" cy="70" r="2"></circle>
+            <circle cx="144" cy="70" r="2"></circle>
+          </g>
+        </g>
+      </defs>
+    </svg>
+
+    <div class="page" id="top">
+      <!-- soft damask wallpaper over the night sky -->
+      <div class="damask" aria-hidden="true"></div>
+
+      <!-- ── HERO — names under the sleeping moon ────────────────────── -->
+      <header class="hero">
+        <div class="stars" aria-hidden="true">
+          {stars.map(([t, l, s, d]) => (
+            <svg class="star" viewBox="-10 -10 20 20" style={`top:${t}%;left:${l}%;--s:${s};--d:${d}s`}>
+              <use href="#starp" fill="#e8d9a8"></use>
+            </svg>
+          ))}
+        </div>
+
+        <svg class="garl left" viewBox="0 0 36 780" preserveAspectRatio="xMidYMin meet" aria-hidden="true">
+          {poms.map((i) => (
+            <g transform={`translate(18 ${24 + i * 64})`}>
+              <circle r="11" fill={i % 2 ? '#e4b33c' : '#e8952f'}></circle>
+              <circle r="6.5" fill="none" stroke={i % 2 ? '#bd8f22' : '#c9741d'} stroke-width="2" stroke-dasharray="2 3"></circle>
+              <ellipse cx="-8" cy="32" rx="8" ry="3.6" fill="#4c7a55" transform="rotate(-26 -8 32)"></ellipse>
+              <ellipse cx="8" cy="32" rx="8" ry="3.6" fill="#4c7a55" transform="rotate(26 8 32)"></ellipse>
+            </g>
+          ))}
+        </svg>
+        <svg class="garl right" viewBox="0 0 36 780" preserveAspectRatio="xMidYMin meet" aria-hidden="true">
+          {poms.map((i) => (
+            <g transform={`translate(18 ${24 + i * 64})`}>
+              <circle r="11" fill={i % 2 ? '#e8952f' : '#e4b33c'}></circle>
+              <circle r="6.5" fill="none" stroke={i % 2 ? '#c9741d' : '#bd8f22'} stroke-width="2" stroke-dasharray="2 3"></circle>
+              <ellipse cx="-8" cy="32" rx="8" ry="3.6" fill="#4c7a55" transform="rotate(-26 -8 32)"></ellipse>
+              <ellipse cx="8" cy="32" rx="8" ry="3.6" fill="#4c7a55" transform="rotate(26 8 32)"></ellipse>
+            </g>
+          ))}
+        </svg>
+
+        <div class="moon-wrap" data-plx="0.06" aria-hidden="true">
+          <svg class="moon float" viewBox="0 0 140 140">
+            <circle cx="70" cy="70" r="70" fill="url(#moonglow)"></circle>
+            <mask id="cres">
+              <rect width="140" height="140" fill="#fff"></rect>
+              <circle cx="100" cy="50" r="46" fill="#000"></circle>
+            </mask>
+            <circle cx="70" cy="70" r="46" fill="#f3e9d2" mask="url(#cres)"></circle>
+            <path d="M40 72 Q47 79 54 72" stroke="#b9a77f" stroke-width="2.6" fill="none" stroke-linecap="round"></path>
+            <path d="M39 79 l-3 4 M46 81 l-1 5 M53 79 l2 5" stroke="#b9a77f" stroke-width="1.8" stroke-linecap="round"></path>
+            <path d="M46 92 Q52 97 59 92" stroke="#b9a77f" stroke-width="2.6" fill="none" stroke-linecap="round"></path>
+            <circle cx="36" cy="88" r="4.5" fill="#e8c9a8" opacity=".75"></circle>
+          </svg>
+        </div>
+
+        <svg class="cloud c1 drift" viewBox="-4 -6 134 74" aria-hidden="true"><use href="#cloudp" fill="#f2eada" opacity=".92"></use></svg>
+        <svg class="cloud c2 drift slow" viewBox="-4 -6 134 74" aria-hidden="true"><use href="#cloudp" fill="#e9dfc8" opacity=".8"></use></svg>
+
+        <h1 class="hero-names rv in">
+          <span class="groom f-inf">Vihaan</span>
+          <span class="weds f-uni">weds</span>
+          <span class="bride f-upr">Anaya</span>
+        </h1>
+
+        <svg class="cloud c3 drift" viewBox="-4 -6 134 74" aria-hidden="true"><use href="#cloudp" fill="#f2eada" opacity=".9"></use></svg>
+
+        <div class="palace-wrap" data-plx="-0.04" aria-hidden="true">
+          <svg class="palace float slow" viewBox="-60 -60 360 260">
+            <use href="#cloudp" transform="translate(-52 96) scale(2.9 2.2)" fill="#f2eada" opacity=".95"></use>
+            <use href="#palaceg"></use>
+          </svg>
+        </div>
+      </header>
+
+      <!-- ── INVITE ──────────────────────────────────────────────────── -->
+      <section class="invite" aria-label="Invitation">
+        <p class="mantra rv" lang="hi">ॐ श्री गणेशाय नमः</p>
+
+        <div class="bless rv">
+          <p>With the heavenly blessings of</p>
+          <p class="bless-names">Smt. Kaushalya Devi &amp; Shri Devraj Sharma</p>
+          <p class="dashes" aria-hidden="true">——</p>
+          <p class="bless-names">Mrs. Nirmala &amp; Mr. Arvind Sharma</p>
+        </div>
+
+        <h2 class="big-invite f-inf rv">INVITE</h2>
+
+        <p class="line rv">You to join us in the wedding celebrations of</p>
+
+        <div class="pair rv">
+          <div class="p-name f-upr">Vihaan</div>
+          <div class="p-amp f-uni" aria-hidden="true">&amp;</div>
+          <div class="p-name f-cor">Anaya</div>
+        </div>
+
+        <p class="line rv">Daughter of</p>
+        <p class="bless-names rv">Mrs. Sunita &amp; Mr. Rakesh Malhotra,</p>
+
+        <p class="line onfollow rv">On the following events</p>
+
+        <svg class="mrange" viewBox="0 0 750 170" preserveAspectRatio="xMidYMax slice" aria-hidden="true">
+          <path d="M0 120 L90 55 L150 95 L235 38 L310 100 L390 52 L470 108 L560 42 L640 98 L750 50 L750 170 L0 170 Z" fill="#0b4552" opacity=".85"></path>
+          <path d="M235 38 L262 66 L249 62 L235 76 L221 62 L208 66 Z" fill="#efe6d2" opacity=".9"></path>
+          <path d="M560 42 L586 68 L574 64 L560 78 L546 64 L534 68 Z" fill="#efe6d2" opacity=".9"></path>
+          <path d="M0 148 L80 92 L170 142 L290 78 L420 148 L540 88 L660 146 L750 100 L750 170 L0 170 Z" fill="#083a44"></path>
+          <use href="#pinep" transform="translate(120 108) scale(.62)" fill="#062f38"></use>
+          <use href="#pinep" transform="translate(430 112) scale(.55)" fill="#062f38"></use>
+          <use href="#pinep" transform="translate(600 106) scale(.66)" fill="#062f38"></use>
+        </svg>
+      </section>
+
+      <!-- ── EVENTS ──────────────────────────────────────────────────── -->
+      <section class="events" aria-label="Wedding events">
+        <div class="balloon-wrap" data-plx="0.05" aria-hidden="true">
+          <svg class="balloon sway" viewBox="0 0 90 132">
+            <path d="M45 4 C70 4 82 27 82 50 C82 76 62 91 45 95 C28 91 8 76 8 50 C8 27 20 4 45 4 Z" fill="#c9a24b"></path>
+            <path d="M45 4 C57 4 63 27 63 50 C63 76 54 91 45 95 C36 91 27 76 27 50 C27 27 33 4 45 4 Z" fill="#0f5b66"></path>
+            <path d="M45 4 C50 4 53 27 53 50 C53 76 49 91 45 95 C41 91 37 76 37 50 C37 27 40 4 45 4 Z" fill="#e8952f"></path>
+            <path d="M26 92 L34 112 M64 92 L56 112 M45 95 L45 112" stroke="#8a6b3f" stroke-width="2"></path>
+            <rect x="33" y="112" width="24" height="16" rx="3" fill="#8a6b3f"></rect>
+            <path d="M33 118 h24 M41 112 v16 M49 112 v16" stroke="#6f5531" stroke-width="1.4"></path>
+          </svg>
+        </div>
+
+        {events.map((e, i) => (
+          <article class={`event rv ${i % 2 ? 'ev-r' : 'ev-l'}`} id={e.key}>
+            <div class="ev-art">
+              <svg viewBox="0 0 260 340" role="img" aria-label={`${e.name} illustration`}>
+                <use href="#archp" fill="url(#archsky)" stroke="#ac9545" stroke-width="2.5"></use>
+                <path
+                  d="M20 336 V166 Q20 106 56 77 Q73 63 83 49 Q96 30 109 24 Q120 19 124 8 L130 -2 L136 8 Q140 19 151 24 Q164 30 177 49 Q187 63 204 77 Q240 106 240 166 V336"
+                  fill="none" stroke="#ac9545" stroke-width="1.2" opacity=".75"
+                ></path>
+                <circle cx="130" cy="2" r="3" fill="#c9b06a"></circle>
+
+                <g clip-path="url(#archclip)">
+                  <use href="#starp" transform="translate(60 60) scale(.7)" fill="#e8d9a8" opacity=".7"></use>
+                  <use href="#starp" transform="translate(206 82) scale(.55)" fill="#e8d9a8" opacity=".55"></use>
+                  <use href="#starp" transform="translate(178 46) scale(.4)" fill="#e8d9a8" opacity=".8"></use>
+
+                  {e.key === 'mehendi' && (
+                    <g>
+                      <rect x="116" y="142" width="28" height="86" rx="14" fill="#e7b98b"></rect>
+                      <rect x="92" y="158" width="24" height="72" rx="12" fill="#e7b98b"></rect>
+                      <rect x="144" y="158" width="24" height="72" rx="12" fill="#e7b98b"></rect>
+                      <path d="M92 236 q-22 -4 -22 -26 q0 -16 13 -16 q11 0 11 15 Z" fill="#e7b98b"></path>
+                      <path d="M168 236 q22 -4 22 -26 q0 -16 -13 -16 q-11 0 -11 15 Z" fill="#e7b98b"></path>
+                      <path d="M92 214 h76 q12 10 12 30 q0 40 -50 40 q-50 0 -50 -40 q0 -20 12 -30 Z" fill="#e7b98b"></path>
+                      <circle cx="130" cy="252" r="18" fill="none" stroke="#c9741d" stroke-width="2"></circle>
+                      <circle cx="130" cy="252" r="11" fill="none" stroke="#c9741d" stroke-width="1.5" stroke-dasharray="2 3"></circle>
+                      <circle cx="130" cy="252" r="4" fill="#c9741d"></circle>
+                      <circle cx="104" cy="176" r="2.2" fill="#c9741d"></circle>
+                      <circle cx="130" cy="160" r="2.2" fill="#c9741d"></circle>
+                      <circle cx="156" cy="176" r="2.2" fill="#c9741d"></circle>
+                      <path d="M104 196 q0 8 0 12 M130 182 q0 8 0 12 M156 196 q0 8 0 12" stroke="#c9741d" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-dasharray="1 4"></path>
+                      <path d="M96 224 q34 12 68 0" stroke="#c9741d" stroke-width="1.6" fill="none"></path>
+                      <circle cx="106" cy="266" r="2" fill="#c9741d"></circle>
+                      <circle cx="154" cy="266" r="2" fill="#c9741d"></circle>
+                      <path d="M118 288 q12 8 24 0" stroke="#c9741d" stroke-width="1.6" fill="none" stroke-linecap="round"></path>
+                      <path d="M84 300 q46 18 92 0" stroke="#c9741d" stroke-width="2" fill="none" stroke-linecap="round" opacity=".7"></path>
+                      <ellipse cx="74" cy="180" rx="9" ry="4" fill="#4c7a55" transform="rotate(-30 74 180)"></ellipse>
+                      <ellipse cx="192" cy="150" rx="9" ry="4" fill="#4c7a55" transform="rotate(24 192 150)"></ellipse>
+                    </g>
+                  )}
+
+                  {e.key === 'haldi' && (
+                    <g>
+                      <path d="M130 60 v36" stroke="#c9a24b" stroke-width="1.6"></path>
+                      <circle cx="130" cy="66" r="4" fill="#e8952f"></circle>
+                      <circle cx="130" cy="78" r="4" fill="#e4b33c"></circle>
+                      <circle cx="130" cy="90" r="4" fill="#e8952f"></circle>
+                      <path d="M76 238 q0 -22 22 -24 q6 -12 20 -10 q8 -12 24 -8 q16 -4 22 8 q16 0 18 16 q4 8 -4 18 Z" fill="#e4b33c"></path>
+                      <path d="M70 238 h120 q4 0 4 6 q0 10 -12 12 q-8 26 -52 26 q-44 0 -52 -26 q-12 -2 -12 -12 q0 -6 4 -6 Z" fill="#c9a24b" stroke="#97854f" stroke-width="1.6"></path>
+                      <path d="M96 262 q34 10 68 0" stroke="#97854f" stroke-width="1.4" fill="none" opacity=".6"></path>
+                      <ellipse cx="86" cy="206" rx="7" ry="3.4" fill="#e8952f" transform="rotate(-24 86 206)"></ellipse>
+                      <ellipse cx="182" cy="196" rx="7" ry="3.4" fill="#e8952f" transform="rotate(28 182 196)"></ellipse>
+                      <ellipse cx="160" cy="300" rx="8" ry="3.6" fill="#e8952f" transform="rotate(12 160 300)"></ellipse>
+                      <path d="M92 306 q6 -10 18 -6 q4 -8 12 -4" stroke="#d9a13a" stroke-width="7" fill="none" stroke-linecap="round"></path>
+                    </g>
+                  )}
+
+                  {e.key === 'cocktail' && (
+                    <g stroke="#d9c078" stroke-width="2.4" fill="none" stroke-linecap="round">
+                      <g transform="rotate(-10 105 210)">
+                        <path d="M75 172 L105 208 L135 172 Z" fill="#0d4b5c"></path>
+                        <path d="M105 208 V252 M87 254 Q105 248 123 254"></path>
+                        <path d="M82 180 q23 12 46 0" stroke-width="1.6" opacity=".8"></path>
+                        <circle cx="98" cy="184" r="4.5" fill="#b0533b" stroke="none"></circle>
+                      </g>
+                      <g transform="rotate(10 158 210)">
+                        <path d="M128 172 L158 208 L188 172 Z" fill="#0d4b5c"></path>
+                        <path d="M158 208 V252 M140 254 Q158 248 176 254"></path>
+                        <path d="M135 180 q23 12 46 0" stroke-width="1.6" opacity=".8"></path>
+                        <circle cx="168" cy="184" r="3.5" fill="#e4b33c" stroke="none"></circle>
+                      </g>
+                      <use href="#starp" transform="translate(131 152) scale(.9)" fill="#e8d9a8" stroke="none"></use>
+                      <circle cx="118" cy="140" r="2" fill="#e8d9a8" stroke="none"></circle>
+                      <circle cx="146" cy="132" r="2.6" fill="#e8d9a8" stroke="none"></circle>
+                      <path d="M96 292 h68" stroke-width="1.4" opacity=".5"></path>
+                    </g>
+                  )}
+
+                  {e.key === 'prewed' && (
+                    <g>
+                      <path d="M96 306 L88 330 M164 306 L172 330 M130 308 V330" stroke="#d9c078" stroke-width="2.4" stroke-linecap="round"></path>
+                      <rect x="80" y="196" width="100" height="70" rx="12" fill="#0f5b66" stroke="#d9c078" stroke-width="2.4"></rect>
+                      <rect x="106" y="184" width="30" height="14" rx="4" fill="#0f5b66" stroke="#d9c078" stroke-width="2"></rect>
+                      <circle cx="130" cy="231" r="22" fill="#04374a" stroke="#d9c078" stroke-width="2.4"></circle>
+                      <circle cx="130" cy="231" r="12" fill="none" stroke="#d9c078" stroke-width="1.6"></circle>
+                      <path d="M124 224 a9 9 0 0 1 6 -3" stroke="#e8d9a8" stroke-width="2" fill="none" stroke-linecap="round"></path>
+                      <circle cx="164" cy="212" r="4" fill="#e8952f"></circle>
+                      <path d="M130 160 q-7 -11 -15 -3 q-7 8 15 22 q22 -14 15 -22 q-8 -8 -15 3 Z" fill="#b0533b"></path>
+                      <use href="#starp" transform="translate(94 168) scale(.6)" fill="#e8d9a8"></use>
+                    </g>
+                  )}
+
+                  {e.key === 'shaadi' && (
+                    <g>
+                      <rect x="62" y="160" width="11" height="130" rx="4" fill="#c9a24b"></rect>
+                      <rect x="187" y="160" width="11" height="130" rx="4" fill="#c9a24b"></rect>
+                      <path d="M50 158 Q130 200 210 158 L210 142 Q130 186 50 142 Z" fill="#b0533b" stroke="#c9a24b" stroke-width="1.6"></path>
+                      <path d="M84 172 q0 26 0 34 M130 184 q0 22 0 30 M176 172 q0 26 0 34" stroke="#e8952f" stroke-width="4.5" stroke-dasharray="0.5 8" stroke-linecap="round" fill="none"></path>
+                      <path d="M116 290 q0 -18 14 -18 q14 0 14 18 q-4 6 -14 6 q-10 0 -14 -6 Z" fill="#c9a24b"></path>
+                      <circle cx="130" cy="266" r="7" fill="#8a5a2b"></circle>
+                      <path d="M124 262 l-8 -8 M130 260 v-11 M136 262 l8 -8" stroke="#4c7a55" stroke-width="3" stroke-linecap="round"></path>
+                      <path d="M78 298 q4 -10 8 0 q-4 4 -8 0 Z" fill="#e8952f"></path>
+                      <path d="M174 298 q4 -10 8 0 q-4 4 -8 0 Z" fill="#e8952f"></path>
+                      <path d="M70 302 h120" stroke="#d9c078" stroke-width="1.4" opacity=".5"></path>
+                    </g>
+                  )}
+
+                  {e.key === 'reception' && (
+                    <g>
+                      <path d="M62 120 Q130 150 198 120" stroke="#d9c078" stroke-width="1.6" fill="none"></path>
+                      <path d="M84 129 l6 12 6 -9 Z M126 137 l6 12 6 -9 Z M166 129 l6 12 6 -9 Z" fill="#e8952f"></path>
+                      <rect x="82" y="252" width="96" height="34" rx="4" fill="#f1e4c8" stroke="#c9a24b" stroke-width="1.8"></rect>
+                      <rect x="94" y="222" width="72" height="30" rx="4" fill="#f1e4c8" stroke="#c9a24b" stroke-width="1.8"></rect>
+                      <rect x="106" y="194" width="48" height="28" rx="4" fill="#f1e4c8" stroke="#c9a24b" stroke-width="1.8"></rect>
+                      <path d="M82 258 q6 8 12 0 q6 8 12 0 q6 8 12 0 q6 8 12 0 q6 8 12 0 q6 8 12 0 q6 8 12 0 q6 8 12 0" stroke="#e8c9a8" stroke-width="2" fill="none"></path>
+                      <path d="M94 228 q6 8 12 0 q6 8 12 0 q6 8 12 0 q6 8 12 0 q6 8 12 0 q6 8 12 0" stroke="#e8c9a8" stroke-width="2" fill="none"></path>
+                      <path d="M130 178 q-5 -8 -11 -2 q-5 6 11 16 q16 -10 11 -16 q-6 -6 -11 2 Z" fill="#b0533b"></path>
+                      <circle cx="196" cy="212" r="2.4" fill="#e8d9a8"></circle>
+                      <circle cx="70" cy="196" r="2" fill="#e8d9a8"></circle>
+                      <circle cx="188" cy="170" r="2" fill="#e4b33c"></circle>
+                      <path d="M70 286 h120" stroke="#d9c078" stroke-width="1.4" opacity=".5"></path>
+                    </g>
+                  )}
+                </g>
+              </svg>
+              <svg class="ev-cloud drift slow" viewBox="-4 -6 134 74" aria-hidden="true">
+                <use href="#cloudp" fill="#f2eada" opacity=".85"></use>
+              </svg>
+            </div>
+            <h3 class="f-inf">{e.name}</h3>
+            <p class="ev-meta f-cor">
+              {e.date}<br />
+              {e.venue}<br />
+              {e.time}
+            </p>
+            <a class="route-pill" href={MAPS} target="_blank" rel="noopener">See the route</a>
+          </article>
+        ))}
+      </section>
+
+      <!-- ── SEE THE ROUTE ───────────────────────────────────────────── -->
+      <section class="route" aria-label="Directions">
+        <h2 class="route-big f-upr rv">See the<br />route</h2>
+        <p class="line rv">Click to open the map</p>
+        <a class="map-card rv" href={MAPS} target="_blank" rel="noopener" aria-label="Open the venue on Google Maps">
+          <svg viewBox="0 0 320 240">
+            <rect x="4" y="4" width="312" height="232" rx="18" fill="#f4ebd7" stroke="#c9a24b" stroke-width="2.5"></rect>
+            <rect x="14" y="14" width="292" height="212" rx="12" fill="none" stroke="#c9a24b" stroke-width="1" stroke-dasharray="4 6" opacity=".6"></rect>
+            <ellipse cx="70" cy="60" rx="34" ry="16" fill="#a9cbc4" opacity=".8"></ellipse>
+            <path d="M180 52 L206 24 L232 52 Z M214 52 L234 30 L254 52 Z" fill="#8fb4a0"></path>
+            <path d="M206 24 L214 33 L206 31 L199 38 Z" fill="#f4ebd7"></path>
+            <use href="#pinep" transform="translate(48 130) scale(.5)" fill="#4c7a55"></use>
+            <use href="#pinep" transform="translate(120 60) scale(.42)" fill="#4c7a55"></use>
+            <use href="#pinep" transform="translate(238 150) scale(.5)" fill="#4c7a55"></use>
+            <path d="M56 198 C96 168 74 130 124 122 C170 114 152 168 208 152 C244 142 240 104 268 84" fill="none" stroke="#ac9545" stroke-width="4" stroke-dasharray="0.5 10" stroke-linecap="round"></path>
+            <g transform="translate(56 188)">
+              <path d="M0 12 Q-11 -2 0 -10 Q11 -2 0 12 Z" fill="#b0533b"></path>
+              <circle cx="0" cy="-2" r="3.6" fill="#f4ebd7"></circle>
+            </g>
+            <g transform="translate(268 66)">
+              <rect x="-13" y="2" width="26" height="10" rx="2" fill="#b0533b"></rect>
+              <path d="M0 -12 Q-9 -6 -9 2 L9 2 Q9 -6 0 -12 Z" fill="#b0533b"></path>
+              <circle cx="0" cy="-14" r="1.6" fill="#b0533b"></circle>
+            </g>
+            <g transform="translate(282 196)" stroke="#ac9545" fill="none" stroke-width="1.6">
+              <circle r="14"></circle>
+              <path d="M0 -14 L3 -3 L0 14 L-3 -3 Z" fill="#ac9545" stroke="none"></path>
+              <path d="M-14 0 H-8 M8 0 H14" stroke-width="1"></path>
+            </g>
+          </svg>
+        </a>
+      </section>
+
+      <!-- ── MEET THE BRIDE & GROOM ──────────────────────────────────── -->
+      <section class="meet" aria-label="Meet the bride and groom">
+        <div class="sun-wrap" data-plx="0.04" aria-hidden="true">
+          <svg class="sun float slow" viewBox="0 0 150 150">
+            <g stroke="#e4c878" stroke-width="3" stroke-linecap="round">
+              <path d="M75 8 V22 M75 128 V142 M8 75 H22 M128 75 H142"></path>
+              <path d="M28 28 L38 38 M112 112 L122 122 M122 28 L112 38 M38 112 L28 122"></path>
+              <path d="M75 2 q4 6 0 12 M148 75 q-6 4 -12 0" opacity="0"></path>
+            </g>
+            <circle cx="75" cy="75" r="40" fill="#f6e1bb"></circle>
+            <path d="M60 74 Q66 80 72 74" stroke="#c2a468" stroke-width="2.6" fill="none" stroke-linecap="round"></path>
+            <path d="M84 74 Q90 80 96 74" stroke="#c2a468" stroke-width="2.6" fill="none" stroke-linecap="round"></path>
+            <path d="M68 90 Q76 96 88 90" stroke="#c2a468" stroke-width="2.6" fill="none" stroke-linecap="round"></path>
+            <circle cx="56" cy="86" r="4.5" fill="#eec9a0" opacity=".85"></circle>
+            <circle cx="100" cy="86" r="4.5" fill="#eec9a0" opacity=".85"></circle>
+          </svg>
+        </div>
+        <svg class="birds" viewBox="0 0 120 40" aria-hidden="true">
+          <path d="M4 18 Q11 8 18 18 Q25 8 32 18 M52 30 Q58 22 64 30 Q70 22 76 30 M88 12 Q93 5 98 12 Q103 5 108 12" stroke="#0c4860" stroke-width="2.4" fill="none" stroke-linecap="round"></path>
+        </svg>
+
+        <p class="meet-over f-cor rv">MEET THE</p>
+        <h2 class="meet-big f-upr rv">Bride &amp; Groom</h2>
+
+        <p class="meet-copy f-cor rv">
+          Our hearts are full. Ever since the roka, the love and warmth shown to us by family
+          and friends has carried us like a mountain breeze, and it has touched us both deeply.
+          We would like to thank everyone most sincerely for their kindness and blessings.
+          We are looking forward to seeing you at the wedding functions, up in the hills we love.
+        </p>
+
+        <div class="couple-wrap rv">
+          <svg class="couple" viewBox="0 0 360 430" role="img" aria-label="Illustration of Vihaan and Anaya in their wedding attire, hand in hand in a mountain meadow">
+            <use href="#cloudp" transform="translate(6 30) scale(.9)" fill="#fdf8ea" opacity=".9"></use>
+            <use href="#cloudp" transform="translate(250 12) scale(.7)" fill="#fdf8ea" opacity=".8"></use>
+            <g transform="translate(18 120) scale(.42)" opacity=".9"><use href="#palaceg"></use></g>
+            <use href="#pinep" transform="translate(306 306) scale(1.05)" fill="#3f6b52"></use>
+            <use href="#pinep" transform="translate(336 330) scale(.8)" fill="#4c7a55"></use>
+            <path d="M254 60 Q259 52 264 60 Q269 52 274 60" stroke="#0c4860" stroke-width="2" fill="none" stroke-linecap="round"></path>
+
+            <ellipse cx="180" cy="402" rx="168" ry="24" fill="#7fa894"></ellipse>
+            <ellipse cx="180" cy="396" rx="118" ry="14" fill="#8fb4a0"></ellipse>
+
+            <!-- groom -->
+            <g>
+              <path d="M118 392 q-15 4 -13 -6 q2 -9 15 -9 h14 v15 Z" fill="#c9a24b"></path>
+              <path d="M160 392 q15 4 13 -6 q-2 -9 -15 -9 h-14 v15 Z" fill="#c9a24b"></path>
+              <rect x="122" y="348" width="13" height="32" fill="#e7d9b8"></rect>
+              <rect x="145" y="348" width="13" height="32" fill="#e7d9b8"></rect>
+              <path d="M104 216 Q104 186 132 182 L148 182 Q176 186 176 216 L173 344 Q140 356 107 344 Z" fill="#f1e4c8" stroke="#d8c69a"></path>
+              <path d="M110 208 L168 302 L178 297 L122 202 Z" fill="#d9822b" opacity=".95"></path>
+              <path d="M112 205 L170 299" stroke="#c9a24b" stroke-width="1.6"></path>
+              <path d="M140 182 V348" stroke="#c9a24b" stroke-width="1.5"></path>
+              <circle cx="140" cy="204" r="2" fill="#ac9545"></circle>
+              <circle cx="140" cy="222" r="2" fill="#ac9545"></circle>
+              <circle cx="140" cy="240" r="2" fill="#ac9545"></circle>
+              <circle cx="140" cy="258" r="2" fill="#ac9545"></circle>
+              <path d="M104 218 Q92 252 100 288 q2 8 10 6 l7 -2 q-9 -34 -1 -68 Z" fill="#f1e4c8" stroke="#d8c69a"></path>
+              <circle cx="112" cy="298" r="7" fill="#e7b98b"></circle>
+              <path d="M174 212 Q198 226 209 254 L199 264 Q186 242 168 232 Z" fill="#f1e4c8" stroke="#d8c69a"></path>
+              <rect x="131" y="166" width="16" height="15" fill="#e7b98b"></rect>
+              <circle cx="139" cy="146" r="23" fill="#e7b98b"></circle>
+              <path d="M127 143 q5 5 10 0 M143 143 q5 5 10 0" stroke="#5a3a22" stroke-width="2" fill="none" stroke-linecap="round"></path>
+              <path d="M126 136 q5 -4 10 -1 M143 135 q5 -3 10 1" stroke="#5a3a22" stroke-width="1.6" fill="none" stroke-linecap="round"></path>
+              <path d="M132 158 q7 6 14 0" stroke="#5a3a22" stroke-width="2" fill="none" stroke-linecap="round"></path>
+              <circle cx="122" cy="152" r="4" fill="#e8c9a8" opacity=".7"></circle>
+              <circle cx="156" cy="152" r="4" fill="#e8c9a8" opacity=".7"></circle>
+              <path d="M162 132 q15 30 7 62" stroke="#d9822b" stroke-width="8" stroke-linecap="round" fill="none"></path>
+              <path d="M113 143 Q110 107 139 103 Q168 107 165 143 Q152 127 139 129 Q126 127 113 143 Z" fill="#d9822b"></path>
+              <path d="M117 128 Q139 114 161 128" stroke="#b06414" stroke-width="2" fill="none"></path>
+              <ellipse cx="153" cy="109" rx="5" ry="10" fill="#e4b33c" transform="rotate(24 153 109)"></ellipse>
+              <circle cx="149" cy="119" r="3" fill="#ac9545"></circle>
+              <path d="M120 176 Q139 216 158 176" stroke="#e8952f" stroke-width="8" stroke-dasharray="0.5 11" stroke-linecap="round" fill="none"></path>
+              <path d="M124 176 Q139 208 154 176" stroke="#e4b33c" stroke-width="6" stroke-dasharray="0.5 10" stroke-linecap="round" fill="none"></path>
+            </g>
+
+            <!-- bride -->
+            <g>
+              <path d="M196 242 Q232 228 268 242 L292 390 Q232 408 172 390 Z" fill="#0f5b66"></path>
+              <path d="M176 386 Q232 402 288 386" stroke="#c9a24b" stroke-width="5" fill="none"></path>
+              <path d="M186 322 Q232 336 278 322" stroke="#c9a24b" stroke-width="1.8" fill="none" opacity=".7"></path>
+              <circle cx="206" cy="290" r="2" fill="#c9a24b"></circle>
+              <circle cx="238" cy="300" r="2" fill="#c9a24b"></circle>
+              <circle cx="262" cy="284" r="2" fill="#c9a24b"></circle>
+              <circle cx="222" cy="352" r="2" fill="#c9a24b"></circle>
+              <circle cx="254" cy="356" r="2" fill="#c9a24b"></circle>
+              <path d="M204 200 Q204 186 218 184 L246 184 Q260 186 260 200 L258 248 Q232 256 206 248 Z" fill="#c9a24b"></path>
+              <path d="M206 210 Q188 230 199 254 L211 260 Q204 238 219 222 Z" fill="#c9a24b"></path>
+              <circle cx="208" cy="258" r="7" fill="#e7b98b"></circle>
+              <circle cx="208" cy="256" r="1.2" fill="#8a4a1d"></circle>
+              <circle cx="211" cy="260" r="1.2" fill="#8a4a1d"></circle>
+              <path d="M258 210 Q272 238 266 270 l-11 -2 q5 -28 -6 -54 Z" fill="#c9a24b"></path>
+              <circle cx="261" cy="272" r="6.5" fill="#e7b98b"></circle>
+              <rect x="224" y="164" width="15" height="13" fill="#e7b98b"></rect>
+              <circle cx="232" cy="146" r="21" fill="#e7b98b"></circle>
+              <path d="M213 140 Q215 122 232 120 Q249 122 251 140 Q242 130 232 131 Q222 130 213 140 Z" fill="#3a2a20"></path>
+              <path d="M208 134 Q232 92 256 134 Q272 168 268 244 L256 240 Q258 176 246 150 Q240 138 232 138 Q218 146 216 172 L214 196 L202 192 Q200 158 208 134 Z" fill="#efdcc0" opacity=".92"></path>
+              <path d="M208 136 Q232 96 254 134 Q268 168 266 240" stroke="#c9a24b" stroke-width="1.6" stroke-dasharray="1 5" fill="none"></path>
+              <path d="M221 144 q4 4 8 0 M235 144 q4 4 8 0" stroke="#5a3a22" stroke-width="1.8" fill="none" stroke-linecap="round"></path>
+              <path d="M220 148 l-2 3 M228 149 l-1 3 M236 148 l-1 3 M244 149 l-1 3" stroke="#5a3a22" stroke-width="1" stroke-linecap="round"></path>
+              <path d="M226 158 q6 5 12 0" stroke="#5a3a22" stroke-width="1.8" fill="none" stroke-linecap="round"></path>
+              <circle cx="217" cy="152" r="3.6" fill="#e8c9a8" opacity=".75"></circle>
+              <circle cx="247" cy="152" r="3.6" fill="#e8c9a8" opacity=".75"></circle>
+              <circle cx="232" cy="133" r="2.2" fill="#b0533b"></circle>
+              <path d="M232 120 V131" stroke="#c9a24b" stroke-width="1.4"></path>
+              <ellipse cx="232" cy="127" rx="2.6" ry="3.4" fill="#c9a24b"></ellipse>
+              <circle cx="240" cy="150" r="1.4" fill="#c9a24b"></circle>
+              <path d="M214 150 q-2 6 2 8 M250 150 q2 6 -2 8" stroke="#c9a24b" stroke-width="2" stroke-linecap="round" fill="none"></path>
+              <path d="M222 172 Q232 180 242 172" stroke="#c9a24b" stroke-width="2.4" fill="none"></path>
+              <path d="M214 174 Q232 208 250 174" stroke="#e8952f" stroke-width="8" stroke-dasharray="0.5 11" stroke-linecap="round" fill="none"></path>
+              <path d="M218 174 Q232 202 246 174" stroke="#e4b33c" stroke-width="6" stroke-dasharray="0.5 10" stroke-linecap="round" fill="none"></path>
+            </g>
+
+            <path d="M207 240 q-4 -6 -9 -1 q-4 4 9 12 q13 -8 9 -12 q-5 -5 -9 1 Z" fill="#b0533b"></path>
+            <g fill="#8fb4a0">
+              <path d="M60 386 q2 -10 0 -16 M64 386 q4 -8 8 -10" stroke="#6e9b85" stroke-width="2" fill="none" stroke-linecap="round"></path>
+              <path d="M300 388 q-2 -10 0 -16 M296 388 q-4 -8 -8 -10" stroke="#6e9b85" stroke-width="2" fill="none" stroke-linecap="round"></path>
+            </g>
+            <circle cx="58" cy="366" r="3" fill="#e8952f"></circle>
+            <circle cx="302" cy="368" r="3" fill="#e4b33c"></circle>
+          </svg>
+        </div>
+
+        <h2 class="meet-cta f-upr rv">Looking forward to see you</h2>
+        <p class="line rv"><a class="soft-link teal" href={RSVP} target="_blank" rel="noopener">Click the link to RSVP</a></p>
+      </section>
+
+      <!-- ── THINGS TO KNOW (night falls again in the deodar forest) ──── -->
+      <section class="know" aria-label="Things to know">
+        <svg class="pines-edge top" viewBox="0 0 750 64" preserveAspectRatio="none" aria-hidden="true">
+          <rect y="52" width="750" height="12" fill="#06303e"></rect>
+          {pines.map((i) => (
+            <path
+              transform={`translate(${i * 58 - 6} ${i % 2 ? 10 : 2}) scale(${i % 3 ? 1 : 1.2})`}
+              d="M29 6 L44 34 L37 32 L48 54 L10 54 L21 32 L14 34 Z"
+              fill="#06303e"
+            ></path>
+          ))}
+        </svg>
+
+        <div class="know-inner">
+          <h2 class="know-big f-inf rv">Things to know</h2>
+          <p class="know-intro f-inf rv">
+            To help you feel at ease and enjoy every moment of the celebrations, here are a few
+            thoughtful details we’d love for you to know before the big day.
+          </p>
+
+          {know.map((k) => (
+            <div class="know-item rv">
+              <svg class="know-ico" viewBox="0 0 48 48" aria-hidden="true">
+                {k.key === 'hashtag' && (
+                  <path d="M18 8 L14 40 M32 8 L28 40 M10 18 H40 M8 30 H38" stroke="#f6e1bb" stroke-width="2.6" stroke-linecap="round" fill="none"></path>
+                )}
+                {k.key === 'weather' && (
+                  <g stroke="#f6e1bb" stroke-width="2.4" fill="none" stroke-linecap="round">
+                    <circle cx="19" cy="18" r="7"></circle>
+                    <path d="M19 5 v4 M19 27 v1 M6 18 h4 M28 18 h1 M10 9 l2.6 2.6 M25.4 11.6 L28 9"></path>
+                    <path d="M18 38 h16 q7 0 7 -6 q0 -6 -6.4 -6 q-1.6 -6 -8.6 -6 q-6 0 -8 5 q-6 0 -6 6.5 q0 6.5 6 6.5 Z" fill="#06303e"></path>
+                  </g>
+                )}
+                {k.key === 'staff' && (
+                  <g stroke="#f6e1bb" stroke-width="2.4" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M8 22 L24 8 L40 22"></path>
+                    <path d="M12 20 V40 H36 V20"></path>
+                    <rect x="20" y="28" width="8" height="12"></rect>
+                    <circle cx="31" cy="26" r="1.6" fill="#f6e1bb" stroke="none"></circle>
+                  </g>
+                )}
+                {k.key === 'parking' && (
+                  <g stroke="#f6e1bb" stroke-width="2.4" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M8 30 L11 19 Q12 15 17 15 H31 Q36 15 37 19 L40 30"></path>
+                    <rect x="6" y="30" width="36" height="8" rx="2.5"></rect>
+                    <circle cx="14" cy="38" r="3.6"></circle>
+                    <circle cx="34" cy="38" r="3.6"></circle>
+                  </g>
+                )}
+              </svg>
+              <h3 class="f-upr">{k.head}</h3>
+              <p class="f-cor">{k.body}</p>
+            </div>
+          ))}
+
+          <div class="follow rv">
+            <h2 class="follow-big f-upr">Follow the action</h2>
+            <p class="line"><a class="soft-link cream" href={INSTAGRAM} target="_blank" rel="noopener">Click the link to open Instagram</a></p>
+          </div>
+        </div>
+
+        <svg class="pines-edge bottom" viewBox="0 0 750 64" preserveAspectRatio="none" aria-hidden="true">
+          <rect width="750" height="12" fill="#06303e"></rect>
+          {pines.map((i) => (
+            <path
+              transform={`translate(${i * 58 + 22} ${i % 2 ? 54 : 62}) scale(${i % 3 ? -1 : -1.2})`}
+              d="M29 6 L44 34 L37 32 L48 54 L10 54 L21 32 L14 34 Z"
+              fill="#06303e"
+            ></path>
+          ))}
+        </svg>
+      </section>
+
+      <!-- ── COUNTDOWN ───────────────────────────────────────────────── -->
+      <section class="count" aria-label="Countdown">
+        <h2 class="count-big f-upr rv">The countdown begins</h2>
+        <div class="cd f-upr rv" id="cd" role="timer" aria-label="Time until the wedding">
+          <span id="cd-d">000</span> : <span id="cd-h">00</span> : <span id="cd-m">00</span> : <span id="cd-s">00</span>
+        </div>
+        <p class="cd-labels rv" aria-hidden="true">days · hours · minutes · seconds</p>
+
+        <p class="count-note f-upr rv">
+          Sharma family is excited that you are able to join us in celebrating what we hope
+          will be one of the happiest days of our lives.
+        </p>
+        <p class="copyright f-upr rv">© Myinvite 2027</p>
+
+        <svg class="meadow" viewBox="0 0 750 150" preserveAspectRatio="xMidYMax slice" aria-hidden="true">
+          <path d="M0 90 Q180 40 375 76 Q560 108 750 60 L750 150 L0 150 Z" fill="#7fa894"></path>
+          <path d="M0 120 Q200 88 420 112 Q600 130 750 104 L750 150 L0 150 Z" fill="#6e9b85"></path>
+          <g stroke="#5c8a73" stroke-width="2" stroke-linecap="round" fill="none">
+            <path d="M110 118 v-16 M104 108 q6 -4 6 -6 M116 108 q-6 -4 -6 -6"></path>
+            <path d="M330 128 v-16 M324 118 q6 -4 6 -6 M336 118 q-6 -4 -6 -6"></path>
+            <path d="M560 122 v-16 M554 112 q6 -4 6 -6 M566 112 q-6 -4 -6 -6"></path>
+          </g>
+          <circle cx="110" cy="98" r="4" fill="#e8952f"></circle>
+          <circle cx="330" cy="108" r="4" fill="#e4b33c"></circle>
+          <circle cx="560" cy="102" r="4" fill="#b0533b"></circle>
+          <circle cx="212" cy="112" r="2.6" fill="#f6e1bb"></circle>
+          <circle cx="470" cy="120" r="2.6" fill="#f6e1bb"></circle>
+          <circle cx="660" cy="118" r="2.6" fill="#f6e1bb"></circle>
+          <path d="M600 34 Q606 26 612 34 Q618 26 624 34 M652 50 Q657 43 662 50 Q667 43 672 50" stroke="#44608a" stroke-width="2" fill="none" stroke-linecap="round" opacity=".7"></path>
+        </svg>
+      </section>
+    </div>
+
+    <!-- floating music toggle -->
+    <button class="music" id="musicBtn" type="button" aria-pressed="false" aria-label="Play music">
+      <svg viewBox="0 0 24 24" class="ic-play" aria-hidden="true"><path d="M8 5 L19 12 L8 19 Z" fill="currentColor"></path></svg>
+      <svg viewBox="0 0 24 24" class="ic-pause" aria-hidden="true"><path d="M7 5 h3.4 v14 H7 Z M13.6 5 H17 v14 h-3.4 Z" fill="currentColor"></path></svg>
+    </button>
+
+    <style>
+      :root {
+        --night: #022938;
+        --sage: #88b2a0;
+        --gold: #ac9545;
+        --gold-2: #c9b06a;
+        --teal-ink: #0c4860;
+        --cream: #f6e1bb;
+        --cream-2: #fef6d1;
+        --purple: #44139b;
+        --panel: #06303e;
+      }
+      * { box-sizing: border-box; }
+      html { scroll-behavior: smooth; }
+      body {
+        margin: 0;
+        color: var(--gold);
+        font-family: 'Cormorant Upright', Georgia, serif;
+        background: linear-gradient(180deg, var(--night) 0%, #10495314 30%, var(--sage) 98%);
+        background-color: var(--night);
+        -webkit-font-smoothing: antialiased;
+        overflow-x: clip;
+      }
+      .page {
+        position: relative;
+        overflow: clip;
+        background: linear-gradient(180deg, var(--night) 0%, #0b4552 34%, #2f7472 66%, var(--sage) 98%);
+      }
+      a { color: inherit; }
+      :focus-visible { outline: 2px solid var(--gold-2); outline-offset: 3px; border-radius: 4px; }
+
+      .f-inf { font-family: 'Cormorant Infant', Georgia, serif; }
+      .f-upr { font-family: 'Cormorant Upright', Georgia, serif; }
+      .f-uni { font-family: 'Cormorant Unicase', Georgia, serif; }
+      .f-cor { font-family: 'Cormorant', Georgia, serif; }
+
+      /* damask wallpaper, fading out as night lifts */
+      .damask {
+        position: absolute; inset: 0 0 auto 0; height: 2600px; pointer-events: none;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cpath d='M70 10 C94 34 94 62 70 92 C46 62 46 34 70 10 Z' fill='none' stroke='%23ac9545' stroke-opacity='.13'/%3E%3Cpath d='M70 26 C84 40 84 58 70 76 C56 58 56 40 70 26 Z' fill='none' stroke='%23ac9545' stroke-opacity='.09'/%3E%3Ccircle cx='70' cy='112' r='3' fill='%23ac9545' fill-opacity='.12'/%3E%3Cpath d='M0 70 C16 54 30 54 46 70 C30 86 16 86 0 70 Z M94 70 C110 54 124 54 140 70 C124 86 110 86 94 70 Z' fill='none' stroke='%23ac9545' stroke-opacity='.08'/%3E%3Ccircle cx='23' cy='70' r='2.4' fill='%23ac9545' fill-opacity='.1'/%3E%3Ccircle cx='117' cy='70' r='2.4' fill='%23ac9545' fill-opacity='.1'/%3E%3C/svg%3E");
+        -webkit-mask-image: linear-gradient(#000 62%, transparent 98%);
+        mask-image: linear-gradient(#000 62%, transparent 98%);
+      }
+
+      section, header { position: relative; }
+
+      /* ── hero ─────────────────────────────────────────────────────── */
+      .hero {
+        min-height: 100svh;
+        display: grid;
+        place-items: center;
+        text-align: center;
+        padding: 20vh 56px 18vh;
+      }
+      .stars { position: absolute; inset: 0; pointer-events: none; }
+      .star {
+        position: absolute; width: calc(14px * var(--s, 1)); height: calc(14px * var(--s, 1));
+        animation: twinkle 2.6s ease-in-out infinite alternate;
+        animation-delay: var(--d, 0s);
+      }
+      @keyframes twinkle { from { opacity: .18; transform: scale(.75); } to { opacity: .95; transform: scale(1.05); } }
+
+      .garl {
+        position: absolute; top: -6px; width: clamp(26px, 8vw, 40px); height: min(94%, 800px);
+        filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.25));
+      }
+      .garl.left { left: clamp(4px, 1.6vw, 22px); }
+      .garl.right { right: clamp(4px, 1.6vw, 22px); }
+
+      .moon-wrap { position: absolute; top: 3.5vh; left: 6vw; width: clamp(92px, 27vw, 150px); }
+      .moon { width: 100%; display: block; }
+
+      .cloud { position: absolute; pointer-events: none; }
+      .c1 { width: clamp(90px, 26vw, 150px); top: 12vh; right: 8vw; }
+      .c2 { width: clamp(64px, 18vw, 110px); top: 40vh; left: 9vw; opacity: .85; }
+      .c3 { width: clamp(100px, 30vw, 170px); bottom: 9vh; right: 12vw; }
+
+      .hero-names { margin: 0; display: grid; gap: clamp(6px, 2vw, 14px); }
+      .hero-names .groom { font-size: clamp(46px, 14.6vw, 84px); font-weight: 400; line-height: 1.05; letter-spacing: .02em; }
+      .hero-names .weds { font-size: clamp(24px, 8vw, 42px); letter-spacing: .22em; opacity: .95; }
+      .hero-names .bride { font-size: clamp(46px, 14.6vw, 84px); line-height: 1.05; letter-spacing: .02em; }
+
+      .palace-wrap {
+        position: absolute; bottom: -7vh; right: -4vw;
+        width: clamp(200px, 60vw, 330px); pointer-events: none;
+      }
+      .palace { width: 100%; display: block; }
+
+      /* ── invite ───────────────────────────────────────────────────── */
+      .invite { text-align: center; padding: 14vh 28px 0; }
+      .mantra {
+        font-family: 'Gotu', 'Cormorant', serif;
+        font-size: 15px; letter-spacing: .08em; margin: 0 0 72px;
+      }
+      .bless p, .line { font-size: clamp(19px, 5.4vw, 24px); line-height: 1.55; margin: 0; }
+      .bless-names { font-size: clamp(19px, 5.4vw, 24px); line-height: 1.55; margin: 0; }
+      .dashes { letter-spacing: .2em; opacity: .8; padding: 10px 0; }
+      .big-invite {
+        font-size: clamp(58px, 21.4vw, 118px); font-weight: 400;
+        letter-spacing: .06em; line-height: 1; margin: 96px 0;
+      }
+      .pair { margin: 34px 0; }
+      .p-name { font-size: clamp(48px, 18.7vw, 100px); line-height: 1.15; }
+      .p-amp { font-size: clamp(30px, 10vw, 52px); line-height: 1.4; opacity: .9; }
+      .onfollow { margin-top: 84px; padding-bottom: 40px; }
+      .mrange { display: block; width: 100%; height: clamp(110px, 28vw, 170px); margin-top: -26px; }
+
+      /* ── events ───────────────────────────────────────────────────── */
+      .events { padding: 40px 24px 30px; max-width: 560px; margin: 0 auto; }
+      .balloon-wrap { position: absolute; top: -40px; right: 6vw; width: clamp(56px, 15vw, 84px); }
+      .balloon { width: 100%; transform-origin: 50% 8%; }
+      .sway { animation: sway 7s ease-in-out infinite alternate; }
+      @keyframes sway { from { transform: rotate(-3.5deg); } to { transform: rotate(3.5deg); } }
+
+      .event { text-align: center; margin: 0 auto 110px; max-width: 340px; }
+      .ev-art { position: relative; width: min(66vw, 250px); margin: 0 auto 20px; }
+      .ev-art > svg:first-child { width: 100%; display: block; filter: drop-shadow(0 14px 24px rgba(1, 22, 30, 0.35)); }
+      .ev-cloud { position: absolute; width: 44%; z-index: 1; }
+      .ev-l .ev-cloud { left: -26%; bottom: 12%; }
+      .ev-r .ev-cloud { right: -26%; top: 16%; }
+      .event h3 { font-size: clamp(38px, 12vw, 52px); font-weight: 400; margin: 0 0 14px; line-height: 1.1; }
+      .ev-meta { font-size: 14.5px; letter-spacing: .04em; line-height: 1.55; margin: 0 0 18px; }
+      .route-pill {
+        display: inline-block; font-family: 'Cormorant', serif; font-size: 14.5px; letter-spacing: .06em;
+        padding: 8px 22px; border: 1px solid var(--gold); border-radius: 999px;
+        text-decoration: none; transition: background .25s, color .25s;
+      }
+      .route-pill:hover { background: var(--gold); color: #06212c; }
+
+      /* ── route ────────────────────────────────────────────────────── */
+      .route { text-align: center; padding: 80px 28px 110px; }
+      .route-big { font-size: clamp(54px, 18.7vw, 96px); font-weight: 400; line-height: 1.02; margin: 0 0 22px; }
+      .map-card { display: block; width: min(78vw, 330px); margin: 34px auto 0; }
+      .map-card svg { width: 100%; display: block; filter: drop-shadow(0 16px 28px rgba(1, 22, 30, 0.3)); transition: transform .3s ease; }
+      .map-card:hover svg { transform: translateY(-4px) rotate(-.5deg); }
+
+      /* ── meet ─────────────────────────────────────────────────────── */
+      .meet { text-align: center; padding: 110px 28px 90px; color: var(--teal-ink); }
+      .sun-wrap { position: absolute; top: 34px; right: 7vw; width: clamp(76px, 22vw, 120px); }
+      .sun { width: 100%; display: block; }
+      .birds { position: absolute; top: 90px; left: 7vw; width: clamp(80px, 24vw, 130px); opacity: .85; }
+      .meet-over { font-size: clamp(24px, 8vw, 34px); letter-spacing: .4em; margin: 0 0 12px; padding-left: .4em; }
+      .meet-big { font-size: clamp(56px, 21vw, 116px); font-weight: 400; line-height: .98; margin: 0 0 44px; }
+      .meet-copy { font-size: 16px; line-height: 1.95; max-width: 34ch; margin: 0 auto 40px; }
+      .couple-wrap { max-width: 420px; margin: 0 auto 70px; }
+      .couple { width: 100%; display: block; }
+      .meet-cta { font-size: clamp(38px, 13.4vw, 64px); font-weight: 400; line-height: 1.08; margin: 0 0 16px; }
+      .soft-link { text-underline-offset: 5px; text-decoration-thickness: 1px; }
+      .soft-link.teal { color: var(--teal-ink); }
+      .soft-link.cream { color: var(--cream-2); }
+
+      /* ── know (dark forest panel) ─────────────────────────────────── */
+      .know { color: var(--cream); }
+      .pines-edge { display: block; width: 100%; height: clamp(44px, 12vw, 72px); }
+      .know-inner { background: var(--panel); padding: 60px 30px 80px; text-align: center; }
+      .know-big { font-size: clamp(44px, 16vw, 76px); font-weight: 400; margin: 0 0 26px; line-height: 1.05; }
+      .know-intro { font-size: clamp(18px, 5.4vw, 22px); line-height: 1.7; max-width: 36ch; margin: 0 auto 70px; }
+      .know-item { max-width: 340px; margin: 0 auto 64px; }
+      .know-ico { width: 44px; height: 44px; margin-bottom: 6px; opacity: .9; }
+      .know-item h3 { font-size: clamp(40px, 15.8vw, 68px); font-weight: 400; margin: 0 0 14px; line-height: 1.05; }
+      .know-item p { font-size: 15px; line-height: 1.8; margin: 0; letter-spacing: .02em; }
+      .follow { margin-top: 110px; color: var(--cream-2); }
+      .follow-big { font-size: clamp(46px, 17vw, 82px); font-weight: 400; line-height: 1.05; margin: 0 0 18px; }
+
+      /* ── countdown ────────────────────────────────────────────────── */
+      .count { text-align: center; color: var(--purple); padding: 110px 28px 0; }
+      .count-big { font-size: clamp(40px, 14.2vw, 66px); font-weight: 400; line-height: 1.05; margin: 0 0 34px; }
+      .cd { font-size: clamp(26px, 9vw, 40px); letter-spacing: .1em; }
+      .cd-labels { font-family: 'Cormorant', serif; font-size: 12px; letter-spacing: .28em; margin: 10px 0 0; opacity: .75; }
+      .count-note { font-size: 14.5px; line-height: 1.8; max-width: 40ch; margin: 46px auto 0; }
+      .copyright { font-size: 14px; margin: 26px 0 0; opacity: .85; }
+      .meadow { display: block; width: 100%; height: clamp(100px, 26vw, 150px); margin-top: 60px; }
+
+      /* ── music button ─────────────────────────────────────────────── */
+      .music {
+        position: fixed; right: 18px; bottom: 18px; z-index: 40;
+        width: 54px; height: 54px; border-radius: 50%;
+        border: none; cursor: pointer;
+        background: var(--gold); color: #06212c;
+        display: grid; place-items: center;
+        box-shadow: 0 10px 24px -8px rgba(1, 22, 30, 0.6);
+        transition: transform .2s ease;
+      }
+      .music:hover { transform: scale(1.06); }
+      .music svg { width: 22px; height: 22px; }
+      .music .ic-pause { display: none; }
+      .music[aria-pressed='true'] .ic-play { display: none; }
+      .music[aria-pressed='true'] .ic-pause { display: block; }
+      .music[aria-pressed='true'] { animation: pulse 2.4s ease-in-out infinite; }
+      @keyframes pulse { 0%, 100% { box-shadow: 0 10px 24px -8px rgba(1, 22, 30, .6); } 50% { box-shadow: 0 10px 30px -6px rgba(172, 149, 69, .8); } }
+
+      /* motion */
+      .float { animation: floaty 6s ease-in-out infinite alternate; }
+      .float.slow { animation-duration: 9s; }
+      .drift { animation: driftx 26s ease-in-out infinite alternate; }
+      .drift.slow { animation-duration: 40s; }
+      @keyframes floaty { from { transform: translateY(0); } to { transform: translateY(-10px); } }
+      @keyframes driftx { from { transform: translateX(0); } to { transform: translateX(26px); } }
+
+      html.js .rv { opacity: 0; }
+      html.js .rv.in { animation: rise .9s ease both; opacity: 1; }
+      @keyframes rise { from { opacity: 0; transform: translateY(26px); } to { opacity: 1; transform: none; } }
+
+      @media (min-width: 760px) {
+        .events { max-width: 640px; }
+        .palace-wrap { right: 4vw; }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        *, *::before, *::after { animation-duration: .01s !important; animation-delay: 0s !important; transition: none !important; }
+        html { scroll-behavior: auto; }
+      }
+    </style>
+
+    <script define:vars={{ SHAADI_ISO }}>
+      /* reveals */
+      const io = new IntersectionObserver(
+        (es) => es.forEach((e) => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }),
+        { threshold: 0.08, rootMargin: '0px 0px -5% 0px' }
+      );
+      document.querySelectorAll('.rv').forEach((el) => io.observe(el));
+
+      /* gentle parallax on the sky ornaments */
+      const plx = [...document.querySelectorAll('[data-plx]')];
+      const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if (!reduced && plx.length) {
+        let ticking = false;
+        const apply = () => {
+          ticking = false;
+          for (const el of plx) el.style.transform = `translateY(${window.scrollY * parseFloat(el.dataset.plx)}px)`;
+        };
+        addEventListener('scroll', () => { if (!ticking) { ticking = true; requestAnimationFrame(apply); } }, { passive: true });
+      }
+
+      /* countdown */
+      const target = new Date(SHAADI_ISO).getTime();
+      const dEl = document.getElementById('cd-d'), hEl = document.getElementById('cd-h'),
+            mEl = document.getElementById('cd-m'), sEl = document.getElementById('cd-s');
+      const pad = (n, w = 2) => String(n).padStart(w, '0');
+      const tick = () => {
+        let ms = Math.max(0, target - Date.now());
+        const d = Math.floor(ms / 864e5); ms -= d * 864e5;
+        const h = Math.floor(ms / 36e5); ms -= h * 36e5;
+        const m = Math.floor(ms / 6e4); ms -= m * 6e4;
+        const s = Math.floor(ms / 1e3);
+        dEl.textContent = pad(d, d > 99 ? 3 : 2);
+        hEl.textContent = pad(h); mEl.textContent = pad(m); sEl.textContent = pad(s);
+      };
+      tick();
+      setInterval(tick, 1000);
+
+      /* generative hill-side ambience — no audio file needed */
+      const btn = document.getElementById('musicBtn');
+      let ac = null, master = null, timer = null, step = 0;
+      const NOTES = [392, 440, 523.25, 587.33, 659.25, 783.99, 659.25, 523.25];
+      function startMusic() {
+        ac = ac || new (window.AudioContext || window.webkitAudioContext)();
+        ac.resume();
+        master = ac.createGain(); master.gain.value = 0;
+        master.connect(ac.destination);
+        master.gain.linearRampToValueAtTime(0.16, ac.currentTime + 2);
+
+        const del = ac.createDelay(1); del.delayTime.value = 0.42;
+        const fb = ac.createGain(); fb.gain.value = 0.34;
+        del.connect(fb); fb.connect(del); del.connect(master);
+
+        const lp = ac.createBiquadFilter(); lp.type = 'lowpass'; lp.frequency.value = 900;
+        lp.connect(master); lp.connect(del);
+
+        const padGain = ac.createGain(); padGain.gain.value = 0.05; padGain.connect(lp);
+        [98, 147, 196.5].forEach((f) => {
+          const o = ac.createOscillator(); o.type = 'sine'; o.frequency.value = f;
+          o.start(); o.connect(padGain); (master._oscs = master._oscs || []).push(o);
+        });
+
+        const pluck = () => {
+          const n = NOTES[step % NOTES.length]; step += 1;
+          const o = ac.createOscillator(); o.type = 'triangle'; o.frequency.value = n;
+          const g = ac.createGain();
+          g.gain.setValueAtTime(0, ac.currentTime);
+          g.gain.linearRampToValueAtTime(0.12, ac.currentTime + 0.04);
+          g.gain.exponentialRampToValueAtTime(0.0001, ac.currentTime + 2.1);
+          o.connect(g); g.connect(lp);
+          o.start(); o.stop(ac.currentTime + 2.2);
+        };
+        pluck();
+        timer = setInterval(pluck, 2400);
+      }
+      function stopMusic() {
+        if (timer) clearInterval(timer);
+        if (master) {
+          master.gain.linearRampToValueAtTime(0, ac.currentTime + 0.8);
+          const m = master;
+          setTimeout(() => { (m._oscs || []).forEach((o) => o.stop()); m.disconnect(); }, 900);
+          master = null;
+        }
+      }
+      btn.addEventListener('click', () => {
+        const on = btn.getAttribute('aria-pressed') === 'true';
+        btn.setAttribute('aria-pressed', String(!on));
+        btn.setAttribute('aria-label', on ? 'Play music' : 'Pause music');
+        on ? stopMusic() : startMusic();
+      });
+    </script>
+  </body>
+</html>

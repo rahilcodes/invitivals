@@ -1,0 +1,125 @@
+---
+import config from '../wedding.config';
+---
+
+<section class="wishes" data-screen="guest-wishes" aria-labelledby="wishes-h">
+  <div class="inner">
+    <div class="head rv-fade" style="--rvr:entry 10% cover 30%">
+      <div class="overline">Guestbook</div>
+      <h2 id="wishes-h">{config.wishes.heading}</h2>
+    </div>
+
+    <div class="list" id="wl-wish-list" aria-live="polite">
+      {
+        config.wishes.entries.map((w, i) => (
+          <div
+            class={`card ${i % 2 === 1 ? 'indent rv-r' : 'rv-l'}`}
+            style={`--rvr:entry 15% cover 35%;--rv-delay:${i * 0.1}s`}
+          >
+            <p>{w.text}</p>
+            <div class="who">{w.name}</div>
+          </div>
+        ))
+      }
+    </div>
+
+    <form class="composer" id="wl-wish-form">
+      <label class="sr-only" for="wl-wish-input">Your wish</label>
+      <input id="wl-wish-input" placeholder={config.wishes.placeholder} autocomplete="off" maxlength="280" />
+      <button type="submit">Send</button>
+    </form>
+  </div>
+</section>
+
+<style>
+  .wishes {
+    padding: 96px 24px;
+    background: var(--dark);
+    color: var(--darkInk);
+  }
+  .inner {
+    max-width: 680px;
+    margin: 0 auto;
+    text-align: center;
+  }
+  .overline {
+    font-size: 11px;
+    letter-spacing: 0.32em;
+    color: var(--gold);
+    text-transform: uppercase;
+  }
+  h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 400;
+    font-style: italic;
+    font-size: clamp(32px, 6vw, 48px);
+    margin: 12px 0 0;
+  }
+  .list {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    margin-top: 48px;
+    text-align: left;
+  }
+  .card {
+    background: color-mix(in srgb, var(--darkInk) 6%, transparent);
+    border: 1px solid color-mix(in srgb, var(--darkInk) 14%, transparent);
+    padding: 24px 26px;
+  }
+  .card.indent {
+    margin-left: 6%;
+  }
+  .card p {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 19px;
+    line-height: 1.6;
+    margin: 0 0 12px;
+    font-style: italic;
+  }
+  .who {
+    font-size: 10px;
+    letter-spacing: 0.26em;
+    text-transform: uppercase;
+    color: var(--gold);
+  }
+  .composer {
+    display: flex;
+    gap: 10px;
+    margin-top: 34px;
+  }
+  input {
+    flex: 1;
+    min-width: 0;
+    background: color-mix(in srgb, var(--darkInk) 8%, transparent);
+    border: 1px solid color-mix(in srgb, var(--darkInk) 18%, transparent);
+    color: var(--darkInk);
+    padding: 16px 20px;
+    font-size: 14px;
+    border-radius: 999px;
+    outline: none;
+    min-height: 20px;
+  }
+  input::placeholder {
+    color: color-mix(in srgb, var(--darkInk) 55%, transparent);
+  }
+  input:focus {
+    border-color: var(--gold);
+  }
+  button {
+    background: var(--gold);
+    color: var(--dark);
+    border: none;
+    padding: 16px 26px;
+    border-radius: 999px;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    cursor: pointer;
+    min-height: 48px;
+    transition: opacity 0.3s ease;
+  }
+  button:hover {
+    opacity: 0.85;
+  }
+</style>

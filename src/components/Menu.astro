@@ -1,0 +1,89 @@
+---
+import config from '../wedding.config';
+---
+
+<section class="menu" data-screen="menu" aria-labelledby="menu-h">
+  <div class="card rv-zoom" style="--rvr:entry 12% cover 34%">
+    <div class="inner-frame" aria-hidden="true"></div>
+    <div class="overline">{config.menu.overline}</div>
+    <h2 id="menu-h">{config.menu.title}</h2>
+
+    {
+      config.menu.courses.map((c, i) => (
+        <>
+          {i > 0 && <div class="divider" aria-hidden="true" />}
+          <div class="course">{c.label}</div>
+          <p class="dish">{c.dish}</p>
+          <p class="alt">{c.alt}</p>
+        </>
+      ))
+    }
+
+    <p class="footnote">{config.menu.footnote}</p>
+  </div>
+</section>
+
+<style>
+  .menu {
+    padding: 96px 24px;
+  }
+  .card {
+    max-width: 480px;
+    margin: 0 auto;
+    border: 1px solid var(--goldSoft);
+    padding: 52px 34px;
+    text-align: center;
+    position: relative;
+    background: var(--bg);
+  }
+  .inner-frame {
+    position: absolute;
+    inset: 8px;
+    border: 1px solid var(--goldSoft);
+    pointer-events: none;
+    opacity: 0.7;
+  }
+  .overline {
+    font-size: 11px;
+    letter-spacing: 0.32em;
+    color: var(--gold);
+    text-transform: uppercase;
+  }
+  h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 500;
+    font-size: clamp(30px, 6vw, 42px);
+    margin: 12px 0 34px;
+  }
+  .course {
+    font-size: 10px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 14px;
+  }
+  .dish {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 19px;
+    line-height: 1.5;
+    margin: 0;
+  }
+  .alt {
+    font-size: 12px;
+    font-style: italic;
+    color: var(--mut);
+    margin: 6px 0 0;
+  }
+  .divider {
+    width: 26px;
+    height: 1px;
+    background: var(--gold);
+    margin: 28px auto;
+  }
+  .footnote {
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    color: var(--mut);
+    margin: 36px 0 0;
+  }
+</style>

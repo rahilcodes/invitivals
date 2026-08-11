@@ -1,0 +1,86 @@
+---
+import config from '../wedding.config';
+import Layout from '../layouts/Layout.astro';
+import IntroOverlay from '../components/IntroOverlay.astro';
+import Nav from '../components/Nav.astro';
+import Hero from '../components/Hero.astro';
+import Couple from '../components/Couple.astro';
+import Story from '../components/Story.astro';
+import Countdown from '../components/Countdown.astro';
+import DayTimeline from '../components/DayTimeline.astro';
+import Events from '../components/Events.astro';
+import Family from '../components/Family.astro';
+import Venue from '../components/Venue.astro';
+import MapSection from '../components/MapSection.astro';
+import Hotels from '../components/Hotels.astro';
+import DressCode from '../components/DressCode.astro';
+import Menu from '../components/Menu.astro';
+import Gallery from '../components/Gallery.astro';
+import Film from '../components/Film.astro';
+import Wishes from '../components/Wishes.astro';
+import Rsvp from '../components/Rsvp.astro';
+import Faq from '../components/Faq.astro';
+import Contact from '../components/Contact.astro';
+import Footer from '../components/Footer.astro';
+import MusicToggle from '../components/MusicToggle.astro';
+
+const s = config.sections;
+
+// The small runtime slice of the config that the client script needs.
+const runtime = {
+  datetime: config.datetime,
+  music: config.music,
+  rsvp: {
+    endpoint: config.rsvp.endpoint,
+    endpointType: config.rsvp.endpointType,
+    maxGuests: config.rsvp.maxGuests,
+    thanks: config.rsvp.thanks,
+  },
+  guestbookEndpoint: config.guestbookEndpoint,
+  wishes: { newWishLabel: config.wishes.newWishLabel },
+  share: { title: config.contact.shareTitle, text: config.contact.shareText },
+};
+---
+
+<Layout>
+  {s.intro && <IntroOverlay />}
+  <Nav />
+
+  <main id="top">
+    {s.hero && <Hero />}
+    {s.couple && <Couple />}
+    {s.story && <Story />}
+    {s.countdown && <Countdown />}
+    {s.dayTimeline && <DayTimeline />}
+    {s.events && <Events />}
+    {s.family && <Family />}
+    {s.venue && <Venue />}
+    {s.map && <MapSection />}
+    {s.hotels && <Hotels />}
+    {s.dressCode && <DressCode />}
+    {s.menu && <Menu />}
+    {s.gallery && <Gallery />}
+    {s.film && <Film />}
+    {s.wishes && <Wishes />}
+    {s.rsvp && <Rsvp />}
+    {s.faq && <Faq />}
+    {s.contact && <Contact />}
+  </main>
+
+  <Footer />
+  <MusicToggle />
+
+  <a class="mi-bar" href="/#pricing" aria-label="Get this design from Myinvite">✦ Get this design — <b>Myinvite</b></a>
+
+  <script type="application/json" id="wl-data" set:html={JSON.stringify(runtime)} is:inline />
+  <script src="../scripts/main.js"></script>
+</Layout>
+
+<style>
+  main {
+    overflow-x: clip;
+  }
+  .mi-bar { position: fixed; left: 18px; bottom: 18px; z-index: 55; display: flex; align-items: center; gap: 6px; background: rgba(18,15,12,.82); color: #f5edd9; backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border: 1px solid rgba(212,166,67,.5); border-radius: 999px; padding: 12px 18px; font-family: ui-sans-serif, system-ui, sans-serif; font-size: 12px; font-weight: 600; letter-spacing: .04em; text-decoration: none; transition: transform .2s ease, border-color .2s ease; }
+  .mi-bar b { color: #d4a643; font-style: italic; font-family: Georgia, serif; font-weight: 400; font-size: 13px; }
+  .mi-bar:hover { transform: translateY(-2px); border-color: #d4a643; color: #f5edd9; }
+</style>

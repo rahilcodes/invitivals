@@ -1,0 +1,139 @@
+---
+import config from '../wedding.config';
+import PhotoSlot from './PhotoSlot.astro';
+import { longDate } from '../lib/helpers';
+---
+
+<section class="hero" data-screen="hero" aria-label={`The wedding of ${config.bride.first} and ${config.groom.first}`}>
+  <div class="photo">
+    <div class="ken">
+      <PhotoSlot
+        src={config.heroPhoto}
+        alt={`${config.bride.first} and ${config.groom.first}`}
+        label="Drop your favorite couple photo — /photos/hero.jpg"
+        loading="eager"
+      />
+    </div>
+    <div class="petal p1" aria-hidden="true"></div>
+    <div class="petal p2" aria-hidden="true"></div>
+    <div class="petal p3" aria-hidden="true"></div>
+    <div class="petal p4" aria-hidden="true"></div>
+    <div class="petal p5" aria-hidden="true"></div>
+  </div>
+
+  <div class="plate">
+    <div class="overline">The wedding of</div>
+    <h1 class="names">
+      {config.bride.first} <span class="amp">&amp;</span> {config.groom.first}
+    </h1>
+    <p class="meta">
+      {longDate()}<br />
+      {config.heroLocationLine}
+    </p>
+  </div>
+
+  <div class="cue" aria-hidden="true">
+    <div class="cue-label">Scroll</div>
+    <div class="cue-track"><div class="cue-dot"></div></div>
+  </div>
+</section>
+
+<style>
+  .hero {
+    min-height: 100svh;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+  }
+  .photo {
+    position: relative;
+    height: 60svh;
+    overflow: hidden;
+  }
+  .ken {
+    position: absolute;
+    inset: 0;
+    animation: kKen 22s ease-in-out infinite alternate;
+  }
+
+  .petal {
+    position: absolute;
+    pointer-events: none;
+    border-radius: 80% 10% 80% 10%;
+    background: var(--goldSoft);
+  }
+  .p1 { left: 8%;  width: 10px; height: 15px; opacity: 0.75; animation: kFloat 17s linear -2s infinite; }
+  .p2 { left: 24%; width: 8px;  height: 12px; opacity: 0.35; background: var(--gold); animation: kFloat 23s linear -9s infinite; }
+  .p3 { left: 58%; width: 12px; height: 17px; opacity: 0.65; border-radius: 10% 80% 10% 80%; animation: kFloat 20s linear -14s infinite; }
+  .p4 { left: 78%; width: 9px;  height: 13px; opacity: 0.3;  background: var(--gold); animation: kFloat 26s linear -5s infinite; }
+  .p5 { left: 90%; width: 7px;  height: 11px; opacity: 0.6;  border-radius: 10% 80% 10% 80%; animation: kFloat 19s linear -11s infinite; }
+
+  .plate {
+    position: relative;
+    margin: -84px auto 0;
+    background: var(--bg);
+    padding: 34px 34px 0;
+    text-align: center;
+    max-width: min(88vw, 640px);
+    border-top: 1px solid var(--gold);
+  }
+  .overline {
+    font-size: 11px;
+    letter-spacing: 0.34em;
+    text-transform: uppercase;
+    color: var(--gold);
+    animation: kWide 1.4s ease both;
+  }
+  .names {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 400;
+    font-size: clamp(52px, 13vw, 110px);
+    line-height: 1;
+    margin: 18px 0 0;
+    animation: kMask 1.4s 0.3s ease both;
+  }
+  .amp {
+    font-style: italic;
+    color: var(--gold);
+  }
+  .meta {
+    font-size: 13px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--mut);
+    margin: 26px 0 0;
+    line-height: 2;
+    animation: kRise 1.2s 0.8s ease both;
+  }
+
+  .cue {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    margin: auto auto 26px;
+    padding-top: 34px;
+  }
+  .cue-label {
+    font-size: 10px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--mut);
+  }
+  .cue-track {
+    width: 1px;
+    height: 38px;
+    background: var(--goldSoft);
+    position: relative;
+    overflow: hidden;
+  }
+  .cue-dot {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 1px;
+    height: 12px;
+    background: var(--gold);
+    animation: kScroll 1.8s ease-in-out infinite;
+  }
+</style>

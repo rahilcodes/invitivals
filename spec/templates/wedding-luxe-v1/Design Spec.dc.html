@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>body{margin:0;background:#faf8f2;color:#2c2a24;font-family:'Jost',sans-serif;-webkit-font-smoothing:antialiased}a{color:#a5843e;text-decoration:none}a:hover{color:#2c2a24}</style>
+</helmet>
+<main style="max-width:780px;margin:0 auto;padding:72px 28px 120px;line-height:1.7">
+<header style="text-align:center;border-bottom:1px solid #e6dcc2;padding-bottom:44px;margin-bottom:56px">
+  <div style="font-size:11px;letter-spacing:.34em;text-transform:uppercase;color:#a5843e">Product design specification</div>
+  <h1 style="font-family:'Cormorant Garamond',serif;font-weight:500;font-size:clamp(36px,6vw,54px);margin:16px 0 10px">Wedding Luxe &mdash; Template V1</h1>
+  <p style="font-size:14px;color:#77715f;margin:0">A premium digital wedding invitation &middot; companion to the live prototype &middot; <a href="Wedding Invitation.dc.html">open the prototype &rarr;</a></p>
+</header>
+
+<section>
+  <h2 style="font-family:'Cormorant Garamond',serif;font-weight:500;font-size:30px;margin:0 0 12px">1 &middot; User journey &amp; emotional arc</h2>
+  <p style="font-size:15px;color:#4c493f;margin:0 0 18px">95% of guests arrive via a WhatsApp link on mobile. The site is a single scroll choreographed as a six-beat emotional arc:</p>
+  <div style="display:grid;grid-template-columns:130px 1fr;gap:8px 18px;font-size:14px">
+    <div style="color:#a5843e;letter-spacing:.14em;text-transform:uppercase;font-size:11px;padding-top:3px">Curiosity</div><div>Envelope intro: names fade in behind a double hairline frame; one button, one quote. Nothing else.</div>
+    <div style="color:#a5843e;letter-spacing:.14em;text-transform:uppercase;font-size:11px;padding-top:3px">Surprise</div><div>&ldquo;Open Invitation&rdquo; dissolves the intro, ambient music begins, the hero photo Ken-Burns behind mask-revealed names.</div>
+    <div style="color:#a5843e;letter-spacing:.14em;text-transform:uppercase;font-size:11px;padding-top:3px">Emotion</div><div>Couple portraits &rarr; Our Story timeline: personal, funny, specific copy. This is where guests forward the link.</div>
+    <div style="color:#a5843e;letter-spacing:.14em;text-transform:uppercase;font-size:11px;padding-top:3px">Anticipation</div><div>Dark countdown interlude &mdash; the palette inverts once, making the ticking numbers feel like an event.</div>
+    <div style="color:#a5843e;letter-spacing:.14em;text-transform:uppercase;font-size:11px;padding-top:3px">Practicality</div><div>Events, venue, map, hotels, dress code, menu &mdash; all answerable in under 30 seconds each, thumb-reach CTAs.</div>
+    <div style="color:#a5843e;letter-spacing:.14em;text-transform:uppercase;font-size:11px;padding-top:3px">Celebration</div><div>Gallery, film, guest wishes, then the RSVP card as the climax; FAQ and contact close the loop.</div>
+  </div>
+</section>
+
+<section style="margin-top:52px">
+  <h2 style="font-family:'Cormorant Garamond',serif;font-weight:500;font-size:30px;margin:0 0 12px">2 &middot; Information architecture</h2>
+  <p style="font-size:15px;color:#4c493f;margin:0 0 14px">One page, 19 sections, fixed order (emotional &rarr; practical &rarr; commitment). Sticky glass nav carries only three targets: Events, Venue, RSVP &mdash; everything a returning guest needs. RSVP is deliberately near the end but always one tap away.</p>
+  <p style="font-size:13px;color:#77715f;font-family:ui-monospace,monospace;line-height:2;margin:0">Intro &rarr; Hero &rarr; Couple &rarr; Our Story &rarr; Countdown &rarr; Day Timeline &rarr; Events &rarr; Family &rarr; Venue &rarr; Map &rarr; Hotels &rarr; Dress Code &rarr; Menu &rarr; Gallery &rarr; Film &rarr; Wishes &rarr; RSVP &rarr; FAQ &rarr; Contact &rarr; Footer</p>
+</section>
+
+<section style="margin-top:52px">
+  <h2 style="font-family:'Cormorant Garamond',serif;font-weight:500;font-size:30px;margin:0 0 12px">3 &middot; Typography system</h2>
+  <div style="border:1px solid #e6dcc2;padding:26px;background:#f2ede1;margin-bottom:14px">
+    <div style="font-family:'Cormorant Garamond',serif;font-size:34px;line-height:1.1">Cormorant Garamond <span style="font-style:italic;color:#a5843e">&amp; italic</span></div>
+    <div style="font-size:13px;color:#77715f;margin-top:6px">Display &amp; headings &middot; weights 300&ndash;600 &middot; italics reserved for emotional emphasis and the ampersand</div>
+  </div>
+  <div style="border:1px solid #e6dcc2;padding:26px;background:#f2ede1">
+    <div style="font-size:20px;letter-spacing:.02em">Jost &mdash; body, labels, UI</div>
+    <div style="font-size:13px;color:#77715f;margin-top:6px">Weights 300&ndash;500 &middot; overline labels: 10&ndash;11px, uppercase, letter-spacing .24&ndash;.34em, gold</div>
+  </div>
+  <p style="font-size:14px;color:#4c493f;margin:16px 0 0">Scale (mobile &rarr; desktop via clamp): names 52&rarr;110px &middot; H2 34&rarr;52px &middot; H3 20&rarr;26px &middot; body 14&ndash;15px/1.7&ndash;1.8 &middot; overline 10&ndash;11px. Nothing under 10px; body copy never under 13px.</p>
+</section>
+
+<section style="margin-top:52px">
+  <h2 style="font-family:'Cormorant Garamond',serif;font-weight:500;font-size:30px;margin:0 0 12px">4 &middot; Color system</h2>
+  <p style="font-size:15px;color:#4c493f;margin:0 0 18px">Eight CSS variables drive the entire template &mdash; a palette is just eight values, so new colorways ship trivially. V1 ships three (switchable in the prototype&rsquo;s Tweaks panel):</p>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:16px">
+    <div style="border:1px solid #e6dcc2">
+      <div style="display:flex;height:52px"><div style="flex:1;background:#faf8f2"></div><div style="flex:1;background:#f2ede1"></div><div style="flex:1;background:#a5843e"></div><div style="flex:1;background:#22211c"></div></div>
+      <div style="padding:14px 16px"><strong style="font-weight:500">Ivory &amp; Gold</strong> (default)<div style="font-size:12px;color:#77715f;font-family:ui-monospace,monospace;margin-top:4px">bg #faf8f2 &middot; bg2 #f2ede1 &middot; ink #2c2a24 &middot; mut #77715f &middot; gold #a5843e &middot; goldSoft #e6dcc2 &middot; dark #22211c &middot; darkInk #efe9da</div></div>
+    </div>
+    <div style="border:1px solid #e6dcc2">
+      <div style="display:flex;height:52px"><div style="flex:1;background:#f7f8f3"></div><div style="flex:1;background:#eaefe2"></div><div style="flex:1;background:#6f815a"></div><div style="flex:1;background:#242920"></div></div>
+      <div style="padding:14px 16px"><strong style="font-weight:500">Sage</strong><div style="font-size:12px;color:#77715f;font-family:ui-monospace,monospace;margin-top:4px">bg #f7f8f3 &middot; bg2 #eaefe2 &middot; ink #272c23 &middot; mut #6f7765 &middot; accent #6f815a &middot; soft #d9e1cc &middot; dark #242920 &middot; darkInk #edf0e6</div></div>
+    </div>
+    <div style="border:1px solid #e6dcc2">
+      <div style="display:flex;height:52px"><div style="flex:1;background:#15171c"></div><div style="flex:1;background:#1d2027"></div><div style="flex:1;background:#bb9c57"></div><div style="flex:1;background:#0e1014"></div></div>
+      <div style="padding:14px 16px"><strong style="font-weight:500">Midnight</strong> (full dark)<div style="font-size:12px;color:#77715f;font-family:ui-monospace,monospace;margin-top:4px">bg #15171c &middot; bg2 #1d2027 &middot; ink #ebe8e0 &middot; mut #98958b &middot; gold #bb9c57 &middot; soft #3b3524 &middot; dark #0e1014 &middot; darkInk #ebe8e0</div></div>
+    </div>
+  </div>
+  <p style="font-size:14px;color:#4c493f;margin:16px 0 0">Rule: one light surface, one tinted surface, one metallic accent, one dark interlude. The dark section appears exactly twice (countdown, wishes/footer) so it stays dramatic. Roadmap palettes (Champagne, Emerald, Rose Gold, Royal Blue, Maroon&hellip;) are eight-value swaps.</p>
+</section>
+
+<section style="margin-top:52px">
+  <h2 style="font-family:'Cormorant Garamond',serif;font-weight:500;font-size:30px;margin:0 0 12px">5 &middot; Design tokens</h2>
+  <p style="font-size:14px;color:#4c493f;font-family:ui-monospace,monospace;line-height:2.1;margin:0">space: 4 / 8 / 12 / 16 / 24 / 34 / 52 / 96 (section padding 96px)<br>radius: 0 (cards) &middot; 2&ndash;4px (media) &middot; 999px (pills, arches, avatars)<br>hairline: 1px goldSoft &middot; accent rule: 1px gold, 26&ndash;46px wide<br>shadow: 0 24px 50px -34px rgba(ink,.4) &mdash; soft, far, low-alpha only<br>glass: bg 74&ndash;82% + blur(12&ndash;16px) &middot; touch targets &ge; 44px &middot; content max-width 680px</p>
+</section>
+
+<section style="margin-top:52px">
+  <h2 style="font-family:'Cormorant Garamond',serif;font-weight:500;font-size:30px;margin:0 0 12px">6 &middot; Component library</h2>
+  <p style="font-size:15px;color:#4c493f;margin:0 0 10px">Fourteen reusable parts, all present in the prototype:</p>
+  <p style="font-size:14px;color:#4c493f;line-height:2;margin:0">Section header (overline + serif H2 + gold rule) &middot; Envelope intro &middot; Glass nav bar &middot; Arch portrait frame &middot; Timeline entry (dot + rail) &middot; Countdown digit group &middot; Snap-scroll carousel card &middot; Event card (date block + body) &middot; Circle avatar &middot; Glass overlay card &middot; Framed menu card (double hairline) &middot; Wish card &middot; RSVP form (pill toggle, stepper, thank-you state) &middot; FAQ accordion &middot; Music toggle (equalizer bars) &middot; Photo drop-slot.</p>
+</section>
+
+<section style="margin-top:52px">
+  <h2 style="font-family:'Cormorant Garamond',serif;font-weight:500;font-size:30px;margin:0 0 12px">7 &middot; Animation &amp; interaction specs</h2>
+  <p style="font-size:14px;color:#4c493f;line-height:1.9;margin:0 0 14px">All scroll reveals are CSS scroll-driven (<span style="font-family:ui-monospace,monospace;font-size:13px">animation-timeline: view()</span>) &mdash; zero JS on the scroll path, 60fps on mid-range Android. Every section animates differently, from a fixed vocabulary of nine keyframes:</p>
+  <div style="display:grid;grid-template-columns:150px 1fr;gap:6px 18px;font-size:13.5px;font-family:ui-monospace,monospace;color:#4c493f">
+    <div>kRise / kFade</div><div style="font-family:'Jost',sans-serif">default entrance &mdash; 34px lift, .9s ease</div>
+    <div>kMask</div><div style="font-family:'Jost',sans-serif">clip-path curtain reveal &mdash; hero names, story photo, film frame</div>
+    <div>kWide</div><div style="font-family:'Jost',sans-serif">letter-spacing settle on overlines (.6em &rarr; .3em)</div>
+    <div>kL / kR</div><div style="font-family:'Jost',sans-serif">opposing slide-ins &mdash; bride/groom, hotels, wish cards</div>
+    <div>kZoom / kKen</div><div style="font-family:'Jost',sans-serif">scale settle on media; 22s Ken Burns on hero</div>
+    <div>kFloat</div><div style="font-family:'Jost',sans-serif">petal drift, 17&ndash;26s, hero only, pointer-events none</div>
+    <div>kBreath / kBar</div><div style="font-family:'Jost',sans-serif">CTA glow pulse; music-toggle equalizer</div>
+  </div>
+  <p style="font-size:14px;color:#4c493f;line-height:1.9;margin:14px 0 0">Interactions: intro button starts WebAudio ambient score (autoplay is browser-blocked &mdash; the tap is the unlock); mute toggle suspends the AudioContext; carousels use native scroll-snap; RSVP submits to an in-place thank-you state with a &ldquo;change my reply&rdquo; escape hatch; share uses <span style="font-family:ui-monospace,monospace;font-size:13px">navigator.share</span> with clipboard fallback. <strong style="font-weight:500">prefers-reduced-motion collapses every animation to &le;10ms.</strong></p>
+</section>
+
+<section style="margin-top:52px">
+  <h2 style="font-family:'Cormorant Garamond',serif;font-weight:500;font-size:30px;margin:0 0 12px">8 &middot; Mobile-first &amp; desktop</h2>
+  <p style="font-size:14px;color:#4c493f;line-height:1.9;margin:0">Designed at 390px first: single column, full-bleed media, carousels for dense content (day timeline, gallery), all CTAs bottom-of-thumb pills &ge;48px. Desktop is the same column, wider: clamp() scales type, grids go 2&ndash;4 up, carousel padding centers on a 800&ndash;920px track. No separate desktop layouts to maintain &mdash; that&rsquo;s deliberate for a sellable template.</p>
+</section>
+
+<section style="margin-top:52px">
+  <h2 style="font-family:'Cormorant Garamond',serif;font-weight:500;font-size:30px;margin:0 0 12px">9 &middot; What differentiates it</h2>
+  <p style="font-size:14px;color:#4c493f;line-height:2;margin:0">1. An arrival ritual (envelope + music unlock), not a landing page. 2. Fashion-editorial restraint &mdash; hairlines and whitespace where competitors use script fonts and flourishes. 3. One dramatic palette inversion instead of constant decoration. 4. Copy with personality baked in as a template voice guide. 5. Eight-variable theming = infinite colorways at near-zero cost. 6. Generated ambient score &mdash; no licensing, no 3MB audio file. 7. Scroll-driven CSS animation &mdash; smooth on cheap phones, where competitors&rsquo; JS parallax judders.</p>
+</section>
+
+<section style="margin-top:52px;background:#22211c;color:#efe9da;padding:40px 34px">
+  <h2 style="font-family:'Cormorant Garamond',serif;font-weight:400;font-style:italic;font-size:30px;margin:0 0 16px;color:#efe9da">10 &middot; Self-critique &mdash; five improvements for V2</h2>
+  <ol style="font-size:14px;line-height:1.9;margin:0;padding-left:20px;color:#cfc9b8">
+    <li><strong style="color:#efe9da;font-weight:500">Real photography is doing zero work.</strong> The design leans on photo slots; until a demo photo set ships, buyers can&rsquo;t feel the final effect. V2: curated licensed demo shoot per palette.</li>
+    <li><strong style="color:#efe9da;font-weight:500">RSVP needs a real backend.</strong> The thank-you state is theater. V2: serverless endpoint + spreadsheet sync, per-guest magic links with pre-filled names.</li>
+    <li><strong style="color:#efe9da;font-weight:500">19 sections is heavy for some couples.</strong> V2: section toggles in an admin config so a minimal 8-section build is one flag away.</li>
+    <li><strong style="color:#efe9da;font-weight:500">Scroll-driven animation needs a fallback audit.</strong> Older Safari plays entrances time-based on load; acceptable but not choreographed. V2: IntersectionObserver polyfill path.</li>
+    <li><strong style="color:#efe9da;font-weight:500">Localization &amp; cultural variants.</strong> English-only, Western event structure. V2: language file + multi-event schemas (mehndi/sangeet, tea ceremony, nikah) &mdash; the biggest commercial unlock.</li>
+  </ol>
+</section>
+
+<footer style="text-align:center;margin-top:64px;font-size:12px;letter-spacing:.24em;text-transform:uppercase;color:#77715f">Wedding Luxe V1 &middot; <a href="Wedding Invitation.dc.html">view the live prototype</a></footer>
+</main>
+</x-dc>
+</body>
+</html>

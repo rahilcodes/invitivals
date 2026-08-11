@@ -1,0 +1,71 @@
+---
+import config from '../wedding.config';
+import PhotoSlot from './PhotoSlot.astro';
+---
+
+<section class="family" data-screen="family" aria-labelledby="family-h">
+  <div class="head rv-rise">
+    <div class="overline">With love from</div>
+    <h2 id="family-h">{config.family.heading}</h2>
+  </div>
+
+  <div class="grid">
+    {
+      config.family.members.map((m, i) => (
+        <div class="member rv-zoom" style={`--rvr:entry 15% cover 35%;--rv-delay:${i * 0.1}s`}>
+          <div class="avatar">
+            <PhotoSlot src={m.photo} alt={m.name} label="Photo" />
+          </div>
+          <h3>{m.name}</h3>
+          <div class="role">{m.role}</div>
+        </div>
+      ))
+    }
+  </div>
+</section>
+
+<style>
+  .family {
+    padding: 96px 24px;
+    max-width: 760px;
+    margin: 0 auto;
+    text-align: center;
+  }
+  .overline {
+    font-size: 11px;
+    letter-spacing: 0.32em;
+    color: var(--gold);
+    text-transform: uppercase;
+  }
+  h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 500;
+    font-size: clamp(34px, 6vw, 52px);
+    margin: 12px 0 0;
+  }
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 34px 20px;
+    margin-top: 56px;
+  }
+  .avatar {
+    width: 124px;
+    height: 124px;
+    margin: 0 auto;
+    border-radius: 50%;
+    overflow: hidden;
+  }
+  h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 500;
+    font-size: 20px;
+    margin: 18px 0 4px;
+  }
+  .role {
+    font-size: 10px;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    color: var(--gold);
+  }
+</style>

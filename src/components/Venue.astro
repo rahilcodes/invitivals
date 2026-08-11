@@ -1,0 +1,89 @@
+---
+import config from '../wedding.config';
+import PhotoSlot from './PhotoSlot.astro';
+import { mapsViewUrl } from '../lib/helpers';
+---
+
+<section id="venue" class="venue" data-screen="venue" aria-labelledby="venue-h">
+  <div class="photo">
+    <PhotoSlot
+      src={config.venue.photo}
+      alt={config.venue.name}
+      label={`Venue photo, full-bleed — /photos/venue.jpg`}
+    />
+  </div>
+  <div class="card-wrap">
+    <div class="card rv-rise" style="--rvr:entry 20% cover 45%">
+      <div class="overline">The venue</div>
+      <h2 id="venue-h">{config.venue.name}</h2>
+      <p>
+        {config.venue.description}<br />
+        {config.venue.address}
+      </p>
+      <a class="cta" href={mapsViewUrl()} target="_blank" rel="noopener">Open in Google Maps</a>
+    </div>
+  </div>
+</section>
+
+<style>
+  .venue {
+    position: relative;
+    min-height: 78svh;
+    display: flex;
+    align-items: flex-end;
+    overflow: hidden;
+  }
+  .photo {
+    position: absolute;
+    inset: 0;
+  }
+  .card-wrap {
+    position: relative;
+    margin: 0 auto;
+    width: min(92vw, 560px);
+    pointer-events: none;
+  }
+  .card {
+    pointer-events: auto;
+    background: color-mix(in srgb, var(--bg) 82%, transparent);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid color-mix(in srgb, var(--goldSoft) 70%, transparent);
+    padding: 36px 30px;
+    text-align: center;
+    margin-bottom: 36px;
+  }
+  .overline {
+    font-size: 11px;
+    letter-spacing: 0.32em;
+    color: var(--gold);
+    text-transform: uppercase;
+  }
+  h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 500;
+    font-size: clamp(30px, 6vw, 44px);
+    margin: 12px 0 8px;
+  }
+  p {
+    font-size: 14px;
+    line-height: 1.8;
+    color: var(--mut);
+    margin: 0 0 20px;
+  }
+  .cta {
+    display: inline-block;
+    background: var(--ink);
+    color: var(--bg);
+    padding: 15px 30px;
+    border-radius: 999px;
+    font-size: 11px;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    transition: background 0.3s ease;
+  }
+  .cta:hover {
+    background: var(--gold);
+    color: var(--bg);
+  }
+</style>

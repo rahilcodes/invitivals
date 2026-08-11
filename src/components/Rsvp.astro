@@ -1,0 +1,259 @@
+---
+import config from '../wedding.config';
+---
+
+<section id="rsvp" class="rsvp" data-screen="rsvp" aria-labelledby="rsvp-h">
+  <div class="card rv-rise" style="--rvr:entry 10% cover 30%">
+    <div class="float-label" aria-hidden="true">Kindly reply</div>
+
+    <form class="pending" id="wl-rsvp-form" novalidate>
+      <div class="head">
+        <h2 id="rsvp-h">{config.rsvp.title}</h2>
+        <p class="deadline">Please reply by {config.rsvp.deadline}</p>
+      </div>
+
+      <div class="fields">
+        <label class="sr-only" for="wl-rsvp-name">Your full name</label>
+        <input id="wl-rsvp-name" name="name" placeholder="Your full name" autocomplete="name" required />
+
+        <label class="sr-only" for="wl-rsvp-contact">Email or phone</label>
+        <input id="wl-rsvp-contact" name="contact" placeholder="Email or phone" autocomplete="email" />
+
+        <div class="choice" role="group" aria-label="Will you attend?">
+          <button type="button" class="pill yes selected" id="wl-rsvp-yes" aria-pressed="true">
+            {config.rsvp.acceptLabel}
+          </button>
+          <button type="button" class="pill no" id="wl-rsvp-no" aria-pressed="false">
+            {config.rsvp.declineLabel}
+          </button>
+        </div>
+
+        <div class="stepper">
+          <span class="stepper-label" id="wl-guests-label">Guests in your party</span>
+          <div class="stepper-controls">
+            <button type="button" id="wl-guests-minus" aria-label="Fewer guests">&minus;</button>
+            <span class="count" id="wl-guests" aria-labelledby="wl-guests-label">2</span>
+            <button type="button" id="wl-guests-plus" aria-label="More guests">+</button>
+          </div>
+        </div>
+
+        <label class="sr-only" for="wl-rsvp-notes">Dietary requirements or a note</label>
+        <textarea id="wl-rsvp-notes" name="notes" placeholder="Dietary requirements or a note for us (optional)" rows="3"></textarea>
+
+        <button type="submit" class="submit">Send reply</button>
+      </div>
+    </form>
+
+    <div class="done" id="wl-rsvp-done" hidden>
+      <div class="monogram" aria-hidden="true">{config.bride.initial}&amp;{config.groom.initial}</div>
+      <h2 id="wl-rsvp-thanks-title" tabindex="-1">&nbsp;</h2>
+      <p id="wl-rsvp-thanks-body"></p>
+      <button type="button" class="change" id="wl-rsvp-reset">Change my reply</button>
+    </div>
+  </div>
+</section>
+
+<style>
+  .rsvp {
+    padding: 110px 24px;
+  }
+  .card {
+    max-width: 520px;
+    margin: 0 auto;
+    border: 1px solid var(--gold);
+    padding: 52px 32px;
+    position: relative;
+    background: var(--bg);
+    box-shadow: 0 40px 80px -50px color-mix(in srgb, var(--ink) 50%, transparent);
+  }
+  .float-label {
+    position: absolute;
+    top: -13px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--bg);
+    padding: 0 16px;
+    font-size: 11px;
+    letter-spacing: 0.34em;
+    text-transform: uppercase;
+    color: var(--gold);
+    white-space: nowrap;
+  }
+  .head {
+    text-align: center;
+  }
+  h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 500;
+    font-size: clamp(32px, 6vw, 44px);
+    margin: 0;
+  }
+  .deadline {
+    font-size: 13px;
+    color: var(--mut);
+    margin: 14px 0 0;
+    letter-spacing: 0.04em;
+  }
+  .fields {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin-top: 36px;
+  }
+  input,
+  textarea {
+    background: var(--bg2);
+    border: 1px solid var(--goldSoft);
+    padding: 17px 20px;
+    font-size: 15px;
+    outline: none;
+    color: var(--ink);
+    box-sizing: border-box;
+    width: 100%;
+  }
+  input:focus,
+  textarea:focus {
+    border-color: var(--gold);
+  }
+  input[aria-invalid='true'] {
+    border-color: #b3543e;
+  }
+  input::placeholder,
+  textarea::placeholder {
+    color: color-mix(in srgb, var(--mut) 80%, transparent);
+  }
+  textarea {
+    resize: vertical;
+  }
+  .choice {
+    display: flex;
+    gap: 10px;
+  }
+  .pill {
+    flex: 1;
+    padding: 16px;
+    border-radius: 999px;
+    font-size: 11px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    cursor: pointer;
+    min-height: 50px;
+    transition: background 0.25s ease, color 0.25s ease, border-color 0.25s ease;
+  }
+  .pill.yes {
+    border: 1px solid var(--gold);
+    background: transparent;
+    color: var(--gold);
+  }
+  .pill.yes.selected {
+    background: var(--gold);
+    color: var(--bg);
+  }
+  .pill.no {
+    border: 1px solid var(--goldSoft);
+    background: transparent;
+    color: var(--mut);
+  }
+  .pill.no.selected {
+    background: var(--ink);
+    color: var(--bg);
+    border-color: var(--ink);
+  }
+  .stepper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border: 1px solid var(--goldSoft);
+    padding: 8px 8px 8px 20px;
+    background: var(--bg2);
+  }
+  .stepper-label {
+    font-size: 13px;
+    color: var(--mut);
+    letter-spacing: 0.04em;
+  }
+  .stepper-controls {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+  }
+  .stepper-controls button {
+    width: 44px;
+    height: 44px;
+    border: 1px solid var(--goldSoft);
+    background: var(--bg);
+    color: var(--ink);
+    font-size: 18px;
+    cursor: pointer;
+    transition: border-color 0.25s ease, color 0.25s ease;
+  }
+  .stepper-controls button:hover {
+    border-color: var(--gold);
+    color: var(--gold);
+  }
+  .count {
+    width: 44px;
+    text-align: center;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px;
+  }
+  .submit {
+    background: var(--ink);
+    color: var(--bg);
+    border: none;
+    padding: 19px;
+    border-radius: 999px;
+    font-size: 12px;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    cursor: pointer;
+    min-height: 54px;
+    transition: background 0.3s ease;
+  }
+  .submit:hover {
+    background: var(--gold);
+  }
+
+  .done {
+    text-align: center;
+    padding: 30px 0;
+    animation: kZoom 0.8s ease both;
+  }
+  .monogram {
+    width: 70px;
+    height: 70px;
+    border: 1px solid var(--gold);
+    border-radius: 50%;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 26px;
+    color: var(--gold);
+    font-style: italic;
+  }
+  .done h2 {
+    font-size: 36px;
+    margin: 26px 0 10px;
+    outline: none;
+  }
+  .done p {
+    font-size: 14px;
+    line-height: 1.8;
+    color: var(--mut);
+    margin: 0;
+  }
+  .change {
+    margin-top: 26px;
+    background: none;
+    border: none;
+    color: var(--gold);
+    font-size: 11px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    cursor: pointer;
+    border-bottom: 1px solid var(--gold);
+    padding: 6px 2px;
+  }
+</style>

@@ -1,0 +1,224 @@
+---
+import config from '../wedding.config';
+import { numericDate } from '../lib/helpers';
+---
+
+<noscript>
+  <style>
+    #wl-intro { display: none !important; }
+  </style>
+</noscript>
+
+<div class="intro" id="wl-intro" data-screen="envelope-intro">
+  <div class="door door-l" aria-hidden="true"></div>
+  <div class="door door-r" aria-hidden="true"></div>
+
+  <div class="content">
+    <div class="frame frame-outer" aria-hidden="true"></div>
+    <div class="frame frame-inner" aria-hidden="true"></div>
+
+    <div class="eyebrow">Together with their families</div>
+
+    <div class="monogram" aria-hidden="true">
+      {config.bride.initial}<span class="amp">&amp;</span>{config.groom.initial}
+    </div>
+
+    <h1 class="names">
+      {config.bride.first} <span class="amp-lg">&amp;</span> {config.groom.first}
+    </h1>
+
+    <p class="quote">{config.quote}</p>
+
+    <div class="date">{numericDate()}</div>
+
+    <div class="dear" id="wl-dear" hidden>
+      Especially for <span class="dear-name" id="wl-dear-name"></span>
+    </div>
+
+    <button class="open" id="wl-open" type="button">
+      <span class="breath">Open Invitation</span>
+    </button>
+
+    <div class="hint">with music &mdash; sound on</div>
+  </div>
+</div>
+
+<style>
+  .intro {
+    position: fixed;
+    inset: 0;
+    z-index: 60;
+    animation: kFade 0.8s ease both;
+  }
+  .intro.closing {
+    pointer-events: none;
+  }
+
+  /* The envelope parts like double doors along a gold seam */
+  .door {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 50.5%;
+    background: var(--bg);
+  }
+  .door-l { left: 0; }
+  .door-r { right: 0; }
+  .door-l::after,
+  .door-r::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 1px;
+    background: linear-gradient(to bottom, transparent, var(--gold) 28% 72%, transparent);
+    opacity: 0;
+  }
+  .door-l::after { right: 0; }
+  .door-r::before { left: 0; }
+
+  @keyframes kDoorL {
+    to { transform: translateX(-102%); }
+  }
+  @keyframes kDoorR {
+    to { transform: translateX(102%); }
+  }
+  .closing .door-l {
+    animation: kDoorL 1.15s 0.35s cubic-bezier(0.77, 0, 0.18, 1) both;
+    box-shadow: 30px 0 60px -30px rgb(0 0 0 / 0.22);
+  }
+  .closing .door-r {
+    animation: kDoorR 1.15s 0.35s cubic-bezier(0.77, 0, 0.18, 1) both;
+    box-shadow: -30px 0 60px -30px rgb(0 0 0 / 0.22);
+  }
+  .closing .door-l::after,
+  .closing .door-r::before {
+    opacity: 0.85;
+  }
+
+  .content {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 32px;
+  }
+  .closing .content {
+    animation: kOut 0.5s ease both;
+  }
+
+  .frame {
+    position: absolute;
+    border: 1px solid var(--goldSoft);
+    pointer-events: none;
+  }
+  .frame-outer { inset: 14px; }
+  .frame-inner { inset: 20px; opacity: 0.6; }
+
+  .eyebrow {
+    font-size: 11px;
+    letter-spacing: 0.34em;
+    text-transform: uppercase;
+    color: var(--mut);
+    animation: kRise 1s 0.2s ease both;
+  }
+  .monogram {
+    width: 74px;
+    height: 74px;
+    border: 1px solid var(--gold);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 30px 0;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 24px;
+    color: var(--gold);
+    animation: kZoom 1.2s 0.5s ease both;
+  }
+  .monogram .amp {
+    margin: 0 6px;
+    font-style: italic;
+    font-size: 16px;
+  }
+  .names {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 400;
+    font-size: clamp(44px, 11vw, 84px);
+    line-height: 1.05;
+    margin: 0;
+    animation: kRise 1.2s 0.8s ease both;
+  }
+  .amp-lg {
+    font-style: italic;
+    color: var(--gold);
+  }
+  .quote {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: clamp(17px, 4vw, 21px);
+    color: var(--mut);
+    max-width: 420px;
+    line-height: 1.6;
+    margin: 26px 0 0;
+    animation: kRise 1.2s 1.3s ease both;
+  }
+  .date {
+    font-size: 12px;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--ink);
+    margin: 26px 0 38px;
+    animation: kRise 1.2s 1.6s ease both;
+  }
+
+  /* Personalized greeting — shown when the link carries ?to=Guest+Name */
+  .dear {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: clamp(17px, 4.2vw, 21px);
+    color: var(--gold);
+    letter-spacing: 0.02em;
+    margin: -16px 0 34px;
+    animation: kRise 1.2s 1.75s ease both;
+  }
+  .dear-name {
+    font-weight: 500;
+  }
+
+  .open {
+    animation: kRise 1.2s 1.9s ease both;
+    background: transparent;
+    border: 1px solid var(--gold);
+    color: var(--gold);
+    padding: 16px 38px;
+    border-radius: 999px;
+    font-size: 12px;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    cursor: pointer;
+    min-height: 48px;
+    transition: background 0.3s ease, color 0.3s ease;
+  }
+  .open:hover {
+    background: var(--gold);
+    color: var(--bg);
+  }
+  .breath {
+    animation: kBreath 2.6s ease infinite;
+    border-radius: 999px;
+    padding: 16px 38px;
+    margin: -16px -38px;
+    display: inline-block;
+  }
+  .hint {
+    font-size: 11px;
+    color: var(--mut);
+    margin-top: 22px;
+    letter-spacing: 0.08em;
+    animation: kFade 1.2s 2.4s ease both;
+  }
+</style>

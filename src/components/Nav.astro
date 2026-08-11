@@ -1,0 +1,70 @@
+---
+import config from '../wedding.config';
+---
+
+<nav aria-label="Invitation">
+  <a class="brand" href="#top">
+    {config.bride.initial} <span class="amp">&amp;</span> {config.groom.initial}
+  </a>
+  <div class="links">
+    <a class="link" href="#events">Events</a>
+    <a class="link" href="#venue">Venue</a>
+    <a class="cta" href="#rsvp">RSVP</a>
+  </div>
+</nav>
+
+<style>
+  nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 40;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 20px;
+    background: color-mix(in srgb, var(--bg) 74%, transparent);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border-bottom: 1px solid color-mix(in srgb, var(--goldSoft) 60%, transparent);
+  }
+  .brand {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 19px;
+    color: var(--ink);
+    letter-spacing: 0.14em;
+  }
+  .amp {
+    color: var(--gold);
+    font-style: italic;
+  }
+  .links {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+  }
+  .link {
+    font-size: 11px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--mut);
+  }
+  .link:hover {
+    color: var(--ink);
+  }
+  .cta {
+    font-size: 11px;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    background: var(--ink);
+    color: var(--bg);
+    padding: 12px 22px;
+    border-radius: 999px;
+    transition: background 0.3s ease;
+  }
+  .cta:hover {
+    background: var(--gold);
+    color: var(--bg);
+  }
+</style>

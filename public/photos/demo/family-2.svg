@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500" preserveAspectRatio="xMidYMid slice">
+  <defs>
+    <linearGradient id="g72" x1="0" y1="0" x2="0.9" y2="1">
+      <stop offset="0" stop-color="#e4e8d9"/><stop offset="1" stop-color="#c3ccb0"/>
+    </linearGradient>
+    <radialGradient id="g72w0" cx="0.20" cy="0.48" r="0.69">
+        <stop offset="0" stop-color="#96a37e" stop-opacity=".62"/>
+        <stop offset="1" stop-color="#96a37e" stop-opacity="0"/>
+      </radialGradient><radialGradient id="g72w1" cx="0.21" cy="0.40" r="0.82">
+        <stop offset="0" stop-color="#eef0e4" stop-opacity=".62"/>
+        <stop offset="1" stop-color="#eef0e4" stop-opacity="0"/>
+      </radialGradient>
+  </defs>
+  <rect width="500" height="500" fill="url(#g72)"/>
+  <rect width="500" height="500" fill="url(#g72w0)"/>
+  <rect width="500" height="500" fill="url(#g72w1)"/>
+  <g fill="none" stroke="#5f6b4c" stroke-opacity=".38" stroke-width="1.4"><path d="M 210.52432850517732 462.82596144622744 Q 200.7 453.7 199.5 438.5 Q 190.2 428.9 189.7 413.5 Q 179.0 405.6 176.0 390.6 Q 165.3 382.6 162.5 367.5 Q 150.5 361.6 145.1 347.2 Q 134.4 339.2 131.6 324.1 Q 121.7 315.1 120.3 299.9"/></g><g fill="#5f6b4c" fill-opacity=".16"><ellipse cx="189.7" cy="413.5" rx="15.0" ry="5.7" transform="rotate(-56.4 189.7 413.5)"/><ellipse cx="176.0" cy="390.6" rx="15.5" ry="5.9" transform="rotate(-175.8 176.0 390.6)"/><ellipse cx="162.5" cy="367.5" rx="10.8" ry="4.1" transform="rotate(-65.5 162.5 367.5)"/><ellipse cx="145.1" cy="347.2" rx="14.5" ry="5.5" transform="rotate(-185.5 145.1 347.2)"/><ellipse cx="131.6" cy="324.1" rx="15.8" ry="6.0" transform="rotate(-65.2 131.6 324.1)"/><ellipse cx="120.3" cy="299.9" rx="11.7" ry="4.4" transform="rotate(-170.1 120.3 299.9)"/></g>
+</svg>

@@ -1,0 +1,55 @@
+<button id="wl-music" class="music is-muted" type="button" aria-label="Toggle music" aria-pressed="false">
+  <span class="bar b1" aria-hidden="true"></span>
+  <span class="bar b2" aria-hidden="true"></span>
+  <span class="bar b3" aria-hidden="true"></span>
+</button>
+
+<style>
+  .music {
+    position: fixed;
+    right: 18px;
+    bottom: 18px;
+    z-index: 50;
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    background: color-mix(in srgb, var(--bg) 80%, transparent);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid var(--goldSoft);
+    cursor: pointer;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    gap: 3px;
+    padding-bottom: 19px;
+    transition: border-color 0.3s ease;
+  }
+  .music:hover {
+    border-color: var(--gold);
+  }
+  .bar {
+    width: 3px;
+    height: 14px;
+    background: var(--gold);
+    border-radius: 2px;
+    transform-origin: bottom;
+    animation: kBar 1s ease-in-out infinite;
+  }
+  .b2 {
+    animation-delay: -0.3s;
+  }
+  .b3 {
+    animation-delay: -0.6s;
+  }
+  .music.is-muted .bar {
+    animation-play-state: paused;
+  }
+  .music.is-muted .b2 {
+    opacity: 0.35;
+  }
+  /* When the analyser drives the bars, the CSS loop steps aside */
+  .music.is-live .bar {
+    animation: none;
+  }
+</style>

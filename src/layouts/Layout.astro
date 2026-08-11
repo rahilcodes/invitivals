@@ -1,0 +1,97 @@
+---
+import '@fontsource/cormorant-garamond/300.css';
+import '@fontsource/cormorant-garamond/400.css';
+import '@fontsource/cormorant-garamond/500.css';
+import '@fontsource/cormorant-garamond/600.css';
+import '@fontsource/cormorant-garamond/300-italic.css';
+import '@fontsource/cormorant-garamond/400-italic.css';
+import '@fontsource/cormorant-garamond/500-italic.css';
+import '@fontsource/jost/300.css';
+import '@fontsource/jost/400.css';
+import '@fontsource/jost/500.css';
+import '../styles/global.css';
+
+import fs from 'node:fs';
+import path from 'node:path';
+import config from '../wedding.config';
+import { siteTitle, siteDescription } from '../lib/helpers';
+
+const title = siteTitle();
+const description = siteDescription();
+const url = config.site.url.replace(/\/$/, '');
+
+// Share image: explicit config → /photos/og.jpg if present → hero photo.
+const ogJpgExists = fs.existsSync(path.join(process.cwd(), 'public', 'photos', 'og.jpg'));
+const ogImage = config.site.ogImage || (ogJpgExists ? '/photos/og.jpg' : config.story.photo);
+const ogImageAbs = ogImage.startsWith('http') ? ogImage : url + ogImage;
+
+// Palette → <html data-palette> (+ optional custom eight-value override).
+const paletteAttr = config.customPalette ? 'custom' : config.palette;
+const customVars = config.customPalette
+  ? Object.entries(config.customPalette)
+      .map(([k, v]) => `--${k}:${v}`)
+      .join(';')
+  : undefined;
+
+const paletteBg: Record<string, string> = {
+  'ivory-gold': '#faf8f2',
+  sage: '#f7f8f3',
+  midnight: '#15171c',
+};
+const themeColor = config.customPalette?.bg ?? paletteBg[config.palette] ?? '#faf8f2';
+
+// Monogram favicon generated from the couple's initials.
+const inkColor = config.customPalette?.gold ?? { 'ivory-gold': '#a5843e', sage: '#6f815a', midnight: '#bb9c57' }[config.palette];
+const favicon = `data:image/svg+xml,${encodeURIComponent(
+  `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><rect width="64" height="64" rx="32" fill="${themeColor}"/><circle cx="32" cy="32" r="26" fill="none" stroke="${inkColor}" stroke-width="2"/><text x="32" y="41" text-anchor="middle" font-family="Georgia,serif" font-size="24" fill="${inkColor}">${config.bride.initial}${config.groom.initial}</text></svg>`
+)}`;
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Event',
+  name: `${config.bride.first} & ${config.groom.first}'s Wedding`,
+  startDate: config.datetime,
+  endDate: config.datetimeEnd,
+  eventStatus: 'https://schema.org/EventScheduled',
+  eventAttendanceMode: 'https://schema.org/OfflineEventAttendanceMode',
+  location: {
+    '@type': 'Place',
+    name: config.venue.name,
+    address: config.venue.address,
+  },
+  image: [ogImageAbs],
+  description,
+};
+---
+
+<!doctype html>
+<html lang="en" data-palette={paletteAttr} style={customVars}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={url + '/'} />
+    <link rel="icon" href={favicon} />
+    <meta name="theme-color" content={themeColor} />
+    <meta name="generator" content={Astro.generator} />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={url + '/'} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={ogImageAbs} />
+    <meta property="og:site_name" content={title} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImageAbs} />
+
+    <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} is:inline />
+    <script is:inline>document.documentElement.classList.add('js');</script>
+  </head>
+  <body>
+    <a class="skip-link" href="#top">Skip to invitation</a>
+    <slot />
+  </body>
+</html>

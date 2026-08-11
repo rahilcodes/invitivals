@@ -1,0 +1,100 @@
+---
+import config from '../wedding.config';
+import PhotoSlot from './PhotoSlot.astro';
+---
+
+<section class="story" data-screen="our-story" aria-labelledby="story-h">
+  <div class="head rv-rise">
+    <div class="overline">Our story</div>
+    <h2 id="story-h">{config.story.heading}</h2>
+  </div>
+
+  <div class="rail">
+    {
+      config.story.milestones.map((m) => (
+        <div class="milestone rv-l" style="--rvr:entry 20% cover 38%">
+          <div class="dot" aria-hidden="true" />
+          <div class="date">{m.date}</div>
+          <h3>{m.title}</h3>
+          <p>{m.text}</p>
+        </div>
+      ))
+    }
+  </div>
+
+  <div class="photo rv-mask" style="--rvr:entry 15% cover 40%">
+    <PhotoSlot
+      src={config.story.photo}
+      alt={config.story.photoAlt}
+      label="Engagement photo, wide 3:2 — /photos/story.jpg"
+    />
+  </div>
+</section>
+
+<style>
+  .story {
+    padding: 96px 24px;
+    max-width: 680px;
+    margin: 0 auto;
+  }
+  .head {
+    text-align: center;
+  }
+  .overline {
+    font-size: 11px;
+    letter-spacing: 0.32em;
+    color: var(--gold);
+    text-transform: uppercase;
+  }
+  h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 500;
+    font-size: clamp(34px, 6vw, 52px);
+    margin: 12px 0 0;
+  }
+  .rail {
+    position: relative;
+    margin-top: 64px;
+    padding-left: 34px;
+    border-left: 1px solid var(--goldSoft);
+    display: flex;
+    flex-direction: column;
+    gap: 56px;
+  }
+  .milestone {
+    position: relative;
+  }
+  .dot {
+    position: absolute;
+    left: -39px;
+    top: 4px;
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    background: var(--gold);
+  }
+  .date {
+    font-size: 11px;
+    letter-spacing: 0.28em;
+    color: var(--gold);
+    text-transform: uppercase;
+  }
+  h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 500;
+    font-size: 26px;
+    margin: 10px 0 8px;
+  }
+  p {
+    font-size: 15px;
+    line-height: 1.8;
+    color: var(--mut);
+    margin: 0;
+  }
+  .photo {
+    margin-top: 64px;
+    overflow: hidden;
+    border-radius: 4px;
+    aspect-ratio: 3 / 2;
+  }
+</style>

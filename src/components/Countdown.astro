@@ -1,0 +1,99 @@
+---
+import config from '../wedding.config';
+import { calendarUrl } from '../lib/helpers';
+
+const units = [
+  { id: 'dd', label: 'Days' },
+  { id: 'hh', label: 'Hours' },
+  { id: 'mm', label: 'Minutes' },
+  { id: 'ss', label: 'Seconds' },
+];
+---
+
+<section class="countdown" data-screen="countdown" aria-labelledby="count-h">
+  <div class="inner rv-fade" style="--rvr:entry 15% cover 40%">
+    <div class="overline">Counting down</div>
+    <h2 id="count-h">{config.countdown.heading}</h2>
+
+    <div class="digits" role="timer" aria-label="Time remaining until the wedding">
+      {
+        units.map((u, i) => (
+          <>
+            {i > 0 && <div class="colon" aria-hidden="true">:</div>}
+            <div class="unit">
+              <div class="num" id={`wl-${u.id}`}>--</div>
+              <div class="label">{u.label}</div>
+            </div>
+          </>
+        ))
+      }
+    </div>
+
+    <a class="cal" href={calendarUrl()} target="_blank" rel="noopener">Add to calendar</a>
+  </div>
+</section>
+
+<style>
+  .countdown {
+    background: var(--dark);
+    color: var(--darkInk);
+    padding: 96px 24px;
+    text-align: center;
+  }
+  .overline {
+    font-size: 11px;
+    letter-spacing: 0.32em;
+    color: var(--gold);
+    text-transform: uppercase;
+  }
+  h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 400;
+    font-style: italic;
+    font-size: clamp(28px, 5.5vw, 44px);
+    margin: 14px 0 0;
+  }
+  .digits {
+    display: flex;
+    justify-content: center;
+    align-items: baseline;
+    gap: clamp(10px, 4vw, 34px);
+    margin-top: 48px;
+  }
+  .num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(46px, 10vw, 84px);
+    line-height: 1;
+    font-weight: 400;
+    font-variant-numeric: tabular-nums;
+  }
+  .label {
+    font-size: 10px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-top: 12px;
+  }
+  .colon {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(30px, 6vw, 50px);
+    color: var(--gold);
+    opacity: 0.6;
+  }
+  .cal {
+    display: inline-block;
+    margin-top: 52px;
+    border: 1px solid var(--gold);
+    color: var(--gold);
+    padding: 15px 32px;
+    border-radius: 999px;
+    font-size: 11px;
+    letter-spacing: 0.26em;
+    text-transform: uppercase;
+    transition: background 0.3s ease, color 0.3s ease;
+  }
+  .cal:hover {
+    background: var(--gold);
+    color: var(--dark);
+  }
+</style>

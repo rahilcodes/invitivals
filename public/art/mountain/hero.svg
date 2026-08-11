@@ -1,0 +1,127 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 750" role="img" aria-label="Moonlit mountain wedding invitation — a palace floating on clouds beneath a sleeping crescent moon">
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#022938"/>
+      <stop offset="1" stop-color="#155a5e"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#f3e9d2" stop-opacity=".5"/>
+      <stop offset="1" stop-color="#f3e9d2" stop-opacity="0"/>
+    </radialGradient>
+    <g id="pom">
+      <circle r="12" fill="#e8952f"/>
+      <circle r="7" fill="none" stroke="#c9741d" stroke-width="2" stroke-dasharray="2 3"/>
+    </g>
+    <g id="pom2">
+      <circle r="12" fill="#e4b33c"/>
+      <circle r="7" fill="none" stroke="#bd8f22" stroke-width="2" stroke-dasharray="2 3"/>
+    </g>
+    <g id="leafpair">
+      <ellipse cx="-10" cy="0" rx="9" ry="4" fill="#4c7a55" transform="rotate(-24 -10 0)"/>
+      <ellipse cx="10" cy="0" rx="9" ry="4" fill="#4c7a55" transform="rotate(24 10 0)"/>
+    </g>
+    <path id="cloud" d="M14 58 Q0 54 4 42 Q-2 28 16 26 Q20 8 42 12 Q52 -4 72 6 Q94 -2 100 18 Q120 18 116 38 Q126 52 108 58 Q104 64 92 62 L26 62 Q16 64 14 58 Z" fill="#f2eada"/>
+    <g id="star">
+      <path d="M0 -10 L2.4 -2.4 L10 0 L2.4 2.4 L0 10 L-2.4 2.4 L-10 0 L-2.4 -2.4 Z" fill="#e8d9a8"/>
+    </g>
+  </defs>
+
+  <rect width="1200" height="750" fill="url(#sky)"/>
+
+  <!-- faint damask hints -->
+  <g fill="none" stroke="#ac9545" stroke-opacity=".12" stroke-width="2">
+    <path d="M180 120 C220 160 220 210 180 260 C140 210 140 160 180 120 Z"/>
+    <path d="M1020 420 C1055 455 1055 500 1020 545 C985 500 985 455 1020 420 Z"/>
+    <path d="M950 90 C980 120 980 155 950 190 C920 155 920 120 950 90 Z"/>
+    <path d="M240 520 C270 550 270 585 240 620 C210 585 210 550 240 520 Z"/>
+  </g>
+
+  <!-- stars -->
+  <use href="#star" x="320" y="95" opacity=".9"/>
+  <use href="#star" x="520" y="60" opacity=".55" transform="scale(1)"/>
+  <use href="#star" x="740" y="120" opacity=".8"/>
+  <use href="#star" x="905" y="230" opacity=".5"/>
+  <use href="#star" x="415" y="215" opacity=".45"/>
+  <use href="#star" x="1105" y="150" opacity=".8"/>
+  <use href="#star" x="90" y="330" opacity=".6"/>
+  <use href="#star" x="640" y="180" opacity=".35"/>
+
+  <!-- sleeping crescent moon -->
+  <g transform="translate(150 150)">
+    <circle r="110" fill="url(#glow)"/>
+    <mask id="cres"><rect x="-70" y="-70" width="140" height="140" fill="#fff"/><circle cx="30" cy="-16" r="52" fill="#000"/></mask>
+    <circle r="58" fill="#f3e9d2" mask="url(#cres)"/>
+    <path d="M-38 6 Q-30 14 -22 6" stroke="#b9a77f" stroke-width="3" fill="none" stroke-linecap="round"/>
+    <path d="M-40 14 l-4 5 M-32 16 l-2 6 M-24 14 l2 6" stroke="#b9a77f" stroke-width="2" stroke-linecap="round"/>
+    <path d="M-30 30 Q-24 36 -16 31" stroke="#b9a77f" stroke-width="3" fill="none" stroke-linecap="round"/>
+    <circle cx="-44" cy="24" r="6" fill="#e8c9a8" opacity=".8"/>
+  </g>
+
+  <!-- palace on a cloud -->
+  <g transform="translate(770 330)">
+    <use href="#cloud" transform="translate(-40 118) scale(2.4)" opacity=".95"/>
+    <g stroke="#97854f" stroke-width="2">
+      <rect x="10" y="96" width="220" height="22" fill="#efe2c4"/>
+      <path d="M10 96 h220 l0 -8 -12 0 0 6 -14 0 0 -6 -14 0 0 6 -14 0 0 -6 -14 0 0 6 -14 0 0 -6 -14 0 0 6 -14 0 0 -6 -14 0 0 6 -14 0 0 -6 -14 0 0 6 -14 0 0 -6 -14 0 0 6 -14 0 0 -6 -12 0 Z" fill="#efe2c4"/>
+      <rect x="60" y="38" width="120" height="58" fill="#f1e4c8"/>
+      <path d="M120 -22 Q88 -8 92 38 L148 38 Q152 -8 120 -22 Z" fill="#c9a24b"/>
+      <path d="M120 -22 L120 -40 M112 -34 L128 -34" stroke-linecap="round"/>
+      <rect x="20" y="26" width="34" height="70" fill="#f1e4c8"/>
+      <rect x="186" y="26" width="34" height="70" fill="#f1e4c8"/>
+      <path d="M37 8 Q24 14 24 26 L50 26 Q50 14 37 8 Z" fill="#c9a24b"/>
+      <path d="M203 8 Q190 14 190 26 L216 26 Q216 14 203 8 Z" fill="#c9a24b"/>
+    </g>
+    <g fill="#0c4860">
+      <path d="M84 96 v-22 q0 -12 12 -12 q12 0 12 12 v22 Z"/>
+      <path d="M132 96 v-22 q0 -12 12 -12 q12 0 12 12 v22 Z"/>
+      <rect x="31" y="52" width="12" height="20" rx="6"/>
+      <rect x="197" y="52" width="12" height="20" rx="6"/>
+    </g>
+  </g>
+
+  <!-- garlands left & right -->
+  <g>
+    <use href="#pom" x="46" y="30"/><use href="#leafpair" x="46" y="66"/>
+    <use href="#pom2" x="46" y="102"/><use href="#leafpair" x="46" y="138"/>
+    <use href="#pom" x="46" y="174"/><use href="#leafpair" x="46" y="210"/>
+    <use href="#pom2" x="46" y="246"/><use href="#leafpair" x="46" y="282"/>
+    <use href="#pom" x="46" y="318"/><use href="#leafpair" x="46" y="354"/>
+    <use href="#pom2" x="46" y="390"/><use href="#leafpair" x="46" y="426"/>
+    <use href="#pom" x="46" y="462"/><use href="#leafpair" x="46" y="498"/>
+    <use href="#pom2" x="46" y="534"/><use href="#leafpair" x="46" y="570"/>
+    <use href="#pom" x="46" y="606"/><use href="#leafpair" x="46" y="642"/>
+    <use href="#pom2" x="46" y="678"/><use href="#leafpair" x="46" y="714"/>
+  </g>
+  <g>
+    <use href="#pom2" x="1154" y="30"/><use href="#leafpair" x="1154" y="66"/>
+    <use href="#pom" x="1154" y="102"/><use href="#leafpair" x="1154" y="138"/>
+    <use href="#pom2" x="1154" y="174"/><use href="#leafpair" x="1154" y="210"/>
+    <use href="#pom" x="1154" y="246"/><use href="#leafpair" x="1154" y="282"/>
+    <use href="#pom2" x="1154" y="318"/><use href="#leafpair" x="1154" y="354"/>
+    <use href="#pom" x="1154" y="390"/><use href="#leafpair" x="1154" y="426"/>
+    <use href="#pom2" x="1154" y="462"/><use href="#leafpair" x="1154" y="498"/>
+    <use href="#pom" x="1154" y="534"/><use href="#leafpair" x="1154" y="570"/>
+    <use href="#pom2" x="1154" y="606"/><use href="#leafpair" x="1154" y="642"/>
+    <use href="#pom" x="1154" y="678"/><use href="#leafpair" x="1154" y="714"/>
+  </g>
+
+  <!-- mountains -->
+  <g>
+    <path d="M0 640 L130 520 L230 600 L360 480 L480 610 L620 500 L760 620 L900 520 L1040 630 L1200 540 L1200 750 L0 750 Z" fill="#0b4552" opacity=".9"/>
+    <path d="M360 480 L392 512 L376 508 L360 522 L344 508 L330 512 Z" fill="#efe6d2" opacity=".85"/>
+    <path d="M900 520 L928 548 L914 544 L900 558 L886 544 L874 548 Z" fill="#efe6d2" opacity=".85"/>
+    <path d="M0 700 L90 620 L190 690 L320 590 L460 700 L600 610 L740 705 L880 620 L1030 700 L1200 620 L1200 750 L0 750 Z" fill="#083a44"/>
+    <g fill="#062f38">
+      <path d="M150 700 l14 -34 14 34 Z M150 682 l14 -30 14 30 Z"/>
+      <path d="M520 705 l13 -32 13 32 Z M520 688 l13 -28 13 28 Z"/>
+      <path d="M950 700 l14 -34 14 34 Z M950 682 l14 -30 14 30 Z"/>
+    </g>
+  </g>
+
+  <!-- names -->
+  <g text-anchor="middle" fill="#c9b06a" font-family="Georgia, 'Times New Roman', serif">
+    <text x="600" y="330" font-size="96" letter-spacing="4">Vihaan</text>
+    <text x="600" y="392" font-size="34" letter-spacing="10" fill="#ac9545">weds</text>
+    <text x="600" y="482" font-size="96" letter-spacing="4">Anaya</text>
+  </g>
+</svg>

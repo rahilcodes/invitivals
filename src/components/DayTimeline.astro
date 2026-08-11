@@ -1,0 +1,94 @@
+---
+import config from '../wedding.config';
+---
+
+<section class="day" data-screen="wedding-day-timeline" aria-labelledby="day-h">
+  <div class="head rv-rise">
+    <div class="overline">The day</div>
+    <h2 id="day-h">{config.dayTimeline.heading}</h2>
+    <p class="hint">{config.dayTimeline.hint}</p>
+  </div>
+
+  <div class="scroller no-scrollbar" tabindex="0" role="region" aria-label="Wedding day schedule — scroll horizontally">
+    {
+      config.dayTimeline.items.map((item, i) => (
+        <div class={`card ${i % 2 === 1 ? 'offset' : ''}`}>
+          <div class="time">{item.time}</div>
+          <div class="divider" aria-hidden="true" />
+          <div class="label">{item.label}</div>
+          <p>{item.note}</p>
+        </div>
+      ))
+    }
+  </div>
+</section>
+
+<style>
+  .day {
+    padding: 96px 0;
+  }
+  .head {
+    text-align: center;
+    padding: 0 24px;
+  }
+  .overline {
+    font-size: 11px;
+    letter-spacing: 0.32em;
+    color: var(--gold);
+    text-transform: uppercase;
+  }
+  h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 500;
+    font-size: clamp(34px, 6vw, 52px);
+    margin: 12px 0 0;
+  }
+  .hint {
+    font-size: 13px;
+    color: var(--mut);
+    letter-spacing: 0.06em;
+    margin: 16px 0 0;
+  }
+  .scroller {
+    display: flex;
+    gap: 14px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    padding: 52px max(24px, calc(50vw - 400px)) 24px;
+  }
+  .card {
+    scroll-snap-align: center;
+    flex: none;
+    width: 168px;
+    background: var(--bg2);
+    border: 1px solid var(--goldSoft);
+    border-radius: 2px;
+    padding: 30px 22px;
+    text-align: center;
+  }
+  .card.offset {
+    margin-top: 22px;
+  }
+  .time {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 34px;
+  }
+  .divider {
+    width: 22px;
+    height: 1px;
+    background: var(--gold);
+    margin: 14px auto;
+  }
+  .label {
+    font-size: 11px;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    color: var(--gold);
+  }
+  p {
+    font-size: 13px;
+    color: var(--mut);
+    line-height: 1.6;
+    margin: 12px 0 0;
+  }
+</style>

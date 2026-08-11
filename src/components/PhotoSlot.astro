@@ -1,0 +1,44 @@
+---
+/**
+ * Renders a photo if the file exists in /public, otherwise an elegant
+ * drop-slot placeholder telling the buyer what belongs there.
+ * Checked at build time — drop the photo in, rebuild, it appears.
+ */
+import fs from 'node:fs';
+import path from 'node:path';
+
+interface Props {
+  src: string;
+  alt: string;
+  /** Label shown inside the placeholder when the photo is missing */
+  label?: string;
+  loading?: 'lazy' | 'eager';
+  class?: string;
+  width?: number;
+  height?: number;
+}
+
+const { src, alt, label = 'Drop your photo here', loading = 'lazy', class: cls, width, height } = Astro.props;
+
+const exists =
+  !!src && fs.existsSync(path.join(process.cwd(), 'public', decodeURIComponent(src).replace(/^\//, '')));
+---
+
+{
+  exists ? (
+    <img
+      src={src}
+      alt={alt}
+      loading={loading}
+      decoding={loading === 'eager' ? 'sync' : 'async'}
+      width={width}
+      height={height}
+      class={cls}
+      style="width:100%;height:100%;object-fit:cover"
+    />
+  ) : (
+    <div class={`slot ${cls ?? ''}`} role="img" aria-label={alt}>
+      <span>{label}</span>
+    </div>
+  )
+}
