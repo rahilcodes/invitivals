@@ -7,13 +7,13 @@ import '@fontsource/manrope/500.css';
 import '@fontsource/manrope/700.css';
 
 /* ─────────────────────────────────────────────────────────────────────────
-   MYINVITE — brand storefront. Everything a buyer edits is right here:
+   INVITIVALS — brand storefront. Everything a buyer edits is right here:
    ───────────────────────────────────────────────────────────────────────── */
 
 // ⚠️ SET THIS BEFORE GOING LIVE — your WhatsApp number, country code, digits only.
 const WHATSAPP = '917997001700';
-const EMAIL = 'hello@myinvite.in';
-const INSTAGRAM = 'https://instagram.com/myinvite.in';
+const EMAIL = 'hello@invitivals.in';
+const INSTAGRAM = 'https://instagram.com/invitivals.in';
 
 const wa = (msg: string) => `https://wa.me/${WHATSAPP}?text=${encodeURIComponent(msg)}`;
 
@@ -177,7 +177,7 @@ const faqs = [
 ];
 
 const ogImage = '/art/hindu/hero.svg';
-const title = 'Myinvite — Wedding Invitation Websites';
+const title = 'Invitivals — Wedding Invitation Websites';
 const description =
   'Your wedding invitation, as a beautiful website. Seven hand-crafted designs for Hindu, Muslim, Sikh, Christian and modern weddings — live demos, RSVP tracking, music & maps. Personalised in 48 hours.';
 
@@ -186,7 +186,7 @@ const jsonLd = {
   '@graph': [
     {
       '@type': 'Organization',
-      name: 'Myinvite',
+      name: 'Invitivals',
       email: EMAIL,
       description,
       sameAs: [INSTAGRAM],
@@ -226,14 +226,14 @@ const jsonLd = {
   <body>
     <!-- ── Nav ── -->
     <nav aria-label="Main">
-      <a class="logo" href="#top">My<span>invite</span></a>
+      <a class="logo" href="#top">Invi<span>tivals</span></a>
       <div class="nav-links">
         <a href="#designs">Designs</a>
         <a href="#how">How it works</a>
         <a href="#pricing">Pricing</a>
         <a href="#faq">FAQ</a>
       </div>
-      <a class="nav-cta" href={wa('Hi Myinvite! I want a wedding invitation website.')} target="_blank" rel="noopener">WhatsApp us</a>
+      <a class="nav-cta" href={wa('Hi Invitivals! I want a wedding invitation website.')} target="_blank" rel="noopener">WhatsApp us</a>
     </nav>
 
     <main id="top">
@@ -248,7 +248,7 @@ const jsonLd = {
           </p>
           <div class="hero-ctas rv">
             <a class="btn solid" href="#designs">See the seven designs</a>
-            <a class="btn ghost" href={wa('Hi Myinvite! I want a wedding invitation website.')} target="_blank" rel="noopener">Talk on WhatsApp</a>
+            <a class="btn ghost" href={wa('Hi Invitivals! I want a wedding invitation website.')} target="_blank" rel="noopener">Talk on WhatsApp</a>
           </div>
           <ul class="chips rv" aria-label="Highlights">
             <li>Try every design live</li>
@@ -303,7 +303,7 @@ const jsonLd = {
                   <h3>{d.title}</h3>
                   <p>{d.desc}</p>
                   <div class="card-ctas">
-                    <a class="mini solid" href={wa(`Hi Myinvite! I love the ${d.title} (${d.tag}) design. I'd like it for my wedding.`)} target="_blank" rel="noopener">Choose this design</a>
+                    <a class="mini solid" href={wa(`Hi Invitivals! I love the ${d.title} (${d.tag}) design. I'd like it for my wedding.`)} target="_blank" rel="noopener">Choose this design</a>
                     <a class="mini" href={d.href}>Open demo</a>
                   </div>
                 </div>
@@ -353,7 +353,7 @@ const jsonLd = {
           </li>
         </ol>
         <div class="how-cta rv">
-          <a class="btn solid" href={wa('Hi Myinvite! Send me the details checklist — I want to get started.')} target="_blank" rel="noopener">Start on WhatsApp →</a>
+          <a class="btn solid" href={wa('Hi Invitivals! Send me the details checklist — I want to get started.')} target="_blank" rel="noopener">Start on WhatsApp ✨ </a>
         </div>
       </section>
 
@@ -375,7 +375,7 @@ const jsonLd = {
                 <ul>
                   {p.features.map((f) => <li>{f}</li>)}
                 </ul>
-                <a class={`btn ${p.popular ? 'solid' : 'ghost'} full`} href={wa(`Hi Myinvite! I'd like the ${p.name} plan (${p.price}).`)} target="_blank" rel="noopener">
+                <a class={`btn ${p.popular ? 'solid' : 'ghost'} full`} href={wa(`Hi Invitivals! I'd like the ${p.name} plan (${p.price}).`)} target="_blank" rel="noopener">
                   Get {p.name}
                 </a>
               </article>
@@ -383,7 +383,7 @@ const jsonLd = {
           }
         </div>
         <p class="guarantee rv">
-          <b>The Myinvite promise:</b> unlimited text revisions · full refund if you don’t love it ·
+          <b>The Invitivals promise:</b> unlimited text revisions · full refund if you don’t love it ·
           a human on WhatsApp from first message to vidaai.
         </p>
       </section>
@@ -429,7 +429,7 @@ const jsonLd = {
         <div class="rv">
           <h2>The shaadi is coming.<br /><em>Let’s make the invite unforgettable.</em></h2>
           <div class="final-ctas">
-            <a class="btn gold" href={wa('Hi Myinvite! I want a wedding invitation website.')} target="_blank" rel="noopener">Message us on WhatsApp</a>
+            <a class="btn gold" href={wa('Hi Invitivals! I want a wedding invitation website.')} target="_blank" rel="noopener">Message us on WhatsApp</a>
             <a class="btn ghost-l" href="#designs">Browse designs again</a>
           </div>
           <p class="final-note">Replies within the hour, every day 9 AM – 11 PM.</p>
@@ -438,10 +438,10 @@ const jsonLd = {
     </main>
 
     <footer>
-      <div class="f-brand">My<span>invite</span></div>
+      <div class="f-brand">Invi<span>tivals</span></div>
       <p class="f-line">Wedding invitation websites, made with love in India.</p>
       <div class="f-links">
-        <a href={wa('Hi Myinvite!')} target="_blank" rel="noopener">WhatsApp</a>
+        <a href={wa('Hi Invitivals!')} target="_blank" rel="noopener">WhatsApp</a>
         <a href={`mailto:${EMAIL}`}>{EMAIL}</a>
         <a href={INSTAGRAM} target="_blank" rel="noopener">Instagram</a>
       </div>

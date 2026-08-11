@@ -1,4 +1,4 @@
-# Myinvite — Go-Live Checklist
+# Invitivals — Go-Live Checklist
 
 Do these before spending a rupee on ads.
 
@@ -22,7 +22,7 @@ npm run build
 
 - **Netlify (easiest):** drag the `dist/` folder onto https://app.netlify.com/drop
 - **Vercel:** `npx vercel` — build command `npm run build`, output dir `dist`
-- Connect your domain (e.g. `myinvite.in`) in the host's dashboard.
+- Connect your domain (e.g. `invitivals.in`) in the host's dashboard.
 - After the domain is live, redeploy once so share links use the final URL.
 
 ## 3. Before ads go out
@@ -36,7 +36,7 @@ npm run build
   in `src/pages/index.astro` `<head>`).
 - [ ] Decide your ad landing URL: the homepage converts best for cold traffic;
   a specific demo (e.g. `/hindu`) works for targeted campaigns — the floating
-  "Get this design — Myinvite" pill routes demo visitors to pricing.
+  "Get this design — Invitivals" pill routes demo visitors to pricing.
 
 ## 4. Operating promise (what the site tells customers)
 
@@ -49,6 +49,6 @@ balance after approval · full refund if unhappy · 12 months hosting · replies
 1. Customer messages you with a design + plan name (pre-filled).
 2. Send them the details checklist (names, dates, events, story, photos, music).
 3. Copy the chosen template page, fill in their content, deploy to a link like
-   `couple-name.myinvite.in` (subdomains on Netlify/Vercel are free).
+   `couple-name.invitivals.in` (subdomains on Netlify/Vercel are free).
 4. For RSVP collection, wire the template's endpoint to a Google Sheet —
    the Apps Script recipe is in `SETUP.md`.
