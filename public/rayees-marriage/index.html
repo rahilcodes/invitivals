@@ -7,10 +7,20 @@
 <title>Nikah of Rayees &amp; Thanisha</title>
 <meta name="description" content="You are cordially invited to the Nikah ceremonies of Mohammed Rayees & Fathima Thanisha, together with their families.">
 <meta name="theme-color" content="#17101a">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://invitivals.com/rayees-marriage">
 <meta property="og:title" content="Nikah of Rayees &amp; Thanisha">
-<meta property="og:description" content="You are cordially invited to the Nikah ceremonies of Mohammed Rayees & Fathima Thanisha.">
-<!-- On go-live, set the absolute URL: <meta property="og:image" content="https://YOUR-DOMAIN/nikah-rayees/assets/og-cover.jpg"> -->
-<meta property="og:image" content="assets/og-cover.jpg">
+<meta property="og:description" content="You are cordially invited to the Nikah ceremonies of Mohammed Rayees &amp; Fathima Thanisha.">
+<meta property="og:image" content="https://invitivals.com/rayees-marriage/assets/og-cover.jpg">
+<meta property="og:image:secure_url" content="https://invitivals.com/rayees-marriage/assets/og-cover.jpg">
+<meta property="og:image:type" content="image/jpeg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Nikah of Rayees &amp; Thanisha Invitation">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Nikah of Rayees &amp; Thanisha">
+<meta name="twitter:description" content="You are cordially invited to the Nikah ceremonies of Mohammed Rayees &amp; Fathima Thanisha.">
+<meta name="twitter:image" content="https://invitivals.com/rayees-marriage/assets/og-cover.jpg">
 <link rel="icon" href="assets/favicon.png">
 <link rel="preload" as="image" href="assets/cover.webp" fetchpriority="high">
 <link rel="preload" as="image" href="assets/seal.webp" fetchpriority="high">
@@ -1292,7 +1302,7 @@ a{ color:var(--gold); text-decoration:none; }
   (function(){
     var box = document.getElementById('countBox');
     var target = new Date(CONFIG.nikahDate).getTime();
-    if (isNaN(target)) { box.style.display = 'none'; return; }
+    if (isNaN(target)) { target = Date.UTC(2026, 8, 10, 11, 30, 0) - (5.5 * 3600000); }
     document.getElementById('countDate').textContent = CONFIG.nikahDateLabel;
     var dEl = document.getElementById('cdD'), hEl = document.getElementById('cdH');
     var mEl = document.getElementById('cdM'), sEl = document.getElementById('cdS');

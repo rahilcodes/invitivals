@@ -7,8 +7,20 @@
 <title>Gruhapravesha • Sri PoornaJnana</title>
 <meta name="description" content="You are cordially invited to the Gruhapravesha of our new home, Sri PoornaJnana — Monday, 31st August 2026.">
 <meta name="theme-color" content="#f2e3c8">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://invitivals.com/poornajnana/">
 <meta property="og:title" content="Gruhapravesha • Sri PoornaJnana">
 <meta property="og:description" content="We cordially invite you to the Gruhapravesha of our new home — Monday, 31st August 2026.">
+<meta property="og:image" content="https://invitivals.com/poornajnana/og-cover.jpg">
+<meta property="og:image:secure_url" content="https://invitivals.com/poornajnana/og-cover.jpg">
+<meta property="og:image:type" content="image/jpeg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Gruhapravesha Sri PoornaJnana Invitation">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Gruhapravesha • Sri PoornaJnana">
+<meta name="twitter:description" content="We cordially invite you to the Gruhapravesha of our new home — Monday, 31st August 2026.">
+<meta name="twitter:image" content="https://invitivals.com/poornajnana/og-cover.jpg">
 <link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20viewBox%3D%270%200%20100%20100%27%3E%3Ctext%20y%3D%27.9em%27%20font-size%3D%2790%27%3E%F0%9F%AA%94%3C/text%3E%3C/svg%3E">
 <style>
 @font-face{font-family: 'Cormorant Garamond';
@@ -189,6 +201,8 @@ img{-webkit-user-drag:none;user-select:none;pointer-events:none}
           <div class="cd-cell"><b id="cdH">&ndash;</b><span>HOURS</span></div>
           <div class="cd-sep"></div>
           <div class="cd-cell"><b id="cdM">&ndash;</b><span>MIN</span></div>
+          <div class="cd-sep"></div>
+          <div class="cd-cell"><b id="cdS">&ndash;</b><span>SEC</span></div>
         </div>
       </div>
       <div data-reveal="2" class="events" style="opacity:0;display:flex;flex-direction:column;gap:calc(18 * var(--u));align-items:center">
@@ -359,7 +373,7 @@ document.querySelectorAll('img[data-asset]').forEach(function(i){i.src=ASSETS[i.
   }
 
   /* ---------------- countdown to the muhurtham ---------------- */
-  var cdTarget = new Date('2026-08-31T05:00:00+05:30').getTime();
+  var cdTarget = Date.UTC(2026, 7, 31, 5, 0, 0) - (5.5 * 3600000);
   function pad2(n) { return (n < 10 ? '0' : '') + n; }
   function tickCountdown() {
     var left = cdTarget - Date.now();
@@ -368,12 +382,18 @@ document.querySelectorAll('img[data-asset]').forEach(function(i){i.src=ASSETS[i.
         '<div class="cd-done">✦ &nbsp;The auspicious day is here&nbsp; ✦</div>';
       return;
     }
-    document.getElementById('cdD').textContent = Math.floor(left / 86400000);
-    document.getElementById('cdH').textContent = pad2(Math.floor(left / 3600000) % 24);
-    document.getElementById('cdM').textContent = pad2(Math.floor(left / 60000) % 60);
-    setTimeout(tickCountdown, 5000);
+    var s = Math.floor(left / 1000);
+    var dEl = document.getElementById('cdD');
+    var hEl = document.getElementById('cdH');
+    var mEl = document.getElementById('cdM');
+    var sEl = document.getElementById('cdS');
+    if (dEl) dEl.textContent = pad2(Math.floor(s / 86400));
+    if (hEl) hEl.textContent = pad2(Math.floor((s % 86400) / 3600));
+    if (mEl) mEl.textContent = pad2(Math.floor((s % 3600) / 60));
+    if (sEl) sEl.textContent = pad2(s % 60);
   }
   tickCountdown();
+  setInterval(tickCountdown, 1000);
 
   /* ---------------- tap the small bell to ring it ---------------- */
   var ringBell = document.getElementById('ringBell');
