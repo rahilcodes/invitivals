@@ -73,6 +73,17 @@ a{ color:var(--gold); text-decoration:none; }
 @supports (height:100dvh){
   .stage{ width:min(100vw, 46.258dvh); height:min(100dvh, 216.18vw); }
 }
+/* Phones: fill the screen edge-to-edge — the cover art crops a few
+   symmetric pixels instead of leaving dark side gutters */
+@media (max-width:620px) and (orientation:portrait){
+  .stage{ width:100vw; height:100vh; }
+  .door{ background-size:cover, cover; }
+}
+@supports (height:100dvh){
+  @media (max-width:620px) and (orientation:portrait){
+    .stage{ height:100dvh; }
+  }
+}
 
 /* ============ Invitation (revealed behind the doors) ============ */
 .invite{
@@ -318,31 +329,38 @@ a{ color:var(--gold); text-decoration:none; }
   position:absolute; right:6px; bottom:2px; width:96px; height:96px;
   color:var(--ev-accent); opacity:.14; transform:rotate(-6deg); pointer-events:none;
 }
-.ev-head{ display:flex; align-items:baseline; justify-content:space-between; gap:12px; }
+.ev-head{ display:flex; align-items:baseline; justify-content:space-between; gap:10px; }
 .ev-name{
   margin:0;
-  font-family:'Cormorant Garamond', serif; font-weight:700; font-size:27px;
+  font-family:'Cormorant Garamond', serif; font-weight:700;
+  font-size:24px; font-size:clamp(19px, 7cqw, 27px);
   letter-spacing:.06em; color:var(--ev-accent); line-height:1.08;
 }
 .ev-date{
-  font-family:'Marcellus', serif; font-size:13px; letter-spacing:.12em;
+  font-family:'Marcellus', serif; letter-spacing:.12em;
+  font-size:12px; font-size:clamp(10.5px, 3.5cqw, 13px);
   color:var(--brown-soft); white-space:nowrap;
 }
 .ev-tag{
-  font-family:'Cormorant Garamond', serif; font-style:italic; font-size:15px;
+  font-family:'Cormorant Garamond', serif; font-style:italic;
+  font-size:14px; font-size:clamp(12.5px, 4.1cqw, 15px);
   color:#7a6248; margin-top:2px;
 }
 .ev-times{ display:flex; flex-direction:column; gap:6px; margin-top:12px; }
-.ev-time{ display:flex; align-items:center; gap:10px; }
+.ev-time{ display:flex; align-items:center; gap:9px; }
 .ev-time .d{ width:5px; height:5px; background:var(--ev-accent); transform:rotate(45deg); flex:none; }
 .ev-time span{
-  font-family:'Marcellus', serif; font-size:13.5px; letter-spacing:.08em; color:#4f3d28;
+  font-family:'Marcellus', serif; letter-spacing:.06em; color:#4f3d28;
+  font-size:12px; font-size:clamp(10.5px, 3.6cqw, 13.5px);
+  white-space:nowrap;
 }
 .ev-map{
-  display:inline-flex; align-items:center; gap:8px;
-  margin-top:14px; padding:9px 20px; border-radius:999px;
+  display:inline-flex; align-items:center; gap:7px;
+  margin-top:14px; padding:9px 16px; border-radius:999px;
   background:var(--ev-accent); color:#fdf6ec;
-  font-family:'Marcellus', serif; font-size:12px; letter-spacing:.16em;
+  font-family:'Marcellus', serif; letter-spacing:.14em;
+  font-size:11px; font-size:clamp(9.5px, 3.2cqw, 12px);
+  white-space:nowrap;
   box-shadow:0 3px 10px rgba(90,50,60,.22);
   transition:transform .18s ease, box-shadow .18s ease, filter .18s ease;
 }
@@ -540,7 +558,8 @@ a{ color:var(--gold); text-decoration:none; }
 .ev-when{ flex:none; text-align:right; }
 .ev-hijri{
   font-family:'Cormorant Garamond', serif; font-style:italic;
-  font-size:11.5px; color:#8a6f52; margin-top:2px; white-space:nowrap;
+  font-size:10.5px; font-size:clamp(9.5px, 3cqw, 11.5px);
+  color:#8a6f52; margin-top:2px; white-space:nowrap;
 }
 .count-hijri{
   font-family:'Marcellus', serif; font-size:9.5px; letter-spacing:.18em;
@@ -630,9 +649,11 @@ a{ color:var(--gold); text-decoration:none; }
 .rsvp{ margin-top:36px; text-align:center; }
 .wa-btn{
   display:inline-flex; align-items:center; gap:10px;
-  padding:13px 26px; border-radius:999px;
+  padding:13px 22px; border-radius:999px;
   background:linear-gradient(160deg, #55754f, #435c40);
-  color:#f2f7ee; font-family:'Marcellus', serif; font-size:12.5px; letter-spacing:.16em;
+  color:#f2f7ee; font-family:'Marcellus', serif; letter-spacing:.14em;
+  font-size:11.5px; font-size:clamp(10px, 3.3cqw, 12.5px);
+  white-space:nowrap;
   box-shadow:0 5px 16px rgba(60,80,55,.35), inset 0 1px 0 rgba(255,255,255,.18);
   transition:transform .18s ease, box-shadow .18s ease, filter .18s ease;
 }
@@ -647,10 +668,12 @@ a{ color:var(--gold); text-decoration:none; }
 /* ============ Save the dates ============ */
 .cal{ margin-top:34px; text-align:center; }
 .cal-btn{
-  display:inline-flex; align-items:center; gap:9px;
-  margin:0; padding:12px 24px; border:1px solid #cfa94e; border-radius:999px;
+  display:inline-flex; align-items:center; gap:8px;
+  margin:0; padding:12px 18px; border:1px solid #cfa94e; border-radius:999px;
   background:linear-gradient(160deg, #c39a3e, #a9812e 60%, #96701f);
-  color:#fdf6e2; font-family:'Marcellus', serif; font-size:12px; letter-spacing:.16em;
+  color:#fdf6e2; font-family:'Marcellus', serif; letter-spacing:.13em;
+  font-size:11px; font-size:clamp(9.5px, 3.1cqw, 12px);
+  white-space:nowrap;
   cursor:pointer; box-shadow:0 5px 16px rgba(140,105,40,.35), inset 0 1px 0 rgba(255,255,255,.25);
   transition:transform .18s ease, filter .18s ease;
 }
