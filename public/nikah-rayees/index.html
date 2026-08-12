@@ -1,0 +1,1607 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex">
+<title>Nikah of Rayees &amp; Thanisha</title>
+<meta name="description" content="You are cordially invited to the Nikah ceremonies of Mohammed Rayees & Fathima Thanisha, together with their families.">
+<meta name="theme-color" content="#17101a">
+<meta property="og:title" content="Nikah of Rayees &amp; Thanisha">
+<meta property="og:description" content="You are cordially invited to the Nikah ceremonies of Mohammed Rayees & Fathima Thanisha.">
+<!-- On go-live, set the absolute URL: <meta property="og:image" content="https://YOUR-DOMAIN/nikah-rayees/assets/og-cover.jpg"> -->
+<meta property="og:image" content="assets/og-cover.jpg">
+<link rel="icon" href="assets/favicon.png">
+<link rel="preload" as="image" href="assets/cover.webp" fetchpriority="high">
+<link rel="preload" as="image" href="assets/seal.webp" fetchpriority="high">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Marcellus&family=Amiri:wght@400;700&display=swap" rel="stylesheet">
+<style>
+/* ============ Base ============ */
+:root{
+  --gold:#a9812e;
+  --gold-deep:#8a6a24;
+  --gold-line:#b08d3f;
+  --gold-soft:#e8d5a8;
+  --plum:#7b2a4e;
+  --rose:#a2536b;
+  --green:#4e6b4a;
+  --brown:#5c4a2e;
+  --brown-soft:#6d5637;
+  --brown-warm:#6d4a35;
+  --paper:#f6ebdf;
+  --night:#17101a;
+}
+*, *::before, *::after{ box-sizing:border-box; }
+html, body{
+  margin:0; padding:0; height:100%;
+  overflow:hidden; overscroll-behavior:none;
+  background:var(--night);
+  -webkit-text-size-adjust:100%;
+}
+body{ touch-action:manipulation; }
+img{ -webkit-user-drag:none; user-select:none; }
+a{ color:var(--gold); text-decoration:none; }
+.sr-only{
+  position:absolute; width:1px; height:1px; margin:-1px; padding:0;
+  overflow:hidden; clip:rect(0 0 0 0); white-space:nowrap; border:0;
+}
+
+/* ============ Backdrop (visible around the card on wide screens) ============ */
+.backdrop{
+  position:fixed; inset:0;
+  background:radial-gradient(120% 80% at 50% 30%, #241423 0%, #150d18 70%);
+}
+.backdrop::after{
+  content:""; position:absolute; inset:0;
+  background:radial-gradient(60% 45% at 50% 50%, rgba(169,129,46,.07) 0%, rgba(169,129,46,0) 70%);
+}
+
+/* ============ Stage — everything lives in a fixed 853:1844 frame ============ */
+/* Fits the full envelope in the viewport; card and doors always align exactly. */
+.stage-wrap{
+  position:fixed; inset:0;
+  display:flex; align-items:center; justify-content:center;
+}
+.stage{
+  position:relative;
+  width:min(100vw, 46.258vh);
+  height:min(100vh, 216.18vw);
+  box-shadow:0 0 60px rgba(0,0,0,.55), 0 0 140px rgba(123,42,78,.22);
+}
+@supports (height:100dvh){
+  .stage{ width:min(100vw, 46.258dvh); height:min(100dvh, 216.18vw); }
+}
+
+/* ============ Invitation (revealed behind the doors) ============ */
+.invite{
+  position:absolute; inset:0;
+  overflow-y:hidden; overflow-x:hidden;
+  -webkit-overflow-scrolling:touch;
+  overscroll-behavior:contain;
+  scrollbar-width:none;
+  opacity:0; transform:scale(1.06);
+  transition:opacity 1.2s ease .55s, transform 1.6s cubic-bezier(.22,.9,.3,1) .45s;
+  outline:none;
+  background:var(--paper);
+}
+.invite::-webkit-scrollbar{ display:none; }
+.is-opening .invite{ opacity:1; transform:scale(1); }
+.is-open .invite{ overflow-y:auto; }
+
+.card{
+  width:100%; min-height:100%;
+  background:var(--paper);
+  container-type:inline-size;
+}
+
+/* ---- Hero ---- */
+.hero{
+  position:relative; width:100%;
+  aspect-ratio:853/1844;
+  background-image:url('assets/mosque-bg.webp'), url('data:image/webp;base64,UklGRoAAAABXRUJQVlA4IHQAAABQBQCdASoYADQAPu1gqE2tJaQjM/mYAaAdiWcAuwAhxDCTlIO9QKAplKY/0MD+cf+zugAA/u/zXLEu/Ns/vP60l5w54OFu0WiYFh1n/+tzc/Wti1S0ox1bSWQ4wh8EPLcOyX7navnosZuMWWKvzR2ehKsAAA==');
+  background-size:cover, cover; background-position:center, center;
+  overflow:hidden;
+}
+.hero .floral{ position:absolute; width:42%; pointer-events:none; }
+.hero .floral-tl{ top:-2%; left:-3%; }
+.hero .floral-tr{ top:-2%; right:-3%; }
+
+/* Lanterns — outer layer drops in, inner layer sways forever */
+.lantern{ position:absolute; top:-1.5%; pointer-events:none; }
+.lantern-a{ left:7%; width:15%; }
+.lantern-b{ right:7%; width:12.5%; }
+.lantern .drop{
+  opacity:0; transform:translateY(-6%);
+  transition:opacity 1s ease 1s, transform 1.5s cubic-bezier(.22,.9,.3,1) .9s;
+}
+.is-opening .lantern .drop{ opacity:1; transform:translateY(0); }
+.lantern .sway{ transform-origin:top center; animation:sway 5.2s ease-in-out infinite; }
+.lantern-b .sway{ animation:swayAlt 6.1s ease-in-out infinite .8s; }
+.lantern img{ display:block; width:100%; }
+.lantern .glow{
+  position:absolute; left:50%; top:62%; width:130%; aspect-ratio:1;
+  transform:translate(-50%,-50%); border-radius:50%;
+  background:radial-gradient(circle, rgba(255,196,92,.4) 0%, rgba(255,196,92,0) 65%);
+  animation:lanternGlow 3.4s ease-in-out infinite;
+}
+.lantern-b .glow{ animation-delay:1.2s; }
+
+/* Bismillah above the arch peak */
+.bismillah{
+  position:absolute; top:0; left:0; right:0; height:9.1%;
+  display:flex; flex-direction:column; align-items:center; justify-content:center;
+  text-align:center; padding:0 20%; z-index:2;
+}
+.bismillah .ar{
+  font-family:'Amiri', serif; color:var(--gold-deep); line-height:1.35; white-space:nowrap;
+  font-size:19px; font-size:clamp(13px, 5.2cqw, 26px);
+}
+.bismillah .ayah{
+  font-family:'Cormorant Garamond', serif; font-style:italic; color:var(--brown-soft);
+  margin-top:1px; white-space:nowrap;
+  font-size:12px; font-size:clamp(9px, 3cqw, 15px);
+}
+.bismillah .ref{
+  font-family:'Marcellus', serif; letter-spacing:.16em; color:var(--gold-deep);
+  margin-top:1px; white-space:nowrap;
+  font-size:9px; font-size:clamp(7px, 2.1cqw, 11px);
+}
+
+/* Hero copy */
+.hero-copy{
+  position:absolute; top:17.5%; bottom:0; left:0; right:0;
+  display:flex; flex-direction:column; align-items:center;
+  text-align:center; padding:0 9%;
+}
+.eyebrow{
+  font-family:'Marcellus', serif; letter-spacing:.2em; color:var(--brown); white-space:nowrap;
+  font-size:12px; font-size:clamp(9px, 2.9cqw, 15px);
+}
+.to-nikah{
+  font-family:'Cormorant Garamond', serif; font-style:italic; color:var(--brown-soft);
+  margin-top:2%;
+  font-size:15px; font-size:clamp(11px, 3.6cqw, 18px);
+}
+.name{
+  font-family:'Cormorant Garamond', serif; font-weight:600; line-height:1.05; color:var(--plum);
+  text-shadow:0 1px 0 rgba(255,255,255,.5);
+  font-size:44px; font-size:clamp(30px, 11.5cqw, 58px);
+}
+/* Periodic gold-foil sheen sweeping across the names */
+@supports ((-webkit-background-clip:text) and (-webkit-text-fill-color:transparent)){
+  .name{
+    background:linear-gradient(112deg, var(--plum) 0%, var(--plum) 48%, #a75681 49%, #d8a98f 50%, #a75681 51%, var(--plum) 52%, var(--plum) 100%);
+    background-size:300% 100%; background-position:100% 0;
+    -webkit-background-clip:text; background-clip:text;
+    -webkit-text-fill-color:transparent;
+    /* text-shadow paints OVER a clipped gradient — recreate the emboss with drop-shadow */
+    text-shadow:none;
+    filter:drop-shadow(0 1px 0 rgba(255,255,255,.45));
+    animation:nameSheen 12s linear 6s infinite;
+    animation-play-state:paused;
+  }
+  .is-open .name{ animation-play-state:running; }
+}
+.name-1{ margin-top:4.5%; }
+.name-2{ margin-top:3.5%; }
+.parent{
+  font-family:'Marcellus', serif; letter-spacing:.08em; color:var(--brown);
+  margin-top:2%;
+  font-size:12px; font-size:clamp(9px, 2.9cqw, 14px);
+}
+.amp-row{ display:flex; align-items:center; gap:12px; margin-top:3.5%; }
+.amp-row .line-l{ width:44px; height:1px; background:linear-gradient(to left, var(--gold-line), transparent); }
+.amp-row .line-r{ width:44px; height:1px; background:linear-gradient(to right, var(--gold-line), transparent); }
+.amp{
+  font-family:'Cormorant Garamond', serif; font-style:italic; color:var(--gold);
+  font-size:30px; font-size:clamp(21px, 7.5cqw, 38px);
+}
+.together{
+  font-family:'Marcellus', serif; letter-spacing:.2em; color:var(--gold-deep);
+  margin-top:6%; white-space:nowrap;
+  font-size:11px; font-size:clamp(8px, 2.7cqw, 13px);
+}
+.hero-foot{
+  position:relative;
+  margin-top:auto; padding-bottom:8%;
+  display:flex; flex-direction:column; align-items:center;
+}
+.hero-foot::before{
+  content:""; position:absolute; inset:-9% -16% -3%;
+  background:radial-gradient(58% 68% at 50% 46%, rgba(255,250,240,.88) 0%, rgba(255,250,240,.45) 52%, rgba(255,250,240,0) 78%);
+  pointer-events:none;
+}
+.hero-foot > *{ position:relative; }
+.orna{ display:flex; align-items:center; gap:10px; }
+.orna .l{ width:52px; height:1px; background:linear-gradient(to left, var(--gold), transparent); }
+.orna .r{ width:52px; height:1px; background:linear-gradient(to right, var(--gold), transparent); }
+.orna .d{ width:6px; height:6px; background:var(--gold); transform:rotate(45deg); }
+.foot-lockup{ display:flex; align-items:center; gap:12px; }
+.fl-line{ width:44px; width:clamp(28px, 13cqw, 64px); height:1px; }
+.fl-l{ background:linear-gradient(to left, var(--gold-line), transparent); }
+.fl-r{ background:linear-gradient(to right, var(--gold-line), transparent); }
+.monogram{
+  width:64px; width:clamp(46px, 17cqw, 88px);
+  aspect-ratio:1; border-radius:50%;
+  border:1px solid rgba(169,129,46,.6);
+  display:flex; align-items:center; justify-content:center; gap:4px;
+  position:relative;
+  background:radial-gradient(circle, rgba(255,252,244,.75) 0%, rgba(255,252,244,.15) 75%);
+}
+.monogram::before{
+  content:""; position:absolute; inset:6%;
+  border:1px solid rgba(169,129,46,.35); border-radius:50%;
+}
+.monogram .mg{
+  font-family:'Cormorant Garamond', serif; font-style:italic; font-weight:600;
+  font-size:20px; font-size:clamp(15px, 5.6cqw, 28px);
+  color:var(--plum); line-height:1;
+  text-shadow:0 1px 0 rgba(255,255,255,.65);
+}
+.monogram .mg-amp{
+  font-family:'Cormorant Garamond', serif; font-style:italic;
+  font-size:12px; font-size:clamp(9px, 3.2cqw, 16px);
+  color:var(--gold); line-height:1; margin-top:14%;
+}
+.request{
+  font-family:'Cormorant Garamond', serif; font-style:italic; font-weight:500; color:#573a24;
+  line-height:1.5; max-width:82%; margin-top:3.5%;
+  font-size:16px; font-size:clamp(13px, 4.3cqw, 21px);
+  text-shadow:0 1px 2px rgba(255,253,247,.9), 0 0 12px rgba(255,253,247,.6);
+}
+.scroll-btn{
+  display:inline-flex; align-items:center; gap:9px;
+  margin:5.5% 0 0; padding:11px 20px 11px 24px;
+  border:1px solid rgba(169,129,46,.7); border-radius:999px;
+  background:linear-gradient(180deg, rgba(255,252,244,.95), rgba(247,235,216,.92));
+  color:#6d4f16; font-family:'Marcellus', serif;
+  font-size:11px; font-size:clamp(9px, 2.8cqw, 13px);
+  letter-spacing:.2em; cursor:pointer;
+  box-shadow:0 4px 16px rgba(90,50,60,.22), inset 0 1px 0 rgba(255,255,255,.9);
+  -webkit-tap-highlight-color:transparent;
+  animation:btnFloat 2.6s ease-in-out infinite;
+}
+.scroll-btn:hover{ filter:brightness(1.04); }
+.scroll-btn:active{ filter:brightness(.95); }
+.scroll-btn:focus-visible{ outline:2px solid var(--gold); outline-offset:3px; }
+.scroll-btn .chev2{ width:15px; height:13px; color:var(--gold); animation:chevNudge 1.6s ease-in-out infinite; }
+
+/* Staggered hero reveal (plays while the doors swing open) */
+.hr{ opacity:0; transform:translateY(16px); transition:opacity .9s ease, transform .9s cubic-bezier(.22,.9,.3,1); transition-delay:var(--d, 1s); }
+.is-opening .hr{ opacity:1; transform:translateY(0); }
+
+/* ---- Events ---- */
+.events{
+  position:relative;
+  background:linear-gradient(180deg, #f8ede1 0%, #f4e4d8 55%, #f0dcd2 100%);
+  padding:34px 18px 30px;
+}
+.ev-title{
+  margin:0; text-align:center;
+  font-family:'Marcellus', serif; font-weight:400; font-size:14px;
+  letter-spacing:.26em; color:var(--plum);
+}
+.ev-orna{ justify-content:center; margin:14px 0 22px; }
+.ev-orna .l, .ev-orna .r{ width:60px; }
+.ev-orna .d{ background:var(--gold-line); }
+.ev-list{ display:flex; flex-direction:column; gap:16px; }
+
+.ev{
+  position:relative;
+  background:var(--ev-bg); border:1px solid var(--ev-border);
+  border-radius:14px; box-shadow:0 6px 18px rgba(90,50,60,.10);
+  overflow:hidden;
+  display:flex; align-items:stretch;
+}
+.ev::before{
+  content:""; position:absolute; top:0; left:0; right:0; height:3px;
+  background:linear-gradient(90deg, transparent, var(--ev-accent), transparent);
+  z-index:2;
+}
+.ev-photo{
+  flex:0 0 33%; min-width:0; min-height:150px;
+  margin:15px 0 15px 14px;
+  border-radius:150px 150px 12px 12px;
+  border:1px solid var(--ev-border);
+  background:radial-gradient(130% 100% at 50% 42%, #fffdf7 0%, rgba(255,251,242,.3) 55%, rgba(255,251,242,0) 100%), var(--ev-bg);
+  overflow:hidden;
+}
+.ev-photo img{ width:100%; height:100%; object-fit:cover; display:block; }
+.ev-body{ flex:1; min-width:0; padding:18px 16px 16px 14px; position:relative; }
+.ev-aqiqah{ --ev-accent:#a9812e; --ev-bg:#fdf7ec; --ev-border:#e2cfa6; }
+.ev-nikah { --ev-accent:#4e6b4a; --ev-bg:#f4f7ef; --ev-border:#c8d4bd; }
+.ev-valima{ --ev-accent:#7b2a4e; --ev-bg:#fbf1f4; --ev-border:#dfc0cc; }
+.ev-meet  { --ev-accent:#a2536b; --ev-bg:#fdf4f0; --ev-border:#e5c8bc; }
+.ev-art{
+  position:absolute; right:6px; bottom:2px; width:96px; height:96px;
+  color:var(--ev-accent); opacity:.14; transform:rotate(-6deg); pointer-events:none;
+}
+.ev-head{ display:flex; align-items:baseline; justify-content:space-between; gap:12px; }
+.ev-name{
+  margin:0;
+  font-family:'Cormorant Garamond', serif; font-weight:700; font-size:27px;
+  letter-spacing:.06em; color:var(--ev-accent); line-height:1.08;
+}
+.ev-date{
+  font-family:'Marcellus', serif; font-size:13px; letter-spacing:.12em;
+  color:var(--brown-soft); white-space:nowrap;
+}
+.ev-tag{
+  font-family:'Cormorant Garamond', serif; font-style:italic; font-size:15px;
+  color:#7a6248; margin-top:2px;
+}
+.ev-times{ display:flex; flex-direction:column; gap:6px; margin-top:12px; }
+.ev-time{ display:flex; align-items:center; gap:10px; }
+.ev-time .d{ width:5px; height:5px; background:var(--ev-accent); transform:rotate(45deg); flex:none; }
+.ev-time span{
+  font-family:'Marcellus', serif; font-size:13.5px; letter-spacing:.08em; color:#4f3d28;
+}
+.ev-map{
+  display:inline-flex; align-items:center; gap:8px;
+  margin-top:14px; padding:9px 20px; border-radius:999px;
+  background:var(--ev-accent); color:#fdf6ec;
+  font-family:'Marcellus', serif; font-size:12px; letter-spacing:.16em;
+  box-shadow:0 3px 10px rgba(90,50,60,.22);
+  transition:transform .18s ease, box-shadow .18s ease, filter .18s ease;
+}
+.ev-map:hover{ color:#fdf6ec; filter:brightness(1.08); box-shadow:0 5px 14px rgba(90,50,60,.3); }
+.ev-map:active{ transform:scale(.96); }
+.ev-map .chev{ font-size:13px; }
+
+/* Scroll-in reveal */
+.sr{ opacity:0; transform:translateY(22px); transition:opacity .7s ease, transform .7s cubic-bezier(.22,.9,.3,1); }
+.sr.in{ opacity:1; transform:translateY(0); }
+.ev-list .sr:nth-child(2){ transition-delay:.08s; }
+.ev-list .sr:nth-child(3){ transition-delay:.16s; }
+.ev-list .sr:nth-child(4){ transition-delay:.24s; }
+
+/* ---- Closing ---- */
+.closing{
+  position:relative; margin-top:34px; text-align:center;
+  padding:0 12px calc(96px + env(safe-area-inset-bottom, 0px));
+}
+.closing .ar{ font-family:'Amiri', serif; font-size:22px; color:var(--gold-deep); }
+.closing .note{
+  font-family:'Cormorant Garamond', serif; font-style:italic; font-size:17px;
+  color:var(--brown-warm); line-height:1.6; max-width:320px; margin:10px auto 0;
+}
+.closing .floral{ position:absolute; bottom:-30px; width:38%; pointer-events:none; }
+.closing .floral-bl{ left:-18px; }
+.closing .floral-br{ right:-18px; }
+
+/* ============ Envelope cover ============ */
+.cover{
+  position:absolute; inset:0; z-index:10;
+  display:block; width:100%; height:100%;
+  margin:0; padding:0; border:0; background:none;
+  cursor:pointer; -webkit-tap-highlight-color:transparent;
+  perspective:1600px;
+}
+.cover:focus-visible{ outline:2px solid var(--gold-soft); outline-offset:-8px; }
+.is-open .cover{ visibility:hidden; transition:visibility 0s .4s; }
+
+.door{
+  position:absolute; top:0; height:100%; width:50.1%;
+  background-image:url('assets/cover.webp'), url('data:image/webp;base64,UklGRlYAAABXRUJQVlA4IEoAAABQAwCdASoYADQAPu1yslOzpqokJAkicB2JZwDK8AqHa5LRQAD+6uWkHdcq9XgZMCB7h7IsMRkbzt/3OMtyGGsETquVkx7R5qQAAA==');
+  background-size:200.2% 100%, 200.2% 100%;
+  transition:transform 1.7s cubic-bezier(.65,0,.3,1) .35s;
+  backface-visibility:hidden; -webkit-backface-visibility:hidden;
+  will-change:transform;
+}
+.door-l{
+  left:0; background-position:left center, left center;
+  transform-origin:left center;
+  box-shadow:8px 0 30px rgba(0,0,0,.35);
+}
+.door-r{
+  right:0; background-position:right center, right center;
+  transform-origin:right center;
+  box-shadow:-8px 0 30px rgba(0,0,0,.35);
+}
+.is-opening .door-l{ transform:rotateY(-112deg); }
+.is-opening .door-r{ transform:rotateY(112deg); }
+
+.seal-glow{
+  position:absolute; left:49.6%; top:53.15%; width:34%; aspect-ratio:1;
+  transform:translate(-50%,-50%); border-radius:50%;
+  background:radial-gradient(circle, rgba(255,214,140,.35) 0%, rgba(255,214,140,0) 65%);
+  animation:glowPulse 2.6s ease-in-out infinite;
+  pointer-events:none;
+  transition:opacity .5s ease;
+}
+.seal{
+  position:absolute; left:49.6%; top:53.15%; width:28.2%;
+  --s:1; --r:0deg;
+  transform:translate(-50%,-50%) scale(var(--s)) rotate(var(--r));
+  transition:transform .6s cubic-bezier(.5,0,.6,1);
+  filter:drop-shadow(0 4px 10px rgba(0,0,0,.35));
+  pointer-events:none;
+}
+@media (hover:hover){
+  .cover:hover .seal{ --s:1.045; }
+}
+.is-opening .seal{ opacity:0; transition:none; }
+.is-opening .seal-glow{ opacity:0; animation:none; }
+
+/* Seal shatter fragments — same artwork, three clipped wedges that break & fall */
+.seal-frags{
+  position:absolute; left:49.6%; top:53.15%; width:28.2%; aspect-ratio:1;
+  transform:translate(-50%,-50%);
+  pointer-events:none; display:none; z-index:3;
+}
+.is-opening .seal-frags{ display:block; }
+.frag{ position:absolute; inset:0; }
+.frag img{ display:block; width:100%; filter:drop-shadow(0 3px 8px rgba(0,0,0,.35)); }
+.frag-1{ clip-path:polygon(50% 50%, 0% 0%, 100% 0%, 100% 38%); }
+.frag-2{ clip-path:polygon(50% 50%, 100% 38%, 100% 100%, 28% 100%); }
+.frag-3{ clip-path:polygon(50% 50%, 28% 100%, 0% 100%, 0% 0%); }
+.is-opening .frag-1{ animation:fragFall1 1s cubic-bezier(.45,.05,.85,.5) forwards; }
+.is-opening .frag-2{ animation:fragFall2 1.05s cubic-bezier(.45,.05,.85,.5) forwards; }
+.is-opening .frag-3{ animation:fragFall3 .95s cubic-bezier(.45,.05,.85,.5) forwards; }
+
+/* Guest personalisation on the envelope */
+.guest-line{
+  position:absolute; left:50%; top:31%; transform:translateX(-50%);
+  width:86%; text-align:center; pointer-events:none; z-index:4;
+  transition:opacity .4s ease;
+}
+.guest-line .gl-eyebrow{
+  font-family:'Marcellus', serif; font-size:10px; letter-spacing:.34em; padding-left:.34em;
+  color:var(--gold-soft); text-transform:uppercase; opacity:.85;
+  text-shadow:0 1px 6px rgba(0,0,0,.5);
+}
+.guest-line .gl-name{
+  font-family:'Cormorant Garamond', serif; font-style:italic; font-weight:500;
+  font-size:clamp(20px, 6.4cqw, 30px); color:#f3dfae; margin-top:6px; line-height:1.2;
+  text-shadow:0 1px 10px rgba(0,0,0,.55), 0 0 26px rgba(255,214,140,.35);
+}
+.is-opening .guest-line{ opacity:0; }
+
+/* Audio toggle */
+.audio-btn{
+  position:absolute; top:calc(10px + env(safe-area-inset-top, 0px)); right:10px; z-index:40;
+  width:42px; height:42px; border-radius:50%;
+  display:flex; align-items:center; justify-content:center;
+  margin:0; padding:0; cursor:pointer;
+  background:rgba(23,16,26,.42); border:1px solid rgba(232,213,168,.55);
+  color:var(--gold-soft); -webkit-tap-highlight-color:transparent;
+  opacity:0; pointer-events:none; transition:opacity .6s ease .9s, transform .2s ease;
+  backdrop-filter:blur(4px); -webkit-backdrop-filter:blur(4px);
+}
+.is-open .audio-btn{ opacity:1; pointer-events:auto; }
+.audio-btn:active{ transform:scale(.92); }
+.audio-btn:focus-visible{ outline:2px solid var(--gold-soft); outline-offset:2px; }
+.audio-btn svg{ width:20px; height:20px; }
+.audio-btn .i-off{ display:none; }
+.audio-btn.muted .i-on{ display:none; }
+.audio-btn.muted .i-off{ display:block; }
+
+.hint{
+  position:absolute; left:50%;
+  bottom:calc(9% + env(safe-area-inset-bottom, 0px) * .5);
+  transform:translateX(-50%);
+  color:var(--gold-soft);
+  font-family:Georgia, 'Times New Roman', serif;
+  font-size:15px; letter-spacing:.35em; padding-left:.35em; text-transform:uppercase;
+  text-shadow:0 1px 8px rgba(0,0,0,.6);
+  animation:hintPulse 2.4s ease-in-out infinite;
+  white-space:nowrap;
+  transition:opacity .4s ease;
+}
+.is-opening .hint{ opacity:0; animation:none; }
+
+.dust{
+  position:absolute; inset:0; width:100%; height:100%;
+  pointer-events:none; z-index:6;
+  transition:opacity 1s ease .45s;
+}
+.is-opening .dust{ opacity:0; }
+
+/* ============ Interactive lanterns ============ */
+.lantern{ pointer-events:auto; cursor:pointer; }
+.bismillah{ pointer-events:none; }
+.lantern img{ transition:filter .35s ease; }
+.lantern .sway{ position:relative; }
+.lantern .sway::after{
+  content:""; position:absolute; inset:-35% -50%;
+  background:radial-gradient(circle, rgba(255,216,130,.55) 0%, rgba(255,216,130,0) 62%);
+  opacity:0; transition:opacity .35s ease; pointer-events:none;
+}
+.lantern.flare img{ filter:brightness(1.32) drop-shadow(0 0 14px rgba(255,200,100,.85)); }
+.lantern.flare .sway::after{ opacity:1; }
+.orb{
+  position:absolute; width:11px; height:11px; border-radius:50%;
+  pointer-events:none; z-index:3;
+  background:radial-gradient(circle, rgba(255,238,190,.95) 0%, rgba(255,214,120,0) 70%);
+  box-shadow:0 0 14px 5px rgba(255,214,120,.5);
+  animation:orbRise 2.8s ease-out forwards;
+}
+
+/* ============ Scroll progress thread ============ */
+.progress{
+  position:absolute; top:0; left:0; right:0; height:2px; z-index:35;
+  background:rgba(255,252,244,.14);
+  opacity:0; transition:opacity .6s ease 1s; pointer-events:none;
+}
+.is-open .progress{ opacity:1; }
+.progress-fill{
+  height:100%; width:0%;
+  background:linear-gradient(90deg, #b98e34, #e6c36b);
+  box-shadow:0 0 6px rgba(230,195,107,.6);
+}
+
+/* ============ Arched section dividers ============ */
+.divider{ width:150px; margin:0 auto 14px; color:var(--gold-line); }
+.divider svg{ display:block; width:100%; height:auto; }
+
+/* ============ Hijri dates ============ */
+.ev-when{ flex:none; text-align:right; }
+.ev-hijri{
+  font-family:'Cormorant Garamond', serif; font-style:italic;
+  font-size:11.5px; color:#8a6f52; margin-top:2px; white-space:nowrap;
+}
+.count-hijri{
+  font-family:'Marcellus', serif; font-size:9.5px; letter-spacing:.18em;
+  text-transform:uppercase; color:#d8ae8f; margin-top:6px;
+}
+
+/* ============ Hero atmosphere — petals & fireflies ============ */
+.petals, .flies{ position:absolute; inset:0; overflow:hidden; pointer-events:none; z-index:1; }
+.hero-copy, .bismillah{ z-index:2; }
+.petal{
+  position:absolute; top:-4%;
+  width:13px; height:17px; opacity:0;
+  background:radial-gradient(80% 80% at 35% 30%, rgba(236,182,198,.85), rgba(162,83,107,.55));
+  border-radius:52% 48% 62% 38% / 60% 64% 36% 40%;
+  animation:petalFall var(--pd, 15s) linear var(--pw, 0s) infinite;
+}
+.fly{
+  position:absolute; width:4px; height:4px; border-radius:50%;
+  background:radial-gradient(circle, rgba(255,226,158,.95) 0%, rgba(255,206,120,0) 72%);
+  box-shadow:0 0 6px 2px rgba(255,214,140,.35);
+  opacity:0;
+  animation:flyFloat var(--fd, 9s) ease-in-out var(--fw, 0s) infinite;
+}
+.hero.still .petal, .hero.still .fly{ animation-play-state:paused; }
+
+/* Bismillah writes itself right-to-left as the doors open */
+.bismillah .ar.write{ clip-path:inset(-12% -6% -18% 100%); }
+.is-opening .bismillah .ar.write{ animation:writeOn 2.3s cubic-bezier(.4,.12,.3,1) 1.35s forwards; }
+
+/* ============ Countdown ============ */
+.count{
+  position:relative; margin:32px -18px 0; padding:24px 16px 22px;
+  background:linear-gradient(135deg, #451a30 0%, #6d2444 48%, #451a30 100%);
+  text-align:center; overflow:hidden;
+}
+.count::before, .count::after{
+  content:""; position:absolute; left:0; right:0; height:1px;
+  background:linear-gradient(90deg, transparent, rgba(240,214,150,.75), transparent);
+}
+.count::before{ top:0; } .count::after{ bottom:0; }
+.count .mini-lantern{
+  position:absolute; top:-4px; width:26px; opacity:.55; pointer-events:none;
+  animation:sway 6s ease-in-out infinite;
+  transform-origin:top center;
+}
+.count .ml-l{ left:14px; } .count .ml-r{ right:14px; animation-delay:1.4s; }
+.count-title{
+  font-family:'Marcellus', serif; font-size:12px; letter-spacing:.26em;
+  color:#f0d696;
+}
+.count-grid{
+  display:flex; align-items:center; justify-content:center; gap:8px;
+  margin-top:16px;
+}
+.cu{ min-width:56px; }
+.cu-n{
+  font-family:'Marcellus', serif; font-size:30px; color:#fdf3da;
+  line-height:1; transition:transform .24s ease, text-shadow .24s ease;
+  font-variant-numeric:tabular-nums;
+}
+.cu-n.tick{ transform:translateY(-3px) scale(1.07); text-shadow:0 0 14px rgba(255,220,150,.6); }
+.cu-l{
+  font-family:'Marcellus', serif; font-size:8.5px; letter-spacing:.22em;
+  color:#d8ae8f; margin-top:7px;
+}
+.cu-sep{ color:#c9995f; font-size:9px; margin-top:-14px; }
+.count-date{
+  font-family:'Cormorant Garamond', serif; font-style:italic; font-size:14px;
+  color:#e9c9b2; margin-top:16px;
+}
+.count-done{
+  font-family:'Cormorant Garamond', serif; font-style:italic; font-size:19px;
+  color:#fdf3da; margin-top:14px; display:none;
+}
+
+/* ============ Shared section headers ============ */
+.sec-title{
+  margin:0; text-align:center;
+  font-family:'Marcellus', serif; font-weight:400; font-size:13px;
+  letter-spacing:.26em; color:var(--plum);
+}
+.sec-orna{ justify-content:center; margin:12px 0 18px; }
+.sec-orna .l, .sec-orna .r{ width:46px; }
+.sec-orna .d{ background:var(--gold-line); }
+
+/* ============ RSVP ============ */
+.rsvp{ margin-top:36px; text-align:center; }
+.wa-btn{
+  display:inline-flex; align-items:center; gap:10px;
+  padding:13px 26px; border-radius:999px;
+  background:linear-gradient(160deg, #55754f, #435c40);
+  color:#f2f7ee; font-family:'Marcellus', serif; font-size:12.5px; letter-spacing:.16em;
+  box-shadow:0 5px 16px rgba(60,80,55,.35), inset 0 1px 0 rgba(255,255,255,.18);
+  transition:transform .18s ease, box-shadow .18s ease, filter .18s ease;
+}
+.wa-btn:hover{ color:#f2f7ee; filter:brightness(1.07); }
+.wa-btn:active{ transform:scale(.96); }
+.wa-btn svg{ width:17px; height:17px; flex:none; }
+.rsvp-note{
+  font-family:'Cormorant Garamond', serif; font-style:italic; font-size:14px;
+  color:#8a6f52; margin-top:12px;
+}
+
+/* ============ Save the dates ============ */
+.cal{ margin-top:34px; text-align:center; }
+.cal-btn{
+  display:inline-flex; align-items:center; gap:9px;
+  margin:0; padding:12px 24px; border:1px solid #cfa94e; border-radius:999px;
+  background:linear-gradient(160deg, #c39a3e, #a9812e 60%, #96701f);
+  color:#fdf6e2; font-family:'Marcellus', serif; font-size:12px; letter-spacing:.16em;
+  cursor:pointer; box-shadow:0 5px 16px rgba(140,105,40,.35), inset 0 1px 0 rgba(255,255,255,.25);
+  transition:transform .18s ease, filter .18s ease;
+}
+.cal-btn:hover{ filter:brightness(1.06); }
+.cal-btn:active{ transform:scale(.96); }
+.cal-btn svg{ width:16px; height:16px; flex:none; }
+.cal-note{
+  font-family:'Cormorant Garamond', serif; font-style:italic; font-size:13.5px;
+  color:#8a6f52; margin-top:11px;
+}
+
+/* ============ Blessings & du'a wall ============ */
+.duas{ margin-top:36px; }
+.duas-strip{
+  overflow:hidden; margin:0 -18px;
+  -webkit-mask-image:linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+  mask-image:linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+}
+.duas-track{
+  display:flex; gap:10px; width:max-content; padding:2px 0 6px;
+  animation:duaScroll 44s linear infinite;
+}
+.duas-strip:hover .duas-track, .duas-strip:active .duas-track{ animation-play-state:paused; }
+.dua-chip{
+  flex:none; max-width:250px; padding:10px 16px;
+  background:#fdf7ec; border:1px solid #e2cfa6; border-radius:999px;
+  font-family:'Cormorant Garamond', serif; font-style:italic; font-size:14px;
+  color:var(--brown-warm); white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
+  box-shadow:0 3px 8px rgba(90,50,60,.08);
+}
+.dua-chip.ar{ font-family:'Amiri', serif; font-style:normal; color:var(--gold-deep); }
+.dua-form{
+  display:flex; gap:8px; margin:16px auto 0; max-width:340px; padding:0 4px;
+}
+.dua-input{
+  flex:1; min-width:0; padding:11px 16px;
+  background:#fffdf8; border:1px solid #dcc79e; border-radius:999px;
+  font-family:'Cormorant Garamond', serif; font-style:italic; font-size:15px;
+  color:#4f3d28; outline:none; transition:border-color .2s ease, box-shadow .2s ease;
+}
+.dua-input::placeholder{ color:#b39b74; }
+.dua-input:focus{ border-color:var(--gold); box-shadow:0 0 0 3px rgba(169,129,46,.15); }
+.dua-send{
+  flex:none; margin:0; padding:0 20px; border:0; border-radius:999px; cursor:pointer;
+  background:var(--plum); color:#fdf0f5;
+  font-family:'Marcellus', serif; font-size:11px; letter-spacing:.14em;
+  box-shadow:0 4px 12px rgba(123,42,78,.3);
+  transition:transform .18s ease, filter .18s ease;
+}
+.dua-send:hover{ filter:brightness(1.1); }
+.dua-send:active{ transform:scale(.95); }
+
+/* ============ Keyframes ============ */
+@keyframes fragFall1{
+  0%{ transform:translate(0,0) rotate(0deg) scale(1); opacity:1; }
+  12%{ transform:translate(-2%,-3%) rotate(-6deg) scale(1.05); }
+  100%{ transform:translate(-52%,150%) rotate(-72deg) scale(.94); opacity:0; }
+}
+@keyframes fragFall2{
+  0%{ transform:translate(0,0) rotate(0deg) scale(1); opacity:1; }
+  12%{ transform:translate(3%,-2%) rotate(7deg) scale(1.05); }
+  100%{ transform:translate(64%,172%) rotate(58deg) scale(.94); opacity:0; }
+}
+@keyframes fragFall3{
+  0%{ transform:translate(0,0) rotate(0deg) scale(1); opacity:1; }
+  12%{ transform:translate(-1%,-4%) rotate(4deg) scale(1.04); }
+  100%{ transform:translate(-12%,188%) rotate(24deg) scale(.95); opacity:0; }
+}
+@keyframes petalFall{
+  0%{ transform:translate3d(0,-4vh,0) rotate(0deg); opacity:0; }
+  6%{ opacity:.55; }
+  80%{ opacity:.45; }
+  100%{ transform:translate3d(var(--px, 34px), 112vh, 0) rotate(var(--pr, 170deg)); opacity:0; }
+}
+@keyframes flyFloat{
+  0%, 100%{ transform:translate3d(0,0,0); opacity:0; }
+  18%{ opacity:.9; }
+  50%{ transform:translate3d(var(--fx, 14px), var(--fy, -16px), 0); opacity:.4; }
+  72%{ opacity:.85; }
+}
+@keyframes writeOn{
+  from{ clip-path:inset(-12% -6% -18% 100%); }
+  to{ clip-path:inset(-12% -6% -18% -6%); }
+}
+@keyframes duaScroll{
+  from{ transform:translate3d(0,0,0); }
+  to{ transform:translate3d(-50%,0,0); }
+}
+@keyframes nameSheen{
+  0%{ background-position:100% 0; }
+  6%{ background-position:0% 0; }
+  100%{ background-position:0% 0; }
+}
+@keyframes orbRise{
+  0%{ transform:translate(0,0) scale(.55); opacity:0; }
+  12%{ opacity:1; }
+  100%{ transform:translate(var(--ox, 10px), -130px) scale(1.15); opacity:0; }
+}
+@keyframes sway    { 0%,100%{ transform:rotate(-3.2deg); } 50%{ transform:rotate(3.2deg); } }
+@keyframes swayAlt { 0%,100%{ transform:rotate(2.6deg); }  50%{ transform:rotate(-2.6deg); } }
+@keyframes lanternGlow{ 0%,100%{ opacity:.55; } 50%{ opacity:.9; } }
+@keyframes hintPulse{ 0%,100%{ opacity:.85; transform:translateX(-50%) translateY(0); } 50%{ opacity:.4; transform:translateX(-50%) translateY(4px); } }
+@keyframes glowPulse{ 0%,100%{ opacity:.5; } 50%{ opacity:.95; } }
+@keyframes btnFloat{ 0%,100%{ transform:translateY(0); } 50%{ transform:translateY(4px); } }
+@keyframes chevNudge{ 0%,100%{ transform:translateY(0); } 50%{ transform:translateY(3px); } }
+
+/* ============ Reduced motion ============ */
+@media (prefers-reduced-motion: reduce){
+  *, *::before, *::after{ animation:none !important; }
+  .door{ transition:opacity .5s ease !important; }
+  .is-opening .door-l, .is-opening .door-r{ transform:none; opacity:0; }
+  .invite{ transition:opacity .5s ease !important; transform:none; }
+  .hr, .sr{ transition:opacity .5s ease !important; transform:none; }
+  .lantern .drop{ transition:opacity .5s ease !important; transform:none; }
+  .seal-frags{ display:none !important; }
+  .is-opening .seal{ transition:opacity .4s ease !important; }
+  .bismillah .ar.write{ clip-path:none !important; }
+  .petal, .fly{ display:none !important; }
+  .duas-track{ animation:none !important; }
+}
+</style>
+</head>
+<body>
+
+<div class="backdrop" aria-hidden="true"></div>
+
+<div class="stage-wrap">
+  <div class="stage">
+
+    <!-- ======== Invitation ======== -->
+    <main class="invite" id="invite" tabindex="-1">
+      <h1 class="sr-only">Nikah invitation — Mohammed Rayees &amp; Fathima Thanisha</h1>
+      <div class="card">
+
+        <!-- Hero -->
+        <section class="hero" aria-label="Invitation">
+          <img class="floral floral-tl" src="assets/floral-tl.webp" alt="">
+          <img class="floral floral-tr" src="assets/floral-tr.webp" alt="">
+
+          <div class="lantern lantern-a">
+            <div class="drop">
+              <div class="sway">
+                <img src="assets/lantern.webp" alt="">
+                <div class="glow"></div>
+              </div>
+            </div>
+          </div>
+          <div class="lantern lantern-b">
+            <div class="drop">
+              <div class="sway">
+                <img src="assets/lantern.webp" alt="">
+                <div class="glow"></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="petals" aria-hidden="true">
+            <span class="petal" style="left:12%; --pd:16s; --pw:2s;  --px:44px;  --pr:200deg;"></span>
+            <span class="petal" style="left:30%; --pd:19s; --pw:9s;  --px:-38px; --pr:150deg;"></span>
+            <span class="petal" style="left:52%; --pd:15s; --pw:5s;  --px:30px;  --pr:230deg;"></span>
+            <span class="petal" style="left:68%; --pd:21s; --pw:12s; --px:-46px; --pr:170deg;"></span>
+            <span class="petal" style="left:84%; --pd:17s; --pw:0s;  --px:36px;  --pr:190deg;"></span>
+            <span class="petal" style="left:42%; --pd:23s; --pw:15s; --px:52px;  --pr:140deg;"></span>
+          </div>
+          <div class="flies" aria-hidden="true">
+            <span class="fly" style="left:11%; top:6%;  --fd:8s;  --fw:0s;   --fx:12px;  --fy:-14px;"></span>
+            <span class="fly" style="left:20%; top:10%; --fd:11s; --fw:3s;   --fx:-10px; --fy:-20px;"></span>
+            <span class="fly" style="left:16%; top:14%; --fd:9s;  --fw:6s;   --fx:15px;  --fy:10px;"></span>
+            <span class="fly" style="left:26%; top:5%;  --fd:12s; --fw:1.5s; --fx:-13px; --fy:16px;"></span>
+            <span class="fly" style="left:79%; top:7%;  --fd:10s; --fw:2s;   --fx:-14px; --fy:-16px;"></span>
+            <span class="fly" style="left:87%; top:11%; --fd:8.5s;--fw:5s;   --fx:11px;  --fy:-12px;"></span>
+            <span class="fly" style="left:83%; top:15%; --fd:12s; --fw:8s;   --fx:-12px; --fy:12px;"></span>
+            <span class="fly" style="left:73%; top:4%;  --fd:9.5s;--fw:4s;   --fx:13px;  --fy:18px;"></span>
+          </div>
+          <div class="bismillah hr" style="--d:1.0s">
+            <div class="ar write" lang="ar" dir="rtl">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</div>
+            <div class="ayah">&ldquo;And We created you in pairs&rdquo;</div>
+            <div class="ref">&mdash; QUR&rsquo;AN 78:8 &mdash;</div>
+          </div>
+
+          <div class="hero-copy">
+            <div class="eyebrow hr" style="--d:1.15s">YOU ARE CORDIALLY INVITED</div>
+            <div class="to-nikah hr" style="--d:1.3s">to the Nikah ceremonies of</div>
+            <div class="name name-1 hr" style="--d:1.45s">Mohammed<br>Rayees</div>
+            <div class="parent hr" style="--d:1.6s">Son of Khwaja Azimuddin</div>
+            <div class="amp-row hr" style="--d:1.72s" aria-hidden="true">
+              <div class="line-l"></div>
+              <div class="amp">&amp;</div>
+              <div class="line-r"></div>
+            </div>
+            <div class="name name-2 hr" style="--d:1.84s">Fathima<br>Thanisha</div>
+            <div class="parent hr" style="--d:2.0s">Daughter of Ismail Tahir</div>
+            <div class="together hr" style="--d:2.15s">TOGETHER WITH THEIR FAMILIES</div>
+            <div class="hero-foot hr" style="--d:2.3s">
+              <div class="foot-lockup" aria-hidden="true">
+                <div class="fl-line fl-l"></div>
+                <div class="monogram"><span class="mg">R</span><span class="mg-amp">&amp;</span><span class="mg">T</span></div>
+                <div class="fl-line fl-r"></div>
+              </div>
+              <div class="request">Request the honour of your presence and blessings as they unite in marriage</div>
+              <button class="scroll-btn" id="scrollBtn" type="button" aria-label="Scroll to the celebrations">
+                <span>THE CELEBRATIONS</span>
+                <svg class="chev2" viewBox="0 0 24 20" aria-hidden="true"><path d="M4 3l8 6 8-6" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/><path d="M4 10l8 6 8-6" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" opacity=".5"/></svg>
+              </button>
+            </div>
+          </div>
+        </section>
+
+        <!-- Events -->
+        <section class="events" aria-label="The celebrations">
+          <h2 class="ev-title sr">THE CELEBRATIONS</h2>
+          <div class="orna ev-orna sr" aria-hidden="true">
+            <div class="l"></div><div class="d"></div><div class="r"></div>
+          </div>
+
+          <div class="ev-list">
+
+            <article class="ev ev-aqiqah sr">
+              <svg class="ev-art" viewBox="0 0 80 80" aria-hidden="true"><path d="M46 10a30 30 0 1 0 0 60 34 34 0 0 1 0-60z" fill="currentColor"/><path d="M58 26l3 7 7 3-7 3-3 7-3-7-7-3 7-3z" fill="currentColor"/></svg>
+              <div class="ev-photo"><img src="assets/ev-aqiqah.webp" alt="" loading="lazy"></div>
+              <div class="ev-body">
+                <div class="ev-head">
+                  <h3 class="ev-name">AQIQAH</h3>
+                  <div class="ev-when">
+                    <div class="ev-date">09TH</div>
+                    <div class="ev-hijri"></div>
+                  </div>
+                </div>
+                <div class="ev-tag">A blessing begins.</div>
+                <div class="ev-times">
+                  <div class="ev-time"><div class="d" aria-hidden="true"></div><span>LUNCH &middot; 2:00 PM</span></div>
+                </div>
+                <a class="ev-map" href="https://maps.app.goo.gl/tLQdytqQiuS5gDJC7" target="_blank" rel="noopener">VIEW LOCATION <span class="chev" aria-hidden="true">&rsaquo;</span></a>
+              </div>
+            </article>
+
+            <article class="ev ev-nikah sr">
+              <svg class="ev-art" viewBox="0 0 80 80" aria-hidden="true"><path d="M40 14 C40 14 14 34 14 54 L66 54 C66 34 40 14 40 14 Z" fill="currentColor"/><rect x="10" y="58" width="60" height="5" rx="2.5" fill="currentColor"/><rect x="38.5" y="4" width="3" height="10" rx="1.5" fill="currentColor"/><circle cx="40" cy="4" r="3" fill="currentColor"/></svg>
+              <div class="ev-photo"><img src="assets/ev-nikah.webp" alt="" loading="lazy"></div>
+              <div class="ev-body">
+                <div class="ev-head">
+                  <h3 class="ev-name">NIKAH</h3>
+                  <div class="ev-when">
+                    <div class="ev-date">10TH</div>
+                    <div class="ev-hijri"></div>
+                  </div>
+                </div>
+                <div class="ev-tag">The most beautiful chapter begins.</div>
+                <div class="ev-times">
+                  <div class="ev-time"><div class="d" aria-hidden="true"></div><span>LUNCH &middot; 11:30 AM</span></div>
+                  <div class="ev-time"><div class="d" aria-hidden="true"></div><span>DINNER &middot; 8:00 PM</span></div>
+                </div>
+                <a class="ev-map" href="https://maps.app.goo.gl/aKg63k46weF2bfBj8" target="_blank" rel="noopener">VIEW LOCATION <span class="chev" aria-hidden="true">&rsaquo;</span></a>
+              </div>
+            </article>
+
+            <article class="ev ev-valima sr">
+              <svg class="ev-art" viewBox="0 0 80 80" aria-hidden="true"><path d="M12 54 a28 28 0 0 1 56 0 Z" fill="currentColor"/><circle cx="40" cy="20" r="4" fill="currentColor"/><rect x="6" y="58" width="68" height="5" rx="2.5" fill="currentColor"/></svg>
+              <div class="ev-photo"><img src="assets/ev-valima.webp" alt="" loading="lazy"></div>
+              <div class="ev-body">
+                <div class="ev-head">
+                  <h3 class="ev-name">VALIMA</h3>
+                  <div class="ev-when">
+                    <div class="ev-date">11TH</div>
+                    <div class="ev-hijri"></div>
+                  </div>
+                </div>
+                <div class="ev-tag">An evening of love, laughter &amp; togetherness.</div>
+                <div class="ev-times">
+                  <div class="ev-time"><div class="d" aria-hidden="true"></div><span>LUNCH &middot; 12:00 PM</span></div>
+                </div>
+                <a class="ev-map" href="https://maps.app.goo.gl/FtkaV4X72h7g9s4p6" target="_blank" rel="noopener">VIEW LOCATION <span class="chev" aria-hidden="true">&rsaquo;</span></a>
+              </div>
+            </article>
+
+            <article class="ev ev-meet sr">
+              <svg class="ev-art" viewBox="0 0 80 80" aria-hidden="true"><circle cx="30" cy="40" r="17" fill="none" stroke="currentColor" stroke-width="5"/><circle cx="50" cy="40" r="17" fill="none" stroke="currentColor" stroke-width="5"/></svg>
+              <div class="ev-photo"><img src="assets/ev-meet.webp" alt="" loading="lazy"></div>
+              <div class="ev-body">
+                <div class="ev-head">
+                  <h3 class="ev-name">MEET &amp;&nbsp;GREET</h3>
+                  <div class="ev-when">
+                    <div class="ev-date">13TH</div>
+                    <div class="ev-hijri"></div>
+                  </div>
+                </div>
+                <div class="ev-tag">Two families become one.</div>
+                <div class="ev-times">
+                  <div class="ev-time"><div class="d" aria-hidden="true"></div><span>DINNER &middot; 7:30 PM</span></div>
+                </div>
+                <a class="ev-map" href="https://maps.app.goo.gl/fvJbD9YwyudiMVKg7" target="_blank" rel="noopener">VIEW LOCATION <span class="chev" aria-hidden="true">&rsaquo;</span></a>
+              </div>
+            </article>
+
+          </div>
+
+          <!-- Countdown -->
+          <div class="count sr" id="countBox">
+            <img class="mini-lantern ml-l" src="assets/lantern.webp" alt="">
+            <img class="mini-lantern ml-r" src="assets/lantern.webp" alt="">
+            <div class="count-title">COUNTING DOWN TO THE NIKAH</div>
+            <div class="count-grid" id="countGrid" role="timer" aria-label="Countdown to the Nikah">
+              <div class="cu"><div class="cu-n" id="cdD">--</div><div class="cu-l">DAYS</div></div>
+              <div class="cu-sep" aria-hidden="true">&#9670;</div>
+              <div class="cu"><div class="cu-n" id="cdH">--</div><div class="cu-l">HOURS</div></div>
+              <div class="cu-sep" aria-hidden="true">&#9670;</div>
+              <div class="cu"><div class="cu-n" id="cdM">--</div><div class="cu-l">MINUTES</div></div>
+              <div class="cu-sep" aria-hidden="true">&#9670;</div>
+              <div class="cu"><div class="cu-n" id="cdS">--</div><div class="cu-l">SECONDS</div></div>
+            </div>
+            <div class="count-date" id="countDate"></div>
+            <div class="count-hijri" id="countHijri"></div>
+            <div class="count-done" id="countDone">Alhamdulillah &mdash; the blessed days are here!</div>
+          </div>
+
+          <!-- RSVP -->
+          <div class="rsvp sr">
+            <div class="divider" aria-hidden="true">
+              <svg viewBox="0 0 150 28" fill="none" stroke="currentColor" stroke-linecap="round"><path d="M0 22 H50 M100 22 H150" stroke-width="1" opacity=".65"/><path d="M50 22 C58 22 61 18 63 13 C65 8.5 68 7 75 7 C82 7 85 8.5 87 13 C89 18 92 22 100 22" stroke-width="1.2"/><path d="M75 7 V4.5" stroke-width="1"/><path d="M75 1 l2.2 2.2 -2.2 2.2 -2.2 -2.2 z" fill="currentColor" stroke="none"/></svg>
+            </div>
+            <h2 class="sec-title">KINDLY CONFIRM YOUR PRESENCE</h2>
+            <a class="wa-btn" id="rsvpBtn" href="#" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12.04 2c-5.46 0-9.9 4.44-9.9 9.9 0 1.75.46 3.45 1.33 4.95L2 22l5.3-1.39a9.87 9.87 0 0 0 4.74 1.21h.01c5.46 0 9.9-4.44 9.9-9.9A9.86 9.86 0 0 0 12.04 2zm0 18.03h-.01a8.2 8.2 0 0 1-4.18-1.15l-.3-.18-3.11.82.83-3.04-.2-.31a8.18 8.18 0 0 1-1.26-4.38c0-4.54 3.7-8.24 8.24-8.24a8.2 8.2 0 0 1 8.23 8.25c0 4.54-3.7 8.23-8.24 8.23zm4.52-6.16c-.25-.13-1.47-.72-1.69-.81-.23-.08-.39-.12-.56.13-.17.25-.64.8-.78.97-.14.17-.29.19-.54.06-.25-.12-1.05-.39-1.99-1.23-.74-.66-1.23-1.47-1.38-1.72-.14-.25-.02-.38.11-.51.11-.11.25-.29.37-.43.12-.14.17-.25.25-.41.08-.17.04-.31-.02-.43-.06-.13-.56-1.34-.76-1.84-.2-.48-.41-.42-.56-.43h-.48c-.17 0-.43.06-.66.31-.22.25-.86.85-.86 2.07 0 1.22.89 2.4 1.01 2.56.12.17 1.75 2.67 4.23 3.74.59.26 1.05.41 1.41.52.59.19 1.13.16 1.56.1.48-.07 1.47-.6 1.67-1.18.21-.58.21-1.07.15-1.18-.06-.11-.22-.17-.47-.29z"/></svg>
+              RSVP ON WHATSAPP
+            </a>
+            <div class="rsvp-note">Your reply reaches the family directly, insha&rsquo;Allah</div>
+          </div>
+
+          <!-- Save the dates -->
+          <div class="cal sr">
+            <div class="divider" aria-hidden="true">
+              <svg viewBox="0 0 150 28" fill="none" stroke="currentColor" stroke-linecap="round"><path d="M0 22 H50 M100 22 H150" stroke-width="1" opacity=".65"/><path d="M50 22 C58 22 61 18 63 13 C65 8.5 68 7 75 7 C82 7 85 8.5 87 13 C89 18 92 22 100 22" stroke-width="1.2"/><path d="M75 7 V4.5" stroke-width="1"/><path d="M75 1 l2.2 2.2 -2.2 2.2 -2.2 -2.2 z" fill="currentColor" stroke="none"/></svg>
+            </div>
+            <h2 class="sec-title">SAVE THE DATES</h2>
+            <button class="cal-btn" id="calBtn" type="button">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2.5"/><path d="M3 9.5h18M8 3v4M16 3v4M12 12.5v5M9.5 15H14.5"/></svg>
+              ADD ALL EVENTS TO CALENDAR
+            </button>
+            <div class="cal-note">Works with Google, Apple &amp; Outlook calendars</div>
+          </div>
+
+          <!-- Blessings & du'a wall -->
+          <div class="duas sr">
+            <div class="divider" aria-hidden="true">
+              <svg viewBox="0 0 150 28" fill="none" stroke="currentColor" stroke-linecap="round"><path d="M0 22 H50 M100 22 H150" stroke-width="1" opacity=".65"/><path d="M50 22 C58 22 61 18 63 13 C65 8.5 68 7 75 7 C82 7 85 8.5 87 13 C89 18 92 22 100 22" stroke-width="1.2"/><path d="M75 7 V4.5" stroke-width="1"/><path d="M75 1 l2.2 2.2 -2.2 2.2 -2.2 -2.2 z" fill="currentColor" stroke="none"/></svg>
+            </div>
+            <h2 class="sec-title">BLESSINGS &amp; DU&rsquo;AS</h2>
+            <div class="duas-strip">
+              <div class="duas-track" id="duaTrack">
+                <div class="dua-chip ar" lang="ar" dir="rtl">بارك الله لكما وبارك عليكما وجمع بينكما في خير</div>
+                <div class="dua-chip">May Allah bless your union with love, mercy &amp; barakah</div>
+                <div class="dua-chip">Barakallahu lakuma wa baraka &rsquo;alaykuma</div>
+                <div class="dua-chip">May your home be filled with sakinah, mawaddah &amp; rahmah</div>
+                <div class="dua-chip">May He unite you in goodness, here &amp; in Jannah</div>
+                <div class="dua-chip">Two souls, one path &mdash; may Allah guide every step</div>
+              </div>
+            </div>
+            <form class="dua-form" id="duaForm">
+              <input class="dua-input" id="duaInput" type="text" maxlength="200" placeholder="Write your du&rsquo;a for the couple&hellip;" aria-label="Write your du'a for the couple">
+              <button class="dua-send" type="submit">SEND</button>
+            </form>
+          </div>
+
+          <!-- Closing note -->
+          <div class="closing">
+            <div class="sr">
+              <div class="divider" aria-hidden="true">
+                <svg viewBox="0 0 150 28" fill="none" stroke="currentColor" stroke-linecap="round"><path d="M0 22 H50 M100 22 H150" stroke-width="1" opacity=".65"/><path d="M50 22 C58 22 61 18 63 13 C65 8.5 68 7 75 7 C82 7 85 8.5 87 13 C89 18 92 22 100 22" stroke-width="1.2"/><path d="M75 7 V4.5" stroke-width="1"/><path d="M75 1 l2.2 2.2 -2.2 2.2 -2.2 -2.2 z" fill="currentColor" stroke="none"/></svg>
+              </div>
+              <div class="ar" lang="ar" dir="rtl">جزاك الله خيرًا</div>
+              <div class="note">Your presence and prayers are the greatest gifts to us. We await you with open hearts.</div>
+            </div>
+            <img class="floral floral-bl" src="assets/floral-bl.webp" alt="" loading="lazy">
+            <img class="floral floral-br" src="assets/floral-br.webp" alt="" loading="lazy">
+          </div>
+        </section>
+
+      </div>
+    </main>
+
+    <!-- ======== Envelope cover ======== -->
+    <button class="cover" id="cover" type="button" aria-label="Open the wedding invitation">
+      <div class="door door-l" aria-hidden="true"></div>
+      <div class="door door-r" aria-hidden="true"></div>
+      <div class="guest-line" id="guestLine" hidden>
+        <div class="gl-eyebrow">Especially for</div>
+        <div class="gl-name" id="guestName"></div>
+      </div>
+      <div class="seal-glow" aria-hidden="true"></div>
+      <img class="seal" src="assets/seal.webp" alt="" aria-hidden="true">
+      <div class="seal-frags" aria-hidden="true">
+        <div class="frag frag-1"><img src="assets/seal.webp" alt=""></div>
+        <div class="frag frag-2"><img src="assets/seal.webp" alt=""></div>
+        <div class="frag frag-3"><img src="assets/seal.webp" alt=""></div>
+      </div>
+      <canvas class="dust" aria-hidden="true"></canvas>
+      <div class="hint" aria-hidden="true">Tap to open</div>
+    </button>
+
+    <button class="audio-btn" id="audioBtn" type="button" aria-label="Mute or unmute music" aria-pressed="false">
+      <svg class="i-on" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18V6l10-2v12"/><circle cx="6.5" cy="18" r="2.5"/><circle cx="16.5" cy="16" r="2.5"/></svg>
+      <svg class="i-off" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18V6l10-2v12"/><circle cx="6.5" cy="18" r="2.5"/><circle cx="16.5" cy="16" r="2.5"/><path d="M3 3l18 18"/></svg>
+    </button>
+
+    <div class="progress" aria-hidden="true"><div class="progress-fill" id="progressFill"></div></div>
+
+  </div>
+</div>
+
+<noscript>
+  <style>
+    .cover{ display:none; }
+    .invite{ opacity:1 !important; transform:none !important; overflow-y:auto !important; }
+    .hr, .sr{ opacity:1 !important; transform:none !important; }
+    .lantern .drop{ opacity:1 !important; transform:none !important; }
+    .bismillah .ar.write{ clip-path:none !important; }
+    .count, .cal, .rsvp, .dua-form, .audio-btn, .scroll-btn{ display:none !important; }
+    .duas-track{ animation:none !important; }
+  </style>
+</noscript>
+
+<script>
+(function(){
+  'use strict';
+
+  /* ═══════════════ EDIT ME — event configuration ═══════════════
+     ⚠ The design only gives day numbers (9th–13th); the month below is
+     ASSUMED to be September 2026. Update these five lines if different.
+     whatsappNumber: digits only with country code, e.g. '919876543210'.
+     Leave '' to let guests pick the contact themselves. */
+  var CONFIG = {
+    nikahDate: '2026-09-10T11:30:00+05:30',
+    nikahDateLabel: '10th September 2026 · 11:30 AM',
+    whatsappNumber: '',
+    calendarEvents: [
+      { title: 'Aqiqah — Rayees & Thanisha',         start: '2026-09-09T14:00:00+05:30', hours: 2.5, map: 'https://maps.app.goo.gl/tLQdytqQiuS5gDJC7' },
+      { title: 'Nikah (Lunch) — Rayees & Thanisha',  start: '2026-09-10T11:30:00+05:30', hours: 3,   map: 'https://maps.app.goo.gl/aKg63k46weF2bfBj8' },
+      { title: 'Nikah (Dinner) — Rayees & Thanisha', start: '2026-09-10T20:00:00+05:30', hours: 2.5, map: 'https://maps.app.goo.gl/aKg63k46weF2bfBj8' },
+      { title: 'Valima — Rayees & Thanisha',         start: '2026-09-11T12:00:00+05:30', hours: 3,   map: 'https://maps.app.goo.gl/FtkaV4X72h7g9s4p6' },
+      { title: 'Meet & Greet — Rayees & Thanisha',   start: '2026-09-13T19:30:00+05:30', hours: 3,   map: 'https://maps.app.goo.gl/fvJbD9YwyudiMVKg7' }
+    ]
+  };
+  /* ═════════════════════════════════════════════════════════════ */
+
+  var root = document.documentElement;
+  var cover = document.getElementById('cover');
+  var invite = document.getElementById('invite');
+  var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var phase = 'closed';
+  var stopDust = null;
+  var burstFn = null;
+  var guest = '';
+
+  /* ---------- Guest personalisation (?guest=Ahmed+Family) ---------- */
+  (function(){
+    try {
+      var params = new URLSearchParams(window.location.search);
+      var g = (params.get('guest') || params.get('g') || '').trim();
+      g = g.replace(/[<>&"']/g, '').slice(0, 48);
+      if (!g) return;
+      guest = g;
+      document.getElementById('guestName').textContent = g;
+      document.getElementById('guestLine').hidden = false;
+    } catch(e) {}
+  })();
+
+  /* ---------- Open sequence ---------- */
+  invite.scrollTop = 0; /* guard against browser scroll restoration on reload */
+  function open(){
+    if (phase !== 'closed') return;
+    phase = 'opening';
+    root.classList.add('is-opening');
+    if (burstFn) burstFn(0.496, 0.5315);
+    audio.start(); /* inside the tap gesture, so browsers allow it */
+    var wait = reduced ? 600 : 2100;
+    setTimeout(function(){
+      phase = 'open';
+      root.classList.add('is-open');
+      if (stopDust) stopDust();
+      invite.scrollTop = 0;
+      try { invite.focus({ preventScroll: true }); } catch(e) {}
+      invite.scrollTop = 0;
+    }, wait);
+  }
+  cover.addEventListener('click', open);
+
+  /* ---------- Scroll-in reveals ---------- */
+  var srEls = [].slice.call(document.querySelectorAll('.sr'));
+  if ('IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(en){
+        if (en.isIntersecting) {
+          en.target.classList.add('in');
+          io.unobserve(en.target);
+        }
+      });
+    }, { root: invite, threshold: 0.12, rootMargin: '0px 0px -8% 0px' });
+    srEls.forEach(function(el){ io.observe(el); });
+  } else {
+    srEls.forEach(function(el){ el.classList.add('in'); });
+  }
+
+  /* ---------- Golden dust over the envelope ---------- */
+  (function(){
+    if (reduced) return;
+    var cv = document.querySelector('.dust');
+    if (!cv || !cv.getContext) return;
+    var ctx = cv.getContext('2d');
+    var dpr = 1, w = 0, h = 0, parts = [], raf = 0, last = 0, hidden = false;
+
+    // Pre-rendered soft glow sprite (cheap to draw many times)
+    var sprite = document.createElement('canvas');
+    sprite.width = sprite.height = 32;
+    var sctx = sprite.getContext('2d');
+    var g = sctx.createRadialGradient(16, 16, 0, 16, 16, 16);
+    g.addColorStop(0, 'rgba(255,222,150,1)');
+    g.addColorStop(0.4, 'rgba(255,210,130,.55)');
+    g.addColorStop(1, 'rgba(255,200,110,0)');
+    sctx.fillStyle = g;
+    sctx.fillRect(0, 0, 32, 32);
+
+    function resize(){
+      var r = cv.getBoundingClientRect();
+      dpr = Math.min(window.devicePixelRatio || 1, 2);
+      w = r.width; h = r.height;
+      cv.width = Math.round(w * dpr);
+      cv.height = Math.round(h * dpr);
+    }
+
+    function seed(){
+      parts = [];
+      var n = Math.round(Math.min(30, Math.max(18, w * h / 14000)));
+      for (var i = 0; i < n; i++) {
+        parts.push({
+          x: Math.random() * w,
+          y: Math.random() * h,
+          r: 0.6 + Math.random() * 1.5,
+          spd: 5 + Math.random() * 12,
+          ph: Math.random() * Math.PI * 2,
+          fs: 0.4 + Math.random() * 0.7,
+          tw: Math.random() * Math.PI * 2,
+          tws: 0.8 + Math.random() * 1.6,
+          a: 0.25 + Math.random() * 0.45
+        });
+      }
+    }
+
+    var sparks = [];
+    burstFn = function(fx, fy){
+      var cx = fx * w, cy = fy * h;
+      for (var i = 0; i < 30; i++) {
+        var ang = Math.random() * Math.PI * 2;
+        var spd = 55 + Math.random() * 150;
+        sparks.push({
+          x: cx, y: cy,
+          vx: Math.cos(ang) * spd, vy: Math.sin(ang) * spd - 35,
+          life: 0, max: 0.6 + Math.random() * 0.6,
+          r: 0.8 + Math.random() * 1.5
+        });
+      }
+    };
+
+    function tick(ts){
+      if (phase === 'open' || hidden) return;
+      raf = requestAnimationFrame(tick);
+      if (!last) last = ts;
+      var dt = Math.min((ts - last) / 1000, 0.05);
+      last = ts;
+      var t = ts / 1000;
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      ctx.clearRect(0, 0, w, h);
+      for (var i = 0; i < parts.length; i++) {
+        var p = parts[i];
+        p.y -= p.spd * dt;
+        p.x += Math.sin(t * p.fs + p.ph) * 0.18;
+        if (p.y < -8) { p.y = h + 8; p.x = Math.random() * w; }
+        var alpha = p.a * (0.55 + 0.45 * Math.sin(t * p.tws + p.tw));
+        if (alpha <= 0.02) continue;
+        var s = p.r * 7;
+        ctx.globalAlpha = alpha;
+        ctx.drawImage(sprite, p.x - s / 2, p.y - s / 2, s, s);
+      }
+      for (var j = sparks.length - 1; j >= 0; j--) {
+        var k = sparks[j];
+        k.life += dt;
+        if (k.life >= k.max) { sparks.splice(j, 1); continue; }
+        k.vy += 80 * dt;
+        k.x += k.vx * dt; k.y += k.vy * dt;
+        ctx.globalAlpha = Math.max(0, 1 - k.life / k.max);
+        var ks = k.r * 7;
+        ctx.drawImage(sprite, k.x - ks / 2, k.y - ks / 2, ks, ks);
+      }
+      ctx.globalAlpha = 1;
+    }
+
+    function start(){
+      resize(); seed();
+      last = 0;
+      cancelAnimationFrame(raf);
+      raf = requestAnimationFrame(tick);
+    }
+
+    window.addEventListener('resize', function(){
+      if (phase === 'open') return;
+      start();
+    });
+    document.addEventListener('visibilitychange', function(){
+      hidden = document.hidden;
+      if (!hidden && phase !== 'open') { last = 0; cancelAnimationFrame(raf); raf = requestAnimationFrame(tick); }
+    });
+    stopDust = function(){ cancelAnimationFrame(raf); };
+    start();
+  })();
+
+  /* ---------- Countdown ---------- */
+  (function(){
+    var box = document.getElementById('countBox');
+    var target = new Date(CONFIG.nikahDate).getTime();
+    if (isNaN(target)) { box.style.display = 'none'; return; }
+    document.getElementById('countDate').textContent = CONFIG.nikahDateLabel;
+    var dEl = document.getElementById('cdD'), hEl = document.getElementById('cdH');
+    var mEl = document.getElementById('cdM'), sEl = document.getElementById('cdS');
+    var grid = document.getElementById('countGrid');
+    var iv;
+    function setNum(el, v){
+      v = v < 10 ? '0' + v : String(v);
+      if (el.textContent === v) return;
+      el.textContent = v;
+      el.classList.add('tick');
+      setTimeout(function(){ el.classList.remove('tick'); }, 250);
+    }
+    function tick(){
+      var diff = target - Date.now();
+      if (diff <= 0) {
+        grid.style.display = 'none';
+        document.getElementById('countDate').style.display = 'none';
+        document.getElementById('countDone').style.display = 'block';
+        clearInterval(iv);
+        return;
+      }
+      var s = Math.floor(diff / 1000);
+      setNum(dEl, Math.floor(s / 86400));
+      setNum(hEl, Math.floor(s % 86400 / 3600));
+      setNum(mEl, Math.floor(s % 3600 / 60));
+      setNum(sEl, s % 60);
+    }
+    tick();
+    iv = setInterval(tick, 1000);
+  })();
+
+  /* ---------- WhatsApp helpers ---------- */
+  function waLink(msg){
+    var base = CONFIG.whatsappNumber
+      ? 'https://wa.me/' + CONFIG.whatsappNumber + '?text='
+      : 'https://wa.me/?text=';
+    return base + encodeURIComponent(msg);
+  }
+
+  /* ---------- RSVP ---------- */
+  (function(){
+    var msg = 'Assalamu alaikum 🌙 We received the invitation for the Nikah ceremonies of Mohammed Rayees & Fathima Thanisha. We would be honoured to join, insha’Allah.';
+    if (guest) msg += '\n— ' + guest;
+    document.getElementById('rsvpBtn').href = waLink(msg);
+  })();
+
+  /* ---------- Save the dates (.ics for Google / Apple / Outlook) ---------- */
+  (function(){
+    function icsStamp(d){
+      return d.toISOString().replace(/[-:]/g, '').replace(/\.\d{3}/, '');
+    }
+    document.getElementById('calBtn').addEventListener('click', function(){
+      var L = ['BEGIN:VCALENDAR', 'VERSION:2.0', 'PRODID:-//Invitivals//Nikah Rayees//EN', 'CALSCALE:GREGORIAN', 'METHOD:PUBLISH'];
+      CONFIG.calendarEvents.forEach(function(ev, i){
+        var st = new Date(ev.start);
+        if (isNaN(st.getTime())) return;
+        var en = new Date(st.getTime() + ev.hours * 3600000);
+        L.push('BEGIN:VEVENT',
+          'UID:nikah-rayees-' + i + '@invitivals',
+          'DTSTAMP:' + icsStamp(new Date()),
+          'DTSTART:' + icsStamp(st),
+          'DTEND:' + icsStamp(en),
+          'SUMMARY:' + ev.title,
+          'DESCRIPTION:Map: ' + ev.map,
+          'LOCATION:' + ev.map,
+          'END:VEVENT');
+      });
+      L.push('END:VCALENDAR');
+      var blob = new Blob([L.join('\r\n')], { type: 'text/calendar;charset=utf-8' });
+      var a = document.createElement('a');
+      a.href = URL.createObjectURL(blob);
+      a.download = 'Rayees-Thanisha-Celebrations.ics';
+      document.body.appendChild(a);
+      a.click();
+      setTimeout(function(){ URL.revokeObjectURL(a.href); a.remove(); }, 800);
+    });
+  })();
+
+  /* ---------- Du'a wall ---------- */
+  (function(){
+    var track = document.getElementById('duaTrack');
+    track.innerHTML += track.innerHTML; /* duplicate chips for a seamless loop */
+    document.getElementById('duaForm').addEventListener('submit', function(e){
+      e.preventDefault();
+      var input = document.getElementById('duaInput');
+      var v = input.value.trim();
+      if (!v) { input.focus(); return; }
+      var msg = 'Our du’a for Rayees & Thanisha 🤲\n“' + v + '”';
+      if (guest) msg += '\n— ' + guest;
+      window.open(waLink(msg), '_blank', 'noopener');
+    });
+  })();
+
+  /* ---------- Hijri dates (Umm al-Qura calendar) ---------- */
+  (function(){
+    var MONTHS_FULL = ['Muharram', 'Safar', "Rabi' al-Awwal", "Rabi' al-Thani", 'Jumada al-Ula', 'Jumada al-Akhirah', 'Rajab', "Sha'ban", 'Ramadan', 'Shawwal', "Dhu al-Qa'dah", 'Dhu al-Hijjah'];
+    var MONTHS_SHORT = ['Muharram', 'Safar', "Rabi' I", "Rabi' II", 'Jumada I', 'Jumada II', 'Rajab', "Sha'ban", 'Ramadan', 'Shawwal', "Dhu'l-Qa'dah", "Dhu'l-Hijjah"];
+    function hijri(iso, withYear){
+      try {
+        var parts = new Intl.DateTimeFormat('en-u-ca-islamic-umalqura', { day: 'numeric', month: 'numeric', year: 'numeric' })
+          .formatToParts(new Date(iso));
+        var m = {};
+        parts.forEach(function(p){ m[p.type] = p.value; });
+        var name = (withYear ? MONTHS_FULL : MONTHS_SHORT)[parseInt(m.month, 10) - 1];
+        if (!m.day || !name) return '';
+        return m.day + ' ' + name + (withYear ? ' ' + m.year + ' AH' : '');
+      } catch(e) { return ''; }
+    }
+    var full = hijri(CONFIG.nikahDate, true);
+    if (full) document.getElementById('countHijri').textContent = full;
+    var cardEventIdx = [0, 1, 3, 4]; /* aqiqah, nikah, valima, meet in calendarEvents */
+    [].forEach.call(document.querySelectorAll('.ev-hijri'), function(el, i){
+      var ev = CONFIG.calendarEvents[cardEventIdx[i]];
+      if (ev) el.textContent = hijri(ev.start, false);
+    });
+  })();
+
+  /* ---------- Interactive lanterns — tap to flare & release a light ---------- */
+  (function(){
+    var hero = document.querySelector('.hero');
+    [].forEach.call(document.querySelectorAll('.lantern'), function(l){
+      var busy = false;
+      l.addEventListener('click', function(){
+        if (busy || phase !== 'open') return;
+        busy = true;
+        l.classList.add('flare');
+        audio.chime();
+        if (!reduced) {
+          var hr = hero.getBoundingClientRect();
+          var lr = l.getBoundingClientRect();
+          var orb = document.createElement('span');
+          orb.className = 'orb';
+          orb.style.left = ((lr.left + lr.width / 2 - hr.left) / hr.width * 100) + '%';
+          orb.style.top = ((lr.top + lr.height * 0.6 - hr.top) / hr.height * 100) + '%';
+          orb.style.setProperty('--ox', Math.round(Math.random() * 44 - 22) + 'px');
+          hero.appendChild(orb);
+          setTimeout(function(){ orb.remove(); }, 3000);
+        }
+        setTimeout(function(){ l.classList.remove('flare'); busy = false; }, 900);
+      });
+    });
+  })();
+
+  /* ---------- Scroll progress thread ---------- */
+  (function(){
+    var fill = document.getElementById('progressFill');
+    invite.addEventListener('scroll', function(){
+      var max = invite.scrollHeight - invite.clientHeight;
+      fill.style.width = (max > 0 ? Math.min(100, invite.scrollTop / max * 100) : 0) + '%';
+    }, { passive: true });
+  })();
+
+  /* ---------- Scroll-to-celebrations button + one-time peek nudge ---------- */
+  (function(){
+    var events = document.querySelector('.events');
+    document.getElementById('scrollBtn').addEventListener('click', function(){
+      events.scrollIntoView({ behavior: reduced ? 'auto' : 'smooth', block: 'start' });
+    });
+    if (reduced) return;
+    /* If the guest hasn't scrolled a few seconds after opening, gently peek
+       the next section and settle back — teaches that the card continues. */
+    var interacted = false;
+    function markInteracted(){ interacted = true; }
+    invite.addEventListener('touchstart', markInteracted, { passive: true, once: true });
+    invite.addEventListener('wheel', markInteracted, { passive: true, once: true });
+    var check = setInterval(function(){
+      if (phase !== 'open') return;
+      clearInterval(check);
+      setTimeout(function(){
+        if (interacted || invite.scrollTop > 4) return;
+        invite.scrollTo({ top: 130, behavior: 'smooth' });
+        setTimeout(function(){
+          if (!interacted && invite.scrollTop <= 150) invite.scrollTo({ top: 0, behavior: 'smooth' });
+        }, 900);
+      }, 3000);
+    }, 250);
+  })();
+
+  /* ---------- Hero parallax (scroll + gentle device tilt) ---------- */
+  (function(){
+    if (reduced) return;
+    var hero = document.querySelector('.hero');
+    var ftl = document.querySelector('.floral-tl');
+    var ftr = document.querySelector('.floral-tr');
+    var la = document.querySelector('.lantern-a');
+    var lb = document.querySelector('.lantern-b');
+    var sy = 0, tx = 0, ty = 0, raf = 0;
+    function apply(){
+      raf = 0;
+      ftl.style.transform = 'translate3d(' + (tx * 8) + 'px,' + (sy * 30 + ty * 6) + 'px,0)';
+      ftr.style.transform = 'translate3d(' + (-tx * 8) + 'px,' + (sy * 30 - ty * 6) + 'px,0)';
+      la.style.transform = 'translate3d(' + (tx * 5) + 'px,' + (sy * 16 + ty * 4) + 'px,0)';
+      lb.style.transform = 'translate3d(' + (tx * 5) + 'px,' + (sy * 16 + ty * 4) + 'px,0)';
+    }
+    function req(){ if (!raf) raf = requestAnimationFrame(apply); }
+    invite.addEventListener('scroll', function(){
+      if (phase === 'closed') return;
+      sy = Math.min(1.2, invite.scrollTop / (hero.offsetHeight || 1));
+      req();
+    }, { passive: true });
+    /* tilt only where no permission prompt is needed (skips iOS 13+) */
+    if (window.DeviceOrientationEvent && typeof DeviceOrientationEvent.requestPermission !== 'function') {
+      window.addEventListener('deviceorientation', function(e){
+        if (phase !== 'open' || e.gamma == null) return;
+        tx = Math.max(-1, Math.min(1, e.gamma / 28));
+        ty = Math.max(-1, Math.min(1, ((e.beta || 45) - 45) / 40));
+        req();
+      }, true);
+    }
+    /* pause petals & fireflies while the hero is scrolled away */
+    if ('IntersectionObserver' in window) {
+      new IntersectionObserver(function(entries){
+        hero.classList.toggle('still', !entries[0].isIntersecting);
+      }, { root: invite, threshold: 0.02 }).observe(hero);
+    }
+  })();
+
+  /* ---------- Ambient music (generative, or assets/nasheed.mp3 if present) ---------- */
+  var audio = (function(){
+    var btn = document.getElementById('audioBtn');
+    var muted = false, started = false;
+    var ctx = null, master = null, echo = null, timers = [];
+    var file = null, fileOk = false;
+    try { muted = localStorage.getItem('nr-muted') === '1'; } catch(e) {}
+    if (muted) { btn.classList.add('muted'); btn.setAttribute('aria-pressed', 'true'); }
+    fetch('assets/music.mp3', { method: 'HEAD' })
+      .then(function(r){ fileOk = r.ok; })
+      .catch(function(){});
+    function fadeIn(target){
+      if (!file) return;
+      file.volume = 0;
+      var step = 0;
+      var iv = setInterval(function(){
+        step++;
+        file.volume = Math.min(target, step * target / 22);
+        if (file.volume >= target || file.paused) clearInterval(iv);
+      }, 120);
+    }
+    /* D hijaz-flavoured scale — soft, prayerful plucks */
+    var SCALE = [293.66, 311.13, 369.99, 392.00, 440.00, 466.16, 587.33];
+    function initCtx(){
+      if (ctx) return true;
+      var AC = window.AudioContext || window.webkitAudioContext;
+      if (!AC) return false;
+      ctx = new AC();
+      master = ctx.createGain();
+      master.gain.value = muted ? 0 : 0.13;
+      master.connect(ctx.destination);
+      echo = ctx.createDelay(1.2);
+      echo.delayTime.value = 0.42;
+      var fb = ctx.createGain(); fb.gain.value = 0.28;
+      var wet = ctx.createGain(); wet.gain.value = 0.35;
+      echo.connect(fb); fb.connect(echo); echo.connect(wet); wet.connect(master);
+      var lp = ctx.createBiquadFilter();
+      lp.type = 'lowpass'; lp.frequency.value = 420; lp.Q.value = 0.4;
+      [146.83, 220.00].forEach(function(f, i){
+        var o = ctx.createOscillator();
+        o.type = 'triangle'; o.frequency.value = f; o.detune.value = i ? 4 : -3;
+        o.connect(lp); o.start();
+      });
+      var padGain = ctx.createGain(); padGain.gain.value = 0;
+      lp.connect(padGain); padGain.connect(master);
+      padGain.gain.linearRampToValueAtTime(0.05, ctx.currentTime + 4);
+      return true;
+    }
+    function pluck(){
+      if (!ctx || muted) return;
+      var f = SCALE[Math.floor(Math.random() * SCALE.length)];
+      if (Math.random() < 0.3) f = f / 2;
+      var o = ctx.createOscillator(), g = ctx.createGain(), t = ctx.currentTime;
+      o.type = 'triangle'; o.frequency.value = f;
+      g.gain.setValueAtTime(0.0001, t);
+      g.gain.exponentialRampToValueAtTime(0.15, t + 0.02);
+      g.gain.exponentialRampToValueAtTime(0.0001, t + 2.2);
+      o.connect(g); g.connect(master); g.connect(echo);
+      o.start(t); o.stop(t + 2.4);
+    }
+    function loop(){
+      timers.push(setTimeout(function(){ pluck(); loop(); }, 2400 + Math.random() * 3200));
+    }
+    function chime(){
+      if (!ctx || muted) return;
+      var o = ctx.createOscillator(), g = ctx.createGain(), t = ctx.currentTime;
+      o.type = 'sine'; o.frequency.value = 1174.66; /* D6 */
+      g.gain.setValueAtTime(0.0001, t);
+      g.gain.exponentialRampToValueAtTime(0.09, t + 0.008);
+      g.gain.exponentialRampToValueAtTime(0.0001, t + 1.4);
+      o.connect(g); g.connect(master); g.connect(echo);
+      o.start(t); o.stop(t + 1.5);
+    }
+    function start(){
+      if (started) return;
+      if (fileOk) {
+        if (!file) { file = new Audio('assets/music.mp3'); file.loop = true; file.volume = 0.55; }
+        started = true;
+        if (!muted) { file.play().then(function(){ fadeIn(0.55); }).catch(function(){}); }
+        return;
+      }
+      if (!initCtx()) return;
+      started = true;
+      if (ctx.state === 'suspended') ctx.resume();
+      pluck(); loop();
+    }
+    function toggle(){
+      muted = !muted;
+      try { localStorage.setItem('nr-muted', muted ? '1' : '0'); } catch(e) {}
+      btn.classList.toggle('muted', muted);
+      btn.setAttribute('aria-pressed', muted ? 'true' : 'false');
+      if (!started && !muted && phase !== 'closed') { start(); return; }
+      if (file) {
+        if (muted) { file.pause(); }
+        else { file.play().then(function(){ fadeIn(0.55); }).catch(function(){}); }
+      }
+      if (ctx && master) {
+        master.gain.cancelScheduledValues(ctx.currentTime);
+        master.gain.linearRampToValueAtTime(muted ? 0 : 0.13, ctx.currentTime + 0.35);
+      }
+    }
+    btn.addEventListener('click', toggle);
+    document.addEventListener('visibilitychange', function(){
+      if (document.hidden) {
+        if (ctx) ctx.suspend();
+        if (file) file.pause();
+      } else if (!muted && started) {
+        if (ctx) ctx.resume();
+        if (file) file.play().catch(function(){});
+      }
+    });
+    return { start: start, chime: chime };
+  })();
+})();
+</script>
+
+</body>
+</html>
