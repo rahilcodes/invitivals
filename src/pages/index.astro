@@ -283,8 +283,11 @@ const favicon =
     <!-- ══════════════ NAV ══════════════ -->
     <nav aria-label="Main">
       <a class="brand" href="#top" aria-label="Invitivals — home">
-        <img src="/brand/seal.png" alt="" width="278" height="284" />
-        <span>INVITIVALS</span>
+        <span class="brand-seal">
+          <img class="on-light" src="/brand/seal.png" alt="" width="278" height="284" />
+          <img class="on-dark-seal" src="/brand/seal-light.png" alt="" width="278" height="284" />
+        </span>
+        <span class="brand-name">INVITIVALS</span>
       </a>
       <div class="nav-links">
         <a href="#collection">THE COLLECTION</a>
@@ -597,7 +600,7 @@ const favicon =
       <section id="start" class="scr final dark">
         <div class="wrap final-wrap">
           <div class="final-body rv">
-            <img class="final-seal" src="/brand/seal.png" alt="" width="278" height="284" />
+            <img class="final-seal" src="/brand/seal-light.png" alt="" width="278" height="284" />
             <h2>The shaadi is coming.<br /><em>Let the invite arrive first.</em></h2>
             <div class="btn-row center">
               <a class="btn gold-btn" href={waHello} target="_blank" rel="noopener">MESSAGE US ON WHATSAPP</a>
@@ -797,27 +800,39 @@ const favicon =
         align-items: center;
         gap: calc(var(--u) * 0.8);
       }
-      /* the wax seal is deep green — on dark screens it gets its sheet of
-         ivory back, so it reads as a seal pressed onto paper */
-      .brand img {
+      /* the seal has two presses: deep-green wax for ivory screens,
+         ivory wax for dark ones. They cross-fade as the nav changes. */
+      .brand-seal {
+        position: relative;
+        display: block;
         width: calc(var(--u) * 2.1);
-        height: auto;
-        border-radius: 50%;
-        background: transparent;
-        transition: background 0.4s ease, box-shadow 0.4s ease;
+        aspect-ratio: 278 / 284;
+        flex: none;
       }
-      nav.on-dark .brand img {
-        background: var(--ivory);
-        box-shadow: 0 0 0 2px var(--ivory);
+      .brand-seal img {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        transition: opacity 0.4s ease;
       }
-      .brand span {
+      .brand-seal .on-dark-seal {
+        opacity: 0;
+      }
+      nav.on-dark .brand-seal .on-light {
+        opacity: 0;
+      }
+      nav.on-dark .brand-seal .on-dark-seal {
+        opacity: 1;
+      }
+      .brand-name {
         font-family: var(--serif);
         font-size: calc(var(--u) * 1.05);
         letter-spacing: 0.22em;
         color: var(--green);
         transition: color 0.4s ease;
       }
-      nav.on-dark .brand span {
+      nav.on-dark .brand-name {
         color: var(--ivory);
       }
       .nav-links {
@@ -1641,10 +1656,7 @@ const favicon =
         max-width: calc(var(--u) * 44);
       }
       .final-seal {
-        width: calc(var(--u) * 4.6);
-        border-radius: 50%;
-        background: var(--ivory);
-        box-shadow: 0 0 0 3px var(--ivory);
+        width: calc(var(--u) * 6.2);
       }
       .final h2 {
         font-size: calc(var(--u) * 3.4);
@@ -2171,32 +2183,50 @@ const favicon =
       const rail = document.querySelector('.rail');
       const railLinks = Array.from(document.querySelectorAll('[data-rail]'));
 
+      /* threshold 0 rather than a fraction: on phones a section can be
+         several viewports tall, and any fractional threshold would never
+         be met — the screen would simply never reveal itself */
       const io = new IntersectionObserver(
         (entries) => {
           entries.forEach((e) => {
             if (e.isIntersecting) e.target.classList.add('in');
           });
         },
-        { threshold: 0.15 }
+        { threshold: 0, rootMargin: '0px 0px -8% 0px' }
       );
       screens.forEach((s) => io.observe(s));
 
-      /* ── nav + rail adapt to the screen behind them ── */
-      const active = new IntersectionObserver(
-        (entries) => {
-          entries.forEach((e) => {
-            if (!e.isIntersecting) return;
-            const dark = e.target.classList.contains('dark') || e.target.classList.contains('exp');
-            nav?.classList.toggle('on-dark', dark);
-            rail?.classList.toggle('on-dark', dark);
-            railLinks.forEach((a) =>
-              a.classList.toggle('on', a.getAttribute('data-rail') === e.target.id)
-            );
-          });
-        },
-        { threshold: 0.55 }
-      );
-      screens.forEach((s) => active.observe(s));
+      /* ── nav + rail adapt to whichever screen is behind the nav bar ──
+         Measured against the nav line instead of an intersection ratio,
+         so it stays correct however tall a section grows. */
+      let queued = false;
+      const syncTheme = () => {
+        queued = false;
+        if (!screens.length) return;
+        const line = (nav ? nav.offsetHeight : 0) + 4;
+        let current = screens[0];
+        for (const s of screens) {
+          const r = s.getBoundingClientRect();
+          if (r.top <= line && r.bottom > line) {
+            current = s;
+            break;
+          }
+          if (r.top > line) break;
+          current = s;
+        }
+        const dark = current.classList.contains('dark') || current.classList.contains('exp');
+        nav?.classList.toggle('on-dark', dark);
+        rail?.classList.toggle('on-dark', dark);
+        railLinks.forEach((a) => a.classList.toggle('on', a.getAttribute('data-rail') === current.id));
+      };
+      const queueSync = () => {
+        if (queued) return;
+        queued = true;
+        requestAnimationFrame(syncTheme);
+      };
+      addEventListener('scroll', queueSync, { passive: true });
+      addEventListener('resize', queueSync);
+      syncTheme();
 
       /* ── the hero seal: tap to open, tap the note to seal again ── */
       const invite = document.getElementById('invite');
