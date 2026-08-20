@@ -26,7 +26,7 @@
 <link rel="preload" as="image" href="assets/seal.webp" fetchpriority="high">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Marcellus&family=Amiri:wght@400;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Marcellus&family=Amiri:wght@400;700&family=Tangerine:wght@400;700&display=swap" rel="stylesheet">
 <style>
 /* ============ Base ============ */
 :root{
@@ -103,7 +103,7 @@ a{ color:var(--gold); text-decoration:none; }
   overscroll-behavior:contain;
   scrollbar-width:none;
   opacity:0; transform:scale(1.06);
-  transition:opacity 1.2s ease .55s, transform 1.6s cubic-bezier(.22,.9,.3,1) .45s;
+  transition:opacity 1.8s ease .8s, transform 2.4s cubic-bezier(.22,.9,.3,1) .65s;
   outline:none;
   background:var(--paper);
 }
@@ -135,7 +135,7 @@ a{ color:var(--gold); text-decoration:none; }
 .lantern-b{ right:7%; width:12.5%; }
 .lantern .drop{
   opacity:0; transform:translateY(-6%);
-  transition:opacity 1s ease 1s, transform 1.5s cubic-bezier(.22,.9,.3,1) .9s;
+  transition:opacity 1.3s ease 1.3s, transform 1.9s cubic-bezier(.22,.9,.3,1) 1.2s;
 }
 .is-opening .lantern .drop{ opacity:1; transform:translateY(0); }
 .lantern .sway{ transform-origin:top center; animation:sway 5.2s ease-in-out infinite; }
@@ -186,9 +186,11 @@ a{ color:var(--gold); text-decoration:none; }
   font-size:15px; font-size:clamp(11px, 3.6cqw, 18px);
 }
 .name{
-  font-family:'Cormorant Garamond', serif; font-weight:600; line-height:1.05; color:var(--plum);
+  font-family:'Tangerine', 'Cormorant Garamond', cursive, serif;
+  font-weight:700; line-height:1; color:var(--plum);
   text-shadow:0 1px 0 rgba(255,255,255,.5);
-  font-size:44px; font-size:clamp(30px, 11.5cqw, 58px);
+  font-size:58px; font-size:clamp(42px, 16cqw, 82px);
+  letter-spacing:.01em;
 }
 /* Periodic gold-foil sheen sweeping across the names */
 @supports ((-webkit-background-clip:text) and (-webkit-text-fill-color:transparent)){
@@ -216,8 +218,8 @@ a{ color:var(--gold); text-decoration:none; }
 .amp-row .line-l{ width:44px; height:1px; background:linear-gradient(to left, var(--gold-line), transparent); }
 .amp-row .line-r{ width:44px; height:1px; background:linear-gradient(to right, var(--gold-line), transparent); }
 .amp{
-  font-family:'Cormorant Garamond', serif; font-style:italic; color:var(--gold);
-  font-size:30px; font-size:clamp(21px, 7.5cqw, 38px);
+  font-family:'Tangerine', 'Cormorant Garamond', cursive, serif; font-weight:700; color:var(--gold);
+  font-size:34px; font-size:clamp(25px, 9cqw, 46px); line-height:1;
 }
 .together{
   font-family:'Marcellus', serif; letter-spacing:.2em; color:var(--gold-deep);
@@ -256,8 +258,8 @@ a{ color:var(--gold); text-decoration:none; }
   border:1px solid rgba(169,129,46,.35); border-radius:50%;
 }
 .monogram .mg{
-  font-family:'Cormorant Garamond', serif; font-style:italic; font-weight:600;
-  font-size:20px; font-size:clamp(15px, 5.6cqw, 28px);
+  font-family:'Tangerine', 'Cormorant Garamond', cursive, serif; font-weight:700;
+  font-size:26px; font-size:clamp(20px, 7.6cqw, 38px);
   color:var(--plum); line-height:1;
   text-shadow:0 1px 0 rgba(255,255,255,.65);
 }
@@ -414,7 +416,7 @@ a{ color:var(--gold); text-decoration:none; }
   position:absolute; top:0; height:100%; width:50.1%;
   background-image:url('assets/cover.webp'), url('data:image/webp;base64,UklGRlYAAABXRUJQVlA4IEoAAABQAwCdASoYADQAPu1yslOzpqokJAkicB2JZwDK8AqHa5LRQAD+6uWkHdcq9XgZMCB7h7IsMRkbzt/3OMtyGGsETquVkx7R5qQAAA==');
   background-size:200.2% 100%, 200.2% 100%;
-  transition:transform 1.7s cubic-bezier(.65,0,.3,1) .35s;
+  transition:transform 2.5s cubic-bezier(.6,0,.25,1) .55s;
   backface-visibility:hidden; -webkit-backface-visibility:hidden;
   will-change:transform;
 }
@@ -465,9 +467,9 @@ a{ color:var(--gold); text-decoration:none; }
 .frag-1{ clip-path:polygon(50% 50%, 0% 0%, 100% 0%, 100% 38%); }
 .frag-2{ clip-path:polygon(50% 50%, 100% 38%, 100% 100%, 28% 100%); }
 .frag-3{ clip-path:polygon(50% 50%, 28% 100%, 0% 100%, 0% 0%); }
-.is-opening .frag-1{ animation:fragFall1 1s cubic-bezier(.45,.05,.85,.5) forwards; }
-.is-opening .frag-2{ animation:fragFall2 1.05s cubic-bezier(.45,.05,.85,.5) forwards; }
-.is-opening .frag-3{ animation:fragFall3 .95s cubic-bezier(.45,.05,.85,.5) forwards; }
+.is-opening .frag-1{ animation:fragFall1 1.35s cubic-bezier(.45,.05,.85,.5) forwards; }
+.is-opening .frag-2{ animation:fragFall2 1.42s cubic-bezier(.45,.05,.85,.5) forwards; }
+.is-opening .frag-3{ animation:fragFall3 1.28s cubic-bezier(.45,.05,.85,.5) forwards; }
 
 /* Guest personalisation on the envelope */
 .guest-line{
@@ -523,7 +525,7 @@ a{ color:var(--gold); text-decoration:none; }
 .dust{
   position:absolute; inset:0; width:100%; height:100%;
   pointer-events:none; z-index:6;
-  transition:opacity 1s ease .45s;
+  transition:opacity 1.5s ease .6s;
 }
 .is-opening .dust{ opacity:0; }
 
@@ -608,7 +610,7 @@ a{ color:var(--gold); text-decoration:none; }
 
 /* Bismillah writes itself right-to-left as the doors open */
 .bismillah .ar.write{ clip-path:inset(-12% -6% -18% 100%); }
-.is-opening .bismillah .ar.write{ animation:writeOn 2.3s cubic-bezier(.4,.12,.3,1) 1.35s forwards; }
+.is-opening .bismillah .ar.write{ animation:writeOn 2.8s cubic-bezier(.4,.12,.3,1) 1.7s forwards; }
 
 /* ============ Countdown ============ */
 .count{
@@ -852,27 +854,27 @@ a{ color:var(--gold); text-decoration:none; }
             <span class="fly" style="left:83%; top:15%; --fd:12s; --fw:8s;   --fx:-12px; --fy:12px;"></span>
             <span class="fly" style="left:73%; top:4%;  --fd:9.5s;--fw:4s;   --fx:13px;  --fy:18px;"></span>
           </div>
-          <div class="bismillah hr" style="--d:1.0s">
+          <div class="bismillah hr" style="--d:1.3s">
             <div class="ar write" lang="ar" dir="rtl">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</div>
             <div class="ayah">&ldquo;And We created you in pairs&rdquo;</div>
             <div class="ref">&mdash; QUR&rsquo;AN 78:8 &mdash;</div>
           </div>
 
           <div class="hero-copy">
-            <div class="eyebrow hr" style="--d:1.15s">YOU ARE CORDIALLY INVITED</div>
-            <div class="to-nikah hr" style="--d:1.3s">to the Nikah ceremonies of</div>
-            <div class="name name-1 hr" style="--d:1.45s">Noor<br>Basha</div>
-            <div class="amp-row hr" style="--d:1.6s" aria-hidden="true">
+            <div class="eyebrow hr" style="--d:1.5s">YOU ARE CORDIALLY INVITED</div>
+            <div class="to-nikah hr" style="--d:1.65s">to the Nikah ceremonies of</div>
+            <div class="name name-1 hr" style="--d:1.8s">Noor<br>Basha</div>
+            <div class="amp-row hr" style="--d:1.95s" aria-hidden="true">
               <div class="line-l"></div>
               <div class="amp">&amp;</div>
               <div class="line-r"></div>
             </div>
-            <div class="name name-2 hr" style="--d:1.75s">Noor e<br>Ayen</div>
-            <div class="together hr" style="--d:1.95s">TOGETHER WITH THEIR FAMILIES</div>
-            <div class="hero-foot hr" style="--d:2.1s">
+            <div class="name name-2 hr" style="--d:2.1s">Noor e<br>Ayen</div>
+            <div class="together hr" style="--d:2.3s">TOGETHER WITH THEIR FAMILIES</div>
+            <div class="hero-foot hr" style="--d:2.45s">
               <div class="foot-lockup" aria-hidden="true">
                 <div class="fl-line fl-l"></div>
-                <div class="monogram"><span class="mg">N</span><span class="mg-amp">&amp;</span><span class="mg">N</span></div>
+                <div class="monogram"><span class="mg">N</span><span class="mg-amp">&amp;</span><span class="mg">M</span></div>
                 <div class="fl-line fl-r"></div>
               </div>
               <div class="request">Request the honour of your presence and blessings as they unite in marriage</div>
@@ -1103,7 +1105,7 @@ a{ color:var(--gold); text-decoration:none; }
     root.classList.add('is-opening');
     if (burstFn) burstFn(0.496, 0.5315);
     audio.start(); /* inside the tap gesture, so browsers allow it */
-    var wait = reduced ? 600 : 2100;
+    var wait = reduced ? 600 : 3100;
     setTimeout(function(){
       phase = 'open';
       root.classList.add('is-open');
@@ -1454,15 +1456,26 @@ a{ color:var(--gold); text-decoration:none; }
     fetch('assets/music.mp3', { method: 'HEAD' })
       .then(function(r){ fileOk = r.ok; })
       .catch(function(){});
-    function fadeIn(target){
-      if (!file) return;
+    /* Gentle fade in at the start and fade out before each loop ends,
+       so the nasheed breathes instead of cutting. Driven off playback time. */
+    var MUSIC_VOL = 0.55, MUSIC_FADE = 3.5;
+    var fadeTimer = 0;
+    function loopFade(){
+      if (!file || file.paused || muted) return;
+      var d = file.duration, t = file.currentTime;
+      if (isFinite(d) && d > MUSIC_FADE * 3) {
+        var k = Math.min(1, t / MUSIC_FADE, Math.max(0, (d - t) / MUSIC_FADE));
+        file.volume = MUSIC_VOL * Math.max(0, Math.min(1, k));
+      } else {
+        file.volume = MUSIC_VOL;
+      }
+    }
+    function attachFade(){
       file.volume = 0;
-      var step = 0;
-      var iv = setInterval(function(){
-        step++;
-        file.volume = Math.min(target, step * target / 22);
-        if (file.volume >= target || file.paused) clearInterval(iv);
-      }, 120);
+      /* timeupdate fires ~4x/s; add a helper interval for smoother ramps */
+      file.addEventListener('timeupdate', loopFade);
+      clearInterval(fadeTimer);
+      fadeTimer = setInterval(loopFade, 150);
     }
     /* D hijaz-flavoured scale — soft, prayerful plucks */
     var SCALE = [293.66, 311.13, 369.99, 392.00, 440.00, 466.16, 587.33];
@@ -1519,9 +1532,9 @@ a{ color:var(--gold); text-decoration:none; }
     function start(){
       if (started) return;
       if (fileOk) {
-        if (!file) { file = new Audio('assets/music.mp3'); file.loop = true; file.volume = 0.55; }
+        if (!file) { file = new Audio('assets/music.mp3'); file.loop = true; attachFade(); }
         started = true;
-        if (!muted) { file.play().then(function(){ fadeIn(0.55); }).catch(function(){}); }
+        if (!muted) { file.play().catch(function(){}); }
         return;
       }
       if (!initCtx()) return;
@@ -1537,7 +1550,7 @@ a{ color:var(--gold); text-decoration:none; }
       if (!started && !muted && phase !== 'closed') { start(); return; }
       if (file) {
         if (muted) { file.pause(); }
-        else { file.play().then(function(){ fadeIn(0.55); }).catch(function(){}); }
+        else { file.play().catch(function(){}); }
       }
       if (ctx && master) {
         master.gain.cancelScheduledValues(ctx.currentTime);

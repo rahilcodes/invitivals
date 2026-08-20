@@ -8,13 +8,13 @@ const config = {
   host: '195.35.44.109',
   port: 65002,
   username: 'u702871438',
-  password: 'invitivals@123P',
+  password: 'ABCDe@54321',
 };
 
 const localDistDir = 'c:\\Users\\moham\\OneDrive\\Desktop\\Websites\\wishes\\dist';
 const remoteTargetDir = 'domains/invitivals.com/public_html';
 
-console.log('Connecting to Hostinger SSH...');
+console.log('Connecting to Hostinger SSH with new credentials...');
 
 conn.on('ready', () => {
   console.log('SSH Connection Established!');
