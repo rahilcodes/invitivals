@@ -671,6 +671,36 @@ a{ color:var(--gold); text-decoration:none; }
 .sec-orna .l, .sec-orna .r{ width:46px; }
 .sec-orna .d{ background:var(--gold-line); }
 
+/* ============ The journey so far — memories gallery ============ */
+.journey{ margin-top:36px; }
+.journey-sub{
+  text-align:center; font-family:'Cormorant Garamond', serif; font-style:italic;
+  font-size:14.5px; color:#8a6f52; margin:-4px 0 18px;
+}
+.gallery{ display:flex; flex-direction:column; gap:14px; }
+.gal{
+  margin:0; padding:5px; cursor:pointer;
+  background:#fdf7ec; border:1px solid #dcc79e; border-radius:14px;
+  box-shadow:0 6px 18px rgba(90,50,60,.12);
+  transition:opacity .7s ease, transform .7s cubic-bezier(.22,.9,.3,1), box-shadow .25s ease;
+}
+.gal:hover{ box-shadow:0 9px 24px rgba(90,50,60,.2); }
+.gal:active{ transform:scale(.985); }
+.gal img{ display:block; width:100%; border-radius:10px; }
+
+/* Lightbox */
+.lightbox{
+  position:fixed; inset:0; z-index:120;
+  display:flex; align-items:center; justify-content:center;
+  background:rgba(18,11,21,.93); padding:18px;
+  cursor:zoom-out;
+}
+.lightbox img{
+  max-width:100%; max-height:92vh;
+  border-radius:10px; box-shadow:0 10px 50px rgba(0,0,0,.6);
+}
+.lightbox[hidden]{ display:none; }
+
 /* ============ Save the dates ============ */
 .cal{ margin-top:34px; text-align:center; }
 .cal-btn{
@@ -863,15 +893,17 @@ a{ color:var(--gold); text-decoration:none; }
           <div class="hero-copy">
             <div class="eyebrow hr" style="--d:1.5s">YOU ARE CORDIALLY INVITED</div>
             <div class="to-nikah hr" style="--d:1.65s">to the Nikah ceremonies of</div>
-            <div class="name name-1 hr" style="--d:1.8s">Noor<br>Basha</div>
-            <div class="amp-row hr" style="--d:1.95s" aria-hidden="true">
+            <div class="name name-1 hr" style="--d:1.8s">Noor Basha</div>
+            <div class="parent hr" style="--d:1.95s">Son of Nayaz Basha</div>
+            <div class="amp-row hr" style="--d:2.05s" aria-hidden="true">
               <div class="line-l"></div>
               <div class="amp">&amp;</div>
               <div class="line-r"></div>
             </div>
-            <div class="name name-2 hr" style="--d:2.1s">Noor e<br>Ayen</div>
-            <div class="together hr" style="--d:2.3s">TOGETHER WITH THEIR FAMILIES</div>
-            <div class="hero-foot hr" style="--d:2.45s">
+            <div class="name name-2 hr" style="--d:2.2s">Noor e Ayen</div>
+            <div class="parent hr" style="--d:2.35s">Daughter of Late Mohamed Iliyas Sahab</div>
+            <div class="together hr" style="--d:2.55s">TOGETHER WITH THEIR FAMILIES</div>
+            <div class="hero-foot hr" style="--d:2.7s">
               <div class="foot-lockup" aria-hidden="true">
                 <div class="fl-line fl-l"></div>
                 <div class="monogram"><span class="mg">N</span><span class="mg-amp">&amp;</span><span class="mg">M</span></div>
@@ -963,6 +995,33 @@ a{ color:var(--gold); text-decoration:none; }
             <div class="count-done" id="countDone">Alhamdulillah &mdash; the blessed days are here!</div>
           </div>
 
+          <!-- The journey so far -->
+          <div class="journey">
+            <div class="divider sr" aria-hidden="true">
+              <svg viewBox="0 0 150 28" fill="none" stroke="currentColor" stroke-linecap="round"><path d="M0 22 H50 M100 22 H150" stroke-width="1" opacity=".65"/><path d="M50 22 C58 22 61 18 63 13 C65 8.5 68 7 75 7 C82 7 85 8.5 87 13 C89 18 92 22 100 22" stroke-width="1.2"/><path d="M75 7 V4.5" stroke-width="1"/><path d="M75 1 l2.2 2.2 -2.2 2.2 -2.2 -2.2 z" fill="currentColor" stroke="none"/></svg>
+            </div>
+            <h2 class="sec-title sr">THE JOURNEY SO FAR</h2>
+            <div class="journey-sub sr">Relive the moments that led to forever</div>
+            <div class="gallery" id="gallery">
+              <figure class="gal sr"><img src="assets/gallery/g01.webp" alt="A cherished memory" loading="lazy"></figure>
+              <figure class="gal sr"><img src="assets/gallery/g02.webp" alt="A cherished memory" loading="lazy"></figure>
+              <figure class="gal sr"><img src="assets/gallery/g03.webp" alt="A cherished memory" loading="lazy"></figure>
+              <figure class="gal sr"><img src="assets/gallery/g04.webp" alt="A cherished memory" loading="lazy"></figure>
+              <figure class="gal sr"><img src="assets/gallery/g05.webp" alt="A cherished memory" loading="lazy"></figure>
+              <figure class="gal sr"><img src="assets/gallery/g06.webp" alt="A cherished memory" loading="lazy"></figure>
+              <figure class="gal sr"><img src="assets/gallery/g07.webp" alt="A cherished memory" loading="lazy"></figure>
+              <figure class="gal sr"><img src="assets/gallery/g08.webp" alt="A cherished memory" loading="lazy"></figure>
+              <figure class="gal sr"><img src="assets/gallery/g09.webp" alt="A cherished memory" loading="lazy"></figure>
+              <figure class="gal sr"><img src="assets/gallery/g10.webp" alt="A cherished memory" loading="lazy"></figure>
+              <figure class="gal sr"><img src="assets/gallery/g11.webp" alt="A cherished memory" loading="lazy"></figure>
+              <figure class="gal sr"><img src="assets/gallery/g12.webp" alt="A cherished memory" loading="lazy"></figure>
+              <figure class="gal sr"><img src="assets/gallery/g13.webp" alt="A cherished memory" loading="lazy"></figure>
+              <figure class="gal sr"><img src="assets/gallery/g14.webp" alt="A cherished memory" loading="lazy"></figure>
+              <figure class="gal sr"><img src="assets/gallery/g15.webp" alt="A cherished memory" loading="lazy"></figure>
+              <figure class="gal sr"><img src="assets/gallery/g16.webp" alt="A cherished memory" loading="lazy"></figure>
+            </div>
+          </div>
+
           <!-- Save the dates -->
           <div class="cal sr">
             <div class="divider" aria-hidden="true">
@@ -1042,6 +1101,10 @@ a{ color:var(--gold); text-decoration:none; }
     <div class="progress" aria-hidden="true"><div class="progress-fill" id="progressFill"></div></div>
 
   </div>
+</div>
+
+<div class="lightbox" id="lightbox" hidden aria-modal="true" role="dialog" aria-label="Enlarged photo — tap to close">
+  <img id="lightboxImg" alt="">
 </div>
 
 <noscript>
@@ -1368,6 +1431,23 @@ a{ color:var(--gold); text-decoration:none; }
         }
         setTimeout(function(){ l.classList.remove('flare'); busy = false; }, 900);
       });
+    });
+  })();
+
+  /* ---------- Memories lightbox ---------- */
+  (function(){
+    var lb = document.getElementById('lightbox');
+    var lbImg = document.getElementById('lightboxImg');
+    document.getElementById('gallery').addEventListener('click', function(e){
+      var img = e.target.closest('img');
+      if (!img) return;
+      lbImg.src = img.src;
+      lb.hidden = false;
+    });
+    function close(){ lb.hidden = true; lbImg.removeAttribute('src'); }
+    lb.addEventListener('click', close);
+    document.addEventListener('keydown', function(e){
+      if (e.key === 'Escape' && !lb.hidden) close();
     });
   })();
 
