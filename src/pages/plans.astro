@@ -1,0 +1,137 @@
+---
+import SiteLayout from '../layouts/SiteLayout.astro';
+import Plans from '../components/site/Plans.astro';
+import Timeline from '../components/site/Timeline.astro';
+import { PROMISE, CHECKLIST, PLANS, SITE } from '../data/site';
+
+const jsonLd = {
+  '@type': 'Service',
+  name: 'Digital invitation, made by hand',
+  serviceType: 'Digital invitation design',
+  provider: { '@id': `${SITE}/#studio` },
+  areaServed: 'IN',
+  url: `${SITE}/plans/`,
+  offers: PLANS.map((p) => ({
+    '@type': 'Offer',
+    name: p.name,
+    price: p.price.replace(/\D/g, ''),
+    priceCurrency: 'INR',
+    description: p.features.join('. '),
+    url: `${SITE}/plans/`,
+  })),
+};
+---
+
+<SiteLayout
+  title="Digital Invitation Prices — Plans from Rs 1,499 | Invitivals"
+  description="One price, told plainly. Essential Rs 1,499, Signature Rs 2,999, Royal Rs 4,999. Pay 50% to begin, the rest after you approve."
+  active="plans"
+  path="/plans/"
+  crumbs={[{ name: 'Plans', href: '/plans/' }]}
+  jsonLd={jsonLd}
+>
+  <section class="wrap page">
+    <div class="head">
+      <span class="eyebrow">Plans</span>
+      <h1>One price, told plainly.</h1>
+      <p class="lede">{PROMISE}</p>
+    </div>
+
+    <Plans />
+
+    <div class="block-top">
+      <Timeline />
+    </div>
+
+    <div class="block-top checklist">
+      <div class="checklist-copy">
+        <span class="eyebrow">The checklist</span>
+        <h2>What we need from you, sent on WhatsApp.</h2>
+        <p class="lede">
+          Send it in one message or ten. Photos as they are, no editing needed. If something is missing, we ask.
+        </p>
+      </div>
+      <ol>
+        {
+          CHECKLIST.map((c) => (
+            <li>
+              <span class="no">{c.no}</span>
+              <div>
+                <b>{c.title}</b>
+                <span>{c.note}</span>
+              </div>
+            </li>
+          ))
+        }
+      </ol>
+    </div>
+  </section>
+</SiteLayout>
+
+<style>
+  .page {
+    padding-top: clamp(28px, 4vw, 56px);
+    padding-bottom: clamp(72px, 10vw, 128px);
+    display: flex;
+    flex-direction: column;
+    gap: clamp(40px, 5vw, 64px);
+  }
+  .block-top {
+    border-top: 1px solid var(--gold);
+    padding-top: clamp(40px, 5vw, 64px);
+  }
+  .checklist {
+    display: flex;
+    flex-wrap: wrap;
+    gap: clamp(32px, 5vw, 80px);
+  }
+  .checklist-copy {
+    flex: 1 1 280px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    max-width: 30em;
+  }
+  .checklist h2 {
+    font-size: clamp(28px, 3vw, 40px);
+  }
+  ol {
+    flex: 1 1 320px;
+    min-width: 0;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    border-top: 1px solid var(--gold);
+  }
+  li {
+    display: flex;
+    gap: 20px;
+    align-items: baseline;
+    padding: 16px 0;
+    border-bottom: 1px solid var(--gold);
+  }
+  .no {
+    font-family: var(--serif);
+    font-size: 13px;
+    letter-spacing: 0.2em;
+    color: var(--gold);
+    width: 2em;
+    flex: none;
+  }
+  li div {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+  li b {
+    font-family: var(--serif);
+    font-weight: 400;
+    font-size: 19px;
+  }
+  li div span {
+    font-size: 18px;
+    color: var(--muted);
+  }
+</style>

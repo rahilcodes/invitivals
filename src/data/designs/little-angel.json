@@ -1,0 +1,24 @@
+{
+  "id": "little-angel",
+  "title": "The Little Angel",
+  "occasions": ["aqeeqah"],
+  "order": 5,
+  "names": "Noor Inaya Fatima",
+  "date": "13 September 2027 · Hyderabad",
+  "href": "/showcase/aqeeqah/index.html",
+  "door": "/showcase/previews/aqeeqah-door.webp",
+  "open": "/showcase/previews/aqeeqah.webp",
+  "share": "/showcase/previews/aqeeqah.jpg",
+  "bg": "#E8CFCB",
+  "palette": ["#E8CFCB", "#B08A5A", "#5A2E2E"],
+  "languages": ["English", "Arabic"],
+  "intro": "Blush and gold, gentle and small. The doors open on a sleeping newborn, lantern light and drifting petals.",
+  "events": [{ "name": "Aqeeqah", "when": "13 Sep · Monday" }],
+  "included": [
+    "Doors that open on the first tap",
+    "Dua for the child",
+    "Hijri and Gregorian dates",
+    "Venue with a map",
+    "Duas from guests, delivered to WhatsApp"
+  ]
+}

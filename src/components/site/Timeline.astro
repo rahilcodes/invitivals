@@ -1,0 +1,18 @@
+---
+import { TIMELINE } from '../../data/site';
+---
+
+<div class="timeline">
+  <span class="eyebrow">The 48 hours</span>
+  <div class="timeline-row">
+    {
+      TIMELINE.map((t) => (
+        <div class="tl">
+          <span class="eyebrow">{t.day}</span>
+          <b>{t.title}</b>
+          <p>{t.note}</p>
+        </div>
+      ))
+    }
+  </div>
+</div>

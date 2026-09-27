@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, maximum-scale=1">
+<meta name="theme-color" content="#f3dcc8">
+<title>Nandini &amp; Madhu · Engagement Ceremony</title>
+<meta name="description" content="Engagement Ceremony of Nandini S S & Madhu N — Sunday, 15 November 2026, Bengaluru.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%238d1a3c' d='M12 21s-7.5-4.6-9.6-9.3C.9 8.4 3 5 6.4 5c2 0 3.4 1 4.3 2.4h2.6C14.2 6 15.6 5 17.6 5 21 5 23.1 8.4 21.6 11.7 19.5 16.4 12 21 12 21z'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600&family=Cormorant+Garamond:ital,wght@0,600;1,500&display=swap" rel="stylesheet">
+<link rel="preload" as="image" href="assets/v2/01_Door_Opening.png?v=8">
+<link rel="preload" as="image" href="assets/v2/door_leaf_l.png?v=8">
+<link rel="preload" as="image" href="assets/v2/door_leaf_r.png?v=8">
+<link rel="stylesheet" href="css/style.css?v=8">
+</head>
+<body class="locked">
+
+<!-- ===== ENTRANCE: the approved door artwork, with hinged leaves layered over the painted doors ===== -->
+<div id="entrance" class="entrance" role="button" tabindex="0" aria-label="Tap to enter the invitation">
+  <div class="door-stage" id="doorStage">
+    <img class="door-base" src="assets/v2/01_Door_Opening.png?v=8" alt="You're invited">
+    <div class="doorway">
+      <div class="light"></div>
+      <div class="doors">
+        <div class="leaf l"><img src="assets/v2/door_leaf_l.png?v=8" alt=""></div>
+        <div class="leaf r"><img src="assets/v2/door_leaf_r.png?v=8" alt=""></div>
+      </div>
+    </div>
+    <img class="pendant" src="assets/v2/door_pendant_cut.png?v=8" alt="">
+    <div class="seam-flash"></div>
+  </div>
+  <div class="tap-hint" id="tapHint"><span class="tap-ring"></span><span class="tap-text">Tap to Enter</span></div>
+</div>
+<div id="veil" class="veil" aria-hidden="true"></div>
+
+<!-- ===== CONTINUOUS INVITATION ===== -->
+<main id="invite" class="invite" aria-hidden="true">
+  <div class="world" id="world"></div>
+</main>
+
+<div class="ambient" aria-hidden="true"></div>
+<div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+<audio id="bgm" loop preload="auto" src="assets/audio/background.mp3?v=8"></audio>
+<button id="mute" class="mute" type="button" aria-label="Mute music" aria-pressed="false" hidden>
+  <svg class="on" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="w" d="M16 8.5a4.5 4.5 0 0 1 0 7M18.5 6a8 8 0 0 1 0 12"/></svg>
+  <svg class="off" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="w" d="M16 9l5 6M21 9l-5 6"/></svg>
+</button>
+
+<script src="js/app.js?v=8"></script>
+</body>
+</html>

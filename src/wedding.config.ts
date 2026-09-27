@@ -520,9 +520,9 @@ const config: WeddingConfig = {
   contact: {
     heading: 'We’re a message away',
     intro: 'Rosa, our wonderful coordinator, has answers to everything.',
-    phone: '+91 7997001700',
+    phone: '+91 799 700 1900',
     callLabel: 'Call Rosa',
-    whatsapp: '917997001700',
+    whatsapp: '917997001900',
     whatsappMessage: 'Hello! A question about Amara & Julian’s wedding:',
     shareTitle: 'Amara & Julian — September 26, 2026',
     shareText: 'You’re invited! Amara & Julian are getting married.',

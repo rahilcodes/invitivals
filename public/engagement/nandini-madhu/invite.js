@@ -1,0 +1,111 @@
+/* generated from invites/nandini-madhu.json by tools/new-invite.mjs — edit the json, not this file */
+window.INVITE = {
+  "slug": "nandini-madhu",
+  "theme": "floral-palace",
+  "eventType": "Engagement Ceremony",
+  "couple": {
+    "first": "Nandini S S",
+    "second": "Madhu N",
+    "short": "Nandini & Madhu"
+  },
+  "hosts": {
+    "title": "Mr. & Mrs.",
+    "names": "K. Shivanna & Taradevi",
+    "message": [
+      "Warmly welcome you",
+      "to the Engagement Ceremony",
+      "of their beloved daughter"
+    ]
+  },
+  "event": {
+    "start": "2026-11-15T10:30:00+05:30",
+    "end": "2026-11-15T15:00:00+05:30",
+    "timezone": "Asia/Kolkata",
+    "day": "Sunday",
+    "dateText": "15th November 2026",
+    "time": [
+      "10:30 AM",
+      "onwards"
+    ],
+    "extra": [
+      "Lunch",
+      "12:30 PM",
+      "onwards"
+    ],
+    "title": "Nandini S S & Madhu N Engagement",
+    "details": "Engagement Ceremony · Sunday, 15th November 2026 · 10:30 AM onwards · Lunch 12:30 PM onwards"
+  },
+  "venue": {
+    "name": [
+      "Udupi Sri Krishnarajathadri",
+      "Party Hall"
+    ],
+    "address": [
+      "330, 13th Cross Rd, near Sri Saibaba Devastana,",
+      "Malleshwaram, Bengaluru - 560003"
+    ],
+    "area": "MALLESHWARAM",
+    "areaLocal": "ಮಲ್ಲೇಶ್ವರಂ"
+  },
+  "closing": {
+    "from": "Family & Friends"
+  },
+  "art": {
+    "ceremony": {
+      "full": "art/ceremony-full.webp",
+      "baked": []
+    },
+    "welcome": {
+      "full": "art/welcome-full.webp",
+      "baked": [
+        "hosts.title",
+        "hosts.message"
+      ]
+    },
+    "couple": {
+      "full": "art/couple-full.webp",
+      "baked": [
+        "couple.first",
+        "couple.second"
+      ]
+    },
+    "date-open": {
+      "full": "art/date-open-full.webp",
+      "baked": [
+        "event.day",
+        "event.time",
+        "event.extra"
+      ]
+    },
+    "venue": {
+      "full": "art/venue-full.webp",
+      "baked": [
+        "venue.name"
+      ]
+    },
+    "family": {
+      "full": "art/family-full.webp",
+      "baked": [
+        "closing.from"
+      ]
+    }
+  },
+  "overlays": {
+    "ceremony": [
+      {
+        "img": "art/ganesha.webp",
+        "x": 282,
+        "y": 390,
+        "w": 172,
+        "cls": "rise halo",
+        "delay": 0.1,
+        "alt": "Lord Ganesha"
+      }
+    ]
+  },
+  "share": {
+    "emblem": "art/ganesha.webp"
+  },
+  "og": "og.jpg",
+  "v": "9d0701a5"
+};

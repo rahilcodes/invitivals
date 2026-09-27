@@ -1,0 +1,28 @@
+{
+  "id": "floral-palace",
+  "title": "The Floral Palace",
+  "occasions": ["engagement"],
+  "order": 4,
+  "names": "Ananya & Karthik",
+  "date": "14 February 2027 · Bengaluru",
+  "href": "/engagement/demo/index.html",
+  "door": "/showcase/previews/engagement-door.webp",
+  "open": "/showcase/previews/engagement.webp",
+  "share": "/engagement/_themes/floral-palace/art/og.jpg",
+  "bg": "#6E8F8B",
+  "palette": ["#7FA39D", "#C9A24B", "#F6E3DF"],
+  "languages": ["English", "Kannada"],
+  "intro": "Palace doors in teal and gold, garlanded in pink. They open on the ring ceremony, the two names, the date in an envelope, and the way to the venue.",
+  "events": [
+    { "name": "Engagement", "when": "14 Feb · 6 pm" },
+    { "name": "Dinner", "when": "14 Feb · 8 pm" }
+  ],
+  "included": [
+    "Palace doors that open on the first tap",
+    "A welcome from the parents, by name",
+    "The date sealed in an envelope, saved to the calendar in one tap",
+    "Venue with a map, labelled in your own script",
+    "Music from the first tap",
+    "Your names set over the artwork, nothing repainted"
+  ]
+}

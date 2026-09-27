@@ -1,0 +1,30 @@
+{
+  "id": "wax-seal",
+  "title": "The Wax Seal",
+  "occasions": ["nikah"],
+  "order": 2,
+  "names": "Tasneem & Rehan",
+  "date": "9 October 2027 · Mangaluru",
+  "href": "/showcase/nikah/index.html",
+  "door": "/showcase/previews/nikah-door.webp",
+  "open": "/showcase/previews/nikah.webp",
+  "share": "/showcase/previews/nikah.jpg",
+  "bg": "#4A2040",
+  "palette": ["#4A2040", "#CBB48B", "#F6EBDD"],
+  "languages": ["English", "Arabic"],
+  "intro": "A plum envelope sealed in gold wax. Bismillah at the top, four celebrations from Aqiqah to Valima, and a place for guests to send duas.",
+  "events": [
+    { "name": "Aqiqah", "when": "8 Oct · 2 pm" },
+    { "name": "Nikah", "when": "9 Oct · 11.30 am" },
+    { "name": "Valima", "when": "10 Oct · 12.30 pm" },
+    { "name": "Meet & greet", "when": "12 Oct · 7 pm" }
+  ],
+  "included": [
+    "Bismillah calligraphy",
+    "Nikah and Valima as separate events, each with a map",
+    "Every event saved to the calendar in one tap",
+    "Duas from guests, delivered to WhatsApp",
+    "Urdu or English, or both",
+    "A link that greets each family by name"
+  ]
+}

@@ -1,0 +1,31 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Nandini & Madhu//Engagement Invitation//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VTIMEZONE
+TZID:Asia/Kolkata
+BEGIN:STANDARD
+DTSTART:19700101T000000
+TZOFFSETFROM:+0530
+TZOFFSETTO:+0530
+TZNAME:IST
+END:STANDARD
+END:VTIMEZONE
+BEGIN:VEVENT
+UID:engagement-nandini-madhu-20261115@invitation
+DTSTAMP:20260925T000000Z
+DTSTART;TZID=Asia/Kolkata:20261115T103000
+DTEND;TZID=Asia/Kolkata:20261115T150000
+SUMMARY:Engagement Ceremony of Nandini SS & Madhu N
+DESCRIPTION:Mr. & Mrs. Shivanna & Taradevi warmly welcome you to the Engagement Ceremony of their beloved daughter Nandini SS with Madhu N.\nSunday\, 15 November 2026\n10:30 AM onwards\nLunch 12:30 PM onwards
+LOCATION:Udupi Sri Krishnarajathadri Party Hall\, 330\, 13th Cross Rd\, near Sri Saibaba Devasthana\, Vyalikaval\, Kodandarampura\, Malleshwaram\, Bengaluru\, Karnataka 560003
+URL:https://www.google.com/maps/search/?api=1&query=Udupi%20Sri%20Krishnarajathadri%20Party%20Hall%2C%20330%2C%2013th%20Cross%20Rd%2C%20Vyalikaval%2C%20Kodandarampura%2C%20Malleshwaram%2C%20Bengaluru%2C%20Karnataka%20560003
+STATUS:CONFIRMED
+BEGIN:VALARM
+TRIGGER:-P1D
+ACTION:DISPLAY
+DESCRIPTION:Engagement Ceremony of Nandini SS & Madhu N tomorrow
+END:VALARM
+END:VEVENT
+END:VCALENDAR

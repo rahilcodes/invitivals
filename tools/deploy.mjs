@@ -4,17 +4,21 @@ import path from 'path';
 
 const conn = new Client();
 
+const privateKeyPath = 'C:\\Users\\moham\\.ssh\\id_rsa_hostinger';
+const privateKey = fs.existsSync(privateKeyPath) ? fs.readFileSync(privateKeyPath, 'utf8') : null;
+
 const config = {
   host: '195.35.44.109',
   port: 65002,
   username: 'u702871438',
-  password: 'ABCDe@54321',
+  password: 'ALrahilazeeez@786',
+  privateKey,
 };
 
 const localDistDir = 'c:\\Users\\moham\\OneDrive\\Desktop\\Websites\\wishes\\dist';
 const remoteTargetDir = 'domains/invitivals.com/public_html';
 
-console.log('Connecting to Hostinger SSH with new credentials...');
+console.log('Connecting to Hostinger SSH with new password ALrahilazeeez@786...');
 
 conn.on('ready', () => {
   console.log('SSH Connection Established!');

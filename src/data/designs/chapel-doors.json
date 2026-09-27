@@ -1,0 +1,28 @@
+{
+  "id": "chapel-doors",
+  "title": "The Chapel Doors",
+  "occasions": ["christian-wedding"],
+  "order": 3,
+  "names": "Nina Grace & Jason Philip",
+  "date": "24 April 2027 · Bengaluru",
+  "href": "/showcase/christian-wedding/index.html",
+  "door": "/showcase/previews/christian-wedding-door.webp",
+  "open": "/showcase/previews/christian-wedding.webp",
+  "share": "/showcase/previews/christian-wedding.jpg",
+  "bg": "#1F3B2F",
+  "palette": ["#1F3B2F", "#B6A27C", "#F4EDE2"],
+  "languages": ["English"],
+  "intro": "Candle-lit chapel doors and scripture in gold, opening to the order of the day and the reception.",
+  "events": [
+    { "name": "Wedding ceremony", "when": "24 Apr · 10.30 am" },
+    { "name": "Lunch", "when": "24 Apr · 2.30 pm" },
+    { "name": "Reception", "when": "24 Apr · 6 pm" }
+  ],
+  "included": [
+    "A verse of scripture chosen by the family",
+    "Chapel doors that open to the invitation",
+    "The schedule of the day",
+    "Reception details with a map",
+    "RSVP to WhatsApp"
+  ]
+}

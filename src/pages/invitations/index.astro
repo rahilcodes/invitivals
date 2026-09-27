@@ -1,0 +1,166 @@
+---
+import SiteLayout from '../../layouts/SiteLayout.astro';
+import InviteCard from '../../components/site/InviteCard.astro';
+import OccasionChips from '../../components/site/OccasionChips.astro';
+import { WA, SITE, STUDIO } from '../../data/site';
+import { DESIGNS, GROUPS, designsFor, designUrl, occasionUrl } from '../../data/designs';
+
+const title = 'Digital Invitation Designs for WhatsApp — Wedding, Nikah, Engagement & More | Invitivals';
+const description =
+  'Browse digital invitation designs by occasion: Telugu and Hindu weddings, Nikah, Christian weddings, engagement, Aqeeqah and Gruhapravesha. Open each one live.';
+
+const jsonLd = {
+  '@type': 'CollectionPage',
+  name: 'Digital invitation designs',
+  url: `${SITE}/invitations/`,
+  description,
+  mainEntity: {
+    '@type': 'ItemList',
+    numberOfItems: DESIGNS.length,
+    itemListElement: DESIGNS.map((d, i) => ({ '@type': 'ListItem', position: i + 1, name: d.title, url: SITE + designUrl(d) })),
+  },
+};
+---
+
+<SiteLayout
+  title={title}
+  description={description}
+  active="invitations"
+  path="/invitations/"
+  crumbs={[{ name: 'Invitations', href: '/invitations/' }]}
+  jsonLd={jsonLd}
+  bar
+>
+  <section class="wrap gallery">
+    <div class="head" style="max-width:34em">
+      <span class="eyebrow">Real invitations</span>
+      <h1>Open one. Imagine your names in it.</h1>
+      <p class="lede">
+        Each was made for a real family in their colours and their words. Names have been changed for their
+        privacy.
+      </p>
+    </div>
+
+    <div class="by">
+      <h2 class="eyebrow">Browse by occasion</h2>
+      {
+        GROUPS.map((g) => (
+          <div class="group">
+            <h3>{g.name}</h3>
+            <div class="tiles">
+              {g.occasions.map((o) => {
+                const list = designsFor(o.slug);
+                return (
+                  <a class="tile" href={occasionUrl(o)}>
+                    <img src={list[0].door} alt="" width="540" height="1085" loading="lazy" decoding="async" />
+                    <span>
+                      <b>{o.heading}</b>
+                      <i>{list.length} {list.length === 1 ? 'design' : 'designs'}</i>
+                    </span>
+                  </a>
+                );
+              })}
+            </div>
+          </div>
+        ))
+      }
+    </div>
+
+    <div class="all">
+      <h2>All designs</h2>
+      <OccasionChips />
+      <div class="dgrid">
+        {DESIGNS.map((d, i) => <InviteCard invite={d} index={i} />)}
+      </div>
+    </div>
+
+    <p class="studio">
+      <span class="eyebrow">Also from the studio</span>
+      {STUDIO.map((t) => <a href={t.href}>{t.name}</a>)}
+    </p>
+  </section>
+
+  <div class="bar">
+    <div class="bar-main" style="gap:6px">
+      <a class="btn md" href={WA.general} target="_blank" rel="noopener" style="font-size:13px">Create this for us</a>
+      <span class="note" style="font-size:10px">Opens WhatsApp</span>
+    </div>
+  </div>
+</SiteLayout>
+
+<style>
+  .gallery {
+    padding-top: clamp(28px, 4vw, 56px);
+    padding-bottom: clamp(56px, 8vw, 104px);
+    display: flex;
+    flex-direction: column;
+    gap: clamp(40px, 5vw, 64px);
+  }
+  .by,
+  .all {
+    display: flex;
+    flex-direction: column;
+    gap: clamp(20px, 3vw, 32px);
+  }
+  .all {
+    border-top: 1px solid var(--gold);
+    padding-top: clamp(40px, 5vw, 64px);
+  }
+  h2.eyebrow {
+    font-family: var(--serif);
+    font-size: 12px;
+    line-height: 1.55;
+  }
+  .group {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+  .group h3 {
+    font-size: clamp(20px, 2vw, 26px);
+  }
+  .tiles {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 250px), 1fr));
+    gap: 12px clamp(12px, 2vw, 20px);
+  }
+  .tile {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 12px;
+    border: 1px solid var(--gold);
+    background: var(--ivory);
+    transition: background 0.4s ease;
+  }
+  .tile:hover {
+    background: rgba(203, 180, 139, 0.15);
+    color: var(--green);
+  }
+  .tile img {
+    flex: none;
+    width: 56px;
+    height: 84px;
+    object-fit: cover;
+    object-position: top;
+    border-radius: 8px;
+    box-shadow: 0 0 0 3px var(--deep);
+    margin: 3px;
+  }
+  .tile span {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    min-width: 0;
+  }
+  .tile b {
+    font-family: var(--serif);
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 1.25;
+  }
+  .tile i {
+    font-size: 17px;
+    color: var(--ink-gold);
+  }
+</style>

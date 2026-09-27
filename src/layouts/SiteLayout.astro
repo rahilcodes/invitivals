@@ -1,0 +1,1100 @@
+---
+import '@fontsource/marcellus/latin-400.css';
+import '@fontsource/cormorant-garamond/latin-400.css';
+import '@fontsource/cormorant-garamond/latin-500.css';
+import '@fontsource/cormorant-garamond/latin-600.css';
+import '@fontsource/cormorant-garamond/latin-400-italic.css';
+import '@fontsource/cormorant-garamond/latin-500-italic.css';
+import { WA, SITE, EMAIL, INSTAGRAM } from '../data/site';
+import { GROUPS, occasionUrl } from '../data/designs';
+
+/* ─────────────────────────────────────────────────────────────────────────
+   INVITIVALS — the marketing site shell.
+   Fine wedding stationery, not a software product: warm ivory paper, forest
+   green ink, gold hairlines. Designed for a thumb on a 390px screen first;
+   desktop is the enlargement.
+   ───────────────────────────────────────────────────────────────────────── */
+
+interface Props {
+  title: string;
+  description: string;
+  active?: 'invitations' | 'plans' | 'about';
+  path?: string;
+  /** extra structured data for this page: one object or several */
+  jsonLd?: object | object[];
+  /** picture for link previews, 1200×630 */
+  image?: string;
+  /** the trail from Home to this page; the last entry is the page itself */
+  crumbs?: { name: string; href: string }[];
+  noindex?: boolean;
+  /** extra bottom room on phones for a fixed bar */
+  bar?: boolean;
+  footer?: boolean;
+}
+const { title, description, active, path = '/', jsonLd, image, crumbs, noindex = false, bar = false, footer = true } = Astro.props;
+
+const canonical = SITE + (path.endsWith('/') ? path : path + '/');
+const abs = (u: string) => (u.startsWith('http') ? u : SITE + u);
+const ogImage = abs(image || '/brand/lockup-light.png');
+
+const links = [
+  { id: 'invitations', href: '/invitations/', label: 'Invitations' },
+  { id: 'traditions', href: '/#traditions', label: 'Traditions' },
+  { id: 'plans', href: '/plans/', label: 'Plans' },
+  { id: 'about', href: '/about/', label: 'About' },
+];
+
+const org = {
+  '@type': 'Organization',
+  '@id': `${SITE}/#studio`,
+  name: 'Invitivals',
+  url: SITE + '/',
+  logo: `${SITE}/brand/lockup-light.png`,
+  email: EMAIL,
+  sameAs: [INSTAGRAM],
+  areaServed: 'IN',
+};
+const trail = crumbs && {
+  '@type': 'BreadcrumbList',
+  itemListElement: [{ name: 'Home', href: '/' }, ...crumbs].map((c, i) => ({
+    '@type': 'ListItem',
+    position: i + 1,
+    name: c.name,
+    item: abs(c.href),
+  })),
+};
+const graph = {
+  '@context': 'https://schema.org',
+  '@graph': [org, ...(trail ? [trail] : []), ...(jsonLd ? [jsonLd].flat() : [])],
+};
+
+const favicon =
+  'data:image/svg+xml,' +
+  encodeURIComponent(
+    '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><rect width="64" height="64" rx="14" fill="#1C332B"/><circle cx="32" cy="32" r="21" fill="none" stroke="#CBB48B" stroke-width="1.6"/><path d="M32 47V27" stroke="#F6F0E7" stroke-width="2" stroke-linecap="round"/><path d="M32 38c-6 0-9-3-9-7 4 0 9 2 9 7Z" fill="#F6F0E7"/><path d="M32 33c6 0 9-3 9-7-4 0-9 2-9 7Z" fill="#F6F0E7"/><circle cx="32" cy="22" r="3.2" fill="none" stroke="#F6F0E7" stroke-width="1.8"/><circle cx="26" cy="18" r="1.7" fill="#F6F0E7"/><circle cx="38" cy="17" r="1.7" fill="#F6F0E7"/></svg>'
+  );
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="theme-color" content="#F6F0E7" />
+    <link rel="canonical" href={canonical} />
+    <meta name="robots" content={noindex ? 'noindex, follow' : 'index, follow, max-image-preview:large'} />
+    <link rel="icon" href={favicon} />
+    <link rel="apple-touch-icon" href="/brand/seal-on-ivory.png" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Invitivals" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:locale" content="en_IN" />
+    <meta property="og:image" content={ogImage} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
+    <link rel="sitemap" href="/sitemap.xml" />
+    <script type="application/ld+json" set:html={JSON.stringify(graph)} is:inline />
+  </head>
+
+  <body class:list={{ 'has-bar': bar }}>
+    <header class="nav">
+      <div class="wrap nav-in">
+        <a class="brand" href="/" aria-label="Invitivals — home">
+          <img src="/brand/seal.png" alt="" width="278" height="284" />
+          <span>INVITIVALS</span>
+        </a>
+        <nav class="nav-links" aria-label="Main">
+          {links.map((l) => <a href={l.href} class:list={{ on: l.id === active }}>{l.label}</a>)}
+        </nav>
+        <div class="nav-right">
+          <a class="nav-wa" href={WA.general} target="_blank" rel="noopener">WhatsApp</a>
+          <button class="menu-btn" type="button" aria-label="Open menu" aria-controls="menu" aria-expanded="false" data-menu-open>
+            <span></span><span></span>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <div class="menu" id="menu" hidden>
+      <div class="menu-top">
+        <span class="wordmark">INVITIVALS</span>
+        <button class="menu-close" type="button" aria-label="Close menu" data-menu-close>CLOSE</button>
+      </div>
+      <nav aria-label="Menu">
+        {links.map((l) => <a href={l.href} data-menu-close>{l.label}</a>)}
+      </nav>
+      <div class="menu-foot">
+        <a class="btn block" href={WA.general} target="_blank" rel="noopener">Message us on WhatsApp</a>
+        <span class="note">Opens WhatsApp</span>
+      </div>
+    </div>
+
+    <main>
+      {
+        crumbs && (
+          <nav class="wrap crumbs" aria-label="Breadcrumb">
+            <ol>
+              <li><a href="/">Home</a></li>
+              {crumbs.map((c, i) => (
+                <li>{i === crumbs.length - 1 ? <span aria-current="page">{c.name}</span> : <a href={c.href}>{c.name}</a>}</li>
+              ))}
+            </ol>
+          </nav>
+        )
+      }
+      <slot />
+    </main>
+
+    {
+      footer && (
+        <footer class="foot on-green">
+          <div class="wrap foot-cols">
+            <div class="foot-brand">
+              <a class="brand" href="/" aria-label="Invitivals — home">
+                <img src="/brand/seal-light.png" alt="" width="278" height="284" loading="lazy" />
+                <span>INVITIVALS</span>
+              </a>
+              <p>Digital invitations, made by hand for Indian celebrations. Opened from WhatsApp, ready in 48 hours.</p>
+            </div>
+            {GROUPS.map((g) => (
+              <nav aria-label={g.name}>
+                <span class="eyebrow">{g.name}</span>
+                {g.occasions.map((o) => <a href={occasionUrl(o)}>{o.heading}</a>)}
+              </nav>
+            ))}
+            <nav aria-label="The studio">
+              <span class="eyebrow">The studio</span>
+              <a href="/invitations/">All invitations</a>
+              <a href="/plans/">Plans</a>
+              <a href="/about/">About</a>
+              <a href={WA.general} target="_blank" rel="noopener">WhatsApp</a>
+              <a href={INSTAGRAM} target="_blank" rel="noopener">Instagram</a>
+              <a href={`mailto:${EMAIL}`}>{EMAIL}</a>
+            </nav>
+          </div>
+          <div class="wrap">
+            <div class="foot-in">
+              <span>INVITIVALS</span>
+              <span>invitivals.com · @invitivals.in</span>
+            </div>
+          </div>
+        </footer>
+      )
+    }
+
+    <script>
+      /* ── the full-screen menu ── */
+      const menu = document.getElementById('menu');
+      const opener = document.querySelector<HTMLButtonElement>('[data-menu-open]');
+      const setMenu = (open: boolean) => {
+        if (!menu) return;
+        menu.hidden = !open;
+        opener?.setAttribute('aria-expanded', String(open));
+        document.documentElement.classList.toggle('menu-open', open);
+      };
+      opener?.addEventListener('click', () => setMenu(true));
+      document.querySelectorAll('[data-menu-close]').forEach((el) => el.addEventListener('click', () => setMenu(false)));
+      addEventListener('keydown', (e) => e.key === 'Escape' && setMenu(false));
+
+      /* ── ?for=<Family name> personalises every greeting ── */
+      let guest = '';
+      try {
+        const v = new URLSearchParams(location.search).get('for');
+        guest = v ? v.replace(/[^\p{L}\s'.-]/gu, '').trim().slice(0, 32) : '';
+      } catch (e) {}
+      if (guest) {
+        document.querySelectorAll<HTMLElement>('[data-guest]').forEach((el) => {
+          el.textContent = (el.dataset.guest || '').replace('{g}', guest);
+        });
+        document.querySelectorAll<HTMLElement>('[data-guest-slug]').forEach((el) => {
+          el.textContent = guest.toLowerCase().replace(/\s+/g, '-');
+        });
+      }
+    </script>
+
+    <style is:global>
+      :root {
+        --ivory: #f6f0e7;
+        --green: #21463a;
+        --deep: #1c332b;
+        --gold: #cbb48b;
+        --ink-gold: #8c7a55;
+        --muted: #4e5f57;
+        --bubble: #fffdf8;
+        --bubble-line: #e8dfcf;
+        --px: clamp(20px, 5vw, 48px);
+        --sec: clamp(64px, 9vw, 120px);
+        --gap: clamp(32px, 4vw, 56px);
+        --serif: 'Marcellus', 'Cormorant Garamond', Georgia, serif;
+        --body: 'Cormorant Garamond', Georgia, serif;
+      }
+
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+      }
+      html {
+        scroll-behavior: smooth;
+        -webkit-text-size-adjust: 100%;
+      }
+      html.menu-open {
+        overflow: hidden;
+      }
+      body {
+        margin: 0;
+        /* paper grain */
+        background: var(--ivory)
+          url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.2 0 0 0 0 0.16 0 0 0 0 0.1 0 0 0 0.06 0'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)'/%3E%3C/svg%3E");
+        color: var(--green);
+        font-family: var(--body);
+        font-size: 19px;
+        line-height: 1.55;
+        -webkit-font-smoothing: antialiased;
+        overflow-x: clip;
+      }
+      a {
+        color: var(--green);
+        text-decoration: none;
+      }
+      a:hover {
+        color: var(--ink-gold);
+      }
+      button {
+        font-family: inherit;
+        color: inherit;
+      }
+      img {
+        max-width: 100%;
+      }
+      h1,
+      h2,
+      h3,
+      p {
+        margin: 0;
+      }
+      h1,
+      h2,
+      h3 {
+        font-family: var(--serif);
+        font-weight: 400;
+        text-wrap: pretty;
+      }
+      p {
+        text-wrap: pretty;
+      }
+      h1 {
+        font-size: clamp(34px, 4.4vw, 56px);
+        line-height: 1.12;
+      }
+      h2 {
+        font-size: clamp(30px, 3.6vw, 46px);
+        line-height: 1.15;
+      }
+      :focus-visible {
+        outline: 2px solid var(--ink-gold);
+        outline-offset: 3px;
+      }
+      [hidden] {
+        display: none !important;
+      }
+
+      .wrap {
+        width: 100%;
+        max-width: 1160px;
+        margin: 0 auto;
+        padding: 0 var(--px);
+      }
+      .lede {
+        font-size: 20px;
+      }
+      .muted {
+        color: var(--muted);
+      }
+
+      /* ── labels ── */
+      .eyebrow {
+        display: block;
+        font-family: var(--serif);
+        font-size: 12px;
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+        color: var(--ink-gold);
+      }
+      .note {
+        display: block;
+        font-family: var(--serif);
+        font-size: 10px;
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+        color: var(--ink-gold);
+        text-align: center;
+      }
+      .on-green .eyebrow,
+      .on-green .note {
+        color: var(--gold);
+      }
+      .head {
+        display: flex;
+        flex-direction: column;
+        gap: 18px;
+        max-width: 32em;
+      }
+      .rule {
+        display: block;
+        width: 40px;
+        height: 1px;
+        background: var(--gold);
+      }
+
+      /* ── buttons ── */
+      .btn,
+      .btn-2,
+      .btn-inv {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        height: 46px;
+        padding: 0 30px;
+        border-radius: 2px;
+        font-family: var(--serif);
+        font-size: 12px;
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+        text-align: center;
+        white-space: nowrap;
+        transition: background 0.4s ease, color 0.4s ease;
+      }
+      .btn {
+        background: var(--green);
+        color: var(--ivory);
+      }
+      .btn:hover {
+        background: var(--deep);
+        color: var(--ivory);
+      }
+      .btn-2 {
+        border: 1px solid var(--gold);
+        color: var(--green);
+      }
+      .btn-2:hover {
+        background: rgba(203, 180, 139, 0.15);
+        color: var(--green);
+      }
+      .btn-inv {
+        background: var(--ivory);
+        color: var(--green);
+      }
+      .btn-inv:hover {
+        background: #efe6d8;
+        color: var(--green);
+      }
+      .btn.md,
+      .btn-2.md,
+      .btn-inv.md {
+        height: 52px;
+      }
+      .btn.lg,
+      .btn-2.lg,
+      .btn-inv.lg {
+        height: 54px;
+        font-size: 13px;
+      }
+      .block {
+        width: 100%;
+        padding: 0 12px;
+      }
+      .tlink {
+        display: inline-flex;
+        font-family: var(--serif);
+        font-size: 13px;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        border-bottom: 1px solid var(--gold);
+        padding-bottom: 6px;
+      }
+      .tlink.sm {
+        font-size: 12px;
+        letter-spacing: 0.2em;
+        padding-bottom: 4px;
+      }
+      .stack {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+      }
+
+      /* ── chips ── */
+      .chips {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+      }
+      .chip {
+        display: inline-flex;
+        align-items: center;
+        height: 40px;
+        padding: 0 16px;
+        border-radius: 2px;
+        border: 1px solid var(--gold);
+        background: transparent;
+        color: var(--green);
+        cursor: pointer;
+        font-family: var(--serif);
+        font-size: 11px;
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+        transition: all 0.4s ease;
+      }
+      .chip.on,
+      .chip[aria-pressed='true'] {
+        background: var(--green);
+        border-color: var(--green);
+        color: var(--ivory);
+      }
+      .chip.sm {
+        height: 36px;
+        padding: 0 14px;
+        font-size: 10px;
+      }
+
+      /* ── nav ── */
+      .nav {
+        position: sticky;
+        top: 0;
+        z-index: 40;
+        background: rgba(246, 240, 231, 0.94);
+        -webkit-backdrop-filter: blur(6px);
+        backdrop-filter: blur(6px);
+        border-bottom: 1px solid var(--gold);
+      }
+      .nav-in {
+        height: 64px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+      }
+      .brand {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        color: var(--green);
+      }
+      .brand img {
+        width: 28px;
+        height: 28px;
+        object-fit: contain;
+      }
+      .brand span,
+      .wordmark {
+        font-family: var(--serif);
+        font-size: 15px;
+        letter-spacing: 0.24em;
+      }
+      .nav-links {
+        display: none;
+        gap: 36px;
+        font-family: var(--serif);
+        font-size: 13px;
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+      }
+      .nav-links a {
+        padding-bottom: 4px;
+        border-bottom: 1px solid transparent;
+      }
+      .nav-links a.on {
+        border-bottom-color: var(--gold);
+      }
+      .nav-right {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+      }
+      .nav-wa {
+        display: inline-flex;
+        align-items: center;
+        height: 38px;
+        padding: 0 18px;
+        background: var(--green);
+        color: var(--ivory);
+        font-family: var(--serif);
+        font-size: 12px;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        border-radius: 2px;
+        transition: background 0.4s ease;
+      }
+      .nav-wa:hover {
+        background: var(--deep);
+        color: var(--ivory);
+      }
+      .menu-btn {
+        width: 44px;
+        height: 44px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 7px;
+        background: none;
+        border: 0;
+        cursor: pointer;
+        padding: 0;
+      }
+      .menu-btn span {
+        display: block;
+        width: 24px;
+        height: 1px;
+        background: var(--green);
+      }
+      .menu {
+        position: fixed;
+        inset: 0;
+        z-index: 60;
+        background: var(--ivory);
+        display: flex;
+        flex-direction: column;
+        padding: 20px var(--px) calc(40px + env(safe-area-inset-bottom));
+        animation: riseIn 0.5s ease both;
+      }
+      .menu-top {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        height: 44px;
+      }
+      .menu-close {
+        min-width: 44px;
+        height: 44px;
+        background: none;
+        border: 0;
+        cursor: pointer;
+        font-family: var(--serif);
+        font-size: 12px;
+        letter-spacing: 0.2em;
+        color: var(--green);
+      }
+      .menu nav {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        gap: 28px;
+        font-family: var(--serif);
+        font-size: clamp(34px, 9vw, 44px);
+        line-height: 1.1;
+      }
+      .menu-foot {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+      .menu-foot .btn {
+        height: 52px;
+        font-size: 13px;
+      }
+      .menu-foot .note {
+        font-size: 11px;
+        text-align: left;
+      }
+      @media (min-width: 820px) {
+        .nav-links {
+          display: flex;
+        }
+        .menu-btn,
+        .menu {
+          display: none;
+        }
+      }
+
+      /* ── phone frame ── */
+      .phone {
+        position: relative;
+        display: block;
+        aspect-ratio: 9 / 19;
+        border-radius: 44px;
+        background: var(--deep);
+        padding: 11px;
+        box-shadow: 0 40px 80px -40px rgba(28, 51, 43, 0.55), inset 0 0 0 1px rgba(203, 180, 139, 0.35);
+      }
+      .phone-screen {
+        position: relative;
+        display: block;
+        width: 100%;
+        height: 100%;
+        border-radius: 34px;
+        overflow: hidden;
+      }
+      .phone-screen img {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: top center;
+      }
+
+      /* ── invitation card (gallery) ── */
+      .icard {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+        animation: riseIn 0.8s ease both;
+      }
+      .icard .phone {
+        aspect-ratio: 9 / 17;
+        border-radius: 30px;
+        padding: 7px;
+        box-shadow: 0 30px 50px -36px rgba(28, 51, 43, 0.6), inset 0 0 0 1px rgba(203, 180, 139, 0.35);
+        transition: transform 1.2s cubic-bezier(0.2, 0.7, 0.2, 1);
+      }
+      .icard .phone-screen {
+        border-radius: 24px;
+      }
+      /* the doors, then the invitation behind them */
+      .icard .phone-screen .opened {
+        opacity: 0;
+        animation: doorsOpen 14s ease-in-out infinite;
+        animation-delay: var(--d, 0s);
+      }
+      @media (hover: hover) {
+        .icard .phone:hover {
+          transform: rotate(-2deg) translateY(-6px);
+        }
+      }
+      .icard > .stack {
+        margin-top: auto;
+      }
+      .icard-meta {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        gap: 10px;
+      }
+      .icard-meta > div:first-child {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+        min-width: 0;
+      }
+      .icard-meta .eyebrow {
+        font-size: 11px;
+      }
+      .icard-name {
+        font-family: var(--serif);
+        font-size: 17px;
+        line-height: 1.3;
+        font-weight: 400;
+        margin: 0;
+      }
+      .icard-name a:hover {
+        color: var(--ink-gold);
+      }
+      a.chip:hover {
+        color: var(--green);
+        background: rgba(203, 180, 139, 0.15);
+      }
+      a.chip.on:hover {
+        color: var(--ivory);
+        background: var(--deep);
+      }
+      .chip small {
+        font-size: inherit;
+        margin-left: 8px;
+        color: var(--ink-gold);
+      }
+      .chip.on small {
+        color: var(--gold);
+      }
+      .dots {
+        display: flex;
+        gap: 6px;
+        padding-top: 4px;
+        flex: none;
+      }
+      .dots span {
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        border: 1px solid rgba(33, 70, 58, 0.25);
+      }
+      .dots.lg {
+        gap: 8px;
+        padding: 0;
+      }
+      .dots.lg span {
+        width: 16px;
+        height: 16px;
+      }
+
+      /* ── a grid of designs ── */
+      .dgrid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(min(240px, 100%), 1fr));
+        gap: clamp(24px, 3vw, 40px) clamp(18px, 3vw, 32px);
+      }
+      /* one card per row would be a very tall phone — keep two on a phone */
+      @media (max-width: 559px) {
+        .dgrid {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+          gap: 28px 14px;
+        }
+        .dgrid .btn,
+        .dgrid .btn-2 {
+          font-size: 10px;
+          letter-spacing: 0.14em;
+          padding: 0 6px;
+        }
+        .dgrid .icard-meta {
+          flex-direction: column;
+        }
+        .dgrid .icard-name {
+          font-size: 16px;
+        }
+      }
+
+      /* ── plans ── */
+      .plans {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));
+        gap: clamp(20px, 2.5vw, 32px);
+        align-items: stretch;
+      }
+      .plan {
+        display: flex;
+        flex-direction: column;
+        gap: 22px;
+        padding: clamp(28px, 3vw, 40px);
+        border: 1px solid var(--gold);
+        background: var(--ivory);
+      }
+      .plan.chosen {
+        border: 0;
+        background: radial-gradient(ellipse at 50% -20%, rgba(246, 240, 231, 0.12), transparent 60%), var(--green);
+        color: var(--ivory);
+        box-shadow: inset 0 0 0 1px rgba(203, 180, 139, 0.5);
+      }
+      .plan-top {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+      }
+      .plan-label {
+        display: flex;
+        justify-content: space-between;
+        gap: 12px;
+        align-items: baseline;
+      }
+      .plan-label .most {
+        font-size: 10px;
+      }
+      .plan-price {
+        font-family: var(--serif);
+        font-size: 40px;
+        line-height: 1;
+      }
+      .plan ul {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        font-size: 19px;
+        flex: 1;
+      }
+      .promise {
+        font-size: 20px;
+        text-align: center;
+        max-width: 40em;
+        margin: 0 auto;
+      }
+
+      /* ── the 48 hours ── */
+      .timeline {
+        display: flex;
+        flex-direction: column;
+        gap: 18px;
+      }
+      .timeline-row {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        position: relative;
+        row-gap: 28px;
+      }
+      .timeline-row::before {
+        content: '';
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 5px;
+        height: 1px;
+        background: var(--gold);
+      }
+      .tl {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        padding: 24px 24px 0 0;
+      }
+      .tl::before {
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 11px;
+        height: 11px;
+        border-radius: 50%;
+        background: var(--ivory);
+        border: 1px solid var(--gold);
+      }
+      .tl .eyebrow {
+        font-size: 11px;
+      }
+      .tl b {
+        font-family: var(--serif);
+        font-weight: 400;
+        font-size: 20px;
+      }
+      .tl p {
+        font-size: 18px;
+        color: var(--muted);
+      }
+      /* stacked on a phone, the hairline runs down the side instead */
+      @media (max-width: 519px) {
+        .timeline-row::before {
+          left: 5px;
+          right: auto;
+          top: 0;
+          bottom: 0;
+          width: 1px;
+          height: auto;
+        }
+        .tl {
+          padding: 0 0 0 30px;
+        }
+        .tl::before {
+          top: 4px;
+        }
+      }
+
+      /* ── scalloped paper edge between ivory and green ── */
+      .scallop {
+        height: 18px;
+        background: radial-gradient(circle at 9px 18px, var(--c, #21463a) 9px, transparent 9.5px) 0 0/18px 18px repeat-x;
+      }
+      .scallop.down {
+        background: radial-gradient(circle at 9px 0, var(--c, #21463a) 9px, transparent 9.5px) 0 0/18px 18px repeat-x;
+      }
+
+      /* ── fixed bar on phones ── */
+      .bar {
+        position: fixed;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        z-index: 50;
+        background: rgba(246, 240, 231, 0.96);
+        -webkit-backdrop-filter: blur(6px);
+        backdrop-filter: blur(6px);
+        border-top: 1px solid var(--gold);
+        padding: 10px 16px calc(10px + env(safe-area-inset-bottom));
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+      .bar .btn {
+        height: 48px;
+        width: 100%;
+        padding: 0 10px;
+      }
+      .bar .note {
+        font-size: 9px;
+      }
+      .bar-main {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        gap: 3px;
+        min-width: 0;
+      }
+      .bar-wa {
+        flex: none;
+        height: 48px;
+        width: 48px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        border: 1px solid var(--gold);
+        border-radius: 50%;
+      }
+      .bar-wa span {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: var(--green);
+      }
+      @media (max-width: 819px) {
+        body.has-bar {
+          padding-bottom: calc(92px + env(safe-area-inset-bottom));
+        }
+      }
+      @media (min-width: 820px) {
+        .bar {
+          display: none;
+        }
+      }
+
+      /* ── breadcrumb ── */
+      .crumbs {
+        padding-top: clamp(20px, 3vw, 32px);
+      }
+      .crumbs ol {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 6px 0;
+        font-family: var(--serif);
+        font-size: 11px;
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+        color: var(--ink-gold);
+      }
+      .crumbs a {
+        color: var(--ink-gold);
+      }
+      .crumbs a:hover {
+        color: var(--green);
+      }
+      .crumbs li + li::before {
+        content: '/';
+        margin: 0 10px;
+        color: var(--gold);
+      }
+      .crumbs [aria-current] {
+        color: var(--green);
+      }
+
+      /* ── footer ── */
+      .foot {
+        background: var(--deep);
+        color: var(--ivory);
+        padding: clamp(48px, 6vw, 80px) 0 28px;
+      }
+      .foot-cols {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(min(100%, 200px), 1fr));
+        gap: 36px clamp(24px, 4vw, 56px);
+        padding-bottom: clamp(36px, 5vw, 56px);
+      }
+      .foot-brand {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+      }
+      .foot .brand,
+      .foot a {
+        color: var(--ivory);
+      }
+      .foot a:hover {
+        color: var(--gold);
+      }
+      .foot-brand p {
+        font-size: 18px;
+        line-height: 1.5;
+        color: rgba(246, 240, 231, 0.8);
+        max-width: 22em;
+      }
+      .foot nav {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        font-size: 18px;
+        line-height: 1.35;
+      }
+      .foot nav .eyebrow {
+        margin-bottom: 6px;
+      }
+      .foot-in {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        gap: 12px 16px;
+        padding-top: 24px;
+        border-top: 1px solid rgba(203, 180, 139, 0.4);
+        font-family: var(--serif);
+        font-size: 12px;
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+        color: var(--gold);
+      }
+
+      /* ── studio templates line ── */
+      .studio {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: baseline;
+        gap: 10px 22px;
+        border-top: 1px solid var(--gold);
+        padding-top: 24px;
+        font-family: var(--serif);
+        font-size: 17px;
+      }
+      .studio a {
+        border-bottom: 1px solid var(--gold);
+        padding-bottom: 2px;
+      }
+
+      @keyframes riseIn {
+        from {
+          opacity: 0;
+          transform: translateY(14px);
+        }
+        to {
+          opacity: 1;
+          transform: none;
+        }
+      }
+      @keyframes doorsOpen {
+        0%,
+        38% {
+          opacity: 0;
+        }
+        50%,
+        88% {
+          opacity: 1;
+        }
+        100% {
+          opacity: 0;
+        }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        html {
+          scroll-behavior: auto;
+        }
+        .icard,
+        .menu {
+          animation: none;
+        }
+        .icard .phone-screen .opened {
+          animation: none;
+        }
+        .icard .phone {
+          transition: none;
+        }
+      }
+    </style>
+  </body>
+</html>

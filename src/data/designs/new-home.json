@@ -1,0 +1,28 @@
+{
+  "id": "new-home",
+  "title": "The New Home",
+  "occasions": ["gruhapravesha"],
+  "order": 6,
+  "names": "Sri Sai Nilaya",
+  "date": "30 August 2027 · Bengaluru",
+  "href": "/showcase/gruhapravesha/index.html",
+  "door": "/showcase/previews/gruhapravesha-door.webp",
+  "open": "/showcase/previews/gruhapravesha.webp",
+  "share": "/showcase/previews/gruhapravesha.jpg",
+  "bg": "#E9D5A8",
+  "palette": ["#C9722B", "#E9D5A8", "#5A3A1E"],
+  "languages": ["English"],
+  "intro": "A teak door garlanded in marigold, Kamadhenu at the threshold, and a temple bell your guests can ring.",
+  "events": [
+    { "name": "Gruhapravesha", "when": "30 Aug · 5 am" },
+    { "name": "Sathyanarayana Pooja", "when": "30 Aug · 9 am" },
+    { "name": "Lunch", "when": "30 Aug · 12.30 pm" }
+  ],
+  "included": [
+    "Kamadhenu motif at the threshold",
+    "A temple bell that rings",
+    "Pooja timings and the order of the day",
+    "New home address with a map",
+    "Written in Telugu, Kannada, Hindi or English"
+  ]
+}

@@ -1,0 +1,76 @@
+---
+import SiteLayout from '../layouts/SiteLayout.astro';
+import { WA, INSTAGRAM } from '../data/site';
+---
+
+<SiteLayout
+  title="About the studio — Invitivals"
+  description="A small studio that makes invitations, one family at a time. Each invitation is written and arranged by hand, and sent to you for approval before anyone else sees it."
+  active="about"
+  path="/about/"
+  crumbs={[{ name: 'About', href: '/about/' }]}
+>
+  <section class="about">
+    <img src="/brand/seal.png" alt="Invitivals seal" width="278" height="284" />
+    <div class="head" style="max-width:none">
+      <span class="eyebrow">About the studio</span>
+      <h1>A small studio that makes invitations, one family at a time.</h1>
+    </div>
+    <div class="prose">
+      <p>
+        Invitivals began with one wedding in our own family. The printed card was beautiful, and most of the
+        guests never held it. They saw a photo of it on WhatsApp.
+      </p>
+      <p>
+        So we made the phone version the real one. A link that opens like a card, with the blessing, the names,
+        every event and a map, in the family’s own language.
+      </p>
+      <p>
+        We are a small team in Andhra Pradesh. We do not use templates. Each invitation is written and arranged
+        by hand, checked by an elder, and sent to you for approval before anyone else sees it.
+      </p>
+      <p>We work over WhatsApp because that is where your family already is.</p>
+    </div>
+    <span class="rule" style="width:48px"></span>
+    <div class="cta">
+      <a class="btn lg" href={WA.general} target="_blank" rel="noopener">Message us on WhatsApp</a>
+      <span class="note">Opens WhatsApp</span>
+    </div>
+    <div class="eyebrow">
+      <a href="/">invitivals.com</a> · <a href={INSTAGRAM} target="_blank" rel="noopener">@invitivals.in</a>
+    </div>
+  </section>
+</SiteLayout>
+
+<style>
+  .about {
+    max-width: 760px;
+    width: 100%;
+    margin: 0 auto;
+    padding: clamp(40px, 6vw, 88px) var(--px) clamp(88px, 12vw, 160px);
+    display: flex;
+    flex-direction: column;
+    gap: clamp(32px, 4vw, 48px);
+  }
+  .about > img {
+    width: 96px;
+    height: 96px;
+    object-fit: contain;
+  }
+  .prose {
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+    font-size: clamp(20px, 1.6vw, 23px);
+    line-height: 1.55;
+  }
+  .cta {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    align-items: flex-start;
+  }
+  .eyebrow a {
+    color: inherit;
+  }
+</style>

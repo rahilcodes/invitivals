@@ -1,0 +1,26 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Invitivals//Invitation//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:demo-20270214T123000Z@invitivals.com
+DTSTAMP:20260927T142757Z
+DTSTART:20270214T123000Z
+DTEND:20270214T163000Z
+SUMMARY:Ananya Rao & Karthik Hegde Engagement
+DESCRIPTION:Engagement Ceremony\nSunday\, 14 February 2027\n6:00 PM onward
+ s\nDinner 8:00 PM onwards
+LOCATION:Sri Lakshmi Venkateshwara Convention Hall\, 24\, Temple Street\, 
+ near Rose Garden\, Jayanagar\, Bengaluru\, Karnataka 560011
+URL:https://www.google.com/maps/search/?api=1&query=Jayanagar%2C%20Bengalu
+ ru
+X-TIMEZONE-HINT:Asia/Kolkata
+STATUS:CONFIRMED
+BEGIN:VALARM
+TRIGGER:-P1D
+ACTION:DISPLAY
+DESCRIPTION:Ananya Rao & Karthik Hegde Engagement tomorrow
+END:VALARM
+END:VEVENT
+END:VCALENDAR

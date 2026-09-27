@@ -1,0 +1,22 @@
+---
+import { DESIGNS, LIVE_OCCASIONS, designsFor, occasionUrl } from '../../data/designs';
+
+/* The occasion filter, as real links: every chip is a page of its own. */
+interface Props {
+  active?: string;
+}
+const { active } = Astro.props;
+---
+
+<nav class="chips" aria-label="Invitations by occasion">
+  <a class:list={['chip', { on: !active }]} href="/invitations/" aria-current={!active ? 'page' : undefined}>
+    All<small>{DESIGNS.length}</small>
+  </a>
+  {
+    LIVE_OCCASIONS.map((o) => (
+      <a class:list={['chip', { on: o.slug === active }]} href={occasionUrl(o)} aria-current={o.slug === active ? 'page' : undefined}>
+        {o.name}<small>{designsFor(o.slug).length}</small>
+      </a>
+    ))
+  }
+</nav>

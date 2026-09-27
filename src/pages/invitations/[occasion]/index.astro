@@ -1,0 +1,218 @@
+---
+import SiteLayout from '../../../layouts/SiteLayout.astro';
+import InviteCard from '../../../components/site/InviteCard.astro';
+import OccasionChips from '../../../components/site/OccasionChips.astro';
+import Timeline from '../../../components/site/Timeline.astro';
+import { SITE, wa } from '../../../data/site';
+import { LIVE_OCCASIONS, designsFor, designUrl, occasionUrl } from '../../../data/designs';
+import type { Occasion } from '../../../data/occasions';
+
+export function getStaticPaths() {
+  return LIVE_OCCASIONS.map((occasion) => ({ params: { occasion: occasion.slug }, props: { occasion } }));
+}
+
+interface Props {
+  occasion: Occasion;
+}
+const { occasion: o } = Astro.props;
+const designs = designsFor(o.slug);
+const url = occasionUrl(o);
+const an = /^[aeiou]/i.test(o.name) ? 'an' : 'a';
+const waHref = wa(`Hello Invitivals, we would like ${an} ${o.name} invitation for our family.`);
+
+// what is promised across these designs, most common first
+const counts = new Map<string, number>();
+designs.forEach((d) => d.included.forEach((i) => counts.set(i, (counts.get(i) || 0) + 1)));
+const included = [...counts.entries()].sort((a, b) => b[1] - a[1]).slice(0, 8).map(([i]) => i);
+
+const faqs = [
+  {
+    q: `How soon can ${an} ${o.name} invitation be ready?`,
+    a: 'Within 48 hours of your details reaching us on WhatsApp. You receive a private link first, ask for any changes, and share it only once you approve.',
+  },
+  { q: 'Which languages can it be written in?', a: o.languages + ' Send us the words, or ask us to write them.' },
+  {
+    q: 'What does it cost?',
+    a: 'Plans begin at Rs 1,499. You pay half to begin and the rest after you approve. If you don’t love it, we refund the half.',
+  },
+  {
+    q: 'How do guests open it?',
+    a: 'They tap the link in WhatsApp and it opens in the browser, on any phone. There is nothing to download or sign in to.',
+  },
+];
+
+const jsonLd = [
+  {
+    '@type': 'CollectionPage',
+    name: o.heading,
+    url: SITE + url,
+    description: o.description,
+    mainEntity: {
+      '@type': 'ItemList',
+      numberOfItems: designs.length,
+      itemListElement: designs.map((d, i) => ({ '@type': 'ListItem', position: i + 1, name: d.title, url: SITE + designUrl(d) })),
+    },
+  },
+  {
+    '@type': 'FAQPage',
+    mainEntity: faqs.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })),
+  },
+];
+---
+
+<SiteLayout
+  title={o.title}
+  description={o.description}
+  active="invitations"
+  path={url}
+  image={designs[0].share}
+  crumbs={[{ name: 'Invitations', href: '/invitations/' }, { name: o.name, href: url }]}
+  jsonLd={jsonLd}
+  bar
+>
+  <section class="wrap page">
+    <div class="head" style="max-width:36em">
+      <span class="eyebrow">{designs.length} {designs.length === 1 ? 'design' : 'designs'} · {o.group}</span>
+      <h1>{o.heading}</h1>
+      <p class="lede">{o.intro}</p>
+      <p class="aka">Also called: {o.aka.join(', ')}.</p>
+    </div>
+
+    <OccasionChips active={o.slug} />
+
+    <div class="dgrid">
+      {designs.map((d, i) => <InviteCard invite={d} index={i} level="h2" />)}
+    </div>
+
+    <div class="cols">
+      <div class="block">
+        <h2>What {an} {o.name} invitation includes</h2>
+        <ul class="dashes">
+          {included.map((i) => <li><span /><span>{i}</span></li>)}
+        </ul>
+      </div>
+      <div class="block">
+        <h2>Questions families ask</h2>
+        <dl>
+          {
+            faqs.map((f) => (
+              <div>
+                <dt>{f.q}</dt>
+                <dd>{f.a}</dd>
+              </div>
+            ))
+          }
+        </dl>
+      </div>
+    </div>
+
+    <div class="block-top">
+      <Timeline />
+    </div>
+
+    <div class="ask">
+      <p class="lede">Don’t see the one for your family? Tell us the tradition and the colours, and we begin from there.</p>
+      <div class="stack" style="align-items:flex-start">
+        <a class="btn lg" href={waHref} target="_blank" rel="noopener">Ask for {an} {o.name} invitation</a>
+        <span class="note">Opens WhatsApp</span>
+      </div>
+      <a class="tlink sm" href="/plans/">See the plans</a>
+    </div>
+  </section>
+
+  <div class="bar">
+    <div class="bar-main" style="gap:6px">
+      <a class="btn md" href={waHref} target="_blank" rel="noopener" style="font-size:13px">Create this for us</a>
+      <span class="note" style="font-size:10px">Opens WhatsApp</span>
+    </div>
+  </div>
+</SiteLayout>
+
+<style>
+  .page {
+    padding-top: clamp(28px, 4vw, 56px);
+    padding-bottom: clamp(56px, 8vw, 104px);
+    display: flex;
+    flex-direction: column;
+    gap: clamp(32px, 4vw, 52px);
+  }
+  .aka {
+    font-style: italic;
+    font-size: 18px;
+    color: var(--ink-gold);
+  }
+  .cols {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr));
+    gap: clamp(36px, 5vw, 80px);
+    border-top: 1px solid var(--gold);
+    padding-top: clamp(40px, 5vw, 64px);
+  }
+  .block {
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+  }
+  .block h2 {
+    font-size: clamp(24px, 2.4vw, 32px);
+  }
+  .dashes {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .dashes li {
+    display: flex;
+    gap: 14px;
+    align-items: baseline;
+  }
+  .dashes li span:first-child {
+    flex: none;
+    width: 18px;
+    height: 1px;
+    background: var(--gold);
+    position: relative;
+    top: -6px;
+  }
+  dl {
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    border-top: 1px solid var(--gold);
+  }
+  dl div {
+    padding: 16px 0;
+    border-bottom: 1px solid var(--gold);
+  }
+  dt {
+    font-family: var(--serif);
+    font-size: 19px;
+    line-height: 1.3;
+  }
+  dd {
+    margin: 6px 0 0;
+    color: var(--muted);
+  }
+  .block-top {
+    border-top: 1px solid var(--gold);
+    padding-top: clamp(40px, 5vw, 64px);
+  }
+  .ask {
+    border-top: 1px solid var(--gold);
+    padding-top: clamp(40px, 5vw, 64px);
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 22px;
+    max-width: 36em;
+  }
+  .ask .btn {
+    white-space: normal;
+    height: auto;
+    min-height: 54px;
+    padding: 10px 26px;
+  }
+</style>

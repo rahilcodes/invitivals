@@ -1,0 +1,27 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Invitivals//Invitation//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:nandini-madhu-20261115T050000Z@invitivals.com
+DTSTAMP:20260927T142757Z
+DTSTART:20261115T050000Z
+DTEND:20261115T093000Z
+SUMMARY:Nandini S S & Madhu N Engagement
+DESCRIPTION:Engagement Ceremony\nSunday\, 15th November 2026\n10:30 AM onw
+ ards\nLunch 12:30 PM onwards
+LOCATION:Udupi Sri Krishnarajathadri Party Hall\, 330\, 13th Cross Rd\, ne
+ ar Sri Saibaba Devastana\, Malleshwaram\, Bengaluru - 560003
+URL:https://www.google.com/maps/search/?api=1&query=Udupi%20Sri%20Krishnar
+ ajathadri%20Party%20Hall%2C%20330%2C%2013th%20Cross%20Rd%2C%20near%20Sri%
+ 20Saibaba%20Devastana%2C%20Malleshwaram%2C%20Bengaluru%20-%20560003
+X-TIMEZONE-HINT:Asia/Kolkata
+STATUS:CONFIRMED
+BEGIN:VALARM
+TRIGGER:-P1D
+ACTION:DISPLAY
+DESCRIPTION:Nandini S S & Madhu N Engagement tomorrow
+END:VALARM
+END:VEVENT
+END:VCALENDAR

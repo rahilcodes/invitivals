@@ -1,0 +1,29 @@
+---
+import { PLANS } from '../../data/site';
+---
+
+<div class="plans">
+  {
+    PLANS.map((p) => (
+      <div class:list={['plan', { 'chosen on-green': p.chosen }]}>
+        <div class="plan-top">
+          <div class="plan-label">
+            <span class="eyebrow">{p.name}</span>
+            {p.chosen && <span class="eyebrow most">Most chosen</span>}
+          </div>
+          <span class="plan-price">{p.price}</span>
+        </div>
+        <span class="rule" />
+        <ul>
+          {p.features.map((f) => <li>{f}</li>)}
+        </ul>
+        <div class="stack">
+          <a class:list={[p.chosen ? 'btn-inv' : 'btn-2', 'md block']} href={p.href} target="_blank" rel="noopener">
+            Begin with {p.name}
+          </a>
+          <span class="note">Opens WhatsApp</span>
+        </div>
+      </div>
+    ))
+  }
+</div>

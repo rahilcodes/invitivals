@@ -1,0 +1,278 @@
+---
+import SiteLayout from '../../../layouts/SiteLayout.astro';
+import InviteCard from '../../../components/site/InviteCard.astro';
+import { SITE } from '../../../data/site';
+import { DESIGNS, designsFor, designUrl, designWa, occasionOf, occasionUrl, primary, type Design } from '../../../data/designs';
+
+// a design lives at one address only: under its first occasion
+export function getStaticPaths() {
+  return DESIGNS.map((design) => ({ params: { occasion: design.occasions[0], design: design.id }, props: { design } }));
+}
+
+interface Props {
+  design: Design;
+}
+const { design: d } = Astro.props;
+const o = primary(d);
+const url = designUrl(d);
+const more = designsFor(o.slug).filter((x) => x.id !== d.id).slice(0, 4);
+const others = d.occasions.slice(1).map(occasionOf);
+
+const cap = o.name.replace(/\b[a-z]/g, (c) => c.toUpperCase());
+const title = `${d.title} — ${cap} Invitation Design | Invitivals`;
+const description = `${d.intro} A digital ${o.name} invitation, personalised with your names in 48 hours.`.slice(0, 300);
+
+const jsonLd = {
+  '@type': 'CreativeWork',
+  name: `${d.title} — ${o.name} invitation`,
+  url: SITE + url,
+  description: d.intro,
+  genre: `${o.name} invitation`,
+  image: [SITE + d.open, SITE + d.door],
+  inLanguage: d.languages,
+  creator: { '@id': `${SITE}/#studio` },
+  isPartOf: { '@type': 'CollectionPage', name: o.heading, url: SITE + occasionUrl(o) },
+};
+---
+
+<SiteLayout
+  title={title}
+  description={description}
+  active="invitations"
+  path={url}
+  image={d.share}
+  crumbs={[
+    { name: 'Invitations', href: '/invitations/' },
+    { name: o.name, href: occasionUrl(o) },
+    { name: d.title, href: url },
+  ]}
+  jsonLd={jsonLd}
+>
+  <section class="wrap detail">
+    <div class="detail-phone">
+      <a class="phone" href={d.href} aria-label={`Open ${d.title}, the live sample`}>
+        <span class="phone-screen" style={`background:${d.bg}`}>
+          <img src={d.door} alt={`${d.title} — ${o.name} invitation, cover`} width="540" height="1085" />
+          <img class="opened" src={d.open} alt={`${d.title} — ${o.name} invitation, opened`} width="540" height="1085" />
+        </span>
+      </a>
+    </div>
+
+    <div class="detail-body">
+      <div class="detail-head">
+        <a class="eyebrow" href={occasionUrl(o)}>{o.heading}</a>
+        <h1>{d.title}</h1>
+        <p class="lede">{d.intro}</p>
+        <div class="dots lg" aria-hidden="true">
+          {d.palette.map((p) => <span style={`background:${p}`} />)}
+        </div>
+        {
+          (others.length > 0 || d.languages) && (
+            <p class="facts">
+              {d.languages && <span>Shown in {d.languages.join(' and ')}.</span>}
+              {others.length > 0 && (
+                <span>
+                  Also suits {others.map((x, i) => <>{i > 0 && ', '}<a href={occasionUrl(x)}>{x.heading.toLowerCase()}</a></>)}.
+                </span>
+              )}
+            </p>
+          )
+        }
+      </div>
+
+      <div class="events">
+        <h2 class="eyebrow">As the sample shows it</h2>
+        <p class="sample">{d.names} · {d.date}</p>
+        <ul>
+          {d.events.map((e) => <li><span>{e.name}</span><i>{e.when}</i></li>)}
+        </ul>
+      </div>
+
+      <div class="included">
+        <h2 class="eyebrow">What is included</h2>
+        <ul>
+          {d.included.map((i) => <li><span class="dash" /><span>{i}</span></li>)}
+        </ul>
+      </div>
+
+      <div class="actions">
+        <a class="btn lg block" href={d.href}>Open it</a>
+        <span class="note">Opens the live invitation</span>
+        <a class="btn-2 lg block" href={designWa(d)} target="_blank" rel="noopener">Create this for us</a>
+        <span class="note">Opens WhatsApp</span>
+      </div>
+      <p class="privacy">Names and details in the sample are changed for the family’s privacy.</p>
+    </div>
+  </section>
+
+  {
+    more.length > 0 && (
+      <section class="wrap more">
+        <div class="more-head">
+          <h2>More {o.heading.toLowerCase()}</h2>
+          <a class="tlink sm" href={occasionUrl(o)}>See all</a>
+        </div>
+        <div class="dgrid">
+          {more.map((x, i) => <InviteCard invite={x} index={i} />)}
+        </div>
+      </section>
+    )
+  }
+</SiteLayout>
+
+<style>
+  .detail {
+    padding-top: clamp(28px, 4vw, 56px);
+    padding-bottom: clamp(72px, 10vw, 128px);
+    display: flex;
+    flex-wrap: wrap;
+    gap: clamp(40px, 6vw, 88px);
+    align-items: flex-start;
+  }
+  .detail-phone {
+    flex: 1 1 300px;
+    min-width: 0;
+    display: flex;
+    justify-content: center;
+  }
+  @media (min-width: 820px) {
+    .detail-phone {
+      position: sticky;
+      top: 88px;
+    }
+  }
+  .detail-phone .phone {
+    width: min(320px, 86vw, calc((100svh - 130px) * 9 / 19));
+    min-width: 220px;
+  }
+  .detail-phone .opened {
+    opacity: 0;
+    animation: doorsOpen 14s ease-in-out infinite;
+  }
+  .detail-body {
+    flex: 1 1 320px;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+  }
+  .detail-head {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  .detail-head h1 {
+    font-size: clamp(34px, 4vw, 52px);
+  }
+  a.eyebrow:hover {
+    color: var(--green);
+  }
+  h2.eyebrow {
+    font-family: var(--serif);
+    font-size: 12px;
+    line-height: 1.55;
+  }
+  .facts {
+    display: flex;
+    flex-direction: column;
+    font-size: 18px;
+    color: var(--muted);
+  }
+  .facts a {
+    border-bottom: 1px solid var(--gold);
+  }
+  .sample {
+    font-style: italic;
+  }
+  .events,
+  .included {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    border-top: 1px solid var(--gold);
+    padding-top: 24px;
+  }
+  .events ul,
+  .included ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .events li {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 16px;
+  }
+  .events li span {
+    font-family: var(--serif);
+    font-size: 17px;
+  }
+  .events li i {
+    color: var(--muted);
+    white-space: nowrap;
+  }
+  .included li {
+    display: flex;
+    gap: 14px;
+    align-items: baseline;
+  }
+  .dash {
+    flex: none;
+    width: 18px;
+    height: 1px;
+    background: var(--gold);
+    position: relative;
+    top: -6px;
+  }
+  .actions {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    max-width: 360px;
+  }
+  .privacy {
+    font-style: italic;
+    font-size: 18px;
+    color: var(--ink-gold);
+  }
+  .more {
+    border-top: 1px solid var(--gold);
+    padding-top: clamp(40px, 5vw, 64px);
+    padding-bottom: clamp(56px, 8vw, 104px);
+    display: flex;
+    flex-direction: column;
+    gap: clamp(24px, 3vw, 40px);
+  }
+  .more.wrap {
+    border-top: 0;
+    position: relative;
+  }
+  .more.wrap::before {
+    content: '';
+    position: absolute;
+    left: var(--px);
+    right: var(--px);
+    top: 0;
+    height: 1px;
+    background: var(--gold);
+  }
+  .more-head {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 12px;
+  }
+  .more h2 {
+    font-size: clamp(24px, 2.4vw, 32px);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .detail-phone .opened {
+      animation: none;
+    }
+  }
+</style>

@@ -1,0 +1,35 @@
+---
+import { designUrl, designWa, primary, type Design } from '../../data/designs';
+
+interface Props {
+  invite: Design;
+  index?: number;
+  /** the heading level the card sits under */
+  level?: 'h2' | 'h3';
+}
+const { invite: d, index = 0, level: H = 'h3' } = Astro.props;
+const occasion = primary(d);
+---
+
+<article class="icard" data-tags={d.occasions.join('|')}>
+  <a class="phone" href={designUrl(d)} tabindex="-1" aria-hidden="true">
+    <span class="phone-screen" style={`background:${d.bg}`}>
+      <img src={d.door} alt={`${d.title} — ${occasion.name} invitation, cover`} width="540" height="1085" loading="lazy" decoding="async" />
+      <img class="opened" src={d.open} alt="" width="540" height="1085" loading="lazy" decoding="async" style={`--d:${(index % 6) * 1.7}s`} />
+    </span>
+  </a>
+  <div class="icard-meta">
+    <div>
+      <span class="eyebrow">{occasion.name}</span>
+      <H class="icard-name"><a href={designUrl(d)}>{d.title}</a></H>
+    </div>
+    <div class="dots" aria-hidden="true">
+      {d.palette.map((p) => <span style={`background:${p}`} />)}
+    </div>
+  </div>
+  <div class="stack">
+    <a class="btn block" href={d.href} aria-label={`Open ${d.title}, the live sample`}>Open it</a>
+    <a class="btn-2 block" href={designWa(d)} target="_blank" rel="noopener" aria-label={`Create ${d.title} for us — opens WhatsApp`}>Create this for us</a>
+    <span class="note">Opens WhatsApp</span>
+  </div>
+</article>

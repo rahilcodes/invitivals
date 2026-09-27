@@ -1,0 +1,28 @@
+{
+  "id": "kalyanam",
+  "title": "The Kalyanam",
+  "occasions": ["telugu-wedding", "hindu-wedding"],
+  "order": 1,
+  "names": "Meenakshi & Karthikeya",
+  "date": "26 August 2027 · Ramapuram",
+  "href": "/showcase/telugu-wedding/index.html",
+  "door": "/showcase/previews/telugu-wedding-door.webp",
+  "open": "/showcase/previews/telugu-wedding.webp",
+  "share": "/showcase/previews/telugu-wedding.jpg",
+  "bg": "#4A1016",
+  "palette": ["#5A1F2A", "#CBB48B", "#F0D9A8"],
+  "languages": ["Telugu"],
+  "intro": "Carved temple doors, maroon and gold, with the blessing in Telugu and the muhurtham hidden under a scratch-to-reveal card.",
+  "events": [
+    { "name": "Muhurtham", "when": "26 Aug · 12 noon" },
+    { "name": "Vindu", "when": "26 Aug · from 12 noon" }
+  ],
+  "included": [
+    "Sita-Rama blessing at the top, written in Telugu",
+    "Scratch-to-reveal muhurtham time",
+    "The seven vows, one per screen",
+    "Pre-wedding photos and a short film",
+    "Venue with a map, and the date saved to the calendar",
+    "A link that greets each family by name"
+  ]
+}

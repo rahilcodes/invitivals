@@ -1,0 +1,33 @@
+---
+import SiteLayout from '../layouts/SiteLayout.astro';
+import OccasionChips from '../components/site/OccasionChips.astro';
+---
+
+<SiteLayout title="Page not found — Invitivals" description="This page could not be found." path="/404/" noindex>
+  <section class="wrap lost">
+    <img src="/brand/seal.png" alt="" width="278" height="284" />
+    <span class="eyebrow">Page not found</span>
+    <h1>This link doesn’t open anything.</h1>
+    <p class="lede">
+      If a family sent you an invitation, ask them to send the link again. Otherwise, the invitations are here.
+    </p>
+    <OccasionChips />
+    <a class="btn lg" href="/">Back to the beginning</a>
+  </section>
+</SiteLayout>
+
+<style>
+  .lost {
+    padding-top: clamp(56px, 8vw, 112px);
+    padding-bottom: clamp(72px, 10vw, 128px);
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 22px;
+    max-width: 760px;
+  }
+  .lost img {
+    width: 72px;
+    height: auto;
+  }
+</style>
