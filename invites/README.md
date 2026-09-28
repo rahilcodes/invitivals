@@ -1,19 +1,28 @@
-# Engagement invitations
+# Invitations
 
-One engine, one theme, one small data file per couple.
+One engine, a theme per design, one small data file per couple.
 
 ```
 invites/<slug>.json                      the couple's details — the ONLY thing you write
 public/engagement/_engine/v1/            engine.js, engine.css, fonts   (shared by every invitation)
-public/engagement/_themes/floral-palace/ theme.js + art/ + audio/        (shared by every invitation)
+public/engagement/_themes/<theme>/       theme.js + art/ + audio/        (shared by every invitation of that design)
 public/engagement/<slug>/                index.html, invite.js, event.ics (generated — do not edit)
 ```
 
+| theme | design | entrance | sample |
+| --- | --- | --- | --- |
+| `floral-palace` | engagement, painted palace plates | a door | `invites/demo.json` |
+| `rose-red` | wedding / nikah, burgundy, blush and gold | a sealed envelope | `invites/rose-red-demo.json` |
+
 ## New couple
 
-1. Copy `invites/demo.json` to `invites/<slug>.json` and change the details.
+1. Copy the theme's sample (`invites/demo.json` or `invites/rose-red-demo.json`) to `invites/<slug>.json` and change the details.
 2. `node tools/new-invite.mjs <slug>`
 3. Open `http://localhost:4321/engagement/<slug>/index.html`
+
+To give an invitation its own address, add `"out": "ayesha-imran"` (or `"nikah/ayesha-imran"`): it is then
+built into `public/ayesha-imran/` and its link is `invitivals.com/ayesha-imran/`. Remove `"out"` from a copy
+of the sample, or change it — two invitations must not share a folder.
 
 The build stops with a message if something is wrong: a missing field, a weekday that does not
 match the date, an end time before the start, an unknown theme.
@@ -67,6 +76,25 @@ To change one line of approved lettering later, paint it out of their plate and 
 `node tools/make-og.mjs <slug>` draws `og.jpg`: the occasion, the names and the date inside the theme's arch.
 Set `"og": "og.jpg"` and rebuild. WhatsApp keeps an old preview for a link it has already seen —
 after a change, test by sending the link with `?v=2` on the end.
+
+## Rose Red
+
+Same fields as above, plus:
+
+| field | what it is |
+| --- | --- |
+| `blessing` | optional: a line above the occasion, e.g. `بِسْمِ ٱللَّٰهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ` (leave it out for none) |
+| `hide` | optional: pieces to leave out. `["figures"]` removes the illustrated couple from the first page |
+| `closing.message` / `closing.label` | optional: the thank-you lines and the words above the family name (default: "With love") |
+| `ui.venueTitle` / `ui.thanksTitle` | optional: the two script headings (default: "The Venue", "Thank You") |
+| `ui.invited` / `ui.enter` | optional: the wording on the envelope's card and under the envelope |
+
+`event.extra` is not printed in this theme; put a second timing in `event.time`, e.g. `["7:00 PM", "· Dinner 8:30 PM"]`.
+Without `venue.area` the map is shown without a place name.
+
+The designer delivers loose elements, not finished pages. `node tools/build-rose-red-art.mjs` lays them out
+into one plate per section (that file decides where each flower sits; `theme.js` decides where the wording sits).
+The source packs are in `invites/src/rose-red/` — kept out of git and out of `public/`, so they are never uploaded.
 
 ## After changing the engine or the theme
 

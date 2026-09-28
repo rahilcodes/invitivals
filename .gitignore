@@ -4,3 +4,6 @@ dist/
 .DS_Store
 .claude/
 
+
+# designer source packs (large); the built theme art is in public/engagement/_themes/
+invites/src/rose-red/

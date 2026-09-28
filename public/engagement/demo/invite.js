@@ -52,5 +52,5 @@ window.INVITE = {
   "closing": {
     "from": "Rao & Hegde Families"
   },
-  "v": "5dfa40d0"
+  "v": "edc82c7f"
 };

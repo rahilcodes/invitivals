@@ -1,0 +1,18 @@
+/* Rose Red: what this theme adds to the engine's own styles */
+@font-face{font-family:"Amiri";font-style:normal;font-weight:400;font-display:swap;src:url(fonts/amiri-arabic-400-normal.woff2) format("woff2")}
+@font-face{font-family:"Amiri";font-style:normal;font-weight:700;font-display:swap;src:url(fonts/amiri-arabic-700-normal.woff2) format("woff2")}
+
+.theme-rose-red .ambient{
+  background:radial-gradient(90% 60% at 50% 20%,rgba(255,250,246,.7),transparent 70%),linear-gradient(180deg,#fbeae3 0%,#f8ddd6 50%,#fbeae3 100%)}
+@media (min-width:561px){.theme-rose-red .world{box-shadow:0 0 90px rgba(122,21,51,.2)}}
+
+/* a blessing in Arabic, Urdu or any script Amiri carries; other scripts fall back to the system's */
+.slot.arabic{font-family:"Amiri","Noto Naskh Arabic","Geeza Pro",serif;direction:rtl;line-height:1.5}
+.slot.arabic .ln{unicode-bidi:plaintext}
+
+/* the light that takes over as the envelope opens is blush, like the paper */
+.theme-rose-red .veil{background:radial-gradient(70% 60% at 50% 50%,#fffdfb 0,#fff6f1 45%,#fbeae3 100%)}
+
+.theme-rose-red .mute::before{background:rgba(255,246,240,.9);border-color:rgba(160,112,42,.7)}
+.theme-rose-red .toast{background:linear-gradient(180deg,#8d1a3c,#6a1029)}
+.theme-rose-red .tap-text{color:#7a5a1e}

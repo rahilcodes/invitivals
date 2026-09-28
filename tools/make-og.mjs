@@ -27,13 +27,17 @@ const esc = (s) => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replac
 const url = (p) => pathToFileURL(p).href;
 
 /* the part of a theme plate that frames the banner: [plate, x, y, w, h, specks to clear] */
-const FRAME = { 'floral-palace': ['art/venue-clean.webp', 0, 0, 1180, 620, [[556, 436, 604, 474], [580, 66, 604, 92]]] };
+const FRAME = {
+  'floral-palace': ['art/venue-clean.webp', 0, 0, 1180, 620, [[556, 436, 604, 474], [580, 66, 604, 92]]],
+  'rose-red': ['art/og-frame.webp', 0, 0, 1200, 630, null],
+};
+const home = path.join(ROOT, 'public', I.out ? String(I.out).replace(/^\/+|\/+$/g, '') : 'engagement/' + I.slug);   // the invitation's folder, as in new-invite.mjs
 const [plate, fx, fy, fw, fh, specks] = FRAME[I.theme] || FRAME['floral-palace'];
 const theme = path.join(BASE, '_themes', I.theme), fonts = path.join(BASE, '_engine/v1/fonts');
 const raw = await sharp(path.join(theme, plate)).ensureAlpha().raw().toBuffer({ resolveWithObject: true });
 if (specks) paintOut(raw.data, raw.info.width, raw.info.height, raw.info.channels, { test: () => true, rects: specks, grow: 0 });
 const bg = await sharp(raw.data, { raw: { width: raw.info.width, height: raw.info.height, channels: raw.info.channels } }).extract({ left: fx, top: fy, width: fw, height: fh }).resize(W, H, { kernel: 'lanczos3' }).png().toBuffer();
-const emblem = I.share && I.share.emblem ? path.join(BASE, I.slug, I.share.emblem) : null;
+const emblem = I.share && I.share.emblem ? path.join(home, I.share.emblem) : null;
 
 const html = `<!DOCTYPE html><meta charset="utf-8"><style>
 @font-face{font-family:"CG";font-weight:600;src:url(${url(path.join(fonts, 'cormorant-garamond-latin-600-normal.woff2'))})}
@@ -86,7 +90,7 @@ try {
   for (let i = 0; i < 40; i++) { await sleep(250); const r = await send('Runtime.evaluate', { expression: 'document.title' }); if (r.result.value === 'ready') break; }
   await sleep(400);
   const { data } = await send('Page.captureScreenshot', { format: 'png' });
-  const out = path.join(BASE, I.slug, 'og.jpg');
+  const out = path.join(home, 'og.jpg');
   await sharp(Buffer.from(data, 'base64')).resize(W, H).jpeg({ quality: 86, mozjpeg: true }).toFile(out);
   console.log(`✓ ${path.relative(ROOT, out)}  ${(fs.statSync(out).size / 1024).toFixed(0)} KB`);
   ws.close();

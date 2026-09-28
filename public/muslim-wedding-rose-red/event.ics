@@ -1,0 +1,25 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Invitivals//Invitation//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:rose-red-demo-20270117T070000Z@invitivals.com
+DTSTAMP:20260928T080033Z
+DTSTART:20270117T070000Z
+DTEND:20270117T110000Z
+SUMMARY:Ayesha Siddiqui & Imran Khan Nikah
+DESCRIPTION:Nikah Ceremony\nSunday\, 17 January 2027\n12:30 PM onwards
+LOCATION:Al Noor Convention Centre\, 18\, Garden Road\, near Rose Park\, F
+ razer Town\, Bengaluru\, Karnataka 560005
+URL:https://www.google.com/maps/search/?api=1&query=Frazer%20Town%2C%20Ben
+ galuru
+X-TIMEZONE-HINT:Asia/Kolkata
+STATUS:CONFIRMED
+BEGIN:VALARM
+TRIGGER:-P1D
+ACTION:DISPLAY
+DESCRIPTION:Ayesha Siddiqui & Imran Khan Nikah tomorrow
+END:VALARM
+END:VEVENT
+END:VCALENDAR

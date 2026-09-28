@@ -23,6 +23,7 @@
   const themeUrl = (p) => T.base + p + V;
   const get = (key) => key.split(".").reduce((o, k) => (o == null ? o : o[k]), I);
   const lines = (v) => (v == null || v === "" ? [] : Array.isArray(v) ? v : [String(v)]);
+  const hidden = (o) => !!(o.name && I.hide && I.hide.indexOf(o.name) >= 0);     // a piece this couple asked to leave out
   const bakedOf = (id) => (I.art && I.art[id] && I.art[id].baked) || [];
   // a section's finished plate: the couple's own art when supplied, else the theme's
   const fullUrl = (id) => (I.art && I.art[id] && I.art[id].full) ? I.art[id].full + V : themeUrl("art/" + id + "-full.webp");
@@ -79,9 +80,11 @@
   }
   /* live wording. When the couple's own art already carries it (baked), it is kept for screen readers only. */
   function slot(S, d, baked) {
-    const txt = lines(get(d.key)); if (!txt.length) return null;
+    let txt = lines(get(d.key)); if (!txt.length) txt = lines(d.text);      // d.text: the theme's own wording, used unless the couple supplies theirs
+    if (!txt.length) return null;
+    if (d.join != null) txt = [txt.join(d.join)];
     if (baked) { const p = el("p", "sr"); p.textContent = txt.join(" "); return p; }
-    const r = d.rect, e = el("p", "slot " + (d.font === "script" ? "script" : d.font === "sans" ? "sans" : "") + (d.align === "left" ? " left" : "") + (d.valign === "top" ? " top" : "") + (d.plain ? " flat" : "") + (d.on || d.plain ? "" : " rise"));
+    const r = d.rect, e = el("p", "slot " + (d.font && d.font !== "serif" ? d.font : "") + (d.align === "left" ? " left" : "") + (d.valign === "top" ? " top" : "") + (d.plain ? " flat" : "") + (d.on || d.plain ? "" : " rise"));
     place(e, r[0], r[1], r[2] - r[0], r[3] - r[1]);
     setv(e, { fs: d.size, lh: d.lh ? (d.lh / d.size).toFixed(3) : null, delay: d.delay != null ? d.delay + "s" : null });
     if (d.weight) e.style.fontWeight = d.weight;
@@ -113,7 +116,7 @@
     const full = fullUrl(S.id), baked = bakedOf(S.id);
     const img = el("img", "ref"); img.alt = ""; img.decoding = "async"; img.dataset.src = themeUrl("art/" + S.id + "-clean.webp"); cv.appendChild(img);
     (S.blocks || []).forEach(b => cv.appendChild(block(S, b, full)));
-    (S.overlays || []).concat((I.overlays && I.overlays[S.id]) || []).forEach(o => cv.appendChild(overlay(o)));
+    (S.overlays || []).concat((I.overlays && I.overlays[S.id]) || []).forEach(o => { if (!hidden(o)) cv.appendChild(overlay(o)); });
     if (S.petals) { const box = el("div", "petals"); setv(box, { y0: S.petals.y0, y1: S.petals.y1 }); cv.appendChild(petalSet(box, S.petals.n)); }
 
     let card = null;
@@ -125,6 +128,7 @@
       if (e) (open && card && !e.classList.contains("sr") ? card : cv).appendChild(e);
     });
     (S.links || []).forEach(l => {
+      if (l.to === "calendar") { const b = hit("button", l.rect, "cal-btn" + (l.round ? " round" : ""), l.label); b.addEventListener("click", saveTheDate); cv.appendChild(b); return; }
       const a = hit("a", l.rect, l.to + "-btn" + (l.round ? " round" : ""), l.label);
       a.href = l.to === "maps" ? mapsUrl : "#"; a.target = "_blank"; a.rel = "noopener"; cv.appendChild(a);
     });
@@ -193,8 +197,38 @@
     applyMute(); $("mute").hidden = false; play();
   }
 
+  /* ---- entrance: a sealed envelope (theme.entrance.kind "envelope"). Tap: the seal gives, the flap is open, the card rises. ---- */
+  function buildEnvelopeEntrance() {
+    const N = T.entrance, ent = el("div", "entrance env-entrance"); ent.id = "entrance";
+    ent.setAttribute("role", "button"); ent.tabIndex = 0; ent.setAttribute("aria-label", (I.ui && I.ui.enterLabel) || "You're invited. Tap to open the invitation");
+    (N.corners || []).forEach(c => { const im = el("img", "ecorner " + c.at); im.alt = ""; im.src = themeUrl(c.img); setv(im, { cw: c.w }); ent.appendChild(im); });
+    const head = el("p", "ehead"); head.textContent = get("eventType") || ""; ent.appendChild(head);
+    const env = el("div", "envl"); setv(env, { ar: N.W + "/" + N.H });
+    const img = (cls, src) => { const im = el("img", cls); im.alt = ""; im.src = themeUrl(src); return im; };
+    const back = img("eback", N.open), front = img("efront", N.open), closed = img("eclosed", N.closed);
+    front.style.clipPath = "polygon(" + N.pocket.map(p => pct(p[0], N.W) + " " + pct(p[1], N.H)).join(",") + ")";
+    const wrap = el("div", "ecardwrap"), card = el("div", "ecard");
+    [["k", (I.ui && I.ui.invited) || "You are invited"], ["n", get("couple.first")], ["a", "&"], ["n", get("couple.second")]].forEach(r => { const sp = el("span", r[0]); sp.textContent = r[1] || ""; card.appendChild(sp); });
+    wrap.appendChild(card); env.appendChild(back); env.appendChild(wrap); env.appendChild(front); env.appendChild(closed); ent.appendChild(env);
+    const hint = el("div", "tap-hint"); hint.innerHTML = '<span class="tap-ring"></span><span class="tap-text"></span>';
+    hint.querySelector(".tap-text").textContent = (I.ui && I.ui.enter) || "Tap to Open"; ent.appendChild(hint);
+    mountEntrance(ent, [closed, back]);
+    // a long name is set smaller, so it stays on the card
+    const fit = () => card.querySelectorAll(".n").forEach(n => { n.style.fontSize = ""; const k = card.clientWidth * .84 / (n.scrollWidth || 1); if (k < 1) n.style.fontSize = (15 * k).toFixed(2) + "cqw"; });
+    fit(); addEventListener("resize", fit); if (document.fonts && document.fonts.ready) document.fonts.ready.then(fit);
+  }
+  function mountEntrance(ent, ims) {
+    const veil = el("div", "veil"); veil.id = "veil"; veil.setAttribute("aria-hidden", "true");
+    document.body.insertBefore(veil, document.body.firstChild); document.body.insertBefore(ent, veil);
+    Promise.all([...ims].map(im => im.complete ? 0 : new Promise(r => { im.onload = r; im.onerror = r; }))).then(() => ent.classList.add("ready"));
+    setTimeout(() => ent.classList.add("ready"), 3500);
+    ent.addEventListener("click", enter);
+    ent.addEventListener("keydown", e => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); enter(); } });
+  }
+
   /* ---- door ---- */
   function buildEntrance() {
+    if (T.entrance && T.entrance.kind === "envelope") return buildEnvelopeEntrance();
     const D = T.door, ent = el("div", "entrance"); ent.id = "entrance";
     ent.setAttribute("role", "button"); ent.tabIndex = 0; ent.setAttribute("aria-label", (I.ui && I.ui.enterLabel) || "You're invited. Tap to open the invitation");
     ent.innerHTML = '<div class="door-stage"><img class="door-base" alt=""><div class="doorway"><div class="light"></div><div class="doors">' +
@@ -207,12 +241,7 @@
     // the full height of the door always fits the screen; on a narrow phone only the outer floral margin leaves it
     const size = () => { const k = innerHeight / D.H; st.style.setProperty("--dw", (D.W * k) + "px"); st.style.setProperty("--dh", (D.H * k) + "px"); };
     size(); addEventListener("resize", size);
-    const veil = el("div", "veil"); veil.id = "veil"; veil.setAttribute("aria-hidden", "true");
-    document.body.insertBefore(veil, document.body.firstChild); document.body.insertBefore(ent, veil);
-    Promise.all([...ims].map(im => im.complete ? 0 : new Promise(r => { im.onload = r; im.onerror = r; }))).then(() => ent.classList.add("ready"));
-    setTimeout(() => ent.classList.add("ready"), 3500);
-    ent.addEventListener("click", enter);
-    ent.addEventListener("keydown", e => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); enter(); } });
+    mountEntrance(ent, ims);
   }
   function reveal() {
     document.body.classList.remove("locked");
@@ -224,7 +253,8 @@
     startMusic();
     const ent = $("entrance"), veil = $("veil");
     ent.classList.add("opening");
-    const T1 = (REDUCED ? 500 : 1500) * K, T2 = (REDUCED ? 1300 : 2400) * K;
+    const slow = T.entrance && T.entrance.kind === "envelope" ? 900 : 0;   // the card has to rise before the light takes over
+    const T1 = (REDUCED ? 500 : 1500 + slow) * K, T2 = (REDUCED ? 1300 : 2400 + slow) * K;
     if (qs.has("hold")) return;
     setTimeout(() => veil.classList.add("on"), Math.max(100, T1 - 900));
     setTimeout(() => {
@@ -250,7 +280,10 @@
   }
 
   function init() {
-    document.documentElement.style.setProperty("--theme", T.colors.theme);
+    const root = document.documentElement;
+    root.style.setProperty("--theme", T.colors.theme);
+    ["ink", "gold", "page"].forEach(k => { if (T.colors[k]) root.style.setProperty("--" + k, T.colors[k]); });
+    if (T.css) { const l = el("link"); l.rel = "stylesheet"; l.href = themeUrl(T.css); document.head.appendChild(l); root.classList.add("theme-" + T.id); }
     const world = $("world");
     T.sections.forEach((S, i) => world.appendChild(buildSection(S, i)));
     document.body.appendChild(petalSet(el("div", "petals-fixed"), 9, true));

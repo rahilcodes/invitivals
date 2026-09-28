@@ -3,18 +3,32 @@
  *   node tools/new-invite.mjs <slug>        build public/engagement/<slug>/ from invites/<slug>.json
  *   node tools/new-invite.mjs --all         rebuild every invitation in invites/
  *
+ * "out": "some/folder" in the json puts the invitation at public/some/folder/ (its link is then
+ * invitivals.com/some/folder/) instead of public/engagement/<slug>/.
+ *
  * Writes index.html, invite.js and event.ics. The folder's own art/ and og.jpg (if any) are left alone.
  * The engine and the theme art are shared by every invitation (public/engagement/_engine, _themes).
  */
 import fs from 'node:fs';
 import path from 'node:path';
 import crypto from 'node:crypto';
+import vm from 'node:vm';
 import { fileURLToPath } from 'node:url';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const SITE = 'https://invitivals.com';
 const ENGINE = 'v1';
 const BASE = path.join(ROOT, 'public/engagement');
+
+/* the invitation's folder, and its path on the site */
+const sitePath = (I) => (I.out ? String(I.out).replace(/^\/+|\/+$/g, '') : 'engagement/' + I.slug);
+const outDir = (I) => path.join(ROOT, 'public', sitePath(I));
+/* the theme, read the way a browser would read it */
+function loadTheme(id) {
+  const box = { window: {}, URL, document: { currentScript: { src: 'https://theme.invalid/' } } };
+  vm.runInNewContext(fs.readFileSync(path.join(BASE, '_themes', id, 'theme.js'), 'utf8'), box);
+  return box.window.INVITE_THEME;
+}
 
 const lines = (v) => (v == null || v === '' ? [] : Array.isArray(v) ? v : [String(v)]);
 const esc = (s) => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
@@ -27,6 +41,7 @@ function check(I, file) {
   const miss = need.filter((k) => { const v = k.split('.').reduce((o, p) => (o == null ? o : o[p]), I); return v == null || v === '' || (Array.isArray(v) && !v.length); });
   if (miss.length) throw new Error(`${file}: missing ${miss.join(', ')}`);
   if (!/^[a-z0-9-]+$/.test(I.slug)) throw new Error(`${file}: slug must be lowercase letters, digits and hyphens`);
+  if (I.out != null && (!/^[a-z0-9-]+(\/[a-z0-9-]+)*$/.test(sitePath(I)) || /^engagement\/_/.test(sitePath(I)))) throw new Error(`${file}: out must be a folder path of lowercase letters, digits and hyphens`);
   for (const k of ['start', 'end']) {
     if (!/[+-]\d\d:\d\d$|Z$/.test(I.event[k]) || isNaN(new Date(I.event[k]))) throw new Error(`${file}: event.${k} must be an ISO time with its offset, e.g. 2026-11-15T10:30:00+05:30`);
   }
@@ -34,16 +49,21 @@ function check(I, file) {
   const said = new Intl.DateTimeFormat('en-GB', { weekday: 'long', timeZone: I.event.timezone || 'Asia/Kolkata' }).format(new Date(I.event.start));
   if (said.toLowerCase() !== String(I.event.day).toLowerCase()) throw new Error(`${file}: event.day says "${I.event.day}" but ${I.event.start} is a ${said}`);
   if (!fs.existsSync(path.join(BASE, '_themes', I.theme, 'theme.js'))) throw new Error(`${file}: unknown theme "${I.theme}"`);
-  for (const o of Object.values(I.overlays || {}).flat()) if (!o.img || !fs.existsSync(path.join(BASE, I.slug, o.img))) throw new Error(`${file}: overlays → ${o.img} does not exist in public/engagement/${I.slug}/`);
-  if (I.og && !fs.existsSync(path.join(BASE, I.slug, I.og))) throw new Error(`${file}: og → ${I.og} does not exist in public/engagement/${I.slug}/ (node tools/make-og.mjs ${I.slug})`);
-  for (const [id, a] of Object.entries(I.art || {})) if (a.full && !fs.existsSync(path.join(BASE, I.slug, a.full))) throw new Error(`${file}: art.${id}.full → ${a.full} does not exist in public/engagement/${I.slug}/`);
+  const dir = outDir(I), where = `public/${sitePath(I)}/`;
+  for (const o of Object.values(I.overlays || {}).flat()) if (!o.img || !fs.existsSync(path.join(dir, o.img))) throw new Error(`${file}: overlays → ${o.img} does not exist in ${where}`);
+  if (I.og && !fs.existsSync(path.join(dir, I.og))) throw new Error(`${file}: og → ${I.og} does not exist in ${where} (node tools/make-og.mjs ${I.slug})`);
+  for (const [id, a] of Object.entries(I.art || {})) if (a.full && !fs.existsSync(path.join(dir, a.full))) throw new Error(`${file}: art.${id}.full → ${a.full} does not exist in ${where}`);
+  if (I.audio && !/^https?:/.test(I.audio) && !fs.existsSync(path.join(dir, I.audio))) throw new Error(`${file}: audio → ${I.audio} does not exist in ${where}`);
+  const names = loadTheme(I.theme).sections.flatMap((S) => (S.overlays || []).map((o) => o.name).filter(Boolean));
+  for (const h of I.hide || []) if (!names.includes(h)) throw new Error(`${file}: hide → the ${I.theme} theme has no piece called "${h}"${names.length ? ` (it has: ${[...new Set(names)].join(', ')})` : ''}`);
 }
 
 function build(slug) {
   const file = path.join(ROOT, 'invites', slug + '.json');
   const I = JSON.parse(fs.readFileSync(file, 'utf8'));
   check(I, path.relative(ROOT, file));
-  const out = path.join(BASE, I.slug); fs.mkdirSync(out, { recursive: true });
+  const out = outDir(I); fs.mkdirSync(out, { recursive: true });
+  const theme = loadTheme(I.theme);
 
   const venueName = lines(I.venue.name).join(' '), address = lines(I.venue.address).join(' ');
   const when = `${I.event.day}, ${I.event.dateText} · ${lines(I.event.time).join(' ')}`;
@@ -58,7 +78,7 @@ function build(slug) {
 
   /* one version stamp for everything the page loads: changes whenever the data, the engine or the theme changes */
   const hash = crypto.createHash('sha1').update(JSON.stringify(I));
-  for (const f of [`_engine/${ENGINE}/engine.js`, `_engine/${ENGINE}/engine.css`, `_themes/${I.theme}/theme.js`]) hash.update(fs.readFileSync(path.join(BASE, f)));
+  for (const f of [`_engine/${ENGINE}/engine.js`, `_engine/${ENGINE}/engine.css`, `_themes/${I.theme}/theme.js`].concat(theme.css ? [`_themes/${I.theme}/${theme.css}`] : [])) hash.update(fs.readFileSync(path.join(BASE, f)));
   const artDir = path.join(BASE, '_themes', I.theme, 'art');
   for (const f of fs.readdirSync(artDir).sort()) hash.update(f + fs.statSync(path.join(artDir, f)).size);
   const ownDir = path.join(out, 'art');                    // the couple's own plates
@@ -77,16 +97,20 @@ function build(slug) {
     'BEGIN:VALARM', 'TRIGGER:-P1D', 'ACTION:DISPLAY', `DESCRIPTION:${icsText(I.event.title)} tomorrow`, 'END:VALARM', 'END:VEVENT', 'END:VCALENDAR'];
   fs.writeFileSync(path.join(out, 'event.ics'), ics.map(fold).join('\r\n') + '\r\n');
 
-  const url = `${SITE}/engagement/${I.slug}/`;
-  const og = I.og ? url + I.og + '?v=' + v : `${SITE}/engagement/_themes/${I.theme}/${'art/og.jpg'}`;
-  const T = `../_themes/${I.theme}`, E = `../_engine/${ENGINE}`;
+  const url = `${SITE}/${sitePath(I)}/`;
+  const og = I.og ? url + I.og + '?v=' + v : `${SITE}/engagement/_themes/${I.theme}/${theme.og || 'art/og.jpg'}?v=${v}`;
+  /* an invitation in its usual place finds the shared files beside it; one placed elsewhere names them from the site's root */
+  const T = `${I.out ? '/engagement' : '..'}/_themes/${I.theme}`, E = `${I.out ? '/engagement' : '..'}/_engine/${ENGINE}`;
+  /* what the entrance needs is fetched first */
+  const first = theme.entrance && theme.entrance.preload ? theme.entrance.preload : ['art/door.webp', 'art/door-leaf-l.webp', 'art/door-leaf-r.webp'];
+  const colour = (theme.colors && theme.colors.theme) || '#f3dcc8';
   const html = `<!DOCTYPE html>
 <!-- generated from invites/${slug}.json by tools/new-invite.mjs — edit the json, not this file -->
 <html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="theme-color" content="#f3dcc8">
+<meta name="theme-color" content="${colour}">
 <meta name="robots" content="noindex, nofollow">
 <title>${esc(title)}</title>
 <meta name="description" content="${esc(desc)}">
@@ -105,9 +129,7 @@ function build(slug) {
 <meta name="twitter:description" content="${esc(desc)}">
 <meta name="twitter:image" content="${og}">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%238d1a3c' d='M12 21s-7.5-4.6-9.6-9.3C.9 8.4 3 5 6.4 5c2 0 3.4 1 4.3 2.4h2.6C14.2 6 15.6 5 17.6 5 21 5 23.1 8.4 21.6 11.7 19.5 16.4 12 21 12 21z'/%3E%3C/svg%3E">
-<link rel="preload" as="image" href="${T}/art/door.webp?v=${v}">
-<link rel="preload" as="image" href="${T}/art/door-leaf-l.webp?v=${v}">
-<link rel="preload" as="image" href="${T}/art/door-leaf-r.webp?v=${v}">
+${first.map((p) => `<link rel="preload" as="image" href="${T}/${p}?v=${v}">`).join('\n')}
 <link rel="preload" as="font" type="font/woff2" href="${E}/fonts/marcellus-latin-400-normal.woff2" crossorigin>
 <link rel="stylesheet" href="${E}/engine.css?v=${v}">
 </head>
@@ -138,7 +160,7 @@ ${I.hosts ? `  <p>${esc([I.hosts.title, I.hosts.names].filter(Boolean).join(' ')
 </html>
 `;
   fs.writeFileSync(path.join(out, 'index.html'), html);
-  console.log(`✓ ${I.slug}  v=${v}  →  public/engagement/${I.slug}/   (${url})`);
+  console.log(`✓ ${I.slug}  v=${v}  →  public/${sitePath(I)}/   (${url})`);
 }
 
 const arg = process.argv[2];

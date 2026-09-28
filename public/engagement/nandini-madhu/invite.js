@@ -107,5 +107,5 @@ window.INVITE = {
     "emblem": "art/ganesha.webp"
   },
   "og": "og.jpg",
-  "v": "9d0701a5"
+  "v": "fd09431d"
 };
