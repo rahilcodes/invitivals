@@ -9,7 +9,7 @@ import StickyBar from '../components/site/StickyBar.astro';
 import {
   WA, SITE, STUDIO, SAMPLE, MOMENTS, TRADITIONS, LANGS, HOW, PROMISE, QUOTES, FAQS, CTAS,
 } from '../data/site';
-import { DESIGNS, LIVE_OCCASIONS, byId, designUrl } from '../data/designs';
+import { DESIGNS, LIVE_OCCASIONS, byId, designUrl, stamp } from '../data/designs';
 
 const title = 'Digital Wedding Invitations for WhatsApp, Made by Hand | Invitivals';
 const description =
@@ -55,8 +55,8 @@ const driftPetal = (p: number[], i: number) =>
   `left:${p[0]}%;top:${(i * 11) % 80}%;width:${p[2] * 1.4}px;height:${p[2] * 2.1}px;background:${PETAL_COLORS[i % 4]};--dx:${p[3] * 3}px;--dy:520px;--rot:${p[3] * 7}deg;animation-duration:${14 + (i % 4) * 3}s;animation-delay:${p[1] * 1.5}s`;
 
 // real invitations fanned behind the sealed one
-const HERO_LEFT = ['/showcase/previews/telugu-wedding-door.webp', '/showcase/previews/gruhapravesha-door.webp', '/showcase/previews/christian-wedding-door.webp'];
-const HERO_RIGHT = ['/showcase/previews/nikah.webp', '/showcase/previews/aqeeqah-door.webp', '/showcase/previews/telugu-wedding.webp'];
+const HERO_LEFT = ['/showcase/previews/telugu-wedding-door.webp', '/showcase/previews/gruhapravesha-door.webp', '/showcase/previews/christian-wedding-door.webp'].map(stamp);
+const HERO_RIGHT = ['/showcase/previews/nikah.webp', '/showcase/previews/aqeeqah-door.webp', '/showcase/previews/telugu-wedding.webp'].map(stamp);
 
 const langFont: Record<string, string> = {
   TE: "'Noto Serif Telugu', serif",

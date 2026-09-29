@@ -9,6 +9,8 @@
 
    The pages, the occasion filters, the sitemap and the footer all follow.
    ───────────────────────────────────────────────────────────────────────── */
+import fs from 'node:fs';
+import { createHash } from 'node:crypto';
 import { OCCASIONS, type Occasion } from './occasions';
 import { wa } from './site';
 
@@ -37,6 +39,21 @@ export interface Design {
   included: string[];
 }
 
+/* Pictures are kept by browsers and by the host for a week. Each address
+   therefore carries a mark of the file's contents, so a re-captured picture
+   is fetched afresh by everyone while the file keeps its name. */
+const marks = new Map<string, string>();
+export const stamp = (src: string) => {
+  if (!marks.has(src)) {
+    let v = '';
+    try {
+      v = '?v=' + createHash('md5').update(fs.readFileSync('public' + src)).digest('hex').slice(0, 8);
+    } catch {}
+    marks.set(src, src + v);
+  }
+  return marks.get(src)!;
+};
+
 const files = import.meta.glob<Design>('./designs/*.json', { eager: true, import: 'default' });
 const known = new Set(OCCASIONS.map((o) => o.slug));
 
@@ -45,7 +62,7 @@ export const DESIGNS: Design[] = Object.entries(files)
     const bad = d.occasions.filter((s) => !known.has(s));
     if (!d.occasions.length || bad.length)
       throw new Error(`${file}: unknown occasion "${bad.join(', ')}" — add it to src/data/occasions.ts`);
-    return d;
+    return { ...d, door: stamp(d.door), open: stamp(d.open) };
   })
   .sort((a, b) => (a.order ?? 9999) - (b.order ?? 9999) || a.title.localeCompare(b.title));
 

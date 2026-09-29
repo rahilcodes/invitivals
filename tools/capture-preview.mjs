@@ -1,13 +1,14 @@
 /* Captures the two gallery pictures for a design: the closed cover and the opened invitation.
  *
- *   node tools/capture-preview.mjs <url> <name> [--wait=7] [--scroll=0]
+ *   node tools/capture-preview.mjs <url> <name> [--wait=7] [--scroll=0] [--click=#tapOpen]
  *
  *   url   the sample invitation on a running dev server,
  *         e.g. http://localhost:4321/engagement/demo/index.html
  *   name  file name under public/showcase/previews, e.g. engagement
  *
  * Writes <name>-door.webp (as the page first appears) and <name>.webp (after one tap in the
- * middle of the screen and --wait seconds). Only ever point this at an anonymised sample.
+ * middle of the screen — or a click on --click, for a sample that opens from its own button —
+ * and --wait seconds). Look at the second picture afterwards: it must show the invitation open. Only ever point this at an anonymised sample.
  */
 import { spawn } from 'node:child_process';
 import fs from 'node:fs';
@@ -24,6 +25,7 @@ if (!url || !name) {
 const flag = (k, d) => Number((flags.find((f) => f.startsWith(`--${k}=`)) || '').split('=')[1] ?? d);
 const WAIT = flag('wait', 7);
 const SCROLL = flag('scroll', 0);
+const CLICK = (flags.find((f) => f.startsWith('--click=')) || '').slice(8);
 
 const OUT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..', 'public', 'showcase', 'previews');
 const CHROME = process.env.CHROME || 'C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe';
@@ -72,9 +74,13 @@ try {
   await sleep(6000);
   await shot(`${name}-door.webp`);
 
-  const at = { x: W / 2, y: H / 2, button: 'left', clickCount: 1 };
-  await send('Input.dispatchMouseEvent', { type: 'mousePressed', ...at });
-  await send('Input.dispatchMouseEvent', { type: 'mouseReleased', ...at });
+  if (CLICK) {
+    await send('Runtime.evaluate', { expression: `document.querySelector(${JSON.stringify(CLICK)}).click()`, userGesture: true });
+  } else {
+    const at = { x: W / 2, y: H / 2, button: 'left', clickCount: 1 };
+    await send('Input.dispatchMouseEvent', { type: 'mousePressed', ...at });
+    await send('Input.dispatchMouseEvent', { type: 'mouseReleased', ...at });
+  }
   await sleep(WAIT * 1000);
   if (SCROLL) {
     await send('Runtime.evaluate', { expression: `window.scrollTo(0, ${SCROLL})` });
