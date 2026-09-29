@@ -1,9 +1,15 @@
 node_modules/
 dist/
+dist.zip
 .astro/
 .DS_Store
 .claude/
 
+# deploy credentials — never commit (see .env.deploy.example)
+.env
+.env.*
+!.env.deploy.example
 
-# designer source packs (large); the built theme art is in public/engagement/_themes/
+# designer source packs (large); the built art lives under public/
 invites/src/rose-red/
+invites/src/nandini-original/

@@ -5,7 +5,7 @@ import '@fontsource/noto-nastaliq-urdu/arabic-400.css';
 import SiteLayout from '../layouts/SiteLayout.astro';
 import InviteCard from '../components/site/InviteCard.astro';
 import Plans from '../components/site/Plans.astro';
-import Timeline from '../components/site/Timeline.astro';
+import StickyBar from '../components/site/StickyBar.astro';
 import {
   WA, SITE, STUDIO, SAMPLE, MOMENTS, TRADITIONS, LANGS, HOW, PROMISE, QUOTES, FAQS, CTAS,
 } from '../data/site';
@@ -86,11 +86,6 @@ const langFont: Record<string, string> = {
           <a class="btn-inv lg" href="#invitations">See real invitations</a>
           <a class="tlink" href={WA.general} target="_blank" rel="noopener">Message us on WhatsApp</a>
         </div>
-        <ul class="hero-marks">
-          <li>Ready in 48 hours</li>
-          <li>Opens from WhatsApp</li>
-          <li>Pay half to begin</li>
-        </ul>
       </div>
 
       <div class="hero-side">
@@ -141,6 +136,12 @@ const langFont: Record<string, string> = {
           <span class="sound-dot"></span><span id="sound-label">Sound off · tap for music</span>
         </button>
       </div>
+
+      <ul class="hero-marks">
+        <li>Ready in 48 hours</li>
+        <li>Opens from WhatsApp</li>
+        <li>Pay half to begin</li>
+      </ul>
     </div>
   </section>
   <div class="scallop down" style="--c:#1C332B"></div>
@@ -239,8 +240,14 @@ const langFont: Record<string, string> = {
         <button class="chip" type="button" data-filter="All" aria-pressed="true">All</button>
         {LIVE_OCCASIONS.map((o) => <button class="chip" type="button" data-filter={o.slug} aria-pressed="false">{o.name}</button>)}
       </div>
-      <div class="scroller">
-        {FEATURED.map((d, i) => <InviteCard invite={d} index={i} />)}
+      <div class="shelf">
+        <div class="scroller" id="scroller" tabindex="0" role="region" aria-label="Real invitations">
+          {FEATURED.map((d, i) => <InviteCard invite={d} index={i} />)}
+        </div>
+        <div class="shelf-nav" aria-hidden="true">
+          <button type="button" tabindex="-1" data-shelf="-1" disabled>←</button>
+          <button type="button" tabindex="-1" data-shelf="1">→</button>
+        </div>
       </div>
       <div class="gallery-foot">
         <p>Every invitation here was made for a real family. Names have been changed for their privacy.</p>
@@ -273,8 +280,11 @@ const langFont: Record<string, string> = {
           TRADITIONS.map((t) => (
             <a class="trad" href={designUrl(byId(t.id)!)}>
               <img src={byId(t.id)!.door} alt="" width="540" height="1085" loading="lazy" decoding="async" />
-              <span class="eyebrow">{t.occasion}</span>
-              <p>{t.line}</p>
+              <span class="trad-copy">
+                <span class="eyebrow">{t.occasion}</span>
+                <span class="trad-line">{t.line}</span>
+                <span class="trad-go">See the invitation</span>
+              </span>
             </a>
           ))
         }
@@ -324,7 +334,7 @@ const langFont: Record<string, string> = {
           ))
         }
       </div>
-      <Timeline />
+      <a class="tlink sm how-more" href="/plans/#checklist">What we need from you</a>
     </div>
   </section>
 
@@ -409,13 +419,7 @@ const langFont: Record<string, string> = {
   </section>
 
   <!-- ══════════════ CONTEXTUAL STICKY BAR (phones) ══════════════ -->
-  <div class="bar">
-    <a class="bar-wa" href={WA.general} target="_blank" rel="noopener" aria-label="Message us on WhatsApp"><span></span></a>
-    <div class="bar-main">
-      <a class="btn" id="bar-cta" href={CTAS.top.href}>{CTAS.top.label}</a>
-      <span class="note" id="bar-note">{CTAS.top.note}</span>
-    </div>
-  </div>
+  <StickyBar label={CTAS.top.label} href={CTAS.top.href} note={CTAS.top.note} live chat />
 
   <script id="cta-data" type="application/json" is:inline set:html={JSON.stringify(CTAS)} />
 </SiteLayout>
@@ -494,6 +498,25 @@ const langFont: Record<string, string> = {
       $('.scroller')?.scrollTo({ left: 0, behavior: reduced ? 'auto' : 'smooth' });
     })
   );
+
+  /* ── the shelf of invitations: arrows where there is a mouse ── */
+  const shelf = $('#scroller');
+  const arrows = $$<HTMLButtonElement>('[data-shelf]');
+  const setArrows = () => {
+    if (!shelf) return;
+    const max = shelf.scrollWidth - shelf.clientWidth - 4;
+    arrows.forEach((a) => (a.disabled = a.dataset.shelf === '-1' ? shelf.scrollLeft <= 4 : shelf.scrollLeft >= max));
+    shelf.parentElement?.classList.toggle('fits', max <= 0);
+  };
+  arrows.forEach((a) =>
+    a.addEventListener('click', () =>
+      shelf?.scrollBy({ left: Number(a.dataset.shelf) * Math.max(260, shelf.clientWidth * 0.8), behavior: reduced ? 'auto' : 'smooth' })
+    )
+  );
+  shelf?.addEventListener('scroll', setArrows, { passive: true });
+  addEventListener('resize', setArrows);
+  filters.forEach((chip) => chip.addEventListener('click', () => setTimeout(setArrows, 50)));
+  setArrows();
 
   /* ── in your language ── */
   const langChips = $$('[data-lang]');
@@ -634,7 +657,7 @@ const langFont: Record<string, string> = {
      phone's width), which tracks the viewport's height as well as its
      width, so the whole scene always fits the first screen. */
   .hero {
-    --pw: min(270px, 22vw, calc((100svh - 64px - 150px) * 9 / 19));
+    --pw: min(270px, 22vw, calc((100svh - 64px - 210px) * 9 / 19));
     position: relative;
     overflow: hidden;
     display: flex;
@@ -669,7 +692,7 @@ const langFont: Record<string, string> = {
     display: grid;
     grid-template-columns: minmax(0, 1.12fr) minmax(0, 0.88fr);
     align-items: center;
-    gap: clamp(28px, 5vw, 72px);
+    gap: clamp(14px, 2.6vh, 28px) clamp(28px, 5vw, 72px);
   }
   .hero-copy {
     display: flex;
@@ -724,6 +747,7 @@ const langFont: Record<string, string> = {
     color: var(--gold);
   }
   .hero-marks {
+    grid-column: 1 / -1;
     list-style: none;
     margin: 0;
     padding: clamp(14px, 2.4vh, 22px) 0 0;
@@ -1036,17 +1060,27 @@ const langFont: Record<string, string> = {
     .hero {
       --pw: min(230px, 52vw);
       min-height: 0;
-      padding: 44px 0 40px;
+      padding: 34px 0 32px;
     }
     .hero-in {
       grid-template-columns: minmax(0, 1fr);
-      gap: 44px;
+      gap: 30px;
+    }
+    .hero-copy {
+      gap: 14px;
+    }
+    .hero-marks {
+      justify-content: center;
+    }
+    .steps li {
+      padding: 22px 0;
     }
     .hero h1 {
       font-size: clamp(36px, 10vw, 52px);
     }
     .hero-copy p {
-      font-size: 19px;
+      font-size: 18px;
+      line-height: 1.45;
     }
     .hero-actions .btn-inv {
       width: 100%;
@@ -1358,6 +1392,47 @@ const langFont: Record<string, string> = {
     width: 240px;
     scroll-snap-align: start;
   }
+  .shelf {
+    position: relative;
+  }
+  .shelf-nav {
+    display: none;
+  }
+  .scroller:focus-visible {
+    outline-offset: -2px;
+  }
+  @media (hover: hover) and (min-width: 820px) {
+    .shelf-nav {
+      position: absolute;
+      right: 0;
+      top: -68px;
+      display: flex;
+      gap: 10px;
+    }
+    .shelf.fits .shelf-nav {
+      display: none;
+    }
+    .shelf-nav button {
+      width: 44px;
+      height: 44px;
+      border: 1px solid var(--gold);
+      border-radius: 50%;
+      background: var(--ivory);
+      color: var(--green);
+      cursor: pointer;
+      font-family: var(--body);
+      font-size: 22px;
+      line-height: 1;
+      transition: background 0.4s ease, opacity 0.4s ease;
+    }
+    .shelf-nav button:hover {
+      background: rgba(203, 180, 139, 0.2);
+    }
+    .shelf-nav button:disabled {
+      opacity: 0.35;
+      cursor: default;
+    }
+  }
   .gallery-foot {
     display: flex;
     flex-wrap: wrap;
@@ -1398,10 +1473,50 @@ const langFont: Record<string, string> = {
     display: flex;
     flex-direction: column;
     gap: 18px;
-    min-height: 280px;
+    transition: background 0.4s ease;
   }
   .trad:hover {
     color: var(--green);
+    background: #fbf7f0;
+  }
+  .trad-copy {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    flex: 1;
+    min-width: 0;
+  }
+  .trad-line {
+    line-height: 1.5;
+    flex: 1;
+  }
+  .trad-go {
+    align-self: flex-start;
+    font-family: var(--serif);
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    border-bottom: 1px solid var(--gold);
+    padding-bottom: 4px;
+    margin-top: 6px;
+  }
+  /* on a phone: the picture beside the words, so four fit in two screens */
+  @media (max-width: 559px) {
+    .trad {
+      flex-direction: row;
+      align-items: flex-start;
+      padding: 18px;
+      gap: 18px;
+    }
+    .trad-grid .trad img {
+      width: 72px;
+      height: 72px;
+      margin: 6px;
+      flex: none;
+    }
+  }
+  .how-more {
+    align-self: flex-start;
   }
   .trad img {
     width: 96px;
@@ -1410,9 +1525,6 @@ const langFont: Record<string, string> = {
     object-fit: cover;
     object-position: 50% 42%;
     box-shadow: 0 0 0 1px var(--gold), 0 0 0 5px var(--ivory), 0 0 0 6px rgba(203, 180, 139, 0.5);
-  }
-  .trad p {
-    line-height: 1.5;
   }
   .lang {
     display: flex;

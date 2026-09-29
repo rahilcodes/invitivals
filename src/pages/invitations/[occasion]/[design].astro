@@ -1,6 +1,7 @@
 ---
 import SiteLayout from '../../../layouts/SiteLayout.astro';
 import InviteCard from '../../../components/site/InviteCard.astro';
+import StickyBar from '../../../components/site/StickyBar.astro';
 import { SITE } from '../../../data/site';
 import { DESIGNS, designsFor, designUrl, designWa, occasionOf, occasionUrl, primary, type Design } from '../../../data/designs';
 
@@ -47,6 +48,7 @@ const jsonLd = {
     { name: d.title, href: url },
   ]}
   jsonLd={jsonLd}
+  bar
 >
   <section class="wrap detail">
     <div class="detail-phone">
@@ -95,7 +97,7 @@ const jsonLd = {
         </ul>
       </div>
 
-      <div class="actions">
+      <div class="actions" id="actions">
         <a class="btn lg block" href={d.href}>Open it</a>
         <span class="note">Opens the live invitation</span>
         <a class="btn-2 lg block" href={designWa(d)} target="_blank" rel="noopener">Create this for us</a>
@@ -118,6 +120,8 @@ const jsonLd = {
       </section>
     )
   }
+
+  <StickyBar label="Open the invitation" href={d.href} note="Opens the live sample" chat />
 </SiteLayout>
 
 <style>
@@ -144,6 +148,21 @@ const jsonLd = {
   .detail-phone .phone {
     width: min(320px, 86vw, calc((100svh - 130px) * 9 / 19));
     min-width: 220px;
+  }
+  /* on a phone the picture leaves room for the name beneath it */
+  @media (max-width: 819px) {
+    .detail {
+      gap: 28px;
+    }
+    .detail-phone .phone {
+      width: min(250px, 64vw);
+      min-width: 0;
+      border-radius: 36px;
+      padding: 9px;
+    }
+    .detail-phone .phone-screen {
+      border-radius: 28px;
+    }
   }
   .detail-phone .opened {
     opacity: 0;

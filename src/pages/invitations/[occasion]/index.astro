@@ -3,6 +3,7 @@ import SiteLayout from '../../../layouts/SiteLayout.astro';
 import InviteCard from '../../../components/site/InviteCard.astro';
 import OccasionChips from '../../../components/site/OccasionChips.astro';
 import Timeline from '../../../components/site/Timeline.astro';
+import StickyBar from '../../../components/site/StickyBar.astro';
 import { SITE, wa } from '../../../data/site';
 import { LIVE_OCCASIONS, designsFor, designUrl, occasionUrl } from '../../../data/designs';
 import type { Occasion } from '../../../data/occasions';
@@ -120,12 +121,7 @@ const jsonLd = [
     </div>
   </section>
 
-  <div class="bar">
-    <div class="bar-main" style="gap:6px">
-      <a class="btn md" href={waHref} target="_blank" rel="noopener" style="font-size:13px">Create this for us</a>
-      <span class="note" style="font-size:10px">Opens WhatsApp</span>
-    </div>
-  </div>
+  <StickyBar label="Create one for us" href={waHref} note="Opens WhatsApp" blank />
 </SiteLayout>
 
 <style>

@@ -2,6 +2,7 @@
 import SiteLayout from '../../layouts/SiteLayout.astro';
 import InviteCard from '../../components/site/InviteCard.astro';
 import OccasionChips from '../../components/site/OccasionChips.astro';
+import StickyBar from '../../components/site/StickyBar.astro';
 import { WA, SITE, STUDIO } from '../../data/site';
 import { DESIGNS, GROUPS, designsFor, designUrl, occasionUrl } from '../../data/designs';
 
@@ -41,6 +42,14 @@ const jsonLd = {
       </p>
     </div>
 
+    <div class="all">
+      <h2 class="eyebrow">All {DESIGNS.length} designs</h2>
+      <OccasionChips />
+      <div class="dgrid">
+        {DESIGNS.map((d, i) => <InviteCard invite={d} index={i} />)}
+      </div>
+    </div>
+
     <div class="by">
       <h2 class="eyebrow">Browse by occasion</h2>
       {
@@ -66,26 +75,13 @@ const jsonLd = {
       }
     </div>
 
-    <div class="all">
-      <h2>All designs</h2>
-      <OccasionChips />
-      <div class="dgrid">
-        {DESIGNS.map((d, i) => <InviteCard invite={d} index={i} />)}
-      </div>
-    </div>
-
     <p class="studio">
       <span class="eyebrow">Also from the studio</span>
       {STUDIO.map((t) => <a href={t.href}>{t.name}</a>)}
     </p>
   </section>
 
-  <div class="bar">
-    <div class="bar-main" style="gap:6px">
-      <a class="btn md" href={WA.general} target="_blank" rel="noopener" style="font-size:13px">Create this for us</a>
-      <span class="note" style="font-size:10px">Opens WhatsApp</span>
-    </div>
-  </div>
+  <StickyBar label="Create one for us" href={WA.general} note="Opens WhatsApp" blank />
 </SiteLayout>
 
 <style>
@@ -102,7 +98,7 @@ const jsonLd = {
     flex-direction: column;
     gap: clamp(20px, 3vw, 32px);
   }
-  .all {
+  .by {
     border-top: 1px solid var(--gold);
     padding-top: clamp(40px, 5vw, 64px);
   }

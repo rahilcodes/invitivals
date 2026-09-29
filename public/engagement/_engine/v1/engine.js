@@ -45,6 +45,7 @@
     if (s._art) return; s._art = true;
     s.querySelectorAll("*").forEach(e => { if (e._bg) { e.style.backgroundImage = "url(" + e._bg + ")"; e._bg = null; } });
     s.querySelectorAll("img[data-src]").forEach(im => { im.src = im.dataset.src; im.removeAttribute("data-src"); });
+    s.querySelectorAll("canvas.scratch").forEach(c => { if (c._load) { c._load(); c._load = null; } });
   }
 
   /* ---- builders ---- */
@@ -80,7 +81,9 @@
   }
   /* live wording. When the couple's own art already carries it (baked), it is kept for screen readers only. */
   function slot(S, d, baked) {
-    let txt = lines(get(d.key)); if (!txt.length) txt = lines(d.text);      // d.text: the theme's own wording, used unless the couple supplies theirs
+    // d.keys: several details set as one line ("Mr. & Mrs." + the names)
+    let txt = d.keys ? [d.keys.map(k => lines(get(k)).join(" ")).filter(Boolean).join(" ")].filter(Boolean) : lines(get(d.key));
+    if (!txt.length) txt = lines(d.text);      // d.text: the theme's own wording, used unless the couple supplies theirs
     if (!txt.length) return null;
     if (d.join != null) txt = [txt.join(d.join)];
     if (baked) { const p = el("p", "sr"); p.textContent = txt.join(" "); return p; }
@@ -114,7 +117,7 @@
     s.appendChild(cv);
 
     const full = fullUrl(S.id), baked = bakedOf(S.id);
-    const img = el("img", "ref"); img.alt = ""; img.decoding = "async"; img.dataset.src = themeUrl("art/" + S.id + "-clean.webp"); cv.appendChild(img);
+    const img = el("img", "ref"); img.alt = ""; img.decoding = "async"; img.dataset.src = themeUrl(S.plate || "art/" + S.id + "-clean.webp"); cv.appendChild(img);
     (S.blocks || []).forEach(b => cv.appendChild(block(S, b, full)));
     (S.overlays || []).concat((I.overlays && I.overlays[S.id]) || []).forEach(o => { if (!hidden(o)) cv.appendChild(overlay(o)); });
     if (S.petals) { const box = el("div", "petals"); setv(box, { y0: S.petals.y0, y1: S.petals.y1 }); cv.appendChild(petalSet(box, S.petals.n)); }
@@ -132,8 +135,42 @@
       const a = hit("a", l.rect, l.to + "-btn" + (l.round ? " round" : ""), l.label);
       a.href = l.to === "maps" ? mapsUrl : "#"; a.target = "_blank"; a.rel = "noopener"; cv.appendChild(a);
     });
+    if (S.scratch) cv.appendChild(scratch(S, s));
     if (i < 2 || qs.has("eager")) hydrate(s);
     return s;
+  }
+
+  /* ---- a cover over part of a plate that the guest wipes away with a finger (or a tap, or Enter) ---- */
+  function scratch(S, sec) {
+    const C = S.scratch, r = C.rect, c = el("canvas", "scratch");
+    place(c, r[0], r[1], r[2] - r[0], r[3] - r[1]);
+    c.setAttribute("role", "button"); c.tabIndex = 0; c.setAttribute("aria-label", C.label || "Touch or swipe to reveal");
+    sec.classList.add("covered");
+    const im = new Image(); let ready = false, done = false, moved = 0, last = null, n = 0;
+    im.onload = () => { c.width = im.naturalWidth; c.height = im.naturalHeight; c.getContext("2d").drawImage(im, 0, 0); ready = true; };
+    c._load = () => { im.src = themeUrl(C.img); };
+    const reveal = () => {
+      if (done) return; done = true; c.classList.add("gone"); sec.classList.remove("covered");
+      say(lines(C.say).map(k => lines(get(k)).join(" ")).filter(Boolean).join(", "));
+      setTimeout(() => c.remove(), 900);
+    };
+    const at = (e) => { const b = c.getBoundingClientRect(); return [(e.clientX - b.left) / b.width * c.width, (e.clientY - b.top) / b.height * c.height]; };
+    const wipe = (p) => {
+      const g = c.getContext("2d"), w = c.width * .085; g.globalCompositeOperation = "destination-out"; g.lineCap = "round"; g.lineJoin = "round"; g.lineWidth = w * 2;
+      g.beginPath(); g.moveTo(last ? last[0] : p[0], last ? last[1] : p[1]); g.lineTo(p[0] + .01, p[1]); g.stroke();
+      if (last) moved += Math.hypot(p[0] - last[0], p[1] - last[1]); last = p;
+      if (++n % 6 === 0 && moved > c.width * .5) {                       // enough of it gone? then let the rest go
+        const d = g.getImageData(0, 0, c.width, c.height).data; let clear = 0, all = 0;
+        for (let i = 3; i < d.length; i += 4 * 97) { all++; if (d[i] < 40) clear++; }
+        if (clear / all > .38) reveal();
+      }
+    };
+    c.addEventListener("pointerdown", e => { if (!ready || done) return; last = null; moved = 0; c._down = true; try { c.setPointerCapture(e.pointerId); } catch (x) {} if (!REDUCED) wipe(at(e)); });
+    c.addEventListener("pointermove", e => { if (c._down && ready && !done && !REDUCED) wipe(at(e)); });
+    c.addEventListener("pointerup", () => { if (c._down && moved < c.width * .04) reveal(); c._down = false; });   // a tap opens it too
+    c.addEventListener("pointercancel", () => { c._down = false; });
+    c.addEventListener("keydown", e => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); reveal(); } });
+    return c;
   }
 
   /* ---- envelope: built from the closed artwork plus the open artwork's card.
@@ -217,6 +254,25 @@
     const fit = () => card.querySelectorAll(".n").forEach(n => { n.style.fontSize = ""; const k = card.clientWidth * .84 / (n.scrollWidth || 1); if (k < 1) n.style.fontSize = (15 * k).toFixed(2) + "cqw"; });
     fit(); addEventListener("resize", fit); if (document.fonts && document.fonts.ready) document.fonts.ready.then(fit);
   }
+  /* ---- entrance: the whole screen is the sealed envelope (theme.entrance.kind "flaps"). Tap: the seal gives and the
+     four flaps draw apart, with the invitation already there behind them. The artwork is shown whole: on a screen of
+     another shape, a soft copy of it fills what is left over. ---- */
+  function buildFlapEntrance() {
+    const N = T.entrance, ent = el("div", "entrance flap-entrance"); ent.id = "entrance";
+    ent.setAttribute("role", "button"); ent.tabIndex = 0; ent.setAttribute("aria-label", (I.ui && I.ui.enterLabel) || "You're invited. Tap the seal to open the invitation");
+    const soft = el("div", "fsoft"); soft.style.backgroundImage = "url(" + themeUrl(N.soft) + ")"; ent.appendChild(soft);
+    const st = el("div", "fstage"); setv(st, { ar: N.W + "/" + N.H, far: (N.W / N.H).toFixed(4), sx: pct(N.seal.cx, N.W), sy: pct(N.seal.cy, N.H) });
+    const probe = el("img"); probe.src = themeUrl(N.img);
+    const poly = (pts) => "polygon(" + pts.map(p => pct(p[0], N.W) + " " + pct(p[1], N.H)).join(",") + ")";
+    ["top", "right", "bottom", "left"].forEach(k => { const d = el("div", "flap " + k); d.style.backgroundImage = "url(" + themeUrl(N.img) + ")"; d.style.clipPath = poly(N.flaps[k]); st.appendChild(d); });
+    const seal = el("div", "fseal"); seal.style.backgroundImage = "url(" + themeUrl(N.img) + ")";
+    seal.style.clipPath = "circle(" + pct(N.seal.r, N.W) + " at " + pct(N.seal.cx, N.W) + " " + pct(N.seal.cy, N.H) + ")"; st.appendChild(seal);
+    const ring = el("span", "fring"); st.appendChild(ring);
+    ent.appendChild(st);
+    const hint = el("div", "tap-hint"); hint.innerHTML = '<span class="tap-text"></span>';
+    hint.querySelector(".tap-text").textContent = (I.ui && I.ui.enter) || "Tap the seal to open"; ent.appendChild(hint);
+    mountEntrance(ent, [probe]);
+  }
   function mountEntrance(ent, ims) {
     const veil = el("div", "veil"); veil.id = "veil"; veil.setAttribute("aria-hidden", "true");
     document.body.insertBefore(veil, document.body.firstChild); document.body.insertBefore(ent, veil);
@@ -229,6 +285,7 @@
   /* ---- door ---- */
   function buildEntrance() {
     if (T.entrance && T.entrance.kind === "envelope") return buildEnvelopeEntrance();
+    if (T.entrance && T.entrance.kind === "flaps") return buildFlapEntrance();
     const D = T.door, ent = el("div", "entrance"); ent.id = "entrance";
     ent.setAttribute("role", "button"); ent.tabIndex = 0; ent.setAttribute("aria-label", (I.ui && I.ui.enterLabel) || "You're invited. Tap to open the invitation");
     ent.innerHTML = '<div class="door-stage"><img class="door-base" alt=""><div class="doorway"><div class="light"></div><div class="doors">' +
@@ -254,6 +311,7 @@
     const ent = $("entrance"), veil = $("veil");
     ent.classList.add("opening");
     const slow = T.entrance && T.entrance.kind === "envelope" ? 900 : 0;   // the card has to rise before the light takes over
+    if (T.entrance && T.entrance.kind === "flaps") document.body.classList.add("parting");   // the invitation is seen through the opening flaps
     const T1 = (REDUCED ? 500 : 1500 + slow) * K, T2 = (REDUCED ? 1300 : 2400 + slow) * K;
     if (qs.has("hold")) return;
     setTimeout(() => veil.classList.add("on"), Math.max(100, T1 - 900));

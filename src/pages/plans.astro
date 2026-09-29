@@ -2,7 +2,8 @@
 import SiteLayout from '../layouts/SiteLayout.astro';
 import Plans from '../components/site/Plans.astro';
 import Timeline from '../components/site/Timeline.astro';
-import { PROMISE, CHECKLIST, PLANS, SITE } from '../data/site';
+import StickyBar from '../components/site/StickyBar.astro';
+import { PROMISE, CHECKLIST, PLANS, SITE, WA } from '../data/site';
 
 const jsonLd = {
   '@type': 'Service',
@@ -29,6 +30,7 @@ const jsonLd = {
   path="/plans/"
   crumbs={[{ name: 'Plans', href: '/plans/' }]}
   jsonLd={jsonLd}
+  bar
 >
   <section class="wrap page">
     <div class="head">
@@ -43,7 +45,7 @@ const jsonLd = {
       <Timeline />
     </div>
 
-    <div class="block-top checklist">
+    <div class="block-top checklist" id="checklist">
       <div class="checklist-copy">
         <span class="eyebrow">The checklist</span>
         <h2>What we need from you, sent on WhatsApp.</h2>
@@ -66,6 +68,8 @@ const jsonLd = {
       </ol>
     </div>
   </section>
+
+  <StickyBar label="Begin on WhatsApp" href={WA.general} note="Opens WhatsApp" blank />
 </SiteLayout>
 
 <style>
@@ -81,6 +85,7 @@ const jsonLd = {
     padding-top: clamp(40px, 5vw, 64px);
   }
   .checklist {
+    scroll-margin-top: 64px;
     display: flex;
     flex-wrap: wrap;
     gap: clamp(32px, 5vw, 80px);

@@ -103,6 +103,7 @@ const favicon =
   </head>
 
   <body class:list={{ 'has-bar': bar }}>
+    <a class="skip" href="#main">Skip to the page</a>
     <header class="nav">
       <div class="wrap nav-in">
         <a class="brand" href="/" aria-label="Invitivals — home">
@@ -135,7 +136,7 @@ const favicon =
       </div>
     </div>
 
-    <main>
+    <main id="main">
       {
         crumbs && (
           <nav class="wrap crumbs" aria-label="Breadcrumb">
@@ -193,10 +194,13 @@ const favicon =
       const menu = document.getElementById('menu');
       const opener = document.querySelector<HTMLButtonElement>('[data-menu-open]');
       const setMenu = (open: boolean) => {
-        if (!menu) return;
+        if (!menu || menu.hidden === !open) return;
         menu.hidden = !open;
         opener?.setAttribute('aria-expanded', String(open));
         document.documentElement.classList.toggle('menu-open', open);
+        // the keyboard follows the menu in, and back out to where it was
+        if (open) menu.querySelector<HTMLElement>('[data-menu-close]')?.focus();
+        else opener?.focus();
       };
       opener?.addEventListener('click', () => setMenu(true));
       document.querySelectorAll('[data-menu-close]').forEach((el) => el.addEventListener('click', () => setMenu(false)));
@@ -303,6 +307,27 @@ const favicon =
       }
       [hidden] {
         display: none !important;
+      }
+
+      .skip {
+        position: absolute;
+        left: 12px;
+        top: -80px;
+        z-index: 100;
+        padding: 12px 18px;
+        background: var(--green);
+        color: var(--ivory);
+        font-family: var(--serif);
+        font-size: 12px;
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+      }
+      .skip:focus {
+        top: 12px;
+        color: var(--ivory);
+      }
+      main {
+        scroll-margin-top: 64px;
       }
 
       .wrap {
@@ -937,11 +962,8 @@ const favicon =
         border: 1px solid var(--gold);
         border-radius: 50%;
       }
-      .bar-wa span {
-        width: 8px;
-        height: 8px;
-        border-radius: 50%;
-        background: var(--green);
+      .bar-wa svg {
+        display: block;
       }
       @media (max-width: 819px) {
         body.has-bar {

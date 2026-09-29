@@ -1,94 +1,95 @@
-import Client from 'file:///C:/Users/moham/.gemini/antigravity/brain/5eab0fb7-5e42-4aed-878d-a3820f01b0d6/scratch/node_modules/ssh2/lib/client.js';
-import fs from 'fs';
-import path from 'path';
+/* ─────────────────────────────────────────────────────────────────────────
+   Upload dist/ to the server over SFTP.
 
-const conn = new Client();
+     npm run deploy            build, check the live links, upload what changed
+     node tools/deploy.mjs --all     upload every file, changed or not
 
-const privateKeyPath = 'C:\\Users\\moham\\.ssh\\id_rsa_hostinger';
-const privateKey = fs.existsSync(privateKeyPath) ? fs.readFileSync(privateKeyPath, 'utf8') : null;
+   Connection details are read from .env.deploy (never committed) — copy
+   .env.deploy.example and fill it in. Nothing on the server is ever deleted,
+   so an address that was live stays live.
+   ───────────────────────────────────────────────────────────────────────── */
+import fs from 'node:fs';
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
+import { spawnSync } from 'node:child_process';
+import ssh2 from 'ssh2';
 
-const config = {
-  host: '195.35.44.109',
-  port: 65002,
-  username: 'u702871438',
-  password: 'Sultan@95731',
-  privateKey,
-};
+const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
+const DIST = path.join(ROOT, 'dist');
+const ALL = process.argv.includes('--all');
 
-const localDistDir = 'c:\\Users\\moham\\OneDrive\\Desktop\\Websites\\wishes\\dist';
-const remoteTargetDir = 'domains/invitivals.com/public_html';
-
-console.log('Connecting to Hostinger SSH with password Sultan@95731...');
-
-conn.on('ready', () => {
-  console.log('SSH Connection Established!');
-
-  conn.sftp(async (err, sftp) => {
-    if (err) {
-      console.error('SFTP init error:', err);
-      conn.end();
-      process.exit(1);
-    }
-
-    function ensureRemoteDir(remoteDir) {
-      return new Promise((resolve) => {
-        sftp.stat(remoteDir, (statErr, stats) => {
-          if (statErr || !stats.isDirectory()) {
-            sftp.mkdir(remoteDir, { mode: 0o755 }, (mkdirErr) => {
-              sftp.chmod(remoteDir, 0o755, () => resolve());
-            });
-          } else {
-            sftp.chmod(remoteDir, 0o755, () => resolve());
-          }
-        });
-      });
-    }
-
-    function uploadFile(localPath, remotePath) {
-      return new Promise((resolve, reject) => {
-        sftp.fastPut(localPath, remotePath, (putErr) => {
-          if (putErr) {
-            console.error(`Failed to upload ${remotePath}:`, putErr);
-            reject(putErr);
-          } else {
-            sftp.chmod(remotePath, 0o644, () => {
-              console.log(`Uploaded: ${remotePath}`);
-              resolve();
-            });
-          }
-        });
-      });
-    }
-
-    async function uploadDirectory(localDir, remoteDir) {
-      await ensureRemoteDir(remoteDir);
-      const items = fs.readdirSync(localDir, { withFileTypes: true });
-
-      for (const item of items) {
-        const fullLocalPath = path.join(localDir, item.name);
-        const fullRemotePath = `${remoteDir}/${item.name}`;
-
-        if (item.isDirectory()) {
-          await uploadDirectory(fullLocalPath, fullRemotePath);
-        } else if (item.isFile()) {
-          await uploadFile(fullLocalPath, fullRemotePath);
-        }
-      }
-    }
-
-    try {
-      console.log(`Uploading built dist files to ${remoteTargetDir}...`);
-      await uploadDirectory(localDistDir, remoteTargetDir);
-      console.log('🎉 DEPLOYMENT SUCCESSFUL!');
-      conn.end();
-      process.exit(0);
-    } catch (e) {
-      console.error('Deployment failed:', e);
-      conn.end();
-      process.exit(1);
-    }
-  });
-}).on('error', (err) => {
-  console.error('Connection error:', err);
+const envFile = path.join(ROOT, '.env.deploy');
+if (fs.existsSync(envFile)) {
+  for (const line of fs.readFileSync(envFile, 'utf8').split(/\r?\n/)) {
+    const m = line.match(/^\s*([A-Z_]+)\s*=\s*(.*?)\s*$/);
+    if (m && !(m[1] in process.env)) process.env[m[1]] = m[2].replace(/^(['"])(.*)\1$/, '$2');
+  }
+}
+const { DEPLOY_HOST, DEPLOY_PORT = '22', DEPLOY_USER, DEPLOY_DIR, DEPLOY_KEY, DEPLOY_PASSWORD } = process.env;
+if (!DEPLOY_HOST || !DEPLOY_USER || !DEPLOY_DIR) {
+  console.error('Missing DEPLOY_HOST, DEPLOY_USER or DEPLOY_DIR — copy .env.deploy.example to .env.deploy and fill it in.');
   process.exit(1);
-}).connect(config);
+}
+const privateKey = DEPLOY_KEY && fs.existsSync(DEPLOY_KEY) ? fs.readFileSync(DEPLOY_KEY, 'utf8') : undefined;
+if (!privateKey && !DEPLOY_PASSWORD) {
+  console.error('No SSH key found at DEPLOY_KEY and no DEPLOY_PASSWORD set.');
+  process.exit(1);
+}
+
+// never upload a build that would break a link someone already has
+const check = spawnSync(process.execPath, [path.join(ROOT, 'tools/check-links.mjs')], { stdio: 'inherit' });
+if (check.status !== 0) {
+  console.error('\nNot deployed: fix the links above first.');
+  process.exit(1);
+}
+
+const conn = new ssh2.Client();
+conn
+  .on('ready', () => {
+    conn.sftp(async (err, sftp) => {
+      if (err) throw err;
+      const stat = (p) => new Promise((r) => sftp.stat(p, (e, s) => r(e ? null : s)));
+      const mkdir = (p) => new Promise((r) => sftp.mkdir(p, { mode: 0o755 }, () => r()));
+      const put = (l, p) => new Promise((ok, no) => sftp.fastPut(l, p, { mode: 0o644 }, (e) => (e ? no(e) : ok())));
+
+      let sent = 0;
+      let same = 0;
+      const upload = async (localDir, remoteDir) => {
+        const s = await stat(remoteDir);
+        if (!s) await mkdir(remoteDir);
+        for (const item of fs.readdirSync(localDir, { withFileTypes: true })) {
+          const local = path.join(localDir, item.name);
+          const remote = `${remoteDir}/${item.name}`;
+          if (item.isDirectory()) await upload(local, remote);
+          else if (item.isFile()) {
+            const l = fs.statSync(local);
+            const r = ALL ? null : await stat(remote);
+            // pages are small and always sent; pictures and audio only when they differ
+            const page = /\.(html|xml|txt|js|css|json|ics|htaccess)$/.test(item.name) || item.name === '.htaccess';
+            if (r && !page && r.size === l.size && r.mtime * 1000 >= l.mtimeMs) {
+              same++;
+              continue;
+            }
+            await put(local, remote);
+            sent++;
+            console.log('uploaded', remote.slice(DEPLOY_DIR.length));
+          }
+        }
+      };
+
+      try {
+        await upload(DIST, DEPLOY_DIR);
+        console.log(`\nDeployed: ${sent} uploaded, ${same} unchanged.`);
+        conn.end();
+      } catch (e) {
+        console.error('Deployment failed:', e.message);
+        conn.end();
+        process.exit(1);
+      }
+    });
+  })
+  .on('error', (e) => {
+    console.error('Connection error:', e.message);
+    process.exit(1);
+  })
+  .connect({ host: DEPLOY_HOST, port: Number(DEPLOY_PORT), username: DEPLOY_USER, privateKey, password: DEPLOY_PASSWORD || undefined });

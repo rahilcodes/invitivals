@@ -12,7 +12,7 @@ public/engagement/<slug>/                index.html, invite.js, event.ics (gener
 | theme | design | entrance | sample |
 | --- | --- | --- | --- |
 | `floral-palace` | engagement, painted palace plates | a door | `invites/demo.json` |
-| `rose-red` | wedding / nikah, burgundy, blush and gold | a sealed envelope | `invites/rose-red-demo.json` |
+| `rose-red` | wedding / nikah, deep red, blush and gold | a sealed envelope, swipe to reveal the date | `invites/rose-red-demo.json` |
 
 ## New couple
 
@@ -79,22 +79,26 @@ after a change, test by sending the link with `?v=2` on the end.
 
 ## Rose Red
 
+The designer's finished pages, used whole: the envelope, the couple, the date, the venue, thank you.
 Same fields as above, plus:
 
 | field | what it is |
 | --- | --- |
-| `blessing` | optional: a line above the occasion, e.g. `بِسْمِ ٱللَّٰهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ` (leave it out for none) |
-| `hide` | optional: pieces to leave out. `["figures"]` removes the illustrated couple from the first page |
-| `closing.message` / `closing.label` | optional: the thank-you lines and the words above the family name (default: "With love") |
-| `ui.venueTitle` / `ui.thanksTitle` | optional: the two script headings (default: "The Venue", "Thank You") |
-| `ui.invited` / `ui.enter` | optional: the wording on the envelope's card and under the envelope |
+| `blessing` | optional: a line at the very top, e.g. `بِسْمِ ٱللَّٰهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ` (leave it out for none) |
+| `ui.enter` | optional: the words under the seal (default: "Tap the seal to open") |
 
-`event.extra` is not printed in this theme; put a second timing in `event.time`, e.g. `["7:00 PM", "· Dinner 8:30 PM"]`.
-Without `venue.area` the map is shown without a place name.
+Live text: hosts, the invitation lines, both names, day, date, time, venue, address, the map's place name and
+`closing.from`. Painted, the same for everyone: "Together with their families", "Your presence will make our
+celebration more special.", "Save Our Date", "Venue", the thank-you page.
+`event.extra` is not printed in this theme; put a second timing in `event.time`.
+Without `venue.area` the map is shown without a place name. The illustrated couple is part of the page and cannot be hidden.
 
-The designer delivers loose elements, not finished pages. `node tools/build-rose-red-art.mjs` lays them out
-into one plate per section (that file decides where each flower sits; `theme.js` decides where the wording sits).
-The source packs are in `invites/src/rose-red/` — kept out of git and out of `public/`, so they are never uploaded.
+The guest taps the seal, the envelope's flaps draw apart, and the date waits under a gold cover until it is
+swiped (or tapped) away.
+
+`node tools/build-rose-red-art.mjs` makes the plates from the pages in `invites/src/rose-red/pages/`: it clears
+the sample couple's wording and nothing else. The rects there and the slots in `theme.js` are the same numbers.
+For a new page from the designer: put it in `pages/`, list what to clear, add its section to `theme.js`.
 
 ## After changing the engine or the theme
 

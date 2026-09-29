@@ -1,13 +1,18 @@
 {
-  "name": "wedding-luxe",
-  "description": "Wedding Luxe V1 — premium digital wedding invitation template",
+  "name": "invitivals",
+  "description": "Invitivals — the studio site and every invitation it serves",
   "type": "module",
   "version": "1.0.0",
   "private": true,
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",
-    "preview": "astro preview"
+    "preview": "astro preview",
+    "links": "node tools/check-links.mjs",
+    "links:update": "node tools/check-links.mjs --update",
+    "check": "astro build && node tools/check-links.mjs",
+    "deploy": "astro build && node tools/deploy.mjs",
+    "invite": "node tools/new-invite.mjs"
   },
   "dependencies": {
     "@fontsource/amiri": "^5.3.0",
@@ -32,5 +37,8 @@
     "@fontsource/prata": "^5.3.0",
     "@fontsource/rozha-one": "^5.3.0",
     "astro": "^5.12.0"
+  },
+  "devDependencies": {
+    "ssh2": "^1.17.0"
   }
 }

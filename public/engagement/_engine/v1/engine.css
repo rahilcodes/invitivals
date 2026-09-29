@@ -236,9 +236,44 @@ body.away .petals-fixed .petal{animation-play-state:paused}
 .env-entrance.opening .ehead{opacity:0}
 .env-entrance .tap-hint{position:relative;left:auto;right:auto;bottom:auto;flex-direction:column-reverse}
 
+/* ---------- entrance (flaps): the artwork whole, its four flaps drawn apart ---------- */
+.flap-entrance{background:var(--theme,#3d0c1a)}
+.fsoft{position:absolute;inset:-6%;background-size:cover;background-position:50% 50%;transition:opacity .7s ease .35s}
+.fstage{position:relative;aspect-ratio:var(--ar);width:min(100vw,calc(100vh * var(--far)));width:min(100vw,calc(100dvh * var(--far)))}
+.flap,.fseal{position:absolute;inset:0;background-size:100% 100%}
+/* where the artwork ends short of the screen, it melts into the soft copy behind it */
+@media (max-aspect-ratio:57/100){.flap,.fseal{-webkit-mask-image:linear-gradient(180deg,transparent 0,#000 5%,#000 95%,transparent 100%);mask-image:linear-gradient(180deg,transparent 0,#000 5%,#000 95%,transparent 100%)}}
+@media (min-aspect-ratio:58/100){.flap,.fseal{-webkit-mask-image:linear-gradient(90deg,transparent 0,#000 5%,#000 95%,transparent 100%);mask-image:linear-gradient(90deg,transparent 0,#000 5%,#000 95%,transparent 100%)}}
+.flap{transition:transform 1.9s cubic-bezier(.62,.02,.3,1) .42s,opacity .8s ease 1.5s;will-change:transform}
+.fseal{transform-origin:var(--sx) var(--sy);transition:transform .2s cubic-bezier(.3,1.5,.5,1);animation:sealbreath 3.2s ease-in-out infinite}
+@keyframes sealbreath{0%,100%{filter:brightness(1)}50%{filter:brightness(1.09)}}
+.fring{position:absolute;left:var(--sx);top:var(--sy);width:34%;aspect-ratio:1;border-radius:50%;border:1.5px solid rgba(255,226,170,.75);transform:translate(-50%,-50%) scale(.85);opacity:0;pointer-events:none;animation:fring 3.2s ease-out infinite}
+@keyframes fring{0%{opacity:.8;transform:translate(-50%,-50%) scale(.85)}70%,100%{opacity:0;transform:translate(-50%,-50%) scale(1.3)}}
+.flap-entrance .tap-text{color:#fbe9c6;text-shadow:0 1px 3px rgba(30,0,8,.9),0 0 14px rgba(30,0,8,.8)}
+.flap-entrance.opening{background:transparent;pointer-events:none}
+.flap-entrance.opening .fsoft{opacity:0}
+.flap-entrance.opening .fseal{animation:sealgo .42s ease-in forwards}
+@keyframes sealgo{0%{transform:scale(1)}40%{transform:scale(.93)}75%{transform:scale(1.04);opacity:1}100%{transform:scale(1.04);opacity:0}}
+.flap-entrance.opening .fring{animation:none;opacity:0}
+.flap-entrance.opening .flap.top{transform:translateY(-104%)}
+.flap-entrance.opening .flap.bottom{transform:translateY(104%)}
+.flap-entrance.opening .flap.left{transform:translateX(-104%)}
+.flap-entrance.opening .flap.right{transform:translateX(104%)}
+.flap-entrance.opening .flap{opacity:0}
+body.parting .veil{display:none}
+
+/* ---------- a cover the guest wipes away ---------- */
+.scratch{position:absolute;left:calc(var(--x)/var(--W)*100%);top:calc(var(--y)/var(--H)*100%);width:calc(var(--bw)/var(--W)*100%);height:calc(var(--bh)/var(--H)*100%);
+  z-index:25;touch-action:pan-y;cursor:pointer;-webkit-tap-highlight-color:transparent;transition:opacity .8s ease,transform .8s ease;outline:none}
+.scratch.gone{opacity:0;transform:scale(1.02);pointer-events:none}
+.scratch:focus-visible{outline:2px solid rgba(255,226,170,.9);outline-offset:-4px}
+/* what lies under the cover stays out of reach, and unread, until it is revealed */
+.sec.covered .slot,.sec.covered .hit{visibility:hidden}
+
 /* ---------- reduced motion ---------- */
 @media (prefers-reduced-motion:reduce){
-  .sway,.lantern-light,.petal,.tap-text,.tap-ring::after,.twinkle,.waft,.envl{animation:none!important}
+  .sway,.lantern-light,.petal,.tap-text,.tap-ring::after,.twinkle,.waft,.envl,.fseal,.fring{animation:none!important}
+  .flap{transition-duration:1s}
   .tblock,.slot.rise,.ov.rise{opacity:1;transform:none;transition:none}
   .petals-fixed{display:none}
   .lantern-light{opacity:.7}

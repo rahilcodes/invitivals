@@ -1,0 +1,18 @@
+# Invitivals — server rules, kept deliberately small.
+# https and compression are already handled by the host.
+
+# our own "page not found", with the way back to the invitations
+ErrorDocument 404 /404.html
+
+<IfModule mod_headers.c>
+  # pages are always asked for again, so a correction reaches guests at once
+  <FilesMatch "\.(html|ics)$">
+    Header set Cache-Control "no-cache"
+  </FilesMatch>
+  Header set X-Content-Type-Options "nosniff"
+</IfModule>
+
+<IfModule mod_mime.c>
+  AddType text/calendar .ics
+  AddType image/webp .webp
+</IfModule>
