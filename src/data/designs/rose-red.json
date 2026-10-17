@@ -1,0 +1,28 @@
+{
+  "id": "rose-red",
+  "title": "The Rose Red",
+  "occasions": ["nikah", "engagement"],
+  "order": 3,
+  "names": "Ayesha & Imran",
+  "date": "17 January 2027 · Bengaluru",
+  "href": "/muslim-wedding-rose-red/index.html",
+  "door": "/showcase/previews/rose-red-door.webp",
+  "open": "/showcase/previews/rose-red.webp",
+  "share": "/showcase/previews/rose-red.jpg",
+  "bg": "#4A1022",
+  "palette": ["#5A1226", "#E8A9B4", "#F3D596"],
+  "languages": ["English", "Arabic"],
+  "intro": "A deep red envelope sealed in rose-gold wax. It opens on Bismillah and the two names above a lake at sunset, the date under a gold cover that guests wipe away, and the way to the venue.",
+  "events": [
+    { "name": "Nikah", "when": "17 Jan · 12.30 pm" }
+  ],
+  "included": [
+    "An envelope that opens when the seal is tapped",
+    "Bismillah, and a welcome from the parents by name",
+    "The date hidden under gold, revealed with a swipe",
+    "Saved to the calendar in one tap",
+    "Venue with a map and directions",
+    "Music from the first tap",
+    "Your names set over the artwork, nothing repainted"
+  ]
+}

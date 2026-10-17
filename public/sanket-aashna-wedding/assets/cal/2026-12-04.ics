@@ -1,0 +1,23 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Invitivals//Wedding//EN
+CALSCALE:GREGORIAN
+BEGIN:VEVENT
+UID:sanket-aashna-wedding-2026-12-04-0@invitivals.com
+DTSTAMP:20261011T183000Z
+DTSTART:20261204T080000Z
+DTEND:20261204T100000Z
+SUMMARY:Faldan & Tilak — Sanket & Aashna
+LOCATION:Rama Celebration\, Capt. Shashikant Sharma Marg\, Opp. Metro Pillar No. 231\, Sector 51\, Noida – 201301
+DESCRIPTION:Wedding of Sanket & Aashna. https://invitivals.com/sanket-aashna-wedding/
+END:VEVENT
+BEGIN:VEVENT
+UID:sanket-aashna-wedding-2026-12-04-1@invitivals.com
+DTSTAMP:20261011T183000Z
+DTSTART:20261204T133000Z
+DTEND:20261204T153000Z
+SUMMARY:Engagement & Sangeet — Sanket & Aashna
+LOCATION:Rama Celebration\, Capt. Shashikant Sharma Marg\, Opp. Metro Pillar No. 231\, Sector 51\, Noida – 201301
+DESCRIPTION:Wedding of Sanket & Aashna. https://invitivals.com/sanket-aashna-wedding/
+END:VEVENT
+END:VCALENDAR

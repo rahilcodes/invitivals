@@ -1,0 +1,50 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Invitivals//Wedding//EN
+CALSCALE:GREGORIAN
+BEGIN:VEVENT
+UID:sanket-aashna-wedding-2026-12-05-0@invitivals.com
+DTSTAMP:20261011T183000Z
+DTSTART:20261205T040000Z
+DTEND:20261205T060000Z
+SUMMARY:Tel & Haldi Ceremony — Sanket & Aashna
+LOCATION:Rama Celebration\, Capt. Shashikant Sharma Marg\, Opp. Metro Pillar No. 231\, Sector 51\, Noida – 201301
+DESCRIPTION:Wedding of Sanket & Aashna. https://invitivals.com/sanket-aashna-wedding/
+END:VEVENT
+BEGIN:VEVENT
+UID:sanket-aashna-wedding-2026-12-05-1@invitivals.com
+DTSTAMP:20261011T183000Z
+DTSTART:20261205T063000Z
+DTEND:20261205T083000Z
+SUMMARY:Phoolon Wali Haldi — Sanket & Aashna
+LOCATION:Rama Celebration\, Capt. Shashikant Sharma Marg\, Opp. Metro Pillar No. 231\, Sector 51\, Noida – 201301
+DESCRIPTION:Wedding of Sanket & Aashna. https://invitivals.com/sanket-aashna-wedding/
+END:VEVENT
+BEGIN:VEVENT
+UID:sanket-aashna-wedding-2026-12-05-2@invitivals.com
+DTSTAMP:20261011T183000Z
+DTSTART:20261205T133000Z
+DTEND:20261205T143000Z
+SUMMARY:Baraat Prasthan — Sanket & Aashna
+LOCATION:Rama Celebration\, Capt. Shashikant Sharma Marg\, Opp. Metro Pillar No. 231\, Sector 51\, Noida – 201301
+DESCRIPTION:Wedding of Sanket & Aashna. https://invitivals.com/sanket-aashna-wedding/
+END:VEVENT
+BEGIN:VEVENT
+UID:sanket-aashna-wedding-2026-12-05-3@invitivals.com
+DTSTAMP:20261011T183000Z
+DTSTART:20261205T143000Z
+DTEND:20261205T153000Z
+SUMMARY:Wedding Celebration — Sanket & Aashna
+LOCATION:Rama Celebration\, Capt. Shashikant Sharma Marg\, Opp. Metro Pillar No. 231\, Sector 51\, Noida – 201301
+DESCRIPTION:Wedding of Sanket & Aashna. https://invitivals.com/sanket-aashna-wedding/
+END:VEVENT
+BEGIN:VEVENT
+UID:sanket-aashna-wedding-2026-12-05-4@invitivals.com
+DTSTAMP:20261011T183000Z
+DTSTART:20261205T153000Z
+DTEND:20261205T173000Z
+SUMMARY:Baraat Arrival — Sanket & Aashna
+LOCATION:Rama Celebration\, Capt. Shashikant Sharma Marg\, Opp. Metro Pillar No. 231\, Sector 51\, Noida – 201301
+DESCRIPTION:Wedding of Sanket & Aashna. https://invitivals.com/sanket-aashna-wedding/
+END:VEVENT
+END:VCALENDAR

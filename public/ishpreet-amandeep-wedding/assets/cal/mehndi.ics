@@ -1,0 +1,21 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Creativals//Wedding Invitation//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:20261212T123000Z-mehndi@invitivals.com
+DTSTAMP:20261010T140605Z
+DTSTART:20261212T123000Z
+DTEND:20261212T153000Z
+SUMMARY:Mehndi Di Raat — Ishpreet & Amandeep
+DESCRIPTION:Music\, Dance & Dinner
+LOCATION:Hotel Picasso Prive\, A14\, Naraina Vihar\, New Delhi
+URL:https://invitivals.com/ishpreet-amandeep-wedding/
+BEGIN:VALARM
+TRIGGER:-P1D
+ACTION:DISPLAY
+DESCRIPTION:Mehndi Di Raat — Ishpreet & Amandeep
+END:VALARM
+END:VEVENT
+END:VCALENDAR

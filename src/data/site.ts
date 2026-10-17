@@ -21,17 +21,6 @@ export const WA = {
 // The designs themselves are in src/data/designs/ (see designs.ts),
 // the occasions they are browsed by in occasions.ts.
 
-// The original illustrated studio templates stay available as extra styles.
-export const STUDIO = [
-  { href: '/hindu', name: 'The Mandap' },
-  { href: '/mountain', name: 'The Mountain' },
-  { href: '/nikah', name: 'The Fanoos' },
-  { href: '/sikh', name: 'The Phulkari' },
-  { href: '/christian', name: 'The Chapel' },
-  { href: '/modern', name: 'The Rooftop' },
-  { href: '/luxe', name: 'The Estate' },
-];
-
 // The sample couple used in the hero, the chat mock and the walkthrough —
 // the same fictional names as the live Telugu wedding sample.
 export const SAMPLE = {

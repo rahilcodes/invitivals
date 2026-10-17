@@ -1,0 +1,51 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Creativals//Wedding Invitation//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:20261212T130000Z-jaggo@invitivals.com
+DTSTAMP:20261012T062032Z
+DTSTART:20261212T130000Z
+DTEND:20261212T160000Z
+SUMMARY:Jaggo — Amandeep & Ishpreet
+DESCRIPTION:An Evening of Song & Dance Followed by the Batna & Haldi ceremony.
+LOCATION:Clay 1 Glorious\, Moti Nagar\, New Delhi
+URL:https://invitivals.com/amandeep-ishpreet-wedding/
+BEGIN:VALARM
+TRIGGER:-P1D
+ACTION:DISPLAY
+DESCRIPTION:Jaggo — Amandeep & Ishpreet
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:20261213T050000Z-anand-karaj@invitivals.com
+DTSTAMP:20261012T062032Z
+DTSTART:20261213T050000Z
+DTEND:20261213T060000Z
+SUMMARY:Anand Karaj — Amandeep & Ishpreet
+DESCRIPTION:The Laavan We humbly request your presence as our daughter takes the four laavan around Sri Guru Granth Sahib Ji. Kindly cover your head and remove footwear before entering the Darbar Sahib.
+LOCATION:Gurudwara Sri Guru Singh Sabha\, Kirti Nagar\, New Delhi – 110015
+URL:https://invitivals.com/amandeep-ishpreet-wedding/
+BEGIN:VALARM
+TRIGGER:-P1D
+ACTION:DISPLAY
+DESCRIPTION:Anand Karaj — Amandeep & Ishpreet
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:20261213T060000Z-reception@invitivals.com
+DTSTAMP:20261012T062032Z
+DTSTART:20261213T060000Z
+DTEND:20261213T090000Z
+SUMMARY:Reception — Amandeep & Ishpreet
+DESCRIPTION:Celebrating the Newlyweds
+LOCATION:Banquet Majestic Crown\, 24\, Najafgarh Road Industrial Area\, New Delhi – 110015
+URL:https://invitivals.com/amandeep-ishpreet-wedding/
+BEGIN:VALARM
+TRIGGER:-P1D
+ACTION:DISPLAY
+DESCRIPTION:Reception — Amandeep & Ishpreet
+END:VALARM
+END:VEVENT
+END:VCALENDAR

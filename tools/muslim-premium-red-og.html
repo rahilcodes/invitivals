@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<!-- Link-preview card for public/muslim-premium-red (1200×630). Rendered with headless Chrome:
+     open as file:///…/tools/muslim-premium-red-og.html?a=Ahmad&b=Layla&d=13%20February%202027&p=Hyderabad
+     and screenshot the 1200×630 viewport to public/muslim-premium-red/assets/og.jpg
+     Art comes from the opening film's first frame (velvet + seal) and last frame (arch + couple). -->
+<html><head><meta charset="utf-8">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Great+Vibes&family=Amiri&display=block" rel="stylesheet">
+<style>
+  html, body { margin: 0; width: 1200px; height: 630px; overflow: hidden; background: #2a0508; }
+  .velvet { position: absolute; inset: 0; background: url(../public/muslim-premium-red/assets/intro-poster.jpg) 100% 0 / 1500px auto; filter: brightness(.62) saturate(1.05); }
+  .velvet::after { content: ''; position: absolute; inset: 0; background: radial-gradient(70% 85% at 36% 50%, rgba(42, 5, 8, .15), rgba(22, 2, 4, .75)), linear-gradient(transparent 78%, rgba(22, 2, 4, .95) 100%); }
+  .arch { position: absolute; top: 0; right: 0; width: 470px; height: 630px; background: url(../public/muslim-premium-red/assets/intro-last.jpg) 50% 58% / 470px auto no-repeat;
+          -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 90px); mask-image: linear-gradient(90deg, transparent 0, #000 90px); }
+  .edge { position: absolute; top: 34px; bottom: 34px; left: 34px; right: 34px; border: 1px solid rgba(217, 178, 106, .5); pointer-events: none; }
+  .edge::before { content: ''; position: absolute; inset: 6px; border: 1px solid rgba(217, 178, 106, .22); }
+  .copy { position: absolute; left: 70px; top: 0; bottom: 0; width: 640px; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; }
+  .seal { width: 112px; height: 112px; border-radius: 50%;
+          background: url(../public/muslim-premium-red/assets/intro-poster.jpg) no-repeat; background-size: 720px 1280px; background-position: -270px -563px;
+          box-shadow: 0 0 0 1px rgba(246, 226, 176, .35), 0 0 40px 6px rgba(255, 200, 120, .28); }
+  .bism { margin-top: 18px; font: 30px/1 Amiri, serif; color: #e9c98a; opacity: .9; direction: rtl; }
+  .eyebrow { margin-top: 18px; font: 600 19px 'Cormorant Garamond', serif; letter-spacing: .42em; color: #d9b26a; }
+  .names { margin-top: 2px; font: 104px/1.08 'Great Vibes', cursive; white-space: nowrap;
+           background: linear-gradient(100deg, #b8873a, #f3dca0 35%, #fff2c8 50%, #e3bd6e 65%, #a87a2a); -webkit-background-clip: text; color: transparent;
+           filter: drop-shadow(0 3px 8px rgba(0, 0, 0, .45)); }
+  .names i { font-style: normal; font-size: 78px; padding: 0 26px 0 18px; }
+  .rule { width: 300px; height: 1px; margin: 10px auto 20px; background: linear-gradient(90deg, transparent, #d9b26a, transparent); }
+  .date { font: 600 25px 'Cormorant Garamond', serif; letter-spacing: .22em; color: #f3e2bd; text-transform: uppercase; }
+  .place { margin-top: 8px; font: italic 500 25px 'Cormorant Garamond', serif; color: #d9b26a; }
+</style></head>
+<body>
+  <div class="velvet"></div>
+  <div class="arch"></div>
+  <div class="edge"></div>
+  <div class="copy">
+    <div class="seal"></div>
+    <div class="bism">بِسْمِ ٱللَّٰهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ</div>
+    <div class="eyebrow">THE NIKAH OF</div>
+    <div class="names"><span id="a"></span><i>&amp;</i><span id="b"></span></div>
+    <div class="rule"></div>
+    <div class="date" id="d"></div>
+    <div class="place" id="p"></div>
+  </div>
+  <script>
+    var q = new URLSearchParams(location.search);
+    ['a', 'b', 'd', 'p'].forEach(function (k) { document.getElementById(k).textContent = q.get(k) || ''; });
+  </script>
+</body></html>

@@ -1,0 +1,14 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Invitivals//Wedding//EN
+CALSCALE:GREGORIAN
+BEGIN:VEVENT
+UID:aashna-sanket-wedding-2026-12-05-0@invitivals.com
+DTSTAMP:20261011T183000Z
+DTSTART:20261205T143000Z
+DTEND:20261205T163000Z
+SUMMARY:Wedding Celebration — Aashna & Sanket
+LOCATION:Rama Celebration\, Capt. Shashikant Sharma Marg\, Opp. Metro Pillar No. 231\, Sector 51\, Noida – 201301
+DESCRIPTION:Wedding of Aashna & Sanket. https://invitivals.com/aashna-sanket-wedding/
+END:VEVENT
+END:VCALENDAR

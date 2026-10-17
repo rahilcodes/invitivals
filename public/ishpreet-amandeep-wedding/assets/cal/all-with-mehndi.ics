@@ -1,0 +1,51 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Creativals//Wedding Invitation//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:20261213T033000Z-sehrabandi@invitivals.com
+DTSTAMP:20261012T062031Z
+DTSTART:20261213T033000Z
+DTEND:20261213T063000Z
+SUMMARY:Sehrabandi & Ghurchari — Ishpreet & Amandeep
+DESCRIPTION:The groom sets out
+LOCATION:Hotel Picasso Prive\, Naraina\, New Delhi
+URL:https://invitivals.com/ishpreet-amandeep-wedding/
+BEGIN:VALARM
+TRIGGER:-P1D
+ACTION:DISPLAY
+DESCRIPTION:Sehrabandi & Ghurchari — Ishpreet & Amandeep
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:20261213T050000Z-anand-karaj@invitivals.com
+DTSTAMP:20261012T062031Z
+DTSTART:20261213T050000Z
+DTEND:20261213T070000Z
+SUMMARY:Anand Karaj — Ishpreet & Amandeep
+DESCRIPTION:The Blissful Union We humbly request your presence as we take the four laavan around Sri Guru Granth Sahib Ji. Kindly cover your head and remove footwear before entering the Darbar Sahib.
+LOCATION:Gurudwara Sri Guru Singh Sabha\, Kirti Nagar\, New Delhi – 110015
+URL:https://invitivals.com/ishpreet-amandeep-wedding/
+BEGIN:VALARM
+TRIGGER:-P1D
+ACTION:DISPLAY
+DESCRIPTION:Anand Karaj — Ishpreet & Amandeep
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:20261213T063000Z-lunch@invitivals.com
+DTSTAMP:20261012T062031Z
+DTSTART:20261213T063000Z
+DTEND:20261213T093000Z
+SUMMARY:Wedding Lunch — Ishpreet & Amandeep
+DESCRIPTION:Food · Family · Festivity
+LOCATION:Banquet Majestic Crown\, 24\, Najafgarh Road Industrial Area\, New Delhi – 110015
+URL:https://invitivals.com/ishpreet-amandeep-wedding/
+BEGIN:VALARM
+TRIGGER:-P1D
+ACTION:DISPLAY
+DESCRIPTION:Wedding Lunch — Ishpreet & Amandeep
+END:VALARM
+END:VEVENT
+END:VCALENDAR

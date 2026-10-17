@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<!-- Link-preview card for public/hindu-south-wedding (1200×630). Rendered with headless Chrome:
+     open as file:///…/tools/hindu-south-og.html?a=Anirudh&b=Sreya&d=24%20November%202026&p=Hyderabad
+     and screenshot the 1200×630 viewport to public/hindu-south-wedding/assets/og.jpg -->
+<html><head><meta charset="utf-8">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600&family=Cormorant+Garamond:ital@1&family=Pinyon+Script&display=block" rel="stylesheet">
+<style>
+  html, body { margin: 0; width: 1200px; height: 630px; overflow: hidden; background: #f4e4ca; }
+  .art { position: absolute; inset: 0; background: url(../public/hindu-south-wedding/assets/hero-arch.webp) center 62% / cover; }
+  .art::after { content: ''; position: absolute; inset: 0; background: linear-gradient(90deg, rgba(247, 235, 210, .97) 0 44%, rgba(247, 235, 210, .55) 62%, rgba(247, 235, 210, 0) 80%); }
+  .couple { position: absolute; right: 120px; bottom: -6px; height: 470px; filter: drop-shadow(0 14px 16px rgba(74, 14, 24, .3)); }
+  .copy { position: absolute; left: 80px; top: 0; bottom: 0; width: 520px; display: flex; flex-direction: column; justify-content: center; text-align: center; }
+  .eyebrow { font: 500 20px Cinzel, serif; letter-spacing: .34em; color: #8c621d; }
+  .name { font: 112px/1.02 'Pinyon Script', cursive; background: linear-gradient(100deg, #7d5518, #b88932 30%, #d9b770 50%, #a87a2a 70%, #7d5518); -webkit-background-clip: text; color: transparent; }
+  .amp { font: italic 44px 'Cormorant Garamond', serif; color: #651522; line-height: .8; }
+  .rule { width: 260px; height: 1px; margin: 22px auto 18px; background: linear-gradient(90deg, transparent, #b88932, transparent); }
+  .date { font: 600 26px Cinzel, serif; letter-spacing: .16em; color: #651522; }
+  .place { margin-top: 6px; font: italic 26px 'Cormorant Garamond', serif; color: #6a4b35; }
+</style></head>
+<body>
+  <div class="art"></div>
+  <img class="couple" src="../public/hindu-south-wedding/assets/couple.webp" alt="">
+  <div class="copy">
+    <div class="eyebrow">THE WEDDING OF</div>
+    <div class="name" id="a"></div><div class="amp">&amp;</div><div class="name" id="b"></div>
+    <div class="rule"></div>
+    <div class="date" id="d"></div>
+    <div class="place" id="p"></div>
+  </div>
+  <script>
+    const q = new URLSearchParams(location.search);
+    for (const k of ['a', 'b', 'd', 'p']) document.getElementById(k).textContent = q.get(k) || '';
+  </script>
+</body></html>

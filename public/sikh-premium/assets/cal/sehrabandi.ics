@@ -1,0 +1,21 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Creativals//Wedding Invitation//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:20270214T033000Z-sehrabandi@invitivals.com
+DTSTAMP:20261012T062031Z
+DTSTART:20270214T033000Z
+DTEND:20270214T063000Z
+SUMMARY:Sehrabandi & Ghurchari — Harpreet & Simran
+DESCRIPTION:The groom sets out
+LOCATION:The Imperial Lawns\, Naraina Vihar\, New Delhi
+URL:https://invitivals.com/sikh-premium/
+BEGIN:VALARM
+TRIGGER:-P1D
+ACTION:DISPLAY
+DESCRIPTION:Sehrabandi & Ghurchari — Harpreet & Simran
+END:VALARM
+END:VEVENT
+END:VCALENDAR

@@ -1,0 +1,353 @@
+---
+import '@fontsource/marcellus/latin-400.css';
+import '@fontsource/cormorant-garamond/latin-500.css';
+import '@fontsource/cormorant-garamond/latin-600.css';
+import { SITE } from '../data/site';
+import { DESIGNS, primary } from '../data/designs';
+import team from '../data/team.json';
+
+/* ─────────────────────────────────────────────────────────────────────────
+   The team desk — every invitation delivered and every demo, one row each,
+   to copy, open or preview a link without walking through the sales site.
+
+   The password only keeps casual visitors out; everything listed here is
+   public anyway. Rows live in src/data/team.json (clients) and
+   src/data/designs/ (demos). Not linked from the site, not in the sitemap.
+   ───────────────────────────────────────────────────────────────────────── */
+
+const fmt = (iso?: string) =>
+  iso ? new Date(iso + 'T12:00:00').toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' }) : '';
+
+const clients = [...team.clients].sort((a, b) => b.made.localeCompare(a.made));
+const families = new Set(clients.filter((c) => !c.old).map((c) => c.client)).size;
+
+const demos = [
+  ...DESIGNS.map((d) => ({
+    title: d.title,
+    occasion: primary(d).name,
+    names: d.names,
+    path: d.href.replace(/index\.html/, ''),
+    thumb: d.door,
+    note: '',
+  })),
+  ...team.extraDemos.map((d: any) => ({ note: '', thumb: '', ...d })),
+];
+
+const full = (p: string) => SITE + p;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex, nofollow" />
+    <meta name="theme-color" content="#1c332b" />
+    <title>Team desk · Invitivals</title>
+    <link rel="icon" href="/brand/seal.png" />
+  </head>
+  <body>
+    <!-- ── lock ── -->
+    <form class="lock" id="lock" autocomplete="off">
+      <img src="/brand/seal-on-ivory.png" alt="" width="72" height="72" />
+      <h1>Team desk</h1>
+      <p>Invitivals · for the studio team</p>
+      <label class="sr" for="pw">Password</label>
+      <input id="pw" type="password" placeholder="Password" autofocus required />
+      <button type="submit">Open</button>
+      <p class="err" id="err" role="alert" hidden>That's not it — try again.</p>
+    </form>
+
+    <!-- ── desk ── -->
+    <main class="desk" id="desk" hidden>
+      <header class="top">
+        <div class="brand">
+          <img src="/brand/seal-on-ivory.png" alt="" width="34" height="34" />
+          <div><b>Team desk</b><span>Invitivals</span></div>
+        </div>
+        <dl class="stats">
+          <div><dt>Families</dt><dd>{families}</dd></div>
+          <div><dt>Client links</dt><dd>{clients.length}</dd></div>
+          <div><dt>Demos</dt><dd>{demos.length}</dd></div>
+        </dl>
+        <div class="tools">
+          <input id="q" type="search" placeholder="Search name, occasion, design…" aria-label="Search" />
+          <button type="button" class="ghost" id="logout">Lock</button>
+        </div>
+      </header>
+
+      <section aria-labelledby="h-clients">
+        <div class="sec-h">
+          <h2 id="h-clients">Client invitations <small>newest first</small></h2>
+          <button type="button" class="ghost" data-copy-all="clients">Copy all links</button>
+        </div>
+        <div class="table" role="table" data-list="clients">
+          <div class="row head" role="row">
+            <span>#</span><span></span><span>Client</span><span>Invitation</span><span>Event</span><span>Made</span><span>Link</span><span></span>
+          </div>
+          {
+            clients.map((c: any, i) => (
+              <div class={'row' + (c.old ? ' old' : '')} role="row" data-url={full(c.path)} data-path={c.path} data-name={c.client} data-search={`${c.client} ${c.occasion} ${c.design} ${c.note || ''} ${c.path}`.toLowerCase()}>
+                <span class="n">{clients.length - i}</span>
+                <span class="th">{c.thumb && <img data-src={c.thumb} alt="" />}</span>
+                <span class="who"><b>{c.client}</b><em>{c.occasion}<span class="m">· {c.design}</span>{c.note && <i class={c.old ? 'warn' : ''}>{c.note}</i>}</em></span>
+                <span class="des">{c.design}</span>
+                <span class="d"><small>Event </small>{fmt(c.event)}</span>
+                <span class="d"><small>Made </small>{fmt(c.made)}</span>
+                <span class="url"><code>{c.path}</code></span>
+                <span class="act">
+                  <button type="button" data-act="copy">Copy</button>
+                  <button type="button" data-act="preview">Preview</button>
+                  <a href={full(c.path)} target="_blank" rel="noopener">Open ↗</a>
+                </span>
+              </div>
+            ))
+          }
+        </div>
+      </section>
+
+      <section aria-labelledby="h-demos">
+        <div class="sec-h">
+          <h2 id="h-demos">Demos <small>safe to send to anyone</small></h2>
+          <button type="button" class="ghost" data-copy-all="demos">Copy all links</button>
+        </div>
+        <div class="table demos" role="table" data-list="demos">
+          <div class="row head" role="row">
+            <span>#</span><span></span><span>Design</span><span>Occasion</span><span>Sample names</span><span>Link</span><span></span>
+          </div>
+          {
+            demos.map((d, i) => (
+              <div class="row" role="row" data-url={full(d.path)} data-path={d.path} data-name={d.title} data-search={`${d.title} ${d.occasion} ${d.names} ${d.note} ${d.path}`.toLowerCase()}>
+                <span class="n">{i + 1}</span>
+                <span class="th">{d.thumb && <img data-src={d.thumb} alt="" />}</span>
+                <span class="who"><b>{d.title}</b>{d.note && <em><i>{d.note}</i></em>}</span>
+                <span class="des">{d.occasion}</span>
+                <span class="d">{d.names}</span>
+                <span class="url"><code>{d.path}</code></span>
+                <span class="act">
+                  <button type="button" data-act="copy">Copy</button>
+                  <button type="button" data-act="preview">Preview</button>
+                  <a href={full(d.path)} target="_blank" rel="noopener">Open ↗</a>
+                </span>
+              </div>
+            ))
+          }
+        </div>
+      </section>
+      <p class="none" id="none" hidden>Nothing matches that search.</p>
+      <p class="foot">Add a delivered invitation to <code>src/data/team.json</code> · demos follow <code>src/data/designs/</code></p>
+    </main>
+
+    <!-- ── preview ── -->
+    <div class="pv" id="pv" hidden>
+      <div class="pv-box" role="dialog" aria-modal="true" aria-labelledby="pv-t">
+        <div class="pv-bar">
+          <b id="pv-t"></b>
+          <button type="button" id="pv-copy">Copy link</button>
+          <a id="pv-open" target="_blank" rel="noopener">Open ↗</a>
+          <button type="button" class="x" id="pv-x" aria-label="Close preview">✕</button>
+        </div>
+        <div class="phone"><iframe id="pv-f" title="Invitation preview" allow="autoplay; clipboard-write"></iframe></div>
+      </div>
+    </div>
+
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+    <script is:inline define:vars={{ HASH: team.passwordHash }}>
+      const $ = (s, r = document) => r.querySelector(s);
+      const KEY = 'inv-team-desk';
+      const lock = $('#lock'), desk = $('#desk');
+      const sha = async (t) =>
+        [...new Uint8Array(await crypto.subtle.digest('SHA-256', new TextEncoder().encode(t)))]
+          .map((b) => b.toString(16).padStart(2, '0')).join('');
+      const store = { get: () => { try { return localStorage.getItem(KEY); } catch { return null; } },
+                      set: (v) => { try { v ? localStorage.setItem(KEY, v) : localStorage.removeItem(KEY); } catch {} } };
+
+      function open() {
+        lock.hidden = true;
+        desk.hidden = false;
+        document.querySelectorAll('img[data-src]').forEach((im) => { im.src = im.dataset.src; im.loading = 'lazy'; });
+        $('#q').focus({ preventScroll: true });
+      }
+      if (store.get() === HASH) open();
+
+      lock.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const ok = (await sha($('#pw').value.trim())) === HASH;
+        $('#err').hidden = ok;
+        if (!ok) { $('#pw').select(); return; }
+        store.set(HASH);
+        open();
+      });
+      $('#logout').addEventListener('click', () => { store.set(null); location.reload(); });
+
+      /* copy */
+      const toast = (t) => { const el = $('#toast'); el.textContent = t; el.classList.add('on'); clearTimeout(toast.t); toast.t = setTimeout(() => el.classList.remove('on'), 1600); };
+      async function copy(text, label) {
+        try { await navigator.clipboard.writeText(text); }
+        catch { const ta = document.createElement('textarea'); ta.value = text; document.body.appendChild(ta); ta.select(); document.execCommand('copy'); ta.remove(); }
+        toast(label);
+      }
+
+      /* local dev does not serve folder indexes from public/ */
+      const local = /^(localhost|127\.0\.0\.1)$/.test(location.hostname);
+      const viewUrl = (row) => {
+        if (!local) return row.dataset.url;
+        const [p, q] = row.dataset.path.split('?');
+        return (p.endsWith('/') ? p + 'index.html' : p) + (q ? '?' + q : '');
+      };
+
+      /* preview */
+      const pv = $('#pv'), frame = $('#pv-f');
+      let current = null, lastFocus = null;
+      function preview(row) {
+        current = row; lastFocus = document.activeElement;
+        $('#pv-t').textContent = row.dataset.name;
+        $('#pv-open').href = row.dataset.url;
+        frame.src = viewUrl(row);
+        pv.hidden = false;
+        document.documentElement.style.overflow = 'hidden';
+        $('#pv-x').focus();
+      }
+      function closePv() {
+        pv.hidden = true; frame.src = 'about:blank';
+        document.documentElement.style.overflow = '';
+        lastFocus && lastFocus.focus();
+      }
+      $('#pv-x').addEventListener('click', closePv);
+      pv.addEventListener('click', (e) => { if (e.target === pv) closePv(); });
+      addEventListener('keydown', (e) => { if (e.key === 'Escape' && !pv.hidden) closePv(); });
+      $('#pv-copy').addEventListener('click', () => current && copy(current.dataset.url, 'Link copied'));
+
+      desk.addEventListener('click', (e) => {
+        const b = e.target.closest('button');
+        if (!b) return;
+        const row = b.closest('.row');
+        if (b.dataset.act === 'copy') copy(row.dataset.url, 'Link copied');
+        if (b.dataset.act === 'preview') preview(row);
+        if (b.dataset.copyAll) {
+          const rows = [...document.querySelectorAll(`[data-list="${b.dataset.copyAll}"] .row:not(.head):not([hidden]):not(.old)`)];
+          copy(rows.map((r) => `${r.dataset.name}: ${r.dataset.url}`).join('\n'), `${rows.length} links copied`);
+        }
+      });
+
+      /* search */
+      $('#q').addEventListener('input', (e) => {
+        const words = e.target.value.toLowerCase().split(/\s+/).filter(Boolean);
+        let shown = 0;
+        document.querySelectorAll('.row[data-search]').forEach((r) => {
+          const hit = words.every((w) => r.dataset.search.includes(w));
+          r.hidden = !hit; shown += hit;
+        });
+        $('#none').hidden = shown > 0;
+      });
+    </script>
+
+    <style is:global>
+      :root {
+        --ivory: #f6f0e7;
+        --paper: #fffdf8;
+        --line: #e8dfcf;
+        --green: #21463a;
+        --deep: #1c332b;
+        --gold: #cbb48b;
+        --ink-gold: #8c7a55;
+        --muted: #5b6b63;
+        --warn: #9a3b2e;
+        --serif: 'Marcellus', 'Cormorant Garamond', Georgia, serif;
+        --body: 'Cormorant Garamond', Georgia, serif;
+        --ui: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+      }
+      * { box-sizing: border-box; }
+      [hidden] { display: none !important; }
+      body { margin: 0; background: var(--ivory); color: var(--green); font: 15px/1.4 var(--ui); }
+      button, input, a { font: inherit; color: inherit; }
+      .sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+      code { font: 12px/1.3 ui-monospace, 'Cascadia Mono', Consolas, monospace; color: var(--muted); }
+
+      /* lock */
+      .lock { min-height: 100dvh; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px; padding: 24px 16px; text-align: center; }
+      .lock h1 { margin: 6px 0 0; font: 400 32px/1.1 var(--serif); }
+      .lock p { margin: 0 0 14px; font: italic 500 18px var(--body); color: var(--ink-gold); }
+      .lock input { width: min(300px, 100%); padding: 12px 14px; border: 1px solid var(--gold); border-radius: 10px; background: var(--paper); text-align: center; font-size: 16px; }
+      .lock input:focus { outline: 2px solid var(--green); outline-offset: 1px; }
+      .lock button { width: min(300px, 100%); padding: 12px; border: 0; border-radius: 10px; background: var(--green); color: var(--ivory); font-weight: 600; letter-spacing: .06em; cursor: pointer; }
+      .lock .err { color: var(--warn); font: 600 14px var(--ui); margin: 4px 0 0; }
+
+      /* desk */
+      .desk { max-width: 1280px; margin: 0 auto; padding: 0 16px 40px; }
+      .top { position: sticky; top: 0; z-index: 10; display: flex; flex-wrap: wrap; align-items: center; gap: 12px 24px; padding: 12px 0; background: var(--ivory); border-bottom: 1px solid var(--line); }
+      .brand { display: flex; align-items: center; gap: 10px; }
+      .brand b { display: block; font: 400 20px/1 var(--serif); }
+      .brand span { font: italic 500 14px var(--body); color: var(--ink-gold); }
+      .stats { display: flex; gap: 18px; margin: 0; }
+      .stats div { display: flex; flex-direction: column-reverse; }
+      .stats dt { font-size: 11px; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+      .stats dd { margin: 0; font: 400 24px/1 var(--serif); }
+      .tools { display: flex; gap: 8px; margin-left: auto; flex: 1 1 260px; max-width: 420px; }
+      .tools input { flex: 1; min-width: 0; padding: 8px 12px; border: 1px solid var(--line); border-radius: 8px; background: var(--paper); }
+      .ghost { padding: 7px 12px; border: 1px solid var(--line); border-radius: 8px; background: var(--paper); cursor: pointer; white-space: nowrap; font-size: 13px; }
+      .ghost:hover { border-color: var(--gold); }
+
+      .sec-h { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; margin: 26px 0 8px; }
+      .sec-h h2 { margin: 0; font: 400 22px var(--serif); }
+      .sec-h small { font: italic 500 15px var(--body); color: var(--ink-gold); margin-left: 6px; }
+
+      .table { background: var(--paper); border: 1px solid var(--line); border-radius: 12px; overflow: hidden; }
+      .row { display: grid; grid-template-columns: 30px 44px minmax(180px, 1.5fr) minmax(120px, 1fr) 100px 100px minmax(140px, 1fr) auto; align-items: center; gap: 12px; padding: 7px 12px; border-top: 1px solid var(--line); }
+      .demos .row { grid-template-columns: 30px 44px minmax(180px, 1.5fr) minmax(120px, 1fr) minmax(130px, 1fr) minmax(140px, 1fr) auto; }
+      .row:first-child { border-top: 0; }
+      .row:not(.head):hover { background: #faf5ea; }
+      .row.head { padding-block: 8px; font-size: 11px; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); background: #f8f2e6; }
+      .row.old { opacity: .55; }
+      .n { color: var(--muted); font-size: 12px; text-align: right; }
+      .th { width: 44px; height: 44px; border-radius: 8px; overflow: hidden; background: var(--line); }
+      .th img { width: 100%; height: 100%; object-fit: cover; display: block; }
+      .who b { display: block; font-weight: 600; font-size: 14.5px; }
+      .who em { font-style: normal; font-size: 12.5px; color: var(--muted); display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
+      .who .m { display: none; }
+      .who i { font-style: normal; font-size: 11px; padding: 1px 7px; border-radius: 99px; background: #efe6d4; color: var(--ink-gold); }
+      .who i.warn { background: #f6dcd6; color: var(--warn); }
+      .des { font-size: 13.5px; }
+      .d { font-size: 13px; color: var(--muted); white-space: nowrap; }
+      .d small { display: none; }
+      .url { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+      .act { display: flex; gap: 6px; justify-content: flex-end; }
+      .act button, .act a { padding: 6px 10px; border: 1px solid var(--line); border-radius: 7px; background: #fff; font-size: 12.5px; text-decoration: none; cursor: pointer; white-space: nowrap; }
+      .act button[data-act='copy'] { background: var(--green); border-color: var(--green); color: var(--ivory); }
+      .act button:hover, .act a:hover { border-color: var(--gold); }
+      .act button[data-act='copy']:hover { background: var(--deep); }
+      button:focus-visible, a:focus-visible { outline: 2px solid var(--green); outline-offset: 2px; }
+      .none { text-align: center; color: var(--muted); padding: 20px; }
+      .foot { margin-top: 28px; text-align: center; font-size: 12px; color: var(--muted); }
+
+      @media (max-width: 900px) {
+        .top { position: static; }
+        .sec-h small { display: none; }
+        .row, .demos .row { grid-template-columns: 44px 1fr; grid-template-areas: 'th who' 'th act'; column-gap: 10px; row-gap: 6px; padding: 9px 12px; }
+        .row.head { display: none; }
+        .row .n, .row .url, .row .des, .row .d { display: none; }
+        .th { grid-area: th; align-self: start; }
+        .who { grid-area: who; min-width: 0; }
+        .who b { font-size: 14px; }
+        .who .m { display: inline; }
+        .act { grid-area: act; justify-content: flex-start; gap: 6px; }
+        .act button, .act a { padding: 4px 11px; font-size: 12px; }
+        .tools { max-width: none; }
+      }
+
+      /* preview */
+      .pv { position: fixed; inset: 0; z-index: 50; background: rgba(20, 30, 26, .72); display: flex; align-items: center; justify-content: center; padding: 16px; }
+      .pv-box { display: flex; flex-direction: column; gap: 10px; height: 100%; max-height: 920px; }
+      .pv-bar { display: flex; align-items: center; gap: 8px; color: var(--ivory); }
+      .pv-bar b { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font: 400 17px var(--serif); }
+      .pv-bar button, .pv-bar a { padding: 6px 11px; border-radius: 7px; border: 1px solid rgba(246, 240, 231, .4); background: transparent; color: var(--ivory); font-size: 13px; text-decoration: none; cursor: pointer; white-space: nowrap; }
+      .pv-bar .x { padding: 6px 10px; }
+      .phone { flex: 1; aspect-ratio: 9 / 18.5; max-width: calc(100vw - 32px); margin: 0 auto; border: 8px solid #0d1512; border-radius: 34px; overflow: hidden; background: #000; box-shadow: 0 30px 80px rgba(0, 0, 0, .5); }
+      .phone iframe { width: 100%; height: 100%; border: 0; display: block; background: #fff; }
+
+      .toast { position: fixed; left: 50%; bottom: 22px; z-index: 60; transform: translate(-50%, 20px); opacity: 0; pointer-events: none; padding: 9px 16px; border-radius: 99px; background: var(--deep); color: var(--ivory); font-size: 14px; transition: .25s; }
+      .toast.on { opacity: 1; transform: translate(-50%, 0); }
+    </style>
+  </body>
+</html>

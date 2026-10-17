@@ -1,0 +1,225 @@
+{
+  "_readme": "The team desk at /team/. Add one entry to \"clients\" for every invitation delivered (newest dates sort first). Demos in the gallery come from src/data/designs/ automatically; \"extraDemos\" are the ones not in the gallery. To change the password: node -e \"console.log(require('crypto').createHash('sha256').update('NEW PASSWORD').digest('hex'))\" and paste the result into passwordHash.",
+  "passwordHash": "cfac56669cf3f82185f7c62a335de8de40fca8db2a4f2b8070ebc85bf9cdbb20",
+  "clients": [
+    {
+      "client": "Nandini & Satyam (bride side)",
+      "occasion": "Wedding",
+      "design": "South Indian Temple (hindu-south)",
+      "path": "/nandini-satyam-wedding/",
+      "event": "2026-12-12",
+      "made": "2026-10-17",
+      "thumb": "/nandini-satyam-wedding/assets/og.jpg",
+      "note": "Bride-side, Nandini first. Same events as /anirudh-sreya-groom/. Older design stays at /satyam-nandini-wedding/. Personal links: ?to=Guest%20Name"
+    },
+    {
+      "client": "Anirudh & Sreya (groom side)",
+      "occasion": "Wedding",
+      "design": "South Indian Temple (hindu-south)",
+      "path": "/anirudh-sreya-groom/",
+      "event": "2026-12-12",
+      "made": "2026-10-16",
+      "thumb": "/anirudh-sreya-groom/assets/og.jpg",
+      "note": "Groom-side copy of /hindu-south-wedding/ with the Ghaziabad events. Personal links: ?to=Guest%20Name"
+    },
+    {
+      "client": "Aashna & Sanket (bride side, 2nd group)",
+      "occasion": "Wedding",
+      "design": "Palace Arch — Shiva opening, green cover",
+      "path": "/aashna-sanket-celebrations/",
+      "event": "2026-12-04",
+      "made": "2026-10-15",
+      "thumb": "/aashna-sanket-celebrations/assets/og.jpg",
+      "note": "Separate bride-side guest group: green envelope + extra scratch panel (4 Dec, Engagement, Sangeet and Mehndi, 7 PM). Main bride link /aashna-sanket-wedding/ unchanged."
+    },
+    {
+      "client": "Dr. Rupam & Dr. Taniya",
+      "occasion": "Wedding",
+      "design": "Rose Red — detailed (6 events + photo gallery)",
+      "path": "/rr-wedding-26nov/",
+      "event": "2026-11-26",
+      "made": "2026-10-14",
+      "thumb": "/rr-wedding-26nov/assets/og.jpg",
+      "note": "Venue name still a placeholder (map pin only). Built by tools/build-rr-wedding.mjs. Personal links: ?to=Guest%20Name"
+    },
+    {
+      "client": "Sanket & Aashna",
+      "occasion": "Wedding",
+      "design": "Palace Arch — Durga opening (groom side)",
+      "path": "/sanket-aashna-wedding/",
+      "event": "2026-12-05",
+      "made": "2026-10-12",
+      "thumb": "/sanket-aashna-wedding/assets/og.jpg",
+      "note": "Groom side (Shrivastava), Rama Celebration, Noida. Built by tools/build-sanket-aashna.mjs. Personal links: ?to=Guest%20Name"
+    },
+    {
+      "client": "Aashna & Sanket",
+      "occasion": "Wedding",
+      "design": "Palace Arch — Shiva–Parvati opening (bride side)",
+      "path": "/aashna-sanket-wedding/",
+      "event": "2026-12-05",
+      "made": "2026-10-12",
+      "thumb": "/aashna-sanket-wedding/assets/og.jpg",
+      "note": "Bride side (Mathur), Rama Celebration, Noida. Date 5 Dec assumed from the groom card. Personal links: ?to=Guest%20Name"
+    },
+    {
+      "client": "Satyam & Nandini",
+      "occasion": "Wedding",
+      "design": "Temple Doors (English, from the Telugu showcase)",
+      "path": "/satyam-nandini-wedding/",
+      "event": "2026-12-12",
+      "made": "2026-10-11",
+      "thumb": "/satyam-nandini-wedding/assets/og.jpg",
+      "note": "Groom side (Parashar), Ghaziabad. Personal links: ?to=Guest%20Name"
+    },
+    {
+      "client": "Anand Kumar & Monika Kumari",
+      "occasion": "Wedding",
+      "design": "South Indian Temple (hindu-south)",
+      "path": "/anand-monika-wedding/",
+      "event": "2026-11-30",
+      "made": "2026-10-10",
+      "thumb": "/anand-monika-wedding/assets/og.jpg",
+      "note": "Groom side, Sitamarhi. Personal links: ?to=Guest%20Name"
+    },
+    {
+      "client": "Ishpreet Singh & Amandeep Kaur",
+      "occasion": "Anand Karaj",
+      "design": "Royal Ivory & Sapphire",
+      "path": "/ishpreet-amandeep-wedding/",
+      "event": "2026-12-13",
+      "made": "2026-10-09",
+      "thumb": "/ishpreet-amandeep-wedding/assets/og.jpg",
+      "note": "Without Mehndi"
+    },
+    {
+      "client": "Ishpreet Singh & Amandeep Kaur",
+      "occasion": "Anand Karaj",
+      "design": "Royal Ivory & Sapphire",
+      "path": "/ishpreet-amandeep-wedding/?mehndi",
+      "event": "2026-12-13",
+      "made": "2026-10-09",
+      "thumb": "/ishpreet-amandeep-wedding/assets/og.jpg",
+      "note": "With Mehndi"
+    },
+    {
+      "client": "Nandini S S & Madhu N",
+      "occasion": "Engagement",
+      "design": "The Floral Palace",
+      "path": "/engagement/nandini-madhu/",
+      "event": "2026-11-15",
+      "made": "2026-09-27",
+      "thumb": "/engagement/nandini-madhu/og.jpg"
+    },
+    {
+      "client": "Nandini S S & Madhu N",
+      "occasion": "Engagement",
+      "design": "The Floral Palace (first build)",
+      "path": "/engagement/nandini/",
+      "event": "2026-11-15",
+      "made": "2026-09-27",
+      "thumb": "/engagement/nandini-madhu/og.jpg",
+      "note": "Old version — do not send",
+      "old": true
+    },
+    {
+      "client": "Syeda Mirha Sadat",
+      "occasion": "Aqeeqah",
+      "design": "The Little Angel",
+      "path": "/aqeeqah-mirha/",
+      "event": "2026-09-14",
+      "made": "2026-09-12",
+      "thumb": "/aqeeqah-mirha/assets/og-cover.jpg"
+    },
+    {
+      "client": "Noor Basha & Noor e Ayen",
+      "occasion": "Nikah",
+      "design": "The Wax Seal",
+      "path": "/nikah-noorbasha/",
+      "event": "2026-10-02",
+      "made": "2026-08-20",
+      "thumb": "/nikah-noorbasha/assets/og-cover.jpg"
+    },
+    {
+      "client": "Neha Maria & Joel Mathew",
+      "occasion": "Christian wedding",
+      "design": "The Chapel Doors",
+      "path": "/neha-joel-wedding/",
+      "event": "2027-04-24",
+      "made": "2026-08-18",
+      "thumb": "/neha-joel-wedding/assets/og-cover.jpg"
+    },
+    {
+      "client": "Mohammed Rayees & Fathima Thanisha",
+      "occasion": "Nikah",
+      "design": "The Wax Seal",
+      "path": "/nikah-rayees-2/",
+      "event": "2026-09-10",
+      "made": "2026-08-18",
+      "thumb": "/nikah-rayees-2/assets/og-cover.jpg",
+      "note": "Version 3"
+    },
+    {
+      "client": "Govindarao & Vanajakshi",
+      "occasion": "Telugu wedding",
+      "design": "The Kalyanam",
+      "path": "/govindarao-marriage/",
+      "event": "2026-08-27",
+      "made": "2026-08-15",
+      "thumb": "/govindarao-marriage/assets/og-cover.jpg"
+    },
+    {
+      "client": "Mohammed Rayees & Fathima Thanisha",
+      "occasion": "Nikah",
+      "design": "The Wax Seal",
+      "path": "/nikah-rayees/",
+      "event": "2026-09-10",
+      "made": "2026-08-12",
+      "thumb": "/nikah-rayees/assets/og-cover.jpg",
+      "note": "Version 2"
+    },
+    {
+      "client": "Mohammed Rayees & Fathima Thanisha",
+      "occasion": "Nikah",
+      "design": "The Wax Seal",
+      "path": "/rayees-marriage/",
+      "event": "2026-09-10",
+      "made": "2026-08-12",
+      "thumb": "/rayees-marriage/assets/og-cover.jpg",
+      "note": "Version 1"
+    },
+    {
+      "client": "Sri PoornaJnana",
+      "occasion": "Gruhapravesha",
+      "design": "The New Home",
+      "path": "/poornajnana/",
+      "event": "2026-08-31",
+      "made": "2026-08-11",
+      "thumb": "/poornajnana/og-cover.jpg"
+    }
+  ],
+  "extraDemos": [
+    {
+      "title": "Muslim Premium Red",
+      "occasion": "Nikah / Muslim wedding",
+      "names": "Ahmad & Layla",
+      "path": "/muslim-premium-red/",
+      "thumb": "/muslim-premium-red/assets/og.jpg"
+    },
+    {
+      "title": "Royal Ivory & Sapphire (without Mehndi)",
+      "occasion": "Anand Karaj",
+      "names": "Harpreet & Simran",
+      "path": "/sikh-premium/",
+      "thumb": "/showcase/previews/royal-ivory-sapphire-door.webp"
+    },
+    {
+      "title": "South Indian Temple",
+      "occasion": "Hindu wedding",
+      "names": "Anirudh & Sreya",
+      "path": "/hindu-south-wedding/",
+      "thumb": "/hindu-south-wedding/assets/og.jpg",
+      "note": "Not in the gallery yet"
+    }
+  ]
+}

@@ -15,8 +15,8 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
-const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
-const DIST = path.join(ROOT, 'dist');
+const ROOT = process.env.REPO_ROOT || path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
+const DIST = process.env.DEPLOY_SNAPSHOT || path.join(ROOT, 'dist');
 const LIST = path.join(ROOT, 'tools/live-files.txt');
 
 if (!fs.existsSync(path.join(DIST, 'index.html'))) {

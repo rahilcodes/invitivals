@@ -14,8 +14,8 @@ import { fileURLToPath } from 'node:url';
 import { spawnSync } from 'node:child_process';
 import ssh2 from 'ssh2';
 
-const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
-const DIST = path.join(ROOT, 'dist');
+const ROOT = process.env.REPO_ROOT || path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
+const DIST = process.env.DEPLOY_SNAPSHOT || path.join(ROOT, 'dist');
 const ALL = process.argv.includes('--all');
 
 const envFile = path.join(ROOT, '.env.deploy');
@@ -92,4 +92,12 @@ conn
     console.error('Connection error:', e.message);
     process.exit(1);
   })
-  .connect({ host: DEPLOY_HOST, port: Number(DEPLOY_PORT), username: DEPLOY_USER, privateKey, password: DEPLOY_PASSWORD || undefined });
+  .connect({
+    host: DEPLOY_HOST,
+    port: Number(DEPLOY_PORT),
+    username: DEPLOY_USER,
+    privateKey,
+    password: DEPLOY_PASSWORD || undefined,
+    readyTimeout: 60000,
+    keepaliveInterval: 10000,
+  });

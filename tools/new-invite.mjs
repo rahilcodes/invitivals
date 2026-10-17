@@ -156,6 +156,7 @@ ${I.hosts ? `  <p>${esc([I.hosts.title, I.hosts.names].filter(Boolean).join(' ')
 <script src="invite.js?v=${v}"></script>
 <script src="${T}/theme.js?v=${v}"></script>
 <script src="${E}/engine.js?v=${v}"></script>
+<script src="/_credit/v1/credit.js" defer data-into="#invite"></script>
 </body>
 </html>
 `;

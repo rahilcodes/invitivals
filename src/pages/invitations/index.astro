@@ -3,7 +3,7 @@ import SiteLayout from '../../layouts/SiteLayout.astro';
 import InviteCard from '../../components/site/InviteCard.astro';
 import OccasionChips from '../../components/site/OccasionChips.astro';
 import StickyBar from '../../components/site/StickyBar.astro';
-import { WA, SITE, STUDIO } from '../../data/site';
+import { WA, SITE } from '../../data/site';
 import { DESIGNS, GROUPS, designsFor, designUrl, occasionUrl } from '../../data/designs';
 
 const title = 'Digital Invitation Designs for WhatsApp — Wedding, Nikah, Engagement & More | Invitivals';
@@ -74,11 +74,7 @@ const jsonLd = {
         ))
       }
     </div>
-
-    <p class="studio">
-      <span class="eyebrow">Also from the studio</span>
-      {STUDIO.map((t) => <a href={t.href}>{t.name}</a>)}
-    </p>
+
   </section>
 
   <StickyBar label="Create one for us" href={WA.general} note="Opens WhatsApp" blank />

@@ -1,0 +1,38 @@
+---
+/* ─────────────────────────────────────────────────────────────────────────
+   The first illustrated templates (/hindu, /nikah, …) were retired on
+   2026-10-10. Their addresses may have been shared, so each one now forwards
+   to the gallery page for the same occasion instead of breaking.
+   ───────────────────────────────────────────────────────────────────────── */
+import { SITE } from '../data/site';
+
+export function getStaticPaths() {
+  const to: Record<string, string> = {
+    hindu: '/invitations/hindu-wedding/',
+    nikah: '/invitations/nikah/',
+    sikh: '/invitations/anand-karaj/',
+    christian: '/invitations/christian-wedding/',
+    modern: '/invitations/',
+    mountain: '/invitations/',
+    luxe: '/invitations/',
+  };
+  return Object.entries(to).map(([old, href]) => ({ params: { old }, props: { href } }));
+}
+
+const { href } = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="robots" content="noindex" />
+    <meta http-equiv="refresh" content={`0; url=${href}`} />
+    <link rel="canonical" href={SITE + href} />
+    <title>Invitivals</title>
+    <script is:inline define:vars={{ href }}>location.replace(href);</script>
+  </head>
+  <body>
+    <p><a href={href}>See our invitations</a></p>
+  </body>
+</html>

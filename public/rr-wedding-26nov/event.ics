@@ -1,0 +1,68 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Invitivals//Rose Red//EN
+CALSCALE:GREGORIAN
+BEGIN:VTIMEZONE
+TZID:Asia/Kolkata
+BEGIN:STANDARD
+DTSTART:19700101T000000
+TZOFFSETFROM:+0530
+TZOFFSETTO:+0530
+TZNAME:IST
+END:STANDARD
+END:VTIMEZONE
+BEGIN:VEVENT
+UID:rr-wedding-26nov-0@invitivals.com
+DTSTAMP:20261015T140738Z
+DTSTART;TZID=Asia/Kolkata:20261126T100000
+DTEND;TZID=Asia/Kolkata:20261126T113000
+SUMMARY:Vriddhi Puja — Rupam & Taniya
+LOCATION:https://maps.app.goo.gl/qrQr8DnLaL9DgmUR8
+URL:https://invitivals.com/rr-wedding-26nov/
+END:VEVENT
+BEGIN:VEVENT
+UID:rr-wedding-26nov-1@invitivals.com
+DTSTAMP:20261015T140738Z
+DTSTART;TZID=Asia/Kolkata:20261126T120000
+DTEND;TZID=Asia/Kolkata:20261126T133000
+SUMMARY:Haldi — Rupam & Taniya
+LOCATION:https://maps.app.goo.gl/qrQr8DnLaL9DgmUR8
+URL:https://invitivals.com/rr-wedding-26nov/
+END:VEVENT
+BEGIN:VEVENT
+UID:rr-wedding-26nov-2@invitivals.com
+DTSTAMP:20261015T140738Z
+DTSTART;TZID=Asia/Kolkata:20261126T133000
+DTEND;TZID=Asia/Kolkata:20261126T160000
+SUMMARY:Ashirwad & Engagement Ceremony — Rupam & Taniya
+LOCATION:https://maps.app.goo.gl/qrQr8DnLaL9DgmUR8
+URL:https://invitivals.com/rr-wedding-26nov/
+END:VEVENT
+BEGIN:VEVENT
+UID:rr-wedding-26nov-3@invitivals.com
+DTSTAMP:20261015T140738Z
+DTSTART;TZID=Asia/Kolkata:20261126T180000
+DTEND;TZID=Asia/Kolkata:20261126T193000
+SUMMARY:Wedding — Rupam & Taniya
+LOCATION:https://maps.app.goo.gl/qrQr8DnLaL9DgmUR8
+URL:https://invitivals.com/rr-wedding-26nov/
+END:VEVENT
+BEGIN:VEVENT
+UID:rr-wedding-26nov-4@invitivals.com
+DTSTAMP:20261015T140738Z
+DTSTART;TZID=Asia/Kolkata:20261126T193000
+DTEND;TZID=Asia/Kolkata:20261126T230000
+SUMMARY:Reception — Rupam & Taniya
+LOCATION:https://maps.app.goo.gl/qrQr8DnLaL9DgmUR8
+URL:https://invitivals.com/rr-wedding-26nov/
+END:VEVENT
+BEGIN:VEVENT
+UID:rr-wedding-26nov-5@invitivals.com
+DTSTAMP:20261015T140738Z
+DTSTART;TZID=Asia/Kolkata:20261127T100000
+DTEND;TZID=Asia/Kolkata:20261127T120000
+SUMMARY:Bidaai — Rupam & Taniya
+LOCATION:https://maps.app.goo.gl/qrQr8DnLaL9DgmUR8
+URL:https://invitivals.com/rr-wedding-26nov/
+END:VEVENT
+END:VCALENDAR

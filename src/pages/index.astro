@@ -7,7 +7,7 @@ import InviteCard from '../components/site/InviteCard.astro';
 import Plans from '../components/site/Plans.astro';
 import StickyBar from '../components/site/StickyBar.astro';
 import {
-  WA, SITE, STUDIO, SAMPLE, MOMENTS, TRADITIONS, LANGS, HOW, PROMISE, QUOTES, FAQS, CTAS,
+  WA, SITE, SAMPLE, MOMENTS, TRADITIONS, LANGS, HOW, PROMISE, QUOTES, FAQS, CTAS,
 } from '../data/site';
 import { DESIGNS, LIVE_OCCASIONS, byId, designUrl, stamp } from '../data/designs';
 
@@ -252,11 +252,7 @@ const langFont: Record<string, string> = {
       <div class="gallery-foot">
         <p>Every invitation here was made for a real family. Names have been changed for their privacy.</p>
         <a class="tlink sm" href="/invitations/">All {DESIGNS.length} invitations, by occasion</a>
-      </div>
-      <p class="studio">
-        <span class="eyebrow">Also from the studio</span>
-        {STUDIO.map((t) => <a href={t.href}>{t.name}</a>)}
-      </p>
+      </div>
     </div>
   </section>
 

@@ -1,0 +1,21 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Creativals//Wedding Invitation//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:20261212T130000Z-jaggo@invitivals.com
+DTSTAMP:20261012T062032Z
+DTSTART:20261212T130000Z
+DTEND:20261212T160000Z
+SUMMARY:Jaggo — Amandeep & Ishpreet
+DESCRIPTION:An Evening of Song & Dance Followed by the Batna & Haldi ceremony.
+LOCATION:Clay 1 Glorious\, Moti Nagar\, New Delhi
+URL:https://invitivals.com/amandeep-ishpreet-wedding/
+BEGIN:VALARM
+TRIGGER:-P1D
+ACTION:DISPLAY
+DESCRIPTION:Jaggo — Amandeep & Ishpreet
+END:VALARM
+END:VEVENT
+END:VCALENDAR

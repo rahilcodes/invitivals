@@ -1,0 +1,21 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Creativals//Wedding Invitation//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:20261213T063000Z-lunch@invitivals.com
+DTSTAMP:20261012T062031Z
+DTSTART:20261213T063000Z
+DTEND:20261213T093000Z
+SUMMARY:Wedding Lunch — Ishpreet & Amandeep
+DESCRIPTION:Food · Family · Festivity
+LOCATION:Banquet Majestic Crown\, 24\, Najafgarh Road Industrial Area\, New Delhi – 110015
+URL:https://invitivals.com/ishpreet-amandeep-wedding/
+BEGIN:VALARM
+TRIGGER:-P1D
+ACTION:DISPLAY
+DESCRIPTION:Wedding Lunch — Ishpreet & Amandeep
+END:VALARM
+END:VEVENT
+END:VCALENDAR

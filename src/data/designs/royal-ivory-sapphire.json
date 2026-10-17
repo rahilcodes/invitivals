@@ -1,0 +1,33 @@
+{
+  "id": "royal-ivory-sapphire",
+  "title": "Royal Ivory & Sapphire",
+  "occasions": ["anand-karaj"],
+  "order": 1,
+  "names": "Harpreet & Simran",
+  "date": "14 February 2027 · New Delhi",
+  "href": "/sikh-premium/index.html?mehndi",
+  "door": "/showcase/previews/royal-ivory-sapphire-door.webp",
+  "open": "/showcase/previews/royal-ivory-sapphire.webp",
+  "share": "/showcase/previews/royal-ivory-sapphire.jpg",
+  "bg": "#1B2A52",
+  "palette": ["#1B2A52", "#E7C87A", "#F3E9D2"],
+  "languages": ["English", "Gurmukhi"],
+  "intro": "Ivory doors sealed with a navy Khanda. A tap plays a short film: the gold shimmers, the doors open on a Gurudwara across still water, and the couple stand before it with their names in the sky. One continuous scroll follows — the blessing of Sri Guru Granth Sahib Ji, both families, the programme, every event on its own gold-edged card, and a sunset over the sarovar to close.",
+  "events": [
+    { "name": "Mehndi Di Raat", "when": "13 Feb · 6 pm" },
+    { "name": "Sehrabandi & Ghurchari", "when": "14 Feb · 9 am" },
+    { "name": "Anand Karaj", "when": "14 Feb · 10.30 am" },
+    { "name": "Wedding Lunch", "when": "14 Feb · 12 noon" }
+  ],
+  "included": [
+    "A short film of the doors opening, with its own music",
+    "Ik Onkar and the blessing of Sri Guru Granth Sahib Ji",
+    "Both families named, the way the card is printed",
+    "The whole programme at a glance, and every event on its own card with a map",
+    "Calendar files that open straight into iPhone and Android calendars",
+    "A countdown to the Anand Karaj, in each guest's own time",
+    "Two links from one invitation — with or without the Mehndi night",
+    "Each guest greeted by name, and RSVP on WhatsApp",
+    "A Laavan recording that plays from the first tap"
+  ]
+}
