@@ -23,6 +23,7 @@ const ICONS = {
   lotus: `<path d="M24 8c4 6 4 14 0 20-4-6-4-14 0-20z"/><path d="M24 28c-6-2-12-8-13-15 6 2 11 7 13 15zM24 28c6-2 12-8 13-15-6 2-11 7-13 15z"/><path d="M24 28c-8 1-16-2-20-8 7-1 15 2 20 8zM24 28c8 1 16-2 20-8-7-1-15 2-20 8z"/><path d="M12 33q12 4 24 0"/>`,
   vratham: null, // falls back to kalasha
   nichayam: `<ellipse cx="24" cy="34" rx="17" ry="5"/><path d="M8 33c0 4 7 7 16 7s16-3 16-7"/><path d="M14 31c-2-6 1-12 7-14-1 6-3 10-7 14zM34 31c2-6-1-12-7-14 1 6 3 10 7 14z"/><circle cx="24" cy="24" r="6"/><path d="M24 18v-4m-2 1 2-3 2 3"/>`,
+  ring: `<circle cx="24" cy="31" r="10.5"/><circle cx="24" cy="31" r="7.8"/><path d="M17 13l3.4-4.4h7.2L31 13l-7 7.2z"/><path d="M17 13h14M20.4 8.6l3.6 4.4 3.6-4.4M24 13v7.2"/><path d="M38 9l1.2-2.6M40.5 13.5l2.8-.8M10 9l-1.2-2.6M7.5 13.5l-2.8-.8"/>`,
   haldi: `<path d="M8 26h32c0 8-7 14-16 14S8 34 8 26z"/><path d="M13 26c1-5 5-8 11-8s10 3 11 8"/><path d="M30 18l9-10"/><circle cx="18" cy="23" r=".8"/><circle cx="25" cy="21" r=".8"/><circle cx="29" cy="24" r=".8"/><path d="M18 40l-2 4h16l-2-4"/>`,
   mehendi: `<path d="M17 42V24c0-2 3-2 3 0v-11c0-2 3-2 3 0v10-13c0-2 3-2 3 0v13-10c0-2 3-2 3 0v13-5c0-2 3-2 3 0v13c0 6-4 10-9 10s-9-3-9-6z"/><circle cx="25" cy="31" r="3"/><path d="M25 25v3M25 34v3M19 31h3M28 31h3"/>`,
   sangeet: `<path d="M10 18c-2 0-3 3-3 6s1 6 3 6M38 18c2 0 3 3 3 6s-1 6-3 6"/><path d="M10 18c6-3 22-3 28 0M10 30c6 3 22 3 28 0"/><path d="M10 18v12M38 18v12M17 17v14M24 16.5v15M31 17v14"/><path d="M16 12l3-4M30 12l-3-4"/>`,
@@ -129,7 +130,7 @@ export const BrassLamp = (cls = '') =>
    </div>`;
 
 export const WeddingCouple = ({ cls = '', eager = false } = {}) =>
-  `<div class="couple ${cls}"><img src="${A}couple.webp" alt="The bride and groom in silk veshti and Kanjeevaram saree, walking together" ${eager ? 'fetchpriority="high"' : 'loading="lazy"'} decoding="async"></div>`;
+  `<div class="couple ${cls}"><img src="${A}couple.webp" alt="The bride in a red bridal lehenga and the groom in an ivory sherwani and safa, walking together to the mandap" ${eager ? 'fetchpriority="high"' : 'loading="lazy"'} decoding="async"></div>`;
 
 /* rose petals drifting down the hero; few, slow, randomised once */
 export const PetalShower = (n = 9) => {

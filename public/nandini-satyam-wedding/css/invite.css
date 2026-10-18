@@ -17,6 +17,7 @@
   --serif: 'Cormorant Garamond', 'Cormorant', Georgia, serif;
   --caps: 'Cinzel', 'Cormorant Garamond', serif;
   --script: 'Pinyon Script', 'Great Vibes', cursive;
+  --names: 'Cormorant Garamond', 'Cormorant', Georgia, serif; /* couple names + initials: clear upright serif, no script (client revision) */
   --ease: cubic-bezier(.2, .7, .2, 1);
   --gutter: clamp(44px, 12.5vw, 56px);
   color-scheme: light;
@@ -191,8 +192,10 @@ html.is-open .intro-bloom { animation: bloom 1.6s ease-out; }
 .names { margin: 2px 0 0; font-weight: 400; line-height: 1; }
 .names .name {
   display: block;
-  font-family: var(--script);
-  font-size: min(15vw, 7svh, 64px);
+  font-family: var(--names);
+  font-weight: 600;
+  font-size: min(14vw, 6.6svh, 60px);
+  letter-spacing: .02em;
   line-height: 1.1;
   padding: 0 .2em;
   filter: drop-shadow(0 1px 0 rgba(255, 248, 230, .8));
@@ -274,7 +277,7 @@ html.is-sealed .petal { animation-play-state: paused; }
 
 /* ══ families ════════════════════════════════════════════ */
 .family { padding: 4px 0; }
-.family-person { margin: 2px 0 0; font-family: var(--script); font-size: 50px; line-height: 1.2; padding: 0 .2em; }
+.family-person { margin: 2px 0 0; font-family: var(--names); font-weight: 600; font-size: 44px; letter-spacing: .02em; line-height: 1.2; padding: 0 .2em; }
 .family-rel { margin: 0; font-style: italic; font-size: 16px; color: var(--ink-soft); }
 .family-parents { margin: 6px 0 0; font-family: var(--caps); font-size: 13.5px; letter-spacing: .07em; line-height: 1.75; color: var(--maroon); }
 .family-gp { margin: 8px auto 0; max-width: 250px; font-style: italic; font-size: 14.5px; line-height: 1.45; color: var(--ink-soft); }
@@ -297,7 +300,6 @@ html.is-sealed .petal { animation-play-state: paused; }
 .t-venue { margin: 2px 0 0; font-style: italic; font-size: 15.5px; line-height: 1.35; color: var(--ink); }
 .t-text { margin: 4px 0 0; font-size: 15.5px; line-height: 1.45; color: var(--ink-soft); }
 .t-item.is-main .t-medal { background: radial-gradient(circle at 50% 35%, #7c1d2c, #4a0e18); box-shadow: 0 0 0 1px var(--gold), 0 0 0 4px var(--paper), 0 0 0 5px rgba(184, 137, 50, .5), 0 8px 18px -6px rgba(74, 14, 24, .5); }
-.t-item.is-main .t-name { font-family: var(--script); font-weight: 400; font-size: 36px; line-height: 1.1; }
 
 /* ══ ceremony ════════════════════════════════════════════ */
 .ceremony { padding-top: 10px; }
@@ -339,7 +341,7 @@ html.is-sealed .petal { animation-play-state: paused; }
 /* ══ venue ═══════════════════════════════════════════════ */
 .venue-frame { position: relative; margin: 8px auto 20px; width: 100%; height: 300px; border-radius: 150px 150px 4px 4px; overflow: hidden; box-shadow: 0 20px 32px -20px rgba(74, 14, 24, .6); }
 .venue-frame::after { content: ''; position: absolute; inset: 8px; border: 1px solid rgba(240, 214, 160, .8); border-radius: 142px 142px 2px 2px; pointer-events: none; }
-.venue-frame img { width: 100%; height: 118%; margin-top: -9%; object-fit: cover; }
+.venue-frame img { width: 100%; height: 118%; margin-top: -9%; object-fit: cover; object-position: 48% 50%; } /* keeps the ARGAN HALL sign centred */
 .venue-name { margin: 0; font-weight: 600; font-size: 22px; line-height: 1.25; color: var(--maroon); }
 .venue-addr { margin: 6px auto 20px; max-width: 260px; font-style: italic; font-size: 16px; line-height: 1.45; color: var(--ink-soft); }
 
@@ -600,7 +602,7 @@ html.is-open .intro.is-skipped .intro-video { transform: none; transition: none;
 /* monogram */
 .monogram { position: relative; width: 108px; height: 108px; margin: 4px auto 2px; display: flex; align-items: center; justify-content: center; }
 .monogram-ring { position: absolute; inset: 0; width: 100%; height: 100%; stroke-width: 1; }
-.monogram span { position: relative; font-family: var(--serif); font-style: italic; font-weight: 500; font-size: 40px; line-height: 1; padding: 0 .06em; }
+.monogram span { position: relative; font-family: var(--names); font-weight: 600; font-size: 40px; line-height: 1; padding: 0 .06em; }
 .intro-guest span.amp-i, .dear span.amp-i { font-family: var(--serif); font-style: italic; font-size: .72em; padding: 0 .1em; }
 .monogram .mono-a { transform: translate(4px, -6px); }
 .monogram .mono-b { transform: translate(-4px, 8px); }
@@ -633,7 +635,7 @@ html.is-open .intro.is-skipped .intro-video { transform: none; transition: none;
   background: radial-gradient(circle at 50% 30%, #7c1d2c, #4a0e18);
   box-shadow: 0 0 0 1px var(--gold), 0 0 0 4px var(--paper), 0 0 0 5px rgba(184, 137, 50, .45), 0 10px 18px -8px rgba(74, 14, 24, .55);
 }
-.cameo span { font-family: var(--script); font-size: 36px; line-height: 1; color: #ecd3a0; transform: translateY(3px); }
+.cameo span { font-family: var(--names); font-weight: 600; font-size: 32px; line-height: 1; color: #ecd3a0; transform: translateY(3px); }
 
 /* events: status, attire, actions */
 .t-status { display: inline-block; margin-left: 8px; padding: 2px 8px 1px; border-radius: 999px; background: var(--maroon); color: #f3dfb4; font-size: 8px; font-weight: 600; letter-spacing: .18em; vertical-align: 1px; }
