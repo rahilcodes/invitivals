@@ -54,7 +54,7 @@ export const weddingConfig = {
       label: "Groom's Family",
       person: 'Satyam',
       relation: 'Son of',
-      parents: ['Mr. Gulveer Parashar', 'Smt. Sushma Sharma'],
+      parents: ['Sh. Gulveer Parashar', 'Smt. Sushma Sharma'],
       grandparents: 'Grandson of Smt. Ram Murti Devi & Late Sh. Krishan Prakash Parashar',
     },
   },
