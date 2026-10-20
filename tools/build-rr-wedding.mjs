@@ -3,8 +3,11 @@
    The designer's Rose Red pages used whole, plus the couple's photos, the full
    day's programme, a gallery, the venue and a contact number.
 
-   node tools/build-rr-wedding.mjs            -> public/<C.out>/index.html + event.ics
-   Assets first: python tools/prep-rr-wedding.py <C.out>
+   node tools/build-rr-wedding.mjs [config]   -> public/<C.out>/index.html + event.ics
+   config: rr-wedding-26nov (default) | chanchal-jp-sharma-wedding
+   Assets first: python tools/prep-rr-wedding.py <C.out>   (Chanchal & JP: node tools/prep-rr-chanchal-jp.mjs)
+   Optional per-invitation fields (families, details, blessings, per-event maps, …) render only when set,
+   so the Rupam & Taniya page is built exactly as before.
 
    Edit wording HERE and re-run; never edit the generated index.html. */
 import fs from 'node:fs';
@@ -13,7 +16,8 @@ import { fileURLToPath } from 'node:url';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 
-const C = {
+const CONFIGS = {};
+CONFIGS['rr-wedding-26nov'] = {
   out: 'rr-wedding-26nov',
   couple: { first: 'Dr. Rupam', second: 'Dr. Taniya', short: 'Rupam & Taniya', initials: ['R', 'T'] },
   invite: ['request the pleasure of your company', 'at the wedding celebration of'],
@@ -50,6 +54,63 @@ const C = {
   ]
 };
 
+/* Chanchal Sharma & JP Sharma — Rajasthani Hindu wedding (client brief 2026-10-20).
+   Every date, time, map link, name and the tithi/route wording are the client's own; nothing guessed.
+   One map link was supplied and it is used for all four functions, as instructed. */
+const CJ_MAP = 'https://maps.app.goo.gl/RSTD7MqNDrLRwGW88?g_st=aw';
+CONFIGS['chanchal-jp-sharma-wedding'] = {
+  out: 'chanchal-jp-sharma-wedding',
+  couple: { first: 'Chanchal Sharma', second: 'JP Sharma', short: 'Chanchal & JP Sharma', initials: ['C', 'J'] },
+  invite: ['request the pleasure of your company', 'at the wedding celebration of'],
+  dateISO: '2026-12-02',
+  day: 'Wednesday',
+  dateText: '2nd December 2026',
+  timeText: '11:30 PM – 1:30 AM',
+  countdownTo: '2026-12-02T23:30:00+05:30',
+  events: [
+    { name: 'Baan', date: '2026-11-26', time: '10:30', end: '13:30', label: '10:30 AM – 1:30 PM', icon: 'haldi', note: 'Turmeric, traditions and the first blessings', maps: CJ_MAP },
+    { name: 'Tilak', date: '2026-11-30', time: '13:30', end: '18:00', label: '1:30 PM – 6:00 PM', icon: 'tilak', note: 'The groom is welcomed with tilak and blessings', maps: CJ_MAP },
+    { name: 'Janeev', date: '2026-12-01', allDay: true, label: 'Morning', icon: 'diya', note: 'The sacred thread ceremony, with prayers and blessings', maps: CJ_MAP },
+    { name: 'Wedding · Fera', date: '2026-12-02', time: '23:30', endDate: '2026-12-03', end: '01:30', label: '11:30 PM – 1:30 AM', when: '11:30 PM on 2 December to 1:30 AM on 3 December', icon: 'agni', note: 'Margashirsha Krishna Paksha Budhwar · seven sacred rounds around the holy fire', maps: CJ_MAP }
+  ],
+  venue: {
+    name: ['VRW6+GVP, Bhagtawar Nagar'],
+    address: ['Near Bhagtawar Nagar, Rajasthan'],
+    maps: CJ_MAP
+  },
+  phone: '+91 92465 85317',
+  closing: 'With love, both families',
+  title: 'Chanchal Sharma & JP Sharma — Wedding Invitation',
+  description: 'Wednesday, 2 December 2026 · Bhagtawar Nagar, Rajasthan. Tap to open your invitation',
+  story: { src: 'assets/photo-story.webp', alt: 'Chanchal and JP at Jal Mahal, Jaipur', pos: '50% 34%' },
+  storyLead: 'Two hearts, one promise — with the blessings of Shri Ganesh ji and our families, we begin our forever.',
+  photos: [
+    { src: 'assets/photo-g1.webp', full: 'assets/photo-g1-full.webp', alt: 'Chanchal and JP walking hand in hand as pigeons take flight', pos: '50% 40%' },
+    { src: 'assets/photo-g2.webp', full: 'assets/photo-g2-full.webp', alt: 'Chanchal and JP seated together on wooden steps', pos: '50% 35%' },
+    { src: 'assets/photo-g3.webp', full: 'assets/photo-g3-full.webp', alt: 'Chanchal and JP laughing in front of Hawa Mahal', pos: '50% 45%' },
+    { src: 'assets/photo-g4.webp', full: 'assets/photo-g4-full.webp', alt: 'Chanchal and JP hand in hand on old stone steps', pos: '50% 30%' },
+    { src: 'assets/photo-story.webp', full: 'assets/photo-story-full.webp', alt: 'Chanchal and JP at Jal Mahal, Jaipur', pos: '50% 34%' }
+  ],
+  invocation: 'Shri Ganeshaya Namah',
+  families: {
+    bride: { label: 'Bride', name: 'Chanchal Sharma', parents: 'Daughter of Savitha Sharma & Ashok Sharma' },
+    groom: { label: 'Groom', name: 'JP Sharma', parents: 'Son of Krishna Sharma & Manju Devi' }
+  },
+  details: [
+    ['Wedding', 'Wednesday, 2 December 2026'],
+    ['Tithi', 'Margashirsha Krishna Paksha Budhwar'],
+    ['Route', 'Teencholi, Rajasthan to Sanjay Nagar, Paparna'],
+    ['Venue', 'VRW6+GVP, Bhagtawar Nagar, Rajasthan', 'Near Bhagtawar Nagar, Rajasthan']
+  ],
+  contact: { kicker: 'RSVP', title: 'Kindly Respond', name: 'Krishna Kumar Sharma', lead: 'Please let us know if you will be joining us — we would love to celebrate with you.' },
+  blessings: {
+    lead: 'Your presence and blessings will make our celebration even more special. Send your love and blessings to Chanchal & JP as they begin this beautiful new chapter.'
+  }
+};
+
+const C = CONFIGS[process.argv[2] || 'rr-wedding-26nov'];
+if (!C) { console.error('unknown config: ' + process.argv[2] + ' (known: ' + Object.keys(CONFIGS).join(', ') + ')'); process.exit(1); }
+
 const esc = s => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 const digits = C.phone.replace(/\D/g, '');
 const url = `https://invitivals.com/${C.out}/`;
@@ -63,8 +124,10 @@ function slot(page, [x0, y0, x1, y1], cls, size, html, css = '') {
 const lines = a => a.map(l => `<span class="ln">${esc(l)}</span>`).join('');
 const pct = (page, [x0, y0, x1, y1]) => `left:${(x0 / W[page] * 100).toFixed(3)}%;top:${(y0 / 1600 * 100).toFixed(3)}%;width:${((x1 - x0) / W[page] * 100).toFixed(3)}%;height:${((y1 - y0) / 1600 * 100).toFixed(3)}%`;
 
+const nextDay = d => new Date(Date.parse(d + 'T00:00:00Z') + 864e5).toISOString().slice(0, 10).replace(/-/g, '');
 const gcal = e => {
-  const s = `${e.date.replace(/-/g, '')}T${e.time.replace(':', '')}00`, en = `${e.date.replace(/-/g, '')}T${e.end.replace(':', '')}00`;
+  const s = e.allDay ? e.date.replace(/-/g, '') : `${e.date.replace(/-/g, '')}T${e.time.replace(':', '')}00`;
+  const en = e.allDay ? nextDay(e.date) : `${(e.endDate || e.date).replace(/-/g, '')}T${e.end.replace(':', '')}00`;
   const q = new URLSearchParams({ action: 'TEMPLATE', text: `${e.name} — ${C.couple.short}`, dates: `${s}/${en}`, ctz: 'Asia/Kolkata', details: `${C.title}\n${url}`, location: C.venue.maps });
   return `https://calendar.google.com/calendar/render?${q}`;
 };
@@ -75,11 +138,14 @@ const ICON = {
   rings: '<circle cx="9" cy="14" r="5"/><circle cx="15" cy="14" r="5"/><path d="M13.5 5.5 15 3.5l1.5 2-1.5 2z"/>',
   agni: '<path d="M12 3c2.6 3 4 5.4 3.4 8-.4 1.8-1.8 2.8-3.4 2.8S9 12.8 8.6 11C8 8.4 9.4 6 12 3z"/><path d="M5 16h14l-1.4 4H6.4z"/><path d="M3.5 16h17"/>',
   reception: '<path d="M7 3h4l-.4 4.5a1.6 1.6 0 0 1-3.2 0z"/><path d="M9 9.5V17M6.5 17h5"/><path d="M14 3h4l-.4 4.5a1.6 1.6 0 0 1-3.2 0z"/><path d="M16 9.5V17M13.5 17h5"/><path d="M10 21h4"/>',
+  tilak: '<path d="M3 14h18c-.8 3.6-4.4 6-9 6s-8.2-2.4-9-6z"/><path d="M12 4.5c1.3 1.6 1.8 2.8 1.3 3.8-.4.8-2.2.8-2.6 0-.5-1 0-2.2 1.3-3.8z"/><path d="M9 14v-1.6c0-1 1.3-1.9 3-1.9s3 .9 3 1.9V14"/><path d="M5.5 14v-1M18.5 14v-1"/>',
   doli: '<path d="M2 7h20"/><path d="M6 7v-.5A6 3 0 0 1 18 6.5V7"/><path d="M7 7v10h10V7"/><path d="M10 17v-5a2 2 0 0 1 4 0v5"/><path d="M5 20h14"/>'
 };
 const icon = k => `<svg viewBox="0 0 24 24" aria-hidden="true">${ICON[k]}</svg>`;
 
-const fmtDay = d => new Date(d + 'T12:00:00+05:30').toLocaleDateString('en-GB', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric', timeZone: 'Asia/Kolkata' });
+const WEEKDAYS = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+const MONTHS = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+const fmtDay = d => { const [y, m, dd] = d.split('-').map(Number); return `${WEEKDAYS[new Date(Date.UTC(y, m - 1, dd)).getUTCDay()]}, ${dd} ${MONTHS[m - 1]} ${y}`; };
 const days = [...new Set(C.events.map(e => e.date))];
 const programme = days.map(d => `
       <div class="day reveal">
@@ -91,7 +157,7 @@ const programme = days.map(d => `
               <h3>${esc(e.name)}</h3>
               <p class="ev-t">${esc(e.label)}</p>
               <p class="ev-n">${esc(e.note)}</p>
-              <a class="ev-cal" href="${esc(gcal(e))}" target="_blank" rel="noopener">Add to calendar</a>
+              <a class="ev-cal" href="${esc(gcal(e))}" target="_blank" rel="noopener">Add to calendar</a>${e.maps ? `<a class="ev-cal ev-map" href="${esc(e.maps)}" target="_blank" rel="noopener" aria-label="${esc(e.name)} location on Google Maps">View on map</a>` : ''}
             </div>
           </li>`).join('')}
         </ol>
@@ -100,17 +166,75 @@ const programme = days.map(d => `
 const gallery = C.photos.map((p, i) => `
         <figure class="g-item"><button type="button" class="g-btn" data-i="${i}" aria-label="View photo ${i + 1} larger"><img src="${p.src}" alt="${esc(p.alt)}" style="object-position:${p.pos}" loading="lazy" decoding="async" width="1000" height="1333"></button></figure>`).join('');
 
+const hasFull = C.photos.some(p => p.full);
 const ics = () => {
   const stamp = new Date().toISOString().replace(/[-:]/g, '').replace(/\.\d+/, '');
   const ev = C.events.map((e, i) => [
     'BEGIN:VEVENT', `UID:${C.out}-${i}@invitivals.com`, `DTSTAMP:${stamp}`,
-    `DTSTART;TZID=Asia/Kolkata:${e.date.replace(/-/g, '')}T${e.time.replace(':', '')}00`,
-    `DTEND;TZID=Asia/Kolkata:${e.date.replace(/-/g, '')}T${e.end.replace(':', '')}00`,
+    e.allDay ? `DTSTART;VALUE=DATE:${e.date.replace(/-/g, '')}` : `DTSTART;TZID=Asia/Kolkata:${e.date.replace(/-/g, '')}T${e.time.replace(':', '')}00`,
+    e.allDay ? `DTEND;VALUE=DATE:${nextDay(e.date)}` : `DTEND;TZID=Asia/Kolkata:${(e.endDate || e.date).replace(/-/g, '')}T${e.end.replace(':', '')}00`,
     `SUMMARY:${e.name} — ${C.couple.short}`, `LOCATION:${C.venue.maps}`, `URL:${url}`, 'END:VEVENT'].join('\r\n'));
   return ['BEGIN:VCALENDAR', 'VERSION:2.0', 'PRODID:-//Invitivals//Rose Red//EN', 'CALSCALE:GREGORIAN',
     'BEGIN:VTIMEZONE', 'TZID:Asia/Kolkata', 'BEGIN:STANDARD', 'DTSTART:19700101T000000', 'TZOFFSETFROM:+0530', 'TZOFFSETTO:+0530', 'TZNAME:IST', 'END:STANDARD', 'END:VTIMEZONE',
     ...ev, 'END:VCALENDAR', ''].join('\r\n');
 };
+
+const orn = '<div class="orn reveal"><i></i><svg viewBox="0 0 16 16"><path d="M8 0l2 6 6 2-6 2-2 6-2-6-6-2 6-2z"/></svg><i></i></div>';
+const familiesBand = C.families ? `
+  <section class="band" id="families" aria-labelledby="fam-h">
+    <img class="corner tl" src="assets/corner-floral.webp" alt="">
+    <p class="kicker reveal">Blessed by our elders</p>
+    <h2 class="h2 reveal" id="fam-h">Our Families</h2>
+    ${orn}
+    <div class="fam reveal">${['bride', 'groom'].map(k => { const p = C.families[k]; return `
+      <div class="fam-p"><p class="fam-l">${esc(p.label)}</p><p class="fam-n">${esc(p.name)}</p><p class="fam-r">${esc(p.parents)}</p></div>`; }).join('<div class="fam-amp">&amp;</div>')}
+    </div>
+    <dl class="facts reveal">${C.details.map(([k, ...v]) => `<div><dt>${esc(k)}</dt><dd>${v.map(esc).join('<br>')}</dd></div>`).join('')}</dl>
+    <div class="btns reveal"><a class="btn" href="${esc(C.venue.maps)}" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M12 2a7 7 0 0 0-7 7c0 5.3 7 13 7 13s7-7.7 7-13a7 7 0 0 0-7-7zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5z"/></svg>View venue on map</a></div>
+    <img class="corner br" src="assets/corner-floral.webp" alt="">
+  </section>` : '';
+const blessingsBand = C.blessings ? `
+  <section class="band" id="blessings" aria-labelledby="bless-h">
+    <img class="corner tl" src="assets/corner-floral.webp" alt="">
+    <p class="kicker reveal">Blessings for the couple</p>
+    <h2 class="h2 reveal" id="bless-h">Your Blessings</h2>
+    ${orn}
+    <p class="lead reveal">${esc(C.blessings.lead)}</p>
+    <form class="bless reveal" id="bless" novalidate>
+      <label class="sr" for="bless-t">Your blessings</label>
+      <textarea id="bless-t" maxlength="500" rows="4" placeholder="Write your blessings for Chanchal &amp; JP…"></textarea>
+      <p class="bless-m" id="bless-m" role="status"></p>
+      <button class="btn" type="submit"><svg viewBox="0 0 24 24"><path d="M2 21 23 12 2 3v7l15 2-15 2z"/></svg>Send blessings</button>
+    </form>
+    <img class="corner br" src="assets/corner-floral.webp" alt="">
+  </section>` : '';
+const EXTRA_CSS = `
+/* added for invitations with families / blessings sections (same palette and type as the template) */
+.invoc{font-family:var(--caps);text-align:center;letter-spacing:.24em;text-transform:uppercase;font-size:14px;color:#fdf0c4;margin-bottom:10px}
+.invoc::before,.invoc::after{content:"॥";margin:0 .6em;color:var(--gold)}
+.ev-b .ev-cal{margin-right:18px}
+.fam{display:flex;flex-direction:column;align-items:center;gap:6px;text-align:center}
+.fam-l{font-family:var(--caps);text-transform:uppercase;letter-spacing:.3em;font-size:12px;color:var(--gold)}
+.fam-n{font-family:var(--script);font-size:clamp(40px,11.5vw,52px);line-height:1.15;color:#fdf0c4;text-shadow:0 0 .22em rgba(255,214,150,.28),0 2px 3px rgba(30,0,8,.5)}
+.fam-r{font-size:19px;font-style:italic;color:#f6dfc0;line-height:1.4}
+.fam-amp{font-family:var(--serif);font-style:italic;font-weight:600;font-size:34px;color:var(--gold);margin:6px 0}
+.facts{margin:30px auto 6px;max-width:420px;border:1px solid rgba(243,213,150,.35);border-radius:16px;background:linear-gradient(180deg,rgba(255,236,208,.08),rgba(255,236,208,.03));padding:6px 18px}
+.facts div{padding:12px 0;border-bottom:1px solid rgba(243,213,150,.2);text-align:center}
+.facts div:last-child{border-bottom:0}
+.facts dt{font-family:var(--caps);text-transform:uppercase;letter-spacing:.24em;font-size:11px;color:var(--gold)}
+.facts dd{margin-top:4px;font-size:19px;font-weight:600;line-height:1.35;color:#fff1d6}
+.rsvp-name{text-align:center;font-family:var(--serif);font-weight:700;font-size:25px;letter-spacing:.04em;color:#fff1d6;margin-top:18px;line-height:1.2}
+.bless{max-width:420px;margin:22px auto 0;display:flex;flex-direction:column;align-items:center;gap:10px}
+.bless textarea{width:100%;min-height:120px;resize:vertical;padding:14px 16px;border-radius:14px;border:1px solid rgba(243,213,150,.5);background:rgba(42,6,17,.6);color:#fff1d6;font:italic 600 18px/1.45 var(--serif)}
+.bless textarea::placeholder{color:rgba(246,223,192,.6)}
+.bless textarea:focus{outline:2px solid var(--gold);outline-offset:2px}
+.bless-m{min-height:1.2em;font-style:italic;color:#f6dfc0;text-align:center}
+`;
+const BLESS_JS = `
+  // blessings: opens WhatsApp to the family with the guest's words
+  (function(){var f=document.getElementById("bless"),t=document.getElementById("bless-t"),m=document.getElementById("bless-m");
+    f.addEventListener("submit",function(e){e.preventDefault();var v=t.value.trim();if(!v){m.textContent="Please write a few words of blessing first.";t.focus();return}
+      window.open("https://wa.me/${digits}?text="+encodeURIComponent("Blessings for ${C.couple.short}:\\n\\n"+v),"_blank","noopener");m.textContent="Thank you — your blessings mean the world to us.";t.value=""})})();`;
 
 const html = `<!doctype html>
 <html lang="en">
@@ -287,7 +411,7 @@ a{color:inherit}
 .twinkle{position:absolute;pointer-events:none;animation:tw 3.4s ease-in-out infinite}
 @keyframes tw{0%,100%{opacity:.2;transform:scale(.7)}50%{opacity:1;transform:scale(1.05)}}
 @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}.reveal,.slot.rise{opacity:1;transform:none}}
-</style>
+${C.families || C.blessings ? EXTRA_CSS : ''}</style>
 </head>
 <body class="locked">
 <div id="env" role="dialog" aria-label="Invitation envelope">
@@ -311,12 +435,12 @@ a{color:inherit}
 
   <section class="band" id="story" aria-labelledby="story-h">
     <img class="corner tl" src="assets/corner-floral.webp" alt="">
-    <p class="kicker reveal">Two hearts, one journey</p>
+${C.invocation ? `<p class="invoc reveal">${esc(C.invocation)}</p>\n` : ''}    <p class="kicker reveal">Two hearts, one journey</p>
     <h2 class="h2 reveal" id="story-h">Our Story</h2>
     <div class="orn reveal"><i></i><svg viewBox="0 0 16 16"><path d="M8 0l2 6 6 2-6 2-2 6-2-6-6-2 6-2z"/></svg><i></i></div>
-    <div class="arch reveal"><img src="${C.story.src}" alt="${esc(C.story.alt)}" loading="lazy" width="1000" height="1333"></div>
+    <div class="arch reveal"><img src="${C.story.src}" alt="${esc(C.story.alt)}"${C.story.pos ? ` style="object-position:${C.story.pos}"` : ''} loading="lazy" width="1000" height="1333"></div>
     <p class="names reveal">${esc(C.couple.first)}<span class="amp">&amp;</span>${esc(C.couple.second)}</p>
-    <p class="lead reveal" style="margin-top:14px">From a chance hello to a lifetime of together — with the blessings of our families, we begin our forever.</p>
+    <p class="lead reveal" style="margin-top:14px">${esc(C.storyLead || 'From a chance hello to a lifetime of together — with the blessings of our families, we begin our forever.')}</p>
     <div class="count reveal" id="count" aria-label="Countdown to the wedding day">
       <div><b data-k="d">00</b><span>Days</span></div><div><b data-k="h">00</b><span>Hours</span></div><div><b data-k="m">00</b><span>Mins</span></div><div><b data-k="s">00</b><span>Secs</span></div>
     </div>
@@ -341,7 +465,7 @@ a{color:inherit}
     <div class="btns reveal"><a class="btn" href="event.ics" download="wedding.ics"><svg viewBox="0 0 24 24"><path d="M7 2h2v2h6V2h2v2h3v18H4V4h3zm11 8H6v10h12z"/></svg>Save all dates</a></div>
   </section>
 
-  <section class="band" id="gallery" aria-labelledby="gal-h">
+${C.families ? familiesBand + '\n' : ''}  <section class="band" id="gallery" aria-labelledby="gal-h">
     <p class="kicker reveal">Moments together</p>
     <h2 class="h2 reveal" id="gal-h">Gallery</h2>
     <div class="orn reveal"><i></i><svg viewBox="0 0 16 16"><path d="M8 0l2 6 6 2-6 2-2 6-2-6-6-2 6-2z"/></svg><i></i></div>
@@ -360,11 +484,11 @@ a{color:inherit}
   </section>
 
   <section class="band" id="contact" aria-labelledby="contact-h">
-    <p class="kicker reveal">For any assistance</p>
-    <h2 class="h2 reveal" id="contact-h">Get in Touch</h2>
+    <p class="kicker reveal">${esc((C.contact || {}).kicker || 'For any assistance')}</p>
+    <h2 class="h2 reveal" id="contact-h">${esc((C.contact || {}).title || 'Get in Touch')}</h2>
     <div class="orn reveal"><i></i><svg viewBox="0 0 16 16"><path d="M8 0l2 6 6 2-6 2-2 6-2-6-6-2 6-2z"/></svg><i></i></div>
-    <p class="lead reveal">We would be delighted to help with directions, timings or anything you need.</p>
-    <a class="phone reveal" href="tel:+${digits}">${esc(C.phone)}</a>
+    <p class="lead reveal">${esc((C.contact || {}).lead || 'We would be delighted to help with directions, timings or anything you need.')}</p>
+    ${(C.contact || {}).name ? `<p class="rsvp-name reveal">${esc(C.contact.name)}</p>` : ''}<a class="phone reveal" href="tel:+${digits}">${esc(C.phone)}</a>
     <div class="btns reveal">
       <a class="btn" href="tel:+${digits}"><svg viewBox="0 0 24 24"><path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1A17 17 0 0 1 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1z"/></svg>Call</a>
       <a class="btn ghost" href="https://wa.me/${digits}?text=${encodeURIComponent('Hello! I received the wedding invitation 💐')}" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm5.3 14.1c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .1-3.3-.8-2.8-1.1-4.5-3.9-4.7-4.1-.1-.2-1.1-1.5-1.1-2.9s.7-2 1-2.3c.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.8 2c.1.2.1.3 0 .5l-.4.6-.4.4c-.1.1-.3.3-.1.6.2.3.8 1.3 1.6 2 1.1 1 2 1.3 2.3 1.4.3.1.5.1.6-.1l.9-1.1c.2-.3.4-.2.7-.1l1.9.9c.3.1.5.2.5.3.1.2.1.7-.1 1.3z"/></svg>WhatsApp</a>
@@ -372,7 +496,7 @@ a{color:inherit}
     </div>
   </section>
 
-  <section class="plate" id="thanks" aria-label="Thank you">
+${C.blessings ? blessingsBand + '\n' : ''}  <section class="plate" id="thanks" aria-label="Thank you">
     <img src="assets/thanks-page.webp" alt="With all our love. Thank you for being a part of our special journey." width="1031" height="2401" loading="lazy">
     ${slot('thanks', [100, 962, 587, 1010], 'caps rise', 25, esc(C.closing))}
   </section>
@@ -448,7 +572,7 @@ a{color:inherit}
   var gal=document.getElementById("gal"),dots=document.querySelectorAll("#dots i");
   gal.addEventListener("scroll",function(){var w=gal.firstElementChild.getBoundingClientRect().width+14,i=Math.round(gal.scrollLeft/w);dots.forEach(function(d,k){d.classList.toggle("on",k===i)})},{passive:true});
   var lb=document.getElementById("box"),li=lb.querySelector("img"),cur=0;
-  function show(i){cur=(i+PHOTOS.length)%PHOTOS.length;li.src=PHOTOS[cur].src;li.alt=PHOTOS[cur].alt;lb.classList.add("on")}
+  function show(i){cur=(i+PHOTOS.length)%PHOTOS.length;li.src=${hasFull ? 'PHOTOS[cur].full||PHOTOS[cur].src' : 'PHOTOS[cur].src'};li.alt=PHOTOS[cur].alt;lb.classList.add("on")}
   gal.querySelectorAll(".g-btn").forEach(function(b){b.addEventListener("click",function(){show(+b.dataset.i)})});
   lb.querySelector(".x").addEventListener("click",function(){lb.classList.remove("on")});
   lb.querySelector(".prev").addEventListener("click",function(e){e.stopPropagation();show(cur-1)});
@@ -456,7 +580,7 @@ a{color:inherit}
   lb.addEventListener("click",function(e){if(e.target===lb)lb.classList.remove("on")});
   addEventListener("keydown",function(e){if(!lb.classList.contains("on"))return;if(e.key==="Escape")lb.classList.remove("on");if(e.key==="ArrowLeft")show(cur-1);if(e.key==="ArrowRight")show(cur+1)});
 
-  // share
+${C.blessings ? BLESS_JS + '\n' : ''}  // share
   document.getElementById("share").addEventListener("click",function(){var u=location.origin+location.pathname,t=document.title.replace(/^.* — /,"");if(navigator.share){navigator.share({title:t,url:u}).catch(function(){})}else{location.href="https://wa.me/?text="+encodeURIComponent(t+" "+u)}});
   document.addEventListener("visibilitychange",function(){if(document.hidden)audio.pause();else if(opened)play()});
 })();

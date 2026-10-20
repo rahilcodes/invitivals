@@ -1,0 +1,50 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Invitivals//Rose Red//EN
+CALSCALE:GREGORIAN
+BEGIN:VTIMEZONE
+TZID:Asia/Kolkata
+BEGIN:STANDARD
+DTSTART:19700101T000000
+TZOFFSETFROM:+0530
+TZOFFSETTO:+0530
+TZNAME:IST
+END:STANDARD
+END:VTIMEZONE
+BEGIN:VEVENT
+UID:chanchal-jp-sharma-wedding-0@invitivals.com
+DTSTAMP:20261020T165022Z
+DTSTART;TZID=Asia/Kolkata:20261126T103000
+DTEND;TZID=Asia/Kolkata:20261126T133000
+SUMMARY:Baan — Chanchal & JP Sharma
+LOCATION:https://maps.app.goo.gl/RSTD7MqNDrLRwGW88?g_st=aw
+URL:https://invitivals.com/chanchal-jp-sharma-wedding/
+END:VEVENT
+BEGIN:VEVENT
+UID:chanchal-jp-sharma-wedding-1@invitivals.com
+DTSTAMP:20261020T165022Z
+DTSTART;TZID=Asia/Kolkata:20261130T133000
+DTEND;TZID=Asia/Kolkata:20261130T180000
+SUMMARY:Tilak — Chanchal & JP Sharma
+LOCATION:https://maps.app.goo.gl/RSTD7MqNDrLRwGW88?g_st=aw
+URL:https://invitivals.com/chanchal-jp-sharma-wedding/
+END:VEVENT
+BEGIN:VEVENT
+UID:chanchal-jp-sharma-wedding-2@invitivals.com
+DTSTAMP:20261020T165022Z
+DTSTART;VALUE=DATE:20261201
+DTEND;VALUE=DATE:20261202
+SUMMARY:Janeev — Chanchal & JP Sharma
+LOCATION:https://maps.app.goo.gl/RSTD7MqNDrLRwGW88?g_st=aw
+URL:https://invitivals.com/chanchal-jp-sharma-wedding/
+END:VEVENT
+BEGIN:VEVENT
+UID:chanchal-jp-sharma-wedding-3@invitivals.com
+DTSTAMP:20261020T165022Z
+DTSTART;TZID=Asia/Kolkata:20261202T233000
+DTEND;TZID=Asia/Kolkata:20261203T013000
+SUMMARY:Wedding · Fera — Chanchal & JP Sharma
+LOCATION:https://maps.app.goo.gl/RSTD7MqNDrLRwGW88?g_st=aw
+URL:https://invitivals.com/chanchal-jp-sharma-wedding/
+END:VEVENT
+END:VCALENDAR
