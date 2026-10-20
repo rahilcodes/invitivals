@@ -20,9 +20,10 @@
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
+<link rel="canonical" href="https://invitivals.com/chanchal-jp-wedding/">
 
-<!-- Preload only what the guest sees first: envelope, main invitation, next screen -->
-<link rel="preload" as="image" href="assets/screens/envelope.jpg" fetchpriority="high">
+<!-- Preload only what the guest sees first: the opening film poster, main invitation, next screen -->
+<link rel="preload" as="image" href="assets/intro-poster.jpg" fetchpriority="high">
 <link rel="preload" as="image" href="assets/screens/main.jpg">
 <link rel="preload" as="image" href="assets/screens/scratch.jpg">
 <link rel="preload" as="image" href="assets/layers/butterfly.png">
@@ -41,14 +42,12 @@
 <div id="envelope" class="envelope" role="button" tabindex="0" aria-label="Open the invitation">
   <div class="envelope__col">
     <div class="envelope__stage">
-      <div class="envelope__whole"></div>
-      <div class="envelope__door envelope__door--l"></div>
-      <div class="envelope__door envelope__door--r"></div>
+      <video id="introVideo" class="envelope__video" src="assets/intro-video.mp4" poster="assets/intro-poster.jpg"
+             playsinline webkit-playsinline preload="auto" aria-hidden="true"></video>
       <div class="envelope__seal" aria-hidden="true"><span></span></div>
-      <div class="envelope__burst" aria-hidden="true"></div>
       <p class="envelope__hint" aria-hidden="true">Tap the seal to open</p>
     </div>
-    <div class="envelope__light" aria-hidden="true"></div>
+    <button id="introSkip" class="envelope__skip" type="button" tabindex="-1">Skip</button>
   </div>
 </div>
 
@@ -80,8 +79,8 @@
       <div class="ov ticket" style="--x:122;--y:735;--w:658;--h:330">
         <div class="ticket__reveal" id="ticketReveal">
           <p class="ticket__label">Save the Date</p>
-          <p class="ticket__date" id="ticketDate">24 · 10 · 2026</p>
-          <p class="ticket__full" id="ticketFull">Saturday, 24 October 2026</p>
+          <p class="ticket__date" id="ticketDate">13 · 02 · 2027</p>
+          <p class="ticket__full" id="ticketFull">Saturday, 13 February 2027</p>
         </div>
         <canvas id="scratchCanvas" class="ticket__canvas" role="button" tabindex="0" aria-label="Scratch to reveal our special date. Press Enter to reveal."></canvas>
         <div class="ticket__burst" aria-hidden="true"></div>

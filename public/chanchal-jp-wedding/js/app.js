@@ -13,7 +13,7 @@
   var CONFIG = {
     couple: 'Chanchal & JP',
     utcOffset: '+05:30',                         // India Standard Time
-    music: 'assets/audio/music.mp3',             // the only background song
+    music: 'assets/audio/background.mp3',        // the only background song
     musicVolume: 0.4,                            // settles at about 40%
     musicEndVolume: 0.0,                         // fades down to this at the closing screen
     mainEvent: 'shadi',                          // countdown, scratch date and calendar use this one (the Fera)
@@ -410,6 +410,19 @@
     atEnding = ending;
     fadeTo(ending ? CONFIG.musicEndVolume : CONFIG.musicVolume, ending ? 5 : 2.5);
   }
+  var musicOn = false;
+  function playMusic() {                           // after the opening film
+    musicOn = true;
+    if (!audio) return;
+    muteBtn.hidden = false;
+    requestAnimationFrame(function () { requestAnimationFrame(function () { muteBtn.classList.add('is-shown'); }); });
+    setTimeout(function () { muteBtn.classList.add('is-shown'); }, 400);   // even if animation frames are paused
+
+    if (audioCtx && audioCtx.state === 'suspended') audioCtx.resume();
+    var p = audio.play();
+    if (p && p.catch) p.catch(function () { setMuted(true); });
+    fadeTo(CONFIG.musicVolume, 3.5);
+  }
   function startMusic() {
     if (!CONFIG.music) return;
     try {
@@ -427,19 +440,16 @@
         } catch (e) { gainNode = null; }
       }
       applyVolume(0);
-      var p = audio.play();
-      if (p && p.catch) p.catch(function () { setMuted(true); });
-      fadeTo(CONFIG.musicVolume, 3.5);
+      var p = audio.play();                        // played and paused inside the tap so phones allow it later
+      if (p && p.then) p.then(function () { if (!musicOn) audio.pause(); }, function () {});
+      else audio.pause();
       audio.addEventListener('error', function () { muteBtn.hidden = true; });
     } catch (e) { audio = null; }
-    muteBtn.hidden = false;
-    requestAnimationFrame(function () { requestAnimationFrame(function () { muteBtn.classList.add('is-shown'); }); });
 
     if ('IntersectionObserver' in window) {          // closing screen: the music bows out; scrolling back up brings it home
       new IntersectionObserver(checkEnding, { threshold: [0, .4] }).observe($('#quran'));
     }
     window.addEventListener('scroll', checkEnding, { passive: true });
-    setTimeout(function () { muteBtn.classList.add('is-shown'); }, 400);   // even if animation frames are paused
     window.__music = function () {                   // read-only status, handy when checking the page
       return { src: audio && audio.src, paused: audio && audio.paused, loop: audio && audio.loop, time: audio && audio.currentTime, volume: +vol.toFixed(2), target: volTarget, muted: muted };
     };
@@ -458,7 +468,7 @@
   }
   muteBtn.addEventListener('click', function () { setMuted(!muted); });
   doc.addEventListener('visibilitychange', function () {
-    if (!audio || muted) return;
+    if (!audio || muted || !musicOn) return;
     if (doc.hidden) audio.pause(); else { var p = audio.play(); if (p && p.catch) p.catch(function () {}); }
   });
 
@@ -486,27 +496,53 @@
   window.scrollTo(0, 0);
   lockScroll();
 
-  function openEnvelope() {
-    if (opened) return;
-    opened = true;
-    startMusic();                                   // inside the tap: allowed to play
-    burst($('.envelope__burst'), 18, Math.min(window.innerWidth, 480) * .55);
-    envelope.classList.add('is-opening');
+  // The opening is the designer's film: tap → it plays with its own sound → at FILM_CUT the arch is
+  // still empty and glowing, and it dissolves into the same arch on the invitation (the couple's photo).
+  // The film's own last seconds (a mosque and a couple in Muslim dress) are never shown.
+  var FILM_CUT = 7.6;
+  var film = $('#introVideo'), skipBtn = $('#introSkip'), handedOff = false;
+  function handOff() {
+    if (handedOff) return; handedOff = true;
+    if (film) { try { film.pause(); } catch (e) {} }
+    envelope.classList.remove('is-playing');
+    envelope.classList.add('is-leaving');
     body.classList.remove('is-sealed');
     body.classList.add('is-open');
-    startScenes();                                  // layers, lettering and parallax come alive as the velvet parts
-    var done = false;
-    function finish() {
-      if (done) return; done = true;
+    startScenes();                                  // layers, lettering and parallax come alive under the dissolve
+    playMusic();
+    setTimeout(function () {
       envelope.classList.add('is-gone');
       envelope.setAttribute('aria-hidden', 'true');
+      if (film) { film.removeAttribute('src'); try { film.load(); } catch (e) {} }   // frees the decoder on phones
       unlockScroll();                               // normal document scrolling begins here
       window.scrollTo(0, 0);
       warm(['assets/screens/functions.jpg', 'assets/screens/countdown.jpg', 'assets/screens/gallery.jpg', 'assets/screens/family.jpg', 'assets/screens/dua.jpg', 'assets/screens/quran.jpg',
             'assets/screens/manje.jpg', 'assets/screens/sanchak.jpg', 'assets/screens/shadi.jpg', 'assets/screens/valima.jpg']);
-    }
-    setTimeout(finish, reduceMotion ? 700 : 2150);
+    }, reduceMotion ? 300 : 1150);
   }
+  function openEnvelope() {
+    if (opened) return;
+    opened = true;
+    startMusic();                                   // inside the tap: unlocked now, heard after the film
+    envelope.classList.add('is-opening');
+    if (!film || reduceMotion) { handOff(); return; }
+    film.addEventListener('ended', handOff);
+    film.addEventListener('error', handOff);
+    film.addEventListener('timeupdate', function () { if (film.currentTime >= FILM_CUT) handOff(); });
+    var stall = setTimeout(handOff, 16000);          // never strand a guest on a film that will not play
+    film.addEventListener('ended', function () { clearTimeout(stall); });
+    function playing() { envelope.classList.add('is-playing'); skipBtn.tabIndex = 0; }
+    film.muted = false;
+    var p = film.play();
+    if (p && p.then) {
+      p.then(playing, function () {                 // sound refused: play the film silently instead
+        film.muted = true;
+        var q = film.play();
+        if (q && q.then) q.then(playing, handOff); else playing();
+      });
+    } else playing();
+  }
+  skipBtn.addEventListener('click', function (e) { e.stopPropagation(); handOff(); });
   envelope.addEventListener('click', openEnvelope);
   envelope.addEventListener('keydown', function (e) {
     if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openEnvelope(); }
