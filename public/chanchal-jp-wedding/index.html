@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#2a0508">
+<title>Chanchal &amp; JP · Wedding Invitation</title>
+<meta name="description" content="With the blessings of Shri Ganesh ji and our elders, Chanchal and JP invite you to their wedding on Wednesday, 2 December 2026, Bhagtawar Nagar, Rajasthan.">
+<meta name="robots" content="noindex">
+
+<!-- link preview (WhatsApp, iMessage, Facebook, X) -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Invitivals">
+<meta property="og:locale" content="en_IN">
+<meta property="og:url" content="https://invitivals.com/chanchal-jp-wedding/">
+<meta property="og:title" content="Chanchal &amp; JP · Wedding Invitation">
+<meta property="og:description" content="Wednesday, 2 December 2026 · Bhagtawar Nagar, Rajasthan. Tap to open the invitation.">
+<meta property="og:image" content="https://invitivals.com/chanchal-jp-wedding/assets/og.jpg">
+<meta property="og:image:type" content="image/jpeg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+
+<!-- Preload only what the guest sees first: envelope, main invitation, next screen -->
+<link rel="preload" as="image" href="assets/screens/envelope.jpg" fetchpriority="high">
+<link rel="preload" as="image" href="assets/screens/main.jpg">
+<link rel="preload" as="image" href="assets/screens/scratch.jpg">
+<link rel="preload" as="image" href="assets/layers/butterfly.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Great+Vibes&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body class="is-sealed">
+
+<!-- ============================================================
+     ENVELOPE (fixed only while sealed, removed after opening)
+     ============================================================ -->
+<div id="envelope" class="envelope" role="button" tabindex="0" aria-label="Open the invitation">
+  <div class="envelope__col">
+    <div class="envelope__stage">
+      <div class="envelope__whole"></div>
+      <div class="envelope__door envelope__door--l"></div>
+      <div class="envelope__door envelope__door--r"></div>
+      <div class="envelope__seal" aria-hidden="true"><span></span></div>
+      <div class="envelope__burst" aria-hidden="true"></div>
+      <p class="envelope__hint" aria-hidden="true">Tap the seal to open</p>
+    </div>
+    <div class="envelope__light" aria-hidden="true"></div>
+  </div>
+</div>
+
+<!-- ============================================================
+     ONE CONTINUOUS SCROLLABLE INVITATION
+     Each section owns a real height through its artwork aspect ratio.
+     ============================================================ -->
+<main id="invitation" class="invitation">
+
+  <!-- MAIN · CHANCHAL & JP -->
+  <section id="main" class="sec sec--dark" style="--W:793;--H:1600" data-petals="5" data-sparkles="10">
+    <div class="art">
+      <img src="assets/screens/main.jpg" width="793" height="1600" alt="Shri Ganeshaya Namah. With the divine blessings of Shri Ganesh ji and our elders, together with our families, Chanchal and JP. Two hearts, one journey, forever in love. A photograph of Chanchal and JP at Jal Mahal. You are warmly invited to our wedding celebrations." decoding="async" fetchpriority="high">
+      <i class="glow" style="--gx:5%;--gy:39%;--gs:36"></i>
+      <i class="glow" style="--gx:94%;--gy:30%;--gs:36"></i>
+      <i class="glow" style="--gx:90%;--gy:67%;--gs:30"></i>
+      <div class="scroll-cue" aria-hidden="true"><span></span></div>
+    </div>
+  </section>
+
+  <!-- SCRATCH DATE -->
+  <section id="scratch" class="sec sec--dark" style="--W:900;--H:1600" data-petals="4" data-sparkles="10">
+    <div class="art">
+      <img src="assets/screens/scratch.jpg" width="900" height="1600" alt="Chanchal and JP. A date written for us. Scratch to reveal our special date. Shubh Vivah." decoding="async">
+      <i class="glow" style="--gx:8%;--gy:21%;--gs:38"></i>
+      <i class="glow" style="--gx:14%;--gy:37%;--gs:20"></i>
+
+
+      <div class="ov ticket" style="--x:122;--y:735;--w:658;--h:330">
+        <div class="ticket__reveal" id="ticketReveal">
+          <p class="ticket__label">Save the Date</p>
+          <p class="ticket__date" id="ticketDate">24 · 10 · 2026</p>
+          <p class="ticket__full" id="ticketFull">Saturday, 24 October 2026</p>
+        </div>
+        <canvas id="scratchCanvas" class="ticket__canvas" role="button" tabindex="0" aria-label="Scratch to reveal our special date. Press Enter to reveal."></canvas>
+        <div class="ticket__burst" aria-hidden="true"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- OUR FUNCTIONS -->
+  <section id="functions" class="sec sec--light" style="--W:689;--H:1600" data-petals="4" data-sparkles="6">
+    <div class="art">
+      <img src="assets/screens/functions.jpg" width="689" height="1600" alt="Our Functions. Four beautiful occasions, one blessed journey: Baan, Tilak, Janeev and Fera. Your presence will make our days more special." loading="lazy" decoding="async">
+      <i class="glow" style="--gx:7%;--gy:24%;--gs:34"></i>
+
+
+      <button class="ov hotspot hotspot--plaque" data-fn="manje"   style="--x:80;--y:548;--w:520;--h:140" aria-label="Baan details"><i></i></button>
+      <button class="ov hotspot hotspot--plaque" data-fn="sanchak" style="--x:80;--y:715;--w:520;--h:140" aria-label="Tilak details"><i></i></button>
+      <button class="ov hotspot hotspot--plaque" data-fn="valima"  style="--x:80;--y:882;--w:520;--h:140" aria-label="Janeev details"><i></i></button>
+      <button class="ov hotspot hotspot--plaque" data-fn="shadi"   style="--x:80;--y:1048;--w:520;--h:140" aria-label="Fera details"><i></i></button>
+    </div>
+  </section>
+
+  <!-- COUNTDOWN + SAVE OUR DATE -->
+  <section id="countdown" class="sec sec--dark" style="--W:628;--H:1600" data-petals="4" data-sparkles="14">
+    <div class="art">
+      <img src="assets/screens/countdown.jpg" width="628" height="1600" alt="The wait is almost over. Some moments are worth the wait." loading="lazy" decoding="async">
+      <i class="glow" style="--gx:50.6%;--gy:8%;--gs:40"></i>
+      <i class="glow" style="--gx:6%;--gy:84%;--gs:34"></i>
+      <i class="glow" style="--gx:93%;--gy:85.5%;--gs:34"></i>
+
+      <div class="ov cd" style="--x:31;--y:500;--w:123;--h:186"><b id="cdDays">00</b><span>Days</span></div>
+      <div class="ov cd" style="--x:178;--y:500;--w:123;--h:186"><b id="cdHours">00</b><span>Hours</span></div>
+      <div class="ov cd" style="--x:326;--y:500;--w:123;--h:186"><b id="cdMins">00</b><span>Minutes</span></div>
+      <div class="ov cd" style="--x:474;--y:500;--w:123;--h:186"><b id="cdSecs">00</b><span>Seconds</span></div>
+
+      <a class="ov hotspot hotspot--save" id="calSave"    style="--x:88;--y:973;--w:452;--h:102" href="#" aria-label="Save our date to your calendar"><i></i></a>
+      <a class="ov hotspot hotspot--icon" id="calGoogle"  style="--x:85;--y:1132;--w:130;--h:142" href="#" target="_blank" rel="noopener" aria-label="Add to Google Calendar"></a>
+      <a class="ov hotspot hotspot--icon" id="calApple"   style="--x:245;--y:1132;--w:130;--h:142" href="#" aria-label="Add to Apple Calendar"></a>
+      <a class="ov hotspot hotspot--icon" id="calOutlook" style="--x:410;--y:1132;--w:130;--h:142" href="#" target="_blank" rel="noopener" aria-label="Add to Outlook Calendar"></a>
+    </div>
+  </section>
+
+  <!-- OUR MOMENTS · the couple's own photographs -->
+  <section id="gallery" class="sec sec--dark" style="--W:628;--H:1600" data-petals="4" data-sparkles="12">
+    <div class="art">
+      <img src="assets/screens/gallery.jpg" width="628" height="1600" alt="Our Moments, captured with love: four photographs of Chanchal and JP — walking among pigeons, seated together on wooden steps, laughing in front of Hawa Mahal, and hand in hand on the stairs. Some moments are worth a lifetime." loading="lazy" decoding="async">
+      <i class="glow" style="--gx:50.6%;--gy:8%;--gs:40"></i>
+      <i class="glow" style="--gx:6%;--gy:84%;--gs:34"></i>
+      <i class="glow" style="--gx:93%;--gy:85.5%;--gs:34"></i>
+    </div>
+  </section>
+
+  <!-- OUR FAMILIES · wedding, venue, route, RSVP -->
+  <section id="family" class="sec sec--light" style="--W:689;--H:1600" data-petals="3" data-sparkles="6">
+    <div class="art">
+      <img src="assets/screens/family.jpg" width="689" height="1600" alt="Our Families. Bride's parents: Savitha Sharma and Ashok Sharma. Groom's parents: Krishna Sharma and Manju Devi. The wedding: Wednesday, 2 December 2026, Margashirsha Krishna Paksha Budhwar. Venue: VRW6+GVP, Bhagtawar Nagar, Rajasthan, near Bhagtawar Nagar, Rajasthan. Route: Teencholi, Rajasthan to Sanjay Nagar, Paparna. RSVP: Krishna Kumar Sharma, 92465 85317." loading="lazy" decoding="async">
+      <i class="glow" style="--gx:7%;--gy:24%;--gs:34"></i>
+      <a class="ov hotspot hotspot--save" id="venueMap" style="--x:192;--y:794;--w:304;--h:62" href="#" target="_blank" rel="noopener" aria-label="View the wedding venue on Google Maps"><i></i></a>
+      <a class="ov hotspot hotspot--save" id="rsvpCall" style="--x:138;--y:1118;--w:194;--h:62" href="tel:+919246585317" aria-label="Call Krishna Kumar Sharma to RSVP, 92465 85317"><i></i></a>
+      <a class="ov hotspot hotspot--save" id="rsvpWhatsapp" style="--x:357;--y:1118;--w:194;--h:62" href="#" target="_blank" rel="noopener" aria-label="RSVP to Krishna Kumar Sharma on WhatsApp"><i></i></a>
+    </div>
+  </section>
+
+  <!-- BLESSINGS FOR THE COUPLE -->
+  <section id="dua" class="sec sec--light" style="--W:733;--H:1600" data-petals="4" data-sparkles="6">
+    <div class="art">
+      <img src="assets/screens/dua.jpg" width="733" height="1600" alt="Shubh Aashirwad. Blessings for the Couple. Your presence and blessings will make our celebration even more special. Send your love and blessings to Chanchal and JP as they begin this beautiful new chapter. Thank you for being a part of our journey and for your love, support and blessings. Chanchal and JP." loading="lazy" decoding="async">
+      <i class="glow" style="--gx:50%;--gy:7.5%;--gs:34"></i>
+      <i class="glow" style="--gx:96%;--gy:40%;--gs:30"></i>
+      <i class="glow" style="--gx:95%;--gy:56%;--gs:30"></i>
+
+      <form id="duaForm" class="dua" novalidate>
+        <div class="ov dua__box" style="--x:135;--y:669;--w:463;--h:147">
+          <label class="vh" for="duaText">Write your blessings</label>
+          <textarea id="duaText" maxlength="500" placeholder="Write your blessings here…" autocomplete="off"></textarea>
+          <div class="dua__thanks" id="duaThanks" aria-live="polite" hidden>
+            <strong>Dhanyavaad</strong>
+            <span>Your blessings have reached our hearts.</span>
+            <button type="button" id="duaAgain">Write another</button>
+          </div>
+        </div>
+        <div class="ov dua__count" style="--x:500;--y:828;--w:108;--h:26"><span id="duaCount">0</span>/500</div>
+        <button class="ov hotspot hotspot--send" type="submit" style="--x:210;--y:856;--w:312;--h:86" aria-label="Send blessings"><i></i></button>
+        <p class="ov dua__msg" id="duaMsg" style="--x:135;--y:946;--w:463;--h:30" role="status"></p>
+      </form>
+    </div>
+  </section>
+
+  <!-- ENDING · SAAT PHERE, SAAT VACHAN -->
+  <section id="quran" class="sec sec--dark" style="--W:995;--H:1581" data-petals="4" data-sparkles="16">
+    <div class="art">
+      <img src="assets/screens/quran.jpg" width="995" height="1581" alt="Saat phere, saat vachan. Seven sacred rounds, seven promises, one lifetime together. Chanchal and JP, 2 December 2026." loading="lazy" decoding="async">
+      <i class="glow" style="--gx:79%;--gy:79%;--gs:40"></i>
+      <i class="glow" style="--gx:60%;--gy:15%;--gs:30"></i>
+      <i class="glow" style="--gx:27.6%;--gy:15%;--gs:22"></i>
+    </div>
+  </section>
+
+</main>
+
+<!-- ============================================================
+     FUNCTION DETAIL (in-place overlay, invitation stays alive underneath)
+     ============================================================ -->
+<div id="fnOverlay" class="fn" aria-hidden="true" role="dialog" aria-modal="true" aria-label="Function details">
+  <div class="fn__scroll" id="fnScroll">
+    <div class="fn__col">
+      <button class="fn__back" id="fnBack" type="button" aria-label="Back to Our Functions">
+        <svg viewBox="0 0 18 12" aria-hidden="true"><path d="M6.5 1 1.5 6l5 5M2 6h15" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        Back
+      </button>
+
+      <!-- Every date, time, venue line and Maps link below is filled from CONFIG in js/app.js -->
+      <article class="fn__page sec--dark" data-fn="manje" data-scene="manje" data-petals="3" data-sparkles="8" style="--W:659;--H:1600">
+        <div class="art">
+          <img data-src="assets/screens/manje.jpg" width="659" height="1600" alt="Baan. A day of traditions, love and haldi. Let the colours of love begin." decoding="async">
+          <i class="glow" style="--gx:86%;--gy:8%;--gs:34"></i>
+          <i class="glow" style="--gx:92%;--gy:27%;--gs:38"></i>
+          <i class="glow glow--flame" style="--gx:3%;--gy:52%;--gs:26"></i>
+          <i class="glow glow--flame" style="--gx:92%;--gy:46%;--gs:26"></i>
+          <div class="ov patch" style="--x:132;--y:674;--w:406;--h:94;--c:#380608"></div>
+          <div class="ov when when--cream" style="--x:100;--y:672;--w:460;--h:98"><span class="rise" data-date></span><span class="rise" data-time></span></div>
+          <div class="ov patch" style="--x:160;--y:868;--w:350;--h:140;--c:linear-gradient(#390609,#3c0809)"></div>
+          <div class="ov venue when--cream" style="--x:100;--y:866;--w:460;--h:82;--vn:38;--va:29"><span class="rise" data-venue-name></span><span class="rise" data-venue-addr></span></div>
+          <a class="ov maps rise" data-maps style="--x:185;--y:956;--w:290;--h:54;--mf:24" target="_blank" rel="noopener"><i></i><svg viewBox="0 0 24 30" aria-hidden="true"><path d="M12 0C5.4 0 0 5.2 0 11.7 0 20.2 12 30 12 30s12-9.8 12-18.3C24 5.2 18.6 0 12 0zm0 16.4a4.7 4.7 0 1 1 0-9.4 4.7 4.7 0 0 1 0 9.4z" fill="currentColor"/></svg><span>View on Google Maps</span></a>
+        </div>
+      </article>
+
+      <article class="fn__page sec--light" data-fn="sanchak" data-scene="sanchak" data-petals="1" data-sparkles="4" style="--W:709;--H:1600">
+        <div class="art">
+          <img data-src="assets/screens/sanchak.jpg" width="709" height="1600" alt="Tilak. A celebration of colours, music and togetherness. Dhol, dance and dil se masti." decoding="async">
+          <i class="glow glow--flame" style="--gx:17%;--gy:61%;--gs:26"></i>
+          <i class="glow" style="--gx:93%;--gy:69%;--gs:30"></i>
+          <div class="ov patch" style="--x:165;--y:632;--w:388;--h:94;--c:linear-gradient(#f2d7b7,#f0d3b0)"></div>
+          <div class="ov when when--ink" style="--x:125;--y:630;--w:460;--h:98"><span class="rise" data-date></span><span class="rise" data-time></span></div>
+          <div class="ov patch" style="--x:185;--y:772;--w:350;--h:140;--c:linear-gradient(#eecfab,#eac69f)"></div>
+          <div class="ov venue when--ink" style="--x:125;--y:774;--w:460;--h:78;--vn:40;--va:30"><span class="rise" data-venue-name></span><span class="rise" data-venue-addr></span></div>
+          <a class="ov maps rise" data-maps style="--x:205;--y:860;--w:300;--h:54;--mf:25" target="_blank" rel="noopener"><i></i><svg viewBox="0 0 24 30" aria-hidden="true"><path d="M12 0C5.4 0 0 5.2 0 11.7 0 20.2 12 30 12 30s12-9.8 12-18.3C24 5.2 18.6 0 12 0zm0 16.4a4.7 4.7 0 1 1 0-9.4 4.7 4.7 0 0 1 0 9.4z" fill="currentColor"/></svg><span>View on Google Maps</span></a>
+        </div>
+      </article>
+
+      <article class="fn__page sec--dark" data-fn="shadi" data-scene="shadi" data-petals="6" data-sparkles="12" style="--W:761;--H:1600">
+        <div class="art">
+          <img data-src="assets/screens/shadi.jpg" width="761" height="1600" alt="Shubh Vivah. Fera. Margashirsha Krishna Paksha Budhwar." decoding="async">
+          <i class="glow" style="--gx:50%;--gy:7.5%;--gs:54"></i>
+          <i class="glow" style="--gx:14%;--gy:20%;--gs:26"></i>
+          <i class="glow" style="--gx:90%;--gy:40%;--gs:26"></i>
+          <i class="glow" style="--gx:10%;--gy:42%;--gs:26"></i>
+          <i class="glow glow--flame" style="--gx:8%;--gy:90%;--gs:24"></i>
+          <i class="glow glow--flame" style="--gx:92%;--gy:91%;--gs:24"></i>
+          <div class="ov patch" style="--x:180;--y:652;--w:400;--h:92;--c:#2d0205"></div>
+          <div class="ov when when--gold" style="--x:150;--y:650;--w:460;--h:96"><span class="rise" data-date></span><span class="rise" data-time></span></div>
+          <div class="ov patch" style="--x:225;--y:778;--w:315;--h:114;--c:linear-gradient(#2d0103,#310204)"></div>
+          <div class="ov venue when--gold" style="--x:150;--y:778;--w:460;--h:68;--vn:36;--va:27"><span class="rise" data-venue-name></span><span class="rise" data-venue-addr></span></div>
+          <a class="ov maps rise" data-maps style="--x:245;--y:851;--w:272;--h:46;--mf:22" target="_blank" rel="noopener"><i></i><svg viewBox="0 0 24 30" aria-hidden="true"><path d="M12 0C5.4 0 0 5.2 0 11.7 0 20.2 12 30 12 30s12-9.8 12-18.3C24 5.2 18.6 0 12 0zm0 16.4a4.7 4.7 0 1 1 0-9.4 4.7 4.7 0 0 1 0 9.4z" fill="currentColor"/></svg><span>View on Google Maps</span></a>
+        </div>
+      </article>
+
+      <article class="fn__page sec--dark" data-fn="valima" data-scene="valima" data-petals="2" data-sparkles="14" data-sparkle-top="1" style="--W:761;--H:1600">
+        <div class="art">
+          <img data-src="assets/screens/valima.jpg" width="761" height="1600" alt="Janeu Sanskar. Janeev. A sacred thread, blessings and togetherness. Blessed by our elders, bound by tradition." decoding="async">
+          <i class="glow" style="--gx:52%;--gy:8%;--gs:56"></i>
+          <i class="glow" style="--gx:96%;--gy:14%;--gs:26"></i>
+          <i class="glow" style="--gx:16%;--gy:26%;--gs:22"></i>
+          <i class="glow glow--flame" style="--gx:6%;--gy:90%;--gs:24"></i>
+          <div class="ov patch" style="--x:262;--y:970;--w:322;--h:82;--c:linear-gradient(100deg,#dcb892,#d8b189 70%,#d3aa80)"></div>
+          <div class="ov when when--ink when--left" style="--x:272;--y:968;--w:330;--h:86"><span class="rise" data-date></span><span class="rise" data-time></span></div>
+          <div class="ov patch" style="--x:266;--y:1090;--w:310;--h:118;--c:linear-gradient(100deg,#e2c4a2,#dcba95 70%,#d5ae86)"></div>
+          <div class="ov venue venue--left when--ink" style="--x:277;--y:1096;--w:330;--h:84;--vn:28.5;--va:24.5"><span class="rise" data-venue-name></span><span class="rise" data-venue-addr></span></div>
+          <a class="ov maps maps--navy rise" data-maps style="--x:216;--y:1386;--w:332;--h:78;--mf:27" target="_blank" rel="noopener"><i></i><svg viewBox="0 0 24 30" aria-hidden="true"><path d="M12 0C5.4 0 0 5.2 0 11.7 0 20.2 12 30 12 30s12-9.8 12-18.3C24 5.2 18.6 0 12 0zm0 16.4a4.7 4.7 0 1 1 0-9.4 4.7 4.7 0 0 1 0 9.4z" fill="currentColor"/></svg><span>View on Google Maps</span></a>
+        </div>
+      </article>
+    </div>
+  </div>
+</div>
+
+<!-- the only global fixed control -->
+<button id="muteBtn" class="mute" type="button" aria-label="Mute music" aria-pressed="false" hidden>
+  <svg class="mute__on" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9.5v5h3.2L12 18.6V5.4L7.2 9.5H4z" fill="currentColor"/><path d="M15 8.6a4.6 4.6 0 0 1 0 6.8M17.4 6.2a8 8 0 0 1 0 11.6" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+  <svg class="mute__off" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9.5v5h3.2L12 18.6V5.4L7.2 9.5H4z" fill="currentColor"/><path d="M15.5 9.5l5 5m0-5l-5 5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+</button>
+
+<script src="js/scenes.js"></script>
+<script src="js/app.js"></script>
+<script src="/_credit/v1/credit.js" defer data-into="#invitation" data-bg="#2a0508" data-color="#e9c98a"></script>
+</body>
+</html>

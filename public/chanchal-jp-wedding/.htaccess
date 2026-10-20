@@ -1,0 +1,8 @@
+# This invitation is corrected in place, so browsers re-check every script,
+# style and picture (a quick "not modified" when nothing changed). The film and
+# the music are large and rarely change, so they keep the site's normal caching.
+<IfModule mod_headers.c>
+  <FilesMatch "\.(js|css|webp|jpg|jpeg|png|svg)$">
+    Header set Cache-Control "no-cache"
+  </FilesMatch>
+</IfModule>
