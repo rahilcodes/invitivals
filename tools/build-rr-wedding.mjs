@@ -60,7 +60,7 @@ CONFIGS['rr-wedding-26nov'] = {
 const CJ_MAP = 'https://maps.app.goo.gl/RSTD7MqNDrLRwGW88?g_st=aw';
 CONFIGS['chanchal-jp-sharma-wedding'] = {
   out: 'chanchal-jp-sharma-wedding',
-  couplePage: 'assets/couple-page.webp?v=2',   // client's Rajasthani couple (2026-10-21); ?v= so cached copies refresh
+  couplePage: 'assets/couple-page.webp?v=3',   // client's Rajasthani couple, re-blended 2026-10-21; ?v= so cached copies refresh
   couple: { first: 'Chanchal Sharma', second: 'JP Sharma', short: 'Chanchal & JP Sharma', initials: ['C', 'J'] },
   invite: ['request the pleasure of your company', 'at the wedding celebration of'],
   dateISO: '2026-12-02',

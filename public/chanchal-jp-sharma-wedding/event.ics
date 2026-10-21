@@ -13,7 +13,7 @@ END:STANDARD
 END:VTIMEZONE
 BEGIN:VEVENT
 UID:chanchal-jp-sharma-wedding-0@invitivals.com
-DTSTAMP:20261021T095641Z
+DTSTAMP:20261021T105627Z
 DTSTART;TZID=Asia/Kolkata:20261126T103000
 DTEND;TZID=Asia/Kolkata:20261126T133000
 SUMMARY:Baan — Chanchal & JP Sharma
@@ -22,7 +22,7 @@ URL:https://invitivals.com/chanchal-jp-sharma-wedding/
 END:VEVENT
 BEGIN:VEVENT
 UID:chanchal-jp-sharma-wedding-1@invitivals.com
-DTSTAMP:20261021T095641Z
+DTSTAMP:20261021T105627Z
 DTSTART;TZID=Asia/Kolkata:20261130T133000
 DTEND;TZID=Asia/Kolkata:20261130T180000
 SUMMARY:Tilak — Chanchal & JP Sharma
@@ -31,7 +31,7 @@ URL:https://invitivals.com/chanchal-jp-sharma-wedding/
 END:VEVENT
 BEGIN:VEVENT
 UID:chanchal-jp-sharma-wedding-2@invitivals.com
-DTSTAMP:20261021T095641Z
+DTSTAMP:20261021T105627Z
 DTSTART;VALUE=DATE:20261201
 DTEND;VALUE=DATE:20261202
 SUMMARY:Janeev — Chanchal & JP Sharma
@@ -40,7 +40,7 @@ URL:https://invitivals.com/chanchal-jp-sharma-wedding/
 END:VEVENT
 BEGIN:VEVENT
 UID:chanchal-jp-sharma-wedding-3@invitivals.com
-DTSTAMP:20261021T095641Z
+DTSTAMP:20261021T105627Z
 DTSTART;TZID=Asia/Kolkata:20261202T233000
 DTEND;TZID=Asia/Kolkata:20261203T013000
 SUMMARY:Wedding · Fera — Chanchal & JP Sharma
