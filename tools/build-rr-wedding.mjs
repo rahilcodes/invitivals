@@ -60,6 +60,7 @@ CONFIGS['rr-wedding-26nov'] = {
 const CJ_MAP = 'https://maps.app.goo.gl/RSTD7MqNDrLRwGW88?g_st=aw';
 CONFIGS['chanchal-jp-sharma-wedding'] = {
   out: 'chanchal-jp-sharma-wedding',
+  couplePage: 'assets/couple-page.webp?v=2',   // client's Rajasthani couple (2026-10-21); ?v= so cached copies refresh
   couple: { first: 'Chanchal Sharma', second: 'JP Sharma', short: 'Chanchal & JP Sharma', initials: ['C', 'J'] },
   invite: ['request the pleasure of your company', 'at the wedding celebration of'],
   dateISO: '2026-12-02',
@@ -82,14 +83,14 @@ CONFIGS['chanchal-jp-sharma-wedding'] = {
   closing: 'With love, both families',
   title: 'Chanchal Sharma & JP Sharma — Wedding Invitation',
   description: 'Wednesday, 2 December 2026 · Bhagtawar Nagar, Rajasthan. Tap to open your invitation',
-  story: { src: 'assets/photo-story.webp', alt: 'Chanchal and JP at Jal Mahal, Jaipur', pos: '50% 34%' },
+  story: { src: 'assets/photo-story.webp?v=2', alt: 'Chanchal and JP at Jal Mahal, Jaipur', pos: '50% 50%' },
   storyLead: 'Two hearts, one promise — with the blessings of Shri Ganesh ji and our families, we begin our forever.',
   photos: [
-    { src: 'assets/photo-g1.webp', full: 'assets/photo-g1-full.webp', alt: 'Chanchal and JP walking hand in hand as pigeons take flight', pos: '50% 40%' },
-    { src: 'assets/photo-g2.webp', full: 'assets/photo-g2-full.webp', alt: 'Chanchal and JP seated together on wooden steps', pos: '50% 35%' },
-    { src: 'assets/photo-g3.webp', full: 'assets/photo-g3-full.webp', alt: 'Chanchal and JP laughing in front of Hawa Mahal', pos: '50% 45%' },
-    { src: 'assets/photo-g4.webp', full: 'assets/photo-g4-full.webp', alt: 'Chanchal and JP hand in hand on old stone steps', pos: '50% 30%' },
-    { src: 'assets/photo-story.webp', full: 'assets/photo-story-full.webp', alt: 'Chanchal and JP at Jal Mahal, Jaipur', pos: '50% 34%' }
+    { src: 'assets/photo-g1.webp?v=2', full: 'assets/photo-g1-full.webp?v=2', alt: 'Chanchal and JP at sunset by the lake, Jal Mahal behind them', pos: '50% 50%' },
+    { src: 'assets/photo-g2.webp?v=2', full: 'assets/photo-g2-full.webp?v=2', alt: 'Chanchal and JP laughing in front of Hawa Mahal, Jaipur', pos: '50% 50%' },
+    { src: 'assets/photo-g3.webp?v=2', full: 'assets/photo-g3-full.webp?v=2', alt: 'Chanchal and JP seated together on a wooden bridge', pos: '50% 50%' },
+    { src: 'assets/photo-g4.webp?v=2', full: 'assets/photo-g4-full.webp?v=2', alt: 'Chanchal and JP holding hands in front of a wooden gate', pos: '50% 50%' },
+    { src: 'assets/photo-g5.webp?v=2', full: 'assets/photo-g5-full.webp?v=2', alt: 'Chanchal and JP walking hand in hand beneath the trees as pigeons take flight', pos: '50% 50%' }
   ],
   invocation: 'Shri Ganeshaya Namah',
   families: {
@@ -425,7 +426,7 @@ ${C.families || C.blessings ? EXTRA_CSS : ''}</style>
 
 <main id="invite">
   <section class="plate" id="couple" aria-label="Invitation">
-    <img src="assets/couple-page.webp" alt="Together with their families. Your presence will make our celebration more special." width="1350" height="2400">
+    <img src="${C.couplePage || 'assets/couple-page.webp'}" alt="Together with their families. Your presence will make our celebration more special." width="1350" height="2400">
     ${slot('couple', [150, 330, 750, 480], 'serif rise', 37, lines(C.invite))}
     ${slot('couple', [110, 498, 790, 676], 'script rise', 150, lines([C.couple.first]))}
     ${slot('couple', [110, 716, 790, 894], 'script rise', 150, lines([C.couple.second]))}
