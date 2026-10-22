@@ -1,0 +1,60 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Invitivals//Rajasthani Wedding//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VTIMEZONE
+TZID:Asia/Kolkata
+BEGIN:STANDARD
+DTSTART:19700101T000000
+TZOFFSETFROM:+0530
+TZOFFSETTO:+0530
+TZNAME:IST
+END:STANDARD
+END:VTIMEZONE
+BEGIN:VEVENT
+UID:rajasthani-wedding-vivah@invitivals.com
+DTSTAMP:20261022T070000Z
+DTSTART;TZID=Asia/Kolkata:20261124T190000
+DTEND;TZID=Asia/Kolkata:20261124T230000
+SUMMARY:विवाह — आरव अरु मायरा
+DESCRIPTION:पावन मिलण · सोमवार 24 नवंबर 2026 · शाम 7:00 बजे सूं
+LOCATION:सिटी पैलेस\, उदयपुर\, राजस्थान\, भारत
+END:VEVENT
+BEGIN:VEVENT
+UID:rajasthani-wedding-haldi@invitivals.com
+DTSTAMP:20261022T070000Z
+DTSTART;TZID=Asia/Kolkata:20261121T100000
+DTEND;TZID=Asia/Kolkata:20261121T130000
+SUMMARY:हल्दी — आरव अरु मायरा
+DESCRIPTION:प्रेम रा रंग · शनिवार 21 नवंबर 2026 · सुबह 10:00 बजे सूं
+LOCATION:द रॉयल कोर्टयार्ड\, उदयपुर\, राजस्थान
+END:VEVENT
+BEGIN:VEVENT
+UID:rajasthani-wedding-mehendi@invitivals.com
+DTSTAMP:20261022T070000Z
+DTSTART;TZID=Asia/Kolkata:20261122T160000
+DTEND;TZID=Asia/Kolkata:20261122T200000
+SUMMARY:मेहंदी — आरव अरु मायरा
+DESCRIPTION:मेहंदी री छाप · शुक्रवार 22 नवंबर 2026 · शाम 4:00 बजे सूं
+LOCATION:लोटस लॉन्स\, उदयपुर\, राजस्थान
+END:VEVENT
+BEGIN:VEVENT
+UID:rajasthani-wedding-sangeet@invitivals.com
+DTSTAMP:20261022T070000Z
+DTSTART;TZID=Asia/Kolkata:20261123T190000
+DTEND;TZID=Asia/Kolkata:20261123T230000
+SUMMARY:संगीत — आरव अरु मायरा
+DESCRIPTION:सुरां सूं सजी रात · रविवार 23 नवंबर 2026 · शाम 7:00 बजे सूं
+LOCATION:शीश महल लॉन्स\, उदयपुर\, राजस्थान
+END:VEVENT
+BEGIN:VEVENT
+UID:rajasthani-wedding-reception@invitivals.com
+DTSTAMP:20261022T070000Z
+DTSTART;TZID=Asia/Kolkata:20261125T193000
+DTEND;TZID=Asia/Kolkata:20261125T230000
+SUMMARY:स्वागत समारोह — आरव अरु मायरा
+DESCRIPTION:खुशियां रो जश्न · मंगलवार 25 नवंबर 2026 · शाम 7:30 बजे सूं
+LOCATION:फतेह हॉल\, उदयपुर\, राजस्थान
+END:VEVENT
+END:VCALENDAR
