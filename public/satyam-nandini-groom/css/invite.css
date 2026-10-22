@@ -426,7 +426,12 @@ html.is-sealed .petal { animation-play-state: paused; }
 .stepper output { min-width: 26px; font-size: 26px; font-weight: 500; color: var(--maroon); }
 .rsvp-actions { display: flex; flex-direction: column; align-items: center; gap: 12px; margin-top: 8px; }
 .rsvp-actions .btn { min-width: 230px; }
-.rsvp-note { margin: 16px 0 0; font-style: italic; font-size: 15px; color: var(--ink-soft); }
+.rsvp-phones { margin: 0 auto 18px; }
+.rsvp-phones-l { margin: 0 0 6px; font-family: var(--caps); font-size: 10px; letter-spacing: .26em; text-transform: uppercase; color: var(--gold-deep); }
+.rsvp-phones-n { margin: 0; display: flex; flex-wrap: wrap; justify-content: center; gap: 6px 22px; }
+.rsvp-phones-n a { display: inline-flex; align-items: center; gap: 7px; font-family: var(--serif); font-weight: 600; font-size: 21px; letter-spacing: .03em; color: var(--maroon); text-decoration: none; font-variant-numeric: lining-nums; }
+.rsvp-phones-n .ico { width: 16px; height: 16px; }
+.rsvp-note {margin: 16px 0 0; font-style: italic; font-size: 15px; color: var(--ink-soft); }
 .wish-form .btn { margin-top: 4px; }
 
 /* ══ getting there ═══════════════════════════════════════ */
@@ -474,7 +479,7 @@ html.is-sealed .petal { animation-play-state: paused; }
 .thanks { padding-bottom: 0; }
 .thanks .script-title { margin-top: 2px; }
 .thanks-heart .ico { width: 24px; height: 24px; margin: 6px auto 0; stroke: var(--maroon); fill: rgba(101, 21, 34, .12); }
-.signoff { margin: 12px auto 0; max-width: 250px; font-family: var(--caps); font-size: 10.5px; letter-spacing: .2em; line-height: 1.7; text-transform: uppercase; color: var(--gold-deep); }
+.signoff { margin: 12px auto 0; max-width: 280px; font-family: var(--caps); font-size: 10.5px; letter-spacing: .2em; line-height: 1.7; text-transform: uppercase; color: var(--gold-deep); }
 .finale { position: relative; margin-top: -10px; aspect-ratio: 941 / 1032; }
 .finale::after { content: ''; position: absolute; left: 0; right: 0; bottom: 0; height: 70px; background: linear-gradient(rgba(40, 12, 6, 0), rgba(40, 12, 6, .45)); pointer-events: none; }
 .finale img {

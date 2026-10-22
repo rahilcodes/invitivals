@@ -1,5 +1,5 @@
 /* RSVPSection — name, number of guests, and two answers. The reply goes to the family on WhatsApp. */
-import { Heading, Button, FloralVine } from '../decor.js';
+import { Heading, Button, FloralVine, Icon } from '../decor.js';
 import { $, whatsappLink } from '../util.js';
 
 export const RSVPSection = (cfg) => `
@@ -8,6 +8,10 @@ export const RSVPSection = (cfg) => `
   ${FloralVine({ side: 'r', top: '-60px', height: '620px', crop: 15, depth: 0.05 })}
   <div class="sec-inner">
     ${Heading('Kindly RSVP', 'We would love to know if you can join us', { id: 'rsvp-h' })}
+    ${cfg.rsvp.phones?.length ? `<div class="rsvp-phones" data-reveal>
+      <p class="rsvp-phones-l">RSVP Contact Numbers</p>
+      <p class="rsvp-phones-n">${cfg.rsvp.phones.map((n) => `<a href="tel:+91${n}" aria-label="Call ${n}">${Icon('phone', 'ico ico-xs')}${n.replace(/^(\d{5})(\d{5})$/, '$1 $2')}</a>`).join('')}</p>
+    </div>` : ''}
     <form class="rsvp-form" id="rsvp-form" data-reveal novalidate>
       <label class="field"><span>Your name</span><input name="name" autocomplete="name" placeholder="Full name" required></label>
       <div class="field">

@@ -119,6 +119,7 @@ export const weddingConfig = {
   rsvp: {
     deadline: '',
     whatsapp: '',
+    phones: ['9818506120', '9990171308'], // shown in the RSVP section, tap to call (client, 2026-10-22)
   },
 
   travelNote: 'All our venues, one tap from your maps',
@@ -136,7 +137,7 @@ export const weddingConfig = {
   thankYou: {
     title: 'Thank You',
     lines: ['For being a part of our special day.', 'Your love and blessings', 'mean the world to us.'],
-    signoff: 'With love, Sh. Gulveer Parashar & Smt. Sushma Sharma',
+    signoff: 'Smt. Ram Murti Devi<br>Smt. Sushma Sharma<br>Sh. Gulveer Parashar<br>Sh. Shivam Parashar', // client's order, 2026-10-22
   },
 
   creditCampaign: 'satyam-nandini-groom',
