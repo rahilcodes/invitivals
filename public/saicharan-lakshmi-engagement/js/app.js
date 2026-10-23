@@ -5,7 +5,7 @@
    Save the Date (.ics / Google Calendar), the music toggle and the falling petals.
    Event facts come from ../config.js.
    ───────────────────────────────────────────────────────────────────────────── */
-import { invite as C } from '../config.js?v=3';
+import { invite as C } from '../config.js?v=4';
 
 const $ = (s, r = document) => r.querySelector(s);
 const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -24,38 +24,60 @@ for (const el of document.querySelectorAll('[data-cfg]')) {
 $('#maps').href = C.venue.mapsUrl;
 function esc(s) { return String(s).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c])); }
 
-/* ── opening: one tap → music, film, fullscreen where allowed; film's end → hero ── */
+/* ── container units: phones without them (iOS before 16) get the same sizes from the stage's width ── */
+if (!(window.CSS && CSS.supports && CSS.supports('width', '1cqw'))) {
+  const cq = () => stage.style.setProperty('--cq', (stage.getBoundingClientRect().width || Math.min(innerWidth, 520)) / 100 + 'px');
+  cq(); addEventListener('resize', cq); addEventListener('orientationchange', () => setTimeout(cq, 300));
+}
+
+/* ── music: starts on the very first tap anywhere on the opening (the earliest gesture browsers accept),
+   audible at once; if a phone refuses, the music button stays up and pulses so one more tap plays it ── */
 let opened = false;
-let wantMusic = true;
-tap.addEventListener('click', () => {
+let wantMusic = true, musicTried = false;
+const isTouchMac = /Macintosh/.test(navigator.userAgent) && navigator.maxTouchPoints > 1;   // iPadOS reports itself as a Mac
+const isIOS = /iPhone|iPad|iPod/.test(navigator.userAgent) || isTouchMac;
+function startMusic() {
+  if (musicTried) return; musicTried = true;
+  mute.hidden = false; mute.classList.add('is-early');
+  try { music.volume = .6; } catch {}
+  const p = music.play();
+  const ok = () => { mute.classList.remove('is-blocked'); fade(music, 1, 700); syncMute(); };
+  const no = () => { wantMusic = false; mute.classList.add('is-blocked'); mute.setAttribute('aria-label', 'Tap to play music'); syncMute(); };
+  if (p && p.then) p.then(ok, no); else ok();
+}
+for (const t of ['touchend', 'pointerup', 'click', 'keydown']) opening.addEventListener(t, startMusic, { passive: true });
+
+/* ── opening: one tap (the button or anywhere on the envelope) → music, film; the film's end → hero ── */
+function open() {
   if (opened) return;
   opened = true;
   tap.disabled = true;
-  /* music first — this is the user gesture, so autoplay rules allow it */
-  music.preload = 'auto';
-  music.volume = 0;
-  music.play().then(() => fade(music, 1, 1800)).catch(() => { wantMusic = false; });
-  /* fullscreen is a courtesy where the browser allows it (Android Chrome); iPhone Safari ignores it */
+  startMusic();
+  /* fullscreen is a courtesy where the browser allows it (Android); never on iPhone or iPad */
   const fs = document.documentElement.requestFullscreen || document.documentElement.webkitRequestFullscreen;
-  if (fs && !/iPhone|iPad/i.test(navigator.userAgent)) { try { const p = fs.call(document.documentElement, { navigationUI: 'hide' }); if (p && p.catch) p.catch(() => {}); } catch {} }
-  /* the film, muted and inline; if it cannot play we go straight in */
-  let done = false;
-  const enter = () => { if (done) return; done = true; clearTimeout(bail); openStage(); };
+  if (fs && !isIOS) { try { const p = fs.call(document.documentElement, { navigationUI: 'hide' }); if (p && p.catch) p.catch(() => {}); } catch {} }
+  /* the film, muted and inline; if it cannot start quickly, or stalls, we go straight in */
+  let done = false, started = false, stall = 0;
+  const enter = () => { if (done) return; done = true; clearTimeout(bail); clearTimeout(slow); clearTimeout(stall); openStage(); };
   const bail = setTimeout(enter, C.videoTimeoutMs || 20000);
+  const slow = setTimeout(() => { if (!started) enter(); }, 4500);          // a slow network or Low Power Mode: no waiting on the envelope
   film.addEventListener('ended', enter, { once: true });
   film.addEventListener('error', enter, { once: true });
-  film.muted = true;
-  film.addEventListener('playing', () => opening.classList.add('is-playing'), { once: true });
+  film.addEventListener('waiting', () => { clearTimeout(stall); stall = setTimeout(enter, 3000); });
+  film.addEventListener('playing', () => { started = true; clearTimeout(stall); opening.classList.add('is-playing'); });
+  film.muted = true; film.setAttribute('muted', '');
   const p = film.play();
-  if (p && p.then) p.then(() => opening.classList.add('is-playing')).catch(enter);
+  if (p && p.then) p.then(() => { started = true; opening.classList.add('is-playing'); }).catch(enter);
   else opening.classList.add('is-playing');
-});
+}
+tap.addEventListener('click', open);
+opening.addEventListener('click', (e) => { if (e.target !== tap && !tap.contains(e.target)) open(); });
 
 function openStage() {
   document.body.classList.remove('is-closed');
   document.body.classList.add('is-open');
   opening.classList.add('is-leaving');
-  mute.hidden = false;
+  mute.hidden = false; mute.classList.remove('is-early');
   syncMute();
   setTimeout(() => { opening.remove(); try { film.pause(); film.removeAttribute('src'); film.load(); } catch {} }, 1100);
   /* the hero's pieces stagger in on their own; later pages wait for the scroll */
@@ -71,9 +93,10 @@ function fade(a, to, ms) {
 }
 
 /* ── music toggle ── */
-mute.addEventListener('click', () => {
+mute.addEventListener('click', (e) => {
+  e.stopPropagation();
   wantMusic = !wantMusic;
-  if (wantMusic) music.play().catch(() => { wantMusic = false; syncMute(); });
+  if (wantMusic) music.play().then(() => mute.classList.remove('is-blocked')).catch(() => { wantMusic = false; syncMute(); });
   else music.pause();
   syncMute();
 });
@@ -171,7 +194,7 @@ const save = $('#save'), card = $('#scard'), foil = $('#foil'), face = $('#scard
   const flush = () => { if (pending && last) { rub(last, pending); last = pending; } pending = null; };
   foil.addEventListener('pointerdown', (e) => { if (done || (e.pointerType === 'mouse' && e.button !== 0)) return; e.preventDefault(); drawing = true; last = pos(e); try { foil.setPointerCapture(e.pointerId); } catch {} rub(last, last); });
   foil.addEventListener('pointermove', (e) => { if (!drawing) return; e.preventDefault();
-    const evs = e.getCoalescedEvents ? e.getCoalescedEvents() : [e]; for (const ev of evs) { pending = pos(ev); flush(); } });
+    const co = e.getCoalescedEvents ? e.getCoalescedEvents() : null, evs = co && co.length ? co : [e]; for (const ev of evs) { pending = pos(ev); flush(); } });
   for (const t of ['pointerup', 'pointercancel', 'lostpointercapture']) foil.addEventListener(t, () => { drawing = false; });
   foil.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); reveal(); } });
   const ready = () => paint();
@@ -221,9 +244,9 @@ document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && !sheet.h
 function startPetals() {
   if (reduced) return;
   const cv = $('#petals'), ctx = cv.getContext('2d');
-  const dpr = Math.min(2, devicePixelRatio || 1);
+  const dpr = Math.min(1.5, devicePixelRatio || 1);
   let W = 0, H = 0, petals = [], raf = 0, last = 0;
-  const N = Math.min(14, Math.round(innerWidth / 36));
+  const N = Math.min(12, Math.round(innerWidth / 40));
   const size = () => { W = innerWidth; H = innerHeight; cv.width = W * dpr; cv.height = H * dpr; ctx.setTransform(dpr, 0, 0, dpr, 0, 0); };
   const make = (fresh) => ({
     x: Math.random() * W, y: fresh ? -30 : Math.random() * H, s: 7 + Math.random() * 7,

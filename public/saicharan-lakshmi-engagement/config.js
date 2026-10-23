@@ -25,7 +25,7 @@ export const invite = {
     mapsUrl: 'https://maps.app.goo.gl/Fhd4a2JoTBdyartK8?g_st=ic',
   },
   description: 'You are warmly invited to the Engagement Ceremony of Annamaneni Sai Charan & Gouravelly Lakshmi — Sunday, 1 November 2026, 11:00 AM, Virupakshi Gardens, Karimnagar Road, Govindpalli, Jagtial, Telangana 505327.',
-  music: 'assets/media/music.mp3',
+  music: 'assets/media/music-v2.mp3',   // the song with its 3.3 s lead-in and 16 s tail of silence trimmed
   video: 'assets/media/opening-cl.mp4',   // the designer's film with the CL seal in every frame (tools/saicharan-lakshmi-film.mjs)
   /* give up on the opening film after this long and go straight to the invitation */
   videoTimeoutMs: 20000,
