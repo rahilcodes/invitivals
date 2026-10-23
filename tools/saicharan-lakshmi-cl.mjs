@@ -3,6 +3,10 @@
    the couple's CL monogram on the envelope's wax seal, and their own illustration.
 
      node tools/saicharan-lakshmi-cl.mjs
+     SLUG=lakshmi-saicharan-engagement MARK=lc node tools/saicharan-lakshmi-cl.mjs     (the bride-side page, L & C)
+
+   SLUG picks the page folder written to, MARK the monogram (sources/<MARK>-logo.jpg → <MARK>-named files). The
+   designer's "A G" envelope is always read from the groom-side folder, so no other monogram is ever underneath.
 
    Sources (invites/src/saicharan-lakshmi-engagement, gitignored):
      cl-logo.jpg            the client's CL monogram — arrived on pure black (its transparency was lost
@@ -19,13 +23,14 @@ import sharp from 'sharp';
 
 const ROOT = path.resolve(path.dirname(new URL(import.meta.url).pathname.replace(/^\/([A-Z]:)/, '$1')), '..');
 const SRC = path.join(ROOT, 'invites/src/saicharan-lakshmi-engagement');
-const OUT = path.join(ROOT, 'public/saicharan-lakshmi-engagement/assets');
-const STILL = path.join(OUT, 'bg/opening.webp');                  // the designer's envelope, kept as it is
+const SLUG = process.env.SLUG || 'saicharan-lakshmi-engagement', MARK = process.env.MARK || 'cl', GROOM = MARK === 'cl';
+const OUT = path.join(ROOT, 'public', SLUG, 'assets');
+const STILL = path.join(ROOT, 'public/saicharan-lakshmi-engagement/assets/bg/opening.webp');   // the designer's envelope, kept as it is
 const SEAL = { cx: 472, cy: 870, r: 90, logo: 164 };               // inner disc of the wax seal, in the still's pixels
 
 /* 1. key the monogram off its black: alpha from brightness, colour un-premultiplied so the gold edge stays gold */
 async function keyLogo() {
-  const { data, info } = await sharp(path.join(SRC, 'cl-logo.jpg')).removeAlpha().raw().toBuffer({ resolveWithObject: true });
+  const { data, info } = await sharp(path.join(SRC, `${MARK}-logo.jpg`)).removeAlpha().raw().toBuffer({ resolveWithObject: true });
   const out = Buffer.alloc(info.width * info.height * 4);
   for (let i = 0; i < info.width * info.height; i++) {
     const r = data[i * 3], g = data[i * 3 + 1], b = data[i * 3 + 2], m = Math.max(r, g, b);
@@ -61,7 +66,7 @@ async function cleanSeal() {
 }
 
 const logo = await keyLogo();
-await sharp(logo).resize({ width: 900 }).webp({ quality: 92, alphaQuality: 95 }).toFile(path.join(OUT, 'el/cl-logo.webp'));
+await sharp(logo).resize({ width: 900 }).webp({ quality: 92, alphaQuality: 95 }).toFile(path.join(OUT, `el/${MARK}-logo.webp`));
 
 const { buf, W, H } = await cleanSeal();
 const L = SEAL.logo;
@@ -74,8 +79,9 @@ const left = SEAL.cx - L / 2, top = SEAL.cy - L / 2 + 2;
 const stamped = await sharp(buf, { raw: { width: W, height: H, channels: 3 } })
   .composite([{ input: shadow, left: Math.round(left + 1.5), top: Math.round(top + 2), blend: 'multiply' }, { input: logoSmall, left: Math.round(left), top: Math.round(top) }])
   .png().toBuffer();
-await sharp(stamped).webp({ quality: 90, effort: 6 }).toFile(path.join(OUT, 'bg/opening-cl.webp'));
+await sharp(stamped).webp({ quality: 90, effort: 6 }).toFile(path.join(OUT, `bg/opening-${MARK}.webp`));
 
+if (GROOM) {   // the seal disc and the illustration belong to the groom-side page only
 // the disc alone, soft-edged, for the film: 2× the still's resolution so it stays crisp while the film zooms in
 const D = SEAL.r * 2 + 16, ox = SEAL.cx - D / 2, oy = SEAL.cy - D / 2;
 const disc = await sharp(stamped).extract({ left: ox, top: oy, width: D, height: D }).removeAlpha().raw().toBuffer();
@@ -87,4 +93,5 @@ for (let y = 0; y < D; y++) for (let x = 0; x < D; x++) {
 await sharp(rgba, { raw: { width: D, height: D, channels: 4 } }).resize(D * 2, D * 2, { kernel: 'lanczos3' }).webp({ quality: 92, alphaQuality: 95 }).toFile(path.join(OUT, 'el/seal-cl.webp'));
 
 await sharp(path.join(SRC, 'couple-illustration.jpg')).resize({ width: 900 }).webp({ quality: 88, effort: 6 }).toFile(path.join(OUT, 'el/couple-art.webp'));
-console.log('seal disc', D, 'px at', ox, oy, '(still', W, '×', H, ') → opening-cl, seal-cl, cl-logo, couple-art');
+}
+console.log(SLUG, '→', `bg/opening-${MARK}.webp, el/${MARK}-logo.webp`, GROOM ? '+ el/seal-cl.webp, el/couple-art.webp' : '');

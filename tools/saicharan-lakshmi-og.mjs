@@ -2,13 +2,15 @@
  * from the built art: the couple on the left, the gold lettering and the date on the right.
  *
  *   node tools/saicharan-lakshmi-og.mjs
+ *   SLUG=lakshmi-saicharan-engagement node tools/saicharan-lakshmi-og.mjs   (bride side: Lakshmi's name first)
  */
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import sharp from 'sharp';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
-const A = path.join(ROOT, 'public/saicharan-lakshmi-engagement/assets');
+const SLUG = process.env.SLUG || 'saicharan-lakshmi-engagement', BRIDE = SLUG !== 'saicharan-lakshmi-engagement';
+const A = path.join(ROOT, 'public', SLUG, 'assets');
 const W = 1200, H = 630;
 
 const bg = await sharp(path.join(A, 'bg/p1.webp')).resize({ width: W, height: H, fit: 'cover', position: 'top' }).modulate({ brightness: 1.02 }).toBuffer();
@@ -28,9 +30,9 @@ await sharp(bg)
     { input: couple, left: 30, top: H - 600 },
     { input: engagement, left: 530, top: 95 },
     { input: text, left: 0, top: 0 },
-    { input: first, left: 525, top: 308 },
-    { input: garland, left: 685, top: 404 },
-    { input: second, left: 550, top: 440 },
+    ...(BRIDE
+      ? [{ input: second, left: 550, top: 300 }, { input: garland, left: 685, top: 428 }, { input: first, left: 525, top: 470 }]
+      : [{ input: first, left: 525, top: 308 }, { input: garland, left: 685, top: 404 }, { input: second, left: 550, top: 440 }]),
   ])
   .jpeg({ quality: 86, mozjpeg: true })
   .toFile(path.join(A, 'og.jpg'));

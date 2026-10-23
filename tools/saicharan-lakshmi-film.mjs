@@ -2,6 +2,7 @@
 /* Sai Charan & Lakshmi — the opening film with the couple's CL monogram on the wax seal, in every frame.
 
      FFMPEG=/path/to/ffmpeg node tools/saicharan-lakshmi-film.mjs [--sheet out.jpg]
+     SLUG=lakshmi-saicharan-engagement MARK=lc FFMPEG=… node tools/saicharan-lakshmi-film.mjs   (bride side, after saicharan-lakshmi-cl.mjs)
 
    The designer's film (assets/media/opening.mp4) shows the envelope's seal with the pack's dummy "A G"
    for its first ~4.2 s: a slow zoom, a white flash, then the flap lifts and the seal tilts away.
@@ -24,9 +25,10 @@ import sharp from 'sharp';
 
 const FF = process.env.FFMPEG || 'ffmpeg';
 const ROOT = path.resolve(path.dirname(new URL(import.meta.url).pathname.replace(/^\/([A-Z]:)/, '$1')), '..');
-const A = path.join(ROOT, 'public/saicharan-lakshmi-engagement/assets');
+const SLUG = process.env.SLUG || 'saicharan-lakshmi-engagement', MARK = process.env.MARK || 'cl';
+const A = path.join(ROOT, 'public', SLUG, 'assets');
 const SRC = path.join(ROOT, 'invites/src/saicharan-lakshmi-engagement');
-const IN = path.join(A, 'media/opening.mp4'), OUT = path.join(A, 'media/opening-cl.mp4');
+const IN = path.join(ROOT, 'public/saicharan-lakshmi-engagement/assets/media/opening.mp4'), OUT = path.join(A, `media/opening-${MARK}.mp4`);
 const W = 720, H = 1280, FPS = 24;
 const C0 = { x: 362, y: 649 }, R_DISC = 73;                    // the seal's inner disc in frame 0 (measured on the film)
 const R_TPL = 82;                                               // tracking template reaches onto the rim
@@ -122,7 +124,7 @@ const MR = R_DISC + 4, MS = MR * 2 + 1, MASK = new Float32Array(MS * MS);
     for (let dy = -3; dy <= 3 && !m; dy++) for (let dx = -3; dx <= 3; dx++) { const a = i + dx, b = j + dy; if (a >= 0 && b >= 0 && a < MS && b < MS && raw[b * MS + a] && dx * dx + dy * dy <= 9) { m = 1; break; } }
     MASK[j * MS + i] = m; } }
 const sampleM = (u, v) => { const x = Math.round(u + MR), y = Math.round(v + MR); return x < 0 || y < 0 || x >= MS || y >= MS ? 0 : MASK[y * MS + x]; };
-const logo = await sharp(path.join(A, 'el/cl-logo.webp')).resize(LOGO, LOGO, { fit: 'contain', background: { r: 0, g: 0, b: 0, alpha: 0 } }).png().toBuffer();
+const logo = await sharp(path.join(A, `el/${MARK}-logo.webp`)).resize(LOGO, LOGO, { fit: 'contain', background: { r: 0, g: 0, b: 0, alpha: 0 } }).png().toBuffer();
 const alpha = await sharp(logo).extractChannel(3).toBuffer();
 const shadow = await sharp({ create: { width: LOGO, height: LOGO, channels: 3, background: { r: 92, g: 58, b: 22 } } }).joinChannel(alpha).png().toBuffer().then((b) => sharp(b).blur(1.3).png().toBuffer());
 const L0 = Math.round(C0.x - LOGO / 2), T0 = Math.round(C0.y - LOGO / 2 + 2);
@@ -204,7 +206,7 @@ await frames(async (f, k) => {
 });
 enc.stdin.end();
 await new Promise((ok, no) => enc.on('close', (c) => (c ? no(new Error('encode failed: ' + encErr)) : ok())));
-fs.writeFileSync(path.join(SRC, 'opening-cl.track.txt'), 't x y sx sy score a\n' + log.join('\n') + '\n');
+fs.writeFileSync(path.join(SRC, `opening-${MARK}.track.txt`), 't x y sx sy score a\n' + log.join('\n') + '\n');
 console.log('film ->', path.relative(ROOT, OUT), `(${(fs.statSync(OUT).size / 1e6).toFixed(1)} MB; cut ${CUT}→${JUMP}, ${((241 - (JUMP - CUT)) / FPS).toFixed(2)} s long)`);
 if (SHEET) {
   const tiles = await Promise.all(sheet.map((f) => sharp(f, { raw: { width: W, height: H, channels: 3 } }).extract({ left: C0.x - 140, top: 380, width: 280, height: 420 }).resize(140, 210).png().toBuffer()));
