@@ -1,0 +1,30 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Invitivals//Engagement Invitation//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VTIMEZONE
+TZID:Asia/Kolkata
+BEGIN:STANDARD
+DTSTART:19700101T000000
+TZOFFSETFROM:+0530
+TZOFFSETTO:+0530
+TZNAME:IST
+END:STANDARD
+END:VTIMEZONE
+BEGIN:VEVENT
+UID:saicharan-lakshmi-engagement-2026-11-01@invitivals.com
+DTSTAMP:20261023T000000Z
+DTSTART;TZID=Asia/Kolkata:20261101T110000
+DTEND;TZID=Asia/Kolkata:20261101T140000
+SUMMARY:Engagement Ceremony of Annamaneni Sai Charan & Gouravelly Lakshmi
+LOCATION:Virupakshi Gardens\, Karimnagar Road\, Govindpalli\, Jagtial\, Telangana 505327
+DESCRIPTION:You are warmly invited to the Engagement Ceremony of Annamaneni Sai Charan & Gouravelly Lakshmi — Sunday\, 1 November 2026\, 11:00 AM.\nMap: https://maps.app.goo.gl/Fhd4a2JoTBdyartK8?g_st=ic
+URL:https://invitivals.com/saicharan-lakshmi-engagement/
+BEGIN:VALARM
+TRIGGER:-P1D
+ACTION:DISPLAY
+DESCRIPTION:Engagement of Sai Charan & Lakshmi is tomorrow
+END:VALARM
+END:VEVENT
+END:VCALENDAR
