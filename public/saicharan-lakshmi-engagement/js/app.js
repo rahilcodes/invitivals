@@ -5,7 +5,7 @@
    Save the Date (.ics / Google Calendar), the music toggle and the falling petals.
    Event facts come from ../config.js.
    ───────────────────────────────────────────────────────────────────────────── */
-import { invite as C } from '../config.js?v=5';
+import { invite as C } from '../config.js?v=6';
 
 const $ = (s, r = document) => r.querySelector(s);
 const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -48,11 +48,16 @@ function startMusic() {
 for (const t of ['touchend', 'pointerup', 'click', 'keydown']) opening.addEventListener(t, startMusic, { passive: true });
 
 /* ── opening: one tap (the button or anywhere on the envelope) → music, film; the film's end → hero ── */
+/* the hero's pieces stagger in underneath the envelope while the film plays, so the invitation is already
+   complete when the envelope lifts (revealed late, the bare floral paper read as an empty slide); later pages wait for the scroll */
+function heroIn() { for (const el of $('#p1').querySelectorAll('.rise, .drop, .pop, .tilt, .slide-l, .swing')) el.classList.add('in'); }
+
 function open() {
   if (opened) return;
   opened = true;
   tap.disabled = true;
   startMusic();
+  heroIn();
   /* fullscreen is a courtesy where the browser allows it (Android); never on iPhone or iPad */
   const fs = document.documentElement.requestFullscreen || document.documentElement.webkitRequestFullscreen;
   if (fs && !isIOS) { try { const p = fs.call(document.documentElement, { navigationUI: 'hide' }); if (p && p.catch) p.catch(() => {}); } catch {} }
@@ -84,8 +89,7 @@ function openStage() {
   syncMute();
   setTimeout(() => { opening.remove(); try { film.pause(); film.removeAttribute('src'); film.load(); } catch {} repaint(); }, 1100);
   setTimeout(repaint, 2400);
-  /* the hero's pieces stagger in on their own; later pages wait for the scroll */
-  for (const el of $('#p1').querySelectorAll('.rise, .drop, .pop, .tilt, .slide-l, .swing')) el.classList.add('in');
+  heroIn();
   startPetals();
   watch();
 }

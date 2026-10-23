@@ -147,6 +147,9 @@ if (SHEET) await sharp(stamped, { raw: { width: W, height: H, channels: 3 } }).e
 const CUT = 48, XF = 12, JUMP = 104;
 const enc = spawn(FF, ['-v', 'error', '-y', '-f', 'rawvideo', '-pix_fmt', 'rgb24', '-s', `${W}x${H}`, '-r', String(FPS), '-i', '-',
   '-map', '0:v', '-c:v', 'libx264', '-preset', 'slow', '-crf', '16', '-profile:v', 'high', '-pix_fmt', 'yuv420p', '-an', '-movflags', '+faststart', OUT]);
+/* the live page plays assets/media/opening-cl-v2.mp4: this film cut at 4.0 s, because after the sparkle burst the
+   designer's film is only blank cream paper (the client saw it as an empty slide). Re-cut after a rebuild:
+   ffmpeg -i opening-cl.mp4 -t 4.0 -an -c:v libx264 -preset slow -crf 20 -pix_fmt yuv420p -profile:v high -movflags +faststart opening-cl-v2.mp4 */
 let encErr = ''; enc.stderr.on('data', (d) => { encErr += d; });
 const write = (b) => new Promise((ok) => (enc.stdin.write(b) ? ok() : enc.stdin.once('drain', ok)));
 const held = []; const log = [], sheet = [], SHEETK = [0, 30, 55, 58, 62, 66, 70, 74, 80, 86, 89, 92, 95, 98, 101];
