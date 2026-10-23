@@ -1,11 +1,11 @@
 /* ─────────────────────────────────────────────────────────────────────────────
    Sai Charan & Lakshmi — Engagement. Runs the page: the one tap that opens the
-   envelope (music + film, then the hero; the couple's CL seal rides on the film),
-   the scroll-in of every piece, the scratch-to-reveal date on the calendar,
+   envelope (music + film, then the hero), the scroll-in of every piece, the
+   scratch-to-reveal Save the Date card,
    Save the Date (.ics / Google Calendar), the music toggle and the falling petals.
    Event facts come from ../config.js.
    ───────────────────────────────────────────────────────────────────────────── */
-import { invite as C } from '../config.js?v=2';
+import { invite as C } from '../config.js?v=3';
 
 const $ = (s, r = document) => r.querySelector(s);
 const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -45,36 +45,11 @@ tap.addEventListener('click', () => {
   film.addEventListener('ended', enter, { once: true });
   film.addEventListener('error', enter, { once: true });
   film.muted = true;
-  film.addEventListener('playing', () => { opening.classList.add('is-playing'); followSeal(); }, { once: true });
+  film.addEventListener('playing', () => opening.classList.add('is-playing'), { once: true });
   const p = film.play();
   if (p && p.then) p.then(() => opening.classList.add('is-playing')).catch(enter);
   else opening.classList.add('is-playing');
 });
-
-/* ── the CL seal on the film: placed in a box that covers the screen exactly like the film does ── */
-const seal = $('#seal'), cover = $('.opening__cover');
-function followSeal() {
-  const S = C.seal; if (!S || !seal) return;
-  seal.classList.add('is-on');
-  const at = (t) => {
-    const k = S.track; if (t <= k[0][0]) return k[0];
-    for (let i = 1; i < k.length; i++) if (t <= k[i][0]) { const a = k[i - 1], b = k[i], u = (t - a[0]) / (b[0] - a[0]); return a.map((v, j) => v + (b[j] - v) * u); }
-    return k[k.length - 1];
-  };
-  const step = () => {
-    if (!seal.isConnected) return;
-    const t = film.currentTime, [, x, y, sc, glare] = at(t);
-    const out = t <= S.fadeOut[0] ? 1 : Math.max(0, 1 - (t - S.fadeOut[0]) / (S.fadeOut[1] - S.fadeOut[0]));
-    seal.style.left = (x * 100) + '%'; seal.style.top = (y * 100) + '%'; seal.style.width = (S.size * sc * 100) + '%';
-    seal.style.opacity = String(out * (1 - glare));
-    seal.style.filter = glare > .02 ? `brightness(${1 + glare * 1.4})` : '';
-    if (out > 0) requestAnimationFrame(step); else seal.classList.remove('is-on');
-  };
-  requestAnimationFrame(step);
-}
-const fitCover = () => { if (!cover) return; const r = 941 / 1672, w = innerWidth, h = innerHeight;
-  const cw = Math.max(w, h * r), ch = cw / r; cover.style.width = cw + 'px'; cover.style.height = ch + 'px'; };
-fitCover(); addEventListener('resize', fitCover);
 
 function openStage() {
   document.body.classList.remove('is-closed');
@@ -125,56 +100,84 @@ function watch() {
 /* ?open in the address skips the envelope while working on the page */
 if (new URLSearchParams(location.search).has('open')) { opened = true; wantMusic = false; openStage(); }
 
-/* ── scratch to reveal the date: a blush-and-gold foil over the calendar's paper; rub it away (finger or
-   mouse) and the date shows with the heart on the 1st. Vertical swipes still scroll the page. ── */
-const cal = $('#cal'), save = $('#save'), sc = $('#scratch'), calDate = $('#calDate');
+/* ── scratch to reveal: a champagne-gold foil with the couple's CL monogram; rub it away with a finger or the
+   mouse (smooth, soft-edged strokes) and the day, the date and the hour show. Past half the foil dissolves by itself. ── */
+const save = $('#save'), card = $('#scard'), foil = $('#foil'), face = $('#scardFace'), hint = $('#scardHint');
 (function scratchCard() {
-  const ctx = sc.getContext('2d');
-  const GX = 22, GY = 26, cells = new Uint8Array(GX * GY); let hit = 0, done = false, drawing = false, last = null, painted = false;
+  const ctx = foil.getContext('2d');
+  const logo = new Image(); logo.src = 'assets/el/cl-logo.webp';
+  const GX = 24, GY = 30, cells = new Uint8Array(GX * GY); let hit = 0, done = false, drawing = false, last = null, dirty = false;
+  let W = 0, H = 0, dpr = 1;
   function paint() {
-    const r = sc.getBoundingClientRect(); if (!r.width || done) return;
-    const dpr = Math.min(2, devicePixelRatio || 1), W = sc.width = Math.round(r.width * dpr), H = sc.height = Math.round(r.height * dpr);
-    ctx.globalCompositeOperation = 'source-over';
+    const r = foil.getBoundingClientRect(); if (!r.width || done || hit) return;
+    dpr = Math.min(2, devicePixelRatio || 1); W = foil.width = Math.round(r.width * dpr); H = foil.height = Math.round(r.height * dpr);
+    const rad = Math.min(W, H) * .045;
+    ctx.save(); ctx.globalCompositeOperation = 'source-over';
+    ctx.beginPath(); ctx.roundRect ? ctx.roundRect(0, 0, W, H, rad) : ctx.rect(0, 0, W, H); ctx.clip();
+    // champagne foil: warm gradient, two soft diagonal sheens, fine metallic grain
     const g = ctx.createLinearGradient(0, 0, W, H);
-    g.addColorStop(0, '#f4d9c6'); g.addColorStop(.28, '#e9c7a0'); g.addColorStop(.5, '#f7e3c2'); g.addColorStop(.72, '#ddb57e'); g.addColorStop(1, '#f1d2bd');
+    g.addColorStop(0, '#e9cf9a'); g.addColorStop(.35, '#f8e7c2'); g.addColorStop(.55, '#d9b36e'); g.addColorStop(.8, '#f3dcab'); g.addColorStop(1, '#c99a52');
     ctx.fillStyle = g; ctx.fillRect(0, 0, W, H);
-    for (let i = 0; i < W * H / 260; i++) { ctx.fillStyle = `rgba(255,250,235,${Math.random() * .35})`; ctx.fillRect(Math.random() * W, Math.random() * H, dpr, dpr); }   // foil shimmer
-    ctx.strokeStyle = 'rgba(169,122,43,.75)'; ctx.lineWidth = 2 * dpr; ctx.strokeRect(9 * dpr, 9 * dpr, W - 18 * dpr, H - 18 * dpr);
-    ctx.strokeStyle = 'rgba(169,122,43,.35)'; ctx.lineWidth = dpr; ctx.strokeRect(15 * dpr, 15 * dpr, W - 30 * dpr, H - 30 * dpr);
+    for (const [x0, a] of [[.18, .32], [.62, .22]]) { const s = ctx.createLinearGradient(W * x0, 0, W * (x0 + .28), H);
+      s.addColorStop(0, 'rgba(255,250,235,0)'); s.addColorStop(.5, `rgba(255,250,235,${a})`); s.addColorStop(1, 'rgba(255,250,235,0)'); ctx.fillStyle = s; ctx.fillRect(0, 0, W, H); }
+    const img = ctx.getImageData(0, 0, W, H), d = img.data;
+    for (let i = 0; i < d.length; i += 4) { const n = (Math.random() - .5) * 16; d[i] += n; d[i + 1] += n; d[i + 2] += n * .8; }
+    ctx.putImageData(img, 0, 0);
+    // a faint lotus damask pressed into the foil
+    ctx.strokeStyle = 'rgba(140,96,36,.14)'; ctx.lineWidth = dpr;
+    const step = W / 5;
+    for (let y = -step / 2; y < H + step; y += step * .86) for (let x = (Math.round(y / step) % 2) * step / 2; x < W + step; x += step) {
+      ctx.beginPath(); for (let k = 0; k < 6; k++) { const a = k * Math.PI / 3; ctx.moveTo(x, y); ctx.quadraticCurveTo(x + Math.cos(a + .5) * step * .28, y + Math.sin(a + .5) * step * .28, x + Math.cos(a) * step * .34, y + Math.sin(a) * step * .34); }
+      ctx.stroke(); }
+    // borders
+    ctx.strokeStyle = 'rgba(122,84,28,.75)'; ctx.lineWidth = 2 * dpr; ctx.strokeRect(rad * .7, rad * .7, W - rad * 1.4, H - rad * 1.4);
+    ctx.strokeStyle = 'rgba(255,246,222,.7)'; ctx.lineWidth = dpr; ctx.strokeRect(rad * 1.05, rad * 1.05, W - rad * 2.1, H - rad * 2.1);
+    // the couple's monogram, embossed in the middle
+    const L = W * .46, lx = (W - L) / 2, ly = H * .2;
+    if (logo.complete && logo.naturalWidth) {
+      ctx.globalAlpha = .9; ctx.shadowColor = 'rgba(90,55,15,.45)'; ctx.shadowBlur = 6 * dpr; ctx.shadowOffsetY = 2 * dpr;
+      ctx.drawImage(logo, lx, ly, L, L); ctx.globalAlpha = 1; ctx.shadowColor = 'transparent';
+    }
     ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
-    ctx.fillStyle = '#a97a2b'; ctx.font = `${Math.round(H * .085)}px "Great Vibes", cursive`; ctx.fillText('Save the Date', W / 2, H * .36);
-    ctx.fillStyle = '#c56f7d'; ctx.font = `${Math.round(H * .07)}px Georgia, serif`; ctx.fillText('♡', W / 2, H * .5);
-    ctx.fillStyle = '#4f5a3a'; ctx.font = `600 ${Math.round(H * .036)}px "Cormorant Garamond", Georgia, serif`;
-    ctx.fillText('S C R A T C H   T O   R E V E A L', W / 2, H * .63);
-    painted = true;
+    ctx.fillStyle = '#6b4a18'; ctx.font = `${Math.round(H * .062)}px "Great Vibes", cursive`; ctx.fillText('Our special day awaits', W / 2, H * .74);
+    ctx.fillStyle = 'rgba(80,55,20,.9)'; ctx.font = `600 ${Math.round(H * .03)}px "Cormorant Garamond", Georgia, serif`;
+    const label = 'SCRATCH TO REVEAL'; ctx.fillText(label.split('').join(String.fromCharCode(8202)), W / 2, H * .82);
+    ctx.restore();
   }
-  const pos = (e) => { const r = sc.getBoundingClientRect(); return { x: (e.clientX - r.left) / r.width, y: (e.clientY - r.top) / r.height }; };
+  const pos = (e) => { const r = foil.getBoundingClientRect(); return { x: (e.clientX - r.left) / r.width, y: (e.clientY - r.top) / r.height }; };
   function mark(p) { const cx = p.x * GX, cy = p.y * GY;
-    for (let gx = Math.max(0, Math.floor(cx - 1.4)); gx <= Math.min(GX - 1, Math.floor(cx + 1.4)); gx++)
-      for (let gy = Math.max(0, Math.floor(cy - 1.4)); gy <= Math.min(GY - 1, Math.floor(cy + 1.4)); gy++) { const i = gy * GX + gx; if (!cells[i]) { cells[i] = 1; hit++; } } }
+    for (let gx = Math.max(0, Math.floor(cx - 1.6)); gx <= Math.min(GX - 1, Math.floor(cx + 1.6)); gx++)
+      for (let gy = Math.max(0, Math.floor(cy - 1.3)); gy <= Math.min(GY - 1, Math.floor(cy + 1.3)); gy++) { const i = gy * GX + gx; if (!cells[i]) { cells[i] = 1; hit++; } } }
+  function dab(x, y, r) { const g = ctx.createRadialGradient(x, y, 0, x, y, r); g.addColorStop(0, 'rgba(0,0,0,1)'); g.addColorStop(.6, 'rgba(0,0,0,.95)'); g.addColorStop(1, 'rgba(0,0,0,0)');
+    ctx.fillStyle = g; ctx.beginPath(); ctx.arc(x, y, r, 0, 6.2832); ctx.fill(); }
   function rub(a, b) {
-    const W = sc.width, H = sc.height;
-    ctx.globalCompositeOperation = 'destination-out'; ctx.lineCap = 'round'; ctx.lineJoin = 'round'; ctx.lineWidth = W * .16;
-    ctx.beginPath(); ctx.moveTo(a.x * W, a.y * H); ctx.lineTo(b.x * W + .01, b.y * H + .01); ctx.stroke();
-    const n = Math.max(1, Math.ceil(Math.hypot((b.x - a.x) * GX, (b.y - a.y) * GY)));
-    for (let k = 0; k <= n; k++) mark({ x: a.x + (b.x - a.x) * k / n, y: a.y + (b.y - a.y) * k / n });
-    if (hit / cells.length > .5) reveal();
+    ctx.globalCompositeOperation = 'destination-out';
+    const r = W * .085, ax = a.x * W, ay = a.y * H, bx = b.x * W, by = b.y * H, n = Math.max(1, Math.ceil(Math.hypot(bx - ax, by - ay) / (r * .35)));
+    for (let k = 0; k <= n; k++) dab(ax + (bx - ax) * k / n, ay + (by - ay) * k / n, r);
+    const m = Math.max(1, Math.ceil(Math.hypot((b.x - a.x) * GX, (b.y - a.y) * GY)));
+    for (let k = 0; k <= m; k++) mark({ x: a.x + (b.x - a.x) * k / m, y: a.y + (b.y - a.y) * k / m });
+    if (!dirty) { dirty = true; hint.classList.add('is-gone'); card.classList.add('is-scratching'); }
+    if (hit / cells.length > .45) reveal();
   }
   function reveal() {
     if (done) return; done = true; drawing = false;
-    sc.classList.add('is-gone'); cal.classList.add('is-revealed'); calDate.classList.add('is-revealed'); save.classList.add('is-ready');
-    sc.setAttribute('aria-hidden', 'true'); sc.tabIndex = -1;
-    $('#calNote').textContent = 'Revealed: the engagement is on Sunday, 1 November 2026 at 11:00 AM. Use Save the Date to add it to your calendar.';
-    setTimeout(() => sc.remove(), 900);
+    foil.classList.add('is-gone'); card.classList.add('is-revealed'); hint.classList.add('is-gone'); save.classList.add('is-ready');
+    foil.setAttribute('aria-hidden', 'true'); foil.tabIndex = -1;
+    $('#scardNote').textContent = 'Revealed: Sunday, 1 November 2026, at 11:00 AM. Use Save the Date to add it to your calendar.';
+    navigator.vibrate?.(12);
+    setTimeout(() => foil.remove(), 1000);
   }
-  sc.addEventListener('pointerdown', (e) => { if (done || (e.pointerType === 'mouse' && e.button !== 0)) return; drawing = true; last = pos(e); try { sc.setPointerCapture(e.pointerId); } catch {} rub(last, last); });
-  sc.addEventListener('pointermove', (e) => { if (!drawing) return; const p = pos(e); rub(last, p); last = p; });
-  for (const t of ['pointerup', 'pointercancel', 'lostpointercapture']) sc.addEventListener(t, () => { drawing = false; });
-  sc.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); reveal(); } });
-  /* paint once the card is laid out and the fonts are in */
-  const ready = () => { if (!painted) paint(); };
+  let pending = null;                                              // one stroke per animation frame keeps it smooth on phones
+  const flush = () => { if (pending && last) { rub(last, pending); last = pending; } pending = null; };
+  foil.addEventListener('pointerdown', (e) => { if (done || (e.pointerType === 'mouse' && e.button !== 0)) return; e.preventDefault(); drawing = true; last = pos(e); try { foil.setPointerCapture(e.pointerId); } catch {} rub(last, last); });
+  foil.addEventListener('pointermove', (e) => { if (!drawing) return; e.preventDefault();
+    const evs = e.getCoalescedEvents ? e.getCoalescedEvents() : [e]; for (const ev of evs) { pending = pos(ev); flush(); } });
+  for (const t of ['pointerup', 'pointercancel', 'lostpointercapture']) foil.addEventListener(t, () => { drawing = false; });
+  foil.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); reveal(); } });
+  const ready = () => paint();
+  logo.onload = () => { if (!hit) paint(); };
   (document.fonts && document.fonts.ready ? document.fonts.ready : Promise.resolve()).then(ready);
-  new ResizeObserver(() => { if (!done && !hit) paint(); }).observe(sc);
+  new ResizeObserver(() => { if (!done && !hit) paint(); }).observe(foil);
 })();
 
 /* ── save the date: .ics built from config (duration is configurable there) + Google Calendar ── */

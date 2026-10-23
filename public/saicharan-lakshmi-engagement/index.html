@@ -21,20 +21,18 @@
 <meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="preload" as="image" href="assets/bg/opening-cl.webp" fetchpriority="high">
-<link rel="modulepreload" href="js/app.js?v=2">
+<link rel="modulepreload" href="js/app.js?v=3">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Noto+Serif+Telugu:wght@500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/invite.css?v=2">
+<link rel="stylesheet" href="css/invite.css?v=3">
 </head>
 <body class="is-closed">
 
 <!-- ── opening: envelope, one tap starts music + the film, which fades into the hero ── -->
 <div class="opening" id="opening">
   <img class="opening__art" src="assets/bg/opening-cl.webp" alt="A sealed cream envelope with the couple's C L monogram on its gold wax seal, pink tassel and embroidered flowers" width="941" height="1672" decoding="async" fetchpriority="high">
-  <video class="opening__film" id="film" playsinline webkit-playsinline muted preload="auto" src="assets/media/opening.mp4" aria-hidden="true"></video>
-  <!-- the film shows the same envelope: the CL seal rides on it, following the camera, until the flap opens -->
-  <div class="opening__cover" aria-hidden="true"><img class="opening__seal" id="seal" src="assets/el/seal-cl.webp" alt="" decoding="async"></div>
+  <video class="opening__film" id="film" playsinline webkit-playsinline muted preload="auto" src="assets/media/opening-cl.mp4" aria-hidden="true"></video>
   <button class="tap" id="tap" type="button">
     <span class="tap__ring" aria-hidden="true"></span>
     <span class="tap__label">Tap to Open</span>
@@ -80,13 +78,22 @@
       <p class="txt caps caps--md rise" style="top:18.4%;--d:.1s">A Beautiful</p>
       <p class="txt caps caps--lg gold rise" style="top:21.6%;--d:.25s">Chapter Begins</p>
       <img class="el rise" style="left:50%;top:26.2%;width:22%;--x:-50%;--d:.4s" src="assets/el/garland.webp" alt="" loading="lazy">
-      <div class="cal rise" id="cal" style="left:19%;top:30.3%;width:62%;--d:.55s">
-        <img class="cal__img" src="assets/el/calendar.webp" alt="November 2026 calendar in an embroidered gold frame" width="1243" height="1500" loading="lazy">
-        <img class="cal__heart" id="heart" src="assets/el/heart.webp" alt="" aria-hidden="true" loading="lazy">
-        <canvas class="scratch" id="scratch" role="button" tabindex="0" aria-label="Scratch card: rub to reveal our date. Press Enter to reveal." aria-describedby="calNote"></canvas>
-        <p class="sr-only" id="calNote" aria-live="polite">Scratch the card to reveal the date.</p>
+      <!-- scratch to reveal: a gold-foil card; underneath, the day, the date and the hour -->
+      <div class="scard rise" id="scard" style="left:17.5%;top:29.6%;width:65%;--d:.55s">
+        <div class="scard__face" id="scardFace" aria-hidden="true">
+          <p class="scard__kicker">Save the Date</p>
+          <p class="scard__day">Sunday</p>
+          <p class="scard__num">1</p>
+          <p class="scard__month">November <span>2026</span></p>
+          <img class="scard__orn" src="assets/el/garland.webp" alt="" loading="lazy">
+          <p class="scard__time">11:00 AM</p>
+          <i class="scard__spark" style="--a:12deg;--r:58%"></i><i class="scard__spark" style="--a:78deg;--r:62%"></i><i class="scard__spark" style="--a:140deg;--r:55%"></i>
+          <i class="scard__spark" style="--a:205deg;--r:60%"></i><i class="scard__spark" style="--a:262deg;--r:57%"></i><i class="scard__spark" style="--a:318deg;--r:61%"></i>
+        </div>
+        <canvas class="scard__foil" id="foil" role="button" tabindex="0" aria-label="Scratch card: rub with your finger or mouse to reveal our date. Press Enter to reveal." aria-describedby="scardNote"></canvas>
+        <span class="scard__hint" id="scardHint" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M9 11.2V5.5a1.5 1.5 0 0 1 3 0v4.7l.1-1.2a1.5 1.5 0 0 1 3 .1v1.3a1.5 1.5 0 0 1 3 .2V12a1.5 1.5 0 0 1 2.9.3v3.4c0 3.5-2.6 6.3-6.2 6.3h-1.3c-2 0-3.4-.8-4.7-2.4L5.7 15.6a1.6 1.6 0 0 1 2.3-2.2z"/></svg></span>
+        <p class="sr-only" id="scardNote" aria-live="polite">Scratch the card to reveal the date.</p>
       </div>
-      <p class="txt cal-date rise" id="calDate" style="top:76.4%;--d:.7s"><span class="cal-date__hint">Scratch the card to reveal our date</span><span class="cal-date__day" aria-hidden="true">Sunday · 11:00 AM</span><span class="cal-date__date" aria-hidden="true">1 November 2026</span></p>
       <button class="save" id="save" type="button" style="left:33%;top:87.3%;width:35%;height:4.9%">
         <span class="sr-only">Save the Date — add to your calendar</span>
       </button>
@@ -165,18 +172,18 @@
           <p class="fam__l">Groom’s Family</p>
           <p class="fam__n">Annamaneni Sai Charan</p>
           <p class="fam__k">Son of</p>
-          <p class="fam__p">Annamaneni Vinod Rao &amp;<br>Annamaneni Shailaja</p>
+          <p class="fam__p">Sh. Annamaneni Vinod Rao &amp;<br>Smt. Annamaneni Shailaja</p>
           <p class="fam__k">Grandson of</p>
-          <p class="fam__g">Annamaneni Narayan Rao (Late) &amp;<br>Annamaneni Pramila Devi (Late)</p>
+          <p class="fam__g">Late Sh. Annamaneni Narayan Rao &amp;<br>Late Smt. Annamaneni Pramila Devi</p>
         </div>
         <p class="fams__heart" aria-hidden="true">♡</p>
         <div class="fam">
           <p class="fam__l">Bride’s Family</p>
           <p class="fam__n">Gouravelly Lakshmi</p>
           <p class="fam__k">Daughter of</p>
-          <p class="fam__p">Gouravelly Surendhar Rao &amp;<br>Gouravelly Rama Devi</p>
+          <p class="fam__p">Sh. Gouravelly Surendhar Rao &amp;<br>Smt. Gouravelly Rama Devi</p>
           <p class="fam__k">Granddaughter of</p>
-          <p class="fam__g">Gouravelly Janardhan Rao &amp;<br>Gouravelly Gangamma</p>
+          <p class="fam__g">Sh. Gouravelly Janardhan Rao &amp;<br>Smt. Gouravelly Gangamma</p>
         </div>
       </div>
     </div>
@@ -192,7 +199,7 @@
       <img class="el rise" style="left:50%;top:25.2%;width:18%;--x:-50%;--d:.35s" src="assets/el/garland.webp" alt="" loading="lazy">
       <p class="txt para rise" style="top:28.8%;--d:.45s">We look forward to your gracious presence and blessings on this special occasion.</p>
       <p class="txt heart-mark rise" style="top:38.5%;--d:.55s" aria-hidden="true">♡</p>
-      <h2 class="txt script script--lg rise" style="top:57.5%;--d:.2s">See You There <span class="script__heart" aria-hidden="true">♡</span></h2>
+      <h2 class="txt script script--lg rise" style="top:57.5%;--d:.2s"><span class="seeyou">See You There<span class="script__heart" aria-hidden="true">♡</span></span></h2>
       <p class="txt flourish rise" style="top:67.5%;--d:.35s" aria-hidden="true">
         <svg viewBox="0 0 120 20" width="100%" height="100%"><path d="M4 12c14-10 22 6 36 0s22-10 36 0 22 10 40-2" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
       </p>
@@ -220,6 +227,6 @@
 </div>
 
 <noscript><p style="padding:40px 24px;text-align:center;font-family:Georgia,serif;color:#5a4a35">Please enable JavaScript to open this invitation.</p></noscript>
-<script type="module" src="js/app.js?v=2"></script>
+<script type="module" src="js/app.js?v=3"></script>
 </body>
 </html>
