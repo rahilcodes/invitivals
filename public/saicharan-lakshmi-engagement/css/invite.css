@@ -27,8 +27,7 @@ img { -webkit-user-drag: none; user-select: none; }
 .sr-only { position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
 
 /* ── the stage: pages at the painting's own proportion ── */
-.stage { --cq: 1cqw; width: var(--stage); margin: 0 auto; container-type: inline-size; position: relative; opacity: 0; transition: opacity 1.1s ease; }
-body.is-open .stage { opacity: 1; }
+.stage { --cq: 1cqw; width: var(--stage); margin: 0 auto; container-type: inline-size; position: relative; }
 .page { position: relative; width: 100%; }
 /* on tall phones the hero painting ends above the fold; the band beneath runs from the painting's own beige into the page's */
 .page--1 { min-height: 100vh; min-height: 100dvh; background: linear-gradient(to bottom, #ecd4ba 70%, var(--beige)); }
@@ -181,8 +180,8 @@ body.is-open .stage { opacity: 1; }
 }
 .opening { cursor: pointer; }
 .opening.is-leaving { opacity: 0; pointer-events: none; }
-.opening__art { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center; }
-.opening__film { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity .7s ease; background: var(--beige); }
+.opening__art { position: absolute; top: 0; left: 0; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center; }
+.opening__film { position: absolute; top: 0; left: 0; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity .7s ease; background: var(--beige); }
 .opening.is-playing .opening__film { opacity: 1; }
 .opening.is-playing .tap, .opening.is-playing .opening__art { opacity: 0; transition: opacity .7s ease; }
 .tap {

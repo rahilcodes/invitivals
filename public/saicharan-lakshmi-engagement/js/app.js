@@ -5,7 +5,7 @@
    Save the Date (.ics / Google Calendar), the music toggle and the falling petals.
    Event facts come from ../config.js.
    ───────────────────────────────────────────────────────────────────────────── */
-import { invite as C } from '../config.js?v=4';
+import { invite as C } from '../config.js?v=5';
 
 const $ = (s, r = document) => r.querySelector(s);
 const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -74,16 +74,34 @@ tap.addEventListener('click', open);
 opening.addEventListener('click', (e) => { if (e.target !== tap && !tap.contains(e.target)) open(); });
 
 function openStage() {
+  /* always land on the hero, never a scroll position the browser remembered */
+  try { history.scrollRestoration = 'manual'; } catch {}
+  window.scrollTo(0, 0);
   document.body.classList.remove('is-closed');
   document.body.classList.add('is-open');
   opening.classList.add('is-leaving');
   mute.hidden = false; mute.classList.remove('is-early');
   syncMute();
-  setTimeout(() => { opening.remove(); try { film.pause(); film.removeAttribute('src'); film.load(); } catch {} }, 1100);
+  setTimeout(() => { opening.remove(); try { film.pause(); film.removeAttribute('src'); film.load(); } catch {} repaint(); }, 1100);
+  setTimeout(repaint, 2400);
   /* the hero's pieces stagger in on their own; later pages wait for the scroll */
   for (const el of $('#p1').querySelectorAll('.rise, .drop, .pop, .tilt, .slide-l, .swing')) el.classList.add('in');
   startPetals();
   watch();
+}
+
+/* some phones (iOS Safari, Android Chrome) leave the page unpainted after the full-screen envelope goes until the
+   guest scrolls — so do what that scroll does: a one-pixel nudge, and reveal whatever is already on screen */
+function repaint() {
+  requestAnimationFrame(() => {
+    const y = window.scrollY;
+    window.scrollTo(0, y + 1); window.scrollTo(0, y);
+    for (const el of stage.querySelectorAll('.rise, .drop, .pop, .tilt, .slide-l, .glide, .flutter, .swing')) {
+      if (el.classList.contains('in')) continue;
+      const r = el.getBoundingClientRect();
+      if (r.bottom > 0 && r.top < innerHeight) el.classList.add('in');
+    }
+  });
 }
 
 function fade(a, to, ms) {
