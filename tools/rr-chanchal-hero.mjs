@@ -1,8 +1,11 @@
 #!/usr/bin/env node
 /* Opening page of chanchal-jp-sharma-wedding: the designer's lakeside page with the client's
-   Rajasthani couple standing in it instead of the illustrated couple.
+   figures standing in it instead of the illustrated couple — since 2026-10-24 Shiv–Parvati
+   (shiv-parvati.jpg); before that the client's Rajasthani couple (couple-rajasthani-cutout.jpg).
+   Always built from the designer's untouched page, so no earlier figure is ever underneath.
 
      node tools/rr-chanchal-hero.mjs        (also run by tools/prep-rr-chanchal-jp.mjs)
+     FIGURE=… PLACE=scale,cx,top OUT=…       try another figure or placement
 
    1. The illustrated couple's outline is traced and removed from the page; the hole is filled
       from the surrounding sky, hills, lake and terrace — nothing else on the page changes.
@@ -18,9 +21,10 @@ import sharp from 'sharp';
 
 const ROOT = path.resolve(path.dirname(new URL(import.meta.url).pathname.replace(/^\/([A-Z]:)/, '$1')), '..');
 const PAGE = path.join(ROOT, 'public/rr-wedding-26nov/assets/couple-page.webp');          // designer's page, untouched
-const NEW = path.join(ROOT, 'invites/src/chanchal-jp-wedding/couple-rajasthani-cutout.jpg');
-const OUT = path.join(ROOT, 'public/chanchal-jp-sharma-wedding/assets/couple-page.webp');
-const PLACE = { scale: .84, cx: 800, top: 1532 };                  // the new couple, in page pixels
+const NEW = path.resolve(ROOT, process.env.FIGURE || 'invites/src/chanchal-jp-wedding/shiv-parvati.jpg');
+const OUT = path.resolve(ROOT, process.env.OUT || 'public/chanchal-jp-sharma-wedding/assets/couple-page.webp');
+const [ps, pcx, ptop] = (process.env.PLACE || '.66,760,1621').split(',').map(Number);
+const PLACE = { scale: ps, cx: pcx, top: ptop };                   // the figures, in page pixels (Rajasthani couple was .84,800,1532)
 const log = (...a) => process.argv.includes('-v') && console.log(...a);
 
 const raw = async (img, ch) => { const { data, info } = await sharp(img).raw().toBuffer({ resolveWithObject: true }); return { d: data, w: info.width, h: info.height, c: info.channels }; };

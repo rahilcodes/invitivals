@@ -13,38 +13,54 @@ END:STANDARD
 END:VTIMEZONE
 BEGIN:VEVENT
 UID:chanchal-jp-sharma-wedding-0@invitivals.com
-DTSTAMP:20261021T105627Z
+DTSTAMP:20261024T131257Z
 DTSTART;TZID=Asia/Kolkata:20261126T103000
 DTEND;TZID=Asia/Kolkata:20261126T133000
-SUMMARY:Baan — Chanchal & JP Sharma
-LOCATION:https://maps.app.goo.gl/RSTD7MqNDrLRwGW88?g_st=aw
+SUMMARY:Baan (बान) — Chanchal & JP Sharma
+LOCATION:https://maps.app.goo.gl/1Xto7i4xRh94CFLy6?g_st=aw
 URL:https://invitivals.com/chanchal-jp-sharma-wedding/
 END:VEVENT
 BEGIN:VEVENT
 UID:chanchal-jp-sharma-wedding-1@invitivals.com
-DTSTAMP:20261021T105627Z
+DTSTAMP:20261024T131257Z
 DTSTART;TZID=Asia/Kolkata:20261130T133000
 DTEND;TZID=Asia/Kolkata:20261130T180000
-SUMMARY:Tilak — Chanchal & JP Sharma
-LOCATION:https://maps.app.goo.gl/RSTD7MqNDrLRwGW88?g_st=aw
+SUMMARY:Tilak (तिलक) — Chanchal & JP Sharma
+LOCATION:https://maps.app.goo.gl/1Xto7i4xRh94CFLy6?g_st=aw
 URL:https://invitivals.com/chanchal-jp-sharma-wedding/
 END:VEVENT
 BEGIN:VEVENT
 UID:chanchal-jp-sharma-wedding-2@invitivals.com
-DTSTAMP:20261021T105627Z
+DTSTAMP:20261024T131257Z
 DTSTART;VALUE=DATE:20261201
 DTEND;VALUE=DATE:20261202
-SUMMARY:Janeev — Chanchal & JP Sharma
-LOCATION:https://maps.app.goo.gl/RSTD7MqNDrLRwGW88?g_st=aw
+SUMMARY:Yagyopavith (यज्ञोपवीत) — Chanchal & JP Sharma
+LOCATION:https://maps.app.goo.gl/1Xto7i4xRh94CFLy6?g_st=aw
 URL:https://invitivals.com/chanchal-jp-sharma-wedding/
 END:VEVENT
 BEGIN:VEVENT
 UID:chanchal-jp-sharma-wedding-3@invitivals.com
-DTSTAMP:20261021T105627Z
+DTSTAMP:20261024T131257Z
+DTSTART;TZID=Asia/Kolkata:20261201T110000
+SUMMARY:Haldi (हल्दी) — Chanchal & JP Sharma
+LOCATION:https://maps.app.goo.gl/1Xto7i4xRh94CFLy6?g_st=aw
+URL:https://invitivals.com/chanchal-jp-sharma-wedding/
+END:VEVENT
+BEGIN:VEVENT
+UID:chanchal-jp-sharma-wedding-4@invitivals.com
+DTSTAMP:20261024T131257Z
+DTSTART;TZID=Asia/Kolkata:20261201T183000
+SUMMARY:Sangeet (संगीत) — Chanchal & JP Sharma
+LOCATION:https://maps.app.goo.gl/1Xto7i4xRh94CFLy6?g_st=aw
+URL:https://invitivals.com/chanchal-jp-sharma-wedding/
+END:VEVENT
+BEGIN:VEVENT
+UID:chanchal-jp-sharma-wedding-5@invitivals.com
+DTSTAMP:20261024T131257Z
 DTSTART;TZID=Asia/Kolkata:20261202T233000
 DTEND;TZID=Asia/Kolkata:20261203T013000
-SUMMARY:Wedding · Fera — Chanchal & JP Sharma
-LOCATION:https://maps.app.goo.gl/RSTD7MqNDrLRwGW88?g_st=aw
+SUMMARY:Pani Greh Sanskar (पाणिग्रहण संस्कार) — Chanchal & JP Sharma
+LOCATION:https://maps.app.goo.gl/AdkKQWQ7Uza6VfK87?g_st=aw
 URL:https://invitivals.com/chanchal-jp-sharma-wedding/
 END:VEVENT
 END:VCALENDAR
