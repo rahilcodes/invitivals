@@ -179,6 +179,9 @@ a{color:inherit}
 /* added for invitations with families / blessings sections (same palette and type as the template) */
 .invoc{font-family:var(--caps);text-align:center;letter-spacing:.24em;text-transform:uppercase;font-size:14px;color:#fdf0c4;margin-bottom:10px}
 .invoc::before,.invoc::after{content:"॥";margin:0 .6em;color:var(--gold)}
+/* the Ganesh shloka at the top of Our Story (client, 2026-10-24): one half-verse per line */
+.shloka{font-family:"Noto Serif Devanagari","Kohinoor Devanagari","Nirmala UI","Mangal",serif;font-weight:600;text-align:center;font-size:clamp(15px,4.4vw,18px);line-height:1.75;color:#fdf0c4;text-shadow:0 1px 2px rgba(30,0,8,.55);margin:0 auto 14px;max-width:24em}
+.shloka span{display:inline-block}
 .ev-b .ev-cal{margin-right:18px}
 .fam{display:flex;flex-direction:column;align-items:center;gap:6px;text-align:center}
 .fam-l{font-family:var(--caps);text-transform:uppercase;letter-spacing:.3em;font-size:12px;color:var(--gold)}
@@ -228,7 +231,7 @@ a{color:inherit}
 
   <section class="band" id="story" aria-labelledby="story-h">
     <img class="corner tl" src="assets/corner-floral.webp" alt="">
-<p class="invoc reveal">Shri Ganeshaya Namah</p>
+<p class="shloka reveal" lang="sa"><span>वक्रतुण्ड महाकाय सूर्यकोटि समप्रभः।</span> <span>निर्विघ्नं कुरु मे देव सर्व कार्येषु सर्वदा॥</span></p>
     <p class="kicker reveal">Two hearts, one journey</p>
     <h2 class="h2 reveal" id="story-h">Our Story</h2>
     <div class="orn reveal"><i></i><svg viewBox="0 0 16 16"><path d="M8 0l2 6 6 2-6 2-2 6-2-6-6-2 6-2z"/></svg><i></i></div>
