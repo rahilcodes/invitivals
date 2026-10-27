@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex">
+<title>শুভ বিবাহ · বিবাহের আমন্ত্রণ · Invitivals</title>
+<meta name="description" content="শুভ বিবাহ — ১০, ১১ ও ১২ ডিসেম্বর ২০২৬, ঢাকা। গায়ে হলুদ, লক্ষ্মী পূজা, সঙ্গীত সন্ধ্যা, বিবাহ ও ভোজন।">
+<meta name="author" content="Invitivals">
+<meta name="theme-color" content="#f9e5bd">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Invitivals">
+<meta property="og:locale" content="bn_BD">
+<meta property="og:url" content="https://invitivals.com/bengali-wedding/">
+<meta property="og:title" content="শুভ বিবাহ · বিবাহের আমন্ত্রণ">
+<meta property="og:description" content="১০, ১১ ও ১২ ডিসেম্বর ২০২৬ · ঢাকা। আমন্ত্রণটি খুলতে ট্যাপ করুন।">
+<meta property="og:image" content="https://invitivals.com/bengali-wedding/assets/og.jpg">
+<meta property="og:image:type" content="image/jpeg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="preload" as="image" href="assets/media/intro-poster.webp" fetchpriority="high">
+<link rel="preload" as="image" href="assets/bg/p1.webp">
+<link rel="modulepreload" href="js/app.js?v=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Bengali:wght@500;700;800;900&family=Noto+Sans+Bengali:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/invite.css?v=1">
+</head>
+<body class="is-closed">
+
+<!-- ── opening: the sealed envelope (the film's first frame); one tap plays the film with sound, its last frame fades into the hero ── -->
+<div class="opening" id="opening">
+  <img class="opening__poster" src="assets/media/intro-poster.webp" alt="একটি সোনালি সিলমোহরযুক্ত আমন্ত্রণপত্র, ফুল ও প্রদীপের মাঝে" width="720" height="1280" decoding="async" fetchpriority="high">
+  <video class="opening__film" id="film" playsinline webkit-playsinline preload="auto" poster="assets/media/intro-poster.webp" src="assets/media/intro.mp4" aria-hidden="true"></video>
+  <button class="tap" id="tap" type="button">
+    <span class="tap__ring" aria-hidden="true"></span>
+    <span class="tap__label">আমন্ত্রণ খুলুন</span>
+    <span class="tap__sub">Tap to enter</span>
+  </button>
+  <button class="skip" id="skip" type="button" hidden>Skip intro ›</button>
+</div>
+
+<button class="mute" id="mute" type="button" aria-pressed="true" aria-label="সঙ্গীত চালান" hidden>
+  <svg viewBox="0 0 24 24" aria-hidden="true"><path class="mute__note" d="M9 18.5a2.5 2.5 0 1 1-2-2.45V6l10-2v11.5a2.5 2.5 0 1 1-2-2.45V7.4l-6 1.2z"/><path class="mute__bar" d="M4 4l16 16"/></svg>
+</button>
+
+<main class="stage" id="stage" aria-label="বিবাহের আমন্ত্রণ">
+
+  <!-- 1 · hero -->
+  <section class="page page--1" id="p1">
+    <div class="art">
+      <img class="bg" src="assets/bg/p1.webp" alt="" width="941" height="1672" decoding="async" fetchpriority="high">
+      <img class="el swing" style="left:1.5%;top:-1%;width:7%;--d:.4s" src="assets/el/tasselJas.webp" alt="">
+      <img class="el swing" style="right:1.5%;top:-1%;width:5.5%;--d:.6s" src="assets/el/tasselRed.webp" alt="">
+      <svg class="el orn drop" style="left:36%;top:7.4%;width:28%;--d:.3s" viewBox="0 0 200 24" aria-hidden="true"><use href="#flourish"/></svg>
+      <h1 class="txt bn-title rise" style="top:10.6%;--d:.45s" data-t="hero.title">শুভ বিবাহ</h1>
+      <p class="txt bn-sub rise" style="top:18.6%;--d:.6s" data-t="hero.sub">দুই পরিবারের মিলনে<br>এক পবিত্র বন্ধন</p>
+      <svg class="el orn rise" style="left:40%;top:24.6%;width:20%;--d:.75s" viewBox="0 0 200 24" aria-hidden="true"><use href="#flourish"/></svg>
+      <img class="el rise" style="left:-2%;top:35.5%;width:17%;--d:.5s" src="assets/el/lampStand.webp" alt="">
+      <img class="el rise flip" style="left:85%;top:35.5%;width:17%;--d:.6s" src="assets/el/lampStand.webp" alt="">
+      <img class="el el--couple rise" style="left:11%;top:28.6%;width:78%;--d:.7s" src="assets/el/couple.webp" alt="বর ও কনে, লাল-সোনালি পোশাকে পাশাপাশি বসে">
+      <img class="el rise" style="left:-1%;top:82%;width:26%;--d:.9s" src="assets/el/diyaFlowers.webp" alt="">
+      <img class="el rise glow" style="left:80%;top:76%;width:16%;--d:1s" src="assets/el/diyaFlame.webp" alt="">
+      <div class="names rise" style="top:64.4%;--d:1s">
+        <span class="name"><span data-t="couple.groom">শুভ</span> <i class="heart">♥</i></span>
+        <svg class="names__mid" viewBox="0 0 24 24" aria-hidden="true"><use href="#motif"/></svg>
+        <span class="name"><i class="heart">♥</i> <span data-t="couple.bride">পরিরা</span></span>
+      </div>
+      <p class="txt bn-para rise" style="top:71.6%;--d:1.15s" data-t="hero.para">ভালোবাসা, আশা ও পারিবারিক<br>সম্পর্কের এই পবিত্র বন্ধনে<br>আপনাদের উপস্থিতি<br>আমাদের জন্য<br>অনেক অনুপ্রেরণা।</p>
+      <svg class="el orn rise" style="left:40%;top:84.4%;width:20%;--d:1.3s" viewBox="0 0 200 24" aria-hidden="true"><use href="#flourish"/></svg>
+    </div>
+  </section>
+
+  <!-- 2 · scratch to reveal the date -->
+  <section class="page" id="p2">
+    <div class="art">
+      <img class="bg" src="assets/bg/p2.webp" alt="" width="941" height="1672" loading="lazy" decoding="async">
+      <h2 class="txt bn-h2 rise" style="top:33.1%;--d:.1s" data-t="reveal.title">শুভ লগ্নের শুভ তারিখ</h2>
+      <p class="txt bn-sub bn-sub--sm rise" style="top:38.2%;--d:.25s" data-t="reveal.sub">ঘষে দেখুন আমাদের বিশেষ দিন</p>
+      <div class="scard" id="scard" style="left:7%;top:37%;width:86%;height:32%">
+        <div class="scard__date" id="scardDate" aria-live="polite">
+          <p class="scard__d" data-t="reveal.date">১২ ডিসেম্বর ২০২৬</p>
+          <p class="scard__day" data-t="reveal.day">শনিবার</p>
+        </div>
+        <canvas class="scard__foil" id="foil" role="button" tabindex="0" aria-label="সোনালি আবরণ: আঙুল বা মাউস দিয়ে ঘষে তারিখ দেখুন। Enter চাপলেও দেখা যাবে।"></canvas>
+        <span class="scard__hint" id="scardHint" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M9 11.2V5.5a1.5 1.5 0 0 1 3 0v4.7l.1-1.2a1.5 1.5 0 0 1 3 .1v1.3a1.5 1.5 0 0 1 3 .2V12a1.5 1.5 0 0 1 2.9.3v3.4c0 3.5-2.6 6.3-6.2 6.3h-1.3c-2 0-3.4-.8-4.7-2.4L5.7 15.6a1.6 1.6 0 0 1 2.3-2.2z"/></svg></span>
+      </div>
+      <img class="el pop" style="left:73.5%;top:56%;width:18.5%;--d:.4s" src="assets/el/coin.webp" alt="">
+      <button class="reveal rise" id="revealBtn" type="button" style="top:71%;--d:.5s" data-t="reveal.button">তারিখ দেখুন</button>
+    </div>
+  </section>
+
+  <!-- 3 · functions menu -->
+  <section class="page" id="p3">
+    <div class="art">
+      <img class="bg" src="assets/bg/p3.webp" alt="" width="941" height="1672" loading="lazy" decoding="async">
+      <img class="el swing glow" style="left:6%;top:19%;width:13%;--d:.3s" src="assets/el/lanternL.webp" alt="" loading="lazy">
+      <img class="el swing glow" style="left:81%;top:19%;width:13%;--d:.5s" src="assets/el/lanternR.webp" alt="" loading="lazy">
+      <h2 class="txt bn-h1 rise" style="top:21.4%;--d:.1s" data-t="menu.title">আমাদের অনুষ্ঠান</h2>
+      <p class="txt bn-sub bn-sub--sm rise" style="top:29.2%;--d:.25s" data-t="menu.sub">আমাদের সাথে এই বিশেষ দিনে<br>থাকার জন্য রইল আমন্ত্রণ।</p>
+      <nav class="menu" aria-label="অনুষ্ঠানসমূহ" id="menu"></nav>
+    </div>
+  </section>
+
+  <!-- 4–8 · the functions: built from config by app.js, each on its own background -->
+  <section class="page fn" id="haldi" data-event="haldi" data-tone="haldi">
+    <div class="art">
+      <img class="bg" src="assets/bg/p4.webp" alt="" width="941" height="1672" loading="lazy" decoding="async">
+      <div class="fn__body"></div>
+    </div>
+  </section>
+  <section class="page fn" id="lakshmi" data-event="lakshmi" data-tone="green">
+    <div class="art">
+      <img class="bg" src="assets/bg/p5.webp" alt="" width="941" height="1672" loading="lazy" decoding="async">
+      <div class="fn__body"></div>
+    </div>
+  </section>
+  <section class="page fn" id="sangeet" data-event="sangeet" data-tone="crimson">
+    <div class="art">
+      <img class="bg" src="assets/bg/p6.webp" alt="" width="941" height="1672" loading="lazy" decoding="async">
+      <img class="el swing glow" style="left:1%;top:12.5%;width:9%;--d:.3s" src="assets/el/lanternSang.webp" alt="" loading="lazy">
+      <img class="el rise" style="left:7%;top:35.5%;width:84%;--d:.5s" src="assets/el/dancers.webp" alt="নাচের ভঙ্গিতে বর ও কনে" loading="lazy">
+      <div class="fn__body"></div>
+    </div>
+  </section>
+  <section class="page fn" id="wedding" data-event="wedding" data-tone="red">
+    <div class="art">
+      <img class="bg" src="assets/bg/p7.webp" alt="" width="941" height="1672" loading="lazy" decoding="async">
+      <div class="fn__body"></div>
+    </div>
+  </section>
+  <section class="page fn fn--logo" id="reception" data-event="reception" data-tone="maroon">
+    <div class="art">
+      <img class="bg" src="assets/bg/p8.webp" alt="" width="941" height="1672" loading="lazy" decoding="async">
+      <img class="el swing glow" style="left:11%;top:23%;width:10%;--d:.3s" src="assets/el/lanternRec.webp" alt="" loading="lazy">
+      <img class="el rise" style="left:28%;top:9.6%;width:44%;--d:.2s" src="assets/el/bhojon.webp" alt="ভোজন" loading="lazy">
+      <div class="fn__body"></div>
+    </div>
+  </section>
+
+  <!-- venues: one look at where and when, after the functions -->
+  <section class="page plain" id="venues">
+    <img class="el swing" style="left:2%;top:0;width:6%;--d:.2s" src="assets/el/tasselJas.webp" alt="" loading="lazy">
+    <img class="el swing" style="right:2%;top:0;width:5%;--d:.4s" src="assets/el/tasselRed.webp" alt="" loading="lazy">
+    <div class="plain__in">
+      <svg class="orn rise" style="width:34%;--d:.1s" viewBox="0 0 200 24" aria-hidden="true"><use href="#flourish"/></svg>
+      <h2 class="bn-h2 rise" style="--d:.2s" data-t="venues.title">অনুষ্ঠানের ঠিকানা</h2>
+      <p class="bn-sub bn-sub--sm rise" style="--d:.3s" data-t="venues.sub">কোথায়, কবে — এক নজরে</p>
+      <div class="vlist" id="vlist"></div>
+      <img class="coin rise" style="--d:.5s" src="assets/el/coin.webp" alt="" loading="lazy">
+    </div>
+  </section>
+
+  <!-- 9 · moments & thanks -->
+  <section class="page" id="p9">
+    <div class="art">
+      <img class="bg" src="assets/bg/p9.webp" alt="" width="941" height="1672" loading="lazy" decoding="async">
+      <svg class="el orn drop" style="left:38%;top:14.2%;width:24%;--d:.1s" viewBox="0 0 200 24" aria-hidden="true"><use href="#flourish"/></svg>
+      <h2 class="txt bn-h1 rise" style="top:16.2%;--d:.2s" data-t="ending.title">আমাদের কিছু মুহূর্ত</h2>
+      <p class="txt bn-sub bn-sub--sm rise" style="top:22.2%;--d:.35s" data-t="ending.sub">ভালোবাসার কিছু স্মৃতি</p>
+      <img class="el photo tilt" style="left:11%;top:26.4%;width:39%;--r:-3deg;--d:.4s" src="assets/el/photo1.webp" alt="বর ও কনের ছবি ১" loading="lazy">
+      <img class="el photo tilt" style="left:51%;top:25.8%;width:40%;--r:2.5deg;--d:.6s" src="assets/el/photo2.webp" alt="বর ও কনের ছবি ২" loading="lazy">
+      <img class="el photo tilt" style="left:12%;top:44.6%;width:38%;--r:2deg;--d:.8s" src="assets/el/photo3.webp" alt="বর ও কনের ছবি ৩" loading="lazy">
+      <img class="el photo tilt" style="left:50%;top:44%;width:41%;--r:-2deg;--d:1s" src="assets/el/photo4.webp" alt="বর ও কনের ছবি ৪" loading="lazy">
+      <svg class="el orn rise" style="left:40%;top:62.4%;width:20%;--d:1.1s" viewBox="0 0 200 24" aria-hidden="true"><use href="#flourish"/></svg>
+      <h2 class="txt bn-h1 bn-h1--sm rise" style="top:64.4%;--d:1.2s" data-t="ending.thanks">আপনাদের<br>ধন্যবাদ</h2>
+      <p class="txt bn-para rise" style="top:74.6%;--d:1.35s" data-t="ending.para">আমাদের এই বিশেষ দিনে<br>আমাদের সাথে থাকার জন্য<br>আপনাদের প্রতি<br>রইল আন্তরিক কৃতজ্ঞতা।</p>
+    </div>
+  </section>
+
+  <!-- RSVP & contact -->
+  <section class="page plain plain--last" id="rsvp">
+    <div class="plain__in">
+      <svg class="orn rise" style="width:34%;--d:.1s" viewBox="0 0 200 24" aria-hidden="true"><use href="#flourish"/></svg>
+      <h2 class="bn-h2 rise" style="--d:.2s" data-t="rsvp.title">উপস্থিতি জানান</h2>
+      <p class="bn-sub bn-sub--sm rise" style="--d:.3s" data-t="rsvp.sub">আপনার আসার খবরটি আমাদের জানালে খুশি হব।</p>
+      <p class="rsvp__meta rise" id="rsvpMeta" style="--d:.35s" hidden></p>
+      <div class="rsvp__actions rise" id="rsvpActions" style="--d:.4s"></div>
+      <form class="rsvp__form rise" id="rsvpForm" style="--d:.5s" hidden novalidate>
+        <label class="field"><span>আপনার নাম</span><input name="name" type="text" required autocomplete="name"></label>
+        <fieldset class="field field--radio"><legend>আসছেন?</legend>
+          <label><input type="radio" name="attendance" value="yes" checked> হ্যাঁ, আসছি</label>
+          <label><input type="radio" name="attendance" value="no"> দুঃখিত, পারছি না</label>
+        </fieldset>
+        <label class="field"><span>কতজন</span><input name="guests" type="number" min="1" max="20" value="1" inputmode="numeric"></label>
+        <button class="btn btn--primary" type="submit">পাঠান</button>
+        <p class="rsvp__status" aria-live="polite"></p>
+      </form>
+    </div>
+  </section>
+</main>
+
+<!-- add-to-calendar sheet (filled per function) -->
+<div class="sheet" id="sheet" hidden>
+  <div class="sheet__veil" data-close></div>
+  <div class="sheet__card" role="dialog" aria-modal="true" aria-labelledby="sheetTitle">
+    <p class="sheet__kicker" id="sheetWhen"></p>
+    <h2 class="sheet__title" id="sheetTitle"></h2>
+    <a class="btn btn--primary" id="ics" href="#" download="event.ics">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 2h2v2h6V2h2v2h3v18H4V4h3V2zm-1 7v11h12V9H6zm2 2h3v3H8v-3z"/></svg>ক্যালেন্ডার ফাইল (.ics)</a>
+    <a class="btn" id="gcal" href="#" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19 4h-1V2h-2v2H8V2H6v2H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2zm0 16H5V9h14v11z"/></svg>গুগল ক্যালেন্ডারে যোগ করুন</a>
+    <button class="sheet__close" type="button" data-close>বন্ধ করুন</button>
+  </div>
+</div>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="flourish" viewBox="0 0 200 24"><g fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"><path d="M4 13h64M132 13h64"/><path d="M68 13c6-6 12-6 18 0s12 6 18 0"/><path d="M96 13c6-6 12-6 18 0s12 6 18 0"/></g><path fill="currentColor" d="M100 3l3.2 6.2L110 10l-6.8 1.4L100 18l-3.2-6.6L90 10l6.8-.8z"/><circle cx="4" cy="13" r="1.6" fill="currentColor"/><circle cx="196" cy="13" r="1.6" fill="currentColor"/></symbol>
+    <symbol id="motif" viewBox="0 0 24 24"><path fill="currentColor" d="M12 2l2.4 5.6L20 9l-4.4 3.6L17 19l-5-3-5 3 1.4-6.4L4 9l5.6-1.4z"/></symbol>
+    <symbol id="i-cal" viewBox="0 0 24 24"><path fill="currentColor" d="M7 2h2v2h6V2h2v2h3v18H4V4h3V2zM6 9v11h12V9H6zm2 2h3v3H8v-3zm5 0h3v3h-3v-3zm-5 5h3v3H8v-3zm5 0h3v3h-3v-3z"/></symbol>
+    <symbol id="i-clock" viewBox="0 0 24 24"><path fill="currentColor" d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm0 2a8 8 0 1 1 0 16 8 8 0 0 1 0-16zm-1 3h2v5.4l3.6 2.2-1 1.7L11 13.6z"/></symbol>
+    <symbol id="i-pin" viewBox="0 0 24 24"><path fill="currentColor" d="M12 2a7 7 0 0 0-7 7c0 5.2 7 13 7 13s7-7.8 7-13a7 7 0 0 0-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"/></symbol>
+    <symbol id="i-wa" viewBox="0 0 24 24"><path fill="currentColor" d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 2a8 8 0 1 1-4.1 14.9l-.3-.2-3 .8.8-2.9-.2-.3A8 8 0 0 1 12 4zm-3 4.3c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.4s1 2.8 1.2 3c.1.2 2 3.2 5 4.4 2.5 1 3 .8 3.5.7.5 0 1.7-.7 2-1.4.2-.7.2-1.3.1-1.4l-.5-.3-1.8-.9c-.3-.1-.5-.1-.7.1l-.9 1.1c-.2.2-.3.2-.6.1a6.5 6.5 0 0 1-3.3-2.9c-.2-.4 0-.5.2-.7l.5-.6.3-.5v-.5l-.8-2c-.2-.5-.4-.4-.6-.4H9z"/></symbol>
+    <symbol id="i-tel" viewBox="0 0 24 24"><path fill="currentColor" d="M6.6 10.8a15 15 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25c1.1.37 2.3.57 3.6.57a1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.57a1 1 0 0 1-.25 1z"/></symbol>
+  </defs>
+</svg>
+
+<script type="module" src="js/app.js?v=1"></script>
+<script src="/_credit/v1/credit.js" defer data-into="#rsvp .plain__in" data-color="#8a5a16"></script>
+</body>
+</html>

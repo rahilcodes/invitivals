@@ -24,3 +24,8 @@ invites/src/chanchal-jp-wedding/build/
 
 invites/src/rose-red-engagement/
 invites/src/rajasthani-wedding/
+invites/src/saicharan-lakshmi-engagement/
+invites/src/*.zip
+
+# bengali wedding source pack (tools/build-bengali-wedding-art.mjs)
+invites/src/bengali-wedding/

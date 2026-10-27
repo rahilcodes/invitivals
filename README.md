@@ -70,3 +70,52 @@ Never link the gallery to a family's own folder, and never show real photos of p
 
 Copy `.env.deploy.example` to `.env.deploy` and fill it in. The file is ignored by git —
 connection details never belong in the repository.
+
+## Sai Charan & Lakshmi — Engagement (`public/saicharan-lakshmi-engagement/`)
+
+A six-page scrolling engagement invitation built from the designer's "engagement AG" pack (cream, blush and gold
+embroidery): a sealed envelope that opens with one tap into a short film and the music, then the couple, the
+November calendar with Reveal the Date, the pavilion, the ring ceremony and venue, the photographs, and With Love.
+
+- `config.js` — the event (date, time, `durationMinutes`, venue, the exact Google Maps link); the words are in `index.html`
+- `js/app.js` — the tap-to-open, scroll-in animations, Reveal the Date, Save the Date (.ics + Google Calendar), music, petals
+- `css/invite.css` — the pages at the paintings' own proportion; every piece sits at percentages of its painting
+- `assets/bg/`, `assets/el/` — the paintings and the separated pieces as WebP, built by
+  `node tools/build-saicharan-lakshmi-art.mjs` from `invites/src/saicharan-lakshmi-engagement/` (the zip, not committed);
+  pieces that came on a baked white or checkerboard background are keyed there
+- `assets/media/` — the opening film (muted, 10 s) and the music; `assets/og.jpg` by `node tools/saicharan-lakshmi-og.mjs`
+- `?open` skips the envelope while working on the page; in `astro dev` open `…/index.html` (the folder URL only works on the built site)
+
+## Rose Red Engagement (`public/rose-red-engagement/`)
+
+A layered engagement template built from the designer's separated element packs (burgundy, blush and gold:
+sealed envelope, the couple on the lake terrace, Save Our Date with the swans, the venue, thank you).
+Unlike the engine themes, every flower, drape, lantern and petal is its own piece set on a 900-px stage, so the
+pages move: petals fall, lanterns swing and glow, drapes drift, the date hides under a gold cover the guest rubs away.
+
+- `config.js` — the only file a new couple changes (names, hosts, date, venue, music, share text)
+- `js/app.js` — lays the pieces out and runs the page; `css/invite.css` — the stage, type and motion
+- `assets/el/` — the pieces as WebP, built by `node tools/build-rose-red-engagement-art.mjs` from
+  `invites/src/rose-red-engagement/` (the client's zip, not committed) with a `manifest.json` of sizes
+- `assets/og.jpg` — the WhatsApp banner, photographed from `og.html` by
+  `node --experimental-websocket tools/rose-red-engagement-og.mjs <dev url of og.html>`
+- `event.ics` — the calendar file behind "Add to calendar" (update it with the couple's date)
+- `?to=Name` personalises the envelope card and the thank-you page; `?open` skips the envelope while working
+
+## Bengali Wedding (`public/bengali-wedding/`)
+
+A Bengali wedding invitation built from the designer's "bengali wedding" pack: nine text-free 941×1672 paintings
+(hero, scratch-to-reveal date, functions menu, গায়ে হলুদ, লক্ষ্মী পূজা, সঙ্গীত সন্ধ্যা, বিবাহ, ভোজন/রিসেপশন, moments & thanks)
+with the Bengali wording set as live text, plus two plain cream sections (venues, RSVP). A tap plays the sealed-envelope
+film with sound (fullscreen where the browser allows it); its last frame dissolves into the hero.
+
+- `config.js` — every Bengali string, the five functions (Asia/Dhaka dates, times, venues, map searches), RSVP/contact
+  details and media. The pack carried placeholders for the couple's names, the home addresses and the RSVP contact —
+  the file marks them with ►.
+- `js/app.js` — the intro, the menu and function pages (built from config), the scratch card, maps and calendar
+  (.ics + Google Calendar per function), music, RSVP (the form shows only when `rsvp.endpoint` is set)
+- `css/invite.css` — the pages at the paintings' proportion; every piece sits at percentages of its painting
+- `assets/bg/`, `assets/el/` — built by `node tools/build-bengali-wedding-art.mjs` from `invites/src/bengali-wedding/`
+  (the zip, not committed); `assets/media/` holds the intro film (re-encoded with ffmpeg, faststart), its poster and the song
+- `assets/og.jpg` — the link banner, by `node tools/bengali-wedding-og.mjs`
+- `?open` skips the envelope while working on the page; in `astro dev` open `…/index.html`
