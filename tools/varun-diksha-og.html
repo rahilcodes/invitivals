@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<!-- Link-preview card for public/varun-diksha-wedding (1200×630): the design of nandini-satyam-og.html without a couple picture (none supplied). Rendered with headless Chrome:
+     open as file:///…/tools/varun-diksha-og.html?a=Varun&b=Diksha&d=25%20November%202026&p=Ambala%20City
+     and screenshot the 1200×630 viewport to public/varun-diksha-wedding/assets/og.jpg -->
+<html><head><meta charset="utf-8">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600&family=Cormorant+Garamond:ital,wght@0,600;1,400&display=block" rel="stylesheet">
+<style>
+  html, body { margin: 0; width: 1200px; height: 630px; overflow: hidden; background: #f4e4ca; }
+  .art { position: absolute; inset: 0; background: url(../public/varun-diksha-wedding/assets/hero-arch.webp) center 62% / cover; }
+  .art::after { content: ''; position: absolute; inset: 0; background: linear-gradient(90deg, rgba(247, 235, 210, .97) 0 44%, rgba(247, 235, 210, .55) 62%, rgba(247, 235, 210, 0) 80%); }
+  .couple { position: absolute; right: 120px; bottom: -6px; height: 560px; }
+  .copy { position: absolute; left: 80px; top: 0; bottom: 0; width: 520px; display: flex; flex-direction: column; justify-content: center; text-align: center; }
+  .eyebrow { font: 500 20px Cinzel, serif; letter-spacing: .34em; color: #8c621d; }
+  .name { font: 600 104px/1.05 'Cormorant Garamond', serif; letter-spacing: .02em; padding-bottom: .1em; margin-bottom: -.1em; background: linear-gradient(100deg, #7d5518, #b88932 30%, #d9b770 50%, #a87a2a 70%, #7d5518); -webkit-background-clip: text; color: transparent; }
+  .amp { font: italic 44px 'Cormorant Garamond', serif; color: #651522; line-height: .8; }
+  .rule { width: 260px; height: 1px; margin: 22px auto 18px; background: linear-gradient(90deg, transparent, #b88932, transparent); }
+  .date { font: 600 26px Cinzel, serif; letter-spacing: .16em; color: #651522; }
+  .place { margin-top: 6px; font: italic 26px 'Cormorant Garamond', serif; color: #6a4b35; }
+</style></head>
+<body>
+  <div class="art"></div>
+  <div class="copy">
+    <div class="eyebrow">THE WEDDING OF</div>
+    <div class="name" id="a"></div><div class="amp">&amp;</div><div class="name" id="b"></div>
+    <div class="rule"></div>
+    <div class="date" id="d"></div>
+    <div class="place" id="p"></div>
+  </div>
+  <script>
+    const q = new URLSearchParams(location.search);
+    for (const k of ['a', 'b', 'd', 'p']) document.getElementById(k).textContent = q.get(k) || '';
+  </script>
+</body></html>
