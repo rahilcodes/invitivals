@@ -12,8 +12,8 @@ export const weddingConfig = {
   brideFirst: false, // groom-side invitation: Varun is written first everywhere
   tagline: ['Two hearts.', 'One journey.', 'Forever.'],
   invocation: 'Om Sri Ganeshaya Namaha',
-  /* a blessing in the family's own script; set to null to hide. font = any Google Font that covers it */
-  regional: { text: 'शुभ विवाह', meaning: 'Shubh Vivah', font: 'Noto Serif Devanagari', lang: 'hi' },
+  /* the line above "The Wedding of" in the hero, in Devanagari (client, 2026-10-28); font = any Google Font that covers it */
+  regional: { text: '॥ श्री गणेशाय नमः ॥', meaning: 'Shri Ganeshaya Namah', font: 'Noto Serif Devanagari', lang: 'sa' },
   /* ?to=Name in the link greets each guest personally; this is used when there is none */
   guestFallback: 'You & Your Family',
   shareText: 'You are invited to the wedding of Varun & Diksha · 25 November 2026, Ambala City',
@@ -32,7 +32,7 @@ export const weddingConfig = {
   venueCity: 'Ambala City',
   mapsUrl: 'https://share.google/roQGgvYO2wtCDj2TP',
   venueImage: 'assets/venue-glen-manor.webp', // the client's photo of the gate, sign included
-  coupleImage: null, // no couple picture supplied yet: the hero shows the arch without one
+  coupleImage: 'assets/couple.webp', // the client's illustration, cut off its black by tools/varun-diksha-couple.mjs
 
   welcome: {
     title: 'Welcome',

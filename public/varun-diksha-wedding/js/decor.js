@@ -130,7 +130,7 @@ export const BrassLamp = (cls = '') =>
    </div>`;
 
 export const WeddingCouple = ({ cls = '', eager = false } = {}) =>
-  `<div class="couple ${cls}"><img src="${A}couple.webp" alt="The couple" ${eager ? 'fetchpriority="high"' : 'loading="lazy"'} decoding="async"></div>`;
+  `<div class="couple ${cls}"><img src="${A}couple.webp" alt="Varun and Diksha seen from behind, the bride in a red lehenga and the groom in an ivory sherwani and safa, walking together" ${eager ? 'fetchpriority="high"' : 'loading="lazy"'} decoding="async"></div>`;
 
 /* rose petals drifting down the hero; few, slow, randomised once */
 export const PetalShower = (n = 9) => {
