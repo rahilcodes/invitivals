@@ -4,9 +4,11 @@
    day's programme, a gallery, the venue and a contact number.
 
    node tools/build-rr-wedding.mjs [config]   -> public/<C.out>/index.html + event.ics
-   config: rr-wedding-26nov (default) | chanchal-jp-sharma-wedding
-   Assets first: python tools/prep-rr-wedding.py <C.out>   (Chanchal & JP: node tools/prep-rr-chanchal-jp.mjs)
-   Optional per-invitation fields (families, details, blessings, per-event maps, …) render only when set,
+   config: rr-wedding-26nov (default) | chanchal-jp-sharma-wedding | mamatha-sairama-wedding
+   Assets first: python tools/prep-rr-wedding.py <C.out>   (Chanchal & JP: node tools/prep-rr-chanchal-jp.mjs;
+   Mamatha & Sai Rama: node tools/prep-rr-mamatha-sairama.mjs)
+   Optional per-invitation fields (families, details, blessings, per-event maps, heading, qualifications,
+   locations, events without an end or a note, no story photo, no gallery yet, …) render only when set,
    so the Rupam & Taniya page is built exactly as before.
 
    Edit wording HERE and re-run; never edit the generated index.html. */
@@ -109,6 +111,52 @@ CONFIGS['chanchal-jp-sharma-wedding'] = {
   }
 };
 
+/* Dr. Mamatha Reddy & Dr. Sai Rama Reddy — Telugu wedding (client brief 2026-10-28).
+   Every detail is the client's own. Not supplied, so not shown: the reception venue's name and address
+   (its map link is), any end times, family details (the old printed invitation's family section,
+   names, address and numbers are deliberately not used). One RSVP number only. */
+const MS_WED_MAP = 'https://maps.app.goo.gl/TMtTFRso7TvirLG69?g_st=aw';
+const MS_REC_MAP = 'https://share.google/N2Op5OpGAX6JdtgORx';
+CONFIGS['mamatha-sairama-wedding'] = {
+  out: 'mamatha-sairama-wedding',
+  couple: { first: 'Dr. Mamatha Reddy', second: 'Dr. Sai Rama Reddy', short: 'Mamatha & Sai Rama', initials: ['M', 'S'],
+    firstQual: '(M.S. Obstetrics & Gynaecology)', secondQual: '(M.D. Paediatrics)' },
+  invite: ['request the pleasure of your company', 'at the wedding celebration of'],
+  // Telugu heading only (client: no full translation). The brief's own Telugu text did not come through, so this is the
+  // customary opening of a Telugu wedding card — to be confirmed with the client.
+  heading: { text: 'శ్రీరస్తు · శుభమస్తు · అవిఘ్నమస్తు', font: 'Noto Serif Telugu', lang: 'te' },   // first line of the story band
+  dateISO: '2026-11-20',
+  day: 'Friday',
+  dateText: '20th November 2026',
+  timeText: 'Muhurtham 9:56 AM',
+  countdownTo: '2026-11-20T09:56:00+05:30',
+  events: [
+    { name: 'Wedding · Muhurtham', date: '2026-11-20', time: '09:56', label: '9:56 AM', icon: 'agni',
+      note: 'Dhanussu Lagnam · Vishwanadha Gardens, Hall No. 1, JP Nagar, Miyapur, Hyderabad · Lunch follows', maps: MS_WED_MAP },
+    { name: 'Reception', date: '2026-11-22', time: '19:00', label: '7:00 PM onwards', icon: 'reception', maps: MS_REC_MAP }
+  ],
+  locations: [['View Wedding Location', MS_WED_MAP], ['View Reception Location', MS_REC_MAP]],
+  venue: {
+    name: ['Vishwanadha Gardens, Hall No. 1'],
+    address: ['JP Nagar, Miyapur, Hyderabad'],
+    maps: MS_WED_MAP
+  },
+  phone: '+91 94910 63207',
+  closing: 'With love, both families',
+  title: 'Dr. Mamatha Reddy & Dr. Sai Rama Reddy — Wedding Invitation',
+  description: 'Friday, 20 November 2026 · Vishwanadha Gardens, Miyapur, Hyderabad. Tap to open your invitation',
+  // the client's five photographs (tools/prep-rr-mamatha-sairama.mjs): featured first, then in story order
+  story: { src: 'assets/photo-story.webp', alt: 'Mamatha and Sai Rama together, a bouquet of red roses in her hand', pos: '50% 50%' },
+  photos: [
+    { src: 'assets/photo-g1.webp', full: 'assets/photo-g1-full.webp', alt: 'Mamatha and Sai Rama in garlands of jasmine and pink lotus before the floral arch', pos: '50% 50%' },
+    { src: 'assets/photo-g2.webp', full: 'assets/photo-g2-full.webp', alt: 'Mamatha and Sai Rama together, a bouquet of red roses in her hand', pos: '50% 50%' },
+    { src: 'assets/photo-g3.webp', full: 'assets/photo-g3-full.webp', alt: 'Sai Rama placing the ring on Mamatha’s finger, their mothers beside them', pos: '50% 50%' },
+    { src: 'assets/photo-g4.webp', full: 'assets/photo-g4-full.webp', alt: 'Mamatha and Sai Rama smiling at each other under the floral arch', pos: '50% 50%' },
+    { src: 'assets/photo-g5.webp', full: 'assets/photo-g5-full.webp', alt: 'Mamatha and Sai Rama with both their families', pos: '50% 50%' }
+  ],
+  contact: { kicker: 'RSVP', title: 'Kindly Respond', lead: 'Please let us know if you will be joining us — we would love to celebrate with you.' }
+};
+
 const C = CONFIGS[process.argv[2] || 'rr-wedding-26nov'];
 if (!C) { console.error('unknown config: ' + process.argv[2] + ' (known: ' + Object.keys(CONFIGS).join(', ') + ')'); process.exit(1); }
 
@@ -128,8 +176,8 @@ const pct = (page, [x0, y0, x1, y1]) => `left:${(x0 / W[page] * 100).toFixed(3)}
 const nextDay = d => new Date(Date.parse(d + 'T00:00:00Z') + 864e5).toISOString().slice(0, 10).replace(/-/g, '');
 const gcal = e => {
   const s = e.allDay ? e.date.replace(/-/g, '') : `${e.date.replace(/-/g, '')}T${e.time.replace(':', '')}00`;
-  const en = e.allDay ? nextDay(e.date) : `${(e.endDate || e.date).replace(/-/g, '')}T${e.end.replace(':', '')}00`;
-  const q = new URLSearchParams({ action: 'TEMPLATE', text: `${e.name} — ${C.couple.short}`, dates: `${s}/${en}`, ctz: 'Asia/Kolkata', details: `${C.title}\n${url}`, location: C.venue.maps });
+  const en = e.allDay ? nextDay(e.date) : e.end ? `${(e.endDate || e.date).replace(/-/g, '')}T${e.end.replace(':', '')}00` : s;
+  const q = new URLSearchParams({ action: 'TEMPLATE', text: `${e.name} — ${C.couple.short}`, dates: `${s}/${en}`, ctz: 'Asia/Kolkata', details: `${C.title}\n${url}`, location: e.maps || C.venue.maps });
   return `https://calendar.google.com/calendar/render?${q}`;
 };
 
@@ -156,8 +204,8 @@ const programme = days.map(d => `
             <div class="ev-ic">${icon(e.icon)}</div>
             <div class="ev-b">
               <h3>${esc(e.name)}</h3>
-              <p class="ev-t">${esc(e.label)}</p>
-              <p class="ev-n">${esc(e.note)}</p>
+              <p class="ev-t">${esc(e.label)}</p>${e.note ? `
+              <p class="ev-n">${esc(e.note)}</p>` : ''}
               <a class="ev-cal" href="${esc(gcal(e))}" target="_blank" rel="noopener">Add to calendar</a>${e.maps ? `<a class="ev-cal ev-map" href="${esc(e.maps)}" target="_blank" rel="noopener" aria-label="${esc(e.name)} location on Google Maps">View on map</a>` : ''}
             </div>
           </li>`).join('')}
@@ -173,8 +221,8 @@ const ics = () => {
   const ev = C.events.map((e, i) => [
     'BEGIN:VEVENT', `UID:${C.out}-${i}@invitivals.com`, `DTSTAMP:${stamp}`,
     e.allDay ? `DTSTART;VALUE=DATE:${e.date.replace(/-/g, '')}` : `DTSTART;TZID=Asia/Kolkata:${e.date.replace(/-/g, '')}T${e.time.replace(':', '')}00`,
-    e.allDay ? `DTEND;VALUE=DATE:${nextDay(e.date)}` : `DTEND;TZID=Asia/Kolkata:${(e.endDate || e.date).replace(/-/g, '')}T${e.end.replace(':', '')}00`,
-    `SUMMARY:${e.name} — ${C.couple.short}`, `LOCATION:${C.venue.maps}`, `URL:${url}`, 'END:VEVENT'].join('\r\n'));
+    e.allDay ? `DTEND;VALUE=DATE:${nextDay(e.date)}` : e.end ? `DTEND;TZID=Asia/Kolkata:${(e.endDate || e.date).replace(/-/g, '')}T${e.end.replace(':', '')}00` : null,
+    `SUMMARY:${e.name} — ${C.couple.short}`, `LOCATION:${e.maps || C.venue.maps}`, `URL:${url}`, 'END:VEVENT'].filter(Boolean).join('\r\n'));
   return ['BEGIN:VCALENDAR', 'VERSION:2.0', 'PRODID:-//Invitivals//Rose Red//EN', 'CALSCALE:GREGORIAN',
     'BEGIN:VTIMEZONE', 'TZID:Asia/Kolkata', 'BEGIN:STANDARD', 'DTSTART:19700101T000000', 'TZOFFSETFROM:+0530', 'TZOFFSETTO:+0530', 'TZNAME:IST', 'END:STANDARD', 'END:VTIMEZONE',
     ...ev, 'END:VCALENDAR', ''].join('\r\n');
@@ -412,7 +460,14 @@ a{color:inherit}
 .twinkle{position:absolute;pointer-events:none;animation:tw 3.4s ease-in-out infinite}
 @keyframes tw{0%,100%{opacity:.2;transform:scale(.7)}50%{opacity:1;transform:scale(1.05)}}
 @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}.reveal,.slot.rise{opacity:1;transform:none}}
-${C.families || C.blessings ? EXTRA_CSS : ''}</style>
+${C.families || C.blessings ? EXTRA_CSS : ''}${C.couple.firstQual || C.heading || C.locations ? `
+/* qualifications under the names, a regional heading on the opening page, labelled location buttons */
+.slot .qual{font-family:var(--serif);font-weight:600;font-size:calc(var(--fs) * .21);letter-spacing:.04em;line-height:1.25;color:var(--gold);text-shadow:0 1px 2px rgba(30,0,8,.6);margin-top:.15em}
+.names .qual{display:block;font-family:var(--serif);font-weight:600;font-size:.36em;letter-spacing:.04em;line-height:1.3;color:var(--gold);margin:.1em 0 .2em}
+.heading{text-align:center;font-weight:600;font-size:clamp(17px,4.9vw,21px);line-height:1.6;color:#fdf0c4;text-shadow:0 1px 2px rgba(30,0,8,.55);margin:0 auto 12px}
+.btns.loc .btn{min-width:min(100%,290px);justify-content:center}` : ''}</style>${C.heading ? `
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=${encodeURIComponent(C.heading.font)}:wght@600&amp;display=swap">` : ''}
 </head>
 <body class="locked">
 <div id="env" role="dialog" aria-label="Invitation envelope">
@@ -428,19 +483,19 @@ ${C.families || C.blessings ? EXTRA_CSS : ''}</style>
   <section class="plate" id="couple" aria-label="Invitation">
     <img src="${C.couplePage || 'assets/couple-page.webp'}" alt="Together with their families. Your presence will make our celebration more special." width="1350" height="2400">
     ${slot('couple', [150, 330, 750, 480], 'serif rise', 37, lines(C.invite))}
-    ${slot('couple', [110, 498, 790, 676], 'script rise', 150, lines([C.couple.first]))}
-    ${slot('couple', [110, 716, 790, 894], 'script rise', 150, lines([C.couple.second]))}
+    ${slot('couple', [110, 498, 790, 676], 'script rise', 150, lines([C.couple.first]) + (C.couple.firstQual ? `<span class="ln qual">${esc(C.couple.firstQual)}</span>` : ''))}
+    ${slot('couple', [110, 716, 790, 894], 'script rise', 150, lines([C.couple.second]) + (C.couple.secondQual ? `<span class="ln qual">${esc(C.couple.secondQual)}</span>` : ''))}
     <img class="twinkle" src="assets/spark.webp" alt="" style="left:10.6%;top:14.7%;width:3.8%">
     <img class="twinkle" src="assets/spark.webp" alt="" style="left:85.5%;top:35%;width:3.4%;animation-delay:-1.6s">
   </section>
 
   <section class="band" id="story" aria-labelledby="story-h">
     <img class="corner tl" src="assets/corner-floral.webp" alt="">
-${C.invocation ? `<p class="invoc reveal">${esc(C.invocation)}</p>\n` : ''}    <p class="kicker reveal">Two hearts, one journey</p>
+${C.invocation ? `<p class="invoc reveal">${esc(C.invocation)}</p>\n` : ''}${C.heading ? `    <p class="heading reveal" lang="${C.heading.lang || 'te'}" style="font-family:'${C.heading.font}',serif">${esc(C.heading.text)}</p>\n` : ''}    <p class="kicker reveal">Two hearts, one journey</p>
     <h2 class="h2 reveal" id="story-h">Our Story</h2>
     <div class="orn reveal"><i></i><svg viewBox="0 0 16 16"><path d="M8 0l2 6 6 2-6 2-2 6-2-6-6-2 6-2z"/></svg><i></i></div>
-    <div class="arch reveal"><img src="${C.story.src}" alt="${esc(C.story.alt)}"${C.story.pos ? ` style="object-position:${C.story.pos}"` : ''} loading="lazy" width="1000" height="1333"></div>
-    <p class="names reveal">${esc(C.couple.first)}<span class="amp">&amp;</span>${esc(C.couple.second)}</p>
+${C.story ? `    <div class="arch reveal"><img src="${C.story.src}" alt="${esc(C.story.alt)}"${C.story.pos ? ` style="object-position:${C.story.pos}"` : ''} loading="lazy" width="1000" height="1333"></div>
+` : ''}    <p class="names reveal">${esc(C.couple.first)}${C.couple.firstQual ? `<span class="qual">${esc(C.couple.firstQual)}</span>` : ''}<span class="amp">&amp;</span>${esc(C.couple.second)}${C.couple.secondQual ? `<span class="qual">${esc(C.couple.secondQual)}</span>` : ''}</p>
     <p class="lead reveal" style="margin-top:14px">${esc(C.storyLead || 'From a chance hello to a lifetime of together — with the blessings of our families, we begin our forever.')}</p>
     <div class="count reveal" id="count" aria-label="Countdown to the wedding day">
       <div><b data-k="d">00</b><span>Days</span></div><div><b data-k="h">00</b><span>Hours</span></div><div><b data-k="m">00</b><span>Mins</span></div><div><b data-k="s">00</b><span>Secs</span></div>
@@ -462,11 +517,12 @@ ${C.invocation ? `<p class="invoc reveal">${esc(C.invocation)}</p>\n` : ''}    <
     <p class="kicker reveal">Join us for</p>
     <h2 class="h2 reveal" id="prog-h">The Celebrations</h2>
     <div class="orn reveal"><i></i><svg viewBox="0 0 16 16"><path d="M8 0l2 6 6 2-6 2-2 6-2-6-6-2 6-2z"/></svg><i></i></div>
-    ${programme}
+    ${programme}${C.locations ? `
+    <div class="btns loc reveal">${C.locations.map(([label, href]) => `<a class="btn" href="${esc(href)}" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M12 2a7 7 0 0 0-7 7c0 5.3 7 13 7 13s7-7.7 7-13a7 7 0 0 0-7-7zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5z"/></svg>${esc(label)}</a>`).join('')}</div>` : ''}
     <div class="btns reveal"><a class="btn" href="event.ics" download="wedding.ics"><svg viewBox="0 0 24 24"><path d="M7 2h2v2h6V2h2v2h3v18H4V4h3zm11 8H6v10h12z"/></svg>Save all dates</a></div>
   </section>
 
-${C.families ? familiesBand + '\n' : ''}  <section class="band" id="gallery" aria-labelledby="gal-h">
+${C.families ? familiesBand + '\n' : ''}${C.photos.length ? `  <section class="band" id="gallery" aria-labelledby="gal-h">
     <p class="kicker reveal">Moments together</p>
     <h2 class="h2 reveal" id="gal-h">Gallery</h2>
     <div class="orn reveal"><i></i><svg viewBox="0 0 16 16"><path d="M8 0l2 6 6 2-6 2-2 6-2-6-6-2 6-2z"/></svg><i></i></div>
@@ -475,7 +531,7 @@ ${C.families ? familiesBand + '\n' : ''}  <section class="band" id="gallery" ari
     <div class="dots" id="dots">${C.photos.map((_, i) => `<i${i ? '' : ' class="on"'}></i>`).join('')}</div>
     <img class="corner br" src="assets/corner-floral.webp" alt="">
   </section>
-
+` : ''}
   <section class="plate" id="venue" aria-label="Venue">
     <img src="assets/venue-page.webp" alt="Venue" width="1062" height="2400" loading="lazy">
     ${slot('venue', [92, 366, 616, 468], 'serif rise', 47, lines(C.venue.name))}
@@ -570,7 +626,7 @@ ${C.blessings ? blessingsBand + '\n' : ''}  <section class="plate" id="thanks" a
   function petals(){var h=document.getElementById("petals");if(matchMedia("(prefers-reduced-motion:reduce)").matches)return;for(var i=0;i<9;i++){var p=document.createElement("i");p.className="petal";p.style.left=Math.random()*100+"%";p.style.setProperty("--dx",(Math.random()*120-60)+"px");p.style.animationDuration=(9+Math.random()*8)+"s";p.style.animationDelay=(-Math.random()*14)+"s";p.style.transform="scale("+(.6+Math.random()*.6)+")";h.appendChild(p)}}
 
   // gallery: dots + lightbox
-  var gal=document.getElementById("gal"),dots=document.querySelectorAll("#dots i");
+  var gal=document.getElementById("gal")${C.photos.length ? '' : '||document.createElement("div")'},dots=document.querySelectorAll("#dots i");
   gal.addEventListener("scroll",function(){var w=gal.firstElementChild.getBoundingClientRect().width+14,i=Math.round(gal.scrollLeft/w);dots.forEach(function(d,k){d.classList.toggle("on",k===i)})},{passive:true});
   var lb=document.getElementById("box"),li=lb.querySelector("img"),cur=0;
   function show(i){cur=(i+PHOTOS.length)%PHOTOS.length;li.src=${hasFull ? 'PHOTOS[cur].full||PHOTOS[cur].src' : 'PHOTOS[cur].src'};li.alt=PHOTOS[cur].alt;lb.classList.add("on")}
