@@ -116,9 +116,10 @@ CONFIGS['chanchal-jp-sharma-wedding'] = {
    (its map link is), any end times, family details (the old printed invitation's family section,
    names, address and numbers are deliberately not used). One RSVP number only. */
 const MS_WED_MAP = 'https://maps.app.goo.gl/TMtTFRso7TvirLG69?g_st=aw';
-// reception link: the client's replacement of 2026-10-28 (the first one, share.google/N2Op5OpGAX6JdtgORx, opened Google's
-// "this URL isn't available" page). NOTE: this one does too when tested — the client has been asked for a working link.
-const MS_REC_MAP = 'https://share.google/7BWmgBiq02v3ipT5';
+// reception link (client, 2026-10-28, third try): opens MNR Convention Hall A/C, Nalgonda – Pamangundla Rd, Telangana 508002.
+// The two before it (share.google/N2Op5OpGAX6JdtgORx, share.google/7BWmgBiq02v3ipT5) were dead links: Google answered both
+// with its "this URL isn't available" page.
+const MS_REC_MAP = 'https://share.google/bkMpneOxdAkmyr5sV';
 CONFIGS['mamatha-sairama-wedding'] = {
   out: 'mamatha-sairama-wedding',
   couple: { first: 'Dr. Mamatha Reddy', second: 'Dr. Sai Rama Reddy', short: 'Mamatha & Sai Rama', initials: ['M', 'S'],
