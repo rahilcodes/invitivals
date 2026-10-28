@@ -2,6 +2,8 @@
 /* Varun & Diksha — the client's couple illustration for the hero (public/varun-diksha-wedding).
 
      node tools/varun-diksha-couple.mjs
+     SRC=invites/src/pooja-deepak-wedding/couple-back.jpg OUT=public/pooja-deepak-wedding/assets/couple.webp node tools/varun-diksha-couple.mjs
+       (any other couple on pure black: Pooja & Deepak's, 2026-10-29)
 
    Source: invites/src/varun-diksha-couple.jpg (gitignored) — the illustration on pure black, its
    transparency lost in upload. The black is removed the way tools/rr-chanchal-hero.mjs does it:
@@ -14,8 +16,8 @@ import path from 'node:path';
 import sharp from 'sharp';
 
 const ROOT = path.resolve(path.dirname(new URL(import.meta.url).pathname.replace(/^\/([A-Z]:)/, '$1')), '..');
-const SRC = path.join(ROOT, 'invites/src/varun-diksha-couple.jpg');
-const OUT = path.join(ROOT, 'public/varun-diksha-wedding/assets/couple.webp');
+const SRC = path.join(ROOT, process.env.SRC || 'invites/src/varun-diksha-couple.jpg');
+const OUT = path.join(ROOT, process.env.OUT || 'public/varun-diksha-wedding/assets/couple.webp');
 
 const { data: d, info } = await sharp(SRC).removeAlpha().raw().toBuffer({ resolveWithObject: true });
 const W = info.width, H = info.height, N = W * H;

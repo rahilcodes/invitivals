@@ -34,7 +34,7 @@ export const weddingConfig = {
   venueCity: 'Noida',
   mapsUrl: 'https://share.google/wCmAaZipCqtWKXlEY',
   venueImage: 'assets/venue-rs-farm.webp', // the client's photo of the banquet aisle (2026-10-29), in place of the kolam seal and pin
-  coupleImage: null, // the hero's walking couple was another client's art; Pooja & Deepak's own picture leads "Moments"
+  coupleImage: 'assets/couple.webp', // the client's couple seen from behind (2026-10-29), cut off its black by tools/varun-diksha-couple.mjs
 
   welcome: {
     title: 'Welcome',
