@@ -4,9 +4,9 @@
    day's programme, a gallery, the venue and a contact number.
 
    node tools/build-rr-wedding.mjs [config]   -> public/<C.out>/index.html + event.ics
-   config: rr-wedding-26nov (default) | chanchal-jp-sharma-wedding | mamatha-sairama-wedding
+   config: rr-wedding-26nov (default) | chanchal-jp-sharma-wedding | mamatha-sairama-wedding | sairama-mamatha-wedding
    Assets first: python tools/prep-rr-wedding.py <C.out>   (Chanchal & JP: node tools/prep-rr-chanchal-jp.mjs;
-   Mamatha & Sai Rama: node tools/prep-rr-mamatha-sairama.mjs)
+   Mamatha & Sai Rama: node tools/prep-rr-mamatha-sairama.mjs; its groom side sairama-mamatha-wedding uses a copy of those assets)
    Optional per-invitation fields (families, details, blessings, per-event maps, heading, qualifications,
    locations, events without an end or a note, no story photo, no gallery yet, …) render only when set,
    so the Rupam & Taniya page is built exactly as before.
@@ -166,6 +166,23 @@ CONFIGS['mamatha-sairama-wedding'] = {
   ],
   contact: { kicker: 'RSVP', title: 'Kindly Respond', lead: 'Please let us know if you will be joining us — we would love to celebrate with you.' }
 };
+
+/* Groom-side twin of mamatha-sairama-wedding (client, 2026-10-28): the same wedding, every event, map, photo and the
+   music unchanged, with Dr. Sai Rama Reddy and his parents first wherever the couple is named. Built from the bride
+   side's config so a later correction to the wedding details reaches both pages on the next build. */
+{
+  const B = CONFIGS['mamatha-sairama-wedding'], c = B.couple;
+  const swap = t => t.replace(/Mamatha and Sai Rama/g, 'Sai Rama and Mamatha');
+  CONFIGS['sairama-mamatha-wedding'] = {
+    ...B,
+    out: 'sairama-mamatha-wedding',
+    couple: { first: c.second, second: c.first, short: 'Sai Rama & Mamatha', initials: ['S', 'M'],
+      firstQual: c.secondQual, secondQual: c.firstQual, firstParents: c.secondParents, secondParents: c.firstParents },
+    title: 'Dr. Sai Rama Reddy & Dr. Mamatha Reddy — Wedding Invitation',
+    story: { ...B.story, alt: swap(B.story.alt) },
+    photos: B.photos.map(p => ({ ...p, alt: swap(p.alt) }))
+  };
+}
 
 const C = CONFIGS[process.argv[2] || 'rr-wedding-26nov'];
 if (!C) { console.error('unknown config: ' + process.argv[2] + ' (known: ' + Object.keys(CONFIGS).join(', ') + ')'); process.exit(1); }

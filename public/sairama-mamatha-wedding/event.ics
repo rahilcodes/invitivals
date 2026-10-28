@@ -1,0 +1,30 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Invitivals//Rose Red//EN
+CALSCALE:GREGORIAN
+BEGIN:VTIMEZONE
+TZID:Asia/Kolkata
+BEGIN:STANDARD
+DTSTART:19700101T000000
+TZOFFSETFROM:+0530
+TZOFFSETTO:+0530
+TZNAME:IST
+END:STANDARD
+END:VTIMEZONE
+BEGIN:VEVENT
+UID:sairama-mamatha-wedding-0@invitivals.com
+DTSTAMP:20261028T160344Z
+DTSTART;TZID=Asia/Kolkata:20261120T095600
+SUMMARY:Wedding · Muhurtham — Sai Rama & Mamatha
+LOCATION:https://maps.app.goo.gl/TMtTFRso7TvirLG69?g_st=aw
+URL:https://invitivals.com/sairama-mamatha-wedding/
+END:VEVENT
+BEGIN:VEVENT
+UID:sairama-mamatha-wedding-1@invitivals.com
+DTSTAMP:20261028T160344Z
+DTSTART;TZID=Asia/Kolkata:20261122T190000
+SUMMARY:Reception — Sai Rama & Mamatha
+LOCATION:https://share.google/bkMpneOxdAkmyr5sV
+URL:https://invitivals.com/sairama-mamatha-wedding/
+END:VEVENT
+END:VCALENDAR
