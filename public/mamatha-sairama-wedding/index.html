@@ -174,6 +174,18 @@ a{color:inherit}
 @keyframes tw{0%,100%{opacity:.2;transform:scale(.7)}50%{opacity:1;transform:scale(1.05)}}
 @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}.reveal,.slot.rise{opacity:1;transform:none}}
 
+/* parents under the names; the Thank You page opened for a special message */
+.names .par{display:block;font-family:var(--serif);font-style:italic;font-weight:500;font-size:clamp(16px,4.4vw,19px);line-height:1.45;color:#f6dfc0;max-width:28ch;margin:.35em auto .25em;text-wrap:balance}
+.thx{background:#461217}
+.thx-a,.thx-b{position:relative;overflow:hidden}
+.thx-a>img,.thx-b>img{position:absolute;left:0;width:100%;height:auto}
+.thx-a>img{top:0;-webkit-mask-image:linear-gradient(180deg,transparent 0,#000 3%,#000 60.5%,transparent 65%);mask-image:linear-gradient(180deg,transparent 0,#000 3%,#000 60.5%,transparent 65%)}
+.thx-b>img{bottom:0;-webkit-mask-image:linear-gradient(180deg,transparent 67%,#000 77%);mask-image:linear-gradient(180deg,transparent 67%,#000 77%)}
+.thx-msg{position:relative;margin:-4px 0;padding:4px 30px 10px;text-align:center;background:radial-gradient(ellipse 70% 60% at 50% 50%,rgba(120,40,46,.45),transparent 75%)}
+.thx-msg .orn{margin:0 auto 14px}
+.thx-h{font-family:var(--caps);font-weight:400;text-transform:uppercase;letter-spacing:.16em;font-size:clamp(14px,3.9vw,17px);line-height:1.6;color:var(--gold);margin:0 auto 12px;max-width:26ch;text-wrap:balance}
+.thx-t{font-family:var(--serif);font-style:italic;font-size:clamp(18px,5vw,21px);line-height:1.5;color:#f6dfc0;margin:0 auto;max-width:30ch;text-wrap:pretty}
+
 /* qualifications under the names, a regional heading on the opening page, labelled location buttons */
 .slot .qual{font-family:var(--serif);font-weight:600;font-size:calc(var(--fs) * .21);letter-spacing:.04em;line-height:1.25;color:var(--gold);text-shadow:0 1px 2px rgba(30,0,8,.6);margin-top:.15em}
 .names .qual{display:block;font-family:var(--serif);font-weight:600;font-size:.36em;letter-spacing:.04em;line-height:1.3;color:var(--gold);margin:.1em 0 .2em}
@@ -209,7 +221,7 @@ a{color:inherit}
     <h2 class="h2 reveal" id="story-h">Our Story</h2>
     <div class="orn reveal"><i></i><svg viewBox="0 0 16 16"><path d="M8 0l2 6 6 2-6 2-2 6-2-6-6-2 6-2z"/></svg><i></i></div>
     <div class="arch reveal"><img src="assets/photo-story.webp" alt="Mamatha and Sai Rama together, a bouquet of red roses in her hand" style="object-position:50% 50%" loading="lazy" width="1000" height="1333"></div>
-    <p class="names reveal">Dr. Mamatha Reddy<span class="qual">(M.S. Obstetrics &amp; Gynaecology)</span><span class="amp">&amp;</span>Dr. Sai Rama Reddy<span class="qual">(M.D. Paediatrics)</span></p>
+    <p class="names reveal">Dr. Mamatha Reddy<span class="qual">(M.S. Obstetrics &amp; Gynaecology)</span><span class="par">Daughter of Smt. Gorantla Hemalatha and Sri Gorantla Laxmi Kantha Reddy</span><span class="amp">&amp;</span>Dr. Sai Rama Reddy<span class="qual">(M.D. Paediatrics)</span><span class="par">Son of Smt. Soodyreddy Rajitha and Sri Laxma Reddy</span></p>
     <p class="lead reveal" style="margin-top:14px">From a chance hello to a lifetime of together — with the blessings of our families, we begin our forever.</p>
     <div class="count reveal" id="count" aria-label="Countdown to the wedding day">
       <div><b data-k="d">00</b><span>Days</span></div><div><b data-k="h">00</b><span>Hours</span></div><div><b data-k="m">00</b><span>Mins</span></div><div><b data-k="s">00</b><span>Secs</span></div>
@@ -254,12 +266,12 @@ a{color:inherit}
             <div class="ev-b">
               <h3>Reception</h3>
               <p class="ev-t">7:00 PM onwards</p>
-              <a class="ev-cal" href="https://calendar.google.com/calendar/render?action=TEMPLATE&amp;text=Reception+%E2%80%94+Mamatha+%26+Sai+Rama&amp;dates=20261122T190000%2F20261122T190000&amp;ctz=Asia%2FKolkata&amp;details=Dr.+Mamatha+Reddy+%26+Dr.+Sai+Rama+Reddy+%E2%80%94+Wedding+Invitation%0Ahttps%3A%2F%2Finvitivals.com%2Fmamatha-sairama-wedding%2F&amp;location=https%3A%2F%2Fshare.google%2FN2Op5OpGAX6JdtgORx" target="_blank" rel="noopener">Add to calendar</a><a class="ev-cal ev-map" href="https://share.google/N2Op5OpGAX6JdtgORx" target="_blank" rel="noopener" aria-label="Reception location on Google Maps">View on map</a>
+              <a class="ev-cal" href="https://calendar.google.com/calendar/render?action=TEMPLATE&amp;text=Reception+%E2%80%94+Mamatha+%26+Sai+Rama&amp;dates=20261122T190000%2F20261122T190000&amp;ctz=Asia%2FKolkata&amp;details=Dr.+Mamatha+Reddy+%26+Dr.+Sai+Rama+Reddy+%E2%80%94+Wedding+Invitation%0Ahttps%3A%2F%2Finvitivals.com%2Fmamatha-sairama-wedding%2F&amp;location=https%3A%2F%2Fshare.google%2F7BWmgBiq02v3ipT5" target="_blank" rel="noopener">Add to calendar</a><a class="ev-cal ev-map" href="https://share.google/7BWmgBiq02v3ipT5" target="_blank" rel="noopener" aria-label="Reception location on Google Maps">View on map</a>
             </div>
           </li>
         </ol>
       </div>
-    <div class="btns loc reveal"><a class="btn" href="https://maps.app.goo.gl/TMtTFRso7TvirLG69?g_st=aw" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M12 2a7 7 0 0 0-7 7c0 5.3 7 13 7 13s7-7.7 7-13a7 7 0 0 0-7-7zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5z"/></svg>View Wedding Location</a><a class="btn" href="https://share.google/N2Op5OpGAX6JdtgORx" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M12 2a7 7 0 0 0-7 7c0 5.3 7 13 7 13s7-7.7 7-13a7 7 0 0 0-7-7zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5z"/></svg>View Reception Location</a></div>
+    <div class="btns loc reveal"><a class="btn" href="https://maps.app.goo.gl/TMtTFRso7TvirLG69?g_st=aw" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M12 2a7 7 0 0 0-7 7c0 5.3 7 13 7 13s7-7.7 7-13a7 7 0 0 0-7-7zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5z"/></svg>View Wedding Location</a><a class="btn" href="https://share.google/7BWmgBiq02v3ipT5" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M12 2a7 7 0 0 0-7 7c0 5.3 7 13 7 13s7-7.7 7-13a7 7 0 0 0-7-7zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5z"/></svg>View Reception Location</a></div>
     <div class="btns reveal"><a class="btn" href="event.ics" download="wedding.ics"><svg viewBox="0 0 24 24"><path d="M7 2h2v2h6V2h2v2h3v18H4V4h3zm11 8H6v10h12z"/></svg>Save all dates</a></div>
   </section>
 
@@ -299,16 +311,24 @@ a{color:inherit}
     </div>
   </section>
 
-  <section class="plate" id="thanks" aria-label="Thank you">
-    <img src="assets/thanks-page.webp" alt="With all our love. Thank you for being a part of our special journey." width="1031" height="2401" loading="lazy">
-    <div class="slot caps rise" style="left:14.556%;top:60.125%;width:70.888%;height:3.000%;--fs:3.639cqw;">With love, both families</div>
+  <section class="plate thx" id="thanks" aria-label="Thank you">
+    <div class="thx-a" style="aspect-ratio:687/1040">
+      <img src="assets/thanks-page.webp" alt="With all our love. Thank you for being a part of our special journey." width="1031" height="2401" loading="lazy">
+      <div class="slot caps rise" style="left:14.556%;top:92.500%;width:70.888%;height:4.615%;--fs:3.639cqw">With love, both families</div>
+    </div>
+    <div class="thx-msg reveal">
+      <div class="orn"><i></i><svg viewBox="0 0 16 16"><path d="M8 0l2 6 6 2-6 2-2 6-2-6-6-2 6-2z"/></svg><i></i></div>
+      <h2 class="thx-h">A Special Invitation from Shivani Reddy &amp; Gowthami Reddy</h2>
+      <p class="thx-t">With love and joy, Shivani Reddy and Gowthami Reddy warmly invite you to join the celebration and bless the couple as they begin their beautiful new journey together.</p>
+    </div>
+    <div class="thx-b" style="aspect-ratio:687/560"><img src="assets/thanks-page.webp" alt="" width="1031" height="2401" loading="lazy"></div>
   </section>
 </main>
 
 <button class="mute" id="mute" type="button" aria-label="Pause music"><span class="bars"><i></i><i></i><i></i><i></i></span></button>
 <div class="box" id="box" role="dialog" aria-label="Photo"><img alt=""><button type="button" class="x" aria-label="Close">&times;</button><button type="button" class="nav prev" aria-label="Previous photo">&#8249;</button><button type="button" class="nav next" aria-label="Next photo">&#8250;</button></div>
 <div class="petals" id="petals" aria-hidden="true"></div>
-<audio id="music" src="assets/music.mp3" loop preload="none"></audio>
+<audio id="music" src="assets/music-v2.mp3" loop preload="none"></audio>
 
 <script>
 (function(){

@@ -116,12 +116,21 @@ CONFIGS['chanchal-jp-sharma-wedding'] = {
    (its map link is), any end times, family details (the old printed invitation's family section,
    names, address and numbers are deliberately not used). One RSVP number only. */
 const MS_WED_MAP = 'https://maps.app.goo.gl/TMtTFRso7TvirLG69?g_st=aw';
-const MS_REC_MAP = 'https://share.google/N2Op5OpGAX6JdtgORx';
+// reception link: the client's replacement of 2026-10-28 (the first one, share.google/N2Op5OpGAX6JdtgORx, opened Google's
+// "this URL isn't available" page). NOTE: this one does too when tested — the client has been asked for a working link.
+const MS_REC_MAP = 'https://share.google/7BWmgBiq02v3ipT5';
 CONFIGS['mamatha-sairama-wedding'] = {
   out: 'mamatha-sairama-wedding',
   couple: { first: 'Dr. Mamatha Reddy', second: 'Dr. Sai Rama Reddy', short: 'Mamatha & Sai Rama', initials: ['M', 'S'],
-    firstQual: '(M.S. Obstetrics & Gynaecology)', secondQual: '(M.D. Paediatrics)' },
+    firstQual: '(M.S. Obstetrics & Gynaecology)', secondQual: '(M.D. Paediatrics)',
+    // client 2026-10-28: the parents, under each name in the story band
+    firstParents: 'Daughter of Smt. Gorantla Hemalatha and Sri Gorantla Laxmi Kantha Reddy',
+    secondParents: 'Son of Smt. Soodyreddy Rajitha and Sri Laxma Reddy' },
   invite: ['request the pleasure of your company', 'at the wedding celebration of'],
+  music: 'assets/music-v2.mp3',   // the client's track, 2026-10-28 (new name so cached copies of the first one are not reused)
+  // client 2026-10-28: on the Thank You page, between its words and its flowers
+  special: { title: 'A Special Invitation from Shivani Reddy & Gowthami Reddy',
+    text: 'With love and joy, Shivani Reddy and Gowthami Reddy warmly invite you to join the celebration and bless the couple as they begin their beautiful new journey together.' },
   // Telugu heading only (client: no full translation). The brief's own Telugu text did not come through, so this is the
   // customary opening of a Telugu wedding card — to be confirmed with the client.
   heading: { text: 'శ్రీరస్తు · శుభమస్తు · అవిఘ్నమస్తు', font: 'Noto Serif Telugu', lang: 'te' },   // first line of the story band
@@ -257,6 +266,34 @@ const blessingsBand = C.blessings ? `
     </form>
     <img class="corner br" src="assets/corner-floral.webp" alt="">
   </section>` : '';
+/* a special message on the Thank You page: the page is opened between its words (down to y=CUT of 1600) and its
+   flowers, and the message sits on the page's own burgundy in between, both cut edges feathered */
+const CUT = 1040;
+const thanksSplit = C.special ? `  <section class="plate thx" id="thanks" aria-label="Thank you">
+    <div class="thx-a" style="aspect-ratio:687/${CUT}">
+      <img src="assets/thanks-page.webp" alt="With all our love. Thank you for being a part of our special journey." width="1031" height="2401" loading="lazy">
+      <div class="slot caps rise" style="left:${(100 / 687 * 100).toFixed(3)}%;top:${(962 / CUT * 100).toFixed(3)}%;width:${(487 / 687 * 100).toFixed(3)}%;height:${(48 / CUT * 100).toFixed(3)}%;--fs:${(25 / 687 * 100).toFixed(3)}cqw">${esc(C.closing)}</div>
+    </div>
+    <div class="thx-msg reveal">
+      <div class="orn"><i></i><svg viewBox="0 0 16 16"><path d="M8 0l2 6 6 2-6 2-2 6-2-6-6-2 6-2z"/></svg><i></i></div>
+      <h2 class="thx-h">${esc(C.special.title)}</h2>
+      <p class="thx-t">${esc(C.special.text)}</p>
+    </div>
+    <div class="thx-b" style="aspect-ratio:687/${1600 - CUT}"><img src="assets/thanks-page.webp" alt="" width="1031" height="2401" loading="lazy"></div>
+  </section>` : '';
+const THX_CSS = `
+/* parents under the names; the Thank You page opened for a special message */
+.names .par{display:block;font-family:var(--serif);font-style:italic;font-weight:500;font-size:clamp(16px,4.4vw,19px);line-height:1.45;color:#f6dfc0;max-width:28ch;margin:.35em auto .25em;text-wrap:balance}
+.thx{background:#461217}
+.thx-a,.thx-b{position:relative;overflow:hidden}
+.thx-a>img,.thx-b>img{position:absolute;left:0;width:100%;height:auto}
+.thx-a>img{top:0;-webkit-mask-image:linear-gradient(180deg,transparent 0,#000 3%,#000 60.5%,transparent 65%);mask-image:linear-gradient(180deg,transparent 0,#000 3%,#000 60.5%,transparent 65%)}
+.thx-b>img{bottom:0;-webkit-mask-image:linear-gradient(180deg,transparent 67%,#000 77%);mask-image:linear-gradient(180deg,transparent 67%,#000 77%)}
+.thx-msg{position:relative;margin:-4px 0;padding:4px 30px 10px;text-align:center;background:radial-gradient(ellipse 70% 60% at 50% 50%,rgba(120,40,46,.45),transparent 75%)}
+.thx-msg .orn{margin:0 auto 14px}
+.thx-h{font-family:var(--caps);font-weight:400;text-transform:uppercase;letter-spacing:.16em;font-size:clamp(14px,3.9vw,17px);line-height:1.6;color:var(--gold);margin:0 auto 12px;max-width:26ch;text-wrap:balance}
+.thx-t{font-family:var(--serif);font-style:italic;font-size:clamp(18px,5vw,21px);line-height:1.5;color:#f6dfc0;margin:0 auto;max-width:30ch;text-wrap:pretty}
+`;
 const EXTRA_CSS = `
 /* added for invitations with families / blessings sections (same palette and type as the template) */
 .invoc{font-family:var(--caps);text-align:center;letter-spacing:.24em;text-transform:uppercase;font-size:14px;color:#fdf0c4;margin-bottom:10px}
@@ -460,7 +497,7 @@ a{color:inherit}
 .twinkle{position:absolute;pointer-events:none;animation:tw 3.4s ease-in-out infinite}
 @keyframes tw{0%,100%{opacity:.2;transform:scale(.7)}50%{opacity:1;transform:scale(1.05)}}
 @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}.reveal,.slot.rise{opacity:1;transform:none}}
-${C.families || C.blessings ? EXTRA_CSS : ''}${C.couple.firstQual || C.heading || C.locations ? `
+${C.families || C.blessings ? EXTRA_CSS : ''}${C.special || C.couple.firstParents ? THX_CSS : ''}${C.couple.firstQual || C.heading || C.locations ? `
 /* qualifications under the names, a regional heading on the opening page, labelled location buttons */
 .slot .qual{font-family:var(--serif);font-weight:600;font-size:calc(var(--fs) * .21);letter-spacing:.04em;line-height:1.25;color:var(--gold);text-shadow:0 1px 2px rgba(30,0,8,.6);margin-top:.15em}
 .names .qual{display:block;font-family:var(--serif);font-weight:600;font-size:.36em;letter-spacing:.04em;line-height:1.3;color:var(--gold);margin:.1em 0 .2em}
@@ -495,7 +532,7 @@ ${C.invocation ? `<p class="invoc reveal">${esc(C.invocation)}</p>\n` : ''}${C.h
     <h2 class="h2 reveal" id="story-h">Our Story</h2>
     <div class="orn reveal"><i></i><svg viewBox="0 0 16 16"><path d="M8 0l2 6 6 2-6 2-2 6-2-6-6-2 6-2z"/></svg><i></i></div>
 ${C.story ? `    <div class="arch reveal"><img src="${C.story.src}" alt="${esc(C.story.alt)}"${C.story.pos ? ` style="object-position:${C.story.pos}"` : ''} loading="lazy" width="1000" height="1333"></div>
-` : ''}    <p class="names reveal">${esc(C.couple.first)}${C.couple.firstQual ? `<span class="qual">${esc(C.couple.firstQual)}</span>` : ''}<span class="amp">&amp;</span>${esc(C.couple.second)}${C.couple.secondQual ? `<span class="qual">${esc(C.couple.secondQual)}</span>` : ''}</p>
+` : ''}    <p class="names reveal">${esc(C.couple.first)}${C.couple.firstQual ? `<span class="qual">${esc(C.couple.firstQual)}</span>` : ''}${C.couple.firstParents ? `<span class="par">${esc(C.couple.firstParents)}</span>` : ''}<span class="amp">&amp;</span>${esc(C.couple.second)}${C.couple.secondQual ? `<span class="qual">${esc(C.couple.secondQual)}</span>` : ''}${C.couple.secondParents ? `<span class="par">${esc(C.couple.secondParents)}</span>` : ''}</p>
     <p class="lead reveal" style="margin-top:14px">${esc(C.storyLead || 'From a chance hello to a lifetime of together — with the blessings of our families, we begin our forever.')}</p>
     <div class="count reveal" id="count" aria-label="Countdown to the wedding day">
       <div><b data-k="d">00</b><span>Days</span></div><div><b data-k="h">00</b><span>Hours</span></div><div><b data-k="m">00</b><span>Mins</span></div><div><b data-k="s">00</b><span>Secs</span></div>
@@ -553,16 +590,16 @@ ${C.families ? familiesBand + '\n' : ''}${C.photos.length ? `  <section class="b
     </div>
   </section>
 
-${C.blessings ? blessingsBand + '\n' : ''}  <section class="plate" id="thanks" aria-label="Thank you">
+${C.blessings ? blessingsBand + '\n' : ''}${C.special ? thanksSplit : `  <section class="plate" id="thanks" aria-label="Thank you">
     <img src="assets/thanks-page.webp" alt="With all our love. Thank you for being a part of our special journey." width="1031" height="2401" loading="lazy">
     ${slot('thanks', [100, 962, 587, 1010], 'caps rise', 25, esc(C.closing))}
-  </section>
+  </section>`}
 </main>
 
 <button class="mute" id="mute" type="button" aria-label="Pause music"><span class="bars"><i></i><i></i><i></i><i></i></span></button>
 <div class="box" id="box" role="dialog" aria-label="Photo"><img alt=""><button type="button" class="x" aria-label="Close">&times;</button><button type="button" class="nav prev" aria-label="Previous photo">&#8249;</button><button type="button" class="nav next" aria-label="Next photo">&#8250;</button></div>
 <div class="petals" id="petals" aria-hidden="true"></div>
-<audio id="music" src="assets/music.mp3" loop preload="none"></audio>
+<audio id="music" src="${C.music || 'assets/music.mp3'}" loop preload="none"></audio>
 
 <script>
 (function(){
