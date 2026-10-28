@@ -39,7 +39,7 @@ export const weddingConfig = {
     lines: [
       'With the blessings of the Almighty',
       'and the love of our families,',
-      'we joyfully invite you to be part of',
+      'we joyfully invite you to be a part of',
       'the most sacred day of our lives.',
     ],
   },
@@ -69,14 +69,15 @@ export const weddingConfig = {
   events: [
     { icon: 'haldi', name: 'Haldi & Mehndi', date: '2026-11-23T15:00:00+05:30',
       details: [['Time', '3:00 PM']],
-      venue: 'J124, Pocket J, Sarita Vihar, New Delhi, Delhi 110076',
-      maps: 'https://www.google.com/maps/search/?api=1&query=J124%2C%20Pocket%20J%2C%20Sarita%20Vihar%2C%20New%20Delhi%2C%20Delhi%20110076' },
+      venue: 'J 121, Pocket J, Sarita Vihar, New Delhi, Delhi 110076',
+      maps: 'https://www.google.com/maps/search/?api=1&query=J%20121%2C%20Pocket%20J%2C%20Sarita%20Vihar%2C%20New%20Delhi%2C%20Delhi%20110076' },
     { icon: 'nichayam', name: 'Manda & Bhaat', date: '2026-11-24T18:00:00+05:30',
       details: [['Time', '6:00 PM']],
-      venue: 'J124, Pocket J, Sarita Vihar, New Delhi, Delhi 110076',
-      maps: 'https://www.google.com/maps/search/?api=1&query=J124%2C%20Pocket%20J%2C%20Sarita%20Vihar%2C%20New%20Delhi%2C%20Delhi%20110076' },
+      venue: 'J 121, Pocket J, Sarita Vihar, New Delhi, Delhi 110076',
+      maps: 'https://www.google.com/maps/search/?api=1&query=J%20121%2C%20Pocket%20J%2C%20Sarita%20Vihar%2C%20New%20Delhi%2C%20Delhi%20110076' },
     { icon: 'forever', name: 'Wedding Ceremony', date: '2026-11-25T10:00:00+05:30', main: true,
-      details: [['Ceremony', 'As per programme'], ['Baraat', '10:00 AM · Sarita Vihar to Ambala City']],
+      details: [['Ceremony', 'As per programme'], ['Baraat', '10:00 AM']],
+      note: 'Departure from Sarita Vihar to Ambala City',
       venue: 'The Glen Manor, Khanna Farms, Chandigarh Road, Ambala City',
       maps: 'https://share.google/roQGgvYO2wtCDj2TP' },
     { icon: 'reception', name: 'Reception', date: '2026-11-28T19:00:00+05:30',
@@ -95,7 +96,7 @@ export const weddingConfig = {
 
   travelNote: 'All our venues, one tap from your maps',
   travel: [
-    { icon: 'pin', title: 'Sarita Vihar, New Delhi', text: 'J124, Pocket J, Sarita Vihar, New Delhi, Delhi 110076 · Haldi & Mehndi, Manda & Bhaat', link: { label: 'Open in Maps', href: 'https://www.google.com/maps/search/?api=1&query=J124%2C%20Pocket%20J%2C%20Sarita%20Vihar%2C%20New%20Delhi%2C%20Delhi%20110076' } },
+    { icon: 'pin', title: 'Sarita Vihar, New Delhi', text: 'J 121, Pocket J, Sarita Vihar, New Delhi, Delhi 110076 · Haldi & Mehndi, Manda & Bhaat', link: { label: 'Open in Maps', href: 'https://www.google.com/maps/search/?api=1&query=J%20121%2C%20Pocket%20J%2C%20Sarita%20Vihar%2C%20New%20Delhi%2C%20Delhi%20110076' } },
     { icon: 'pin', title: 'The Glen Manor', text: 'The Glen Manor, Khanna Farms, Chandigarh Road, Ambala City · Wedding Ceremony', link: { label: 'Wedding map', href: 'https://share.google/roQGgvYO2wtCDj2TP' } },
     { icon: 'pin', title: 'Tivoli Royal Court', text: 'Tivoli Royal Court, Okhla Phase-I, New Delhi · Reception', link: { label: 'Open in Maps', href: 'https://share.google/ZhpNneaABMEk9xFQE' } },
   ],
@@ -112,7 +113,7 @@ export const weddingConfig = {
   },
 
   creditCampaign: 'varun-diksha-wedding',
-  music: 'assets/audio/music.mp3',
+  music: 'assets/audio/music-jashn-e-bahaaraa.mp3', // the client's track (2026-10-28),
   intro: {
     video: 'assets/intro-wedding.mp4',
     poster: 'assets/intro-poster.webp',

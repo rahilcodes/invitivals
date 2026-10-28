@@ -52,6 +52,25 @@ if (cfg.regional) {
   document.documentElement.style.setProperty('--regional', `'${cfg.regional.font}'`);
 }
 
+/* hero fit, on every phone: browsers without svh get the real visible height, and the couple is given only
+   the room left below the date (long names, big system fonts and short screens can never push them together) */
+const root = document.documentElement;
+const fitHero = () => {
+  if (!CSS.supports?.("height", "1svh")) root.style.setProperty("--sv", innerHeight / 100 + "px");
+  const stage = document.querySelector(".hero-stage"), copy = document.querySelector(".hero-copy"), wrap = document.querySelector(".hero-couple-wrap");
+  if (!stage || !copy || !wrap) return;
+  // layout boxes, not on-screen rects: the parallax and entrance transforms must not skew the measure
+  const room = stage.clientHeight - (copy.offsetTop + copy.offsetHeight) - parseFloat(getComputedStyle(wrap).bottom) - 30; // 14px of air + the parallax lift of the couple
+  root.style.setProperty("--couple-fit", Math.max(90, Math.round(room)) + "px");
+};
+fitHero();
+document.fonts?.ready.then(fitHero);
+// re-fit whenever the text block changes height (web fonts arriving late, the Devanagari line, text zoom)
+if (window.ResizeObserver) new ResizeObserver(fitHero).observe(document.querySelector(".hero-copy"));
+addEventListener("load", fitHero);
+let fitT; addEventListener("resize", () => { clearTimeout(fitT); fitT = setTimeout(fitHero, 120); });
+addEventListener("orientationchange", () => setTimeout(fitHero, 300));
+
 initEvents(cfg);
 initCountdown(cfg);
 if (cfg.gallery?.length) initGallery(cfg);

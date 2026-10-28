@@ -4,7 +4,7 @@ import { Icon } from './decor.js';
 export function createMusic(src) {
   const audio = new Audio(src);
   audio.loop = true; audio.volume = 0;
-  audio.preload = 'none'; // 3.7 MB: fetched only once the guest taps to open
+  audio.preload = 'none'; // fetched only once the guest taps to open
   const btn = document.createElement('button');
   btn.className = 'music'; btn.type = 'button';
   btn.setAttribute('aria-label', 'Pause music');
