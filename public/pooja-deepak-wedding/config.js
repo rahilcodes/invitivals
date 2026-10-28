@@ -33,7 +33,7 @@ export const weddingConfig = {
   venueAddress: 'Near Parthala Bridge, Sector 12, Noida, Uttar Pradesh 201307',
   venueCity: 'Noida',
   mapsUrl: 'https://share.google/wCmAaZipCqtWKXlEY',
-  venueImage: '', // no venue photo supplied: the section shows its kolam seal
+  venueImage: 'assets/venue-rs-farm.webp', // the client's photo of the banquet aisle (2026-10-29), in place of the kolam seal and pin
   coupleImage: null, // the hero's walking couple was another client's art; Pooja & Deepak's own picture leads "Moments"
 
   welcome: {
