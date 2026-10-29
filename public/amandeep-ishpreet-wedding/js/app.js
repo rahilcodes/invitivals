@@ -52,13 +52,15 @@ document.body.insertAdjacentHTML('afterbegin', IntroExperience(view, guest));
 document.getElementById('boot')?.remove();
 document.title = `${couple(view).join(' & ')} · Wedding Invitation`;
 
-/* Gurmukhi (the invocation and/or the intro's Gurbani): load only the glyphs needed */
-const gurText = [view.invocation?.text, ...(view.intro.gurbani || [])].filter(Boolean).join('');
+/* Gurmukhi (the invocation, the intro's Gurbani, Punjabi quote and card): load only the glyphs needed — or the
+   whole font for Punjabi sentences, whose vowel signs and nuktas need shaping a text= subset can drop */
+const gurProse = [view.blessing.quote?.lang === 'pa' && view.blessing.quote.lines.join(''), view.blessing.linesLang === 'pa' && view.blessing.lines.join('')].filter(Boolean).join('');
+const gurText = [view.invocation?.text, ...(view.intro.gurbani || []), gurProse].filter(Boolean).join('');
 if (gurText) {
   const font = view.invocation?.font || 'Noto Serif Gurmukhi';
   const l = document.createElement('link');
   l.rel = 'stylesheet';
-  l.href = `https://fonts.googleapis.com/css2?family=${encodeURIComponent(font)}:wght@500;600;700&text=${encodeURIComponent(gurText)}&display=swap`;
+  l.href = `https://fonts.googleapis.com/css2?family=${encodeURIComponent(font)}:wght@500;600;700&${gurProse ? '' : `text=${encodeURIComponent(gurText)}&`}display=swap`;
   document.head.appendChild(l);
   document.documentElement.style.setProperty('--gur', `'${font}', serif`);
 }

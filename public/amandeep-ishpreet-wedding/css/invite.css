@@ -633,3 +633,7 @@ html.is-open .intro{opacity:0;pointer-events:none}
 .intro-gurbani span:first-child{font-size:clamp(1.5rem,7.4vw,1.9rem);color:var(--gold-deep)}
 .intro.is-ending .intro-gurbani{opacity:1;transform:none}
 @media (min-width:540px){.intro-gurbani{left:50%;right:auto;width:calc(var(--maxw) - 60px);transform:translate(-50%,8px)}.intro.is-ending .intro-gurbani{transform:translate(-50%,0)}}
+
+/* the Gurbani quote and the card under it in Punjabi (Gurmukhi): upright, in the page's Gurmukhi face, balanced lines */
+.blessing-sky .bs-text-pa{font-family:var(--gur,'Noto Serif Gurmukhi'),serif;font-style:normal;font-size:clamp(.98rem,4.4vw,1.14rem);line-height:1.75;text-wrap:balance}
+.welcome-lines-pa p{font-family:var(--gur,'Noto Serif Gurmukhi'),serif;font-style:normal;font-weight:500;font-size:clamp(.98rem,4.3vw,1.08rem);line-height:1.9;text-wrap:balance}

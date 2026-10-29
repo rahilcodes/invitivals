@@ -48,16 +48,16 @@ export const weddingConfig = {
 
   blessing: {
     title: ['With the Blessings of', 'Sri Guru Granth Sahib Ji'],
-    lines: [
-      'With the blessings of Sri Guru Granth Sahib Ji',
-      'and the love of our families,',
-      'we invite you to bless our daughter',
-      'as she begins a beautiful journey together.',
-    ],
+    /* the card under the arch, in the family's Punjabi (client, 2026-10-29), exactly as sent; it was
+       "With the blessings of Sri Guru Granth Sahib Ji and the love of our families, we invite you to bless our daughter …" */
+    lines: ["ਸ੍ਰੀ ਗੁਰੂ ਗ੍ਰੰਥ ਸਾਹਿਬ ਜੀ ਦੀ ਅਪਾਰ ਬਖ਼ਸ਼ਿਸ਼ ਅਤੇ ਸਾਡੇ ਪਰਿਵਾਰਾਂ ਦੇ ਪਿਆਰ ਸਦਕਾ, ਅਸੀਂ ਤੁਹਾਨੂੰ ਸਾਡੀ ਧੀ ਦੇ ਜੀਵਨ ਦੇ ਇਸ ਨਵੇਂ ਅਤੇ ਸੁੰਦਰ ਸਫ਼ਰ ਦੀ ਸ਼ੁਰੂਆਤ 'ਤੇ ਆਪਣਾ ਪਿਆਰ ਅਤੇ ਅਸ਼ੀਰਵਾਦ ਦੇਣ ਲਈ ਸੱਦਾ ਦਿੰਦੇ ਹਾਂ।"],
+    linesLang: 'pa',
     /* written into the sky of the arch scene; set to null to hide */
     quote: {
       eyebrow: 'Gurbani',
-      lines: ['They alone are called', 'husband and wife,', 'who have one light', 'in two bodies.'],
+      /* in Punjabi (client, 2026-10-29), exactly as sent; it was "They alone are called husband and wife, who have one light in two bodies." */
+      lines: ['ਉਹੀ ਸੁਹਾਗੀ ਜੋੜਾ ਕਹੀਦਾ ਹੈ, ਜਿਨ੍ਹਾਂ ਦੇ ਦੋ ਸਰੀਰਾਂ ਵਿੱਚ ਇੱਕੋ ਜੋਤਿ ਵੱਸਦੀ ਹੈ।'],
+      lang: 'pa',
       source: 'Sri Guru Granth Sahib Ji · Ang 788',
     },
   },
@@ -68,14 +68,7 @@ export const weddingConfig = {
     groom: { label: "Groom's Parents", parents: ['S. Ravinder Pal Singh Sandhu', 'Sdn. Tejinder Kaur'] },
   },
 
-  story: {
-    heading: 'Our Story',
-    text: 'A journey of faith, love and two families coming together. With the blessings of Guru Sahib, we begin a beautiful chapter of our lives.',
-    image: 'assets/gallery/g5.webp?v=32dc7fa1a1',
-    imageAlt: 'The couple by the Gurudwara sarovar at golden hour',
-    motto: ['Different Paths', 'One Destiny'],
-    pillars: [{ icon: 'faith', label: 'Faith' }, { icon: 'heart', label: 'Love' }, { icon: 'family', label: 'Family' }],
-  },
+  story: null, // removed at the family's request (client, 2026-10-29)
 
   /* in the order of the day. art: dhol | horse | gurudwara | lantern */
   events: [
@@ -111,41 +104,11 @@ export const weddingConfig = {
     passed: 'The laavan have been taken. Thank you for your blessings.',
   },
 
-  gallery: {
-    title: 'A Glimpse',
-    sub: 'Moments that last forever',
-    note: 'Illustrative artwork in the spirit of the day.',
-    /* the first four show in the grid; "See more" opens the viewer with all of them */
-    images: [
-      { src: 'assets/gallery/g1.webp?v=7a3383d4d0', alt: 'The Anand Karaj ceremony inside Sri Darbar Sahib' },
-      { src: 'assets/gallery/g2.webp?v=83e53f37ba', alt: 'Sehrabandi ceremony as the groom prepares for the wedding' },
-      { src: 'assets/gallery/g3.webp?v=44d3e88be5', alt: 'Mehndi Di Raat celebration with music and dhol' },
-      { src: 'assets/gallery/g4.webp?v=8d8069ea90', alt: 'Joyful Baraat procession arriving at the venue' },
-      { src: 'assets/gallery/g5.webp?v=32dc7fa1a1', alt: 'The couple by the serene Gurudwara sarovar' },
-      { src: 'assets/gallery/g6.webp?v=0fd488da20', alt: 'The Milni ceremony welcoming family members' },
-    ],
-  },
+  gallery: null, // removed at the family's request (client, 2026-10-29)
 
-  /* each row opens an honest map search around the main venue — nothing invented */
-  gettingHere: {
-    title: 'Getting Here',
-    sub: 'Location, parking and nearby stay options for your convenience.',
-    rows: [
-      { icon: 'pin', label: 'Directions', sub: 'Open the Gurudwara in Google Maps', href: maps('Gurudwara Sri Guru Singh Sabha, Kirti Nagar, New Delhi 110015') },
-      { icon: 'car', label: 'Parking Info', sub: 'Find parking near the venue', href: maps('parking near Gurudwara Sri Guru Singh Sabha, Kirti Nagar, New Delhi') },
-      { icon: 'hotel', label: 'Nearby Hotels', sub: 'Stays around Kirti Nagar', href: maps('hotels near Kirti Nagar, New Delhi') },
-    ],
-  },
+  gettingHere: null, // removed at the family's request (client, 2026-10-29)
 
-  rsvp: {
-    title: 'Kindly RSVP',
-    note: 'Your presence will make our celebration even more special.',
-    deadline: 'Kindly respond by 1 December 2026',
-    /* Put the family's WhatsApp number here in full international form, digits only,
-       e.g. '919812345678'. While it still contains an X, the page shows the choice
-       without claiming the reply is delivered. */
-    whatsapp: '91XXXXXXXXXX',
-  },
+  rsvp: null, // removed at the family's request (client, 2026-10-29)
 
   closing: {
     title: ['With Love', 'and Blessings'],

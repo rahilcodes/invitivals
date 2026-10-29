@@ -22,13 +22,13 @@ export const BlessingSection = (cfg) => `
     ${cfg.blessing.quote && cfg.invite.placement !== 'blessing' ? `<blockquote class="blessing-sky">
       <span class="bs-eyebrow">${esc(cfg.blessing.quote.eyebrow)}</span>
       ${KhandaMark('bs-mark')}
-      <p class="bs-text">${cfg.blessing.quote.lines.map(esc).join('<br>')}</p>
+      <p class="bs-text${cfg.blessing.quote.lang ? ' bs-text-' + cfg.blessing.quote.lang : ''}"${cfg.blessing.quote.lang ? ` lang="${cfg.blessing.quote.lang}"` : ''}>${cfg.blessing.quote.lines.map(esc).join('<br>')}</p>
       <cite class="bs-src">${esc(cfg.blessing.quote.source)}</cite>
     </blockquote>` : ''}
   </div>
   ${cfg.blessing.lines?.length ? `<div class="card card-words" data-reveal>
     <span class="card-corner tl"></span><span class="card-corner tr"></span><span class="card-corner bl"></span><span class="card-corner br"></span>
-    <div class="welcome-lines">${cfg.blessing.lines.map((l) => `<p>${esc(l)}</p>`).join('')}</div>
+    <div class="welcome-lines${cfg.blessing.linesLang ? ' welcome-lines-' + cfg.blessing.linesLang : ''}"${cfg.blessing.linesLang ? ` lang="${cfg.blessing.linesLang}"` : ''}>${cfg.blessing.lines.map((l) => `<p>${esc(l)}</p>`).join('')}</div>
   </div>` : ''}
 </section>`;
 
