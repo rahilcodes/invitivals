@@ -1,0 +1,21 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Creativals//Wedding Invitation//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:20261213T033000Z-sehrabandi@invitivals.com
+DTSTAMP:20261012T062031Z
+DTSTART:20261213T033000Z
+DTEND:20261213T063000Z
+SUMMARY:Sehrabandi & Ghurchari — Amandeep & Ishpreet
+DESCRIPTION:The groom sets out
+LOCATION:Hotel Picasso Prive\, Naraina\, New Delhi
+URL:https://invitivals.com/amandeep-kaur-ishpreet-singh-wedding/
+BEGIN:VALARM
+TRIGGER:-P1D
+ACTION:DISPLAY
+DESCRIPTION:Sehrabandi & Ghurchari — Amandeep & Ishpreet
+END:VALARM
+END:VEVENT
+END:VCALENDAR
