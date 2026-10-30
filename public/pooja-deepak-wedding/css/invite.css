@@ -753,3 +753,26 @@ html.is-open .intro.is-skipped .intro-video { transform: none; transition: none;
 /* the client's pictures, each whole: the illustration on its own (2:3), the two paintings side by side (3:4) */
 .plate-portrait { grid-column: span 2; justify-self: center; width: 88%; aspect-ratio: 2 / 3; }
 .plate-pair { aspect-ratio: 3 / 4; }
+
+/* one picture in Moments: nothing to page through in the viewer */
+.viewer.is-single .viewer-nav, .viewer.is-single .viewer-count { display: none; }
+
+/* the swipe cue (client, 2026-10-30): a small card low on the hero's left, beside the couple and clear of the round
+   buttons on the right. It is kept in the visible screen on short phones, where the hero runs taller than the screen */
+.swipe-cue {
+  position: absolute; z-index: 4; left: 8px; bottom: max(12px, calc(100% - 100 * var(--sv) + 12px)); width: 88px; padding: 7px 4px 8px;
+  display: flex; flex-direction: column; align-items: center; text-align: center; text-decoration: none; line-height: 1.25;
+  background: rgba(255, 248, 232, .92); border: 1px solid rgba(184, 137, 50, .75); border-radius: 14px;
+  box-shadow: 0 6px 14px -6px rgba(74, 14, 24, .45); font-family: var(--caps); color: var(--maroon);
+  transition: opacity .8s ease 1.6s, transform .8s var(--ease) 1.6s;
+}
+.swipe-cue b { font-weight: 600; font-size: 10.5px; letter-spacing: .2em; text-indent: .2em; text-transform: uppercase; }
+.swipe-cue small { font-size: 7.5px; letter-spacing: .1em; text-transform: uppercase; color: var(--gold-deep); }
+.swipe-arrows { position: relative; display: block; width: 14px; height: 16px; margin-bottom: 3px; animation: swipe-up 1.7s ease-in-out infinite; }
+.swipe-arrows i { position: absolute; left: 2px; width: 10px; height: 10px; border-top: 2px solid var(--maroon); border-left: 2px solid var(--maroon); transform: rotate(45deg); }
+.swipe-arrows i:first-child { top: 1px; }
+.swipe-arrows i:last-child { top: 7px; opacity: .55; }
+@keyframes swipe-up { 0%, 100% { transform: translateY(3px); } 50% { transform: translateY(-3px); } }
+html.is-sealed .swipe-cue { opacity: 0; transform: translateY(10px); }
+.swipe-cue.is-gone { opacity: 0; transform: translateY(10px); pointer-events: none; transition: opacity .3s ease, transform .3s ease; }
+@media (prefers-reduced-motion: reduce) { .swipe-arrows { animation: none; } }

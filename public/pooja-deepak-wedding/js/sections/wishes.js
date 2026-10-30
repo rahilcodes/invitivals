@@ -23,7 +23,7 @@ export function initWishes(cfg, guest) {
     const msg = form.elements.msg.value.trim();
     if (!msg) { form.elements.msg.focus(); form.elements.msg.closest('.field').classList.add('is-invalid'); return; }
     const who = form.elements.name.value.trim();
-    window.open(whatsappLink(cfg.contact?.whatsapp || cfg.rsvp.whatsapp || '', `Wishes for ${cfg.pair[0]} & ${cfg.pair[1]}:\n\n${msg}${who ? `\n\n— ${who}` : ''}`), '_blank', 'noopener');
+    window.open(whatsappLink(cfg.wishes.whatsapp || cfg.contact?.whatsapp || cfg.rsvp?.whatsapp || '', `Wishes for ${cfg.pair[0]} & ${cfg.pair[1]}:\n\n${msg}${who ? `\n\n— ${who}` : ''}`), '_blank', 'noopener');
     form.hidden = true; $('#wish-thanks').hidden = false;
   });
 }

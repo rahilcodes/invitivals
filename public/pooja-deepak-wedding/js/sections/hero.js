@@ -30,6 +30,10 @@ export const HeroSection = (cfg) => `
       </p>
     </div>
     ${cfg.coupleImage === null ? '' : `<div class="hero-couple-wrap" data-parallax="0.05">${WeddingCouple({ cls: 'hero-couple', eager: true })}</div>`}
+    <a class="swipe-cue" href="#welcome" aria-label="Swipe up to explore the invitation">
+      <span class="swipe-arrows" aria-hidden="true"><i></i><i></i></span>
+      <b>Swipe</b><small>to explore</small>
+    </a>
     <a class="scroll-cue" href="#welcome" aria-label="Scroll to the invitation"><span>Scroll</span><i></i></a>
   </div>
 </section>`;

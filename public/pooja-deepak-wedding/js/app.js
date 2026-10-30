@@ -31,7 +31,7 @@ cfg.pair = cfg.brideFirst ? [cfg.brideName, cfg.groomName] : [cfg.groomName, cfg
 
 const SECTIONS = [
   HeroSection, WelcomeSection, cfg.story && StorySection, FamilySection, EventsSection, CeremonySection,
-  VenueSection, CountdownSection, cfg.gallery?.length && GallerySection, SaveTheDateSection, RSVPSection,
+  VenueSection, CountdownSection, cfg.gallery?.length && GallerySection, SaveTheDateSection, cfg.rsvp && RSVPSection,
   cfg.travel?.length && TravelSection, cfg.contact && ContactSection, cfg.gifting && GiftingSection, WishesSection, ThankYouSection,
 ].filter(Boolean);
 const NO_THREAD_AFTER = new Set([HeroSection, ThankYouSection]);
@@ -76,9 +76,13 @@ initEvents(cfg);
 initCountdown(cfg);
 if (cfg.gallery?.length) initGallery(cfg);
 initSaveTheDate(cfg);
-initRSVP(cfg, guest);
+if (cfg.rsvp) initRSVP(cfg, guest);
 if (cfg.gifting) initGifting();
 initWishes(cfg, guest);
+
+/* the swipe cue on the hero bows out as soon as the guest starts to scroll, and returns at the very top */
+const swipeCue = document.querySelector('.swipe-cue');
+if (swipeCue) addEventListener('scroll', () => swipeCue.classList.toggle('is-gone', scrollY > 40), { passive: true });
 
 const music = createMusic(cfg.music);
 const menu = createMenu(cfg, weddingCalendar(cfg));

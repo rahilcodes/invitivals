@@ -31,6 +31,7 @@ export function initGallery(cfg) {
   const cap = $('.viewer-cap', viewer);
   const count = $('.viewer-count', viewer);
   let i = 0, x0 = null, lastFocus = null;
+  viewer.classList.toggle('is-single', cfg.gallery.length < 2);
   const show = (n) => {
     i = (n + cfg.gallery.length) % cfg.gallery.length;
     img.src = cfg.gallery[i].src;

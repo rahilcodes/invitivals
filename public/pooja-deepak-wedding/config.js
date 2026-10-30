@@ -5,7 +5,7 @@
    The page (js/app.js) renders only from this object, so a new
    invitation is: copy the folder, edit this file, swap photos.
    Dates are ISO strings in India time (+05:30).
-   Only what the client supplied is used: no Haldi venue name (its map link only), no RSVP contact,
+   Only what the client supplied is used: no Haldi venue name (its map link only),
    no grandparents, no ceremony time beyond "7:00 PM onwards · Dinner".
    ───────────────────────────────────────────────────────────── */
 export const weddingConfig = {
@@ -33,7 +33,7 @@ export const weddingConfig = {
   venueAddress: 'Near Parthala Bridge, Sector 12, Noida, Uttar Pradesh 201307',
   venueCity: 'Noida',
   mapsUrl: 'https://share.google/wCmAaZipCqtWKXlEY',
-  venueImage: 'assets/venue-rs-farm.webp', // the client's photo of the banquet aisle (2026-10-29), in place of the kolam seal and pin
+  venueImage: 'assets/venue-rs-farm-mandap.webp', // the client's RS Farm image (2026-10-30), replacing the aisle photo
   coupleImage: 'assets/couple.webp', // the client's couple seen from behind (2026-10-29), cut off its black by tools/varun-diksha-couple.mjs
 
   welcome: {
@@ -79,15 +79,9 @@ export const weddingConfig = {
   /* the client's own pictures (tools/pooja-deepak-art.mjs), each shown whole */
   gallery: [
     { src: 'assets/gallery-pd-couple.webp', alt: 'Pooja and Deepak in each other’s arms beneath a floral arch, she in a blush-pink gown and he in a navy suit', shape: 'portrait' },
-    { src: 'assets/gallery-pd-haldi.webp', alt: 'Pooja and Deepak in yellow at their Haldi, marigold garlands behind them', shape: 'pair' },
-    { src: 'assets/gallery-pd-hills.webp', alt: 'Deepak twirling a laughing Pooja on a hilltop', shape: 'pair' },
   ],
 
-  /* no RSVP contact supplied: RSVP opens WhatsApp and the guest picks the contact (no number is invented) */
-  rsvp: {
-    deadline: '',
-    whatsapp: '',
-  },
+  rsvp: null, // section removed at the client's request (2026-10-30)
 
   travelNote: 'Both our venues, one tap from your maps',
   travel: [
@@ -98,7 +92,7 @@ export const weddingConfig = {
   contact: null,
   gifting: null,
 
-  wishes: { prompt: 'Leave your blessings for the couple.' },
+  wishes: { prompt: 'Leave your blessings for the couple.', whatsapp: '919004646130' }, // Send Wishes opens the bride's WhatsApp (+91 90046 46130), the guest sends it
 
   thankYou: {
     title: 'Thank You',
