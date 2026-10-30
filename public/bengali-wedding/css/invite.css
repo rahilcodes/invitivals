@@ -103,7 +103,7 @@ img { -webkit-user-drag: none; user-select: none; }
 /* ── a function page ── */
 .fn .bn-fn { position: absolute; left: 6%; right: 6%; top: 13.6%; margin: 0; text-align: center; font-family: var(--bn-serif); font-weight: 900; font-size: calc(var(--cq) * 11); line-height: 1.15;
   background: linear-gradient(175deg, #f6d987 0%, #c8962d 38%, #f8e3a4 52%, #9a6b16 72%, #e9c66c 100%); -webkit-background-clip: text; background-clip: text; color: transparent;
-  filter: drop-shadow(0 0 calc(var(--cq) * 1.2) rgba(255, 250, 225, .95)) drop-shadow(0 calc(var(--cq) * .35) calc(var(--cq) * .35) rgba(90, 50, 0, .45)); }
+  filter: drop-shadow(0 0 calc(var(--cq) * 1.2) rgba(255, 250, 225, .95)) drop-shadow(0 0 calc(var(--cq) * 2.4) rgba(255, 250, 225, .9)) drop-shadow(0 calc(var(--cq) * .35) calc(var(--cq) * .35) rgba(90, 50, 0, .45)); }
 .fn[data-tone="haldi"] .bn-fn { background-image: linear-gradient(175deg, #c98a12 0%, #8a5a06 38%, #e0a92a 52%, #6e4404 72%, #c98a12 100%); }
 .fn[data-tone="green"] .bn-fn { background-image: linear-gradient(175deg, #2f8a4f, #15532c 45%, #3c9a5c 60%, #0f3f20); }
 .fn[data-tone="crimson"] .bn-fn { background-image: linear-gradient(175deg, #d02a52, #8c0f22 45%, #e0486a 60%, #6e0a1a); }
@@ -111,6 +111,10 @@ img { -webkit-user-drag: none; user-select: none; }
 .fn .bn-sub { top: 25.6%; }
 .fn--logo .bn-sub { top: 23.2%; }
 .fn--logo .bn-fn { display: none; }
+/* the soft cream haze the reference pages carry behind the details and buttons, so they read over the painting */
+.haze { position: absolute; left: 4%; right: 4%; top: 65.5%; height: 26%; pointer-events: none;
+  background: radial-gradient(ellipse 58% 50% at 50% 50%, rgba(253, 240, 208, .92) 0, rgba(253, 240, 208, .78) 45%, rgba(253, 240, 208, .35) 75%, rgba(253, 240, 208, 0) 100%); }
+.haze--end { top: 71%; height: 17%; left: 6%; right: 6%; background: radial-gradient(ellipse 50% 50% at 50% 50%, rgba(253, 240, 208, .96) 0, rgba(253, 240, 208, .86) 50%, rgba(253, 240, 208, .4) 78%, rgba(253, 240, 208, 0) 100%); }
 .fn .details { position: absolute; left: 24%; right: 6%; top: 68.8%; margin: 0; padding: 0; list-style: none; display: grid; gap: calc(var(--cq) * .7); }
 .fn .details li { display: grid; grid-template-columns: calc(var(--cq) * 5.5) calc(var(--cq) * 11) calc(var(--cq) * 2) 1fr; align-items: start; column-gap: calc(var(--cq) * 1);
   font-family: var(--bn-sans); font-weight: 600; color: #3b2608; font-size: calc(var(--cq) * 3.5); line-height: 1.35; }

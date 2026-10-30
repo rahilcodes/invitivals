@@ -4,7 +4,7 @@
    words from config; the functions menu and the five function pages; the
    scratch-to-reveal date; maps and calendar; music; RSVP and contact.
    ───────────────────────────────────────────────────────────────────────────── */
-import { invite as C } from '../config.js?v=1';
+import { invite as C } from '../config.js?v=2';
 
 const $ = (s, r = document) => r.querySelector(s);
 const $$ = (s, r = document) => [...r.querySelectorAll(s)];
@@ -36,6 +36,7 @@ for (const sec of $$('.fn')) {
     <a class="back" href="#p3"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M15.5 4.5L8 12l7.5 7.5-1.4 1.4L5.2 12l8.9-8.9z"/></svg>${esc(C.labels.back)}</a>
     <h2 class="bn-fn rise" style="--d:.1s">${esc(ev.title)}</h2>
     <p class="txt bn-sub rise" style="--d:.25s">${lines(ev.tagline)}</p>
+    <span class="haze" aria-hidden="true"></span>
     <ul class="details rise" style="--d:.4s">
       <li><svg aria-hidden="true"><use href="#i-cal"/></svg><span>${esc(C.labels.date)}</span><span class="sep">:</span><span>${esc(ev.dateBn)}</span></li>
       <li><svg aria-hidden="true"><use href="#i-clock"/></svg><span>${esc(C.labels.time)}</span><span class="sep">:</span><span>${esc(ev.timeBn)}</span></li>
