@@ -23,14 +23,14 @@ export const weddingConfig = {
   hostSide: 'bride',
 
   /* the Mool Mantar opening in Gurmukhi; set to null to hide */
-  invocation: { text: 'ੴ ਸਤਿ ਨਾਮੁ', meaning: 'Ik Onkar · There is One Creator', font: 'Noto Serif Gurmukhi' },
+  invocation: { text: 'ੴ ਸਤਿ ਨਾਮੁ', meaning: 'Ik Onkar · Satnam Waheguru', font: 'Noto Serif Gurmukhi' },
 
   /* the invitation block that follows the hero scene */
   invite: {
     motto: ['Together in Faith', 'Forever in Love'],
     tagline: ['Two Souls', 'One Journey', 'Blessed by Guru Sahib'],
     eyebrow: ['You are', 'cordially invited'],
-    line: 'by S. Baldev Singh Sidhu & Sdn. Inderjeet Kaur Sidhu to celebrate the wedding of their beloved daughter Amandeep with Ishpreet, in the presence of Guru Sahib.',
+    line: 'by Sdn. Inderjeet Kaur & S. Baldev Singh Sidhu to celebrate the wedding of their beloved daughter Amandeep with Ishpreet, in the presence of Guru Sahib.',
   },
 
   /* purpose-made side borders, once the designer supplies them (transparent PNG,
@@ -54,7 +54,7 @@ export const weddingConfig = {
     linesLang: 'pa',
     /* written into the sky of the arch scene; set to null to hide */
     quote: {
-      eyebrow: 'Gurbani',
+      eyebrow: '', // the word "Gurbani" removed (client, 2026-10-30)
       /* in Punjabi (client, 2026-10-29), exactly as sent; it was "They alone are called husband and wife, who have one light in two bodies." */
       lines: ['ਉਹੀ ਸੁਹਾਗੀ ਜੋੜਾ ਕਹੀਦਾ ਹੈ, ਜਿਨ੍ਹਾਂ ਦੇ ਦੋ ਸਰੀਰਾਂ ਵਿੱਚ ਇੱਕੋ ਜੋਤਿ ਵੱਸਦੀ ਹੈ।'],
       lang: 'pa',
@@ -64,7 +64,8 @@ export const weddingConfig = {
 
   families: {
     heading: 'With the Blessings of Our Families',
-    bride: { label: "Bride's Parents", parents: ['S. Baldev Singh Sidhu', 'Sdn. Inderjeet Kaur Sidhu'] },
+    showWho: false, // no "Parents of …" line (client, 2026-10-30)
+    bride: { label: "Bride's Parents", parents: ['S. Baldev Singh Sidhu', 'Sdn. Inderjeet Kaur'] },
     groom: { label: "Groom's Parents", parents: ['S. Ravinder Pal Singh Sandhu', 'Sdn. Tejinder Kaur'] },
   },
 

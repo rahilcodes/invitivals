@@ -20,7 +20,7 @@ export const BlessingSection = (cfg) => `
       <p class="bs-text">${esc(cfg.invite.line)}</p>
     </div>` : ''}
     ${cfg.blessing.quote && cfg.invite.placement !== 'blessing' ? `<blockquote class="blessing-sky">
-      <span class="bs-eyebrow">${esc(cfg.blessing.quote.eyebrow)}</span>
+      ${cfg.blessing.quote.eyebrow ? `<span class="bs-eyebrow">${esc(cfg.blessing.quote.eyebrow)}</span>` : ''}
       ${KhandaMark('bs-mark')}
       <p class="bs-text${cfg.blessing.quote.lang ? ' bs-text-' + cfg.blessing.quote.lang : ''}"${cfg.blessing.quote.lang ? ` lang="${cfg.blessing.quote.lang}"` : ''}>${cfg.blessing.quote.lines.map(esc).join('<br>')}</p>
       <cite class="bs-src">${esc(cfg.blessing.quote.source)}</cite>
