@@ -29,3 +29,6 @@ invites/src/*.zip
 
 # bengali wedding source pack (tools/build-bengali-wedding-art.mjs)
 invites/src/bengali-wedding/
+
+# brown theme wedding source pack (public/brown-theme-wedding)
+invites/src/brown-theme-wedding-zip/
