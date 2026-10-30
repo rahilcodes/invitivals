@@ -83,6 +83,6 @@ for (const [id, [file, key]] of Object.entries(EL)) {
   console.log(`el/${id}`.padEnd(18), `${info.width}×${info.height}`.padEnd(10), `${(info.size / 1024).toFixed(0).padStart(5)} KB`);
 }
 fs.writeFileSync(path.join(OUT, 'el', 'manifest.json'), JSON.stringify(manifest));
-if (!fs.existsSync(path.join(OUT, 'media', 'intro.mp4'))) fs.copyFileSync(path.join(SRC, 'ai video.mp4'), path.join(OUT, 'media', 'intro.mp4'));
+if (!fs.existsSync(path.join(OUT, 'media', 'intro-clean.mp4'))) fs.copyFileSync(path.join(SRC, 'ai video clean.mp4'), path.join(OUT, 'media', 'intro-clean.mp4'));
 if (fs.existsSync(path.join(SRC, 'music.mp3'))) fs.copyFileSync(path.join(SRC, 'music.mp3'), path.join(OUT, 'media', 'music.mp3'));
 console.log(`\n${(total / 1048576).toFixed(1)} MB of pictures`);

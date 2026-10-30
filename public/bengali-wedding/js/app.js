@@ -4,7 +4,7 @@
    words from config; the functions menu and the five function pages; the
    scratch-to-reveal date; maps and calendar; music; RSVP and contact.
    ───────────────────────────────────────────────────────────────────────────── */
-import { invite as C } from '../config.js?v=2';
+import { invite as C } from '../config.js?v=3';
 
 const $ = (s, r = document) => r.querySelector(s);
 const $$ = (s, r = document) => [...r.querySelectorAll(s)];

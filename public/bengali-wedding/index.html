@@ -22,18 +22,18 @@
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="preload" as="image" href="assets/media/intro-poster.webp" fetchpriority="high">
 <link rel="preload" as="image" href="assets/bg/p1.webp">
-<link rel="modulepreload" href="js/app.js?v=2">
+<link rel="modulepreload" href="js/app.js?v=3">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Bengali:wght@500;700;800;900&family=Noto+Sans+Bengali:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/invite.css?v=2">
+<link rel="stylesheet" href="css/invite.css?v=3">
 </head>
 <body class="is-closed">
 
 <!-- ── opening: the sealed envelope (the film's first frame); one tap plays the film with sound, its last frame fades into the hero ── -->
 <div class="opening" id="opening">
   <img class="opening__poster" src="assets/media/intro-poster.webp" alt="একটি সোনালি সিলমোহরযুক্ত আমন্ত্রণপত্র, ফুল ও প্রদীপের মাঝে" width="720" height="1280" decoding="async" fetchpriority="high">
-  <video class="opening__film" id="film" playsinline webkit-playsinline preload="auto" poster="assets/media/intro-poster.webp" src="assets/media/intro.mp4" aria-hidden="true"></video>
+  <video class="opening__film" id="film" playsinline webkit-playsinline preload="auto" poster="assets/media/intro-poster.webp" src="assets/media/intro-clean.mp4" aria-hidden="true"></video>
   <button class="tap" id="tap" type="button">
     <span class="tap__ring" aria-hidden="true"></span>
     <span class="tap__label">আমন্ত্রণ খুলুন</span>
@@ -219,7 +219,7 @@
   </defs>
 </svg>
 
-<script type="module" src="js/app.js?v=2"></script>
+<script type="module" src="js/app.js?v=3"></script>
 <script src="/_credit/v1/credit.js" defer data-into="#rsvp .plain__in" data-color="#8a5a16"></script>
 </body>
 </html>

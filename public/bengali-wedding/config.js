@@ -76,7 +76,7 @@ export const invite = {
   },
 
   music: 'assets/media/music.mp3',          // leave '' if there is no song
-  video: 'assets/media/intro.mp4',
+  video: 'assets/media/intro-clean.mp4',
   videoPoster: 'assets/media/intro-poster.webp',
   videoTimeoutMs: 25000,
   share: {

@@ -263,6 +263,7 @@ bengali-wedding/assets/el/photo3.webp
 bengali-wedding/assets/el/photo4.webp
 bengali-wedding/assets/el/tasselJas.webp
 bengali-wedding/assets/el/tasselRed.webp
+bengali-wedding/assets/media/intro-clean.mp4
 bengali-wedding/assets/media/intro-poster.webp
 bengali-wedding/assets/media/intro.mp4
 bengali-wedding/assets/media/music.mp3
