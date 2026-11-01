@@ -9,7 +9,7 @@ import { StorySection } from './sections/story.js';
 import { FamilySection } from './sections/families.js';
 import { EventsSection, initEvents } from './sections/events.js';
 import { CeremonySection } from './sections/ceremony.js';
-import { VenueSection } from './sections/venue.js';
+import { VenueSection, ReceptionVenueSection } from './sections/venue.js';
 import { CountdownSection, initCountdown } from './sections/countdown.js';
 import { GallerySection, initGallery } from './sections/gallery.js';
 import { SaveTheDateSection, initSaveTheDate, weddingCalendar } from './sections/save-the-date.js';
@@ -29,9 +29,12 @@ import { createMenu } from './menu.js';
 /* names as they read on the card: groom first by default, bride first on a bride-side invitation */
 cfg.pair = cfg.brideFirst ? [cfg.brideName, cfg.groomName] : [cfg.groomName, cfg.brideName];
 
+/* both venues count as one stop in the list below, so the stitches of the later sections stay as they were */
+const Venues = (c) => VenueSection(c) + (c.receptionVenue ? GoldThread() + ReceptionVenueSection(c) : '');
+
 const SECTIONS = [
   HeroSection, WelcomeSection, cfg.story && StorySection, FamilySection, EventsSection, CeremonySection,
-  VenueSection, CountdownSection, cfg.gallery?.length && GallerySection, SaveTheDateSection, RSVPSection,
+  Venues, CountdownSection, cfg.gallery?.length && GallerySection, SaveTheDateSection, RSVPSection,
   cfg.travel?.length && TravelSection, cfg.contact && ContactSection, cfg.gifting && GiftingSection, WishesSection, ThankYouSection,
 ].filter(Boolean);
 const NO_THREAD_AFTER = new Set([HeroSection, ThankYouSection]);

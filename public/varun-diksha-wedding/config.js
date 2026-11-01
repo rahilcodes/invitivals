@@ -32,6 +32,14 @@ export const weddingConfig = {
   venueCity: 'Ambala City',
   mapsUrl: 'https://share.google/roQGgvYO2wtCDj2TP',
   venueImage: 'assets/venue-glen-manor.webp', // the client's photo of the gate, sign included
+  /* the reception's own venue section, after The Venue (client, 2026-11-01); image as the client sent it, the map is the
+     Google Maps place of Tivoli Royal Court, D-185, Okhla Phase I */
+  receptionVenue: {
+    name: 'Tivoli Royal Court',
+    address: 'Okhla Phase-I, New Delhi',
+    image: 'assets/venue-tivoli-royal-court.webp',
+    maps: 'https://www.google.com/maps/search/?api=1&query=Tivoli%20Royal%20Court%2C%20D-185%2C%20Okhla%20Phase%20I%2C%20New%20Delhi%20110020',
+  },
   coupleImage: 'assets/couple.webp', // the client's illustration, cut off its black by tools/varun-diksha-couple.mjs
 
   welcome: {
