@@ -727,3 +727,8 @@ html.is-open .intro.is-skipped .intro-video { transform: none; transition: none;
 .t-details dd { margin: 0; font-size: 16px; font-weight: 600; color: var(--maroon); }
 .t-item .t-venue { margin-top: 6px; }
 .t-name .amp-i { font-family: var(--serif); font-style: italic; font-size: .62em; padding: 0 .12em; }
+
+/* The Venue (client, 2026-11-01): the heading sits close to the arch, its line breaks balanced. The image no longer drifts
+   in the arch on scroll (no data-parallax in js/sections/venue.js): that cut the arch flat and opened a gap below the heading */
+#venue .sec-head { margin-bottom: 10px; }
+#venue .sec-sub { text-wrap: balance; }
