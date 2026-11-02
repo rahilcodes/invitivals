@@ -7,7 +7,7 @@ export const VenueSection = (cfg) => `
   <div class="sec-inner">
     ${Heading('The Venue', 'A beautiful place to witness our new beginning', { id: 'venue-h' })}
     ${cfg.venueImage ? `<figure class="venue-frame" data-reveal>
-      <img src="${cfg.venueImage}" alt="${cfg.venue}" loading="lazy" decoding="async" data-parallax="0.035">
+      <img src="${cfg.venueImage}" alt="${cfg.venue}" loading="lazy" decoding="async">
     </figure>` : `<div class="venue-seal" data-reveal>${Kolam('venue-kolam')}${Icon('pin', 'ico venue-pin')}</div>`}
     <p class="venue-name" data-reveal>${cfg.venue}</p>
     <p class="venue-addr" data-reveal>${cfg.venueAddress}</p>

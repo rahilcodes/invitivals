@@ -43,12 +43,11 @@ document.body.insertAdjacentHTML('afterbegin', IntroExperience(cfg, guest));
 document.getElementById('boot')?.remove(); // static poster that covered the page while modules loaded
 document.title = `${cfg.pair[0]} & ${cfg.pair[1]} · Wedding Invitation`;
 
-/* regional blessing (and the opening shloka, same font): load only the glyphs it needs from Google Fonts, the whole font
-   when there is a shloka (a text= subset can drop the shaping its conjuncts need) */
+/* the regional line over the names: the whole font from Google Fonts (a text= subset can drop the shaping the conjunct in श्री needs) */
 if (cfg.regional) {
   const l = document.createElement('link');
   l.rel = 'stylesheet';
-  l.href = `https://fonts.googleapis.com/css2?family=${encodeURIComponent(cfg.regional.font)}:wght@500&${cfg.introShloka ? '' : `text=${encodeURIComponent(cfg.regional.text)}&`}display=swap`;
+  l.href = `https://fonts.googleapis.com/css2?family=${encodeURIComponent(cfg.regional.font)}:wght@500&display=swap`;
   document.head.appendChild(l);
   document.documentElement.style.setProperty('--regional', `'${cfg.regional.font}'`);
 }

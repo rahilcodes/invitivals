@@ -17,7 +17,7 @@ export const weddingConfig = {
   tagline: ['Two hearts.', 'One journey.', 'Forever.'],
   invocation: 'Om Sri Ganeshaya Namaha',
   /* a blessing in the family's own script; set to null to hide. font = any Google Font that covers it */
-  regional: { text: 'शुभ विवाह', meaning: 'Shubh Vivah', font: 'Noto Serif Devanagari', lang: 'hi' },
+  regional: { text: '।। श्री गणेशाय नमः ।।', meaning: 'Shri Ganeshaya Namah', font: 'Noto Serif Devanagari', lang: 'sa' }, // client, 2026-11-02, exactly as sent
   introShloka: null,
   /* ?to=Name in the link greets each guest personally; this is used when there is none */
   guestFallback: 'You & Your Family',
@@ -34,7 +34,7 @@ export const weddingConfig = {
   venueAddress: 'Bal Vikas Progressive School Road, Sodhpur, Panipat',
   venueCity: 'Panipat',
   mapsUrl: PALM_MAP,
-  venueImage: '',
+  venueImage: 'assets/venue-palm-luxuria.webp', // the client's Palm Luxuria picture (2026-11-02), in place of the kolam-and-pin seal
   coupleImage: 'assets/couple.webp', // the client's couple seen from behind (2026-11-02), cut off its white by tools/akansha-lokesh-couple.mjs
 
   welcome: {

@@ -32,7 +32,28 @@ for (let s = 0; s < N; s++) {
     if (x === 0 || y === 0 || x === W - 1 || y === H - 1) border = true;
     for (const j of [i - 1, i + 1, i - W, i + W]) if (j >= 0 && j < N && white[j] && !seen[j] && Math.abs((j % W) - x) <= 1) { seen[j] = 1; comp.push(j); }
   }
-  if (border || comp.length > 3000) for (const i of comp) bg[i] = 1;
+  // enclosed white goes too: any pocket away from the jasmine (the thin gap between his legs, 2026-11-02), only big ones on the bun
+  const sx = s % W, sy = (s / W) | 0, onBun = sx >= W * 0.40 && sx < W * 0.66 && sy >= H * 0.08 && sy < H * 0.26;
+  if (border || comp.length > 3000 || (!onBun && comp.length > 120)) for (const i of comp) bg[i] = 1;
+}
+/* second pass (client, 2026-11-02: white still showed by her hair): the paper between the loose strands beside
+   the bun and between her hair and his shoulder is a little greyer than the open white and cut into small
+   pockets by the strands. From the background, the removal now also runs through pale, neutral pixels; the
+   jasmine is warmer than neutral and sits inside the hair's dark outline, so it is not reached. */
+// beside the bun (a box from her shoulder line up past the bun, to the groom's collar) the paper is ringed by thin grey
+// strands, so there the removal also crosses light neutral grey; the brown hair and the warm jasmine stop it
+const [BX0, BY0, BX1, BY1] = [W * 0.30, H * 0.08, W * 0.62, H * 0.30];
+const pale = (i) => {
+  const r = d[i * 3], g = d[i * 3 + 1], b = d[i * 3 + 2], lo = Math.min(r, g, b), hi = Math.max(r, g, b), x = i % W, y = (i / W) | 0;
+  if (lo >= 196 && hi - lo <= 22) return true;
+  return x >= BX0 && x < BX1 && y >= BY0 && y < BY1 && (lo >= 120 && hi - lo <= 26 || lo >= 200 && hi - lo <= 40);
+};
+{
+  const q = []; for (let i = 0; i < N; i++) if (bg[i]) q.push(i);
+  for (let k = 0; k < q.length; k++) {
+    const i = q[k], x = i % W;
+    for (const j of [i - 1, i + 1, i - W, i + W]) if (j >= 0 && j < N && !bg[j] && Math.abs((j % W) - x) <= 1 && pale(j)) { bg[j] = 1; q.push(j); }
+  }
 }
 // distance from the background (two-pass chamfer), capped — drives the soft edge
 const dist = new Float32Array(N).fill(99);
