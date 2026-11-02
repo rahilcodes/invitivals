@@ -21,12 +21,12 @@
 <meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="preload" as="image" href="assets/media/intro-poster.webp" fetchpriority="high">
-<link rel="preload" as="image" href="assets/bg/p1.webp">
-<link rel="modulepreload" href="js/app.js?v=3">
+<link rel="preload" as="image" href="assets/bg/r1.webp">
+<link rel="modulepreload" href="js/app.js?v=5">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Bengali:wght@500;700;800;900&family=Noto+Sans+Bengali:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/invite.css?v=3">
+<link rel="stylesheet" href="css/invite.css?v=5">
 </head>
 <body class="is-closed">
 
@@ -48,99 +48,128 @@
 
 <main class="stage" id="stage" aria-label="বিবাহের আমন্ত্রণ">
 
+  <!-- 1–9 are the designer's finished pages (tools/build-bengali-wedding-ref.mjs); the words are in the art,
+       repeated for screen readers, and the painted buttons and menu rows have real controls laid over them -->
+
   <!-- 1 · hero -->
   <section class="page page--1" id="p1">
     <div class="art">
-      <img class="bg" src="assets/bg/p1.webp" alt="" width="941" height="1672" decoding="async" fetchpriority="high">
-      <img class="el swing" style="left:1.5%;top:-1%;width:7%;--d:.4s" src="assets/el/tasselJas.webp" alt="">
-      <img class="el swing" style="right:1.5%;top:-1%;width:5.5%;--d:.6s" src="assets/el/tasselRed.webp" alt="">
-      <svg class="el orn drop" style="left:36%;top:7.4%;width:28%;--d:.3s" viewBox="0 0 200 24" aria-hidden="true"><use href="#flourish"/></svg>
-      <h1 class="txt bn-title rise" style="top:10.6%;--d:.45s" data-t="hero.title">শুভ বিবাহ</h1>
-      <p class="txt bn-sub rise" style="top:18.6%;--d:.6s" data-t="hero.sub">দুই পরিবারের মিলনে<br>এক পবিত্র বন্ধন</p>
-      <svg class="el orn rise" style="left:40%;top:24.6%;width:20%;--d:.75s" viewBox="0 0 200 24" aria-hidden="true"><use href="#flourish"/></svg>
-      <img class="el rise" style="left:-2%;top:35.5%;width:17%;--d:.5s" src="assets/el/lampStand.webp" alt="">
-      <img class="el rise flip" style="left:85%;top:35.5%;width:17%;--d:.6s" src="assets/el/lampStand.webp" alt="">
-      <img class="el el--couple rise" style="left:11%;top:28.6%;width:78%;--d:.7s" src="assets/el/couple.webp" alt="বর ও কনে, লাল-সোনালি পোশাকে পাশাপাশি বসে">
-      <img class="el rise" style="left:-1%;top:82%;width:26%;--d:.9s" src="assets/el/diyaFlowers.webp" alt="">
-      <img class="el rise glow" style="left:83%;top:79%;width:15%;--d:1s" src="assets/el/diyaFlame.webp" alt="">
-      <div class="names rise" style="top:64.4%;--d:1s">
-        <span class="name"><span data-t="couple.groom">শুভ</span> <i class="heart">♥</i></span>
-        <svg class="names__mid" viewBox="0 0 24 24" aria-hidden="true"><use href="#motif"/></svg>
-        <span class="name"><i class="heart">♥</i> <span data-t="couple.bride">পরিরা</span></span>
+      <img class="bg" src="assets/bg/r1.webp" alt="শুভ বিবাহের আমন্ত্রণ: ফুলে সাজানো মণ্ডপে লাল-সোনালি পোশাকে বর ও কনে" width="941" height="1672" decoding="async" fetchpriority="high">
+      <i class="glow" style="left:5.5%;top:58%;--s:10;--d:0.2s" aria-hidden="true"></i><i class="glow" style="left:97.9%;top:61.8%;--s:10;--d:0.9s" aria-hidden="true"></i>
+      <div class="sr-only">
+        <h1 data-t="hero.title">শুভ বিবাহ</h1>
+        <p data-t="hero.sub">দুই পরিবারের মিলনে এক পবিত্র বন্ধন</p>
+        <p><span data-t="couple.groom">শুভ</span> ও <span data-t="couple.bride">পরিরা</span></p>
+        <p data-t="hero.para">ভালোবাসা, আশা ও পারিবারিক সম্পর্কের এই পবিত্র বন্ধনে আপনাদের উপস্থিতি আমাদের জন্য অনেক অনুপ্রেরণা।</p>
       </div>
-      <p class="txt bn-para rise" style="top:71.6%;--d:1.15s" data-t="hero.para">ভালোবাসা, আশা ও পারিবারিক<br>সম্পর্কের এই পবিত্র বন্ধনে<br>আপনাদের উপস্থিতি<br>আমাদের জন্য<br>অনেক অনুপ্রেরণা।</p>
-      <svg class="el orn rise" style="left:40%;top:84.4%;width:20%;--d:1.3s" viewBox="0 0 200 24" aria-hidden="true"><use href="#flourish"/></svg>
     </div>
   </section>
 
-  <!-- 2 · scratch to reveal the date -->
+  <!-- 2 · scratch to reveal the date: page 2's own gold is the cover; under it, the scratch-off reference's date -->
   <section class="page" id="p2">
     <div class="art">
-      <img class="bg" src="assets/bg/p2.webp" alt="" width="941" height="1672" loading="lazy" decoding="async">
-      <h2 class="txt bn-h2 rise" style="top:33.1%;--d:.1s" data-t="reveal.title">শুভ লগ্নের শুভ তারিখ</h2>
-      <p class="txt bn-sub bn-sub--sm rise" style="top:38.2%;--d:.25s" data-t="reveal.sub">ঘষে দেখুন আমাদের বিশেষ দিন</p>
-      <div class="scard" id="scard" style="left:7%;top:37%;width:86%;height:32%">
-        <div class="scard__date" id="scardDate" aria-live="polite">
-          <p class="scard__d" data-t="reveal.date">১২ ডিসেম্বর ২০২৬</p>
-          <p class="scard__day" data-t="reveal.day">শনিবার</p>
-        </div>
+      <img class="bg" src="assets/bg/r2.webp" alt="সোনালি তুলির দাগে ঢাকা লাল ফলক, প্রদীপ আর ফুলের মাঝে" width="941" height="1672" loading="lazy" decoding="async">
+      <h2 class="sr-only" data-t="reveal.title">শুভ লগ্নের শুভ তারিখ</h2>
+      <p class="sr-only" data-t="reveal.sub">ঘষে দেখুন আমাদের বিশেষ দিন</p>
+      <div class="scard" id="scard" style="left:27.84%;top:49.76%;width:49.52%;height:13.88%">
+        <img class="scard__date" src="assets/el/date-ink.webp" alt="" width="466" height="232" loading="lazy">
         <canvas class="scard__foil" id="foil" role="button" tabindex="0" aria-label="সোনালি আবরণ: আঙুল বা মাউস দিয়ে ঘষে তারিখ দেখুন। Enter চাপলেও দেখা যাবে।"></canvas>
         <span class="scard__hint" id="scardHint" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M9 11.2V5.5a1.5 1.5 0 0 1 3 0v4.7l.1-1.2a1.5 1.5 0 0 1 3 .1v1.3a1.5 1.5 0 0 1 3 .2V12a1.5 1.5 0 0 1 2.9.3v3.4c0 3.5-2.6 6.3-6.2 6.3h-1.3c-2 0-3.4-.8-4.7-2.4L5.7 15.6a1.6 1.6 0 0 1 2.3-2.2z"/></svg></span>
       </div>
-      <img class="el pop" style="left:73.5%;top:56%;width:18.5%;--d:.4s" src="assets/el/coin.webp" alt="">
-      <button class="reveal rise" id="revealBtn" type="button" style="top:71%;--d:.5s" data-t="reveal.button">তারিখ দেখুন</button>
+      <p class="sr-only" id="scardNote" aria-live="polite"></p>
+      <button class="reveal rise" id="revealBtn" type="button" style="top:80%;--d:.4s" data-t="reveal.button">তারিখ দেখুন</button>
     </div>
   </section>
 
-  <!-- 3 · functions menu -->
+  <!-- 3 · functions menu: the painted rows are the buttons -->
   <section class="page" id="p3">
     <div class="art">
-      <img class="bg" src="assets/bg/p3.webp" alt="" width="941" height="1672" loading="lazy" decoding="async">
-      <img class="el swing glow" style="left:6%;top:19%;width:13%;--d:.3s" src="assets/el/lanternL.webp" alt="" loading="lazy">
-      <img class="el swing glow" style="left:81%;top:19%;width:13%;--d:.5s" src="assets/el/lanternR.webp" alt="" loading="lazy">
-      <h2 class="txt bn-h1 rise" style="top:21.4%;--d:.1s" data-t="menu.title">আমাদের অনুষ্ঠান</h2>
-      <p class="txt bn-sub bn-sub--sm rise" style="top:29.2%;--d:.25s" data-t="menu.sub">আমাদের সাথে এই বিশেষ দিনে<br>থাকার জন্য রইল আমন্ত্রণ।</p>
-      <nav class="menu" aria-label="অনুষ্ঠানসমূহ" id="menu"></nav>
+      <img class="bg" src="assets/bg/r3.webp" alt="" width="941" height="1672" loading="lazy" decoding="async">
+      <i class="glow" style="left:11.9%;top:31.6%;--s:12;--d:0.1s" aria-hidden="true"></i><i class="glow" style="left:88%;top:31.6%;--s:12;--d:0.7s" aria-hidden="true"></i>
+      <h2 class="sr-only" data-t="menu.title">আমাদের অনুষ্ঠান</h2>
+      <p class="sr-only" data-t="menu.sub">আমাদের সাথে এই বিশেষ দিনে থাকার জন্য রইল আমন্ত্রণ।</p>
+      <nav class="menu" aria-label="অনুষ্ঠানসমূহ">
+        <a class="hit hit--row" href="#haldi" style="left:15.4%;top:38.1%;width:70.5%;height:7.48%">গায়ে হলুদ</a>
+        <a class="hit hit--row" href="#lakshmi" style="left:15.4%;top:46.47%;width:70.5%;height:7.54%">লক্ষ্মী পূজা</a>
+        <a class="hit hit--row" href="#sangeet" style="left:15.4%;top:54.9%;width:70.5%;height:7.6%">সঙ্গীত সন্ধ্যা</a>
+        <a class="hit hit--row" href="#wedding" style="left:15.4%;top:63.4%;width:70.5%;height:7.6%">বিবাহ</a>
+        <a class="hit hit--row" href="#reception" style="left:15.4%;top:71.77%;width:70.5%;height:7.66%">রিসেপশন</a>
+      </nav>
     </div>
   </section>
 
-  <!-- 4–8 · the functions: built from config by app.js, each on its own background -->
-  <section class="page fn" id="haldi" data-event="haldi" data-tone="haldi">
+  <!-- 4–8 · the functions -->
+  <section class="page fn" id="haldi" data-event="haldi">
     <div class="art">
-      <img class="bg" src="assets/bg/p4.webp" alt="" width="941" height="1672" loading="lazy" decoding="async">
-      <div class="fn__body"></div>
+      <img class="bg" src="assets/bg/r4.webp" alt="গায়ে হলুদ: হলুদ ফুল আর লণ্ঠনে সাজানো আঙিনায় বর-কনে" width="941" height="1672" loading="lazy" decoding="async">
+      <i class="glow" style="left:11.6%;top:19.7%;--s:12;--d:0.2s" aria-hidden="true"></i><i class="glow" style="left:28.8%;top:24.2%;--s:10;--d:0.8s" aria-hidden="true"></i>
+      <a class="back" href="#p3"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M15.5 4.5L8 12l7.5 7.5-1.4 1.4L5.2 12l8.9-8.9z"/></svg><span data-t="labels.back">অনুষ্ঠান তালিকা</span></a>
+      <div class="sr-only" data-sr="haldi"></div>
+      <a class="hit" data-maps="haldi" style="left:26.6%;top:80.2%;width:48.3%;height:4.8%" href="#" target="_blank" rel="noopener"><span class="sr-only">গুগল ম্যাপ দেখুন</span></a>
+      <button class="hit" type="button" data-cal="haldi" style="left:24.6%;top:85%;width:51.5%;height:4.6%"><span class="sr-only">ক্যালেন্ডারে রাখুন</span></button>
     </div>
   </section>
-  <section class="page fn" id="lakshmi" data-event="lakshmi" data-tone="green">
+  <section class="page fn" id="lakshmi" data-event="lakshmi">
     <div class="art">
-      <img class="bg" src="assets/bg/p5.webp" alt="" width="941" height="1672" loading="lazy" decoding="async">
-      <div class="fn__body"></div>
+      <img class="bg" src="assets/bg/r5.webp" alt="লক্ষ্মী পূজা: প্রদীপ আর পদ্মের মাঝে মা লক্ষ্মীর পূজায় বর-কনে" width="941" height="1672" loading="lazy" decoding="async">
+      
+      <a class="back" href="#p3"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M15.5 4.5L8 12l7.5 7.5-1.4 1.4L5.2 12l8.9-8.9z"/></svg><span data-t="labels.back">অনুষ্ঠান তালিকা</span></a>
+      <div class="sr-only" data-sr="lakshmi"></div>
+      <a class="hit" data-maps="lakshmi" style="left:22.4%;top:80.9%;width:58.8%;height:4.9%" href="#" target="_blank" rel="noopener"><span class="sr-only">গুগল ম্যাপ দেখুন</span></a>
+      <button class="hit" type="button" data-cal="lakshmi" style="left:22.1%;top:86.8%;width:57.2%;height:4.9%"><span class="sr-only">ক্যালেন্ডারে রাখুন</span></button>
     </div>
   </section>
-  <section class="page fn" id="sangeet" data-event="sangeet" data-tone="crimson">
+  <section class="page fn" id="sangeet" data-event="sangeet">
     <div class="art">
-      <img class="bg" src="assets/bg/p6.webp" alt="" width="941" height="1672" loading="lazy" decoding="async">
-      <img class="el swing glow" style="left:1%;top:12.5%;width:9%;--d:.3s" src="assets/el/lanternSang.webp" alt="" loading="lazy">
-      <img class="el rise" style="left:11%;top:36%;width:78%;--d:.5s" src="assets/el/dancers.webp" alt="নাচের ভঙ্গিতে বর ও কনে" loading="lazy">
-      <div class="fn__body"></div>
+      <img class="bg" src="assets/bg/r6.webp" alt="সঙ্গীত সন্ধ্যা: আলো আর ফুলে সাজানো আসরে নাচের ভঙ্গিতে বর-কনে" width="941" height="1672" loading="lazy" decoding="async">
+      <i class="glow" style="left:3.2%;top:21.8%;--s:10;--d:0.3s" aria-hidden="true"></i><i class="glow" style="left:80.6%;top:25%;--s:10;--d:1s" aria-hidden="true"></i>
+      <a class="back" href="#p3"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M15.5 4.5L8 12l7.5 7.5-1.4 1.4L5.2 12l8.9-8.9z"/></svg><span data-t="labels.back">অনুষ্ঠান তালিকা</span></a>
+      <div class="sr-only" data-sr="sangeet"></div>
+      <a class="hit" data-maps="sangeet" style="left:24.8%;top:83.8%;width:50%;height:4.9%" href="#" target="_blank" rel="noopener"><span class="sr-only">গুগল ম্যাপ দেখুন</span></a>
+      <button class="hit" type="button" data-cal="sangeet" style="left:24%;top:88.9%;width:52%;height:5%"><span class="sr-only">ক্যালেন্ডারে রাখুন</span></button>
     </div>
   </section>
-  <section class="page fn" id="wedding" data-event="wedding" data-tone="red">
+  <section class="page fn" id="wedding" data-event="wedding">
     <div class="art">
-      <img class="bg" src="assets/bg/p7.webp" alt="" width="941" height="1672" loading="lazy" decoding="async">
-      <div class="fn__body"></div>
+      <img class="bg" src="assets/bg/r7.webp" alt="বিবাহ: যজ্ঞের আগুনের সামনে টোপর পরা বর আর মুকুট পরা কনে" width="941" height="1672" loading="lazy" decoding="async">
+      <i class="glow" style="left:52.9%;top:61.2%;--s:16;--d:0.4s" aria-hidden="true"></i>
+      <a class="back" href="#p3"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M15.5 4.5L8 12l7.5 7.5-1.4 1.4L5.2 12l8.9-8.9z"/></svg><span data-t="labels.back">অনুষ্ঠান তালিকা</span></a>
+      <div class="sr-only" data-sr="wedding"></div>
+      <a class="hit" data-maps="wedding" style="left:23.8%;top:84%;width:51.5%;height:4.9%" href="#" target="_blank" rel="noopener"><span class="sr-only">গুগল ম্যাপ দেখুন</span></a>
+      <button class="hit" type="button" data-cal="wedding" style="left:22.4%;top:89.4%;width:55%;height:4.9%"><span class="sr-only">ক্যালেন্ডারে রাখুন</span></button>
     </div>
   </section>
-  <section class="page fn fn--logo" id="reception" data-event="reception" data-tone="maroon">
+  <section class="page fn" id="reception" data-event="reception">
     <div class="art">
-      <img class="bg" src="assets/bg/p8.webp" alt="" width="941" height="1672" loading="lazy" decoding="async">
-      <img class="el swing glow" style="left:3%;top:19%;width:9%;--d:.3s" src="assets/el/lanternRec.webp" alt="" loading="lazy">
-      <img class="el rise" style="left:28%;top:9.6%;width:44%;--d:.2s" src="assets/el/bhojon.webp" alt="ভোজন" loading="lazy">
-      <div class="fn__body"></div>
+      <img class="bg" src="assets/bg/r8.webp" alt="ভোজন: পদ্মা পাড়ের প্রাসাদের সামনে ভোজের টেবিলে বর-কনে" width="941" height="1672" loading="lazy" decoding="async">
+      <i class="glow" style="left:17%;top:27.2%;--s:10;--d:0.5s" aria-hidden="true"></i>
+      <a class="back" href="#p3"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M15.5 4.5L8 12l7.5 7.5-1.4 1.4L5.2 12l8.9-8.9z"/></svg><span data-t="labels.back">অনুষ্ঠান তালিকা</span></a>
+      <div class="sr-only" data-sr="reception"></div>
+      <a class="hit" data-maps="reception" style="left:24.8%;top:82.4%;width:52.7%;height:4.8%" href="#" target="_blank" rel="noopener"><span class="sr-only">গুগল ম্যাপ দেখুন</span></a>
+      <button class="hit" type="button" data-cal="reception" style="left:23%;top:87.7%;width:56.1%;height:5.1%"><span class="sr-only">ক্যালেন্ডারে রাখুন</span></button>
     </div>
   </section>
 
-  <!-- venues: one look at where and when, after the functions -->
+
+  <!-- 9 · moments & thanks: the four photographs develop one after another -->
+  <section class="page" id="p9">
+    <div class="art">
+      <img class="bg" src="assets/bg/r9.webp" alt="আমাদের কিছু মুহূর্ত: ফুলের ফ্রেমে বর-কনের চারটি ছবি, নদীর পাড়ে প্রদীপের আলোয় ধন্যবাদ" width="941" height="1672" loading="lazy" decoding="async">
+      <i class="veil develop" style="left:10.5%;top:26%;width:40.5%;height:17.5%;--d:.2s" aria-hidden="true"></i>
+      <i class="veil develop" style="left:51.5%;top:26%;width:41%;height:18.5%;--d:.55s" aria-hidden="true"></i>
+      <i class="veil develop" style="left:11.5%;top:43.5%;width:40.5%;height:17.5%;--d:.9s" aria-hidden="true"></i>
+      <i class="veil develop" style="left:49.5%;top:43.5%;width:42.5%;height:19%;--d:1.25s" aria-hidden="true"></i>
+      <i class="glow" style="left:46.8%;top:93.7%;--s:9;--d:0.2s" aria-hidden="true"></i><i class="glow" style="left:67%;top:93.7%;--s:9;--d:0.8s" aria-hidden="true"></i>
+      <div class="sr-only">
+        <h2 data-t="ending.title">আমাদের কিছু মুহূর্ত</h2>
+        <p data-t="ending.sub">ভালোবাসার কিছু স্মৃতি</p>
+        <h2 data-t="ending.thanks">আপনাদের ধন্যবাদ</h2>
+        <p data-t="ending.para">আমাদের এই বিশেষ দিনে আমাদের সাথে থাকার জন্য আপনাদের প্রতি রইল আন্তরিক কৃতজ্ঞতা।</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- venues: every function's place and time in one list, after the nine pages -->
   <section class="page plain" id="venues">
     <img class="el swing" style="left:2%;top:0;width:6%;--d:.2s" src="assets/el/tasselJas.webp" alt="" loading="lazy">
     <img class="el swing" style="right:2%;top:0;width:5%;--d:.4s" src="assets/el/tasselRed.webp" alt="" loading="lazy">
@@ -150,24 +179,6 @@
       <p class="bn-sub bn-sub--sm rise" style="--d:.3s" data-t="venues.sub">কোথায়, কবে — এক নজরে</p>
       <div class="vlist" id="vlist"></div>
       <img class="coin rise" style="--d:.5s" src="assets/el/coin.webp" alt="" loading="lazy">
-    </div>
-  </section>
-
-  <!-- 9 · moments & thanks -->
-  <section class="page" id="p9">
-    <div class="art">
-      <img class="bg" src="assets/bg/p9.webp" alt="" width="941" height="1672" loading="lazy" decoding="async">
-      <svg class="el orn drop" style="left:38%;top:14.2%;width:24%;--d:.1s" viewBox="0 0 200 24" aria-hidden="true"><use href="#flourish"/></svg>
-      <h2 class="txt bn-h1 rise" style="top:16.2%;--d:.2s" data-t="ending.title">আমাদের কিছু মুহূর্ত</h2>
-      <p class="txt bn-sub bn-sub--sm rise" style="top:22.2%;--d:.35s" data-t="ending.sub">ভালোবাসার কিছু স্মৃতি</p>
-      <img class="el photo tilt" style="left:11%;top:26.4%;width:39%;--r:-3deg;--d:.4s" src="assets/el/photo1.webp" alt="বর ও কনের ছবি ১" loading="lazy">
-      <img class="el photo tilt" style="left:51%;top:25.8%;width:40%;--r:2.5deg;--d:.6s" src="assets/el/photo2.webp" alt="বর ও কনের ছবি ২" loading="lazy">
-      <img class="el photo tilt" style="left:12%;top:44.6%;width:38%;--r:2deg;--d:.8s" src="assets/el/photo3.webp" alt="বর ও কনের ছবি ৩" loading="lazy">
-      <img class="el photo tilt" style="left:50%;top:44%;width:41%;--r:-2deg;--d:1s" src="assets/el/photo4.webp" alt="বর ও কনের ছবি ৪" loading="lazy">
-      <svg class="el orn rise" style="left:40%;top:62.4%;width:20%;--d:1.1s" viewBox="0 0 200 24" aria-hidden="true"><use href="#flourish"/></svg>
-      <h2 class="txt bn-h1 bn-h1--sm rise" style="top:64.4%;--d:1.2s" data-t="ending.thanks">আপনাদের<br>ধন্যবাদ</h2>
-      <span class="haze haze--end" aria-hidden="true"></span>
-      <p class="txt bn-para rise" style="top:74.6%;--d:1.35s" data-t="ending.para">আমাদের এই বিশেষ দিনে<br>আমাদের সাথে থাকার জন্য<br>আপনাদের প্রতি<br>রইল আন্তরিক কৃতজ্ঞতা।</p>
     </div>
   </section>
 
@@ -219,7 +230,7 @@
   </defs>
 </svg>
 
-<script type="module" src="js/app.js?v=3"></script>
+<script type="module" src="js/app.js?v=5"></script>
 <script src="/_credit/v1/credit.js" defer data-into="#rsvp .plain__in" data-color="#8a5a16"></script>
 </body>
 </html>

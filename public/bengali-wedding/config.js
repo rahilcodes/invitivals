@@ -1,6 +1,7 @@
 /* ─────────────────────────────────────────────────────────────────────────────
    Bengali wedding — everything the page says and knows about the events lives
-   here: the Bengali wording (transcribed from the designer's with-text pages),
+   here: the Bengali wording (as painted on the designer's with-text pages, which are the
+   pages themselves; config gives screen readers, the calendar and the venues list the same words),
    dates and times (Bangladesh time, Asia/Dhaka), venues, map searches, RSVP and
    contact details, media. index.html lays it out, js/app.js runs it.
 
@@ -41,13 +42,13 @@ export const invite = {
 
   /* the five functions, in the menu's order. date/time are local wall-clock (Asia/Dhaka). */
   events: [
-    { id: 'haldi', label: 'গায়ে হলুদ', title: 'গায়ে হলুদ', tagline: ['গায়ের হলুদে রঙিন হোক', 'ভালোবাসার আগমনী'],
+    { id: 'haldi', label: 'গায়ে হলুদ', title: 'গায়ে হলুদ', tagline: ['গায়ের হলুদের রঙিন হোক', 'ভালোবাসার আগমনী'],
       date: '2026-12-10', time: '13:00', durationMinutes: 180, dateBn: '১০ ডিসেম্বর ২০২৬', timeBn: 'দুপুর ১টা',
       venue: ['আমাদের বাসা,', 'ঢাকা'], mapQuery: 'Dhaka, Bangladesh' /* ► replace with the house address */ },
     { id: 'lakshmi', label: 'লক্ষ্মী পূজা', title: 'লক্ষ্মী পূজা', tagline: ['শুভ কাজের আগে', 'মায়ের আশীর্বাদ'],
       date: '2026-12-10', time: '10:00', durationMinutes: 120, dateBn: '১০ ডিসেম্বর ২০২৬', timeBn: 'সকাল ১০টা',
       venue: ['আমাদের বাসা,', 'ঢাকা'], mapQuery: 'Dhaka, Bangladesh' /* ► replace with the house address */ },
-    { id: 'sangeet', label: 'সঙ্গীত সন্ধ্যা', title: 'সঙ্গীত সন্ধ্যা', tagline: ['সুরে সুরে জমুক', 'আনন্দের আসর'],
+    { id: 'sangeet', label: 'সঙ্গীত সন্ধ্যা', title: 'সঙ্গীত সন্ধ্যা', tagline: ['সুরে সুরে জমুক', 'আমাদের আসর'],
       date: '2026-12-11', time: '18:00', durationMinutes: 240, dateBn: '১১ ডিসেম্বর ২০২৬', timeBn: 'সন্ধ্যা ৬টা',
       venue: ['কমিউনিটি সেন্টার,', 'গুলশান, ঢাকা'], mapQuery: 'Community Center, Gulshan, Dhaka' },
     { id: 'wedding', label: 'বিবাহ', title: 'বিবাহ', tagline: ['দুই প্রাণের এক হওয়ার', 'শুভ মুহূর্ত'],

@@ -104,18 +104,16 @@ pages move: petals fall, lanterns swing and glow, drapes drift, the date hides u
 
 ## Bengali Wedding (`public/bengali-wedding/`)
 
-A Bengali wedding invitation built from the designer's "bengali wedding" pack: nine text-free 941×1672 paintings
-(hero, scratch-to-reveal date, functions menu, গায়ে হলুদ, লক্ষ্মী পূজা, সঙ্গীত সন্ধ্যা, বিবাহ, ভোজন/রিসেপশন, moments & thanks)
-with the Bengali wording set as live text, plus two plain cream sections (venues, RSVP). A tap plays the sealed-envelope
-film with sound (fullscreen where the browser allows it); its last frame dissolves into the hero.
+An Invitivals design demo (not a client's invitation). Its nine pages are the designer's finished references,
+`invites/src/bengali-wedding/with text temp/1.png … 9.png`, used as drawn: the references are the specification.
+A tap plays the sealed-envelope film with sound (fullscreen where the browser allows it), then: hero, scratch-to-reveal
+date, functions menu, গায়ে হলুদ, লক্ষ্মী পূজা, সঙ্গীত সন্ধ্যা, বিবাহ, ভোজন, moments & thanks; after them a venues list and RSVP.
 
-- `config.js` — every Bengali string, the five functions (Asia/Dhaka dates, times, venues, map searches), RSVP/contact
-  details and media. The pack carried placeholders for the couple's names, the home addresses and the RSVP contact —
-  the file marks them with ►.
-- `js/app.js` — the intro, the menu and function pages (built from config), the scratch card, maps and calendar
-  (.ics + Google Calendar per function), music, RSVP (the form shows only when `rsvp.endpoint` is set)
-- `css/invite.css` — the pages at the paintings' proportion; every piece sits at percentages of its painting
-- `assets/bg/`, `assets/el/` — built by `node tools/build-bengali-wedding-art.mjs` from `invites/src/bengali-wedding/`
-  (the zip, not committed); `assets/media/` holds the intro film (re-encoded with ffmpeg, faststart), its poster and the song
-- `assets/og.jpg` — the link banner, by `node tools/bengali-wedding-og.mjs`
+- `assets/bg/r1…r9.webp` — built by `node tools/build-bengali-wedding-ref.mjs`, which also corrects six slips in the
+  references' Bengali with the references' own letters (listed at the top of the tool)
+- page 2: the cover the guest rubs away is the page's own gold; beneath it lies the scratch-off reference's date
+- the painted buttons and menu rows carry invisible real controls (`.hit`, boxes in % of the 941×1672 page); the words are
+  repeated for screen readers from `config.js`, which also feeds maps, calendar (.ics + Google, Asia/Dhaka) and the venues list
+- `tools/build-bengali-wedding-art.mjs` builds the older pieces still used by the venues section and the banner;
+  `assets/og.jpg` by `node tools/bengali-wedding-og.mjs`
 - `?open` skips the envelope while working on the page; in `astro dev` open `…/index.html`
