@@ -50,7 +50,7 @@ const VARIANTS = {
     title: 'Lokesh & Akansha · Wedding Invitation',
     description: 'You and your family are cordially invited to the wedding of Lokesh & Akansha — Thursday, 26 November 2026, Palm Luxuria Banquets, Panipat.',
     ogDescription: 'Thursday, 26 November 2026 · Panipat. Tap to open the invitation.',
-    og: 'cover-wedding-day.jpg',              // a new file name, so WhatsApp fetches the cover afresh (client, 2026-11-04)
+    og: 'og-wedding-day-26nov.jpg',           // the All Events cover's design with this page's date, under a new file name (client, 2026-11-04)
     state: true,                               // "…, Shodapur, Panipat, Haryana" (client, 2026-11-04, this page)
     lovingFamilies: false,                     // the sentence "The loving families of the bride and groom" is not on this page (client)
     welcomeNames: ['Pooja and Ashish', 'Pinki and Rohit'],
