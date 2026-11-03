@@ -776,3 +776,8 @@ html.is-open .intro.is-skipped .intro-video { transform: none; transition: none;
 html.is-sealed .swipe-cue { opacity: 0; transform: translateY(10px); }
 .swipe-cue.is-gone { opacity: 0; transform: translateY(10px); pointer-events: none; transition: opacity .3s ease, transform .3s ease; }
 @media (prefers-reduced-motion: reduce) { .swipe-arrows { animation: none; } }
+
+/* no "Wedding Festivities" heading (client, 2026-11-03): the wedding card sits under the stitch */
+.visually-hidden { position: absolute !important; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
+.events .sec-inner { padding-top: 6px; }
+.events .timeline { margin-top: 0; }

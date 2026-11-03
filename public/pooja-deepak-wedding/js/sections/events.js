@@ -1,17 +1,17 @@
 /* EventsSection — the days of celebration on one vertical gold line.
    Each event carries the family's own words (title, subtitle, verse, timings) exactly as written,
    a map and its own calendar entry; the line knows what is today. */
-import { Heading, Icon, FloralVine } from '../decor.js';
+import { Icon, FloralVine } from '../decor.js';
 import { $$, day, monthShort, weekdayShort, addToCalendar, dayState } from '../util.js';
 
-const WORDS = ['', 'One', 'Two', 'Three', 'Four', 'Five', 'Six', 'Seven'];
-const dayCount = (events) => new Set(events.map((e) => e.date.slice(0, 10))).size;
+/* the "Wedding Festivities" heading and its subtitle are left off at the client's request (2026-11-03); the
+   section keeps a hidden heading for screen readers */
 
 export const EventsSection = (cfg) => `
 <section class="sec events" id="events" aria-labelledby="events-h">
   ${FloralVine({ side: 'r', top: '60px', height: '640px', crop: 0, depth: 0.05, cls: 'vine-soft' })}
   <div class="sec-inner">
-    ${Heading('Wedding Festivities', `${dayCount(cfg.events) === 1 ? 'A day' : `${WORDS[dayCount(cfg.events)] || ''} days`} of rituals, music and blessings`.trim(), { id: 'events-h' })}
+    <h2 class="visually-hidden" id="events-h">The wedding</h2>
     <ol class="timeline">
       ${cfg.events.map((e, i) => `
         <li class="t-item ${e.main ? 'is-main' : ''}" data-reveal data-event="${i}">

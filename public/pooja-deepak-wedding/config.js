@@ -67,9 +67,7 @@ export const weddingConfig = {
 
   /* icon: vratham | nichayam | ring | haldi | mehendi | sangeet | muhurtham | forever | reception */
   events: [
-    { icon: 'haldi', name: 'Haldi', date: '2026-11-29T09:00:00+05:30',
-      details: [['Time', '9:00 AM']],
-      maps: 'https://maps.app.goo.gl/s6yeTBJ6DEE62A6y7' },
+    /* Haldi removed at the client's request (2026-11-03) */
     { icon: 'forever', name: 'Wedding Celebration', date: '2026-11-29T19:00:00+05:30', main: true,
       details: [['Time', '7:00 PM onwards · Dinner']],
       venue: 'R.S Farm Banquet, Near Parthala Bridge, Sector 12, Noida, Uttar Pradesh 201307',
@@ -86,7 +84,6 @@ export const weddingConfig = {
   travelNote: 'Both our venues, one tap from your maps',
   travel: [
     { icon: 'pin', title: 'R.S Farm Banquet', text: 'R.S Farm Banquet, Near Parthala Bridge, Sector 12, Noida, Uttar Pradesh 201307 · Wedding Celebration', link: { label: 'Wedding map', href: 'https://share.google/wCmAaZipCqtWKXlEY' } },
-    { icon: 'pin', title: 'Haldi', text: 'Sunday, 29 November · 9:00 AM', link: { label: 'Haldi map', href: 'https://maps.app.goo.gl/s6yeTBJ6DEE62A6y7' } },
   ],
 
   contact: null,
