@@ -650,3 +650,9 @@ html.is-open .intro{opacity:0;pointer-events:none}
 .blessing-sky .bs-ref{display:block;margin-top:4px;font-family:var(--gur,'Noto Serif Gurmukhi'),serif;font-size:clamp(.7rem,3vw,.8rem);font-weight:500;line-height:1.5;color:var(--gold-deep)}
 /* the smallest phones (320px): a little wider and tighter, so the block stays clear of the Golden Temple domes */
 @media (max-width:359px){.blessing-sky.bs-gurbani{top:22%;width:76%}.blessing-sky .bs-text-pa{font-size:.86rem;line-height:1.6}.blessing-sky .bs-src-pa{margin-top:10px}.blessing-sky .bs-src-pa::before{margin-bottom:9px}}
+/* centred in the arch's open sky (client, 2026-11-03): the flower sprays on the pillars are not mirror images, so the
+   clear space between them sits a little right of the scene's middle. That space is narrower than the first verse line on
+   a phone, so the block is narrower and the first line breaks at its pause, as the second already did */
+.blessing-sky.bs-gurbani{top:27.5%;left:51.5%;width:58%}
+.blessing-sky.bs-gurbani .bs-mark{margin:0 auto 6px}
+@media (max-width:359px){.blessing-sky.bs-gurbani{top:23.5%}}
