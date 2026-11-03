@@ -19,9 +19,9 @@ export function Rsvp(cfg) {
 
   /* ── the two tiles ── */
   const tiles = {};
-  const pick = (id, label, value) => {
+  const pick = (id, label, value, delay) => {
     const b = h('button', { class: 'tile', type: 'button', 'aria-pressed': 'false', 'aria-label': label }, h('img', { src: `assets/${id}.webp`, alt: '', decoding: 'async', draggable: 'false' }));
-    const wrap = h('div', { class: 's hit', style: { ...box(id), zIndex: 5 } }, b);
+    const wrap = h('div', { class: 's hit reveal', style: { ...box(id), zIndex: 5, '--d': `${delay}s` } }, b);
     tiles[value] = b;
     b.addEventListener('click', async () => {
       if (b.classList.contains('busy')) return;
@@ -45,8 +45,8 @@ export function Rsvp(cfg) {
       b.setAttribute('aria-pressed', String(v === value));
     }
   }
-  const will = pick('p5-will', 'Will attend', 'yes');
-  const unable = pick('p5-unable', 'Unable to attend', 'no');
+  const will = pick('p5-will', 'Will attend', 'yes', 0.5);
+  const unable = pick('p5-unable', 'Unable to attend', 'no', 0.62);
 
   /* ── the Dua box in the frame's empty area ── */
   const field = h('textarea', { class: 'dua-field', rows: '2', readonly: true, placeholder: cfg.placeholder, 'aria-label': 'Your dua for the couple' });

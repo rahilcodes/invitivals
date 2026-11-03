@@ -6,7 +6,7 @@ import { box } from './page.js';
 
 export function Countdown(targetIso) {
   const target = Date.parse(targetIso);
-  const cells = [0, 1, 2, 3].map((k) => h('div', { class: 's digit', style: { ...box(`p4-digit${k}`), zIndex: 3 } }, h('span', {}, '00')));
+  const cells = [0, 1, 2, 3].map((k) => h('div', { class: 's digit reveal', style: { ...box(`p4-digit${k}`), zIndex: 3, '--d': `${0.45 + k * 0.1}s` } }, h('span', {}, '00')));
   const live = h('div', { class: 'sr-only', 'aria-live': 'polite', 'aria-atomic': 'true' });
   const labels = ['days', 'hours', 'minutes', 'seconds'];
   let lastMinute = -1;

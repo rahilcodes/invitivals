@@ -67,6 +67,7 @@ export function mapsHref(ev) {
 
 /* fade in each page's overlays as it scrolls into view */
 export function observePages(root) {
+  if (!('IntersectionObserver' in window)) { root.classList.add('no-io'); return; } // nothing ever stays hidden
   const io = new IntersectionObserver((entries) => {
     for (const e of entries) if (e.isIntersecting) { e.target.classList.add('on'); io.unobserve(e.target); }
   }, { threshold: 0.15 });

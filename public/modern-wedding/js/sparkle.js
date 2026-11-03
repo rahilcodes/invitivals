@@ -1,11 +1,10 @@
-/* SparkleOverlay — a few champagne, dusty-mauve and rose-gold motes drifting gently down, the odd
-   satin petal among them, and a micro-glitter trail under the guest's finger. One fixed canvas with
-   pointer-events none, so it never blocks scrolling, links or inputs; the trail listens passively.
-   Off entirely for reduced motion. */
+/* SparkleOverlay — tiny white and silver motes drifting slowly down over the whole invitation, some
+   twinkling, a few catching the light as small four-point glints, and a micro-glitter trail under the
+   guest's finger. One fixed, device-pixel-ratio-aware canvas with pointer-events none, so it never
+   blocks scrolling, links or inputs; the trail listens passively. Off entirely for reduced motion. */
 import { h, reducedMotion } from './util.js';
 
-const TINTS = [[243, 220, 180], [243, 220, 180], [236, 206, 170], [201, 162, 184], [227, 180, 160], [214, 182, 150]];
-const PETAL = [233, 207, 217];
+const TINTS = [[255, 255, 255], [255, 255, 255], [244, 246, 250], [230, 234, 240], [214, 219, 228], [200, 206, 216]];
 
 export function SparkleOverlay() {
   if (reducedMotion()) return { show() {}, hide() {} };
@@ -16,18 +15,15 @@ export function SparkleOverlay() {
   const N = 26;
   const P = [], T = []; // drifting motes, touch glitter
 
-  const spawn = (p = {}) => {
-    const petal = Math.random() < 0.07;
-    return Object.assign(p, {
-      kind: petal ? 'petal' : Math.random() < 0.35 ? 'star' : 'dust',
-      tint: petal ? PETAL : TINTS[(Math.random() * TINTS.length) | 0],
-      x: Math.random() * W, y: -10 - Math.random() * H * 0.2,
-      r: petal ? 2.6 + Math.random() * 2.2 : 0.6 + Math.random() * 1.4,
-      vx: (Math.random() - 0.5) * 0.12, vy: petal ? 0.22 + Math.random() * 0.2 : 0.12 + Math.random() * 0.22,
-      sway: Math.random() * Math.PI * 2, rot: Math.random() * Math.PI, vr: (Math.random() - 0.5) * 0.01,
-      a: 0, max: petal ? 0.32 + Math.random() * 0.18 : 0.22 + Math.random() * 0.3, life: 0, span: 700 + Math.random() * 700,
-    });
-  };
+  const spawn = (p = {}) => Object.assign(p, {
+    kind: Math.random() < 0.3 ? 'star' : 'dust',
+    tint: TINTS[(Math.random() * TINTS.length) | 0],
+    x: Math.random() * W, y: -10 - Math.random() * H * 0.2,
+    r: 0.6 + Math.random() * 1.3,
+    vx: (Math.random() - 0.5) * 0.12, vy: 0.12 + Math.random() * 0.22,
+    sway: Math.random() * Math.PI * 2, tw: 0.02 + Math.random() * 0.05, twinkle: Math.random() < 0.6,
+    a: 0, max: 0.22 + Math.random() * 0.3, life: 0, span: 700 + Math.random() * 700,
+  });
   function resize() {
     dpr = Math.min(2, devicePixelRatio || 1);
     W = innerWidth; H = innerHeight;
@@ -50,13 +46,11 @@ export function SparkleOverlay() {
       p.life += dt;
       const t = p.life / p.span;
       p.a = p.max * Math.sin(Math.PI * Math.min(1, t)); // ease in, ease out: never a flash
-      p.sway += 0.01 * dt; p.rot += p.vr * dt;
+      if (p.twinkle) p.a *= 0.55 + 0.45 * Math.sin(p.life * p.tw); // a soft twinkle, never off
+      p.sway += 0.01 * dt;
       p.x += (p.vx + Math.sin(p.sway) * 0.08) * dt; p.y += p.vy * dt;
       if (t >= 1 || p.y > H + 12) spawn(p);
-      if (p.kind === 'petal') {
-        ctx.save(); ctx.translate(p.x, p.y); ctx.rotate(p.rot);
-        ctx.fillStyle = rgba(p.tint, p.a); ctx.beginPath(); ctx.ellipse(0, 0, p.r, p.r * 0.55, 0, 0, Math.PI * 2); ctx.fill(); ctx.restore();
-      } else if (p.kind === 'star') star(p.x, p.y, p.r, p.tint, p.a);
+      if (p.kind === 'star') star(p.x, p.y, p.r, p.tint, p.a);
       else {
         const g = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, p.r * 2.5);
         g.addColorStop(0, rgba(p.tint, p.a)); g.addColorStop(1, rgba(p.tint, 0));

@@ -114,13 +114,18 @@ async function page(n, refName, build) {
 
   const ctx = {
     W, H, ref, plate,
-    /* dark lettering and ornaments on a light panel: the strokes are what is darker than lum */
-    async text(id, region, { lum = 172 } = {}) {
+    /* dark lettering and ornaments on a light panel: the strokes are what is darker than lum
+       (light: true for cream or gold lettering on the burgundy plaques, with its glow) */
+    async text(id, region, { lum = 172, light = false, grow = 1, halo = 0 } = {}) {
       const r = await inRegion(region); const m = new Uint8Array(W * H);
-      for (let p = 0; p < W * H; p++) if (r[p] > 127 && !claimed[p] && lumAt(ref, p) < lum) m[p] = 1;
-      const mm = dilate(m, W, H, 1);
+      for (let p = 0; p < W * H; p++) if (r[p] > 127 && !claimed[p] && (light ? lumAt(ref, p) > lum : lumAt(ref, p) < lum)) m[p] = 1;
+      const mm = dilate(m, W, H, grow);
       for (let p = 0; p < W * H; p++) if (mm[p] && !claimed[p] && r[p] > 127) { claimed[p] = 1; m[p] = 1; }
-      pieces.push({ id, mask: m });
+      if (!halo) { pieces.push({ id, mask: m }); return; }
+      // glowing lettering: its halo (up to halo px, inside the region) travels with the overlay, so the plate is bare plaque
+      const area = dilate(m, W, H, halo);
+      for (let p = 0; p < W * H; p++) if (r[p] < 128) area[p] = 0;
+      pieces.push({ id, mask: m, erase: area, area });
     },
     /* a solid thing on the panel (a tile, a pill): what differs from the clean template there, its enclosed
        interior filled; the soft glow around it (up to `glow` px) travels with the overlay, so the plate is bare panel */
@@ -203,6 +208,9 @@ await page(1, '1.png', async (c) => {
 
 /* PAGE 2 — Save Our Date: the Reveal Date pill gives way to the Date Revealed element; the month may change. */
 await page(2, '2.png', async (c) => {
+  await c.text('p2-monogram', [395, 118, 150, 184]);
+  await c.text('p2-divider', [358, 300, 222, 48]);
+  await c.text('p2-title', [218, 338, 514, 258]);
   await c.text('p2-month', [292, 610, 352, 48]);
   await c.solid('p2-reveal', [204, 1066, 526, 146]);
   setBox('p2-reveal-hit', [220, 1080, 495, 112], c.W, c.H);
@@ -223,6 +231,9 @@ await page(2, '2.png', async (c) => {
 
 /* PAGE 3 — Our Functions: each card's wording is an overlay over the erased card, so it can be edited. */
 await page(3, '3.png', async (c) => {
+  await c.text('p3-monogram', [432, 82, 164, 186]);
+  await c.text('p3-title', [280, 276, 462, 168]);
+  await c.text('p3-divider', [432, 424, 176, 54]);
   for (const [k, dy] of [['n', 0], ['r', 509]]) {
     await c.text(`p3-${k}-title`, [440, 556 + dy, 225, 62]);
     await c.text(`p3-${k}-divider`, [462, 612 + dy, 170, 38], { lum: 190 });
@@ -241,17 +252,29 @@ await page(3, '3.png', async (c) => {
 
 /* PAGE 5 — RSVP: the two tiles are overlays (they light up when chosen); the Dua box area is HTML. */
 await page(5, '5.png', async (c) => {
+  await c.text('p5-ornament', [390, 344, 162, 86]);
+  await c.text('p5-title', [222, 436, 492, 232]);
+  await c.text('p5-divider1', [300, 660, 344, 60]);
+  await c.text('p5-divider2', [303, 996, 340, 60]);
+  await c.text('p5-dua-title', [335, 1050, 280, 140]);   // praying hands, laurels, "Dua for Us"
   await c.solid('p5-will', [184, 712, 262, 304]);   // clear of the dividers' central ornaments (x 450-492)
   await c.solid('p5-unable', [496, 712, 262, 304]);
   setBox('p5-dua-area', [232, 1192, 512, 126], c.W, c.H); // clear of the bottom-left flower
 });
 
 /* PAGE 6 — Thank You: the reference as it is; the page fades in as one. */
-await page(6, '6.png', async () => {});
+await page(6, '6.png', async (c) => {
+  await c.text('p6-title', [150, 400, 640, 235], { light: true, lum: 110, grow: 2, halo: 14 });   // Thank You, with its glow
+  await c.text('p6-lines', [280, 690, 400, 135], { light: true, lum: 110, grow: 2, halo: 14 });   // For your love & blessings
+  await c.text('p6-cartouche', [270, 975, 420, 185]);                                   // We are eagerly waiting…
+});
 
 /* PAGE 4 — the landscape countdown: the reference with the four figures erased; live figures are HTML. */
 await page(4, '4.png', async (c) => {
   const centers = [585, 796, 1010, 1225];
+  await c.text('p4-title', [620, 215, 510, 230], { light: true, lum: 105, grow: 2, halo: 14 });   // Until We Say Nikkah
+  await c.text('p4-divider', [730, 448, 340, 36], { light: true, lum: 105, grow: 2, halo: 14 });
+  for (const [k, x] of [[0, 530], [1, 741], [2, 955], [3, 1165]]) await c.text(`p4-label${k}`, [x, 634, k === 3 ? 130 : 120, 38], { light: true, lum: 105, halo: 8 });
   for (const cx of centers) await c.erase([cx - 58, 548, 116, 84]);
   centers.forEach((cx, k) => setBox(`p4-digit${k}`, [cx - 70, 540, 140, 100], c.W, c.H));
 });
