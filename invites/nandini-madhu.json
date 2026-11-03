@@ -38,5 +38,6 @@
     "ceremony": [{ "img": "art/ganesha.webp", "x": 282, "y": 390, "w": 172, "cls": "rise halo", "delay": 0.1, "alt": "Lord Ganesha" }]
   },
   "share": { "emblem": "art/ganesha.webp" },
-  "og": "og.jpg"
+  "og": "og.jpg",
+  "scrollCue": { "label": "Scroll to Explore", "at": 0.618, "_note": "the calm sky between the flourish under CEREMONY and the mountains (client, 2026-11-03)" }
 }

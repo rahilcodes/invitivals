@@ -104,6 +104,46 @@ function build(slug) {
   /* what the entrance needs is fetched first */
   const first = theme.entrance && theme.entrance.preload ? theme.entrance.preload : ['art/door.webp', 'art/door-leaf-l.webp', 'art/door-leaf-r.webp'];
   const colour = (theme.colors && theme.colors.theme) || '#f3dcc8';
+  /* "scrollCue": { "label": "Scroll to Explore", "at": 0.6 } puts a small bobbing chevron on the first plate, at that
+     fraction of its height (a calm patch of the art), once the doors have opened; it fades as soon as the guest scrolls and
+     a tap glides to the next plate. Only invitations that ask for it get it (Nandini & Madhu, 2026-11-03). */
+  const cue = I.scrollCue;
+  const cueCss = cue ? `<style>
+.scroll-cue{position:absolute;z-index:6;left:50%;top:${(Number(cue.at) || 0.6) * 100}%;transform:translate(-50%,-50%);display:flex;flex-direction:column;align-items:center;gap:3px;margin:0;padding:8px 14px;background:none;border:0;cursor:pointer;font:400 10px/1.2 "Marcellus",Georgia,serif;letter-spacing:.32em;text-indent:.32em;text-transform:uppercase;color:#8d1a3c;white-space:nowrap;text-shadow:0 0 6px rgba(255,249,242,.95),0 0 14px rgba(255,246,236,.9);opacity:0;pointer-events:none;transition:opacity .9s ease;-webkit-tap-highlight-color:transparent}
+.scroll-cue.is-on{opacity:1;pointer-events:auto}
+.scroll-cue svg{width:22px;height:20px;fill:none;stroke:#c6952c;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round;filter:drop-shadow(0 0 4px rgba(255,248,238,.95));animation:cue-bob 1.9s ease-in-out infinite}
+.scroll-cue svg path+path{opacity:.55}
+.scroll-cue:focus-visible{outline:2px solid #8d1a3c;outline-offset:3px;border-radius:8px}
+@keyframes cue-bob{0%,100%{transform:translateY(-2px)}50%{transform:translateY(4px)}}
+@media (min-width:600px){.scroll-cue{font-size:11px}}
+@media (prefers-reduced-motion:reduce){.scroll-cue svg{animation:none}}
+</style>
+` : '';
+  const cueJs = cue ? `<script>
+(function () {
+  var go = function () {
+  var first = document.querySelector("#world > .sec"); if (!first) return;
+  var b = document.createElement("button"); b.type = "button"; b.className = "scroll-cue";
+  b.setAttribute("aria-label", "Scroll down to the rest of the invitation");
+  b.innerHTML = '<span>${esc(cue.label || 'Scroll to Explore')}</span><svg viewBox="0 0 22 20" aria-hidden="true"><path d="M4 3l7 6 7-6"/><path d="M4 10l7 6 7-6"/></svg>';
+  if (getComputedStyle(first).position === "static") first.style.position = "relative";
+  first.appendChild(b);
+  var open = function () { return !document.body.classList.contains("locked") && !document.getElementById("entrance"); };
+  var sync = function () { b.classList.toggle("is-on", open() && window.scrollY < 40); };
+  new MutationObserver(function () { setTimeout(sync, 900); }).observe(document.body, { attributes: true, childList: true });
+  window.addEventListener("scroll", sync, { passive: true });
+  b.addEventListener("click", function () {
+    var next = first.nextElementSibling; if (!next) return;
+    var still = window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches;
+    window.scrollTo({ top: next.getBoundingClientRect().top + window.scrollY, behavior: still ? "auto" : "smooth" });
+  });
+  setTimeout(sync, 900);
+  };
+  /* after the engine, which builds the plates on DOMContentLoaded */
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", go); else go();
+})();
+</script>
+` : '';
   const html = `<!DOCTYPE html>
 <!-- generated from invites/${slug}.json by tools/new-invite.mjs — edit the json, not this file -->
 <html lang="en">
@@ -132,7 +172,7 @@ function build(slug) {
 ${first.map((p) => `<link rel="preload" as="image" href="${T}/${p}?v=${v}">`).join('\n')}
 <link rel="preload" as="font" type="font/woff2" href="${E}/fonts/marcellus-latin-400-normal.woff2" crossorigin>
 <link rel="stylesheet" href="${E}/engine.css?v=${v}">
-</head>
+${cueCss}</head>
 <body>
 
 <!-- the invitation in plain words: shown if scripts are blocked or fail, replaced by the artwork otherwise -->
@@ -156,7 +196,7 @@ ${I.hosts ? `  <p>${esc([I.hosts.title, I.hosts.names].filter(Boolean).join(' ')
 <script src="invite.js?v=${v}"></script>
 <script src="${T}/theme.js?v=${v}"></script>
 <script src="${E}/engine.js?v=${v}"></script>
-<script src="/_credit/v1/credit.js" defer data-into="#invite"></script>
+${cueJs}<script src="/_credit/v1/credit.js" defer data-into="#invite"></script>
 </body>
 </html>
 `;

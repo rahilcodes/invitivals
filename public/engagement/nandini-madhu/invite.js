@@ -107,5 +107,10 @@ window.INVITE = {
     "emblem": "art/ganesha.webp"
   },
   "og": "og.jpg",
-  "v": "e41322a3"
+  "scrollCue": {
+    "label": "Scroll to Explore",
+    "at": 0.618,
+    "_note": "the calm sky between the flourish under CEREMONY and the mountains (client, 2026-11-03)"
+  },
+  "v": "f5423099"
 };
