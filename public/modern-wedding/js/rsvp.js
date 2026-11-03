@@ -49,7 +49,7 @@ export function Rsvp(cfg) {
   const unable = pick('p5-unable', 'Unable to attend', 'no', 0.62);
 
   /* ── the Dua box in the frame's empty area ── */
-  const field = h('textarea', { class: 'dua-field', rows: '2', readonly: true, placeholder: cfg.placeholder, 'aria-label': 'Your dua for the couple' });
+  const field = h('input', { type: 'text', class: 'dua-field', readonly: true, placeholder: cfg.placeholder, 'aria-label': 'Your dua for the couple' });
   const submit = h('button', { class: 'dua-submit', type: 'button' }, 'Submit');
   const area = h('div', { class: 's hit dua', style: { ...box('p5-dua-area'), zIndex: 5 } }, field, submit);
   field.addEventListener('pointerdown', (e) => { e.preventDefault(); open(); });

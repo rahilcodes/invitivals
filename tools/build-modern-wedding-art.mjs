@@ -259,7 +259,7 @@ await page(5, '5.png', async (c) => {
   await c.text('p5-dua-title', [335, 1050, 280, 140]);   // praying hands, laurels, "Dua for Us"
   await c.solid('p5-will', [184, 712, 262, 304]);   // clear of the dividers' central ornaments (x 450-492)
   await c.solid('p5-unable', [496, 712, 262, 304]);
-  setBox('p5-dua-area', [232, 1192, 512, 126], c.W, c.H); // clear of the bottom-left flower
+  setBox('p5-dua-area', [232, 1188, 512, 140], c.W, c.H); // the frame's empty area, clear of the bottom-left flower
 });
 
 /* PAGE 6 — Thank You: the reference as it is; the page fades in as one. */

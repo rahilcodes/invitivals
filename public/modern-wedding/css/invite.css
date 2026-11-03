@@ -59,8 +59,9 @@ button { font: inherit; cursor: pointer; }
 /* ── opening screen: the film's first frame, Tap to Play ── */
 .opening { position: fixed; inset: 0; z-index: 50; background: #c9afc0 radial-gradient(ellipse at 50% 20%, #e8d3dd 0%, #cfb5c4 55%, #b596a9 100%); display: flex; align-items: flex-start; justify-content: center; overflow: hidden; transition: opacity .8s ease; }
 .opening.out { opacity: 0; pointer-events: none; }
-.opening .frame { position: relative; width: 100%; aspect-ratio: 720 / 1280; container-type: inline-size; }
-.opening .art { width: 100%; height: 100%; object-fit: contain; }
+/* the poster fills the whole viewport (its satin runs to every edge), so a phone taller than 9:16 never shows a bare strip */
+.opening .frame { position: relative; width: 100%; height: 100dvh; container-type: inline-size; }
+.opening .art { width: 100%; height: 100%; object-fit: cover; object-position: 50% 50%; }
 .tap { position: absolute; left: 50%; bottom: 9%; transform: translateX(-50%); display: flex; flex-direction: column; align-items: center; gap: 10px; background: none; border: 0; color: var(--cream); letter-spacing: .3em; text-transform: uppercase; font-size: clamp(11px, 2.8cqw, 15px); padding: 12px 20px; }
 .tap .ring { width: 62px; height: 62px; border-radius: 50%; border: 1px solid rgba(251,241,234,.9); display: grid; place-items: center; box-shadow: 0 0 0 0 rgba(251,241,234,.5); animation: pulse 2.4s ease-out infinite; backdrop-filter: blur(3px); background: rgba(74,31,53,.28); }
 .tap .ring::before { content: ''; width: 0; height: 0; border-left: 15px solid var(--cream); border-top: 9px solid transparent; border-bottom: 9px solid transparent; margin-left: 4px; }
@@ -70,8 +71,10 @@ button { font: inherit; cursor: pointer; }
 /* ── opening film: same box as the poster and as page 1, so nothing jumps ── */
 .film { position: fixed; inset: 0; z-index: 45; background: #c9afc0 radial-gradient(ellipse at 50% 20%, #e8d3dd 0%, #cfb5c4 55%, #b596a9 100%); display: none; align-items: flex-start; justify-content: center; overflow: hidden; }
 .film.playing { display: flex; }
-.film video { width: 100%; height: auto; aspect-ratio: 720 / 1280; object-fit: contain; background: transparent; display: block; }
+/* the film fills the viewport like the poster; as it ends it settles to the hero's exact box while dissolving onto it */
+.film video { width: 100%; height: 100dvh; object-fit: cover; object-position: 50% 50%; background: transparent; display: block; transition: height 1.2s ease; }
 .film.fade { transition: opacity 1.2s ease; opacity: 0; pointer-events: none; }
+.film.fade video { height: calc(var(--col) * 1280 / 720); }
 .skip { position: fixed; right: calc(14px + env(safe-area-inset-right, 0px)); bottom: calc(18px + env(safe-area-inset-bottom, 0px)); z-index: 46; background: rgba(74,31,53,.5); border: 1px solid rgba(251,241,234,.5); color: var(--cream); border-radius: 999px; padding: 8px 16px; font-size: 12px; letter-spacing: .2em; text-transform: uppercase; }
 
 /* ── music control ── */
@@ -115,16 +118,16 @@ button { font: inherit; cursor: pointer; }
 .tile { display: block; width: 100%; height: 100%; padding: 0; border: 0; background: none; -webkit-tap-highlight-color: transparent; transition: opacity .4s ease, transform .4s ease, filter .4s ease; }
 .tile img { display: block; width: 100%; height: 100%; max-width: none; -webkit-user-drag: none; user-select: none; }
 .tile.dim { opacity: .55; }
-.tile.sel { transform: scale(1.04); filter: drop-shadow(0 0 1.4cqw rgba(255,214,150,.95)) drop-shadow(0 .4cqw 1cqw rgba(90,40,70,.25)); }
+.tile.sel { filter: drop-shadow(0 0 1.4cqw rgba(255,214,150,.95)) drop-shadow(0 .4cqw 1cqw rgba(90,40,70,.25)); } /* a glow only: both tiles keep the same size */
 .tile.busy { pointer-events: none; }
 .tile:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; border-radius: 2cqw; }
-.dua { display: flex; flex-direction: row; align-items: stretch; gap: 1.6cqw; }
-.dua-field { flex: 1; width: 100%; min-height: 0; resize: none; font: 500 14px/1.22 var(--serif); color: var(--plum); background: rgba(255,255,255,.34); border: 1px solid rgba(138,90,116,.3); border-radius: 1.6cqw; padding: .9cqw 1.6cqw; box-shadow: inset 0 1px 2px rgba(74,31,53,.08); cursor: text; overflow: hidden; }
-.dua-submit { align-self: center; flex: none; }
+/* the dua box: one full-width line (a long placeholder is ellipsised, never wrapped) with the small Submit pill under its right end, all inside the frame's empty area */
+.dua { display: flex; flex-direction: column; align-items: stretch; justify-content: center; gap: 1.1cqw; }
+.dua-field { flex: none; width: 100%; height: 52%; min-height: 0; font: 500 clamp(12px, 3.5cqw, 15px) var(--serif); line-height: 1; color: var(--plum); background: rgba(255,255,255,.34); border: 1px solid rgba(138,90,116,.3); border-radius: 1.6cqw; padding: 0 2cqw; box-shadow: inset 0 1px 2px rgba(74,31,53,.08); cursor: text; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .dua-field::placeholder { color: rgba(74,31,53,.55); font-style: italic; }
 .dua-field:focus { outline: none; border-color: rgba(216,179,106,.9); }
-.dua-submit { align-self: flex-end; border: 1px solid rgba(216,179,106,.9); background: linear-gradient(180deg, #f8ecf0, #e8cfd9); color: var(--plum); border-radius: 99px; padding: .35em 1.3em; font-size: 12px; letter-spacing: .18em; text-transform: uppercase; line-height: 1.2; position: relative; box-shadow: 0 .3cqw .8cqw rgba(74,31,53,.18); -webkit-tap-highlight-color: transparent; }
-.dua-submit::before { content: ''; position: absolute; inset: -12px -8px; } /* a finger-sized target around the small pill */
+.dua-submit { align-self: flex-end; flex: none; border: 1px solid rgba(216,179,106,.9); background: linear-gradient(180deg, #f8ecf0, #e8cfd9); color: var(--plum); border-radius: 99px; padding: .3em 1.2em; font-size: clamp(10px, 2.7cqw, 12px); letter-spacing: .18em; text-transform: uppercase; line-height: 1.2; position: relative; box-shadow: 0 .3cqw .8cqw rgba(74,31,53,.18); -webkit-tap-highlight-color: transparent; }
+.dua-submit::before { content: ''; position: absolute; inset: -8px -8px; } /* a finger-sized target around the small pill */
 .dua-submit:active { filter: brightness(1.05); }
 .dua.done .dua-field { color: var(--plum); border-color: rgba(216,179,106,.7); }
 
