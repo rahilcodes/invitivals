@@ -1,16 +1,20 @@
 /* ─────────────────────────────────────────────────────────────────────────────
    Bengali wedding — runs the page: the tap that plays the intro film (with
    sound, fullscreen where allowed) and fades its last frame into the hero; the
-   words from config; the functions menu and the five function pages; the
+   words from config; the lifted wording and hanging pieces of each page (assets/fx); the five function
+   pages and the Our Functions view; the
    scratch-to-reveal date; maps and calendar; music; RSVP and contact.
    ───────────────────────────────────────────────────────────────────────────── */
-import { invite as C } from '../config.js?v=5';
+import { invite as C } from '../config.js?v=6';
 
 const $ = (s, r = document) => r.querySelector(s);
 const $$ = (s, r = document) => [...r.querySelectorAll(s)];
 const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
 const opening = $('#opening'), film = $('#film'), tap = $('#tap'), skip = $('#skip'), mute = $('#mute'), stage = $('#stage');
-const ANIM = '.rise, .drop, .pop, .tilt, .swing, .develop, .glow';
+const ANIM = '.rise, .drop, .pop, .tilt, .swing, .develop, .glow, .lift, .sway';
+/* the lifted words wait hidden for their entrance only once this script runs: if it never does, they simply show */
+document.documentElement.classList.add('anim');
+if (!('IntersectionObserver' in window)) document.documentElement.classList.remove('anim');
 const esc = (s) => String(s).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
 const lines = (v) => (Array.isArray(v) ? v.map(esc).join('<br>') : esc(v));
 const get = (k) => k.split('.').reduce((o, p) => (o == null ? o : o[p]), C);
@@ -33,14 +37,47 @@ for (const ev of C.events) {
     <p>${esc(C.labels.date)}: ${esc(ev.dateBn)}। ${esc(C.labels.time)}: ${esc(ev.timeBn)}। ${esc(C.labels.venue)}: ${esc(ev.venue.join(' '))}</p>`;
   if (maps) maps.href = mapsUrl(ev);
 }
-/* venues section */
-$('#vlist').innerHTML = C.events.map((ev) => `<article class="vcard rise" style="--d:.2s">
+/* ── Our Functions: every function's card (date, time, place, map, calendar) in a view of its own inside the
+   invitation. It opens from page 3; Back (the button or the browser's) returns to the same place in the scroll. ── */
+const fview = $('#functions');
+$('#vlist').innerHTML = C.events.map((ev) => `<article class="vcard" id="card-${ev.id}">
     <h3>${esc(ev.label)}</h3><p class="when">${esc(ev.dateBn)} · ${esc(ev.timeBn)}</p><p class="where">${lines(ev.venue)}</p>
     <div class="row"><a class="btn btn--primary" href="${mapsUrl(ev)}" target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#i-pin"/></svg>${esc(C.labels.maps)}</a>
     <button class="btn" type="button" data-cal="${ev.id}"><svg aria-hidden="true"><use href="#i-cal"/></svg>${esc(C.labels.calendar)}</button></div></article>`).join('');
+let savedY = 0, fviewFrom = null;
+function openFview(focusId, from, push = true) {
+  if (!fview.hidden) return;
+  savedY = window.scrollY; fviewFrom = from || null;
+  fview.hidden = false; fview.scrollTop = 0;
+  document.body.classList.add('fview-open');
+  stage.setAttribute('aria-hidden', 'true'); stage.inert = true;
+  if (push) { try { history.pushState({ fview: 1, y: savedY }, '', '#functions'); } catch {} }
+  const card = focusId && $(`#card-${focusId}`);
+  for (const c of $$('.vcard.is-target', fview)) c.classList.remove('is-target');
+  setTimeout(() => {
+    if (card) { fview.scrollTop = Math.max(0, card.offsetTop - $('.fview__bar').offsetHeight - 12); card.classList.add('is-target'); }
+    $('#fviewBack').focus({ preventScroll: true });
+  }, 30);
+}
+function closeFview(fromPop = false) {
+  if (fview.hidden) return;
+  fview.hidden = true;
+  document.body.classList.remove('fview-open');
+  stage.removeAttribute('aria-hidden'); stage.inert = false;
+  window.scrollTo(0, savedY);                                     // the exact place the guest left
+  requestAnimationFrame(() => { window.scrollTo(0, savedY); fviewFrom?.focus({ preventScroll: true }); });
+  if (!fromPop && history.state && history.state.fview) history.back();
+}
+$('#fviewBack').addEventListener('click', () => closeFview());
+addEventListener('popstate', () => { if (!fview.hidden && location.hash !== '#functions') closeFview(true); else if (fview.hidden && location.hash === '#functions' && opened) openFview(null, null, false); });
+document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && !fview.hidden && $('#sheet').hidden) closeFview(); });
+document.addEventListener('click', (e) => {
+  const a = e.target.closest('[data-fview]'); if (!a) return;
+  e.preventDefault(); openFview(a.dataset.fview, a);
+});
 /* in-page links scroll smoothly and never leave a stale hash in the address */
 document.addEventListener('click', (e) => {
-  const a = e.target.closest('a[href^="#"]'); if (!a) return;
+  const a = e.target.closest('a[href^="#"]'); if (!a || a.hasAttribute('data-fview')) return;
   const t = document.getElementById(a.getAttribute('href').slice(1)); if (!t) return;
   e.preventDefault(); t.scrollIntoView({ behavior: reduced ? 'auto' : 'smooth', block: 'start' });
   setTimeout(() => { const f = t.querySelector('.back, .hit, h2'); if (f) { if (f.matches('h2')) f.setAttribute('tabindex', '-1'); f.focus({ preventScroll: true }); } }, reduced ? 0 : 600);
@@ -95,7 +132,6 @@ function open() {
   const p = film.play();
   if (p && p.then) p.then(() => { started = true; playing = true; opening.classList.add('is-playing'); skip.hidden = false; })
     .catch(() => { film.muted = true; film.play().then(() => { started = true; playing = true; opening.classList.add('is-playing'); skip.hidden = false; }).catch(enter); });
-  if (!reduced) heroIn();
 }
 tap.addEventListener('click', open);
 opening.addEventListener('click', (e) => { if (!playing && e.target !== tap && !tap.contains(e.target)) open(); });
@@ -113,6 +149,7 @@ function openStage() {
   setTimeout(() => { opening.remove(); try { film.removeAttribute('src'); film.load(); } catch {} repaint(); }, 1300);
   setTimeout(repaint, 2600);
   watch();
+  if (location.hash === '#functions') { try { history.replaceState(null, '', location.pathname + location.search); history.pushState({ fview: 1 }, '', '#functions'); } catch {} openFview(null, null, false); }
 }
 function repaint() {
   requestAnimationFrame(() => {
@@ -121,7 +158,7 @@ function repaint() {
   });
 }
 function watch() {
-  const io = new IntersectionObserver((entries) => { for (const e of entries) if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }, { threshold: 0.1, rootMargin: '0px 0px -5% 0px' });
+  const io = new IntersectionObserver((entries) => { for (const e of entries) if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }, { threshold: 0, rootMargin: '0px 0px -8% 0px' });
   for (const el of $$(ANIM, stage)) if (!el.classList.contains('in')) io.observe(el);
 }
 if (new URLSearchParams(location.search).has('open')) { wantMusic = false; openStage(); }

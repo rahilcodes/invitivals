@@ -1,0 +1,452 @@
+[
+ {
+  "page": 1,
+  "id": "orn",
+  "file": "p1-orn.webp",
+  "kind": "text",
+  "x": 40.383,
+  "y": 3.708,
+  "w": 19.66
+ },
+ {
+  "page": 1,
+  "id": "title",
+  "file": "p1-title.webp",
+  "kind": "text",
+  "x": 29.118,
+  "y": 10.945,
+  "w": 49.309
+ },
+ {
+  "page": 1,
+  "id": "sub",
+  "file": "p1-sub.webp",
+  "kind": "text",
+  "x": 34.538,
+  "y": 18.66,
+  "w": 32.412
+ },
+ {
+  "page": 1,
+  "id": "names",
+  "file": "p1-names.webp",
+  "kind": "name",
+  "x": 19.341,
+  "y": 63.876,
+  "w": 64.612
+ },
+ {
+  "page": 1,
+  "id": "para",
+  "file": "p1-para.webp",
+  "kind": "text",
+  "x": 27.843,
+  "y": 71.172,
+  "w": 46.015
+ },
+ {
+  "page": 2,
+  "id": "title",
+  "file": "p2-title.webp",
+  "kind": "text",
+  "x": 21.467,
+  "y": 26.376,
+  "w": 60.361
+ },
+ {
+  "page": 2,
+  "id": "sub",
+  "file": "p2-sub.webp",
+  "kind": "text",
+  "x": 26.036,
+  "y": 36.244,
+  "w": 49.947
+ },
+ {
+  "page": 2,
+  "id": "strandL",
+  "file": "p2-strandL.webp",
+  "kind": "sway",
+  "x": 15.197,
+  "y": 17.763,
+  "w": 6.376
+ },
+ {
+  "page": 2,
+  "id": "strandR",
+  "file": "p2-strandR.webp",
+  "kind": "sway",
+  "x": 81.403,
+  "y": 18.301,
+  "w": 7.226
+ },
+ {
+  "page": 3,
+  "id": "title",
+  "file": "p3-title.webp",
+  "kind": "text",
+  "x": 21.041,
+  "y": 15.49,
+  "w": 57.811
+ },
+ {
+  "page": 3,
+  "id": "sub",
+  "file": "p3-sub.webp",
+  "kind": "text",
+  "x": 27.63,
+  "y": 28.589,
+  "w": 45.802
+ },
+ {
+  "page": 3,
+  "id": "row1",
+  "file": "p3-row1.webp",
+  "kind": "btn",
+  "x": 14.665,
+  "y": 37.739,
+  "w": 71.945
+ },
+ {
+  "page": 3,
+  "id": "row2",
+  "file": "p3-row2.webp",
+  "kind": "btn",
+  "x": 14.665,
+  "y": 46.112,
+  "w": 71.945
+ },
+ {
+  "page": 3,
+  "id": "row3",
+  "file": "p3-row3.webp",
+  "kind": "btn",
+  "x": 14.665,
+  "y": 54.545,
+  "w": 71.945
+ },
+ {
+  "page": 3,
+  "id": "row4",
+  "file": "p3-row4.webp",
+  "kind": "btn",
+  "x": 14.665,
+  "y": 63.038,
+  "w": 71.945
+ },
+ {
+  "page": 3,
+  "id": "row5",
+  "file": "p3-row5.webp",
+  "kind": "btn",
+  "x": 14.665,
+  "y": 71.471,
+  "w": 71.945
+ },
+ {
+  "page": 3,
+  "id": "lanternL",
+  "file": "p3-lanternL.webp",
+  "kind": "sway",
+  "x": 7.864,
+  "y": 20.933,
+  "w": 8.289
+ },
+ {
+  "page": 3,
+  "id": "lanternR",
+  "file": "p3-lanternR.webp",
+  "kind": "sway",
+  "x": 84.166,
+  "y": 20.634,
+  "w": 7.864
+ },
+ {
+  "page": 4,
+  "id": "title",
+  "file": "p4-title.webp",
+  "kind": "text",
+  "x": 38.257,
+  "y": 8.852,
+  "w": 45.696
+ },
+ {
+  "page": 4,
+  "id": "tag",
+  "file": "p4-tag.webp",
+  "kind": "text",
+  "x": 39.851,
+  "y": 24.761,
+  "w": 38.257
+ },
+ {
+  "page": 4,
+  "id": "det",
+  "file": "p4-det.webp",
+  "kind": "text",
+  "x": 25.505,
+  "y": 69.258,
+  "w": 48.034
+ },
+ {
+  "page": 4,
+  "id": "maps",
+  "file": "p4-maps.webp",
+  "kind": "btn",
+  "x": 22.529,
+  "y": 80.144,
+  "w": 56.961
+ },
+ {
+  "page": 4,
+  "id": "cal",
+  "file": "p4-cal.webp",
+  "kind": "btn",
+  "x": 24.23,
+  "y": 85.167,
+  "w": 52.285
+ },
+ {
+  "page": 5,
+  "id": "title",
+  "file": "p5-title.webp",
+  "kind": "text",
+  "x": 27.418,
+  "y": 7.057,
+  "w": 50.691
+ },
+ {
+  "page": 5,
+  "id": "tag",
+  "file": "p5-tag.webp",
+  "kind": "text",
+  "x": 33.794,
+  "y": 21.651,
+  "w": 35.494
+ },
+ {
+  "page": 5,
+  "id": "det",
+  "file": "p5-det.webp",
+  "kind": "text",
+  "x": 26.249,
+  "y": 68.9,
+  "w": 47.396
+ },
+ {
+  "page": 5,
+  "id": "maps",
+  "file": "p5-maps.webp",
+  "kind": "btn",
+  "x": 19.979,
+  "y": 80.742,
+  "w": 62.062
+ },
+ {
+  "page": 5,
+  "id": "cal",
+  "file": "p5-cal.webp",
+  "kind": "btn",
+  "x": 19.979,
+  "y": 86.483,
+  "w": 61.849
+ },
+ {
+  "page": 6,
+  "id": "lanternL",
+  "file": "p6-lanternL.webp",
+  "kind": "sway",
+  "x": 1.063,
+  "y": 15.55,
+  "w": 9.352
+ },
+ {
+  "page": 6,
+  "id": "lanternR",
+  "file": "p6-lanternR.webp",
+  "kind": "sway",
+  "x": 76.939,
+  "y": 19.737,
+  "w": 8.077
+ },
+ {
+  "page": 6,
+  "id": "title",
+  "file": "p6-title.webp",
+  "kind": "text",
+  "x": 25.292,
+  "y": 7.656,
+  "w": 53.56
+ },
+ {
+  "page": 6,
+  "id": "tag",
+  "file": "p6-tag.webp",
+  "kind": "text",
+  "x": 34.538,
+  "y": 22.249,
+  "w": 34.006
+ },
+ {
+  "page": 6,
+  "id": "det",
+  "file": "p6-det.webp",
+  "kind": "text",
+  "x": 25.717,
+  "y": 71.292,
+  "w": 48.99
+ },
+ {
+  "page": 6,
+  "id": "maps",
+  "file": "p6-maps.webp",
+  "kind": "btn",
+  "x": 19.341,
+  "y": 83.493,
+  "w": 61.955
+ },
+ {
+  "page": 6,
+  "id": "cal",
+  "file": "p6-cal.webp",
+  "kind": "btn",
+  "x": 19.766,
+  "y": 88.995,
+  "w": 61.211
+ },
+ {
+  "page": 7,
+  "id": "title",
+  "file": "p7-title.webp",
+  "kind": "text",
+  "x": 32.412,
+  "y": 8.493,
+  "w": 37.726
+ },
+ {
+  "page": 7,
+  "id": "tag",
+  "file": "p7-tag.webp",
+  "kind": "text",
+  "x": 33.156,
+  "y": 22.967,
+  "w": 35.707
+ },
+ {
+  "page": 7,
+  "id": "det",
+  "file": "p7-det.webp",
+  "kind": "text",
+  "x": 23.911,
+  "y": 71.292,
+  "w": 53.135
+ },
+ {
+  "page": 7,
+  "id": "maps",
+  "file": "p7-maps.webp",
+  "kind": "btn",
+  "x": 18.278,
+  "y": 83.612,
+  "w": 63.337
+ },
+ {
+  "page": 7,
+  "id": "cal",
+  "file": "p7-cal.webp",
+  "kind": "btn",
+  "x": 19.129,
+  "y": 89.234,
+  "w": 61.637
+ },
+ {
+  "page": 8,
+  "id": "lanternL",
+  "file": "p8-lanternL.webp",
+  "kind": "sway",
+  "x": 15.94,
+  "y": 19.737,
+  "w": 6.908
+ },
+ {
+  "page": 8,
+  "id": "title",
+  "file": "p8-title.webp",
+  "kind": "text",
+  "x": 30.074,
+  "y": 7.177,
+  "w": 45.696
+ },
+ {
+  "page": 8,
+  "id": "tag",
+  "file": "p8-tag.webp",
+  "kind": "text",
+  "x": 33.794,
+  "y": 21.471,
+  "w": 37.194
+ },
+ {
+  "page": 8,
+  "id": "det",
+  "file": "p8-det.webp",
+  "kind": "text",
+  "x": 26.993,
+  "y": 69.498,
+  "w": 48.672
+ },
+ {
+  "page": 8,
+  "id": "maps",
+  "file": "p8-maps.webp",
+  "kind": "btn",
+  "x": 18.278,
+  "y": 81.938,
+  "w": 66.206
+ },
+ {
+  "page": 8,
+  "id": "cal",
+  "file": "p8-cal.webp",
+  "kind": "btn",
+  "x": 18.278,
+  "y": 87.44,
+  "w": 66.206
+ },
+ {
+  "page": 9,
+  "id": "title",
+  "file": "p9-title.webp",
+  "kind": "text",
+  "x": 16.791,
+  "y": 13.038,
+  "w": 68.438
+ },
+ {
+  "page": 9,
+  "id": "sub",
+  "file": "p9-sub.webp",
+  "kind": "text",
+  "x": 29.543,
+  "y": 22.01,
+  "w": 40.808
+ },
+ {
+  "page": 9,
+  "id": "thanks",
+  "file": "p9-thanks.webp",
+  "kind": "text",
+  "x": 24.23,
+  "y": 61.483,
+  "w": 51.01
+ },
+ {
+  "page": 9,
+  "id": "para",
+  "file": "p9-para.webp",
+  "kind": "text",
+  "x": 35.919,
+  "y": 72.129,
+  "w": 29.118
+ }
+]
