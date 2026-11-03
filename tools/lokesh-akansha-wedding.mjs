@@ -50,6 +50,7 @@ const VARIANTS = {
     title: 'Lokesh & Akansha · Wedding Invitation',
     description: 'You and your family are cordially invited to the wedding of Lokesh & Akansha — Thursday, 26 November 2026, Palm Luxuria Banquets, Panipat.',
     ogDescription: 'Thursday, 26 November 2026 · Panipat. Tap to open the invitation.',
+    state: true,                               // "…, Shodapur, Panipat, Haryana" (client, 2026-11-04, this page)
     lovingFamilies: false,                     // the sentence "The loving families of the bride and groom" is not on this page (client)
     welcomeNames: ['Pooja and Ashish', 'Pinki and Rohit'],
     pairs: true,
@@ -287,7 +288,7 @@ ${V.pre ? `
         <div class="venue-frame pop" style="--d:.15s"><img src="assets/el/venue.webp" alt="${esc(VENUES.palm.name)}, lit up at night, with a red carpet to its doors" width="1200" height="675" loading="lazy" decoding="async"></div>
         ${PIN}
         <p class="venue rise">${esc(VENUES.palm.name)}</p>
-        <p class="addr rise" style="--d:.15s">${esc(VENUES.palm.address)}</p>
+        <p class="addr rise" style="--d:.15s">${esc(VENUES.palm.address + (V.state ? ', Haryana' : ''))}</p>
         ${MAPBTN('palm')}
       </div>
     </div>
@@ -326,7 +327,7 @@ ${V.pre ? `
 export const invite = {
   slug: '${slug}',
   /* the family's song, once they send it (e.g. 'assets/media/music.mp3'); null = no music and no music button */
-  music: ${slug === MAIN ? "'assets/media/music.mp3'" : 'null'},
+  music: 'assets/media/music.mp3',   // Jashn-e-Bahaaraa, the family's song (client, 2026-11-04), on both pages
   /* the venue links exactly as the family supplied them; a venue without a link shows its button greyed out */
   venues: ${JSON.stringify(VENUES, null, 2).replace(/\n/g, '\n  ')},
   /* give up on the opening film after this long and go straight to the invitation */
@@ -344,7 +345,7 @@ for (const slug of ASKED.length ? ASKED : [MAIN]) {
   fs.writeFileSync(path.join(D, 'index.html'), html);
   fs.writeFileSync(path.join(D, 'config.js'), config);
   if (slug === DAY) {
-    for (const f of ['css/invite.css', 'js/app.js', 'favicon.svg', '.htaccess', 'assets/bg/opening-la.webp', 'assets/el/la-logo.webp', 'assets/media/opening-la-v2.mp4']) {
+    for (const f of ['css/invite.css', 'js/app.js', 'favicon.svg', '.htaccess', 'assets/bg/opening-la.webp', 'assets/el/la-logo.webp', 'assets/media/opening-la-v2.mp4', 'assets/media/music.mp3']) {
       fs.mkdirSync(path.dirname(path.join(D, f)), { recursive: true });
       fs.copyFileSync(path.join(M, f), path.join(D, f));
     }

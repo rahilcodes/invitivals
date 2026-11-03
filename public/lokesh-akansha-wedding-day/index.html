@@ -15,18 +15,23 @@
 <meta property="og:url" content="https://invitivals.com/lokesh-akansha-wedding-day/">
 <meta property="og:title" content="Lokesh &amp; Akansha · Wedding Invitation">
 <meta property="og:description" content="Thursday, 26 November 2026 · Panipat. Tap to open the invitation.">
-<meta property="og:image" content="https://invitivals.com/lokesh-akansha-wedding-day/assets/og.jpg">
+<meta property="og:image" content="https://invitivals.com/lokesh-akansha-wedding-day/assets/og.jpg?v=2">
+<meta property="og:image:secure_url" content="https://invitivals.com/lokesh-akansha-wedding-day/assets/og.jpg?v=2">
 <meta property="og:image:type" content="image/jpeg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Lokesh &amp; Akansha · The Wedding · 26 November 2026 · Panipat, Haryana">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Lokesh &amp; Akansha · Wedding Invitation">
+<meta name="twitter:description" content="Thursday, 26 November 2026 · Panipat. Tap to open the invitation.">
+<meta name="twitter:image" content="https://invitivals.com/lokesh-akansha-wedding-day/assets/og.jpg?v=2">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="preload" as="image" href="assets/bg/opening-la.webp" fetchpriority="high">
-<link rel="modulepreload" href="js/app.js?v=1">
+<link rel="modulepreload" href="js/app.js?v=2">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Pinyon+Script&family=Cinzel:wght@500;600&family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Noto+Serif+Devanagari:wght@500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/invite.css?v=1">
+<link rel="stylesheet" href="css/invite.css?v=2">
 </head>
 <body class="is-closed">
 
@@ -37,7 +42,7 @@
   <button class="tap" id="tap" type="button"><span class="tap__ring" aria-hidden="true"></span><span>Tap to Open</span></button>
 </div>
 
-<audio id="music" loop preload="auto"></audio>
+<audio id="music" loop preload="none"></audio>
 <button class="mute" id="mute" type="button" aria-pressed="false" aria-label="Pause music" hidden>
   <svg viewBox="0 0 24 24" aria-hidden="true"><path class="mute__note" d="M9 18.5a2.5 2.5 0 1 1-2-2.45V6l10-2v11.5a2.5 2.5 0 1 1-2-2.45V7.4l-6 1.2z"/><path class="mute__bar" d="M4 4l16 16"/></svg>
 </button>
@@ -47,13 +52,13 @@
 
   <!-- 1 · the cover: Ganesha, the shloka, the couple -->
   <section class="page page--1" id="p1">
-    <div class="art" style="--h:177.68">
+    <div class="art art--fit" style="--h:177.68">
       <img class="bg" src="assets/bg/p1.webp" alt="" width="941" height="1672" decoding="async">
-      <img class="el swing" style="left:12%;top:5.5%;width:5%;--d:.9s" src="assets/el/bell.webp" alt="">
-      <img class="el swing" style="left:6%;top:11.5%;width:5.6%;--d:1.1s" src="assets/el/bell.webp" alt="">
-      <img class="el swing" style="right:12%;top:5.5%;width:5%;--d:1s" src="assets/el/bell.webp" alt="">
-      <img class="el swing" style="right:6%;top:11.5%;width:5.6%;--d:1.2s" src="assets/el/bell.webp" alt="">
-      <div class="flow" style="--top:13.5;--side:13">
+      <img class="el swing" style="left:12%;top:calc(var(--cq) * 9.8);width:5%;--d:.9s" src="assets/el/bell.webp" alt="">
+      <img class="el swing" style="left:6%;top:calc(var(--cq) * 20.4);width:5.6%;--d:1.1s" src="assets/el/bell.webp" alt="">
+      <img class="el swing" style="right:12%;top:calc(var(--cq) * 9.8);width:5%;--d:1s" src="assets/el/bell.webp" alt="">
+      <img class="el swing" style="right:6%;top:calc(var(--cq) * 20.4);width:5.6%;--d:1.2s" src="assets/el/bell.webp" alt="">
+      <div class="flow" style="--top:13.5;--side:13;--bottom:6">
         <img class="orn drop" style="width:calc(var(--cq) * 11);margin-top:0;--d:.2s" src="assets/el/ganesha.webp" alt="Ganesha">
         <img class="orn rise" style="width:calc(var(--cq) * 22);margin:calc(var(--cq) * 1.6) auto calc(var(--cq) * 2.4);--d:.4s" src="assets/el/garland.webp" alt="">
         <p class="shloka rise" lang="sa" style="--d:.55s"><span>शिवशक्त्यात्मरूपाय</span><span>दम्पत्योः प्रीतये सदा।</span><span>दाम्पत्यं सफलं भूयात्</span><span>मङ्गलम् च दिने दिने॥</span></p>
@@ -70,12 +75,37 @@
     </div>
   </section>
 
+  <!-- Save the Date: a gold-foil scratch card; underneath, the dates (scratch with a finger or the mouse) -->
+  <section class="page" id="p-save">
+    <div class="art art--fit" style="--h:169.29">
+      <img class="bg" src="assets/bg/p2.webp" alt="" width="964" height="1632" loading="lazy" decoding="async">
+      <img class="el swing" style="left:5.5%;top:calc(var(--cq) * 60.9);width:8%;--d:.6s" src="assets/el/tasselB.webp" alt="" loading="lazy">
+      <img class="el swing" style="right:5.5%;top:calc(var(--cq) * 64.3);width:7%;--d:.8s" src="assets/el/tasselA.webp" alt="" loading="lazy">
+      <div class="flow" style="--top:33;--side:14">
+        <h2 class="script script--lg rise">Save the Date</h2>
+        <div class="scard rise" id="scard" style="--d:.3s">
+          <div class="scard__face" id="scardFace">
+            <p class="scard__kicker">Our Wedding</p>
+            <p class="scard__day">Thursday</p>
+            <p class="scard__num">26</p>
+            <p class="scard__month">November <span>2026</span></p>
+            <img class="scard__orn" src="assets/el/garland.webp" alt="" loading="lazy">
+            <p class="scard__place">Panipat, Haryana</p>
+          </div>
+          <canvas class="scard__foil" id="foil" role="button" tabindex="0" aria-label="Scratch card: rub it with your finger or the mouse to reveal our wedding dates. Press Enter to reveal." aria-describedby="scardNote"></canvas>
+          <span class="scard__hint" id="scardHint" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M9 11.2V5.5a1.5 1.5 0 0 1 3 0v4.7l.1-1.2a1.5 1.5 0 0 1 3 .1v1.3a1.5 1.5 0 0 1 3 .2V12a1.5 1.5 0 0 1 2.9.3v3.4c0 3.5-2.6 6.3-6.2 6.3h-1.3c-2 0-3.4-.8-4.7-2.4L5.7 15.6a1.6 1.6 0 0 1 2.3-2.2z"/></svg></span>
+          <p class="sr-only" id="scardNote" aria-live="polite">Scratch the card to reveal the dates.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- 2 · the invitation -->
   <section class="page" id="p-invite">
-    <div class="art" style="--h:177.68">
+    <div class="art art--fit" style="--h:177.68">
       <img class="bg" src="assets/bg/p4.webp" alt="" width="941" height="1672" loading="lazy" decoding="async">
-      <img class="el swing" style="left:12%;top:15%;width:5.5%;--d:.5s" src="assets/el/bell.webp" alt="" loading="lazy">
-      <img class="el swing" style="right:11%;top:20%;width:5.5%;--d:.6s" src="assets/el/bell.webp" alt="" loading="lazy">
+      <img class="el swing" style="left:12%;top:calc(var(--cq) * 26.7);width:5.5%;--d:.5s" src="assets/el/bell.webp" alt="" loading="lazy">
+      <img class="el swing" style="right:11%;top:calc(var(--cq) * 35.5);width:5.5%;--d:.6s" src="assets/el/bell.webp" alt="" loading="lazy">
       <div class="flow" style="--top:52;--side:16">
         <p class="para rise">You and your family are cordially invited to celebrate the wedding of</p>
         <p class="script script--md gap-m rise" style="--d:.3s">Lokesh &amp; Akansha</p>
@@ -87,12 +117,12 @@
 
   <!-- 3 · the families: the groom's first, then the bride's (mother before father, grandmother before grandfather) -->
   <section class="page" id="p-fam">
-    <div class="art" style="--h:177.68">
+    <div class="art art--fit" style="--h:177.68">
       <img class="bg" src="assets/bg/p1.webp" alt="" width="941" height="1672" loading="lazy" decoding="async">
-      <img class="el swing" style="left:12%;top:5.5%;width:5%;--d:.9s" src="assets/el/bell.webp" alt="" loading="lazy">
-      <img class="el swing" style="left:6%;top:11.5%;width:5.6%;--d:1.1s" src="assets/el/bell.webp" alt="" loading="lazy">
-      <img class="el swing" style="right:12%;top:5.5%;width:5%;--d:1s" src="assets/el/bell.webp" alt="" loading="lazy">
-      <img class="el swing" style="right:6%;top:11.5%;width:5.6%;--d:1.2s" src="assets/el/bell.webp" alt="" loading="lazy">
+      <img class="el swing" style="left:12%;top:calc(var(--cq) * 9.8);width:5%;--d:.9s" src="assets/el/bell.webp" alt="" loading="lazy">
+      <img class="el swing" style="left:6%;top:calc(var(--cq) * 20.4);width:5.6%;--d:1.1s" src="assets/el/bell.webp" alt="" loading="lazy">
+      <img class="el swing" style="right:12%;top:calc(var(--cq) * 9.8);width:5%;--d:1s" src="assets/el/bell.webp" alt="" loading="lazy">
+      <img class="el swing" style="right:6%;top:calc(var(--cq) * 20.4);width:5.6%;--d:1.2s" src="assets/el/bell.webp" alt="" loading="lazy">
       <div class="flow" style="--top:24;--side:13">
         <h2 class="script script--lg rise">Our Families</h2>
         <img class="orn rise" style="width:calc(var(--cq) * 18);--d:.15s" src="assets/el/garland.webp" alt="" loading="lazy">
@@ -119,10 +149,10 @@
 
   <!-- 4 · the couple's own photograph, whole -->
   <section class="page" id="p-hands">
-    <div class="art" style="--h:177.68">
+    <div class="art art--fit" style="--h:177.68">
       <img class="bg" src="assets/bg/p5.webp" alt="" width="941" height="1672" loading="lazy" decoding="async">
-      <img class="el swing" style="left:15%;top:8.5%;width:5%;--d:.5s" src="assets/el/bell.webp" alt="" loading="lazy">
-      <img class="el swing" style="right:14%;top:8%;width:5%;--d:.6s" src="assets/el/bell.webp" alt="" loading="lazy">
+      <img class="el swing" style="left:15%;top:calc(var(--cq) * 15.1);width:5%;--d:.5s" src="assets/el/bell.webp" alt="" loading="lazy">
+      <img class="el swing" style="right:14%;top:calc(var(--cq) * 14.2);width:5%;--d:.6s" src="assets/el/bell.webp" alt="" loading="lazy">
       <div class="flow" style="--top:26;--side:12">
         <h2 class="script script--lg rise">Hand in Hand</h2>
         <img class="orn rise" style="width:calc(var(--cq) * 16);--d:.25s" src="assets/el/garland.webp" alt="" loading="lazy">
@@ -133,12 +163,12 @@
 
   <!-- 5 · the wedding day -->
   <section class="page" id="p-wedding">
-    <div class="art" style="--h:177.68">
+    <div class="art art--fit" style="--h:177.68">
       <img class="bg" src="assets/bg/p4.webp" alt="" width="941" height="1672" loading="lazy" decoding="async">
-      <img class="el swing" style="left:12%;top:15%;width:5.5%;--d:.5s" src="assets/el/bell.webp" alt="" loading="lazy">
-      <img class="el swing" style="right:11%;top:20%;width:5.5%;--d:.6s" src="assets/el/bell.webp" alt="" loading="lazy">
-      <img class="el swing" style="left:2.5%;top:57%;width:5%;--d:.9s" src="assets/el/bell2.webp" alt="" loading="lazy">
-      <img class="el swing" style="right:3%;top:59%;width:5%;--d:1s" src="assets/el/bell2.webp" alt="" loading="lazy">
+      <img class="el swing" style="left:12%;top:calc(var(--cq) * 26.7);width:5.5%;--d:.5s" src="assets/el/bell.webp" alt="" loading="lazy">
+      <img class="el swing" style="right:11%;top:calc(var(--cq) * 35.5);width:5.5%;--d:.6s" src="assets/el/bell.webp" alt="" loading="lazy">
+      <img class="el swing" style="left:2.5%;top:calc(var(--cq) * 101.3);width:5%;--d:.9s" src="assets/el/bell2.webp" alt="" loading="lazy">
+      <img class="el swing" style="right:3%;top:calc(var(--cq) * 104.8);width:5%;--d:1s" src="assets/el/bell2.webp" alt="" loading="lazy">
       <div class="flow" style="--top:40;--side:14">
         <h2 class="script script--md rise">The Wedding Day</h2>
         <p class="datebar gap-m rise" style="--d:.15s">Thursday<small>26 November 2026</small></p>
@@ -157,14 +187,14 @@
 
   <!-- 6 · the wedding venue: its picture (assets/el/venue.webp — replace that file to change it), name, address, map -->
   <section class="page" id="p-venue">
-    <div class="art" style="--h:169.29">
+    <div class="art art--fit" style="--h:169.29">
       <img class="bg" src="assets/bg/p2.webp" alt="" width="964" height="1632" loading="lazy" decoding="async">
       <div class="flow" style="--top:31;--side:14">
         <h2 class="script script--md rise">Wedding Venue</h2>
         <div class="venue-frame pop" style="--d:.15s"><img src="assets/el/venue.webp" alt="Palm Luxuria Banquets, lit up at night, with a red carpet to its doors" width="1200" height="675" loading="lazy" decoding="async"></div>
         <svg class="pin" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a7 7 0 0 0-7 7c0 5.2 7 13 7 13s7-7.8 7-13a7 7 0 0 0-7-7zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5z"/></svg>
         <p class="venue rise">Palm Luxuria Banquets</p>
-        <p class="addr rise" style="--d:.15s">Bal Vikas Progressive School Road, Shodapur, Panipat</p>
+        <p class="addr rise" style="--d:.15s">Bal Vikas Progressive School Road, Shodapur, Panipat, Haryana</p>
         <a class="maps rise" data-maps="palm" target="_blank" rel="noopener" style="--d:.5s"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a7 7 0 0 0-7 7c0 5.2 7 13 7 13s7-7.8 7-13a7 7 0 0 0-7-7zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5z"/></svg><span>View on Map</span></a>
       </div>
     </div>
@@ -191,6 +221,6 @@
 </main>
 
 <noscript><p style="padding:40px 24px;text-align:center;font-family:Georgia,serif;color:#5a3a30">Please enable JavaScript to open this invitation.</p></noscript>
-<script type="module" src="js/app.js?v=1"></script>
+<script type="module" src="js/app.js?v=2"></script>
 </body>
 </html>
