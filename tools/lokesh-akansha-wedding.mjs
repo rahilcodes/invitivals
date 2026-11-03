@@ -50,6 +50,7 @@ const VARIANTS = {
     title: 'Lokesh & Akansha · Wedding Invitation',
     description: 'You and your family are cordially invited to the wedding of Lokesh & Akansha — Thursday, 26 November 2026, Palm Luxuria Banquets, Panipat.',
     ogDescription: 'Thursday, 26 November 2026 · Panipat. Tap to open the invitation.',
+    og: 'cover-wedding-day.jpg',              // a new file name, so WhatsApp fetches the cover afresh (client, 2026-11-04)
     state: true,                               // "…, Shodapur, Panipat, Haryana" (client, 2026-11-04, this page)
     lovingFamilies: false,                     // the sentence "The loving families of the bride and groom" is not on this page (client)
     welcomeNames: ['Pooja and Ashish', 'Pinki and Rohit'],
@@ -106,8 +107,8 @@ function page(slug) {
 <meta property="og:url" content="${url}">
 <meta property="og:title" content="${esc(V.title)}">
 <meta property="og:description" content="${esc(V.ogDescription)}">
-<meta property="og:image" content="${url}assets/og.jpg?v=2">
-<meta property="og:image:secure_url" content="${url}assets/og.jpg?v=2">
+<meta property="og:image" content="${url}assets/${V.og || 'og.jpg?v=2'}">
+<meta property="og:image:secure_url" content="${url}assets/${V.og || 'og.jpg?v=2'}">
 <meta property="og:image:type" content="image/jpeg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
@@ -115,7 +116,7 @@ function page(slug) {
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="${esc(V.title)}">
 <meta name="twitter:description" content="${esc(V.ogDescription)}">
-<meta name="twitter:image" content="${url}assets/og.jpg?v=2">
+<meta name="twitter:image" content="${url}assets/${V.og || 'og.jpg?v=2'}">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="preload" as="image" href="assets/bg/opening-la.webp" fetchpriority="high">
 <link rel="modulepreload" href="js/app.js?v=2">

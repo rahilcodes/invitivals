@@ -21,6 +21,14 @@
   .amp b { font: 400 54px/1 'Pinyon Script', cursive; color: #a1742a; }
   .d { margin-top: 18px; font: 700 27px Cinzel, serif; letter-spacing: .12em; padding-left: .12em; color: #6e1630; }
   .p { margin-top: 6px; font: 600 18px Cinzel, serif; letter-spacing: .32em; padding-left: .32em; color: #9a6c22; }
+  /* ?big=1 (the wedding-day cover, 2026-11-04): larger names and date, still inside the centre square WhatsApp crops to */
+  body.big .seal { width: 104px; height: 104px; }
+  body.big .k { margin-top: 18px; font-size: 20px; }
+  body.big .n { font-size: 122px; line-height: 1; }
+  body.big .k + .n { margin-top: 6px; }
+  body.big .amp { width: 330px; margin: -4px 0 -2px; }
+  body.big .d { margin-top: 16px; font-size: 27px; letter-spacing: .07em; padding-left: .07em; }
+  body.big .p { font-size: 19px; }
 </style></head>
 <body>
   <div class="art" id="art"></div>
@@ -37,6 +45,7 @@
     const q = new URLSearchParams(location.search), A = `../public/${q.get('slug')}/assets/`;
     document.getElementById('art').style.backgroundImage = `url(${A}bg/p4.webp)`;
     document.getElementById('logo').src = `${A}el/la-logo.webp`;
+    if (q.has('big')) document.body.classList.add('big');
     document.getElementById('d').textContent = (q.get('d') || '').toUpperCase();
   </script>
 </body></html>
