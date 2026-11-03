@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 /* Lokesh & Akansha — writes the two groom-side WEDDING pages (client brief 2026-11-04):
 
-     node tools/lokesh-akansha-wedding.mjs
+     node tools/lokesh-akansha-wedding.mjs [slug …]      (default: lokesh-akansha-wedding only; name lokesh-akansha-wedding-day to rebuild it)
 
    public/lokesh-akansha-wedding       all functions: the loving families + seven names, Haldi, Mehndi & Sangeet, the wedding day
    public/lokesh-akansha-wedding-day   the wedding day only: no "loving families" sentence, Pooja & Ashish and Pinki & Rohit,
@@ -68,15 +68,19 @@ const ICON = {
 };
 const PIN = '<svg class="pin" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a7 7 0 0 0-7 7c0 5.2 7 13 7 13s7-7.8 7-13a7 7 0 0 0-7-7zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5z"/></svg>';
 const MAPBTN = (k) => `<a class="maps rise" data-maps="${k}" target="_blank" rel="noopener" style="--d:.5s"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a7 7 0 0 0-7 7c0 5.2 7 13 7 13s7-7.8 7-13a7 7 0 0 0-7-7zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5z"/></svg><span>View on Map</span></a>`;
+const TASSELS = `<img class="el swing" style="left:5.5%;top:${at(36, 169.29)};width:8%;--d:.6s" src="assets/el/tasselB.webp" alt="" loading="lazy">
+      <img class="el swing" style="right:5.5%;top:${at(38, 169.29)};width:7%;--d:.8s" src="assets/el/tasselA.webp" alt="" loading="lazy">`;
 const timeline = (list) => `<ol class="tl">${list.map((e, i) => `
           <li class="rise" style="--d:${(.15 + i * .15).toFixed(2)}s"><span class="medal" aria-hidden="true"><svg viewBox="0 0 48 48">${ICON[e.icon]}</svg></span>
             <div><h3 class="ev__name">${esc(e.name)}</h3><p class="ev__time">${esc(e.time)}</p></div></li>`).join('')}
         </ol>`;
-const bells = (y1, y2) => `
-      <img class="el swing" style="left:12%;top:${y1}%;width:5%;--d:.9s" src="assets/el/bell.webp" alt="">
-      <img class="el swing" style="left:6%;top:${y2}%;width:5.6%;--d:1.1s" src="assets/el/bell.webp" alt="">
-      <img class="el swing" style="right:12%;top:${y1}%;width:5%;--d:1s" src="assets/el/bell.webp" alt="">
-      <img class="el swing" style="right:6%;top:${y2}%;width:5.6%;--d:1.2s" src="assets/el/bell.webp" alt="">`;
+const bells = (y1, y2, H = 177.68) => `
+      <img class="el swing" style="left:12%;top:${at(y1, H)};width:5%;--d:.9s" src="assets/el/bell.webp" alt="">
+      <img class="el swing" style="left:6%;top:${at(y2, H)};width:5.6%;--d:1.1s" src="assets/el/bell.webp" alt="">
+      <img class="el swing" style="right:12%;top:${at(y1, H)};width:5%;--d:1s" src="assets/el/bell.webp" alt="">
+      <img class="el swing" style="right:6%;top:${at(y2, H)};width:5.6%;--d:1.2s" src="assets/el/bell.webp" alt="">`;
+/* a height on the painting (percent of the painting) as a length that does not change with the page's height */
+function at(pct, H) { return `calc(var(--cq) * ${(pct * H / 100).toFixed(1)})`; }
 
 function page(slug) {
   const V = VARIANTS[slug], url = `https://invitivals.com/${slug}/`;
@@ -101,18 +105,23 @@ function page(slug) {
 <meta property="og:url" content="${url}">
 <meta property="og:title" content="${esc(V.title)}">
 <meta property="og:description" content="${esc(V.ogDescription)}">
-<meta property="og:image" content="${url}assets/og.jpg">
+<meta property="og:image" content="${url}assets/og.jpg?v=2">
+<meta property="og:image:secure_url" content="${url}assets/og.jpg?v=2">
 <meta property="og:image:type" content="image/jpeg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Lokesh &amp; Akansha · The Wedding · ${V.pre ? '25 – 26 November 2026' : '26 November 2026'} · Panipat, Haryana">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="${esc(V.title)}">
+<meta name="twitter:description" content="${esc(V.ogDescription)}">
+<meta name="twitter:image" content="${url}assets/og.jpg?v=2">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="preload" as="image" href="assets/bg/opening-la.webp" fetchpriority="high">
-<link rel="modulepreload" href="js/app.js?v=1">
+<link rel="modulepreload" href="js/app.js?v=2">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Pinyon+Script&family=Cinzel:wght@500;600&family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Noto+Serif+Devanagari:wght@500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/invite.css?v=1">
+<link rel="stylesheet" href="css/invite.css?v=2">
 </head>
 <body class="is-closed">
 
@@ -123,7 +132,7 @@ function page(slug) {
   <button class="tap" id="tap" type="button"><span class="tap__ring" aria-hidden="true"></span><span>Tap to Open</span></button>
 </div>
 
-<audio id="music" loop preload="auto"></audio>
+<audio id="music" loop preload="none"></audio>
 <button class="mute" id="mute" type="button" aria-pressed="false" aria-label="Pause music" hidden>
   <svg viewBox="0 0 24 24" aria-hidden="true"><path class="mute__note" d="M9 18.5a2.5 2.5 0 1 1-2-2.45V6l10-2v11.5a2.5 2.5 0 1 1-2-2.45V7.4l-6 1.2z"/><path class="mute__bar" d="M4 4l16 16"/></svg>
 </button>
@@ -133,9 +142,9 @@ function page(slug) {
 
   <!-- 1 · the cover: Ganesha, the shloka, the couple -->
   <section class="page page--1" id="p1">
-    <div class="art" style="--h:177.68">
+    <div class="art art--fit" style="--h:177.68">
       <img class="bg" src="assets/bg/p1.webp" alt="" width="941" height="1672" decoding="async">${bells(5.5, 11.5)}
-      <div class="flow" style="--top:13.5;--side:13">
+      <div class="flow" style="--top:13.5;--side:13;--bottom:6">
         <img class="orn drop" style="width:calc(var(--cq) * 11);margin-top:0;--d:.2s" src="assets/el/ganesha.webp" alt="Ganesha">
         <img class="orn rise" style="width:calc(var(--cq) * 22);margin:calc(var(--cq) * 1.6) auto calc(var(--cq) * 2.4);--d:.4s" src="assets/el/garland.webp" alt="">
         <p class="shloka rise" lang="sa" style="--d:.55s">${SHLOKA.map((l) => `<span>${l}</span>`).join('')}</p>
@@ -152,12 +161,36 @@ function page(slug) {
     </div>
   </section>
 
+  <!-- Save the Date: a gold-foil scratch card; underneath, the dates (scratch with a finger or the mouse) -->
+  <section class="page" id="p-save">
+    <div class="art art--fit" style="--h:169.29">
+      <img class="bg" src="assets/bg/p2.webp" alt="" width="964" height="1632" loading="lazy" decoding="async">
+      ${TASSELS}
+      <div class="flow" style="--top:33;--side:14">
+        <h2 class="script script--lg rise">Save the Date</h2>
+        <div class="scard rise" id="scard" style="--d:.3s">
+          <div class="scard__face" id="scardFace">
+            <p class="scard__kicker">Our Wedding</p>
+            <p class="scard__day">${V.pre ? 'Wednesday &amp; Thursday' : 'Thursday'}</p>
+            <p class="scard__num">${V.pre ? '25<span>–</span>26' : '26'}</p>
+            <p class="scard__month">November <span>2026</span></p>
+            <img class="scard__orn" src="assets/el/garland.webp" alt="" loading="lazy">
+            <p class="scard__place">Panipat, Haryana</p>
+          </div>
+          <canvas class="scard__foil" id="foil" role="button" tabindex="0" aria-label="Scratch card: rub it with your finger or the mouse to reveal our wedding dates. Press Enter to reveal." aria-describedby="scardNote"></canvas>
+          <span class="scard__hint" id="scardHint" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M9 11.2V5.5a1.5 1.5 0 0 1 3 0v4.7l.1-1.2a1.5 1.5 0 0 1 3 .1v1.3a1.5 1.5 0 0 1 3 .2V12a1.5 1.5 0 0 1 2.9.3v3.4c0 3.5-2.6 6.3-6.2 6.3h-1.3c-2 0-3.4-.8-4.7-2.4L5.7 15.6a1.6 1.6 0 0 1 2.3-2.2z"/></svg></span>
+          <p class="sr-only" id="scardNote" aria-live="polite">Scratch the card to reveal the dates.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- 2 · the invitation -->
   <section class="page" id="p-invite">
-    <div class="art" style="--h:177.68">
+    <div class="art art--fit" style="--h:177.68">
       <img class="bg" src="assets/bg/p4.webp" alt="" width="941" height="1672" loading="lazy" decoding="async">
-      <img class="el swing" style="left:12%;top:15%;width:5.5%;--d:.5s" src="assets/el/bell.webp" alt="" loading="lazy">
-      <img class="el swing" style="right:11%;top:20%;width:5.5%;--d:.6s" src="assets/el/bell.webp" alt="" loading="lazy">
+      <img class="el swing" style="left:12%;top:${at(15, 177.68)};width:5.5%;--d:.5s" src="assets/el/bell.webp" alt="" loading="lazy">
+      <img class="el swing" style="right:11%;top:${at(20, 177.68)};width:5.5%;--d:.6s" src="assets/el/bell.webp" alt="" loading="lazy">
       <div class="flow" style="--top:${V.pairs ? 52 : 30};--side:16">
         ${invite}
         <p class="script script--md gap-m rise" style="--d:.3s">Lokesh &amp; Akansha</p>
@@ -169,7 +202,7 @@ function page(slug) {
 
   <!-- 3 · the families: the groom's first, then the bride's (mother before father, grandmother before grandfather) -->
   <section class="page" id="p-fam">
-    <div class="art" style="--h:177.68">
+    <div class="art art--fit" style="--h:177.68">
       <img class="bg" src="assets/bg/p1.webp" alt="" width="941" height="1672" loading="lazy" decoding="async">${bells(5.5, 11.5).replace(/alt="">/g, 'alt="" loading="lazy">')}
       <div class="flow" style="--top:24;--side:13">
         <h2 class="script script--lg rise">Our Families</h2>
@@ -197,10 +230,10 @@ function page(slug) {
 
   <!-- 4 · the couple's own photograph, whole -->
   <section class="page" id="p-hands">
-    <div class="art" style="--h:177.68">
+    <div class="art art--fit" style="--h:177.68">
       <img class="bg" src="assets/bg/p5.webp" alt="" width="941" height="1672" loading="lazy" decoding="async">
-      <img class="el swing" style="left:15%;top:8.5%;width:5%;--d:.5s" src="assets/el/bell.webp" alt="" loading="lazy">
-      <img class="el swing" style="right:14%;top:8%;width:5%;--d:.6s" src="assets/el/bell.webp" alt="" loading="lazy">
+      <img class="el swing" style="left:15%;top:${at(8.5, 177.68)};width:5%;--d:.5s" src="assets/el/bell.webp" alt="" loading="lazy">
+      <img class="el swing" style="right:14%;top:${at(8, 177.68)};width:5%;--d:.6s" src="assets/el/bell.webp" alt="" loading="lazy">
       <div class="flow" style="--top:26;--side:12">
         <h2 class="script script--lg rise">Hand in Hand</h2>
         <img class="orn rise" style="width:calc(var(--cq) * 16);--d:.25s" src="assets/el/garland.webp" alt="" loading="lazy">
@@ -211,10 +244,9 @@ function page(slug) {
 ${V.pre ? `
   <!-- 5 · the pre-wedding celebrations, at COSMOS -->
   <section class="page" id="p-pre">
-    <div class="art" style="--h:169.29">
+    <div class="art art--fit" style="--h:169.29">
       <img class="bg" src="assets/bg/p2.webp" alt="" width="964" height="1632" loading="lazy" decoding="async">
-      <img class="el swing" style="left:5.5%;top:36%;width:8%;--d:.6s" src="assets/el/tasselB.webp" alt="" loading="lazy">
-      <img class="el swing" style="right:5.5%;top:38%;width:7%;--d:.8s" src="assets/el/tasselA.webp" alt="" loading="lazy">
+      ${TASSELS}
       <div class="flow" style="--top:31;--side:14">
         <h2 class="script script--lg rise">Pre-Wedding<br>Celebrations</h2>
         <p class="datebar gap-m rise" style="--d:.15s">Wednesday<small>25 November 2026</small></p>
@@ -231,12 +263,12 @@ ${V.pre ? `
 ` : ''}
   <!-- ${V.pre ? '6' : '5'} · the wedding day -->
   <section class="page" id="p-wedding">
-    <div class="art" style="--h:177.68">
+    <div class="art art--fit" style="--h:177.68">
       <img class="bg" src="assets/bg/p4.webp" alt="" width="941" height="1672" loading="lazy" decoding="async">
-      <img class="el swing" style="left:12%;top:15%;width:5.5%;--d:.5s" src="assets/el/bell.webp" alt="" loading="lazy">
-      <img class="el swing" style="right:11%;top:20%;width:5.5%;--d:.6s" src="assets/el/bell.webp" alt="" loading="lazy">
-      <img class="el swing" style="left:2.5%;top:57%;width:5%;--d:.9s" src="assets/el/bell2.webp" alt="" loading="lazy">
-      <img class="el swing" style="right:3%;top:59%;width:5%;--d:1s" src="assets/el/bell2.webp" alt="" loading="lazy">
+      <img class="el swing" style="left:12%;top:${at(15, 177.68)};width:5.5%;--d:.5s" src="assets/el/bell.webp" alt="" loading="lazy">
+      <img class="el swing" style="right:11%;top:${at(20, 177.68)};width:5.5%;--d:.6s" src="assets/el/bell.webp" alt="" loading="lazy">
+      <img class="el swing" style="left:2.5%;top:${at(57, 177.68)};width:5%;--d:.9s" src="assets/el/bell2.webp" alt="" loading="lazy">
+      <img class="el swing" style="right:3%;top:${at(59, 177.68)};width:5%;--d:1s" src="assets/el/bell2.webp" alt="" loading="lazy">
       <div class="flow" style="--top:40;--side:14">
         <h2 class="script script--md rise">The Wedding Day</h2>
         <p class="datebar gap-m rise" style="--d:.15s">Thursday<small>26 November 2026</small></p>
@@ -248,7 +280,7 @@ ${V.pre ? `
 
   <!-- ${V.pre ? '7' : '6'} · the wedding venue: its picture (assets/el/venue.webp — replace that file to change it), name, address, map -->
   <section class="page" id="p-venue">
-    <div class="art" style="--h:169.29">
+    <div class="art art--fit" style="--h:169.29">
       <img class="bg" src="assets/bg/p2.webp" alt="" width="964" height="1632" loading="lazy" decoding="async">
       <div class="flow" style="--top:31;--side:14">
         <h2 class="script script--md rise">Wedding Venue</h2>
@@ -285,7 +317,7 @@ ${V.pre ? `
 </main>
 
 <noscript><p style="padding:40px 24px;text-align:center;font-family:Georgia,serif;color:#5a3a30">Please enable JavaScript to open this invitation.</p></noscript>
-<script type="module" src="js/app.js?v=1"></script>
+<script type="module" src="js/app.js?v=2"></script>
 </body>
 </html>
 `;
@@ -294,7 +326,7 @@ ${V.pre ? `
 export const invite = {
   slug: '${slug}',
   /* the family's song, once they send it (e.g. 'assets/media/music.mp3'); null = no music and no music button */
-  music: null,
+  music: ${slug === MAIN ? "'assets/media/music.mp3'" : 'null'},
   /* the venue links exactly as the family supplied them; a venue without a link shows its button greyed out */
   venues: ${JSON.stringify(VENUES, null, 2).replace(/\n/g, '\n  ')},
   /* give up on the opening film after this long and go straight to the invitation */
@@ -305,7 +337,8 @@ export const invite = {
 }
 
 const M = path.join(ROOT, 'public', MAIN);
-for (const slug of [MAIN, DAY]) {
+const ASKED = process.argv.slice(2).filter((a) => a === MAIN || a === DAY);
+for (const slug of ASKED.length ? ASKED : [MAIN]) {
   const D = path.join(ROOT, 'public', slug);
   const { html, config } = page(slug);
   fs.writeFileSync(path.join(D, 'index.html'), html);

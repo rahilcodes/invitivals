@@ -1,28 +1,35 @@
 <!DOCTYPE html>
 <!-- Link-preview card for public/lokesh-akansha-wedding(-day) (1200×630). Rendered with headless Chrome:
      file:///…/tools/lokesh-akansha-wedding-og.html?slug=lokesh-akansha-wedding&d=25%20–%2026%20November%202026
-     screenshot the 1200×630 viewport, saved as public/<slug>/assets/og.jpg -->
+     screenshot the 1200×630 viewport, saved as public/<slug>/assets/og.jpg.
+     Everything that matters sits in the middle 600 px, so WhatsApp's square thumbnail (a centre crop) still shows the
+     seal, both names, the dates and the place; the painted floral sides of the invitation frame the wide version. -->
 <html><head><meta charset="utf-8">
-<link href="https://fonts.googleapis.com/css2?family=Pinyon+Script&family=Cinzel:wght@600&display=block" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Pinyon+Script&family=Cinzel:wght@600;700&display=block" rel="stylesheet">
 <style>
   html, body { margin: 0; width: 1200px; height: 630px; overflow: hidden; background: #ecd4ba; }
-  .art { position: absolute; inset: 0; background-size: cover; background-position: 50% 0; }
-  .art::after { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse 46% 70% at 50% 52%, rgba(240, 220, 196, .92), rgba(240, 220, 196, .55) 70%, rgba(240, 220, 196, 0)); }
-  .logo { position: absolute; left: 70px; top: 165px; width: 300px; height: 300px; border-radius: 50%; background: #2a160f; box-shadow: 0 12px 30px rgba(80, 40, 20, .35); }
-  .logo img { width: 100%; height: 100%; border-radius: 50%; }
-  .copy { position: absolute; left: 400px; right: 60px; top: 0; bottom: 0; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; }
-  .k { font: 600 22px Cinzel, serif; letter-spacing: .32em; color: #a1742a; }
-  .n { font: 128px/1.05 'Pinyon Script', cursive; color: #6e1630; }
-  .amp { font: 70px/0.8 'Pinyon Script', cursive; color: #a1742a; }
-  .d { margin-top: 18px; font: 600 28px Cinzel, serif; letter-spacing: .14em; color: #6e1630; }
-  .p { margin-top: 6px; font: 600 20px Cinzel, serif; letter-spacing: .28em; color: #a1742a; }
+  .art { position: absolute; inset: 0; background-size: 100% auto; background-position: 50% 4%; }
+  .art::after { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse 34% 62% at 50% 50%, rgba(243, 226, 204, .96), rgba(243, 226, 204, .7) 65%, rgba(243, 226, 204, 0)); }
+  .card { position: absolute; left: 300px; width: 600px; top: 0; bottom: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; }
+  .seal { width: 118px; height: 118px; border-radius: 50%; background: radial-gradient(circle at 35% 30%, #4a2416, #1d0d07); box-shadow: 0 0 0 4px #f6e3b8, 0 0 0 5.5px #b98a2e, 0 10px 22px rgba(80, 40, 20, .35); }
+  .seal img { width: 100%; height: 100%; border-radius: 50%; display: block; }
+  .k { margin-top: 26px; font: 600 19px Cinzel, serif; letter-spacing: .34em; padding-left: .34em; color: #9a6c22; }
+  .n { font: 96px/1.04 'Pinyon Script', cursive; color: #6e1630; }
+  .k + .n { margin-top: 10px; }
+  .amp { display: flex; align-items: center; gap: 16px; width: 300px; margin: -6px 0; }
+  .amp i { flex: 1; height: 1.5px; background: linear-gradient(to right, transparent, #c99a46, transparent); }
+  .amp b { font: 400 54px/1 'Pinyon Script', cursive; color: #a1742a; }
+  .d { margin-top: 18px; font: 700 27px Cinzel, serif; letter-spacing: .12em; padding-left: .12em; color: #6e1630; }
+  .p { margin-top: 6px; font: 600 18px Cinzel, serif; letter-spacing: .32em; padding-left: .32em; color: #9a6c22; }
 </style></head>
 <body>
   <div class="art" id="art"></div>
-  <div class="logo"><img id="logo" alt=""></div>
-  <div class="copy">
+  <div class="card">
+    <div class="seal"><img id="logo" alt=""></div>
     <div class="k">THE WEDDING OF</div>
-    <div class="n">Lokesh</div><div class="amp">&amp;</div><div class="n">Akansha</div>
+    <div class="n">Lokesh</div>
+    <div class="amp"><i></i><b>&amp;</b><i></i></div>
+    <div class="n">Akansha</div>
     <div class="d" id="d"></div>
     <div class="p">PANIPAT · HARYANA</div>
   </div>

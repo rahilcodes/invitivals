@@ -43,9 +43,15 @@ p, h1, h2, h3 { margin: 0; }
   -webkit-mask-image: linear-gradient(to bottom, transparent 0, #000 2.5%, #000 97%, transparent 100%);
   mask-image: linear-gradient(to bottom, transparent 0, #000 2.5%, #000 97%, transparent 100%);
 }
-.page--1 { min-height: 100vh; min-height: 100dvh; background: linear-gradient(to bottom, var(--paper) 70%, var(--beige)); }
+.page--1 { background: linear-gradient(to bottom, var(--paper) 70%, var(--beige)); }
 .page--1 .bg { -webkit-mask-image: linear-gradient(to bottom, #000 0, #000 97%, transparent 100%); mask-image: linear-gradient(to bottom, #000 0, #000 97%, transparent 100%); }
 .page--end .bg { -webkit-mask-image: linear-gradient(to bottom, transparent 0, #000 3%); mask-image: linear-gradient(to bottom, transparent 0, #000 3%); }
+/* a page that ends with its words (client, 2026-11-04: no empty paper after the cover or the families): the painting is
+   cut there and fades into the ivory of the next page; its bells and tassels are pinned to the painting, not to this height */
+.art--fit { min-height: 0; }
+/* and every page after the cover begins with a soft fade from the same ivory, so no line shows where two papers meet */
+.page:not(.page--1) .art::before { content: ""; position: absolute; z-index: 1; left: 0; right: 0; top: 0; height: calc(var(--cq) * 8); background: linear-gradient(to top, rgba(232, 207, 180, 0), var(--beige)); pointer-events: none; }
+.art--fit::after { content: ""; position: absolute; z-index: 1; left: 0; right: 0; bottom: 0; height: calc(var(--cq) * 12); background: linear-gradient(to bottom, rgba(232, 207, 180, 0), var(--beige)); pointer-events: none; }
 /* the words: one centred column inside the painting's floral sides */
 .flow { position: relative; z-index: 2; display: flex; flex-direction: column; align-items: center; text-align: center;
   padding: calc(var(--cq) * var(--top, 20)) calc(var(--cq) * var(--side, 16)) calc(var(--cq) * var(--bottom, 14)); }
@@ -137,6 +143,40 @@ p, h1, h2, h3 { margin: 0; }
 .maps:active { transform: translateY(1px); }
 .maps[aria-disabled="true"] { opacity: .55; pointer-events: none; }
 
+/* ── Save the Date: a gold-foil scratch card; underneath, the dates ── */
+.scard { position: relative; width: calc(var(--cq) * 62); aspect-ratio: 4 / 5; margin-top: calc(var(--cq) * 4); border-radius: calc(var(--cq) * 2.4); padding: calc(var(--cq) * 1.6);
+  -webkit-user-select: none; user-select: none; -webkit-touch-callout: none; font-variant-numeric: lining-nums; font-feature-settings: "lnum" 1;
+  background: linear-gradient(150deg, #f3dc9e, #b8893a 30%, #f5dea3 50%, #a97a2b 72%, #ecc982);
+  box-shadow: 0 calc(var(--cq) * 2.2) calc(var(--cq) * 4.4) rgba(90, 40, 25, .28), 0 0 0 1px rgba(255, 244, 214, .7) inset; }
+.scard__face, .scard__foil { position: absolute; inset: calc(var(--cq) * 1.6); border-radius: calc(var(--cq) * 1.4); }
+.scard__face { display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; overflow: hidden;
+  background: radial-gradient(120% 90% at 50% 40%, #fffaf0, #f9ecd6 60%, #f1dcbc);
+  box-shadow: inset 0 0 0 1px rgba(169, 122, 43, .45), inset 0 0 0 calc(var(--cq) * .8) #fffaf0, inset 0 0 0 calc(calc(var(--cq) * .8) + 1px) rgba(169, 122, 43, .3); }
+.scard__kicker { font-family: var(--caps); font-weight: 600; text-transform: uppercase; letter-spacing: .3em; padding-left: .3em; color: var(--gold); font-size: calc(var(--cq) * 2.6); }
+.scard__day { font-family: var(--script); color: var(--maroon); font-size: calc(var(--cq) * 5.4); line-height: 1.15; margin-top: calc(var(--cq) * 1.4); }
+.scard__num { font-family: var(--serif); font-weight: 700; font-size: calc(var(--cq) * 17); line-height: .95; margin: calc(var(--cq) * .2) 0;
+  background: linear-gradient(160deg, #e9c46f, #a97a2b 45%, #f1d48d 60%, #8a5e1c); -webkit-background-clip: text; background-clip: text; color: transparent;
+  filter: drop-shadow(0 calc(var(--cq) * .3) calc(var(--cq) * .4) rgba(110, 70, 20, .25)); }
+.scard__num span { padding: 0 .06em; }
+.scard__month { font-family: var(--caps); font-weight: 600; text-transform: uppercase; letter-spacing: .18em; padding-left: .18em; color: var(--maroon); font-size: calc(var(--cq) * 3.9); }
+.scard__month span { color: var(--gold); }
+.scard__orn { width: 30%; height: auto; margin: calc(var(--cq) * 1.8) 0 calc(var(--cq) * 1.2); }
+.scard__place { font-family: var(--caps); font-weight: 600; color: var(--gold); font-size: calc(var(--cq) * 2.9); letter-spacing: .2em; padding-left: .2em; text-transform: uppercase; }
+.scard__face > * { opacity: 0; transform: translateY(calc(var(--cq) * 1.6)) scale(.97); transition: opacity .8s ease, transform .9s cubic-bezier(.2, .8, .2, 1); }
+.scard.is-scratching .scard__face > *, .scard.is-revealed .scard__face > * { opacity: 1; transform: none; }
+/* the foil takes the finger only for scratching; the page still scrolls beside the card, and the foil lets go once revealed */
+.scard__foil { width: calc(100% - calc(var(--cq) * 3.2)); height: calc(100% - calc(var(--cq) * 3.2)); touch-action: none; cursor: grab; transition: opacity .9s ease, transform .9s ease, filter .9s ease; }
+.scard__foil:active { cursor: grabbing; }
+.scard__foil:focus-visible { outline: 2px solid var(--gold); outline-offset: 4px; }
+.scard__foil.is-gone { opacity: 0; transform: scale(1.04); filter: brightness(1.3); pointer-events: none; }
+.scard__hint { position: absolute; left: 50%; top: 62%; width: calc(var(--cq) * 7.5); height: calc(var(--cq) * 7.5); margin-left: calc(var(--cq) * -3.75); pointer-events: none; animation: hint-rub 2.2s ease-in-out infinite; transition: opacity .4s; }
+.scard__hint svg { width: 100%; height: 100%; fill: #fff8e6; stroke: #7a5418; stroke-width: .9; filter: drop-shadow(0 calc(var(--cq) * .3) calc(var(--cq) * .5) rgba(60, 35, 10, .35)); }
+.scard__hint.is-gone { opacity: 0; animation: none; }
+@keyframes hint-rub { 0%, 100% { transform: translate(calc(var(--cq) * -5), 0) rotate(-12deg); } 50% { transform: translate(calc(var(--cq) * 5), calc(var(--cq) * -1)) rotate(8deg); } }
+/* no canvas (very old browsers): the dates simply show */
+.scard.no-foil .scard__face > * { opacity: 1; transform: none; }
+.scard.no-foil .scard__foil, .scard.no-foil .scard__hint { display: none; }
+
 /* ── the last page ── */
 .message { font-family: var(--serif); font-style: italic; font-weight: 600; color: var(--maroon); font-size: calc(var(--cq) * 5); line-height: 1.4; text-wrap: balance; }
 .from { font-family: var(--script); color: var(--maroon); font-size: calc(var(--cq) * 10); line-height: 1.15; }
@@ -205,12 +245,15 @@ p, h1, h2, h3 { margin: 0; }
 .mute[aria-pressed="true"] .mute__bar { display: block; }
 .mute[hidden] { display: none; }
 .mute.is-blocked { animation: mute-ask 1.6s ease-in-out infinite; }
+.mute.is-blocked::after { content: "Tap for music"; position: absolute; right: 50px; top: 50%; transform: translateY(-50%); white-space: nowrap; padding: 6px 11px; border-radius: 999px;
+  background: rgba(250, 240, 222, .94); border: 1px solid rgba(169, 122, 43, .5); color: var(--maroon); font: 600 12px/1 var(--caps); letter-spacing: .12em; }
 @keyframes mute-ask { 0%, 100% { box-shadow: 0 2px 10px rgba(60, 40, 20, .18), 0 0 0 0 rgba(169, 122, 43, .45); } 50% { box-shadow: 0 2px 10px rgba(60, 40, 20, .18), 0 0 0 8px rgba(169, 122, 43, 0); } }
 .petals { position: fixed; top: 0; left: 0; inset: 0; width: 100%; height: 100%; z-index: 15; pointer-events: none; }
 
 @media (prefers-reduced-motion: reduce) {
   .rise, .drop, .pop, .swing, .flutter, .glide { transition-duration: .01s; }
-  .in.swing, .in.flutter, .in.glide, .tap, .tap__ring, .cue svg { animation: none !important; }
+  .in.swing, .in.flutter, .in.glide, .tap, .tap__ring, .cue svg, .scard__hint { animation: none !important; }
+  .scard__foil, .scard__face > * { transition-duration: .01s !important; }
 }
 @media (min-width: 521px) {
   body { background: #e3c6a6 url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='6' height='6'%3E%3Ccircle cx='3' cy='3' r='.6' fill='%23d8b891'/%3E%3C/svg%3E"); }

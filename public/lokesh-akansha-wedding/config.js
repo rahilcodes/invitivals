@@ -3,7 +3,7 @@
 export const invite = {
   slug: 'lokesh-akansha-wedding',
   /* the family's song, once they send it (e.g. 'assets/media/music.mp3'); null = no music and no music button */
-  music: null,
+  music: 'assets/media/music.mp3',
   /* the venue links exactly as the family supplied them; a venue without a link shows its button greyed out */
   venues: {
     "palm": {
