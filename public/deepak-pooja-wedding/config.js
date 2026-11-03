@@ -78,7 +78,10 @@ export const weddingConfig = {
   ],
 
   /* the client's own pictures (tools/pooja-deepak-art.mjs), each shown whole */
-  gallery: [], // no Moments on the groom side (the single picture there is the bride side's)
+  /* the client's couple illustration in Moments, as on the bride side (restored at the client's request, 2026-11-03) */
+  gallery: [
+    { src: 'assets/gallery-pd-couple.webp', alt: 'Deepak and Pooja in each other’s arms beneath a floral arch, she in a blush-pink gown and he in a navy suit', shape: 'portrait' },
+  ],
 
   rsvp: null, // section removed at the client's request (2026-10-30)
 
