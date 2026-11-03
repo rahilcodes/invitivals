@@ -4,6 +4,7 @@
      node tools/varun-diksha-couple.mjs
      SRC=invites/src/pooja-deepak-wedding/couple-back.jpg OUT=public/pooja-deepak-wedding/assets/couple.webp node tools/varun-diksha-couple.mjs
        (any other couple on pure black: Pooja & Deepak's, 2026-10-29)
+     SRC=invites/src/amandeep-ishpreet-wedding/couple-1000555431.jpg OUT=public/amandeep-ishpreet-wedding/assets/couple.webp POCKET=Infinity node tools/varun-diksha-couple.mjs
 
    Source: invites/src/varun-diksha-couple.jpg (gitignored) — the illustration on pure black, its
    transparency lost in upload. The black is removed the way tools/rr-chanchal-hero.mjs does it:
@@ -18,6 +19,8 @@ import sharp from 'sharp';
 const ROOT = path.resolve(path.dirname(new URL(import.meta.url).pathname.replace(/^\/([A-Z]:)/, '$1')), '..');
 const SRC = path.join(ROOT, process.env.SRC || 'invites/src/varun-diksha-couple.jpg');
 const OUT = path.join(ROOT, process.env.OUT || 'public/varun-diksha-wedding/assets/couple.webp');
+// enclosed black pockets larger than this go too; POCKET=Infinity keeps every enclosed dark (deep fabric shadows: Amandeep & Ishpreet's navy, 2026-11-03)
+const POCKET = Number(process.env.POCKET || 400);
 
 const { data: d, info } = await sharp(SRC).removeAlpha().raw().toBuffer({ resolveWithObject: true });
 const W = info.width, H = info.height, N = W * H;
@@ -32,7 +35,7 @@ for (let s = 0; s < N; s++) {
     if (x === 0 || y === 0 || x === W - 1 || y === H - 1) border = true;
     for (const j of [i - 1, i + 1, i - W, i + W]) if (j >= 0 && j < N && dark[j] && !seen[j] && Math.abs((j % W) - x) <= 1) { seen[j] = 1; comp.push(j); }
   }
-  if (border || comp.length > 400) for (const i of comp) bg[i] = 1;
+  if (border || comp.length > POCKET) for (const i of comp) bg[i] = 1;
 }
 // distance from the background (two-pass chamfer), capped — drives the soft edge
 const dist = new Float32Array(N).fill(99);

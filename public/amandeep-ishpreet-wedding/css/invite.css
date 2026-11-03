@@ -637,3 +637,16 @@ html.is-open .intro{opacity:0;pointer-events:none}
 /* the Gurbani quote and the card under it in Punjabi (Gurmukhi): upright, in the page's Gurmukhi face, balanced lines */
 .blessing-sky .bs-text-pa{font-family:var(--gur,'Noto Serif Gurmukhi'),serif;font-style:normal;font-size:clamp(.98rem,4.4vw,1.14rem);line-height:1.75;text-wrap:balance}
 .welcome-lines-pa p{font-family:var(--gur,'Noto Serif Gurmukhi'),serif;font-style:normal;font-weight:500;font-size:clamp(.98rem,4.3vw,1.08rem);line-height:1.9;text-wrap:balance}
+
+/* ── client round, 2026-11-03 ──────────────────────────────── */
+/* the Gurbani block, laid out as the family's reference: each line on its own (balanced if it wraps), a fine gold
+   rule, the scripture in Gurmukhi, then Ang · Raag · Mahla, smaller and softer */
+.blessing-sky.bs-gurbani{top:24%;width:70%}
+.blessing-sky .bs-text-pa .bs-line{display:block;text-wrap:balance}
+.blessing-sky .bs-text-pa .bs-line + .bs-line{margin-top:.55em}
+.blessing-sky .bs-text-pa{font-weight:600;font-size:clamp(.92rem,4vw,1.08rem);line-height:1.7}
+.blessing-sky .bs-src-pa{margin-top:14px;font-family:var(--gur,'Noto Serif Gurmukhi'),serif;letter-spacing:0;text-transform:none;font-size:clamp(.86rem,3.7vw,.98rem);font-weight:700;color:var(--navy);line-height:1.5}
+.blessing-sky .bs-src-pa::before{width:72px;margin-bottom:12px}
+.blessing-sky .bs-ref{display:block;margin-top:4px;font-family:var(--gur,'Noto Serif Gurmukhi'),serif;font-size:clamp(.7rem,3vw,.8rem);font-weight:500;line-height:1.5;color:var(--gold-deep)}
+/* the smallest phones (320px): a little wider and tighter, so the block stays clear of the Golden Temple domes */
+@media (max-width:359px){.blessing-sky.bs-gurbani{top:22%;width:76%}.blessing-sky .bs-text-pa{font-size:.86rem;line-height:1.6}.blessing-sky .bs-src-pa{margin-top:10px}.blessing-sky .bs-src-pa::before{margin-bottom:9px}}

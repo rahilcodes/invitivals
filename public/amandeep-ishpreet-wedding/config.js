@@ -22,8 +22,9 @@ export const weddingConfig = {
   /* the bride's family is hosting: the bride is named first everywhere */
   hostSide: 'bride',
 
-  /* the Mool Mantar opening in Gurmukhi; set to null to hide */
-  invocation: { text: 'ੴ ਸਤਿ ਨਾਮੁ', meaning: 'Ik Onkar · Satnam Waheguru', font: 'Noto Serif Gurmukhi' },
+  /* the opening symbol in Gurmukhi; set to null to hide. Only ੴ, with "Ik Onkar" under it on the blessing
+     (client, 2026-11-03; it was "ੴ ਸਤਿ ਨਾਮੁ" / "Ik Onkar · Satnam Waheguru") */
+  invocation: { text: 'ੴ', meaning: 'Ik Onkar', font: 'Noto Serif Gurmukhi' },
 
   /* the invitation block that follows the hero scene */
   invite: {
@@ -55,10 +56,14 @@ export const weddingConfig = {
     /* written into the sky of the arch scene; set to null to hide */
     quote: {
       eyebrow: '', // the word "Gurbani" removed (client, 2026-10-30)
-      /* in Punjabi (client, 2026-10-29), exactly as sent; it was "They alone are called husband and wife, who have one light in two bodies." */
-      lines: ['ਉਹੀ ਸੁਹਾਗੀ ਜੋੜਾ ਕਹੀਦਾ ਹੈ, ਜਿਨ੍ਹਾਂ ਦੇ ਦੋ ਸਰੀਰਾਂ ਵਿੱਚ ਇੱਕੋ ਜੋਤਿ ਵੱਸਦੀ ਹੈ।'],
+      /* the client's Gurbani (2026-11-03), laid out as their reference: the two lines, a fine rule, the scripture,
+         then Ang · Raag · Mahla. The wording is the reference image's (the typed brief had "ਜਲਿ ਬਲਿ ਮਹਿਆਲਿ" and
+         "ਸ਼੍ਰੀ"; the reference and the Gurbani read "ਜਲਿ ਥਲਿ ਮਹੀਅਲਿ" and "ਸ੍ਰੀ"). It was the Ang 788 line in Punjabi. */
+      lines: ['ਕਰਣ ਕਾਰਣ ਪ੍ਰਭੁ ਏਕੁ ਹੈ ਦੂਸਰ ਨਾਹੀ ਕੋਇ ॥', 'ਨਾਨਕ ਤਿਸੁ ਬਲਿਹਾਰਣੈ ਜਲਿ ਥਲਿ ਮਹੀਅਲਿ ਸੋਇ ॥੧॥'],
       lang: 'pa',
-      source: 'Sri Guru Granth Sahib Ji · Ang 788',
+      source: 'ਸ੍ਰੀ ਗੁਰੂ ਗ੍ਰੰਥ ਸਾਹਿਬ ਜੀ',
+      sourceLang: 'pa',
+      ref: 'ਅੰਗ ੨੯੬ · ਰਾਗੁ ਗਉੜੀ · ਮਹਲਾ ੫',
     },
   },
 

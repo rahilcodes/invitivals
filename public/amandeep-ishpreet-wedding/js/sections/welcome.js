@@ -19,11 +19,12 @@ export const BlessingSection = (cfg) => `
       ${KhandaMark('bs-mark')}
       <p class="bs-text">${esc(cfg.invite.line)}</p>
     </div>` : ''}
-    ${cfg.blessing.quote && cfg.invite.placement !== 'blessing' ? `<blockquote class="blessing-sky">
+    ${cfg.blessing.quote && cfg.invite.placement !== 'blessing' ? `<blockquote class="blessing-sky${cfg.blessing.quote.ref ? ' bs-gurbani' : ''}">
       ${cfg.blessing.quote.eyebrow ? `<span class="bs-eyebrow">${esc(cfg.blessing.quote.eyebrow)}</span>` : ''}
       ${KhandaMark('bs-mark')}
-      <p class="bs-text${cfg.blessing.quote.lang ? ' bs-text-' + cfg.blessing.quote.lang : ''}"${cfg.blessing.quote.lang ? ` lang="${cfg.blessing.quote.lang}"` : ''}>${cfg.blessing.quote.lines.map(esc).join('<br>')}</p>
-      <cite class="bs-src">${esc(cfg.blessing.quote.source)}</cite>
+      <p class="bs-text${cfg.blessing.quote.lang ? ' bs-text-' + cfg.blessing.quote.lang : ''}"${cfg.blessing.quote.lang ? ` lang="${cfg.blessing.quote.lang}"` : ''}>${cfg.blessing.quote.lines.map((l) => `<span class="bs-line">${esc(l)}</span>`).join('')}</p>
+      <cite class="bs-src${cfg.blessing.quote.sourceLang ? ' bs-src-' + cfg.blessing.quote.sourceLang : ''}"${cfg.blessing.quote.sourceLang ? ` lang="${cfg.blessing.quote.sourceLang}"` : ''}>${esc(cfg.blessing.quote.source)}</cite>
+      ${cfg.blessing.quote.ref ? `<small class="bs-ref" lang="${cfg.blessing.quote.sourceLang || 'pa'}">${esc(cfg.blessing.quote.ref)}</small>` : ''}
     </blockquote>` : ''}
   </div>
   ${cfg.blessing.lines?.length ? `<div class="card card-words" data-reveal>

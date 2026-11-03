@@ -54,7 +54,7 @@ document.title = `${couple(view).join(' & ')} · Wedding Invitation`;
 
 /* Gurmukhi (the invocation, the intro's Gurbani, Punjabi quote and card): load only the glyphs needed — or the
    whole font for Punjabi sentences, whose vowel signs and nuktas need shaping a text= subset can drop */
-const gurProse = [view.blessing.quote?.lang === 'pa' && view.blessing.quote.lines.join(''), view.blessing.linesLang === 'pa' && view.blessing.lines.join('')].filter(Boolean).join('');
+const gurProse = [view.blessing.quote?.lang === 'pa' && [...view.blessing.quote.lines, view.blessing.quote.source, view.blessing.quote.ref || ''].join(''), view.blessing.linesLang === 'pa' && view.blessing.lines.join('')].filter(Boolean).join('');
 const gurText = [view.invocation?.text, ...(view.intro.gurbani || []), gurProse].filter(Boolean).join('');
 if (gurText) {
   const font = view.invocation?.font || 'Noto Serif Gurmukhi';
