@@ -7,7 +7,7 @@
    ───────────────────────────────────────────────────────────── */
 const COSMOS = 'COSMOS Cafe & Lounge, Sector 25, Panipat, Haryana';
 const COSMOS_MAP = 'https://share.google/pOU3fFbjNnsn068Wq';
-const PALM = 'Palm Luxuria Banquets, Bal Vikas Progressive School Road, Sodhpur, Panipat';
+const PALM = 'Palm Luxuria Banquets, Bal Vikas Progressive School Road, Shodapur, Panipat';
 const PALM_MAP = 'https://share.google/MfaBFtqryZA8yG071';
 
 export const weddingConfig = {
@@ -23,15 +23,15 @@ export const weddingConfig = {
   guestFallback: 'You & Your Family',
   shareText: 'You are invited to the wedding of Lokesh & Akansha · 26 November 2026, Panipat',
 
-  weddingDate: '2026-11-26T12:00:00+05:30',
+  weddingDate: '2026-11-26T15:00:00+05:30', // Feras at 03:00 PM (client, 2026-11-04; was the Wedding Ceremony at 12:00 PM)
   weddingEnd: '',
-  weddingTimeLabel: '12:00 PM',
-  ceremonyTitle: 'Wedding Ceremony',
+  weddingTimeLabel: '03:00 PM',
+  ceremonyTitle: 'Feras',
   ceremonyLine: 'Your presence will make our celebration complete.<br>Please join us as Lokesh and Akansha take the seven sacred steps.',
   muhurtham: '',
 
   venue: 'Palm Luxuria Banquets',
-  venueAddress: 'Bal Vikas Progressive School Road, Sodhpur, Panipat',
+  venueAddress: 'Bal Vikas Progressive School Road, Shodapur, Panipat',
   venueCity: 'Panipat',
   mapsUrl: PALM_MAP,
   venueImage: 'assets/venue-palm-luxuria.webp', // the client's Palm Luxuria picture (2026-11-02), in place of the kolam-and-pin seal
@@ -54,15 +54,15 @@ export const weddingConfig = {
       label: "Groom's Family",
       person: 'Lokesh',
       relation: 'Beloved son of',
-      parents: ['Ramdass and Manju'],
-      grandparents: 'Grandson of Late Shree Girraj Prasad<br>and Late Smt. Shakuntala Devi',
+      parents: ['Manju and Ramdass'], // mother first (client, 2026-11-04)
+      grandparents: 'Grandson of Late Smt. Shakuntala Devi<br>and Late Shree Girraj Prasad', // grandmother first
     },
     bride: {
       label: "Bride's Family",
       person: 'Akansha',
       relation: 'Daughter of',
-      parents: ['Chandrashekhar and Usha'],
-      grandparents: 'Granddaughter of Shree Ramprayay<br>and Late Smt. Kevla Devi',
+      parents: ['Usha and Chandrashekhar'],
+      grandparents: 'Granddaughter of Late Smt. Kevla Devi<br>and Shree Ramprayag', // Ramprayag (client, 2026-11-04)
     },
   },
 
@@ -78,8 +78,8 @@ export const weddingConfig = {
       details: [['Time', '9:00 AM']], venue: PALM, maps: PALM_MAP },
     { icon: 'sangeet', name: 'Baraat', date: '2026-11-26T11:00:00+05:30', subtitle: 'Wedding day',
       details: [['Time', '11:00 AM']], venue: PALM, maps: PALM_MAP },
-    { icon: 'forever', name: 'Wedding Ceremony', date: '2026-11-26T12:00:00+05:30', main: true, subtitle: 'Wedding day',
-      details: [['Time', '12:00 PM (Day)']], venue: PALM, maps: PALM_MAP },
+    { icon: 'forever', name: 'Feras', date: '2026-11-26T15:00:00+05:30', main: true, subtitle: 'Wedding day',
+      details: [['Time', '03:00 PM']], venue: PALM, maps: PALM_MAP },
   ],
 
   gallery: [],
@@ -89,7 +89,7 @@ export const weddingConfig = {
 
   travelNote: 'Both our venues, one tap from your maps',
   travel: [
-    { icon: 'pin', title: 'Palm Luxuria Banquets', text: `${PALM} · Ghudhchadhi, Baraat & Wedding Ceremony, Thursday 26 November`, link: { label: 'Palm Luxuria map', href: PALM_MAP } },
+    { icon: 'pin', title: 'Palm Luxuria Banquets', text: `${PALM} · Ghudhchadhi, Baraat & Feras, Thursday 26 November`, link: { label: 'Palm Luxuria map', href: PALM_MAP } },
     { icon: 'pin', title: 'COSMOS Cafe & Lounge', text: `${COSMOS} · Haldi, Mehndi & Sangeet, Wednesday 25 November`, link: { label: 'Cosmos map', href: COSMOS_MAP } },
   ],
 
