@@ -1,0 +1,31 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Invitivals//Vaishali & Arpan Wedding//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VTIMEZONE
+TZID:Asia/Kolkata
+BEGIN:STANDARD
+DTSTART:19700101T000000
+TZOFFSETFROM:+0530
+TZOFFSETTO:+0530
+TZNAME:IST
+END:STANDARD
+END:VTIMEZONE
+BEGIN:VEVENT
+UID:vaishali-arpan-wedding-20261119@invitivals.com
+DTSTAMP:20261104T000000Z
+DTSTART;TZID=Asia/Kolkata:20261119T190000
+SUMMARY:Vaishali & Arpan · The Engagement Celebration
+LOCATION:Golden Apple Mansion\, Hall No. 2\, Darbaar Hall\, Pitampura\, Del
+ hi
+DESCRIPTION:7:00 PM – Engagement Ceremony\n8:00 PM onwards – Dinner\n\n
+ Map: https://maps.app.goo.gl/V4mpJjW6xamdfdcP7?g_st=aw
+URL:https://invitivals.com/vaishali-arpan-wedding/
+BEGIN:VALARM
+TRIGGER:-P1D
+ACTION:DISPLAY
+DESCRIPTION:Vaishali & Arpan · The Engagement Celebration tomorrow
+END:VALARM
+END:VEVENT
+END:VCALENDAR

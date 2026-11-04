@@ -1,0 +1,35 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Invitivals//Vaishali & Arpan Wedding//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VTIMEZONE
+TZID:Asia/Kolkata
+BEGIN:STANDARD
+DTSTART:19700101T000000
+TZOFFSETFROM:+0530
+TZOFFSETTO:+0530
+TZNAME:IST
+END:STANDARD
+END:VTIMEZONE
+BEGIN:VEVENT
+UID:vaishali-arpan-wedding-20261118@invitivals.com
+DTSTAMP:20261104T000000Z
+DTSTART;TZID=Asia/Kolkata:20261118T110000
+SUMMARY:Vaishali & Arpan · A Day of Love\, Colours & Celebrations
+LOCATION:Vyom Luxury Gym and Wellness\, Near True Value\, Sector 16\, Rohin
+ i\, Delhi
+DESCRIPTION:Dress Code: Pastel Colour Theme\n11:00 AM – Guest Welcome Lun
+ ch\n1:00 PM – Radha Krishna Phoolon Ki Haldi\n2:00 PM onwards – Pool P
+ arty (please bring your swimming costumes!)\n4:00 PM onwards – Mehendi\n
+ 7:00 PM onwards – DJ Night\n8:00 PM – Dinner\n\nMap: https://maps.app.
+ goo.gl/xJUJUJWmYGwAEcJQ6?g_st=ic
+URL:https://invitivals.com/vaishali-arpan-wedding/
+BEGIN:VALARM
+TRIGGER:-P1D
+ACTION:DISPLAY
+DESCRIPTION:Vaishali & Arpan · A Day of Love\, Colours & Celebrations tomo
+ rrow
+END:VALARM
+END:VEVENT
+END:VCALENDAR

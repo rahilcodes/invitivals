@@ -1,16 +1,19 @@
-/* Vaishali & Arpan, bride-side wedding (18–20 Nov 2026, Delhi), on the Brown Theme Wedding design.
+/* Vaishali & Arpan, bride-side wedding (18–20 Nov 2026, Delhi), on the Brown Theme Wedding demo.
  *
- *   node --experimental-websocket tools/vaishali-arpan-wedding.mjs      pictures + event.ics + og.jpg
- *   node --experimental-websocket tools/vaishali-arpan-wedding.mjs og   only the link preview
+ *   node --experimental-websocket tools/vaishali-arpan-wedding.mjs        everything below
+ *   node --experimental-websocket tools/vaishali-arpan-wedding.mjs og     only the opening seal + og.jpg
  *
- * The page itself (index.html, css/, js/) is hand-written in public/vaishali-arpan-wedding/.
- * This tool only prepares what it uses:
+ * The page (index.html, config.js, css/, js/) lives in public/vaishali-arpan-wedding/ and is the demo's
+ * own engine (plates + overlay boxes in %) with the client's words as live text. This tool prepares its assets:
+ *  - the demo's plates, florals, butterflies, lanterns, pins, rules, buttons and music, copied as they are
+ *    (public/brown-theme-wedding is only read, never written);
+ *  - the pack's text-free floral plaque (elements/3) for the three function plaques;
  *  - the client's four photos and the dress-code circles from invites/src/vaishali-arpan-wedding/
  *    (73.jpg reference, 74–77.jpg couple), only resized / cropped / converted, never retouched;
- *  - the demo's own florals, butterflies, opening plate and music, copied (the demo folder is never written);
- *  - event.ics for the Save the Date (the wedding, 20 Nov 2026 8:00 PM IST);
- *  - assets/og.jpg, 1200×630, with everything that matters inside the centre 630 px square
- *    (WhatsApp shows a square centre crop), rendered by headless Chrome.
+ *  - the opening envelope: the demo's poster with the seal's "CL" replaced by "VA" (the only part painted here,
+ *    because the pack has no cover for this couple); the demo's door film keeps the CL seal and is not used;
+ *  - three .ics files (one per day, start times only, no invented end times) and assets/og.jpg, 1200×630,
+ *    the demo's hero plate with the names inside the centre 630 px square (WhatsApp's square crop).
  */
 import { spawn } from 'node:child_process';
 import fs from 'node:fs';
@@ -22,27 +25,45 @@ import sharp from 'sharp';
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const SLUG = 'vaishali-arpan-wedding';
 const SRC = path.join(ROOT, 'invites/src', SLUG);
+const PACK = path.join(ROOT, 'invites/src/brown-theme-wedding-zip/brown theme wedding');
 const DEMO = path.join(ROOT, 'public/brown-theme-wedding/assets');
 const OUT = path.join(ROOT, 'public', SLUG);
 const A = path.join(OUT, 'assets');
 const only = process.argv[2];
 fs.mkdirSync(A, { recursive: true });
 
-/* ── the wedding, for the calendar ── */
-const WEDDING = {
-  title: 'Wedding of Vaishali & Arpan',
-  start: '20261120T200000',                 // 20 Nov 2026, 8:00 PM, Asia/Kolkata — Welcome of Baraat
-  venue: 'The Sherioan By Kawatra Tent, Colosseum Hall, Pitampura, Delhi – 110034 (Near DCP Office, Outer District)',
-  map: 'https://maps.app.goo.gl/8svFQVQ7mBP4o59D8?g_st=ic',
-};
+/* ── the three days, for the calendar files ── */
+const DAYS = [
+  { file: 'event-18nov.ics', start: '20261118T110000', title: 'Vaishali & Arpan · A Day of Love, Colours & Celebrations',
+    venue: 'Vyom Luxury Gym and Wellness, Near True Value, Sector 16, Rohini, Delhi', map: 'https://maps.app.goo.gl/xJUJUJWmYGwAEcJQ6?g_st=ic',
+    lines: ['Dress Code: Pastel Colour Theme', '11:00 AM – Guest Welcome Lunch', '1:00 PM – Radha Krishna Phoolon Ki Haldi', '2:00 PM onwards – Pool Party (please bring your swimming costumes!)', '4:00 PM onwards – Mehendi', '7:00 PM onwards – DJ Night', '8:00 PM – Dinner'] },
+  { file: 'event-19nov.ics', start: '20261119T190000', title: 'Vaishali & Arpan · The Engagement Celebration',
+    venue: 'Golden Apple Mansion, Hall No. 2, Darbaar Hall, Pitampura, Delhi', map: 'https://maps.app.goo.gl/V4mpJjW6xamdfdcP7?g_st=aw',
+    lines: ['7:00 PM – Engagement Ceremony', '8:00 PM onwards – Dinner'] },
+  { file: 'event.ics', start: '20261120T200000', title: 'Wedding of Vaishali & Arpan',
+    venue: 'The Sherioan By Kawatra Tent, Colosseum Hall, Pitampura, Delhi – 110034 (Near DCP Office, Outer District)', map: 'https://maps.app.goo.gl/8svFQVQ7mBP4o59D8?g_st=ic',
+    lines: ['The Wedding Celebration', '8:00 PM – Welcome of Baraat', '9:00 PM – Dinner', 'Vidaai – Taron Ki Chhaon Mein'] },
+];
 
 if (only !== 'og') {
-  /* photos: original aspect ratios, sized for a column up to ~520 px at 2× */
-  const photos = { 'photo-red-gown': '76.jpg', 'photo-hallway': '74.jpg', 'photo-arch': '75.jpg', 'photo-lights': '77.jpg' };
+  /* the demo's art and music, as they are */
+  const demo = ['plate1', 'plate2', 'plate3', 'plate4', 'plate5', 'plate6', 'plate7', 'plate8',
+    'p1-flowers-a', 'p1-flowers-b', 'p1-butterfly', 'p1-rule1',
+    'p2-flowers-a', 'p2-flowers-b', 'p2-flowers-c', 'p2-flowers-d', 'p2-butterfly-a', 'p2-butterfly-b', 'p2-title', 'p2-rule', 'p2-click', 'p2-paper', 'p2-roller', 'p2-daterule',
+    'p3-flowers-a', 'p3-flowers-b', 'p3-flowers-c', 'p3-flowers-d', 'p3-flowers-e', 'p3-pin1', 'p3-pin2',
+    'p4-rule', 'p4-save', 'p4-maps',
+    'p5-lantern-a', 'p5-lantern-b', 'p5-lantern-c', 'p5-butterfly-a', 'p5-butterfly-b', 'p5-butterfly-c', 'p5-heart', 'p5-save', 'p5-maps',
+    'p6-our', 'p6-title', 'p6-rule', 'p6-frame', 'p7-rule1', 'p7-rule2', 'p8-rule', 'p8-heart'];
+  for (const f of demo) fs.copyFileSync(path.join(DEMO, f + '.webp'), path.join(A, f + '.webp'));
+  fs.copyFileSync(path.join(DEMO, 'music.mp3'), path.join(A, 'music.mp3'));
+
+  /* the pack's own text-free plaque, for the three days */
+  await sharp(path.join(PACK, 'elements/3/Ornate Golden Floral Plaque.png')).resize({ width: 900 }).webp({ quality: 86 }).toFile(path.join(A, 'p3-plaque.webp'));
+
+  /* photos: original aspect ratios, sized for the memories window at 2× */
+  const photos = { 'photo-1': '76.jpg', 'photo-2': '74.jpg', 'photo-3': '75.jpg', 'photo-4': '77.jpg' };
   for (const [name, file] of Object.entries(photos)) {
-    const img = sharp(path.join(SRC, file)).rotate();
-    const m = await img.metadata();
-    await img.resize({ width: Math.min(m.width, 960), withoutEnlargement: true }).webp({ quality: 82 }).toFile(path.join(A, `${name}.webp`));
+    await sharp(path.join(SRC, file)).rotate().resize({ width: 900, withoutEnlargement: true }).webp({ quality: 82 }).toFile(path.join(A, `${name}.webp`));
   }
 
   /* the four pastel circles of the dress-code reference (1206×400), each cut round */
@@ -54,74 +75,64 @@ if (only !== 'og') {
       .ensureAlpha().composite([{ input: mask, blend: 'dest-in' }]).webp({ quality: 88, alphaQuality: 90 }).toFile(path.join(A, `pastel-${name}.webp`));
   }
 
-  /* the demo's own art and music, copied as they are */
-  for (const f of ['p1-flowers-a.webp', 'p2-flowers-b.webp', 'p2-flowers-c.webp', 'p2-flowers-d.webp', 'p1-butterfly.webp', 'p2-butterfly-a.webp', 'p2-butterfly-b.webp', 'plate1.webp', 'music.mp3']) {
-    fs.copyFileSync(path.join(DEMO, f), path.join(A, f));
-  }
-
-  /* event.ics: the invitation gives no end time, so there is no DTEND (a start-only entry) */
+  /* .ics: start times only; no DTEND, because the invitation gives no end times */
   const esc = (s) => String(s).replace(/([,;\\])/g, '\\$1').replace(/\n/g, '\\n');
-  const ics = [
-    'BEGIN:VCALENDAR', 'VERSION:2.0', 'PRODID:-//Invitivals//Vaishali & Arpan Wedding//EN', 'CALSCALE:GREGORIAN', 'METHOD:PUBLISH',
-    'BEGIN:VTIMEZONE', 'TZID:Asia/Kolkata', 'BEGIN:STANDARD', 'DTSTART:19700101T000000', 'TZOFFSETFROM:+0530', 'TZOFFSETTO:+0530', 'TZNAME:IST', 'END:STANDARD', 'END:VTIMEZONE',
-    'BEGIN:VEVENT',
-    `UID:${SLUG}-20261120@invitivals.com`,
-    'DTSTAMP:20261104T000000Z',
-    `DTSTART;TZID=Asia/Kolkata:${WEDDING.start}`,
-    `SUMMARY:${esc(WEDDING.title)}`,
-    `LOCATION:${esc(WEDDING.venue)}`,
-    `DESCRIPTION:${esc(`The Wedding Celebration\n8:00 PM – Welcome of Baraat\n9:00 PM – Dinner\nVidaai – Taron Ki Chhaon Mein\n\nMap: ${WEDDING.map}`)}`,
-    `URL:https://invitivals.com/${SLUG}/`,
-    'BEGIN:VALARM', 'TRIGGER:-P1D', 'ACTION:DISPLAY', `DESCRIPTION:${esc(WEDDING.title)} tomorrow`, 'END:VALARM',
-    'END:VEVENT', 'END:VCALENDAR', '',
-  ];
-  // RFC 5545: lines over 75 octets are folded
   const fold = (l) => { const b = Buffer.from(l); if (b.length <= 75) return l; const out = []; let i = 0, first = true;
     while (i < b.length) { let n = first ? 75 : 74; while (i + n < b.length && (b[i + n] & 0xc0) === 0x80) n--; out.push((first ? '' : ' ') + b.subarray(i, i + n).toString()); i += n; first = false; } return out.join('\r\n'); };
-  fs.writeFileSync(path.join(OUT, 'event.ics'), ics.map(fold).join('\r\n'));
-  console.log('✓ photos, pastel circles, demo art, event.ics');
+  for (const d of DAYS) {
+    const ics = [
+      'BEGIN:VCALENDAR', 'VERSION:2.0', 'PRODID:-//Invitivals//Vaishali & Arpan Wedding//EN', 'CALSCALE:GREGORIAN', 'METHOD:PUBLISH',
+      'BEGIN:VTIMEZONE', 'TZID:Asia/Kolkata', 'BEGIN:STANDARD', 'DTSTART:19700101T000000', 'TZOFFSETFROM:+0530', 'TZOFFSETTO:+0530', 'TZNAME:IST', 'END:STANDARD', 'END:VTIMEZONE',
+      'BEGIN:VEVENT',
+      `UID:${SLUG}-${d.start.slice(0, 8)}@invitivals.com`,
+      'DTSTAMP:20261104T000000Z',
+      `DTSTART;TZID=Asia/Kolkata:${d.start}`,
+      `SUMMARY:${esc(d.title)}`,
+      `LOCATION:${esc(d.venue)}`,
+      `DESCRIPTION:${esc([...d.lines, '', `Map: ${d.map}`].join('\n'))}`,
+      `URL:https://invitivals.com/${SLUG}/`,
+      'BEGIN:VALARM', 'TRIGGER:-P1D', 'ACTION:DISPLAY', `DESCRIPTION:${esc(d.title)} tomorrow`, 'END:VALARM',
+      'END:VEVENT', 'END:VCALENDAR', '',
+    ];
+    fs.writeFileSync(path.join(OUT, d.file), ics.map(fold).join('\r\n'));
+  }
+  console.log('✓ demo art, plaque, photos, pastel circles, 3 × .ics');
 }
 
-/* ── og.jpg ── */
+/* ── headless Chrome: the seal's new letters and the link preview ── */
 const CHROME = process.env.CHROME || 'C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe';
-const PORT = 9353, W = 1200, H = 630;
+const PORT = 9353;
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 const url = (p) => pathToFileURL(p).href;
-const html = `<!DOCTYPE html><meta charset="utf-8">
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Great+Vibes&display=block" rel="stylesheet">
-<style>
-*{margin:0;box-sizing:border-box}
-body{width:${W}px;height:${H}px;overflow:hidden;position:relative;background:#e4c09a;font-variant-numeric:lining-nums}
-.side{position:absolute;top:0;height:${H}px;object-fit:cover}
-.l{left:0;width:300px;object-position:50% 22%}.r{right:0;width:300px;object-position:50% 18%}
-.side::after{content:''}
-.card{position:absolute;left:285px;width:630px;top:0;height:${H}px;background:radial-gradient(ellipse 62% 70% at 50% 50%,#fbeedd 0%,#f4dcbc 62%,#e6c39d 100%);
-  box-shadow:0 0 40px rgba(60,30,10,.45);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;overflow:hidden}
-.fl{position:absolute;opacity:.95}
-.fa{left:0;top:0;height:250px}.fd{right:-36px;bottom:-30px;height:290px}
-.k{margin-bottom:10px;font:600 20px 'Cormorant Garamond',serif;letter-spacing:.36em;padding-left:.36em;color:#9a6c22}
-.n{font:400 104px/1.02 'Great Vibes',cursive;color:#6b1a24;position:relative}
-.amp{font:400 52px/1 'Great Vibes',cursive;color:#a1742a;margin:-4px 0 -8px;position:relative}
-.rule{width:300px;height:1.5px;background:linear-gradient(90deg,transparent,#c9a24f,transparent);margin:18px 0 14px}
-.d{font:700 30px 'Cormorant Garamond',serif;letter-spacing:.12em;padding-left:.12em;color:#5a3418}
-.p{margin-top:8px;font:600 18px 'Cormorant Garamond',serif;letter-spacing:.3em;padding-left:.3em;color:#9a6c22}
-.dots{display:flex;gap:10px;margin-top:16px}.dots i{width:12px;height:12px;border-radius:50%}
+const FONTS = '<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Great+Vibes&display=block" rel="stylesheet">';
+const READY = `<script>Promise.all([document.fonts.ready,...[...document.images].map(i=>i.decode().catch(()=>{}))]).then(()=>{document.title='ready'})</script>`;
+
+/* the seal face on the demo's poster (947×1660): centre and radius, measured on the picture */
+const SEAL = { cx: 490, cy: 830, r: 97 };
+const sealHtml = `<!DOCTYPE html><meta charset="utf-8">${FONTS}<style>
+*{margin:0}html,body{background:transparent}body{width:${SEAL.r * 4}px;height:${SEAL.r * 4}px;position:relative}
+.face{position:absolute;inset:0;border-radius:50%;background:radial-gradient(circle at 42% 36%,#d3a872 0%,#c6975f 45%,#b4824c 78%,#a8753f 100%)}
+.rim{position:absolute;inset:4%;border-radius:50%;box-shadow:inset 0 0 0 2px rgba(255,236,200,.35),inset 0 3px 6px rgba(255,240,210,.35),inset 0 -4px 8px rgba(90,50,20,.3)}
+.m{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font:600 ${SEAL.r * 2.1}px 'Cormorant Garamond',serif;letter-spacing:-.06em;color:#ba8a4f}
+.m.d{color:rgba(80,42,14,.55);transform:translate(2px,3px)}.m.l{color:rgba(255,236,205,.55);transform:translate(-2px,-2px)}
+</style><div class="face"></div><div class="rim"></div><div class="m d">VA</div><div class="m l">VA</div><div class="m">VA</div>${READY}`;
+
+/* og: the demo's hero plate (its own og is this plate with the names), names inside the centre square */
+const ogHtml = `<!DOCTYPE html><meta charset="utf-8">${FONTS}<style>
+*{margin:0;box-sizing:border-box}body{width:1200px;height:630px;overflow:hidden;position:relative;background:#e9cfa8;font-variant-numeric:lining-nums}
+.bg{position:absolute;left:0;top:-400px;width:1200px;height:2132px}
+.fl{position:absolute;left:-40px;top:-70px;width:440px}
+.c{position:absolute;left:285px;width:630px;top:0;height:630px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding-top:14px}
+.k{font:600 21px 'Cormorant Garamond',serif;letter-spacing:.36em;padding-left:.36em;color:#8a5a1e}
+.n{font:400 136px/1 'Great Vibes',cursive;color:#5a2e12;background:linear-gradient(180deg,#8a5a1e,#5a3418 45%,#8a5a1e);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;filter:drop-shadow(0 2px 2px rgba(255,235,200,.8))}
+.a{font:400 58px/1 'Great Vibes',cursive;color:#a1742a;margin:-6px 0 -10px}
+.d{margin-top:22px;font:700 30px 'Cormorant Garamond',serif;letter-spacing:.14em;padding-left:.14em;color:#5a3418}
+.p{margin-top:6px;font:600 19px 'Cormorant Garamond',serif;letter-spacing:.32em;padding-left:.32em;color:#8a5a1e}
 </style>
-<img class="side l" src="${url(path.join(A, 'photo-red-gown.webp'))}">
-<img class="side r" src="${url(path.join(A, 'photo-arch.webp'))}">
-<div class="card">
-  <img class="fl fa" src="${url(path.join(A, 'p1-flowers-a.webp'))}"><img class="fl fd" src="${url(path.join(A, 'p2-flowers-d.webp'))}">
-  <p class="k">WEDDING INVITATION</p>
-  <p class="n">Vaishali</p><p class="amp">&amp;</p><p class="n">Arpan</p>
-  <div class="rule"></div>
-  <p class="d">18 – 20 NOVEMBER 2026</p>
-  <p class="p">DELHI</p>
-  <div class="dots"><i style="background:#a9d3f1"></i><i style="background:#f5b5cc"></i><i style="background:#f8bd88"></i><i style="background:#c3e394"></i></div>
-</div>
-<script>Promise.all([document.fonts.ready,...[...document.images].map(i=>i.decode().catch(()=>{}))]).then(()=>{document.title='ready'})</script>`;
+<img class="bg" src="${url(path.join(A, 'plate1.webp'))}"><img class="fl" src="${url(path.join(A, 'p1-flowers-a.webp'))}">
+<div class="c"><p class="k">WEDDING INVITATION</p><p class="n">Vaishali</p><p class="a">&amp;</p><p class="n">Arpan</p><p class="d">18 – 20 NOVEMBER 2026</p><p class="p">DELHI</p></div>${READY}`;
 
 const work = fs.mkdtempSync(path.join(os.tmpdir(), 'inv-og-'));
-const page = path.join(work, 'og.html'); fs.writeFileSync(page, html);
 const chrome = spawn(CHROME, ['--headless=new', `--remote-debugging-port=${PORT}`, '--remote-allow-origins=*', `--user-data-dir=${path.join(work, 'profile')}`,
   '--allow-file-access-from-files', '--hide-scrollbars', 'about:blank'], { stdio: 'ignore' });
 try {
@@ -137,12 +148,22 @@ try {
   ws.onmessage = (m) => { const d = JSON.parse(m.data); if (d.id && pending.has(d.id)) { pending.get(d.id)(d.result); pending.delete(d.id); } };
   const send = (method, params = {}) => new Promise((r) => { pending.set(++id, r); ws.send(JSON.stringify({ id, method, params })); });
   await send('Page.enable');
-  await send('Emulation.setDeviceMetricsOverride', { width: W, height: H, deviceScaleFactor: 1, mobile: false });
-  await send('Page.navigate', { url: url(page) });
-  for (let i = 0; i < 60; i++) { await sleep(250); const r = await send('Runtime.evaluate', { expression: 'document.title' }); if (r.result.value === 'ready') break; }
-  await sleep(500);
-  const { data } = await send('Page.captureScreenshot', { format: 'png' });
-  await sharp(Buffer.from(data, 'base64')).resize(W, H).jpeg({ quality: 86, mozjpeg: true }).toFile(path.join(A, 'og.jpg'));
+  const shot = async (html, w, h, transparent) => {
+    const page = path.join(work, `p${++id}.html`); fs.writeFileSync(page, html);
+    await send('Emulation.setDeviceMetricsOverride', { width: w, height: h, deviceScaleFactor: 1, mobile: false });
+    if (transparent) await send('Emulation.setDefaultBackgroundColorOverride', { color: { r: 0, g: 0, b: 0, a: 0 } });
+    await send('Page.navigate', { url: url(page) });
+    for (let i = 0; i < 60; i++) { await sleep(250); const r = await send('Runtime.evaluate', { expression: 'document.title' }); if (r.result.value === 'ready') break; }
+    await sleep(500);
+    return Buffer.from((await send('Page.captureScreenshot', { format: 'png' })).data, 'base64');
+  };
+
+  // the seal: rendered at 2×, scaled onto the poster's seal face
+  const face = await sharp(await shot(sealHtml, SEAL.r * 4, SEAL.r * 4, true)).resize(SEAL.r * 2, SEAL.r * 2).png().toBuffer();
+  await sharp(path.join(DEMO, 'opening.webp')).composite([{ input: face, left: SEAL.cx - SEAL.r, top: SEAL.cy - SEAL.r }]).webp({ quality: 92 }).toFile(path.join(A, 'opening.webp'));
+  console.log('✓ opening.webp (seal reads VA)');
+
+  await sharp(await shot(ogHtml, 1200, 630, false)).jpeg({ quality: 86, mozjpeg: true }).toFile(path.join(A, 'og.jpg'));
   console.log(`✓ og.jpg ${(fs.statSync(path.join(A, 'og.jpg')).size / 1024).toFixed(0)} KB`);
   ws.close();
 } finally {
