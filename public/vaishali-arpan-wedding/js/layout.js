@@ -8,17 +8,17 @@ Object.assign(art, {
      every box is as tall as its words, with a steady gap of ~0.8 % between groups and a smaller one between a
      name and its own line. The block starts below the arch's cusps (~13.2 % at x 39 / 63 %) and ends above
      the painted couple, whose heads begin at ~57 % on the right (x > 72 %) */
-  'h-invocation': { x: 32.4, y: 14.0, w: 40, h: 1.3 },
-  'h-hindi': { x: 29.4, y: 16.1, w: 46, h: 4.33 },
-  'h-rule1': { x: 40.4, y: 21.3, w: 24, h: 1.913 },
-  'h-blessings': { x: 32.4, y: 24.0, w: 40, h: 1.3 },
-  'h-parents': { x: 29.4, y: 25.9, w: 46, h: 4.44 },
-  'h-request': { x: 28.4, y: 31.1, w: 48, h: 3.8 },
-  'h-bride': { x: 27.4, y: 35.7, w: 50, h: 6.38 },
-  'h-bride-of': { x: 29.4, y: 42.3, w: 46, h: 3.66 },
-  'h-with': { x: 37.4, y: 46.9, w: 30, h: 1.35 },
-  'h-groom': { x: 27.4, y: 48.8, w: 50, h: 6.38 },
-  'h-groom-of': { x: 29.4, y: 55.4, w: 46, h: 3.66 },
+  'h-invocation': { x: 32.4, y: 15.2, w: 40, h: 1.3 },
+  'h-hindi': { x: 29.4, y: 17.3, w: 46, h: 4.33 },
+  'h-rule1': { x: 40.4, y: 22.5, w: 24, h: 1.913 },
+  'h-blessings': { x: 32.4, y: 25.2, w: 40, h: 1.3 },
+  'h-parents': { x: 29.4, y: 27.1, w: 46, h: 4.44 },
+  'h-request': { x: 28.4, y: 32.3, w: 48, h: 3.8 },
+  'h-bride': { x: 27.4, y: 36.9, w: 50, h: 6.38 },
+  'h-bride-of': { x: 29.4, y: 43.5, w: 46, h: 3.66 },
+  'h-with': { x: 37.4, y: 48.1, w: 30, h: 1.35 },
+  'h-groom': { x: 27.4, y: 50.0, w: 50, h: 6.38 },
+  'h-groom-of': { x: 29.4, y: 56.6, w: 46, h: 3.66 },
 
   /* page 2: the parchment's date, three lines */
   'p2-date3': { x: 35, y: 57.8, w: 30, h: 12.4 },
@@ -34,14 +34,14 @@ Object.assign(art, {
   'd4-date': { x: 33, y: 45, w: 34, h: 2.6 },
   'd4-weekday': { x: 34.5, y: 47.5, w: 31, h: 2.1 },
 
-  /* the countdown on plate 4 (shown down to the top of its painted buttons): the title in the arch under the
-     lantern, the day in the gold frame, the four tiles in a tray over the daybed */
-  'c-title': { x: 14, y: 28.6, w: 72, h: 8.6 },
-  'c-rule': { x: 40.914, y: 37.8, w: 18.597, h: 1.794 },
-  'c-lines': { x: 22, y: 40.2, w: 56, h: 3.9 },
-  'c-date': { x: 33, y: 45, w: 34, h: 2.6 },
-  'c-weekday': { x: 33, y: 47.5, w: 34, h: 2.1 },
-  'c-tray': { x: 18, y: 60.6, w: 64, h: 11.2 },
+  /* the countdown on the top half of plate 8 (its plain wall with soft florals in the upper corners; the
+     closing page shows the plate from 26 % down): title, line, four light tiles, the day under them */
+  'c-title': { x: 15, y: 9.2, w: 70, h: 8.6 },
+  'c-rule': { x: 40.914, y: 18.6, w: 18.597, h: 1.794 },
+  'c-lines': { x: 22, y: 21.2, w: 56, h: 3.9 },
+  'c-tray': { x: 15, y: 27.2, w: 70, h: 10.4 },
+  'c-date': { x: 20, y: 39.6, w: 60, h: 2.6 },
+  'c-weekday': { x: 20, y: 42.1, w: 60, h: 2.1 },
 
   /* Save the Date on plate 5, the plate made for it: the title in the arch, the names and the venue under it,
      the day beside the card's calendar icon, the time beside its clock, and the plate's own two buttons */
@@ -50,8 +50,9 @@ Object.assign(art, {
   'sd-names': { x: 20, y: 23.2, w: 60, h: 2.0 },
   'sd-venue': { x: 20, y: 26.3, w: 60, h: 1.9 },
   'sd-addr': { x: 20, y: 28.5, w: 60, h: 1.7 },
-  'sd-date': { x: 43, y: 43.0, w: 28, h: 2.3 },
-  'sd-time': { x: 46.5, y: 48.1, w: 24, h: 2.2 },
+  'sd-card': { x: 21, y: 40.2, w: 58, h: 13 },      /* one solid card over the plate's painted one (its ornaments included) */
+  'sd-save': { x: 11, y: 53.0, w: 38.6, h: 7.2 },   /* over the plate's painted buttons, which they hide */
+  'sd-maps': { x: 50.4, y: 53.0, w: 38.6, h: 7.2 },
 
   /* little stars on plate 7, inside the frame's clear middle (x ≈ 22–78 %) */
   's-rule1': { x: 32.412, y: 27.5, w: 35.6, h: 5.144 },

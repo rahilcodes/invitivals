@@ -50,7 +50,7 @@ if (only !== 'og') {
     'p1-flowers-a', 'p1-flowers-b', 'p1-butterfly', 'p1-rule1',
     'p2-flowers-a', 'p2-flowers-b', 'p2-flowers-c', 'p2-flowers-d', 'p2-butterfly-a', 'p2-butterfly-b', 'p2-title', 'p2-rule', 'p2-click', 'p2-paper', 'p2-roller', 'p2-daterule',
     'p3-flowers-a', 'p3-flowers-b', 'p3-flowers-c', 'p3-flowers-d', 'p3-flowers-e',
-    'p4-rule', 'p4-save', 'p4-maps', 'p5-save', 'p5-maps',
+    'p4-rule', 'p4-save', 'p4-maps',
     'p5-lantern-a', 'p5-lantern-b', 'p5-lantern-c', 'p5-butterfly-a', 'p5-butterfly-b', 'p5-butterfly-c', 'p5-heart',
     'p6-our', 'p6-title', 'p6-rule', 'p6-frame', 'p7-rule1', 'p7-rule2', 'p8-rule', 'p8-heart'];
   for (const f of demo) fs.copyFileSync(path.join(DEMO, f + '.webp'), path.join(A, f + '.webp'));
@@ -142,6 +142,8 @@ if (only !== 'og') {
     await patch(P5, [400, 712], [400, 712], 250, 84, { blur: 14, s: 5 }),   // the card, beside the calendar
     await patch(P5, [432, 812], [432, 812], 220, 50, { blur: 14, s: 4 }),   // the card, beside the clock
   ]).webp({ quality: 86 }).toFile(path.join(A, 'plate5.webp'));
+  const P8 = path.join(DEMO, 'plate8.webp');
+  await sharp(P8).composite([await patch(P8, [170, 420], [170, 420], 600, 400, { blur: 28, s: 10 })]).webp({ quality: 86 }).toFile(path.join(A, 'plate8.webp'));
   const P4 = path.join(DEMO, 'plate4.webp');
   await sharp(P4).composite([await patch(P4, [455, 905], [540, 905], 100, 80, { s: 7 })]).webp({ quality: 86 }).toFile(path.join(A, 'plate4.webp'));
 
@@ -154,7 +156,7 @@ if (only !== 'og') {
   const sharpTop = await sharp(P3).extract({ left: 0, top: 0, width: m3.width, height: topH }).ensureAlpha().composite([{ input: fade, blend: 'dest-in' }]).png().toBuffer();
   await sharp(await sharp(P3).blur(30).modulate({ brightness: 1.04, saturation: 0.9 }).toBuffer())
     .composite([{ input: sharpTop, left: 0, top: 0 }]).webp({ quality: 84 }).toFile(path.join(A, 'plate3.webp'));
-  console.log('✓ p6-frame.webp (no flowers), plate6.webp, plate5.webp, plate4.webp (patched), plate3.webp (bokeh below the title)');
+  console.log('✓ p6-frame.webp (no flowers), plate6.webp, plate5.webp, plate4.webp + plate8.webp (patched), plate3.webp (bokeh below the title)');
   if (only === 'art') process.exit(0);
 }
 

@@ -40,10 +40,10 @@ export function openDetail(key, plate, buildPage) {
 
 /* the two action buttons of a detail page: Save the Date opens the calendar sheet, the other opens Maps */
 export function saveTheDate(day, art, sheet) {
-  const b = h('button', { class: 'img-btn', type: 'button', 'aria-label': `Save the date: ${day.title}`, 'aria-haspopup': 'dialog' }, art);
+  const b = h('button', { class: 'img-btn', type: 'button', 'aria-label': `Save the date: ${day.title}`, 'aria-haspopup': 'dialog' }, ...[].concat(art));
   b.addEventListener('click', () => sheet.open(day, b));
   return b;
 }
 export function openMaps(day, art) {
-  return h('a', { class: 'img-btn', href: mapsHref(day), target: '_blank', rel: 'noopener', 'aria-label': `Open the ${day.venue} venue in Google Maps` }, art);
+  return h('a', { class: 'img-btn', href: mapsHref(day), target: '_blank', rel: 'noopener', 'aria-label': `Open the ${day.venue} venue in Google Maps` }, ...[].concat(art));
 }

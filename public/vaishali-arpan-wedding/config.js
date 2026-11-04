@@ -58,7 +58,7 @@ export const config = {
   countdown: { title: ['The Countdown', 'to Forever'], lines: ['The wait is almost over.', 'A beautiful new beginning awaits!'], done: 'The day is here. A beautiful new beginning begins!', units: ['Days', 'Hours', 'Minutes', 'Seconds'] },
 
   /* the Save the Date page: the wedding day with Add to Calendar and the venue map */
-  saveTheDate: { title: 'Save the Date', button: 'Add to Calendar' },
+  saveTheDate: { title: 'Save the Date', button: 'Save the Date', maps: 'View on Google Maps', labels: ['Date', 'Time'] },
 
   /* the memories page: the couple's own photographs. `pos` is object-position: where the couple stands in
      the picture, so the frame (narrower than a 3:4 photograph) is cut around both of them. */

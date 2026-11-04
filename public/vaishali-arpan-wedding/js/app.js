@@ -100,21 +100,20 @@ const page3 = Page(3, [
   card('f-card-c', day3, 'III', 0.8),
 ], { id: 'page-3' });
 
-/* ── the countdown (plate 4 down to its painted buttons: the day in the gold frame, the tiles in a tray over
-      the daybed) ── */
+/* ── the countdown: the plain upper half of plate 8, soft florals in its corners, four light tiles ── */
 const CD = C.countdown, W = C.wedding;
 const tiles = h('div', { class: 'cd', id: 'countdown', role: 'timer', 'aria-live': 'off' },
   ...CD.units.map((u) => h('div', {}, h('b', { 'data-u': u[0].toLowerCase() }, '--'), h('span', {}, u))));
 const done = h('p', { class: 'cd-done script', hidden: true }, CD.done);
-const tray = h('div', { class: 's cd-tray reveal', style: { ...box('c-tray'), zIndex: 5, '--d': '0.8s' } }, tiles, done);
-const pageCountdown = Page(4, [
+const tray = h('div', { class: 's cd-tray reveal', style: { ...box('c-tray'), zIndex: 5, '--d': '0.6s' } }, tiles, done);
+const pageCountdown = Page(8, [
   live('c-title', CD.title, { size: 7, cls: 'script burgundy', delay: 0.15 }),
   sprAt('c-rule', 'p4-rule', { delay: 0.3 }),
   live('c-lines', CD.lines, { size: 2.7, cls: 'serif italic', delay: 0.45 }),
-  live('c-date', W.dateLine, { size: 2.4, cls: 'serif caps deep', delay: 0.6, wrap: false }),
-  live('c-weekday', `${W.weekday} · ${W.time}`, { size: 2.1, cls: 'serif caps tight soft', delay: 0.65, wrap: false }),
   tray,
-], { id: 'page-countdown', crop: { bottom: 0.22 } });
+  live('c-date', W.dateLine, { size: 2.6, cls: 'serif caps deep', delay: 0.8, wrap: false }),
+  live('c-weekday', `${W.weekday} · ${W.time}`, { size: 2.1, cls: 'serif caps tight soft', delay: 0.85, wrap: false }),
+], { id: 'page-countdown', crop: { bottom: 0.5 } });
 
 /* the countdown: worked out every second from the real moment, never below zero */
 (() => {
@@ -133,10 +132,18 @@ const pageCountdown = Page(4, [
   document.addEventListener('visibilitychange', () => { if (!document.hidden) tick(); });
 })();
 
-/* ── Save the Date (plate 5, the plate painted for it: the title in the arch, the names and the venue, the
-      day beside the card's calendar, the time beside its clock, and its two buttons: the calendar sheet and
-      the wedding venue on Google Maps) ── */
+/* ── Save the Date (plate 5: the title in the arch, the names and the venue; one solid card with the date and
+      the time where the plate paints its small frame, and two buttons of the page's own over the painted ones:
+      the calendar sheet and the wedding venue on Google Maps) ── */
 const SD = C.saveTheDate;
+const glyph = (d) => { const i = h('i', { class: 'ico', 'aria-hidden': 'true' }); i.innerHTML = `<svg viewBox="0 0 24 24"><path d="${d}" fill="currentColor"/></svg>`; return i; };
+const CAL = 'M7 2h2v2h6V2h2v2h3v18H4V4h3V2zm-1 8v10h12V10H6zm2 2h3v3H8v-3z';
+const PIN = 'M12 2a7 7 0 0 0-7 7c0 5.2 7 13 7 13s7-7.8 7-13a7 7 0 0 0-7-7zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5z';
+const sdCard = h('div', { class: 's sd-card reveal', style: { ...box('sd-card'), zIndex: 5, '--d': '0.6s' } },
+  h('small', {}, SD.labels[0]), h('b', {}, `${W.weekday}, ${W.dateLine}`),
+  h('i', { class: 'sd-rule', 'aria-hidden': 'true' }),
+  h('small', {}, SD.labels[1]), h('b', {}, W.time));
+const sdButton = (id, node, delay) => { node.classList.add('sd-btn'); return control(id, node, { delay, z: 6 }); };
 const pageSave = Page(5, [
   spr('p5-lantern-a', { still: true, motion: 'sway hang', origin: '50% 0%', z: 2 }),
   spr('p5-lantern-b', { still: true, motion: 'sway hang alt', origin: '50% 0%', z: 2 }),
@@ -149,10 +156,9 @@ const pageSave = Page(5, [
   live('sd-names', `${C.couple.bride} & ${C.couple.groom}`, { size: 3.2, cls: 'serif caps deep', delay: 0.4, wrap: false }),
   live('sd-venue', day3.venue, { size: 2.7, cls: 'serif bold', delay: 0.5, wrap: false }),
   live('sd-addr', day3.address[0].replace(/ – .*$/, ''), { size: 2.4, cls: 'serif soft', delay: 0.55, wrap: false }),
-  live('sd-date', W.dateLine, { size: 2.3, cls: 'serif caps tight deep', delay: 0.65, wrap: false }),
-  live('sd-time', `${W.weekday} · ${W.time}`, { size: 2.2, cls: 'serif caps tight deep', delay: 0.7, wrap: false }),
-  control('p5-save', saveTheDate(day3, pic('p5-save', SD.button), sheet), { delay: 0.9 }),
-  control('p5-maps', openMaps(day3, pic('p5-maps', 'View on Google Maps')), { delay: 1 }),
+  sdCard,
+  sdButton('sd-save', saveTheDate(day3, [glyph(CAL), h('span', {}, SD.button)], sheet), 0.85),
+  sdButton('sd-maps', openMaps(day3, [glyph(PIN), h('span', {}, SD.maps)]), 0.95),
 ], { id: 'page-save' });
 
 /* ── our memories (the plate's empty floor below the stage is cut: the next page follows the hint) ── */

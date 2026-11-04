@@ -81,15 +81,30 @@ body { font-variant-numeric: lining-nums; }
 .page.tall .reveal.flow { transform: translateY(1.4cqw); }
 .page.tall.ready .reveal.flow.in { transform: none; }
 
-/* ── the countdown: four tiles in a cream tray over the daybed ── */
-.cd-tray { display: flex; flex-direction: column; justify-content: center; padding: 1.6cqw; border-radius: 3cqw; background: var(--card) linear-gradient(180deg, #fdf5e6, #f5e4c4); border: 1px solid rgba(201, 162, 79, .85); box-shadow: 0 0 0 .6cqw rgba(252, 242, 226, .5), 0 1.4cqw 3cqw rgba(84, 44, 16, .22); }
-.cd { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.6cqw; height: 100%; }
-.cd div { display: flex; flex-direction: column; align-items: center; justify-content: center; border-radius: 2.2cqw; background: linear-gradient(180deg, #4a2a17, #2f1b0f); border: 1px solid rgba(201, 162, 79, .75); box-shadow: 0 1cqw 2.4cqw rgba(59, 34, 20, .28), inset 0 0 0 2px rgba(201, 162, 79, .14); }
-.cd b { font-weight: 600; font-size: 5.6cqw; line-height: 1; color: #f0d08a; font-variant-numeric: tabular-nums lining-nums; }
-.cd span { margin-top: 1cqw; font-weight: 600; font-size: 1.8cqw; letter-spacing: .2em; padding-left: .2em; text-transform: uppercase; color: var(--cream); }
+/* ── the countdown: four light tiles on the plain wall, equal, with a hairline of gold ── */
+.cd-tray { display: flex; flex-direction: column; justify-content: center; }
+.cd { display: grid; grid-template-columns: repeat(4, 1fr); gap: 2.4cqw; height: 100%; }
+.cd div { display: flex; flex-direction: column; align-items: center; justify-content: center; border-radius: 2.4cqw; background: rgba(255, 250, 241, .88); border: 1px solid rgba(201, 162, 79, .9); box-shadow: 0 0 0 .5cqw rgba(255, 250, 241, .55), 0 1.2cqw 2.8cqw rgba(84, 44, 16, .16); }
+.cd b { font-weight: 600; font-size: 6.4cqw; line-height: 1; color: var(--burgundy); font-variant-numeric: tabular-nums lining-nums; }
+.cd span { margin-top: 1.1cqw; font-weight: 700; font-size: 1.8cqw; letter-spacing: .2em; padding-left: .2em; text-transform: uppercase; color: var(--ink-soft); }
 .cd[hidden] { display: none; }
 .cd-done { margin: 0; text-align: center; font-family: var(--script); font-size: 5.2cqw; line-height: 1.1; color: var(--burgundy); }
 .cd-done[hidden] { display: none; }
+
+/* ── Save the Date: the date-and-time card and the two buttons ── */
+.sd-card { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: .5cqw; padding: 2cqw 3cqw; border-radius: 3cqw; text-align: center; background: var(--card) linear-gradient(180deg, #fdf6e8, #f6e5c8); border: 1px solid rgba(201, 162, 79, .9); box-shadow: 0 0 0 .5cqw rgba(252, 243, 228, .8), 0 1.4cqw 3.2cqw rgba(84, 44, 16, .22); }
+.sd-card small { font-weight: 700; font-size: 1.9cqw; letter-spacing: .26em; padding-left: .26em; text-transform: uppercase; color: var(--ink-soft); }
+.sd-card b { font-weight: 700; font-size: 3.5cqw; line-height: 1.2; color: var(--ink-deep); }
+.sd-rule { display: block; width: 34cqw; height: 1px; margin: 1.5cqw 0; background: linear-gradient(90deg, transparent, var(--gold) 20%, var(--gold) 80%, transparent); position: relative; }
+.sd-rule::after { content: ""; position: absolute; left: 50%; top: 50%; width: 1.3cqw; height: 1.3cqw; transform: translate(-50%, -50%) rotate(45deg); background: var(--gold); box-shadow: 0 0 0 .5cqw var(--card); }
+.sd-btn { display: flex; align-items: center; justify-content: center; gap: 1.6cqw; width: 100%; height: 100%; padding: 0 2cqw; border-radius: 2.4cqw; font-weight: 700; font-size: 2.55cqw; letter-spacing: .06em; text-decoration: none; transition: transform .2s ease, filter .2s ease; }
+.sd-btn .ico { display: block; width: 3.4cqw; height: 3.4cqw; flex: 0 0 auto; }
+.sd-btn .ico svg { display: block; width: 100%; height: 100%; }
+.sd-btn:active { transform: scale(.98); filter: brightness(1.06); }
+.sd-btn:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; }
+button.sd-btn { background: linear-gradient(180deg, #8a2430, #5e1420); color: var(--cream); border: 1px solid rgba(201, 162, 79, .7); box-shadow: 0 0 0 .5cqw rgba(252, 243, 228, .85), 0 1.2cqw 2.6cqw rgba(90, 20, 30, .32); }
+a.sd-btn { background: var(--card) linear-gradient(180deg, #fdf6e8, #f3e0c0); color: var(--ink-deep); border: 1px solid var(--gold); box-shadow: 0 0 0 .5cqw rgba(252, 243, 228, .85), 0 1.2cqw 2.6cqw rgba(84, 44, 16, .22); }
+a.sd-btn .ico { color: var(--burgundy); }
 
 /* ── Add to Calendar sheet ── */
 .sheet { position: fixed; inset: 0; z-index: 70; display: flex; align-items: flex-end; justify-content: center; }
