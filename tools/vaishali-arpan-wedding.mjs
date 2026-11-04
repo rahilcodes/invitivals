@@ -11,7 +11,7 @@
  *  - the client's four photos and the dress-code circles from invites/src/vaishali-arpan-wedding/
  *    (73.jpg reference, 74–77.jpg couple), only resized / cropped / converted, never retouched;
  *  - the opening envelope: the demo's poster with the seal's "CL" replaced by "VA" (the only part painted here,
- *    because the pack has no cover for this couple); the demo's door film keeps the CL seal and is not used;
+ *    because the pack has no cover for this couple); the demo's door film plays with its seal covered by seal.png until it breaks;
  *  - three .ics files (one per day, start times only, no invented end times) and assets/og.jpg, 1200×630,
  *    the demo's hero plate with the names inside the centre 630 px square (WhatsApp's square crop).
  */
@@ -35,13 +35,13 @@ fs.mkdirSync(A, { recursive: true });
 /* ── the three days, for the calendar files ── */
 const DAYS = [
   { file: 'event-18nov.ics', start: '20261118T110000', title: 'Vaishali & Arpan · A Day of Love, Colours & Celebrations',
-    venue: 'Vyom Luxury Gym and Wellness, Near True Value, Sector 16, Rohini, Delhi', map: 'https://maps.app.goo.gl/xJUJUJWmYGwAEcJQ6?g_st=ic',
+    venue: 'Vyom Luxury Gym and Wellness, Near True Value, Sector 16, Rohini, Delhi', map: 'https://share.google/XcZWmq2nKNx3zUg58',
     lines: ['Dress Code: Pastel Colour Theme', '11:00 AM – Guest Welcome Lunch', '1:00 PM – Radha Krishna Phoolon Ki Haldi', '2:00 PM onwards – Pool Party (please bring your swimming costumes!)', '4:00 PM onwards – Mehendi', '7:00 PM onwards – DJ Night', '8:00 PM – Dinner'] },
   { file: 'event-19nov.ics', start: '20261119T190000', title: 'Vaishali & Arpan · The Engagement Celebration',
-    venue: 'Golden Apple Mansion, Hall No. 2, Darbaar Hall, Pitampura, Delhi', map: 'https://maps.app.goo.gl/V4mpJjW6xamdfdcP7?g_st=aw',
+    venue: 'Golden Apple Mansion, Hall No. 2, Darbaar Hall, Pitampura, Delhi', map: 'https://share.google/7iebx6d5qkqSQan4a',
     lines: ['7:00 PM – Engagement Ceremony', '8:00 PM onwards – Dinner'] },
   { file: 'event.ics', start: '20261120T200000', title: 'Wedding of Vaishali & Arpan',
-    venue: 'The Sherioan By Kawatra Tent, Colosseum Hall, Pitampura, Delhi – 110034 (Near DCP Office, Outer District)', map: 'https://maps.app.goo.gl/8svFQVQ7mBP4o59D8?g_st=ic',
+    venue: 'The Sherioan By Kawatra Tent, Colosseum Hall, Pitampura, Delhi – 110034 (Near DCP Office, Outer District)', map: 'https://share.google/6FekKRjN2AlnVlOxE',
     lines: ['The Wedding Celebration', '8:00 PM – Welcome of Baraat', '9:00 PM – Dinner', 'Vidaai – Taron Ki Chhaon Mein'] },
 ];
 
@@ -52,10 +52,11 @@ if (only !== 'og') {
     'p2-flowers-a', 'p2-flowers-b', 'p2-flowers-c', 'p2-flowers-d', 'p2-butterfly-a', 'p2-butterfly-b', 'p2-title', 'p2-rule', 'p2-click', 'p2-paper', 'p2-roller', 'p2-daterule',
     'p3-flowers-a', 'p3-flowers-b', 'p3-flowers-c', 'p3-flowers-d', 'p3-flowers-e', 'p3-pin1', 'p3-pin2',
     'p4-rule', 'p4-save', 'p4-maps',
-    'p5-lantern-a', 'p5-lantern-b', 'p5-lantern-c', 'p5-butterfly-a', 'p5-butterfly-b', 'p5-butterfly-c', 'p5-heart', 'p5-save', 'p5-maps',
+    'p5-lantern-a', 'p5-lantern-b', 'p5-lantern-c', 'p5-butterfly-a', 'p5-butterfly-b', 'p5-butterfly-c', 'p5-heart',
     'p6-our', 'p6-title', 'p6-rule', 'p6-frame', 'p7-rule1', 'p7-rule2', 'p8-rule', 'p8-heart'];
   for (const f of demo) fs.copyFileSync(path.join(DEMO, f + '.webp'), path.join(A, f + '.webp'));
   fs.copyFileSync(path.join(DEMO, 'music.mp3'), path.join(A, 'music.mp3'));
+  fs.copyFileSync(path.join(DEMO, 'opening.mp4'), path.join(A, 'opening.mp4')); // the door film; its CL seal is covered by assets/seal.png in js/opening.js
 
   /* the pack's own text-free plaque, for the three days */
   await sharp(path.join(PACK, 'elements/3/Ornate Golden Floral Plaque.png')).resize({ width: 900 }).webp({ quality: 86 }).toFile(path.join(A, 'p3-plaque.webp'));
@@ -162,6 +163,9 @@ try {
   const face = await sharp(await shot(sealHtml, SEAL.r * 4, SEAL.r * 4, true)).resize(SEAL.r * 2, SEAL.r * 2).png().toBuffer();
   await sharp(path.join(DEMO, 'opening.webp')).composite([{ input: face, left: SEAL.cx - SEAL.r, top: SEAL.cy - SEAL.r }]).webp({ quality: 92 }).toFile(path.join(A, 'opening.webp'));
   console.log('✓ opening.webp (seal reads VA)');
+  // the same face, transparent, for js/opening.js to lay over the film's seal until it breaks
+  await sharp(await shot(sealHtml, SEAL.r * 4, SEAL.r * 4, true)).png().toFile(path.join(A, 'seal.png'));
+  console.log('✓ seal.png (the seal face for the film)');
 
   await sharp(await shot(ogHtml, 1200, 630, false)).jpeg({ quality: 86, mozjpeg: true }).toFile(path.join(A, 'og.jpg'));
   console.log(`✓ og.jpg ${(fs.statSync(path.join(A, 'og.jpg')).size / 1024).toFixed(0)} KB`);

@@ -27,7 +27,7 @@ export function MemoriesCarousel(photos) {
   // every card has the centre window's size, placed at its position inside the stage, then posed in 3D
   const cardStyle = { left: `${((win.x - stageBox.x) / stageBox.w) * 100}%`, top: `${((win.y - stageBox.y) / stageBox.h) * 100}%`, width: `${(win.w / stageBox.w) * 100}%`, height: `${(win.h / stageBox.h) * 100}%` };
   const cards = photos.map((p, i) => h('div', { class: 'card', role: 'group', 'aria-label': `Photo ${i + 1} of ${photos.length}`, style: cardStyle },
-    h('img', { src: p.src, alt: p.alt || '', decoding: 'async', draggable: 'false' })));
+    h('img', { src: p.src, alt: p.alt || '', decoding: 'async', draggable: 'false', style: { objectPosition: p.pos || '50% 50%' } })));
   cards.forEach((c) => stage.append(c));
   const hint = h('div', { class: 'tap-hint swipe-hint', 'aria-hidden': 'true' }, 'Swipe');
 
