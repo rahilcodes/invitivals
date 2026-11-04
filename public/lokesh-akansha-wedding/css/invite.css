@@ -49,9 +49,11 @@ p, h1, h2, h3 { margin: 0; }
 /* a page that ends with its words (client, 2026-11-04: no empty paper after the cover or the families): the painting is
    cut there and fades into the ivory of the next page; its bells and tassels are pinned to the painting, not to this height */
 .art--fit { min-height: 0; }
+/* round 3 (client, 2026-11-04): a fitted page closes a little after its last line, not a full band later */
+.art--fit .flow { --bottom: 7; }
 /* and every page after the cover begins with a soft fade from the same ivory, so no line shows where two papers meet */
 .page:not(.page--1) .art::before { content: ""; position: absolute; z-index: 1; left: 0; right: 0; top: 0; height: calc(var(--cq) * 8); background: linear-gradient(to top, rgba(232, 207, 180, 0), var(--beige)); pointer-events: none; }
-.art--fit::after { content: ""; position: absolute; z-index: 1; left: 0; right: 0; bottom: 0; height: calc(var(--cq) * 12); background: linear-gradient(to bottom, rgba(232, 207, 180, 0), var(--beige)); pointer-events: none; }
+.art--fit::after { content: ""; position: absolute; z-index: 1; left: 0; right: 0; bottom: 0; height: calc(var(--cq) * 7); background: linear-gradient(to bottom, rgba(232, 207, 180, 0), var(--beige)); pointer-events: none; }
 /* the words: one centred column inside the painting's floral sides */
 .flow { position: relative; z-index: 2; display: flex; flex-direction: column; align-items: center; text-align: center;
   padding: calc(var(--cq) * var(--top, 20)) calc(var(--cq) * var(--side, 16)) calc(var(--cq) * var(--bottom, 14)); }
@@ -176,6 +178,32 @@ p, h1, h2, h3 { margin: 0; }
 /* no canvas (very old browsers): the dates simply show */
 .scard.no-foil .scard__face > * { opacity: 1; transform: none; }
 .scard.no-foil .scard__foil, .scard.no-foil .scard__hint { display: none; }
+
+/* the Add to Calendar button under the card, and its sheet */
+.cal-btn { border: 1.5px solid #cfa64f; cursor: pointer; margin-top: calc(var(--cq) * 6); }
+.sheet { position: fixed; top: 0; right: 0; bottom: 0; left: 0; inset: 0; z-index: 40; display: flex; align-items: flex-end; justify-content: center; }
+.sheet[hidden] { display: none; }
+.sheet__veil { position: absolute; inset: 0; background: rgba(50, 20, 15, .45); backdrop-filter: blur(3px); -webkit-backdrop-filter: blur(3px); }
+.sheet__card { position: relative; width: min(100%, 520px); background: #fbf1df; border-radius: 22px 22px 0 0; padding: 22px 22px calc(22px + env(safe-area-inset-bottom));
+  box-shadow: 0 -10px 40px rgba(60, 30, 20, .3); animation: sheet-up .4s cubic-bezier(.2, .8, .2, 1); display: flex; flex-direction: column; gap: 10px; }
+@keyframes sheet-up { from { transform: translateY(40px); opacity: 0; } }
+.sheet__kicker { margin: 0; text-align: center; font: 600 13px/1.4 var(--caps); letter-spacing: .14em; text-transform: uppercase; color: var(--gold); }
+.sheet__title { margin: 0 0 6px; text-align: center; font-family: var(--script); font-weight: 400; font-size: 46px; color: var(--maroon); line-height: 1.1; }
+.sheet__btn { display: flex; align-items: center; justify-content: center; gap: 10px; min-height: 50px; padding: 12px 16px; border-radius: 999px;
+  border: 1.5px solid #cfa64f; background: #fff8ea; color: var(--maroon); text-decoration: none; font: 600 17px/1.2 var(--serif); }
+.sheet__btn svg { width: 20px; height: 20px; fill: currentColor; }
+.sheet__btn--primary { background: linear-gradient(#80203b, var(--maroon-deep)); color: #f8e9c9; }
+.sheet__close { margin-top: 2px; background: none; border: 0; color: var(--ink); font: 600 15px var(--caps); letter-spacing: .14em; text-transform: uppercase; padding: 12px; cursor: pointer; }
+
+/* the countdown to the Feras */
+.cd { display: grid; grid-template-columns: repeat(4, 1fr); gap: calc(var(--cq) * 2.4); width: calc(var(--cq) * 72); margin-top: calc(var(--cq) * 4); }
+.cd__u { display: flex; flex-direction: column; align-items: center; padding: calc(var(--cq) * 2.6) 0 calc(var(--cq) * 2); border-radius: calc(var(--cq) * 2.4);
+  background: radial-gradient(circle at 35% 25%, #fffaf0, #f6e6c9 80%); border: 1.5px solid var(--gold-light);
+  box-shadow: 0 0 0 calc(var(--cq) * .7) rgba(255, 248, 236, .85), 0 calc(var(--cq) * 1) calc(var(--cq) * 2.4) rgba(90, 40, 25, .18); }
+.cd__u b { font-family: var(--serif); font-weight: 700; font-size: calc(var(--cq) * 8.6); line-height: 1; color: var(--maroon); font-variant-numeric: lining-nums tabular-nums; font-feature-settings: "lnum" 1, "tnum" 1; }
+.cd__u span { margin-top: calc(var(--cq) * 1.2); font-family: var(--caps); font-weight: 600; font-size: calc(var(--cq) * 2.2); letter-spacing: .14em; padding-left: .14em; text-transform: uppercase; color: var(--gold); }
+.cd.is-done { display: none; }
+.cd__done { margin-top: calc(var(--cq) * 4); }
 
 /* ── the last page ── */
 .message { font-family: var(--serif); font-style: italic; font-weight: 600; color: var(--maroon); font-size: calc(var(--cq) * 5); line-height: 1.4; text-wrap: balance; }

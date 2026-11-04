@@ -1,0 +1,85 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Invitivals//Lokesh & Akansha Wedding//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VTIMEZONE
+TZID:Asia/Kolkata
+BEGIN:STANDARD
+DTSTART:19700101T000000
+TZOFFSETFROM:+0530
+TZOFFSETTO:+0530
+TZNAME:IST
+END:STANDARD
+END:VTIMEZONE
+BEGIN:VEVENT
+UID:lokesh-akansha-wedding-1@invitivals.com
+DTSTAMP:20261104T000000Z
+DTSTART;TZID=Asia/Kolkata:20261125T100000
+SUMMARY:Haldi Ceremony · Lokesh & Akansha
+LOCATION:COSMOS Cafe & Lounge\, Sector 25\, Panipat\, Haryana
+DESCRIPTION:Wedding of Lokesh & Akansha\nMap: https://share.google/pOU3fFbjNnsn068Wq
+URL:https://invitivals.com/lokesh-akansha-wedding/
+BEGIN:VALARM
+TRIGGER:-P1D
+ACTION:DISPLAY
+DESCRIPTION:Haldi Ceremony tomorrow
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:lokesh-akansha-wedding-2@invitivals.com
+DTSTAMP:20261104T000000Z
+DTSTART;TZID=Asia/Kolkata:20261125T160000
+SUMMARY:Mehndi & Sangeet · Lokesh & Akansha
+LOCATION:COSMOS Cafe & Lounge\, Sector 25\, Panipat\, Haryana
+DESCRIPTION:Wedding of Lokesh & Akansha\nMap: https://share.google/pOU3fFbjNnsn068Wq
+URL:https://invitivals.com/lokesh-akansha-wedding/
+BEGIN:VALARM
+TRIGGER:-P1D
+ACTION:DISPLAY
+DESCRIPTION:Mehndi & Sangeet tomorrow
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:lokesh-akansha-wedding-3@invitivals.com
+DTSTAMP:20261104T000000Z
+DTSTART;TZID=Asia/Kolkata:20261126T090000
+SUMMARY:Ghudchadhi · Lokesh & Akansha
+LOCATION:Palm Luxuria Banquets\, Bal Vikas Progressive School Road\, Shodapur\, Panipat
+DESCRIPTION:Wedding of Lokesh & Akansha\nMap: https://share.google/MfaBFtqryZA8yG071
+URL:https://invitivals.com/lokesh-akansha-wedding/
+BEGIN:VALARM
+TRIGGER:-P1D
+ACTION:DISPLAY
+DESCRIPTION:Ghudchadhi tomorrow
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:lokesh-akansha-wedding-4@invitivals.com
+DTSTAMP:20261104T000000Z
+DTSTART;TZID=Asia/Kolkata:20261126T110000
+SUMMARY:Baraat · Lokesh & Akansha
+LOCATION:Palm Luxuria Banquets\, Bal Vikas Progressive School Road\, Shodapur\, Panipat
+DESCRIPTION:Wedding of Lokesh & Akansha\nMap: https://share.google/MfaBFtqryZA8yG071
+URL:https://invitivals.com/lokesh-akansha-wedding/
+BEGIN:VALARM
+TRIGGER:-P1D
+ACTION:DISPLAY
+DESCRIPTION:Baraat tomorrow
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:lokesh-akansha-wedding-5@invitivals.com
+DTSTAMP:20261104T000000Z
+DTSTART;TZID=Asia/Kolkata:20261126T150000
+SUMMARY:Feras · Lokesh & Akansha
+LOCATION:Palm Luxuria Banquets\, Bal Vikas Progressive School Road\, Shodapur\, Panipat
+DESCRIPTION:Wedding of Lokesh & Akansha\nMap: https://share.google/MfaBFtqryZA8yG071
+URL:https://invitivals.com/lokesh-akansha-wedding/
+BEGIN:VALARM
+TRIGGER:-P1D
+ACTION:DISPLAY
+DESCRIPTION:Feras tomorrow
+END:VALARM
+END:VEVENT
+END:VCALENDAR

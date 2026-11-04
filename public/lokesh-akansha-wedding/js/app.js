@@ -3,7 +3,7 @@
    then the cover), the scroll-in of every piece, the Save the Date scratch card, the venue map links, the falling
    petals, and the family's song when ../config.js names one (no song: no music button).
    ───────────────────────────────────────────────────────────────────────────── */
-import { invite as C } from '../config.js?v=2';
+import { invite as C } from '../config.js?v=3';
 
 const $ = (s, r = document) => r.querySelector(s);
 const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -211,6 +211,33 @@ if (cue) {
   (document.fonts && document.fonts.ready ? document.fonts.ready : Promise.resolve()).then(paint);
   if (window.ResizeObserver) new ResizeObserver(() => { if (!done && !hit) paint(); }).observe(foil); else paint();
 })();
+
+/* ── Add to Calendar: a sheet with the .ics (Apple, Android, Outlook) and Google Calendar ── */
+const sheet = $('#sheet'), calBtn = $('#calBtn');
+if (sheet && calBtn) {
+  calBtn.addEventListener('click', () => { sheet.hidden = false; sheet.querySelector('a').focus(); });
+  for (const el of sheet.querySelectorAll('[data-close]')) el.addEventListener('click', () => { sheet.hidden = true; calBtn.focus(); });
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && !sheet.hidden) { sheet.hidden = true; calBtn.focus(); } });
+}
+
+/* ── countdown to the Feras: worked out every second from the real moment (an absolute time with its +05:30 offset,
+   so it is right on any phone in any time zone); at zero it gives way to "The Big Day Is Here!" ── */
+const cd = $('#countdown');
+if (cd) {
+  const target = Date.parse(cd.dataset.target), cells = {};
+  for (const k of ['d', 'h', 'm', 's']) cells[k] = cd.querySelector(`[data-cd="${k}"]`);
+  const two = (n) => String(n).padStart(2, '0');
+  let timer = 0;
+  const tick = () => {
+    const left = target - Date.now();
+    if (!(left > 0)) { cd.classList.add('is-done'); $('#cdDone').hidden = false; clearInterval(timer); return; }
+    const t = Math.floor(left / 1000);
+    cells.d.textContent = Math.floor(t / 86400); cells.h.textContent = two(Math.floor(t / 3600) % 24);
+    cells.m.textContent = two(Math.floor(t / 60) % 60); cells.s.textContent = two(t % 60);
+  };
+  tick(); timer = setInterval(tick, 1000);
+  document.addEventListener('visibilitychange', () => { if (!document.hidden) tick(); });
+}
 
 /* ?open in the address skips the envelope while working on the page */
 if (new URLSearchParams(location.search).has('open')) { opened = true; wantMusic = false; openStage(); }
