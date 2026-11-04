@@ -2,12 +2,12 @@
  *
  *   node --experimental-websocket tools/vaishali-arpan-wedding.mjs        everything below
  *   node --experimental-websocket tools/vaishali-arpan-wedding.mjs og     only the opening seal + og.jpg
+ *   node --experimental-websocket tools/vaishali-arpan-wedding.mjs art    only the retouched frame and plates
  *
  * The page (index.html, config.js, css/, js/) lives in public/vaishali-arpan-wedding/ and is the demo's
  * own engine (plates + overlay boxes in %) with the client's words as live text. This tool prepares its assets:
  *  - the demo's plates, florals, butterflies, lanterns, pins, rules, buttons and music, copied as they are
  *    (public/brown-theme-wedding is only read, never written);
- *  - the pack's text-free floral plaque (elements/3) for the three function plaques;
  *  - the client's four photos and the dress-code circles from invites/src/vaishali-arpan-wedding/
  *    (73.jpg reference, 74–77.jpg couple), only resized / cropped / converted, never retouched;
  *  - the opening envelope: the demo's poster with the seal's "CL" replaced by "VA" (the only part painted here,
@@ -25,7 +25,6 @@ import sharp from 'sharp';
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const SLUG = 'vaishali-arpan-wedding';
 const SRC = path.join(ROOT, 'invites/src', SLUG);
-const PACK = path.join(ROOT, 'invites/src/brown-theme-wedding-zip/brown theme wedding');
 const DEMO = path.join(ROOT, 'public/brown-theme-wedding/assets');
 const OUT = path.join(ROOT, 'public', SLUG);
 const A = path.join(OUT, 'assets');
@@ -50,16 +49,13 @@ if (only !== 'og') {
   const demo = ['plate1', 'plate2', 'plate3', 'plate4', 'plate5', 'plate6', 'plate7', 'plate8',
     'p1-flowers-a', 'p1-flowers-b', 'p1-butterfly', 'p1-rule1',
     'p2-flowers-a', 'p2-flowers-b', 'p2-flowers-c', 'p2-flowers-d', 'p2-butterfly-a', 'p2-butterfly-b', 'p2-title', 'p2-rule', 'p2-click', 'p2-paper', 'p2-roller', 'p2-daterule',
-    'p3-flowers-a', 'p3-flowers-b', 'p3-flowers-c', 'p3-flowers-d', 'p3-flowers-e', 'p3-pin1', 'p3-pin2',
-    'p4-rule', 'p4-save', 'p4-maps',
+    'p3-flowers-a', 'p3-flowers-b', 'p3-flowers-c', 'p3-flowers-d', 'p3-flowers-e',
+    'p4-rule', 'p4-save', 'p4-maps', 'p5-save', 'p5-maps',
     'p5-lantern-a', 'p5-lantern-b', 'p5-lantern-c', 'p5-butterfly-a', 'p5-butterfly-b', 'p5-butterfly-c', 'p5-heart',
     'p6-our', 'p6-title', 'p6-rule', 'p6-frame', 'p7-rule1', 'p7-rule2', 'p8-rule', 'p8-heart'];
   for (const f of demo) fs.copyFileSync(path.join(DEMO, f + '.webp'), path.join(A, f + '.webp'));
   fs.copyFileSync(path.join(DEMO, 'music.mp3'), path.join(A, 'music.mp3'));
   fs.copyFileSync(path.join(DEMO, 'opening.mp4'), path.join(A, 'opening.mp4')); // the door film; its CL seal is covered by assets/seal.png in js/opening.js
-
-  /* the pack's own text-free plaque, for the three days */
-  await sharp(path.join(PACK, 'elements/3/Ornate Golden Floral Plaque.png')).resize({ width: 900 }).webp({ quality: 86 }).toFile(path.join(A, 'p3-plaque.webp'));
 
   /* photos: original aspect ratios, sized for the memories window at 2× */
   const photos = { 'photo-1': '76.jpg', 'photo-2': '74.jpg', 'photo-3': '75.jpg', 'photo-4': '77.jpg' };
@@ -97,7 +93,69 @@ if (only !== 'og') {
     ];
     fs.writeFileSync(path.join(OUT, d.file), ics.map(fold).join('\r\n'));
   }
-  console.log('✓ demo art, plaque, photos, pastel circles, 3 × .ics');
+  console.log('✓ demo art, photos, pastel circles, 3 × .ics');
+}
+
+/* ── retouches for this client's pages (the demo's files are only read) ── */
+if (only !== 'og') {
+  /* the memories frame without its two flower clusters: the frame's lines are mirror-symmetric about their own
+     centre (x 28–37 ↔ 395–404, y 40–49 ↔ 690–701 in the 418×767 cut-out), so the frame is rebuilt from its
+     clean bottom-left quarter, mirrored, and all four corners carry the same ornament */
+  const FRAME = path.join(DEMO, 'p6-frame.webp');
+  const fm = await sharp(FRAME).metadata();
+  if (fm.width !== 418 || fm.height !== 767) throw new Error(`p6-frame.webp is ${fm.width}×${fm.height}, the mirror lines below assume 418×767`);
+  const CX = 216, CY = 371; // 2·CX = 432 (left line 28 ↔ right line 404), 2·CY = 741 (top line 40 ↔ bottom line 701)
+  const quarter = (x, y, w, hh) => sharp(FRAME).extract({ left: x, top: y, width: w, height: hh });
+  const BL = await quarter(0, CY, CX, fm.height - CY).png().toBuffer();
+  const TL = await quarter(0, CY, CX, CY).flip().png().toBuffer();
+  const BR = await quarter(2 * CX - fm.width + 1, CY, fm.width - CX, fm.height - CY).flop().png().toBuffer();
+  const TR = await quarter(2 * CX - fm.width + 1, CY, fm.width - CX, CY).flip().flop().png().toBuffer();
+  await sharp({ create: { width: fm.width, height: fm.height, channels: 4, background: { r: 0, g: 0, b: 0, alpha: 0 } } })
+    .composite([{ input: BL, left: 0, top: CY }, { input: TL, left: 0, top: 0 }, { input: TR, left: CX, top: 0 }, { input: BR, left: CX, top: CY }])
+    .webp({ quality: 90, alphaQuality: 92 }).toFile(path.join(A, 'p6-frame.webp'));
+
+  /* plate 6: the same flowers are painted into the plate beside its window (the photographs cover the window
+     itself). They are painted over with the wall from just above, and with the mirror image of the frame's clean
+     left side (the lines mirror at x 284 ↔ 660 in the plate); the rebuilt frame then draws its lines on top. */
+  const feather = (w, hh, s) => sharp(Buffer.from(`<svg width="${w}" height="${hh}"><rect x="${s * 2}" y="${s * 2}" width="${w - s * 4}" height="${hh - s * 4}" fill="#fff"/></svg>`)).blur(s).png().toBuffer();
+  /* a feathered patch for a plate: a region copied from [sx, sy] to [tx, ty], optionally mirrored or blurred */
+  const patch = async (plate, [sx, sy], [tx, ty], w, hh, { flop = false, blur = 0, s = 6 } = {}) => {
+    let p = sharp(plate).extract({ left: sx, top: sy, width: w, height: hh });
+    if (flop) p = p.flop();
+    if (blur) p = sharp(await p.blur(blur).toBuffer());
+    return { input: await p.ensureAlpha().composite([{ input: await feather(w, hh, s), blend: 'dest-in' }]).png().toBuffer(), left: tx, top: ty };
+  };
+  const P6 = path.join(DEMO, 'plate6.webp');
+  await sharp(P6).composite([
+    await patch(P6, [236, 200], [236, 330], 30, 100),           // the sliver beside the left panel's top: wall from 130 px higher
+    await patch(P6, [258, 195], [258, 330], 414, 135),          // above the window: wall from 135 px higher
+    await patch(P6, [500, 200], [500, 420], 172, 120),          // the frame's top-right corner: wall
+    await patch(P6, [639, 405], [250, 405], 55, 365, { flop: true }), // left of the window: the right side's lines, mirrored
+    await patch(P6, [239, 900], [490, 900], 215, 270, { flop: true }), // bottom right: the bottom left (ornament, platform, panel edge), mirrored
+  ]).webp({ quality: 86 }).toFile(path.join(A, 'plate6.webp'));
+
+  /* plates 4 and 5 keep faint traces of the lettering that was painted out of them (ghost words in plate 5's
+     arch and card, a "li," above plate 4's daybed): the traces are smoothed into the wall around them */
+  const P5 = path.join(DEMO, 'plate5.webp');
+  await sharp(P5).composite([
+    await patch(P5, [240, 230], [240, 230], 460, 450, { blur: 28, s: 10 }), // the arch's wall
+    await patch(P5, [400, 712], [400, 712], 250, 84, { blur: 14, s: 5 }),   // the card, beside the calendar
+    await patch(P5, [432, 812], [432, 812], 220, 50, { blur: 14, s: 4 }),   // the card, beside the clock
+  ]).webp({ quality: 86 }).toFile(path.join(A, 'plate5.webp'));
+  const P4 = path.join(DEMO, 'plate4.webp');
+  await sharp(P4).composite([await patch(P4, [455, 905], [540, 905], 100, 80, { s: 7 })]).webp({ quality: 86 }).toFile(path.join(A, 'plate4.webp'));
+
+  /* plate 3: the functions page keeps the plate's "Our Functions" lettering and marble wall; below it the
+     painted pathway and stages become a soft bokeh of the venue, the backdrop for the programme cards */
+  const P3 = path.join(DEMO, 'plate3.webp');
+  const m3 = await sharp(P3).metadata();
+  const topH = Math.round(m3.height * 0.33);
+  const fade = Buffer.from(`<svg width="${m3.width}" height="${topH}"><defs><linearGradient id="g" x1="0" y1="0" x2="0" y2="1"><stop offset="0.833" stop-color="#fff" stop-opacity="1"/><stop offset="0.87" stop-color="#fff" stop-opacity="0"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></linearGradient></defs><rect width="100%" height="100%" fill="url(#g)"/></svg>`);
+  const sharpTop = await sharp(P3).extract({ left: 0, top: 0, width: m3.width, height: topH }).ensureAlpha().composite([{ input: fade, blend: 'dest-in' }]).png().toBuffer();
+  await sharp(await sharp(P3).blur(30).modulate({ brightness: 1.04, saturation: 0.9 }).toBuffer())
+    .composite([{ input: sharpTop, left: 0, top: 0 }]).webp({ quality: 84 }).toFile(path.join(A, 'plate3.webp'));
+  console.log('✓ p6-frame.webp (no flowers), plate6.webp, plate5.webp, plate4.webp (patched), plate3.webp (bokeh below the title)');
+  if (only === 'art') process.exit(0);
 }
 
 /* ── headless Chrome: the seal's new letters and the link preview ── */

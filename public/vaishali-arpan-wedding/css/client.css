@@ -1,11 +1,12 @@
 /* Vaishali & Arpan: additions to the demo's stylesheet (css/invite.css, unchanged). Live words in measured
-   boxes (no reference lettering for these lines), the three plaques, the day pages that flow below their
+   boxes (no reference lettering for these lines), the programme cards, the day pages that flow below their
    plate, the countdown tray, the Save the Date page, the Add to Calendar sheet, and the film's seal patch.
    Every word is set in dark browns (the demo's light gold reads poorly on the cream plates). */
 :root {
   --ink: #4a291b;        /* body words: deep chocolate */
   --ink-soft: #593522;   /* small capitals and labels: walnut */
   --ink-deep: #3b2214;   /* names, headings in capitals */
+  --card: #fbf0dc;       /* the solid cream of every card */
   --deva: 'Noto Serif Devanagari', 'Kohinoor Devanagari', 'Mangal', serif;
 }
 body { font-variant-numeric: lining-nums; }
@@ -19,30 +20,46 @@ body { font-variant-numeric: lining-nums; }
 .s.live.bold { font-weight: 700; }
 .s.live.semibold { font-weight: 600; }
 .s.live.italic { font-style: italic; }
-.s.live.deva { font-family: var(--deva); font-weight: 500; line-height: 1.5; }
+.s.live.deva { font-family: var(--deva); font-weight: 500; line-height: 1.45; }
 .s.live.script { line-height: 1.05; }
+.s.live.serif.wrap { line-height: 1.25; }
+.s.live.italic.wrap { line-height: 1.3; }
 .s.live.date3 { color: var(--burgundy); line-height: 1.12; }
 .s.live.date3 b { font-weight: 600; font-size: 1.7em; line-height: 1; }
 .s.live.date3 sup { font-size: .42em; vertical-align: .9em; margin-left: .05em; }
 .hint, .tap-hint { color: var(--ink); font-weight: 600; }
 .tap-hint { opacity: .85; }
 
-/* ── page 3: the plaques carry live words over the pack's plaque ── */
-.plaque { position: relative; }
-.plaque .plaque-art { position: absolute; inset: 0; width: 100%; height: 100%; filter: drop-shadow(0 .7cqw 1.3cqw rgba(84, 44, 16, .48)) saturate(1.12) brightness(.97); }
-.page-3-hint { top: 95.4%; }
-.plaque-label { position: absolute; left: 14%; right: 14%; top: 0; bottom: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; color: var(--ink-deep); line-height: 1.15; }
-.plaque-label small { font-size: 2cqw; letter-spacing: .14em; padding-left: .14em; text-transform: uppercase; font-weight: 700; color: var(--ink-soft); margin-bottom: .4cqw; }
-.plaque-label b { font-size: 3.2cqw; font-weight: 700; letter-spacing: .02em; }
+/* ── page 3: the programme cards, each a button that opens its day ── */
+.fn-wrap { filter: drop-shadow(0 1.6cqw 3.2cqw rgba(84, 44, 16, .26)); }
+.fn { position: relative; display: flex; align-items: center; gap: 3.4cqw; width: 100%; height: 100%; padding: 2.4cqw 3cqw 2.4cqw 2.8cqw; border: 0; border-radius: 3.4cqw; text-align: left; color: var(--ink);
+  background: var(--card) linear-gradient(160deg, #fdf6e8, #f6e5c8); box-shadow: 0 0 0 .45cqw rgba(252, 243, 228, .9), 0 0 0 .7cqw rgba(201, 162, 79, .95); transition: transform .25s ease, filter .25s ease; }
+.fn::before { content: ""; position: absolute; inset: 1.1cqw; border-radius: 2.4cqw; border: 1px solid rgba(201, 162, 79, .55); pointer-events: none; }
+.fn:active { transform: scale(.985); filter: brightness(1.04); }
+.fn:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; }
+@media (hover: hover) { .fn:hover { transform: translateY(-.4cqw); filter: brightness(1.03); } }
+.fn-day { flex: 0 0 auto; display: flex; flex-direction: column; align-items: center; justify-content: center; width: 15.2cqw; height: 15.2cqw; border-radius: 50%; color: var(--cream);
+  background: radial-gradient(circle at 35% 30%, #8a2634, #5a1420 70%, #4a0f1a); box-shadow: 0 0 0 .5cqw #f3e2c4, 0 0 0 .75cqw var(--gold), 0 1cqw 2.2cqw rgba(84, 44, 16, .3); }
+.fn-day b { font-weight: 600; font-size: 6.2cqw; line-height: 1; font-variant-numeric: lining-nums; }
+.fn-day small { margin-top: .5cqw; font-weight: 700; font-size: 1.9cqw; letter-spacing: .22em; padding-left: .22em; text-transform: uppercase; color: #f0d08a; }
+.fn-body { display: flex; flex-direction: column; align-items: flex-start; min-width: 0; flex: 1 1 auto; }
+.fn-when { font-weight: 700; font-size: 2cqw; letter-spacing: .18em; text-transform: uppercase; color: var(--ink-soft); }
+.fn-title { display: block; margin: .9cqw 0 .8cqw; font-weight: 700; font-size: 3.45cqw; line-height: 1.15; color: var(--ink-deep); }
+.fn-meta { font-weight: 500; font-size: 2.35cqw; line-height: 1.25; color: var(--ink); }
+.fn-tap { display: inline-flex; align-items: center; gap: 1.2cqw; margin-top: 2cqw; padding: 1.25cqw 2.6cqw 1.25cqw 3cqw; border-radius: 99px; background: linear-gradient(180deg, #8a2430, #5e1420); color: var(--cream); font-weight: 700; font-size: 2.05cqw; letter-spacing: .2em; text-transform: uppercase; box-shadow: 0 .8cqw 1.8cqw rgba(90, 20, 30, .3); }
+.fn-tap i { width: 1.5cqw; height: 1.5cqw; border-right: 1.5px solid currentColor; border-top: 1.5px solid currentColor; transform: rotate(45deg); animation: nudge 1.6s ease-in-out infinite; }
+@keyframes nudge { 0%, 100% { transform: translateX(0) rotate(45deg); } 50% { transform: translateX(.6cqw) rotate(45deg); } }
+.fn-n { position: absolute; top: 1.9cqw; right: 2.6cqw; font-family: var(--serif); font-weight: 600; font-size: 2.3cqw; letter-spacing: .16em; color: var(--gold); }
 
-/* ── a day's detail page: plate at the top, words in flow below its arch ── */
-.page.tall { min-height: calc(var(--col) * 1672 / 941); overflow: visible; background: none; }
-/* the plate fades out above its own painted buttons (78 % down), which the card would otherwise half-cover */
-.page.tall > img.plate { height: auto; bottom: auto; -webkit-mask-image: linear-gradient(to bottom, #000 70%, transparent 77%); mask-image: linear-gradient(to bottom, #000 70%, transparent 77%); }
+/* ── a day's detail page: plate at the top, words in flow below its arch; the page ends with its card ── */
+.page.tall { overflow: hidden; background: none; }
+/* the plate fades in from the blurred backdrop at its top edge, and out above its own painted buttons (78 % down),
+   which the card would otherwise half-cover */
+.page.tall > img.plate { height: auto; bottom: auto; -webkit-mask-image: linear-gradient(to bottom, transparent, #000 6%, #000 70%, transparent 77%); mask-image: linear-gradient(to bottom, transparent, #000 6%, #000 70%, transparent 77%); }
 .detail { overflow-x: hidden; }
-.detail .column { justify-content: flex-start; }
-.flow { position: relative; z-index: 5; margin-top: var(--top); padding: 0 8cqw 9cqw; }
-.flow .panel, .dress { padding: 3.2cqw 4cqw 4cqw; border-radius: 3cqw; background: #fbf0dc linear-gradient(180deg, #fdf5e6, #f7e8cc); border: 1px solid rgba(201, 162, 79, .8); box-shadow: 0 0 0 .8cqw rgba(252, 242, 226, .55), 0 1.4cqw 3.6cqw rgba(84, 44, 16, .24); }
+.detail .column { justify-content: center; }
+.flow { position: relative; z-index: 5; margin-top: var(--top); padding: 0 8cqw 5cqw; }
+.flow .panel, .dress { padding: 3.2cqw 4cqw 4cqw; border-radius: 3cqw; background: var(--card) linear-gradient(180deg, #fdf5e6, #f7e8cc); border: 1px solid rgba(201, 162, 79, .8); box-shadow: 0 0 0 .8cqw rgba(252, 242, 226, .55), 0 1.4cqw 3.6cqw rgba(84, 44, 16, .24); }
 .dress { margin: 0 0 3.2cqw; padding: 2.6cqw 3cqw 3cqw; text-align: center; }
 .dress-title { margin: 0; font-weight: 700; font-size: 3.6cqw; color: var(--ink-deep); }
 .swatches { list-style: none; display: flex; justify-content: center; gap: 2.6cqw; margin: 2.4cqw 0 0; padding: 0; }
@@ -51,7 +68,7 @@ body { font-variant-numeric: lining-nums; }
 .timeline { list-style: none; margin: 0; padding: 0; position: relative; }
 .timeline::before { content: ""; position: absolute; left: 1.6cqw; top: 1.6cqw; bottom: 1.6cqw; width: 1px; background: linear-gradient(var(--gold), rgba(201, 162, 79, .25)); }
 .timeline li { position: relative; padding: 1.3cqw 0 1.3cqw 6cqw; }
-.timeline li::before { content: ""; position: absolute; left: 1.6cqw; top: 2.6cqw; width: 2cqw; height: 2cqw; border-radius: 50%; transform: translateX(-50%); background: var(--gold); box-shadow: 0 0 0 2px #fbf0dc; }
+.timeline li::before { content: ""; position: absolute; left: 1.6cqw; top: 2.6cqw; width: 2cqw; height: 2cqw; border-radius: 50%; transform: translateX(-50%); background: var(--gold); box-shadow: 0 0 0 2px var(--card); }
 .timeline time { display: block; font-weight: 700; font-size: 2.5cqw; letter-spacing: .14em; text-transform: uppercase; color: var(--ink-soft); }
 .timeline span { display: block; font-weight: 600; font-size: 3.5cqw; line-height: 1.25; color: var(--ink-deep); }
 .timeline .no-time span { font-style: italic; color: var(--burgundy); }
@@ -60,18 +77,18 @@ body { font-variant-numeric: lining-nums; }
 .venue-name { margin: 0; font-weight: 700; font-size: 3.6cqw; letter-spacing: .08em; text-transform: uppercase; line-height: 1.25; color: var(--ink-deep); }
 .venue-addr { margin: 1cqw 0 0; font-size: 3.1cqw; line-height: 1.4; color: var(--ink); }
 .actions { display: flex; justify-content: center; gap: 1.5cqw; margin-top: 4cqw; }
-.actions .img-wrap { width: 34cqw; height: 10.4cqw; }
+.actions .img-wrap { width: 34cqw; height: 10.4cqw; filter: drop-shadow(0 .8cqw 1.8cqw rgba(84, 44, 16, .25)); }
 .page.tall .reveal.flow { transform: translateY(1.4cqw); }
 .page.tall.ready .reveal.flow.in { transform: none; }
 
-/* ── the countdown: four tiles in a cream tray under the plate's card ── */
-.cd-tray { display: flex; flex-direction: column; justify-content: center; padding: 1.6cqw; border-radius: 3cqw; background: #fbf0dc linear-gradient(180deg, #fdf5e6, #f5e4c4); border: 1px solid rgba(201, 162, 79, .85); box-shadow: 0 0 0 .6cqw rgba(252, 242, 226, .5), 0 1.4cqw 3cqw rgba(84, 44, 16, .22); }
+/* ── the countdown: four tiles in a cream tray over the daybed ── */
+.cd-tray { display: flex; flex-direction: column; justify-content: center; padding: 1.6cqw; border-radius: 3cqw; background: var(--card) linear-gradient(180deg, #fdf5e6, #f5e4c4); border: 1px solid rgba(201, 162, 79, .85); box-shadow: 0 0 0 .6cqw rgba(252, 242, 226, .5), 0 1.4cqw 3cqw rgba(84, 44, 16, .22); }
 .cd { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.6cqw; height: 100%; }
 .cd div { display: flex; flex-direction: column; align-items: center; justify-content: center; border-radius: 2.2cqw; background: linear-gradient(180deg, #4a2a17, #2f1b0f); border: 1px solid rgba(201, 162, 79, .75); box-shadow: 0 1cqw 2.4cqw rgba(59, 34, 20, .28), inset 0 0 0 2px rgba(201, 162, 79, .14); }
-.cd b { font-weight: 600; font-size: 6.2cqw; line-height: 1; color: #f0d08a; font-variant-numeric: tabular-nums lining-nums; }
-.cd span { margin-top: 1cqw; font-weight: 600; font-size: 1.9cqw; letter-spacing: .2em; padding-left: .2em; text-transform: uppercase; color: var(--cream); }
+.cd b { font-weight: 600; font-size: 5.6cqw; line-height: 1; color: #f0d08a; font-variant-numeric: tabular-nums lining-nums; }
+.cd span { margin-top: 1cqw; font-weight: 600; font-size: 1.8cqw; letter-spacing: .2em; padding-left: .2em; text-transform: uppercase; color: var(--cream); }
 .cd[hidden] { display: none; }
-.cd-done { margin: 0; text-align: center; font-family: var(--script); font-size: 5.6cqw; line-height: 1.1; color: var(--burgundy); }
+.cd-done { margin: 0; text-align: center; font-family: var(--script); font-size: 5.2cqw; line-height: 1.1; color: var(--burgundy); }
 .cd-done[hidden] { display: none; }
 
 /* ── Add to Calendar sheet ── */
@@ -94,3 +111,5 @@ body { font-variant-numeric: lining-nums; }
 .film .seal, .film .burst { position: absolute; pointer-events: none; will-change: opacity; }
 .film .seal { opacity: 0; }
 .film .burst { opacity: 0; border-radius: 50%; background: radial-gradient(circle closest-side, #fff8e6 0%, #ffecc4 34%, rgba(255, 232, 190, .98) 56%, rgba(255, 220, 160, .6) 76%, rgba(255, 210, 140, 0) 100%); }
+
+@media (prefers-reduced-motion: reduce) { .fn-tap i { animation: none; } }

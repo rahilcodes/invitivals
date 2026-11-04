@@ -1,5 +1,5 @@
 /* Vaishali & Arpan: the invitation assembled from the demo's components.
-   Scroll order: 1 the invitation, 2 the date, 3 the three days, the countdown, Save the Date,
+   Scroll order: 1 the invitation, 2 the date, 3 the programme (three days), the countdown, Save the Date,
    our memories, the little stars' message, the closing. The three days open as detail views from page 3. */
 import { config as C } from '../config.js';
 import './layout.js';
@@ -25,17 +25,17 @@ const page1 = Page(1, [
   spr('p1-flowers-a', { still: true, motion: 'sway soft', origin: '0% 45%', z: 1 }),
   spr('p1-flowers-b', { still: true, motion: 'sway soft alt', origin: '0% 50%', z: 1 }),
   butterfly('p1-butterfly', { z: 2 }),
-  live('h-invocation', H.invocation, { size: 2.45, cls: 'serif caps tight soft', delay: 0.1, wrap: false }),
-  live('h-hindi', H.hindi, { size: 2.8, cls: 'deva burgundy', delay: 0.25, lang: 'hi' }),
+  live('h-invocation', H.invocation, { size: 2.3, cls: 'serif caps tight soft', delay: 0.1, wrap: false }),
+  live('h-hindi', H.hindi, { size: 2.65, cls: 'deva burgundy', delay: 0.25, lang: 'hi' }),
   sprAt('h-rule1', 'p1-rule1', { delay: 0.4 }),
-  live('h-blessings', H.blessings, { size: 2.6, cls: 'serif caps soft', delay: 0.5, wrap: false }),
-  live('h-parents', H.parents, { size: 3.3, cls: 'serif bold deep', delay: 0.6 }),
-  live('h-request', H.request, { size: 2.7, cls: 'serif italic', delay: 0.7 }),
-  live('h-bride', C.couple.bride, { size: 11.5, cls: 'script burgundy', delay: 0.6, slow: true, wrap: false }),
-  live('h-bride-of', H.brideOf, { size: 2.6, cls: 'serif semibold', delay: 0.9 }),
-  live('h-with', H.with, { size: 2.7, cls: 'serif caps soft', delay: 1, wrap: false }),
-  live('h-groom', C.couple.groom, { size: 11.5, cls: 'script burgundy', delay: 0.9, slow: true, wrap: false }),
-  live('h-groom-of', H.groomOf, { size: 2.6, cls: 'serif semibold', delay: 1.2 }),
+  live('h-blessings', H.blessings, { size: 2.3, cls: 'serif caps soft', delay: 0.5, wrap: false }),
+  live('h-parents', H.parents, { size: 3.15, cls: 'serif bold deep', delay: 0.6 }),
+  live('h-request', H.request, { size: 2.5, cls: 'serif italic', delay: 0.7 }),
+  live('h-bride', C.couple.bride, { size: 10.8, cls: 'script burgundy', delay: 0.6, slow: true, wrap: false }),
+  live('h-bride-of', H.brideOf, { size: 2.5, cls: 'serif semibold', delay: 0.9 }),
+  live('h-with', H.with, { size: 2.4, cls: 'serif caps soft', delay: 1, wrap: false }),
+  live('h-groom', C.couple.groom, { size: 10.8, cls: 'script burgundy', delay: 0.9, slow: true, wrap: false }),
+  live('h-groom-of', H.groomOf, { size: 2.5, cls: 'serif semibold', delay: 1.2 }),
   h('div', { class: 'hint', 'aria-hidden': 'true' }, h('span', {}, 'Scroll'), h('i')),
 ], { id: 'page-1' });
 
@@ -54,7 +54,7 @@ const page2 = Page(2, [
 ], { id: 'page-2' });
 
 /* ── the three days: detail views, all on plate 4 (title over the arch, the date in its gold frame, the
-      programme in one solid card below, the demo's two buttons under it) ── */
+      programme in one solid card below, the demo's two buttons under it; the page ends with its card) ── */
 const schedule = (day) => h('ol', { class: 'timeline' }, ...day.schedule.map(([t, what, note]) => h('li', { class: t ? '' : 'no-time' },
   t ? h('time', {}, t) : null, h('span', {}, what, note ? h('em', {}, note) : null))));
 const venue = (day) => h('div', { class: 'venue' }, h('p', { class: 'venue-name' }, day.venue), h('p', { class: 'venue-addr' }, ...day.address.flatMap((l, i) => (i ? [h('br'), l] : [l]))));
@@ -73,49 +73,48 @@ const dayPage = (day) => () => Page(4, [
 ], { id: `detail-${day.key}`, tall: true, flow: h('div', { class: 'flow reveal', style: { '--d': '0.6s', '--top': '91.8cqw' } },
   day.dressCode ? dressCode(day) : null, h('div', { class: 'panel' }, schedule(day), venue(day)), actions(day)) });
 
-/* ── 3 · our functions: a plaque per day, its pin on the plaque ── */
-const plaque = (id, day, delay) => control(id,
-  h('button', { class: 'plaque', type: 'button', 'aria-label': `${day.title}, ${day.weekday} ${day.date}: view details`, onclick: () => openDetail(day.title, 4, dayPage(day)) },
-    pic('p3-plaque', ''), h('span', { class: 'plaque-label' }, h('small', {}, `${day.weekday} · ${day.date.replace(' 2026', '')}`), h('b', {}, day.title))), { delay, cls: 'plaque-wrap' });
-
+/* ── 3 · our functions: the programme as three cards, each a button that opens its day. The day's number sits
+      in a burgundy medallion, the title and the first hour beside it, and a "Tap to view" pill says what a
+      tap does, so nobody wonders whether the cards are live. ── */
 const [day1, day2, day3] = C.days;
+const monthShort = (date) => date.split(' ')[1].slice(0, 3);
+const card = (id, day, n, delay) => control(id,
+  h('button', { class: 'fn', type: 'button', 'aria-label': `${day.title}, ${day.weekday} ${day.date}: view the programme`, onclick: () => openDetail(day.title, 4, dayPage(day)) },
+    h('span', { class: 'fn-day', 'aria-hidden': 'true' }, h('b', {}, day.date.split(' ')[0]), h('small', {}, monthShort(day.date))),
+    h('span', { class: 'fn-body' },
+      h('small', { class: 'fn-when' }, `${day.weekday} · ${day.date.replace(' 2026', '')}`),
+      h('b', { class: 'fn-title' }, day.title),
+      h('span', { class: 'fn-meta' }, `${day.schedule[0][0]} · ${day.venue}`),
+      h('span', { class: 'fn-tap' }, 'Tap to view', h('i', { 'aria-hidden': 'true' }))),
+    h('span', { class: 'fn-n', 'aria-hidden': 'true' }, n)),
+  { delay, cls: 'fn-wrap', z: 5 });
+
 const page3 = Page(3, [
   spr('p3-flowers-a', { motion: 'sway', origin: '0% 30%', delay: 0.1, z: 2 }),
   spr('p3-flowers-b', { motion: 'sway alt', origin: '0% 50%', delay: 0.2, z: 2 }),
   spr('p3-flowers-c', { motion: 'sway', origin: '0% 50%', delay: 0.3, z: 2 }),
   spr('p3-flowers-d', { motion: 'sway alt', origin: '100% 50%', delay: 0.2, z: 2 }),
   spr('p3-flowers-e', { motion: 'sway', origin: '100% 50%', delay: 0.3, z: 2 }),
-  plaque('p3-plaque-a', day1, 0.45),
-  sprAt('p3-pin-a', 'p3-pin1', { delay: 0.55, z: 4, cls: 'bob' }),
-  plaque('p3-plaque-b', day2, 0.7),
-  sprAt('p3-pin-b', 'p3-pin1', { delay: 0.8, z: 4, cls: 'bob' }),
-  plaque('p3-plaque-c', day3, 0.9),
-  sprAt('p3-pin-c', 'p3-pin1', { delay: 1, z: 4, cls: 'bob' }),
-  h('div', { class: 'tap-hint page-3-hint', 'aria-hidden': 'true' }, 'Tap to view'),
+  card('f-card-a', day1, 'I', 0.4),
+  card('f-card-b', day2, 'II', 0.6),
+  card('f-card-c', day3, 'III', 0.8),
 ], { id: 'page-3' });
-page3.querySelectorAll('.plaque-wrap .plaque img').forEach((i) => i.classList.add('plaque-art'));
 
-/* ── the countdown (plate 5: the plate's card carries the date and time, the tiles sit in a tray below) ── */
+/* ── the countdown (plate 4 down to its painted buttons: the day in the gold frame, the tiles in a tray over
+      the daybed) ── */
 const CD = C.countdown, W = C.wedding;
 const tiles = h('div', { class: 'cd', id: 'countdown', role: 'timer', 'aria-live': 'off' },
   ...CD.units.map((u) => h('div', {}, h('b', { 'data-u': u[0].toLowerCase() }, '--'), h('span', {}, u))));
 const done = h('p', { class: 'cd-done script', hidden: true }, CD.done);
 const tray = h('div', { class: 's cd-tray reveal', style: { ...box('c-tray'), zIndex: 5, '--d': '0.8s' } }, tiles, done);
-const pageCountdown = Page(5, [
-  spr('p5-lantern-a', { still: true, motion: 'sway hang', origin: '50% 0%', z: 2 }),
-  spr('p5-lantern-b', { still: true, motion: 'sway hang alt', origin: '50% 0%', z: 2 }),
-  spr('p5-lantern-c', { still: true, motion: 'sway hang', origin: '50% 0%', z: 2 }),
-  butterfly('p5-butterfly-a', { z: 3 }),
-  butterfly('p5-butterfly-b', { z: 3 }),
-  butterfly('p5-butterfly-c', { z: 3 }),
-  live('c-title', CD.title, { size: 7.6, cls: 'script burgundy', delay: 0.15 }),
-  spr('p5-heart', { delay: 0.35 }),
-  live('c-lines', CD.lines, { size: 3.2, cls: 'serif italic', delay: 0.45 }),
-  live('c-date', W.dateLine, { size: 2.35, cls: 'serif caps deep', delay: 0.65, wrap: false }),
-  live('c-weekday', W.weekday, { size: 2.2, cls: 'serif caps soft', delay: 0.7, wrap: false }),
-  live('c-time', W.time, { size: 3, cls: 'serif bold deep', delay: 0.75, wrap: false }),
+const pageCountdown = Page(4, [
+  live('c-title', CD.title, { size: 7, cls: 'script burgundy', delay: 0.15 }),
+  sprAt('c-rule', 'p4-rule', { delay: 0.3 }),
+  live('c-lines', CD.lines, { size: 2.7, cls: 'serif italic', delay: 0.45 }),
+  live('c-date', W.dateLine, { size: 2.4, cls: 'serif caps deep', delay: 0.6, wrap: false }),
+  live('c-weekday', `${W.weekday} · ${W.time}`, { size: 2.1, cls: 'serif caps tight soft', delay: 0.65, wrap: false }),
   tray,
-], { id: 'page-countdown' });
+], { id: 'page-countdown', crop: { bottom: 0.22 } });
 
 /* the countdown: worked out every second from the real moment, never below zero */
 (() => {
@@ -134,19 +133,26 @@ const pageCountdown = Page(5, [
   document.addEventListener('visibilitychange', () => { if (!document.hidden) tick(); });
 })();
 
-/* ── Save the Date (plate 4, the demo's own events composition: the day in the gold frame, the time, the
-      venue, and its two buttons: Add to Calendar and the wedding venue on Google Maps) ── */
+/* ── Save the Date (plate 5, the plate painted for it: the title in the arch, the names and the venue, the
+      day beside the card's calendar, the time beside its clock, and its two buttons: the calendar sheet and
+      the wedding venue on Google Maps) ── */
 const SD = C.saveTheDate;
-const pageSave = Page(4, [
+const pageSave = Page(5, [
+  spr('p5-lantern-a', { still: true, motion: 'sway hang', origin: '50% 0%', z: 2 }),
+  spr('p5-lantern-b', { still: true, motion: 'sway hang alt', origin: '50% 0%', z: 2 }),
+  spr('p5-lantern-c', { still: true, motion: 'sway hang', origin: '50% 0%', z: 2 }),
+  butterfly('p5-butterfly-a', { z: 3 }),
+  butterfly('p5-butterfly-b', { z: 3 }),
+  butterfly('p5-butterfly-c', { z: 3 }),
   live('sd-title', SD.title, { size: 8.6, cls: 'script burgundy', delay: 0.15, wrap: false }),
   sprAt('sd-rule', 'p4-rule', { delay: 0.3 }),
-  live('sd-names', `${C.couple.bride} & ${C.couple.groom}`, { size: 3, cls: 'serif caps soft', delay: 0.4, wrap: false }),
-  live('sd-date', W.dateLine, { size: 2.4, cls: 'serif caps deep', delay: 0.5, wrap: false }),
-  live('sd-weekday', W.weekday, { size: 2.2, cls: 'serif caps soft', delay: 0.55, wrap: false }),
-  live('sd-time', W.time, { size: 3, cls: 'serif bold deep', delay: 0.6, wrap: false }),
-  live('sd-venue', day3.venueLines || day3.venue, { size: 2.2, cls: 'serif caps tight deep', delay: 0.65 }),
-  control('p4-save', saveTheDate(day3, pic('p4-save', SD.button), sheet), { delay: 0.85 }),
-  control('p4-maps', openMaps(day3, pic('p4-maps', 'Open in Google Maps')), { delay: 0.95 }),
+  live('sd-names', `${C.couple.bride} & ${C.couple.groom}`, { size: 3.2, cls: 'serif caps deep', delay: 0.4, wrap: false }),
+  live('sd-venue', day3.venue, { size: 2.7, cls: 'serif bold', delay: 0.5, wrap: false }),
+  live('sd-addr', day3.address[0].replace(/ – .*$/, ''), { size: 2.4, cls: 'serif soft', delay: 0.55, wrap: false }),
+  live('sd-date', W.dateLine, { size: 2.3, cls: 'serif caps tight deep', delay: 0.65, wrap: false }),
+  live('sd-time', `${W.weekday} · ${W.time}`, { size: 2.2, cls: 'serif caps tight deep', delay: 0.7, wrap: false }),
+  control('p5-save', saveTheDate(day3, pic('p5-save', SD.button), sheet), { delay: 0.9 }),
+  control('p5-maps', openMaps(day3, pic('p5-maps', 'View on Google Maps')), { delay: 1 }),
 ], { id: 'page-save' });
 
 /* ── our memories (the plate's empty floor below the stage is cut: the next page follows the hint) ── */

@@ -55,7 +55,7 @@ export const config = {
   ],
 
   /* the countdown page */
-  countdown: { title: ['The Countdown', 'to Forever'], lines: 'The wait is almost over. A beautiful new beginning awaits!', done: 'The day is here. A beautiful new beginning begins!', units: ['Days', 'Hours', 'Minutes', 'Seconds'] },
+  countdown: { title: ['The Countdown', 'to Forever'], lines: ['The wait is almost over.', 'A beautiful new beginning awaits!'], done: 'The day is here. A beautiful new beginning begins!', units: ['Days', 'Hours', 'Minutes', 'Seconds'] },
 
   /* the Save the Date page: the wedding day with Add to Calendar and the venue map */
   saveTheDate: { title: 'Save the Date', button: 'Add to Calendar' },
@@ -71,7 +71,7 @@ export const config = {
     ],
   },
 
-  stars: { title: 'A Little Message from Our Little Stars', big: 'My Bua is getting married!', line: 'Please join us to celebrate this beautiful new beginning!', love: 'With love,', names: 'Mishika, Navya & Himanshi' },
+  stars: { title: 'A Little Message from Our Little Stars', big: 'My Bua is getting married!', line: ['Please join us to celebrate', 'this beautiful new beginning!'], love: 'With love,', names: 'Mishika, Navya & Himanshi' },
 
   closing: { title: ['Your Presence Is', 'Our Greatest Gift'], lines: 'We look forward to celebrating these beautiful moments with you and your family.', hashtag: '#theARVAStory' },
 

@@ -4,30 +4,29 @@
 import { art } from './art.js';
 
 Object.assign(art, {
-  /* page 1: the invitation, bride first, centred on the arch (its axis is at 52.4 %); everything ends above
-     the painted couple, who stand at the lower right from ~59 % */
-  'h-invocation': { x: 32.4, y: 15.0, w: 40, h: 2.2 }, /* below the arch's cusps, which reach down to ~14 % at the sides */
-  'h-hindi': { x: 29.4, y: 17.3, w: 46, h: 4.8 },
-  'h-rule1': { x: 39.65, y: 22.3, w: 25.505, h: 2.033 },
-  'h-blessings': { x: 32.4, y: 24.4, w: 40, h: 2.0 },
-  'h-parents': { x: 29.4, y: 26.5, w: 46, h: 5.0 },
-  'h-request': { x: 28.4, y: 31.6, w: 48, h: 4.2 },
-  'h-bride': { x: 27.4, y: 35.8, w: 50, h: 6.4 },
-  'h-bride-of': { x: 29.4, y: 42.3, w: 46, h: 4.0 },
-  'h-with': { x: 37.4, y: 46.4, w: 30, h: 2.0 },
-  'h-groom': { x: 27.4, y: 48.4, w: 50, h: 6.4 },
-  'h-groom-of': { x: 29.4, y: 54.9, w: 46, h: 4.0 },
+  /* page 1: the invitation, bride first, centred on the arch (its axis is at 52.4 %). One vertical rhythm:
+     every box is as tall as its words, with a steady gap of ~0.8 % between groups and a smaller one between a
+     name and its own line. The block starts below the arch's cusps (~13.2 % at x 39 / 63 %) and ends above
+     the painted couple, whose heads begin at ~57 % on the right (x > 72 %) */
+  'h-invocation': { x: 32.4, y: 14.0, w: 40, h: 1.3 },
+  'h-hindi': { x: 29.4, y: 16.1, w: 46, h: 4.33 },
+  'h-rule1': { x: 40.4, y: 21.3, w: 24, h: 1.913 },
+  'h-blessings': { x: 32.4, y: 24.0, w: 40, h: 1.3 },
+  'h-parents': { x: 29.4, y: 25.9, w: 46, h: 4.44 },
+  'h-request': { x: 28.4, y: 31.1, w: 48, h: 3.8 },
+  'h-bride': { x: 27.4, y: 35.7, w: 50, h: 6.38 },
+  'h-bride-of': { x: 29.4, y: 42.3, w: 46, h: 3.66 },
+  'h-with': { x: 37.4, y: 46.9, w: 30, h: 1.35 },
+  'h-groom': { x: 27.4, y: 48.8, w: 50, h: 6.38 },
+  'h-groom-of': { x: 29.4, y: 55.4, w: 46, h: 3.66 },
 
   /* page 2: the parchment's date, three lines */
   'p2-date3': { x: 35, y: 57.8, w: 30, h: 12.4 },
 
-  /* page 3: three plaques (the pack's plaque is 3:1), centred, each with its pin on its top-right corner */
-  'p3-plaque-a': { x: 24, y: 44, w: 52, h: 9.75 },
-  'p3-plaque-b': { x: 24, y: 73, w: 52, h: 9.75 },
-  'p3-plaque-c': { x: 24, y: 85.2, w: 52, h: 9.75 },
-  'p3-pin-a': { x: 70, y: 41.6, w: 7.006, h: 5.153 },
-  'p3-pin-b': { x: 70, y: 70.6, w: 7.006, h: 5.153 },
-  'p3-pin-c': { x: 70, y: 82.8, w: 7.006, h: 5.153 },
+  /* page 3: the programme, three cards under the plate's "Our Functions" lettering, over the venue's bokeh */
+  'f-card-a': { x: 12, y: 33.6, w: 76, h: 16.8 },
+  'f-card-b': { x: 12, y: 53.4, w: 76, h: 16.8 },
+  'f-card-c': { x: 12, y: 73.2, w: 76, h: 16.8 },
 
   /* the three day pages on plate 4: title over the arch, date in the plate's own gold frame (44.6–50 %) */
   'd4-title': { x: 17, y: 28.4, w: 66, h: 9.2 },
@@ -35,23 +34,24 @@ Object.assign(art, {
   'd4-date': { x: 33, y: 45, w: 34, h: 2.6 },
   'd4-weekday': { x: 34.5, y: 47.5, w: 31, h: 2.1 },
 
-  /* Save the Date on plate 4: the demo's own composition (date in the frame, time, venue, the two buttons) */
-  'sd-title': { x: 15, y: 27.2, w: 70, h: 9.6 },
-  'sd-rule': { x: 40.914, y: 37.4, w: 18.597, h: 1.794 },
-  'sd-names': { x: 25, y: 39.6, w: 50, h: 2.6 },
-  'sd-date': { x: 33, y: 45, w: 34, h: 2.6 },
-  'sd-weekday': { x: 34.5, y: 47.5, w: 31, h: 2.1 },
-  'sd-time': { x: 33, y: 54.1, w: 34, h: 2.4 },
-  'sd-venue': { x: 32, y: 56.5, w: 36, h: 4.6 }, /* two lines: the clear cream between the flower beds is only 33–67 % wide here */
+  /* the countdown on plate 4 (shown down to the top of its painted buttons): the title in the arch under the
+     lantern, the day in the gold frame, the four tiles in a tray over the daybed */
+  'c-title': { x: 14, y: 28.6, w: 72, h: 8.6 },
+  'c-rule': { x: 40.914, y: 37.8, w: 18.597, h: 1.794 },
+  'c-lines': { x: 22, y: 40.2, w: 56, h: 3.9 },
+  'c-date': { x: 33, y: 45, w: 34, h: 2.6 },
+  'c-weekday': { x: 33, y: 47.5, w: 34, h: 2.1 },
+  'c-tray': { x: 18, y: 60.6, w: 64, h: 11.2 },
 
-  /* the countdown on plate 5: the plate's own card (42–52 %) holds the date and time; the tiles sit in a
-     tray right under it, over the plate's painted buttons */
-  'c-title': { x: 12, y: 17.6, w: 76, h: 12.2 },
-  'c-lines': { x: 20, y: 32.2, w: 60, h: 5 },
-  'c-date': { x: 41, y: 43.2, w: 30, h: 2.6 },
-  'c-weekday': { x: 42.5, y: 45.8, w: 27, h: 2.1 },
-  'c-time': { x: 42.5, y: 48.9, w: 27, h: 2.3 },
-  'c-tray': { x: 11, y: 53.2, w: 78, h: 10.6 },
+  /* Save the Date on plate 5, the plate made for it: the title in the arch, the names and the venue under it,
+     the day beside the card's calendar icon, the time beside its clock, and the plate's own two buttons */
+  'sd-title': { x: 15, y: 13.8, w: 70, h: 5.6 },
+  'sd-rule': { x: 40.914, y: 20.4, w: 18.597, h: 1.794 },
+  'sd-names': { x: 20, y: 23.2, w: 60, h: 2.0 },
+  'sd-venue': { x: 20, y: 26.3, w: 60, h: 1.9 },
+  'sd-addr': { x: 20, y: 28.5, w: 60, h: 1.7 },
+  'sd-date': { x: 43, y: 43.0, w: 28, h: 2.3 },
+  'sd-time': { x: 46.5, y: 48.1, w: 24, h: 2.2 },
 
   /* little stars on plate 7, inside the frame's clear middle (x ≈ 22–78 %) */
   's-rule1': { x: 32.412, y: 27.5, w: 35.6, h: 5.144 },
