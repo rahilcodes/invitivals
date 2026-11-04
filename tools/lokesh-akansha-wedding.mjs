@@ -58,9 +58,17 @@ const VARIANTS = {
     og: 'og-wedding-day-26nov.jpg',           // the All Events cover's design with this page's date, under a new file name (client, 2026-11-04)
     state: true,                               // "…, Shodapur, Panipat, Haryana" (client, 2026-11-04, this page)
     lovingFamilies: false,                     // the sentence "The loving families of the bride and groom" is not on this page (client)
-    welcomeNames: ['Pooja and Ashish', 'Pinki and Rohit'],
-    pairs: true,
+    /* one slide (client, 2026-11-04): the Save the Date card, then the seven names, then the two couples (with "&"),
+       then the invitation line — no separate invitation page */
+    welcomeNames: ['Krishnamurari', 'Yatendra Kumar', 'Narender Kumar', 'Virender Kumar', 'Gajender Kumar', 'Umesh', 'Baldev'],
+    couples: ['Pooja & Ashish', 'Pinki & Rohit'],
+    merged: true,
+    shloka: [...SHLOKA.slice(0, 3), 'मङ्गलं च दिने दिने॥'],   // "मङ्गलं" as the client wrote it for this page (2026-11-04)
+    pairs: false,
     pre: false,
+    titles: true,
+    calendar: true,
+    countdown: '2026-11-26T15:00:00+05:30',
     closing: { message: 'We’re eagerly waiting for your kind presence to bless our Mama and Maami.', kids: 'Anvay and Aryav' },
   },
 };
@@ -89,7 +97,7 @@ const bells = (y1, y2, H = 177.68) => `
 /* a height on the painting (percent of the painting) as a length that does not change with the page's height */
 function at(pct, H) { return `calc(var(--cq) * ${(pct * H / 100).toFixed(1)})`; }
 
-const ALL = [
+const EVENTS = [
   { name: 'Haldi Ceremony', at: '2026-11-25T10:00', where: 'cosmos' },
   { name: 'Mehndi & Sangeet', at: '2026-11-25T16:00', where: 'cosmos' },
   { name: 'Ghudchadhi', at: '2026-11-26T09:00', where: 'palm' },
@@ -98,22 +106,27 @@ const ALL = [
 ];
 const icsText = (t) => String(t).replace(/\\/g, '\\\\').replace(/\n/g, '\\n').replace(/[,;]/g, (c) => '\\' + c);
 const wall = (at) => at.replace(/[-:]/g, '') + '00';
+function calendarFor(slug) {
+const V = VARIANTS[slug], ALL = V.pre ? EVENTS : EVENTS.filter((e) => e.at.startsWith('2026-11-26'));
 const SCHEDULE = ALL.map((e) => `${e.name}: ${new Date(e.at + ':00+05:30').toLocaleString('en-IN', { timeZone: 'Asia/Kolkata', weekday: 'short', day: 'numeric', month: 'short', hour: 'numeric', minute: '2-digit' })}, ${VENUES[e.where].name}`).join('\n');
 /* one .ics with an entry per function (Asia/Kolkata), each with a reminder the day before */
 const ICS = ['BEGIN:VCALENDAR', 'VERSION:2.0', 'PRODID:-//Invitivals//Lokesh & Akansha Wedding//EN', 'CALSCALE:GREGORIAN', 'METHOD:PUBLISH',
   'BEGIN:VTIMEZONE', 'TZID:Asia/Kolkata', 'BEGIN:STANDARD', 'DTSTART:19700101T000000', 'TZOFFSETFROM:+0530', 'TZOFFSETTO:+0530', 'TZNAME:IST', 'END:STANDARD', 'END:VTIMEZONE',
-  ...ALL.flatMap((e, i) => ['BEGIN:VEVENT', `UID:lokesh-akansha-wedding-${i + 1}@invitivals.com`, 'DTSTAMP:20261104T000000Z',
+  ...ALL.flatMap((e, i) => ['BEGIN:VEVENT', `UID:${slug === MAIN ? 'lokesh-akansha-wedding-' + (i + 1) : slug + '-' + e.at.slice(11, 13)}@invitivals.com`, 'DTSTAMP:20261104T000000Z',
     `DTSTART;TZID=Asia/Kolkata:${wall(e.at)}`, `SUMMARY:${icsText(e.name + ' · Lokesh & Akansha')}`,
     `LOCATION:${icsText(VENUES[e.where].name + ', ' + VENUES[e.where].address)}`,
-    `DESCRIPTION:${icsText('Wedding of Lokesh & Akansha\nMap: ' + VENUES[e.where].mapsUrl)}`, `URL:https://invitivals.com/${MAIN}/`,
+    `DESCRIPTION:${icsText('Wedding of Lokesh & Akansha\nMap: ' + VENUES[e.where].mapsUrl)}`, `URL:https://invitivals.com/${slug}/`,
     'BEGIN:VALARM', 'TRIGGER:-P1D', 'ACTION:DISPLAY', `DESCRIPTION:${icsText(e.name + ' tomorrow')}`, 'END:VALARM', 'END:VEVENT']),
   'END:VCALENDAR', ''].join('\r\n');
 /* Google Calendar takes one entry: both days, all day, with every function's time in its notes */
 const GCAL = esc('https://calendar.google.com/calendar/render?' + new URLSearchParams({ action: 'TEMPLATE', text: 'Wedding of Lokesh & Akansha',
-  dates: '20261125/20261127', ctz: 'Asia/Kolkata', location: 'Panipat, Haryana', details: SCHEDULE + '\n\nhttps://invitivals.com/' + MAIN + '/' }).toString());
+  dates: V.pre ? '20261125/20261127' : '20261126/20261127', ctz: 'Asia/Kolkata', location: V.pre ? 'Panipat, Haryana' : VENUES.palm.name + ', ' + VENUES.palm.address,
+  details: SCHEDULE + '\n\nhttps://invitivals.com/' + slug + '/' }).toString());
+return { ICS, GCAL };
+}
 
 function page(slug) {
-  const V = VARIANTS[slug], url = `https://invitivals.com/${slug}/`;
+  const V = VARIANTS[slug], url = `https://invitivals.com/${slug}/`, { GCAL } = calendarFor(slug);
   const invite = V.lovingFamilies
     ? `<h2 class="caps caps--lg rise">The Loving Families</h2>
         <p class="para gap-s rise" style="--d:.15s">of the groom and bride cordially invite you and your family to celebrate the wedding of</p>`
@@ -177,7 +190,7 @@ function page(slug) {
       <div class="flow" style="--top:13.5;--side:13;--bottom:2">
         <img class="orn drop" style="width:calc(var(--cq) * 11);margin-top:0;--d:.2s" src="assets/el/ganesha.webp" alt="Ganesha">
         <img class="orn rise" style="width:calc(var(--cq) * 22);margin:calc(var(--cq) * 1.6) auto calc(var(--cq) * 2.4);--d:.4s" src="assets/el/garland.webp" alt="">
-        <p class="shloka rise" lang="sa" style="--d:.55s">${SHLOKA.map((l) => `<span>${l}</span>`).join('')}</p>
+        <p class="shloka rise" lang="sa" style="--d:.55s">${(V.shloka || SHLOKA).map((l) => `<span>${l}</span>`).join('')}</p>
         <p class="caps caps--sm gap-l rise" style="--d:.8s">The Wedding of</p>
         <h1 class="couple-names">
           <span class="script script--xl rise" style="--d:1s">Lokesh</span>
@@ -212,6 +225,11 @@ function page(slug) {
           <p class="sr-only" id="scardNote" aria-live="polite">Scratch the card to reveal the dates.</p>
         </div>
 ${V.calendar ? `        <button class="maps cal-btn rise" id="calBtn" type="button" style="--d:.4s" aria-haspopup="dialog"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 2h2v2h6V2h2v2h3v18H4V4h3zm-1 7v11h12V9zm2 2h3v3H8z"/></svg><span>Add to Calendar</span></button>
+` : ''}${V.merged ? `        <div class="welcome-names rise" style="margin-top:calc(var(--cq) * 8);--d:.1s">${V.welcomeNames.map((n) => `<p>${esc(n)}</p>`).join('')}</div>
+        <div class="welcome-names welcome-names--pairs rise" style="margin-top:calc(var(--cq) * 4);--d:.2s">${V.couples.map((n) => `<p>${esc(n)}</p>`).join('')}</div>
+        <img class="orn rise" style="width:calc(var(--cq) * 18);--d:.25s" src="assets/el/garland.webp" alt="" loading="lazy">
+        ${invite}
+        <p class="script script--md gap-s rise" style="--d:.3s">Lokesh &amp; Akansha</p>
 ` : ''}      </div>
     </div>
   </section>
@@ -238,7 +256,7 @@ ${V.countdown ? `
     </div>
   </section>
 ` : ''}
-  <!-- 2 · the invitation -->
+${V.merged ? '' : `  <!-- 2 · the invitation -->
   <section class="page" id="p-invite">
     <div class="art art--fit" style="--h:177.68">
       <img class="bg" src="assets/bg/p4.webp" alt="" width="941" height="1672" loading="lazy" decoding="async">
@@ -252,7 +270,7 @@ ${V.welcomeNames.length ? `<div class="welcome-names${V.pairs ? ' welcome-names-
       </div>
     </div>
   </section>
-
+`}
   <!-- 3 · the families: the groom's first, then the bride's (mother before father, grandmother before grandfather) -->
   <section class="page" id="p-fam">
     <div class="art art--fit" style="--h:177.68">
@@ -372,7 +390,7 @@ ${V.pre ? `
 ${V.calendar ? `<div class="sheet" id="sheet" hidden>
   <div class="sheet__veil" data-close></div>
   <div class="sheet__card" role="dialog" aria-modal="true" aria-labelledby="sheetTitle">
-    <p class="sheet__kicker">25 – 26 November 2026 · Panipat</p>
+    <p class="sheet__kicker">${V.pre ? '25 – 26 November 2026' : 'Thursday · 26 November 2026'} · Panipat</p>
     <h2 class="sheet__title" id="sheetTitle">Save the Date</h2>
     <a class="sheet__btn sheet__btn--primary" href="event.ics" download="lokesh-akansha-wedding.ics"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 2h2v2h6V2h2v2h3v18H4V4h3zm-1 7v11h12V9zm2 2h3v3H8z"/></svg>Apple / Android calendar (.ics)</a>
     <a class="sheet__btn" id="gcal" href="${GCAL}" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm1 5v5.4l3.6 2.1-.8 1.3L11 13V7z"/></svg>Google Calendar</a>
@@ -406,7 +424,7 @@ for (const slug of ASKED.length ? ASKED : [MAIN]) {
   const { html, config } = page(slug);
   fs.writeFileSync(path.join(D, 'index.html'), html);
   fs.writeFileSync(path.join(D, 'config.js'), config);
-  if (VARIANTS[slug].calendar) fs.writeFileSync(path.join(D, 'event.ics'), ICS);
+  if (VARIANTS[slug].calendar) fs.writeFileSync(path.join(D, 'event.ics'), calendarFor(slug).ICS);
   if (slug === DAY) {
     for (const f of ['css/invite.css', 'js/app.js', 'favicon.svg', '.htaccess', 'assets/bg/opening-la.webp', 'assets/el/la-logo.webp', 'assets/media/opening-la-v2.mp4', 'assets/media/music.mp3']) {
       fs.mkdirSync(path.dirname(path.join(D, f)), { recursive: true });
