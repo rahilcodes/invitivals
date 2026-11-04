@@ -1,0 +1,9 @@
+# This invitation is corrected in place, so browsers re-check every script,
+# style and picture (a quick "not modified" when nothing changed). The music is
+# large and rarely changes, so it keeps the site's normal caching.
+AddType text/calendar .ics
+<IfModule mod_headers.c>
+  <FilesMatch "\.(js|css|webp|jpg|jpeg|png|svg|ics)$">
+    Header set Cache-Control "no-cache"
+  </FilesMatch>
+</IfModule>
