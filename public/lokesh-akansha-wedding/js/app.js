@@ -220,7 +220,7 @@ if (sheet && calBtn) {
   document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && !sheet.hidden) { sheet.hidden = true; calBtn.focus(); } });
 }
 
-/* ── countdown to the Feras: worked out every second from the real moment (an absolute time with its +05:30 offset,
+/* ── countdown to the Pheras: worked out every second from the real moment (an absolute time with its +05:30 offset,
    so it is right on any phone in any time zone); at zero it gives way to "The Big Day Is Here!" ── */
 const cd = $('#countdown');
 if (cd) {

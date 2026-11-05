@@ -79,6 +79,8 @@ p, h1, h2, h3 { margin: 0; }
 .shloka { font-family: var(--deva); font-weight: 600; color: var(--maroon); font-size: calc(var(--cq) * 4.15); line-height: 1.6; letter-spacing: .01em;
   text-shadow: 0 0 .5em rgba(255, 248, 236, .9); }
 .shloka span { display: block; white-space: nowrap; }
+/* on two lines, smaller (both pages, client 2026-11-05) */
+.shloka--2 { font-size: calc(var(--cq) * 3.3); line-height: 1.8; letter-spacing: 0; }
 /* the couple on the cover */
 .couple-names { display: flex; flex-direction: column; align-items: center; }
 .amp { display: flex; align-items: center; gap: calc(var(--cq) * 2.4); width: calc(var(--cq) * 46); margin: calc(var(--cq) * -.6) 0; }
@@ -195,7 +197,7 @@ p, h1, h2, h3 { margin: 0; }
 .sheet__btn--primary { background: linear-gradient(#80203b, var(--maroon-deep)); color: #f8e9c9; }
 .sheet__close { margin-top: 2px; background: none; border: 0; color: var(--ink); font: 600 15px var(--caps); letter-spacing: .14em; text-transform: uppercase; padding: 12px; cursor: pointer; }
 
-/* the countdown to the Feras */
+/* the countdown to the Pheras */
 .cd { display: grid; grid-template-columns: repeat(4, 1fr); gap: calc(var(--cq) * 2.4); width: calc(var(--cq) * 72); margin-top: calc(var(--cq) * 4); }
 .cd__u { display: flex; flex-direction: column; align-items: center; padding: calc(var(--cq) * 2.6) 0 calc(var(--cq) * 2); border-radius: calc(var(--cq) * 2.4);
   background: radial-gradient(circle at 35% 25%, #fffaf0, #f6e6c9 80%); border: 1.5px solid var(--gold-light);
