@@ -55,6 +55,8 @@ const VARIANTS = {
     two: true,
     late: true,
     pheras: true,
+    shri: true,          // "Shri" (client, 2026-11-05, from the screenshot; the brief's words said the reverse)
+    venueLabel: true,    // "Venue – Palm Luxuria Banquets" under the Pheras (client, 2026-11-05)
     closing: { message: 'Your gracious presence and blessings will make these joyous occasions truly memorable.', from: ['With love and warm regards,', 'the loving families of the groom and bride'] },
   },
   [DAY]: {
@@ -361,7 +363,7 @@ ${V.pre ? `
         <h2 class="script script--md rise">The Wedding Day</h2>
         <p class="datebar gap-m rise" style="--d:.15s">Thursday<small>26 November 2026</small></p>
         ${timeline(WEDDING.map((e) => (e.name === 'Feras' ? { ...e, name: FERAS } : e)))}
-        <p class="venue-for gap-m rise">${V.nine ? 'Venue – ' : 'at '}${esc(VENUES.palm.name)}</p>
+        <p class="venue-for gap-m rise">${V.nine || V.venueLabel ? 'Venue – ' : 'at '}${esc(VENUES.palm.name)}</p>
       </div>
     </div>
   </section>
