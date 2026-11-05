@@ -20,8 +20,9 @@ body { font-variant-numeric: lining-nums; }
 .s.live.bold { font-weight: 700; }
 .s.live.semibold { font-weight: 600; }
 .s.live.italic { font-style: italic; }
-.s.live.deva { font-family: var(--deva); font-weight: 500; line-height: 1.45; }
+.s.live.deva { font-family: var(--deva); font-weight: 500; line-height: 1.45; white-space: nowrap; }
 .s.live.script { line-height: 1.05; }
+.s.live.name { font-family: 'Playfair Display', 'Cormorant Garamond', Georgia, serif; font-style: italic; font-weight: 500; letter-spacing: .01em; line-height: 1.15; }
 .s.live.serif.wrap { line-height: 1.25; }
 .s.live.italic.wrap { line-height: 1.3; }
 .s.live.date3 { color: var(--burgundy); line-height: 1.12; }

@@ -11,6 +11,7 @@ export function OpeningScreen(cfg, { audio, onStart, onOpened }) {
   const tap = h('button', { class: 'tap', type: 'button', 'aria-label': 'Tap to open the invitation' },
     h('span', { class: 'ring', 'aria-hidden': 'true' }), h('span', {}, 'Tap to Open'));
   const frame = h('div', { class: 'frame' }, h('img', { class: 'art', src: cfg.poster, alt: 'Sealed wedding invitation', fetchpriority: 'high', decoding: 'async' }), tap);
+  frame.style.cursor = 'pointer'; // the seal, the envelope, the button: one tap anywhere opens
   const opening = h('div', { class: 'opening' }, h('div', { class: 'column' }, frame));
 
   const video = h('video', { playsinline: true, 'webkit-playsinline': true, preload: 'auto', src: cfg.video, 'aria-label': 'Opening film', disablepictureinpicture: true, disableremoteplayback: true });
@@ -21,7 +22,7 @@ export function OpeningScreen(cfg, { audio, onStart, onOpened }) {
   const skip = h('button', { class: 'skip', type: 'button', style: { display: 'none' } }, 'Skip');
   document.body.append(opening, film, skip);
 
-  let opened = false, done = false, raf = 0, lastT = -1, lastMove = 0;
+  let opened = false, done = false, raf = 0, lastT = -1, lastMove = 0, letGoOpening = null;
   const timers = [];
   const later = (fn, ms) => timers.push(setTimeout(fn, ms));
 
@@ -62,6 +63,7 @@ export function OpeningScreen(cfg, { audio, onStart, onOpened }) {
     cancelAnimationFrame(raf);
     timers.forEach(clearTimeout);
     removeEventListener('resize', place);
+    if (letGoOpening) letGoOpening();
     audio.begin();
     onOpened();
     film.classList.add('fade');
@@ -69,8 +71,10 @@ export function OpeningScreen(cfg, { audio, onStart, onOpened }) {
     setTimeout(() => { try { video.pause(); video.removeAttribute('src'); video.load(); } catch { /* already gone */ } film.remove(); }, 1100);
   }
 
-  tap.addEventListener('click', () => {
+  const open = () => {
     if (opened) return; opened = true;
+    tap.querySelector('span:last-child').textContent = 'Opening…';
+    tap.disabled = true;
     const fs = document.documentElement.requestFullscreen || document.documentElement.webkitRequestFullscreen;
     // best effort, never awaited: some browsers leave this promise pending, and the film must not wait for it
     if (fs) { try { const p = fs.call(document.documentElement, { navigationUI: 'hide' }); if (p && p.catch) p.catch(() => {}); } catch { /* not allowed here, that's fine */ } }
@@ -78,13 +82,15 @@ export function OpeningScreen(cfg, { audio, onStart, onOpened }) {
     audio.prime(); // the music starts muted inside this gesture, so it may be let in later without another tap
     film.classList.add('playing');
     requestAnimationFrame(place);
-    opening.classList.add('out');
-    setTimeout(() => opening.remove(), 1000); // not among the film's timers: it goes whatever the film does
+    // the envelope stays in view until the film is really playing (a slow connection otherwise shows a black
+    // screen that looks stuck); finish() lets it go too, whatever the film does
+    const letGo = () => { if (opening.isConnected && !opening.classList.contains('out')) { opening.classList.add('out'); setTimeout(() => opening.remove(), 1000); } };
+    letGoOpening = letGo;
     video.muted = false;
     seal.style.opacity = '1';
     lastMove = performance.now();
     raf = requestAnimationFrame(frameStep);
-    const onPlaying = () => { skip.style.display = ''; place(); };
+    const onPlaying = () => { skip.style.display = ''; place(); letGo(); };
     video.addEventListener('playing', onPlaying, { once: true });
     video.addEventListener('ended', finish, { once: true });
     video.addEventListener('error', finish, { once: true });
@@ -97,5 +103,7 @@ export function OpeningScreen(cfg, { audio, onStart, onOpened }) {
       video.play().then(() => audio.begin()).catch(finish);
     });
     skip.addEventListener('click', finish);
-  });
+  };
+  tap.addEventListener('click', (e) => { e.stopPropagation(); open(); });
+  frame.addEventListener('click', open);
 }

@@ -8,17 +8,18 @@ Object.assign(art, {
      every box is as tall as its words, with a steady gap of ~0.8 % between groups and a smaller one between a
      name and its own line. The block starts below the arch's cusps (~13.2 % at x 39 / 63 %) and ends above
      the painted couple, whose heads begin at ~57 % on the right (x > 72 %) */
-  'h-invocation': { x: 32.4, y: 15.2, w: 40, h: 1.3 },
-  'h-hindi': { x: 29.4, y: 17.3, w: 46, h: 4.33 },
-  'h-rule1': { x: 40.4, y: 22.5, w: 24, h: 1.913 },
-  'h-blessings': { x: 32.4, y: 25.2, w: 40, h: 1.3 },
-  'h-parents': { x: 29.4, y: 27.1, w: 46, h: 4.44 },
-  'h-request': { x: 28.4, y: 32.3, w: 48, h: 3.8 },
-  'h-bride': { x: 27.4, y: 36.9, w: 50, h: 6.38 },
-  'h-bride-of': { x: 29.4, y: 43.5, w: 46, h: 3.66 },
-  'h-with': { x: 37.4, y: 48.1, w: 30, h: 1.35 },
-  'h-groom': { x: 27.4, y: 50.0, w: 50, h: 6.38 },
-  'h-groom-of': { x: 29.4, y: 56.6, w: 46, h: 3.66 },
+  'h-ganesha': { x: 48.7, y: 12.4, w: 7.4, h: 5.65 }, /* the demo's small Ganesha, 140×190, under the arch's point */
+  'h-invocation': { x: 32.4, y: 12.0, w: 40, h: 1.3 }, /* only when the invocation line is set (then Ganesha is not) */
+  'h-hindi': { x: 27.4, y: 18.9, w: 50, h: 4.2 },
+  'h-rule1': { x: 40.4, y: 24.0, w: 24, h: 1.913 },
+  'h-blessings': { x: 32.4, y: 26.6, w: 40, h: 1.3 },
+  'h-parents': { x: 29.4, y: 28.5, w: 46, h: 4.44 },
+  'h-request': { x: 28.4, y: 33.7, w: 48, h: 3.8 },
+  'h-bride': { x: 25.4, y: 38.3, w: 54, h: 5.4 },
+  'h-bride-of': { x: 29.4, y: 44.1, w: 46, h: 3.66 },
+  'h-with': { x: 37.4, y: 48.6, w: 30, h: 1.35 },
+  'h-groom': { x: 25.4, y: 50.5, w: 54, h: 5.4 },
+  'h-groom-of': { x: 29.4, y: 56.3, w: 46, h: 3.66 },
 
   /* page 2: the parchment's date, three lines */
   'p2-date3': { x: 35, y: 57.8, w: 30, h: 12.4 },
@@ -69,4 +70,5 @@ Object.assign(art, {
   'z-lines': { x: 20, y: 51.8, w: 60, h: 5.2 },
   'z-hashtag': { x: 25, y: 58.2, w: 50, h: 3 },
   'z-heart': { x: 35.919, y: 62.6, w: 28.905, h: 3.947 },
+  'z-logo': { x: 42.4, y: 61.4, w: 20, h: 8 }, /* the couple's monogram in place of the heart, once supplied */
 });

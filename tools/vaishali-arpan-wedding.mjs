@@ -35,7 +35,7 @@ fs.mkdirSync(A, { recursive: true });
 const DAYS = [
   { file: 'event-18nov.ics', start: '20261118T110000', title: 'Vaishali & Arpan · A Day of Love, Colours & Celebrations',
     venue: 'Vyom Luxury Gym and Wellness, Near True Value, Sector 16, Rohini, Delhi', map: 'https://share.google/XcZWmq2nKNx3zUg58',
-    lines: ['Dress Code: Pastel Colour Theme', '11:00 AM – Guest Welcome Lunch', '1:00 PM – Radha Krishna Phoolon Ki Haldi', '2:00 PM onwards – Pool Party (please bring your swimming costumes!)', '4:00 PM onwards – Mehendi', '7:00 PM onwards – DJ Night', '8:00 PM – Dinner'] },
+    lines: ['Dress Code: Pastel Colour Theme', '11:00 AM – Guest Welcome Lunch', '1:00 PM – Radha Krishna Phoolon Ki Haldi', '2:00 PM onwards – Pool Party (please bring your swimming costumes!)', '4:00 PM onwards – Mehendi', '5:00 PM – Bhaat', '7:00 PM onwards – DJ Night', '8:00 PM – Dinner'] },
   { file: 'event-19nov.ics', start: '20261119T190000', title: 'Vaishali & Arpan · The Engagement Celebration',
     venue: 'Golden Apple Mansion, Hall No. 2, Darbaar Hall, Pitampura, Delhi', map: 'https://share.google/7iebx6d5qkqSQan4a',
     lines: ['7:00 PM – Engagement Ceremony', '8:00 PM onwards – Dinner'] },
@@ -47,7 +47,7 @@ const DAYS = [
 if (only !== 'og') {
   /* the demo's art and music, as they are */
   const demo = ['plate1', 'plate2', 'plate3', 'plate4', 'plate5', 'plate6', 'plate7', 'plate8',
-    'p1-flowers-a', 'p1-flowers-b', 'p1-butterfly', 'p1-rule1',
+    'p1-flowers-a', 'p1-flowers-b', 'p1-butterfly', 'p1-rule1', 'p1-ganesha',
     'p2-flowers-a', 'p2-flowers-b', 'p2-flowers-c', 'p2-flowers-d', 'p2-butterfly-a', 'p2-butterfly-b', 'p2-title', 'p2-rule', 'p2-click', 'p2-paper', 'p2-roller', 'p2-daterule',
     'p3-flowers-a', 'p3-flowers-b', 'p3-flowers-c', 'p3-flowers-d', 'p3-flowers-e',
     'p4-rule', 'p4-save', 'p4-maps',
@@ -165,7 +165,7 @@ const CHROME = process.env.CHROME || 'C:\\Program Files\\Google\\Chrome\\Applica
 const PORT = 9353;
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 const url = (p) => pathToFileURL(p).href;
-const FONTS = '<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Great+Vibes&display=block" rel="stylesheet">';
+const FONTS = '<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Great+Vibes&family=Playfair+Display:ital,wght@1,500&display=block" rel="stylesheet">';
 const READY = `<script>Promise.all([document.fonts.ready,...[...document.images].map(i=>i.decode().catch(()=>{}))]).then(()=>{document.title='ready'})</script>`;
 
 /* the seal face on the demo's poster (947×1660): centre and radius, measured on the picture */
@@ -185,8 +185,8 @@ const ogHtml = `<!DOCTYPE html><meta charset="utf-8">${FONTS}<style>
 .fl{position:absolute;left:-40px;top:-70px;width:440px}
 .c{position:absolute;left:285px;width:630px;top:0;height:630px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding-top:14px}
 .k{font:600 21px 'Cormorant Garamond',serif;letter-spacing:.36em;padding-left:.36em;color:#8a5a1e}
-.n{font:400 136px/1 'Great Vibes',cursive;color:#5a2e12;background:linear-gradient(180deg,#8a5a1e,#5a3418 45%,#8a5a1e);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;filter:drop-shadow(0 2px 2px rgba(255,235,200,.8))}
-.a{font:400 58px/1 'Great Vibes',cursive;color:#a1742a;margin:-6px 0 -10px}
+.n{font:italic 500 108px/1.1 'Playfair Display',Georgia,serif;letter-spacing:.01em;color:#5a2e12;background:linear-gradient(180deg,#8a5a1e,#5a3418 45%,#8a5a1e);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;filter:drop-shadow(0 2px 2px rgba(255,235,200,.8))}
+.a{font:italic 400 52px/1 'Playfair Display',Georgia,serif;color:#a1742a;margin:2px 0}
 .d{margin-top:22px;font:700 30px 'Cormorant Garamond',serif;letter-spacing:.14em;padding-left:.14em;color:#5a3418}
 .p{margin-top:6px;font:600 19px 'Cormorant Garamond',serif;letter-spacing:.32em;padding-left:.32em;color:#8a5a1e}
 </style>

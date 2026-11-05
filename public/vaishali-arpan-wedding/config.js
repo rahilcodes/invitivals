@@ -8,8 +8,11 @@ export const config = {
 
   /* page 1 */
   hero: {
-    invocation: 'Ek Tu Hi Nirankar',
-    hindi: ['तेरे आसरा ले के करता हूँ काम,', 'मेरे सतगुरु तुझको लाखो सलाम ।'],
+    /* the client's final round (5 Nov) opens the slide with Ganesha and his mantra; the earlier Nirankar
+       invocation stays here in case the family wants it back: set ganesha to '' and restore these two */
+    ganesha: 'assets/p1-ganesha.webp',
+    invocation: '', /* was 'Ek Tu Hi Nirankar' */
+    hindi: ['वक्रतुण्ड महाकाय सूर्यकोटि समप्रभ।', 'निर्विघ्नं कुरु मे देव सर्वकार्येषु सर्वदा॥'], /* was ['तेरे आसरा ले के करता हूँ काम,', 'मेरे सतगुरु तुझको लाखो सलाम ।'] */
     blessings: 'With Blessings',
     parents: 'Mrs. Vanita Gupta & Mr. Subhash Chand Gupta',
     request: ['With joy and love, we invite you to bless', 'the wedding of our beloved daughter.'],
@@ -34,6 +37,7 @@ export const config = {
         ['1:00 PM', 'Radha Krishna Phoolon Ki Haldi'],
         ['2:00 PM onwards', 'Pool Party', 'Please bring your swimming costumes for the pool party!'],
         ['4:00 PM onwards', 'Mehendi'],
+        ['5:00 PM', 'Bhaat'],
         ['7:00 PM onwards', 'DJ Night'],
         ['8:00 PM', 'Dinner'],
       ],
@@ -73,7 +77,9 @@ export const config = {
 
   stars: { title: 'A Little Message from Our Little Stars', big: 'My Bua is getting married!', line: ['Please join us to celebrate', 'this beautiful new beginning!'], love: 'With love,', names: 'Mishika, Navya & Himanshi' },
 
-  closing: { title: ['Your Presence Is', 'Our Greatest Gift'], lines: 'We look forward to celebrating these beautiful moments with you and your family.', hashtag: '#theARVAStory' },
+  /* logo: the couple's own AV monogram, once the client supplies the file (assets/av-logo.png, transparent);
+     until then the page keeps the demo's small heart flourish under the hashtag */
+  closing: { title: ['Your Presence Is', 'Our Greatest Gift'], lines: 'We look forward to celebrating these beautiful moments with you and your family.', hashtag: '#theARVAStory', logo: '' },
 
   opening: {
     video: 'assets/opening.mp4',
