@@ -70,5 +70,5 @@ Object.assign(art, {
   'z-lines': { x: 20, y: 51.8, w: 60, h: 5.2 },
   'z-hashtag': { x: 25, y: 58.2, w: 50, h: 3 },
   'z-heart': { x: 35.919, y: 62.6, w: 28.905, h: 3.947 },
-  'z-logo': { x: 42.4, y: 61.4, w: 20, h: 8 }, /* the couple's monogram in place of the heart, once supplied */
+  'z-logo': { x: 41, y: 60.8, w: 18, h: 10.13 }, /* the couple's monogram (square) in place of the heart, under the hashtag */
 });

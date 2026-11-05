@@ -192,7 +192,7 @@ const pageClosing = Page(8, [
   sprAt('z-rule', 'p8-rule', { delay: 0.5 }),
   live('z-lines', Z.lines, { size: 3.2, cls: 'serif italic', delay: 0.65 }),
   live('z-hashtag', Z.hashtag, { size: 3.8, cls: 'serif bold soft', delay: 0.8, wrap: false }),
-  Z.logo ? h('div', { class: 's reveal', style: { ...box('z-logo'), zIndex: 3, '--d': '0.95s' } }, h('img', { src: Z.logo, alt: `${C.couple.bride} & ${C.couple.groom} monogram`, decoding: 'async', draggable: 'false', style: { objectFit: 'contain' } })) : sprAt('z-heart', 'p8-heart', { delay: 0.95 }),
+  Z.logo ? h('div', { class: 's reveal z-logo', style: { ...box('z-logo'), zIndex: 3, '--d': '0.95s' } }, h('img', { src: Z.logo, alt: `${C.couple.bride} & ${C.couple.groom} monogram`, decoding: 'async', draggable: 'false' })) : sprAt('z-heart', 'p8-heart', { delay: 0.95 }),
   h('a', { class: 'created', href: 'https://invitivals.com/', target: '_blank', rel: 'noopener' }, 'Created by ', h('b', {}, 'INVITIVALS')),
 ], { id: 'page-closing', crop: { top: 0.26 } });
 

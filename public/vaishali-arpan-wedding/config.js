@@ -77,9 +77,9 @@ export const config = {
 
   stars: { title: 'A Little Message from Our Little Stars', big: 'My Bua is getting married!', line: ['Please join us to celebrate', 'this beautiful new beginning!'], love: 'With love,', names: 'Mishika, Navya & Himanshi' },
 
-  /* logo: the couple's own AV monogram, once the client supplies the file (assets/av-logo.png, transparent);
-     until then the page keeps the demo's small heart flourish under the hashtag */
-  closing: { title: ['Your Presence Is', 'Our Greatest Gift'], lines: 'We look forward to celebrating these beautiful moments with you and your family.', hashtag: '#theARVAStory', logo: '' },
+  /* logo: the couple's own AV monogram (the client's file, its black background keyed out by the tool),
+     in place of the demo's heart flourish under the hashtag; set logo to '' to show the heart again */
+  closing: { title: ['Your Presence Is', 'Our Greatest Gift'], lines: 'We look forward to celebrating these beautiful moments with you and your family.', hashtag: '#theARVAStory', logo: 'assets/av-logo.png' },
 
   opening: {
     video: 'assets/opening.mp4',

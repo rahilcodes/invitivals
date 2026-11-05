@@ -157,8 +157,23 @@ if (only !== 'og') {
   await sharp(await sharp(P3).blur(30).modulate({ brightness: 1.04, saturation: 0.9 }).toBuffer())
     .composite([{ input: sharpTop, left: 0, top: 0 }]).webp({ quality: 84 }).toFile(path.join(A, 'plate3.webp'));
   console.log('✓ p6-frame.webp (no flowers), plate6.webp, plate5.webp, plate4.webp + plate8.webp (patched), plate3.webp (bokeh below the title)');
-  if (only === 'art') process.exit(0);
 }
+
+/* ── the couple's AV monogram (invites/src/vaishali-arpan-wedding/av-logo.jpg, gold on black): the black is
+      keyed to transparency from each pixel's brightness, and the edge colours are un-blended from the black ── */
+{
+  const src = sharp(path.join(SRC, 'av-logo.jpg'));
+  const { data, info } = await src.raw().toBuffer({ resolveWithObject: true });
+  const out = Buffer.alloc(info.width * info.height * 4);
+  for (let i = 0, o = 0; i < data.length; i += info.channels, o += 4) {
+    const r = data[i], g = data[i + 1], b = data[i + 2];
+    const a = Math.min(1, Math.max(r, g, b) / 215);
+    out[o] = a ? Math.min(255, r / a) : 0; out[o + 1] = a ? Math.min(255, g / a) : 0; out[o + 2] = a ? Math.min(255, b / a) : 0; out[o + 3] = Math.round(a * 255);
+  }
+  await sharp(out, { raw: { width: info.width, height: info.height, channels: 4 } }).resize({ width: 600 }).png({ compressionLevel: 9 }).toFile(path.join(A, 'av-logo.png'));
+  console.log('✓ av-logo.png (the monogram, transparent)');
+}
+if (only === 'art') process.exit(0);
 
 /* ── headless Chrome: the seal's new letters and the link preview ── */
 const CHROME = process.env.CHROME || 'C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe';
@@ -174,9 +189,8 @@ const sealHtml = `<!DOCTYPE html><meta charset="utf-8">${FONTS}<style>
 *{margin:0}html,body{background:transparent}body{width:${SEAL.r * 4}px;height:${SEAL.r * 4}px;position:relative}
 .face{position:absolute;inset:0;border-radius:50%;background:radial-gradient(circle at 42% 36%,#d3a872 0%,#c6975f 45%,#b4824c 78%,#a8753f 100%)}
 .rim{position:absolute;inset:4%;border-radius:50%;box-shadow:inset 0 0 0 2px rgba(255,236,200,.35),inset 0 3px 6px rgba(255,240,210,.35),inset 0 -4px 8px rgba(90,50,20,.3)}
-.m{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font:600 ${SEAL.r * 2.1}px 'Cormorant Garamond',serif;letter-spacing:-.06em;color:#ba8a4f}
-.m.d{color:rgba(80,42,14,.55);transform:translate(2px,3px)}.m.l{color:rgba(255,236,205,.55);transform:translate(-2px,-2px)}
-</style><div class="face"></div><div class="rim"></div><div class="m d">VA</div><div class="m l">VA</div><div class="m">VA</div>${READY}`;
+.m{position:absolute;inset:15%;display:block;width:70%;height:70%;filter:drop-shadow(0 2px 2px rgba(70,35,10,.45)) drop-shadow(0 -1px 1px rgba(255,240,210,.35))}
+</style><div class="face"></div><div class="rim"></div><img class="m" src="${url(path.join(A, 'av-logo.png'))}" alt="">${READY}`;
 
 /* og: the demo's hero plate (its own og is this plate with the names), names inside the centre square */
 const ogHtml = `<!DOCTYPE html><meta charset="utf-8">${FONTS}<style>

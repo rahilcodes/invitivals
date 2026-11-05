@@ -107,6 +107,9 @@ button.sd-btn { background: linear-gradient(180deg, #8a2430, #5e1420); color: va
 a.sd-btn { background: var(--card) linear-gradient(180deg, #fdf6e8, #f3e0c0); color: var(--ink-deep); border: 1px solid var(--gold); box-shadow: 0 0 0 .5cqw rgba(252, 243, 228, .85), 0 1.2cqw 2.6cqw rgba(84, 44, 16, .22); }
 a.sd-btn .ico { color: var(--burgundy); }
 
+/* ── the closing: the couple's monogram ── */
+.z-logo img { object-fit: contain; filter: drop-shadow(0 .6cqw 1.4cqw rgba(84, 44, 16, .28)); }
+
 /* ── Add to Calendar sheet ── */
 .sheet { position: fixed; inset: 0; z-index: 70; display: flex; align-items: flex-end; justify-content: center; }
 .sheet[hidden] { display: none; }
