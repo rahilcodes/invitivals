@@ -369,7 +369,7 @@ ${V.nine ? `
         <img class="orn rise" style="width:calc(var(--cq) * 18);--d:.2s" src="assets/el/garland.webp" alt="" loading="lazy">
         <div class="names2 rise" style="--d:.3s">
           <ul class="names2__list">${V.welcomeNames.map((n) => `<li>${esc(n)}</li>`).join('')}</ul>
-          <div class="names2__pairs">${V.couples.map((n) => `<p>${esc(n)}</p>`).join('')}</div>
+          <ul class="names2__list names2__list--right">${V.couples.flatMap((n) => n.split(' & ')).map((n) => `<li>${esc(n)}</li>`).join('')}</ul>
         </div>
       </div>
     </div>
@@ -451,12 +451,11 @@ const NINE_CSS = `
 .shloka--2 { font-size: calc(var(--cq) * 3.3); line-height: 1.8; letter-spacing: 0; }
 /* the invitation line over the families, and the line over the names */
 .para--invite { font-size: calc(var(--cq) * 3.7); line-height: 1.5; }
-/* the names: the seven on the left in one serif, the two couples on the right in the script, each on its own row */
+/* the names: two columns in one and the same serif — the seven on the left, Pooja, Ashish, Pinki, Rohit on the right (client, 2026-11-05: no "&", no script) */
 .names2 { display: grid; grid-template-columns: auto auto; justify-content: space-between; align-items: center; column-gap: calc(var(--cq) * 4); width: 100%; margin-top: calc(var(--cq) * 2); }
 .names2__list { list-style: none; margin: 0; padding: 0; display: grid; gap: calc(var(--cq) * 1.1); text-align: left; }
 .names2__list li { font-family: var(--serif); font-weight: 700; color: var(--maroon); font-size: calc(var(--cq) * 4); line-height: 1.2; letter-spacing: .02em; white-space: nowrap; }
-.names2__pairs { display: grid; gap: calc(var(--cq) * 3); text-align: right; }
-.names2__pairs p { font-family: var(--script); font-weight: 400; color: var(--maroon); font-size: calc(var(--cq) * 6.6); line-height: 1.15; white-space: nowrap; padding-right: .1em; }
+.names2__list--right { text-align: left; align-self: start; }
 `;
 const ASKED = process.argv.slice(2).filter((a) => a === MAIN || a === DAY);
 for (const slug of ASKED.length ? ASKED : [MAIN]) {
