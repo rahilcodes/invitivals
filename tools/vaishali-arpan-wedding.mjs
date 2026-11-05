@@ -170,7 +170,7 @@ if (only !== 'og') {
     const a = Math.min(1, Math.max(r, g, b) / 215);
     out[o] = a ? Math.min(255, r / a) : 0; out[o + 1] = a ? Math.min(255, g / a) : 0; out[o + 2] = a ? Math.min(255, b / a) : 0; out[o + 3] = Math.round(a * 255);
   }
-  await sharp(out, { raw: { width: info.width, height: info.height, channels: 4 } }).resize({ width: 600 }).png({ compressionLevel: 9 }).toFile(path.join(A, 'av-logo.png'));
+  await sharp(out, { raw: { width: info.width, height: info.height, channels: 4 } }).resize({ width: 320 }).png({ compressionLevel: 9, palette: true, quality: 90 }).toFile(path.join(A, 'av-logo.png'));
   console.log('✓ av-logo.png (the monogram, transparent)');
 }
 if (only === 'art') process.exit(0);
