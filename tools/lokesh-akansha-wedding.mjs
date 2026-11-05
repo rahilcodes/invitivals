@@ -64,6 +64,12 @@ const VARIANTS = {
     couples: ['Pooja & Ashish', 'Pinki & Rohit'],
     merged: true,
     shloka: [...SHLOKA.slice(0, 3), 'मङ्गलं च दिने दिने॥'],   // "मङ्गलं" as the client wrote it for this page (2026-11-04)
+    /* nine slides (client, 2026-11-05): cover · Save the Date (the card and the calendar button only) · families, under
+       the invitation line · Hand in Hand · the wedding day · the names on a slide of their own (the seven on the left,
+       the two couples on the right) · venue · countdown · With Love. The shloka on two lines, "Shri", "Pheras". */
+    nine: true,
+    shri: true,
+    pheras: true,
     pairs: false,
     pre: false,
     titles: true,
@@ -107,7 +113,7 @@ const EVENTS = [
 const icsText = (t) => String(t).replace(/\\/g, '\\\\').replace(/\n/g, '\\n').replace(/[,;]/g, (c) => '\\' + c);
 const wall = (at) => at.replace(/[-:]/g, '') + '00';
 function calendarFor(slug) {
-const V = VARIANTS[slug], ALL = V.pre ? EVENTS : EVENTS.filter((e) => e.at.startsWith('2026-11-26'));
+const V = VARIANTS[slug], ALL = (V.pre ? EVENTS : EVENTS.filter((e) => e.at.startsWith('2026-11-26'))).map((e) => (e.name === 'Feras' && V.pheras ? { ...e, name: 'Pheras' } : e));
 const SCHEDULE = ALL.map((e) => `${e.name}: ${new Date(e.at + ':00+05:30').toLocaleString('en-IN', { timeZone: 'Asia/Kolkata', weekday: 'short', day: 'numeric', month: 'short', hour: 'numeric', minute: '2-digit' })}, ${VENUES[e.where].name}`).join('\n');
 /* one .ics with an entry per function (Asia/Kolkata), each with a reminder the day before */
 const ICS = ['BEGIN:VCALENDAR', 'VERSION:2.0', 'PRODID:-//Invitivals//Lokesh & Akansha Wedding//EN', 'CALSCALE:GREGORIAN', 'METHOD:PUBLISH',
@@ -127,6 +133,31 @@ return { ICS, GCAL };
 
 function page(slug) {
   const V = VARIANTS[slug], url = `https://invitivals.com/${slug}/`, { GCAL } = calendarFor(slug);
+  const SHRI = V.shri ? 'Shri' : 'Shree', FERAS = V.pheras ? 'Pheras' : 'Feras';
+  const shlokaLines = V.nine ? [0, 2].map((i) => (V.shloka || SHLOKA).slice(i, i + 2).join(' ')) : (V.shloka || SHLOKA);
+  const COUNTDOWN = V.countdown ? `
+  <!-- the countdown to the ${FERAS} (26 November 2026, 3:00 PM IST), worked out live from that moment -->
+  <section class="page" id="p-countdown">
+    <div class="art art--fit" style="--h:177.68">
+      <img class="bg" src="assets/bg/p4.webp" alt="" width="941" height="1672" loading="lazy" decoding="async">
+      <img class="el swing" style="left:12%;top:${at(15, 177.68)};width:5.5%;--d:.5s" src="assets/el/bell.webp" alt="" loading="lazy">
+      <img class="el swing" style="right:11%;top:${at(20, 177.68)};width:5.5%;--d:.6s" src="assets/el/bell.webp" alt="" loading="lazy">
+      <div class="flow" style="--top:30;--side:15">
+        <p class="caps caps--sm rise">Counting down to</p>
+        <h2 class="script script--lg gap-s rise" style="--d:.1s">Our Big Day</h2>
+        <img class="orn rise" style="width:calc(var(--cq) * 18);--d:.2s" src="assets/el/garland.webp" alt="" loading="lazy">
+        <div class="cd rise" id="countdown" data-target="${V.countdown}" style="--d:.3s" role="timer" aria-live="off">
+          <div class="cd__u"><b data-cd="d">--</b><span>Days</span></div>
+          <div class="cd__u"><b data-cd="h">--</b><span>Hours</span></div>
+          <div class="cd__u"><b data-cd="m">--</b><span>Minutes</span></div>
+          <div class="cd__u"><b data-cd="s">--</b><span>Seconds</span></div>
+        </div>
+        <p class="script script--md cd__done" id="cdDone" hidden>The Big Day Is Here!</p>
+        <p class="datebar gap-m rise" style="--d:.4s">The ${FERAS} · 3:00 PM<small>Thursday, 26 November 2026</small></p>
+      </div>
+    </div>
+  </section>
+` : '';
   const invite = V.lovingFamilies
     ? `<h2 class="caps caps--lg rise">The Loving Families</h2>
         <p class="para gap-s rise" style="--d:.15s">of the groom and bride cordially invite you and your family to celebrate the wedding of</p>`
@@ -190,7 +221,7 @@ function page(slug) {
       <div class="flow" style="--top:13.5;--side:13;--bottom:2">
         <img class="orn drop" style="width:calc(var(--cq) * 11);margin-top:0;--d:.2s" src="assets/el/ganesha.webp" alt="Ganesha">
         <img class="orn rise" style="width:calc(var(--cq) * 22);margin:calc(var(--cq) * 1.6) auto calc(var(--cq) * 2.4);--d:.4s" src="assets/el/garland.webp" alt="">
-        <p class="shloka rise" lang="sa" style="--d:.55s">${(V.shloka || SHLOKA).map((l) => `<span>${l}</span>`).join('')}</p>
+        <p class="shloka${V.nine ? ' shloka--2' : ''} rise" lang="sa" style="--d:.55s">${shlokaLines.map((l) => `<span>${l}</span>`).join('')}</p>
         <p class="caps caps--sm gap-l rise" style="--d:.8s">The Wedding of</p>
         <h1 class="couple-names">
           <span class="script script--xl rise" style="--d:1s">Lokesh</span>
@@ -225,7 +256,7 @@ function page(slug) {
           <p class="sr-only" id="scardNote" aria-live="polite">Scratch the card to reveal the dates.</p>
         </div>
 ${V.calendar ? `        <button class="maps cal-btn rise" id="calBtn" type="button" style="--d:.4s" aria-haspopup="dialog"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 2h2v2h6V2h2v2h3v18H4V4h3zm-1 7v11h12V9zm2 2h3v3H8z"/></svg><span>Add to Calendar</span></button>
-` : ''}${V.merged ? `        <div class="welcome-names rise" style="margin-top:calc(var(--cq) * 8);--d:.1s">${V.welcomeNames.map((n) => `<p>${esc(n)}</p>`).join('')}</div>
+` : ''}${V.merged && !V.nine ? `        <div class="welcome-names rise" style="margin-top:calc(var(--cq) * 8);--d:.1s">${V.welcomeNames.map((n) => `<p>${esc(n)}</p>`).join('')}</div>
         <div class="welcome-names welcome-names--pairs rise" style="margin-top:calc(var(--cq) * 4);--d:.2s">${V.couples.map((n) => `<p>${esc(n)}</p>`).join('')}</div>
         <img class="orn rise" style="width:calc(var(--cq) * 18);--d:.25s" src="assets/el/garland.webp" alt="" loading="lazy">
         ${invite}
@@ -233,29 +264,7 @@ ${V.calendar ? `        <button class="maps cal-btn rise" id="calBtn" type="butt
 ` : ''}      </div>
     </div>
   </section>
-${V.countdown ? `
-  <!-- the countdown to the Feras (26 November 2026, 3:00 PM IST), worked out live from that moment -->
-  <section class="page" id="p-countdown">
-    <div class="art art--fit" style="--h:177.68">
-      <img class="bg" src="assets/bg/p4.webp" alt="" width="941" height="1672" loading="lazy" decoding="async">
-      <img class="el swing" style="left:12%;top:${at(15, 177.68)};width:5.5%;--d:.5s" src="assets/el/bell.webp" alt="" loading="lazy">
-      <img class="el swing" style="right:11%;top:${at(20, 177.68)};width:5.5%;--d:.6s" src="assets/el/bell.webp" alt="" loading="lazy">
-      <div class="flow" style="--top:30;--side:15">
-        <p class="caps caps--sm rise">Counting down to</p>
-        <h2 class="script script--lg gap-s rise" style="--d:.1s">Our Big Day</h2>
-        <img class="orn rise" style="width:calc(var(--cq) * 18);--d:.2s" src="assets/el/garland.webp" alt="" loading="lazy">
-        <div class="cd rise" id="countdown" data-target="${V.countdown}" style="--d:.3s" role="timer" aria-live="off">
-          <div class="cd__u"><b data-cd="d">--</b><span>Days</span></div>
-          <div class="cd__u"><b data-cd="h">--</b><span>Hours</span></div>
-          <div class="cd__u"><b data-cd="m">--</b><span>Minutes</span></div>
-          <div class="cd__u"><b data-cd="s">--</b><span>Seconds</span></div>
-        </div>
-        <p class="script script--md cd__done" id="cdDone" hidden>The Big Day Is Here!</p>
-        <p class="datebar gap-m rise" style="--d:.4s">The Feras · 3:00 PM<small>Thursday, 26 November 2026</small></p>
-      </div>
-    </div>
-  </section>
-` : ''}
+${V.nine ? '' : COUNTDOWN}
 ${V.merged ? '' : `  <!-- 2 · the invitation -->
   <section class="page" id="p-invite">
     <div class="art art--fit" style="--h:177.68">
@@ -276,24 +285,25 @@ ${V.welcomeNames.length ? `<div class="welcome-names${V.pairs ? ' welcome-names-
     <div class="art art--fit" style="--h:177.68">
       <img class="bg" src="assets/bg/p1.webp" alt="" width="941" height="1672" loading="lazy" decoding="async">${bells(5.5, 11.5).replace(/alt="">/g, 'alt="" loading="lazy">')}
       <div class="flow" style="--top:24;--side:13">
-        <h2 class="script script--lg rise">Our Families</h2>
+${V.nine ? `        <p class="para para--invite rise">With the blessings of our elders and the love of our families, we cordially invite you and your family to join us in the wedding celebration of</p>
+        <h2 class="script script--md gap-s rise" style="--d:.1s">Lokesh &amp; Akansha !</h2>` : `        <h2 class="script script--lg rise">Our Families</h2>`}
         <img class="orn rise" style="width:calc(var(--cq) * 18);--d:.15s" src="assets/el/garland.webp" alt="" loading="lazy">
         <div class="fam rise" style="--d:.25s">
           <p class="fam__l">The Groom</p>
           <h3 class="fam__n">Lokesh</h3>
           <p class="fam__k">Beloved son of</p>
-          <p class="fam__p">${V.titles ? 'Smt. Manju and Shree Ramdass' : 'Manju and Ramdass'}</p>
+          <p class="fam__p">${V.titles ? `Smt. Manju and ${SHRI} Ramdass` : 'Manju and Ramdass'}</p>
           <p class="fam__k">Grandson of</p>
-          <p class="fam__g">Late Smt. Shakuntala Devi and<br>Late Shree Girraj Prasad</p>
+          <p class="fam__g">Late Smt. Shakuntala Devi and<br>Late ${SHRI} Girraj Prasad</p>
         </div>
         <p class="fam-sep rise" aria-hidden="true">&amp;</p>
         <div class="fam rise" style="--d:.1s">
           <p class="fam__l">The Bride</p>
           <h3 class="fam__n">Akansha</h3>
           <p class="fam__k">Daughter of</p>
-          <p class="fam__p">${V.titles ? 'Smt. Usha and Shree Chandrashekhar' : 'Usha and Chandrashekhar'}</p>
+          <p class="fam__p">${V.titles ? `Smt. Usha and ${SHRI} Chandrashekhar` : 'Usha and Chandrashekhar'}</p>
           <p class="fam__k">Granddaughter of</p>
-          <p class="fam__g">Late Smt. Kevla Devi and<br>Shree Ramprayag</p>
+          <p class="fam__g">Late Smt. Kevla Devi and<br>${SHRI} Ramprayag</p>
         </div>
       </div>
     </div>
@@ -343,12 +353,28 @@ ${V.pre ? `
       <div class="flow" style="--top:40;--side:14">
         <h2 class="script script--md rise">The Wedding Day</h2>
         <p class="datebar gap-m rise" style="--d:.15s">Thursday<small>26 November 2026</small></p>
-        ${timeline(WEDDING)}
-        <p class="venue-for gap-m rise">at ${esc(VENUES.palm.name)}</p>
+        ${timeline(WEDDING.map((e) => (e.name === 'Feras' ? { ...e, name: FERAS } : e)))}
+        <p class="venue-for gap-m rise">${V.nine ? 'Venue – ' : 'at '}${esc(VENUES.palm.name)}</p>
       </div>
     </div>
   </section>
-
+${V.nine ? `
+  <!-- the names: the seven on the left, the two couples on the right (client, 2026-11-05) -->
+  <section class="page" id="p-names">
+    <div class="art art--fit" style="--h:177.68">
+      <img class="bg" src="assets/bg/p1.webp" alt="" width="941" height="1672" loading="lazy" decoding="async">${bells(5.5, 11.5).replace(/alt="">/g, 'alt="" loading="lazy">')}
+      <div class="flow" style="--top:29;--side:12">
+        <h2 class="script script--md rise">With Best Compliments</h2>
+        <p class="para para--invite gap-s rise" style="--d:.1s">Kindly grace the joyous occasion with your presence and bless the couple with your love and good wishes.</p>
+        <img class="orn rise" style="width:calc(var(--cq) * 18);--d:.2s" src="assets/el/garland.webp" alt="" loading="lazy">
+        <div class="names2 rise" style="--d:.3s">
+          <ul class="names2__list">${V.welcomeNames.map((n) => `<li>${esc(n)}</li>`).join('')}</ul>
+          <div class="names2__pairs">${V.couples.map((n) => `<p>${esc(n)}</p>`).join('')}</div>
+        </div>
+      </div>
+    </div>
+  </section>
+` : ''}
   <!-- ${V.pre ? '7' : '6'} · the wedding venue: its picture (assets/el/venue.webp — replace that file to change it), name, address, map -->
   <section class="page" id="p-venue">
     <div class="art art--fit" style="--h:169.29">
@@ -363,7 +389,7 @@ ${V.pre ? `
       </div>
     </div>
   </section>
-
+${V.nine ? COUNTDOWN : ''}
   <!-- the last page -->
   <section class="page page--end" id="p-end">
     <div class="art" style="--h:150">
@@ -418,6 +444,20 @@ export const invite = {
 }
 
 const M = path.join(ROOT, 'public', MAIN);
+/* styles only the nine-slide page needs */
+const NINE_CSS = `
+/* ── the nine-slide page (client, 2026-11-05) ─────────────── */
+/* the shloka on two lines, smaller */
+.shloka--2 { font-size: calc(var(--cq) * 3.3); line-height: 1.8; letter-spacing: 0; }
+/* the invitation line over the families, and the line over the names */
+.para--invite { font-size: calc(var(--cq) * 3.7); line-height: 1.5; }
+/* the names: the seven on the left in one serif, the two couples on the right in the script, each on its own row */
+.names2 { display: grid; grid-template-columns: auto auto; justify-content: space-between; align-items: center; column-gap: calc(var(--cq) * 4); width: 100%; margin-top: calc(var(--cq) * 2); }
+.names2__list { list-style: none; margin: 0; padding: 0; display: grid; gap: calc(var(--cq) * 1.1); text-align: left; }
+.names2__list li { font-family: var(--serif); font-weight: 700; color: var(--maroon); font-size: calc(var(--cq) * 4); line-height: 1.2; letter-spacing: .02em; white-space: nowrap; }
+.names2__pairs { display: grid; gap: calc(var(--cq) * 3); text-align: right; }
+.names2__pairs p { font-family: var(--script); font-weight: 400; color: var(--maroon); font-size: calc(var(--cq) * 6.6); line-height: 1.15; white-space: nowrap; padding-right: .1em; }
+`;
 const ASKED = process.argv.slice(2).filter((a) => a === MAIN || a === DAY);
 for (const slug of ASKED.length ? ASKED : [MAIN]) {
   const D = path.join(ROOT, 'public', slug);
@@ -430,6 +470,7 @@ for (const slug of ASKED.length ? ASKED : [MAIN]) {
       fs.mkdirSync(path.dirname(path.join(D, f)), { recursive: true });
       fs.copyFileSync(path.join(M, f), path.join(D, f));
     }
+    if (VARIANTS[slug].nine) fs.appendFileSync(path.join(D, 'css/invite.css'), NINE_CSS);
   }
   console.log('✓', slug);
 }

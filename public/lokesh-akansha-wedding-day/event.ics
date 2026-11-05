@@ -44,14 +44,14 @@ BEGIN:VEVENT
 UID:lokesh-akansha-wedding-day-15@invitivals.com
 DTSTAMP:20261104T000000Z
 DTSTART;TZID=Asia/Kolkata:20261126T150000
-SUMMARY:Feras · Lokesh & Akansha
+SUMMARY:Pheras · Lokesh & Akansha
 LOCATION:Palm Luxuria Banquets\, Bal Vikas Progressive School Road\, Shodapur\, Panipat
 DESCRIPTION:Wedding of Lokesh & Akansha\nMap: https://share.google/MfaBFtqryZA8yG071
 URL:https://invitivals.com/lokesh-akansha-wedding-day/
 BEGIN:VALARM
 TRIGGER:-P1D
 ACTION:DISPLAY
-DESCRIPTION:Feras tomorrow
+DESCRIPTION:Pheras tomorrow
 END:VALARM
 END:VEVENT
 END:VCALENDAR

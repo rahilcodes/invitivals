@@ -287,3 +287,15 @@ p, h1, h2, h3 { margin: 0; }
   body { background: #e3c6a6 url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='6' height='6'%3E%3Ccircle cx='3' cy='3' r='.6' fill='%23d8b891'/%3E%3C/svg%3E"); }
   .stage { box-shadow: 0 0 60px rgba(80, 50, 20, .2); background: var(--beige); }
 }
+
+/* ── the nine-slide page (client, 2026-11-05) ─────────────── */
+/* the shloka on two lines, smaller */
+.shloka--2 { font-size: calc(var(--cq) * 3.3); line-height: 1.8; letter-spacing: 0; }
+/* the invitation line over the families, and the line over the names */
+.para--invite { font-size: calc(var(--cq) * 3.7); line-height: 1.5; }
+/* the names: the seven on the left in one serif, the two couples on the right in the script, each on its own row */
+.names2 { display: grid; grid-template-columns: auto auto; justify-content: space-between; align-items: center; column-gap: calc(var(--cq) * 4); width: 100%; margin-top: calc(var(--cq) * 2); }
+.names2__list { list-style: none; margin: 0; padding: 0; display: grid; gap: calc(var(--cq) * 1.1); text-align: left; }
+.names2__list li { font-family: var(--serif); font-weight: 700; color: var(--maroon); font-size: calc(var(--cq) * 4); line-height: 1.2; letter-spacing: .02em; white-space: nowrap; }
+.names2__pairs { display: grid; gap: calc(var(--cq) * 3); text-align: right; }
+.names2__pairs p { font-family: var(--script); font-weight: 400; color: var(--maroon); font-size: calc(var(--cq) * 6.6); line-height: 1.15; white-space: nowrap; padding-right: .1em; }
