@@ -35,7 +35,7 @@ fs.mkdirSync(A, { recursive: true });
 const DAYS = [
   { file: 'event-18nov.ics', start: '20261118T110000', title: 'Vaishali & Arpan · A Day of Love, Colours & Celebrations',
     venue: 'Vyom Luxury Gym and Wellness, Near True Value, Sector 16, Rohini, Delhi', map: 'https://share.google/XcZWmq2nKNx3zUg58',
-    lines: ['Dress Code: Pastel Colour Theme', '11:00 AM – Guest Welcome Lunch', '1:00 PM – Radha Krishna Phoolon Ki Haldi', '2:00 PM onwards – Pool Party (please bring your swimming costumes!)', '4:00 PM onwards – Mehendi', '5:00 PM – Bhaat', '7:00 PM onwards – DJ Night', '8:00 PM – Dinner'] },
+    lines: ['Dress Code: Pastel Colour Theme', '11:00 AM – Guest Welcome Lunch', '1:00 PM – Radha Krishna Phoolon Ki Haldi', '2:00 PM onwards – Pool Party (Note- Come dressed in your pastel best and enjoy the water fun! If joining, do carry an extra outfit for the evening Mehendi. Please note, only shower rooms are available; no changing rooms.)', '4:00 PM onwards – Mehendi', '5:00 PM – Bhaat', '7:00 PM onwards – DJ Night', '8:00 PM – Dinner'] },
   { file: 'event-19nov.ics', start: '20261119T190000', title: 'Vaishali & Arpan · The Engagement Celebration',
     venue: 'Golden Apple Mansion, Hall No. 2, Darbaar Hall, Pitampura, Delhi', map: 'https://share.google/7iebx6d5qkqSQan4a',
     lines: ['7:00 PM – Engagement Ceremony', '8:00 PM onwards – Dinner'] },

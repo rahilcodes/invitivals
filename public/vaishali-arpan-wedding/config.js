@@ -35,7 +35,7 @@ export const config = {
       schedule: [
         ['11:00 AM', 'Guest Welcome Lunch'],
         ['1:00 PM', 'Radha Krishna Phoolon Ki Haldi'],
-        ['2:00 PM onwards', 'Pool Party', 'Please bring your swimming costumes for the pool party!'],
+        ['2:00 PM onwards', 'Pool Party', 'Note- Come dressed in your pastel best and enjoy the water fun! If joining, do carry an extra outfit for the evening Mehendi. Please note, only shower rooms are available; no changing rooms.'],
         ['4:00 PM onwards', 'Mehendi'],
         ['5:00 PM', 'Bhaat'],
         ['7:00 PM onwards', 'DJ Night'],
