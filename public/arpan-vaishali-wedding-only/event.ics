@@ -1,0 +1,32 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Invitivals//Arpan & Vaishali Wedding//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VTIMEZONE
+TZID:Asia/Kolkata
+BEGIN:STANDARD
+DTSTART:19700101T000000
+TZOFFSETFROM:+0530
+TZOFFSETTO:+0530
+TZNAME:IST
+END:STANDARD
+END:VTIMEZONE
+BEGIN:VEVENT
+UID:vaishali-arpan-wedding-20261120@invitivals.com
+DTSTAMP:20261104T000000Z
+DTSTART;TZID=Asia/Kolkata:20261120T200000
+SUMMARY:Wedding of Arpan & Vaishali
+LOCATION:The Sherioan By Kawatra Tent\, Colosseum Hall\, Pitampura\, Delhi 
+ – 110034 (Near DCP Office\, Outer District)
+DESCRIPTION:The Wedding Celebration\n8:00 PM – Welcome of Baraat\n9:00 PM
+  – Dinner\nVidaai – Taron Ki Chhaon Mein\n\nMap: https://share.google/
+ 6FekKRjN2AlnVlOxE
+URL:https://invitivals.com/arpan-vaishali-wedding-only/
+BEGIN:VALARM
+TRIGGER:-P1D
+ACTION:DISPLAY
+DESCRIPTION:Wedding of Arpan & Vaishali tomorrow
+END:VALARM
+END:VEVENT
+END:VCALENDAR

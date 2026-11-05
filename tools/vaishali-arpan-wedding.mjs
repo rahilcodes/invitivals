@@ -29,9 +29,10 @@ const DEMO = path.join(ROOT, 'public/brown-theme-wedding/assets');
 const OUT = path.join(ROOT, 'public', SLUG);
 const A = path.join(OUT, 'assets');
 const only = process.argv[2];
-/* "og <slug> <DATES>": only og.jpg, into public/<slug>/assets with that date line (the shorter links made by
-   tools/vaishali-arpan-wedding-variants.mjs); the seal and this folder's files are left alone */
-const VAR = only === 'og' && process.argv[3] ? { slug: process.argv[3], dates: process.argv[4] } : null;
+/* "og <slug> <DATES> [groom]": only og.jpg, into public/<slug>/assets with that date line, the groom's name
+   first on "groom" (the other links made by tools/vaishali-arpan-wedding-variants.mjs); the seal and this
+   folder's files are left alone */
+const VAR = only === 'og' && process.argv[3] ? { slug: process.argv[3], dates: process.argv[4], groom: process.argv[5] === 'groom' } : null;
 fs.mkdirSync(A, { recursive: true });
 
 /* ── the three days, for the calendar files ── */
@@ -208,7 +209,7 @@ const ogHtml = `<!DOCTYPE html><meta charset="utf-8">${FONTS}<style>
 .p{margin-top:6px;font:600 19px 'Cormorant Garamond',serif;letter-spacing:.32em;padding-left:.32em;color:#8a5a1e}
 </style>
 <img class="bg" src="${url(path.join(A, 'plate1.webp'))}"><img class="fl" src="${url(path.join(A, 'p1-flowers-a.webp'))}">
-<div class="c"><p class="k">WEDDING INVITATION</p><p class="n">Vaishali</p><p class="a">&amp;</p><p class="n">Arpan</p><p class="d">${VAR ? VAR.dates : '18 – 20 NOVEMBER 2026'}</p><p class="p">DELHI</p></div>${READY}`;
+<div class="c"><p class="k">WEDDING INVITATION</p><p class="n">${VAR?.groom ? 'Arpan' : 'Vaishali'}</p><p class="a">&amp;</p><p class="n">${VAR?.groom ? 'Vaishali' : 'Arpan'}</p><p class="d">${VAR ? VAR.dates : '18 – 20 NOVEMBER 2026'}</p><p class="p">DELHI</p></div>${READY}`;
 
 const work = fs.mkdtempSync(path.join(os.tmpdir(), 'inv-og-'));
 const chrome = spawn(CHROME, ['--headless=new', `--remote-debugging-port=${PORT}`, '--remote-allow-origins=*', `--user-data-dir=${path.join(work, 'profile')}`,
