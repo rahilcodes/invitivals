@@ -29,6 +29,9 @@ const DEMO = path.join(ROOT, 'public/brown-theme-wedding/assets');
 const OUT = path.join(ROOT, 'public', SLUG);
 const A = path.join(OUT, 'assets');
 const only = process.argv[2];
+/* "og <slug> <DATES>": only og.jpg, into public/<slug>/assets with that date line (the shorter links made by
+   tools/vaishali-arpan-wedding-variants.mjs); the seal and this folder's files are left alone */
+const VAR = only === 'og' && process.argv[3] ? { slug: process.argv[3], dates: process.argv[4] } : null;
 fs.mkdirSync(A, { recursive: true });
 
 /* ── the three days, for the calendar files ── */
@@ -205,7 +208,7 @@ const ogHtml = `<!DOCTYPE html><meta charset="utf-8">${FONTS}<style>
 .p{margin-top:6px;font:600 19px 'Cormorant Garamond',serif;letter-spacing:.32em;padding-left:.32em;color:#8a5a1e}
 </style>
 <img class="bg" src="${url(path.join(A, 'plate1.webp'))}"><img class="fl" src="${url(path.join(A, 'p1-flowers-a.webp'))}">
-<div class="c"><p class="k">WEDDING INVITATION</p><p class="n">Vaishali</p><p class="a">&amp;</p><p class="n">Arpan</p><p class="d">18 – 20 NOVEMBER 2026</p><p class="p">DELHI</p></div>${READY}`;
+<div class="c"><p class="k">WEDDING INVITATION</p><p class="n">Vaishali</p><p class="a">&amp;</p><p class="n">Arpan</p><p class="d">${VAR ? VAR.dates : '18 – 20 NOVEMBER 2026'}</p><p class="p">DELHI</p></div>${READY}`;
 
 const work = fs.mkdtempSync(path.join(os.tmpdir(), 'inv-og-'));
 const chrome = spawn(CHROME, ['--headless=new', `--remote-debugging-port=${PORT}`, '--remote-allow-origins=*', `--user-data-dir=${path.join(work, 'profile')}`,
@@ -233,6 +236,7 @@ try {
     return Buffer.from((await send('Page.captureScreenshot', { format: 'png' })).data, 'base64');
   };
 
+  if (!VAR) {
   // the seal: rendered at 2×, scaled onto the poster's seal face
   const face = await sharp(await shot(sealHtml, SEAL.r * 4, SEAL.r * 4, true)).resize(SEAL.r * 2, SEAL.r * 2).png().toBuffer();
   await sharp(path.join(DEMO, 'opening.webp')).composite([{ input: face, left: SEAL.cx - SEAL.r, top: SEAL.cy - SEAL.r }]).webp({ quality: 92 }).toFile(path.join(A, 'opening.webp'));
@@ -240,9 +244,11 @@ try {
   // the same face, transparent, for js/opening.js to lay over the film's seal until it breaks
   await sharp(await shot(sealHtml, SEAL.r * 4, SEAL.r * 4, true)).png().toFile(path.join(A, 'seal.png'));
   console.log('✓ seal.png (the seal face for the film)');
+  }
 
-  await sharp(await shot(ogHtml, 1200, 630, false)).jpeg({ quality: 86, mozjpeg: true }).toFile(path.join(A, 'og.jpg'));
-  console.log(`✓ og.jpg ${(fs.statSync(path.join(A, 'og.jpg')).size / 1024).toFixed(0)} KB`);
+  const OG = path.join(VAR ? path.join(ROOT, 'public', VAR.slug, 'assets') : A, 'og.jpg');
+  await sharp(await shot(ogHtml, 1200, 630, false)).jpeg({ quality: 86, mozjpeg: true }).toFile(OG);
+  console.log(`✓ ${path.relative(ROOT, OG)} ${(fs.statSync(OG).size / 1024).toFixed(0)} KB`);
   ws.close();
 } finally {
   chrome.kill();
