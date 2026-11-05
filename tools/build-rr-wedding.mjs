@@ -181,8 +181,8 @@ CONFIGS['mamatha-sairama-wedding'] = {
     title: 'Dr. Sai Rama Reddy & Dr. Mamatha Reddy — Wedding Invitation',
     story: { ...B.story, alt: swap(B.story.alt) },
     photos: B.photos.map(p => ({ ...p, alt: swap(p.alt) })),
-    /* the reception's address under the location buttons, as the client wrote it (2026-11-05, this page only) */
-    locationNote: { label: 'Reception venue', lines: ['MNR CONVENTION HALL A/C', 'Near Nalgonda Bypass Road.'] }
+    /* the reception's address in its event box, under the time, as the client wrote it (2026-11-05, this page only) */
+    events: B.events.map(e => (e.name === 'Reception' ? { ...e, note: ['MNR CONVENTION HALL A/C', 'Near Nalgonda Bypass Road.'] } : e))
   };
 }
 
@@ -234,7 +234,7 @@ const programme = days.map(d => `
             <div class="ev-b">
               <h3>${esc(e.name)}</h3>
               <p class="ev-t">${esc(e.label)}</p>${e.note ? `
-              <p class="ev-n">${esc(e.note)}</p>` : ''}
+              <p class="ev-n">${Array.isArray(e.note) ? e.note.map(esc).join('<br>') : esc(e.note)}</p>` : ''}
               <a class="ev-cal" href="${esc(gcal(e))}" target="_blank" rel="noopener">Add to calendar</a>${e.maps ? `<a class="ev-cal ev-map" href="${esc(e.maps)}" target="_blank" rel="noopener" aria-label="${esc(e.name)} location on Google Maps">View on map</a>` : ''}
             </div>
           </li>`).join('')}
@@ -522,9 +522,7 @@ ${C.families || C.blessings ? EXTRA_CSS : ''}${C.special || C.couple.firstParent
 .slot .qual{font-family:var(--serif);font-weight:600;font-size:calc(var(--fs) * .21);letter-spacing:.04em;line-height:1.25;color:var(--gold);text-shadow:0 1px 2px rgba(30,0,8,.6);margin-top:.15em}
 .names .qual{display:block;font-family:var(--serif);font-weight:600;font-size:.36em;letter-spacing:.04em;line-height:1.3;color:var(--gold);margin:.1em 0 .2em}
 .heading{text-align:center;font-weight:600;font-size:clamp(17px,4.9vw,21px);line-height:1.6;color:#fdf0c4;text-shadow:0 1px 2px rgba(30,0,8,.55);margin:0 auto 12px}
-.btns.loc .btn{min-width:min(100%,290px);justify-content:center}
-.loc-note{margin:14px auto 0;max-width:420px;text-align:center;font-style:italic;font-size:16.5px;line-height:1.4;color:#efd5b3}
-.loc-note b{display:block;margin-bottom:4px;font-style:normal;font-weight:400;font-family:var(--caps);font-size:12px;letter-spacing:.22em;text-indent:.22em;text-transform:uppercase;color:var(--gold)}` : ''}</style>${C.heading ? `
+.btns.loc .btn{min-width:min(100%,290px);justify-content:center}` : ''}</style>${C.heading ? `
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=${encodeURIComponent(C.heading.font)}:wght@600&amp;display=swap">` : ''}
 </head>
@@ -577,8 +575,7 @@ ${C.story ? `    <div class="arch reveal"><img src="${C.story.src}" alt="${esc(C
     <h2 class="h2 reveal" id="prog-h">The Celebrations</h2>
     <div class="orn reveal"><i></i><svg viewBox="0 0 16 16"><path d="M8 0l2 6 6 2-6 2-2 6-2-6-6-2 6-2z"/></svg><i></i></div>
     ${programme}${C.locations ? `
-    <div class="btns loc reveal">${C.locations.map(([label, href]) => `<a class="btn" href="${esc(href)}" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M12 2a7 7 0 0 0-7 7c0 5.3 7 13 7 13s7-7.7 7-13a7 7 0 0 0-7-7zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5z"/></svg>${esc(label)}</a>`).join('')}</div>${C.locationNote ? `
-    <p class="loc-note reveal"><b>${esc(C.locationNote.label)}</b>${C.locationNote.lines.map(esc).join('<br>')}</p>` : ''}` : ''}
+    <div class="btns loc reveal">${C.locations.map(([label, href]) => `<a class="btn" href="${esc(href)}" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M12 2a7 7 0 0 0-7 7c0 5.3 7 13 7 13s7-7.7 7-13a7 7 0 0 0-7-7zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5z"/></svg>${esc(label)}</a>`).join('')}</div>` : ''}
     <div class="btns reveal"><a class="btn" href="event.ics" download="wedding.ics"><svg viewBox="0 0 24 24"><path d="M7 2h2v2h6V2h2v2h3v18H4V4h3zm11 8H6v10h12z"/></svg>Save all dates</a></div>
   </section>
 
