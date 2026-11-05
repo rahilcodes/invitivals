@@ -294,7 +294,7 @@ p, h1, h2, h3 { margin: 0; }
 /* the invitation line over the families, and the line over the names */
 .para--invite { font-size: calc(var(--cq) * 3.7); line-height: 1.5; }
 /* the names: two columns in one and the same serif — the seven on the left, Pooja, Ashish, Pinki, Rohit on the right (client, 2026-11-05: no "&", no script) */
-.names2 { display: grid; grid-template-columns: auto auto; justify-content: space-between; align-items: center; column-gap: calc(var(--cq) * 4); width: 100%; margin-top: calc(var(--cq) * 2); }
+.names2 { display: grid; grid-template-columns: auto auto; justify-content: center; align-items: start; column-gap: calc(var(--cq) * 9); width: 100%; margin-top: calc(var(--cq) * 2); }   /* the two columns sit together in the middle (client, 2026-11-05) */
 .names2__list { list-style: none; margin: 0; padding: 0; display: grid; gap: calc(var(--cq) * 1.1); text-align: left; }
 .names2__list li { font-family: var(--serif); font-weight: 700; color: var(--maroon); font-size: calc(var(--cq) * 4); line-height: 1.2; letter-spacing: .02em; white-space: nowrap; }
 .names2__list--right { text-align: left; align-self: start; }
