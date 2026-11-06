@@ -56,9 +56,15 @@ const page2 = Page(2, [
 
 /* ── the three days: detail views, all on plate 4 (title over the arch, the date in its gold frame, the
       programme in one solid card below, the demo's two buttons under it; the page ends with its card) ── */
-const schedule = (day) => h('ol', { class: 'timeline' }, ...day.schedule.map(([t, what, note]) => h('li', { class: t ? '' : 'no-time' },
+const schedule = (part) => h('ol', { class: 'timeline' }, ...part.schedule.map(([t, what, note]) => h('li', { class: t ? '' : 'no-time' },
   t ? h('time', {}, t) : null, h('span', {}, what, note ? h('em', {}, note) : null))));
-const venue = (day) => h('div', { class: 'venue' }, h('p', { class: 'venue-name' }, day.venue), h('p', { class: 'venue-addr' }, ...day.address.flatMap((l, i) => (i ? [h('br'), l] : [l]))));
+const venue = (part) => h('div', { class: 'venue' }, h('p', { class: 'venue-name' }, part.venue), h('p', { class: 'venue-addr' }, ...part.address.flatMap((l, i) => (i ? [h('br'), l] : [l]))));
+/* a day in several places: each section with its heading, hours, venue and its own map link */
+const mapLink = (part) => h('a', { class: 'fn-tap venue-map', href: part.mapsUrl, target: '_blank', rel: 'noopener', 'aria-label': `Open ${part.venue} in Google Maps` }, 'Open in Google Maps', h('i', { 'aria-hidden': 'true' }));
+const programme = (day) => day.sections
+  ? day.sections.map((part) => h('div', { class: 'section' }, h('p', { class: 'seg' }, part.label), schedule(part), venue(part), mapLink(part)))
+  : [schedule(day), venue(day)];
+const firstTime = (day) => (day.sections ? day.sections[0] : day).schedule[0][0];
 const actions = (day) => h('div', { class: 'actions' },
   h('div', { class: 'img-wrap' }, saveTheDate(day, pic('p4-save', 'Save the Date'), sheet)),
   h('div', { class: 'img-wrap' }, openMaps(day, pic('p4-maps', 'Open in Google Maps'))));
@@ -72,7 +78,7 @@ const dayPage = (day) => () => Page(4, [
   live('d4-date', day.date, { size: 2.4, cls: 'serif caps deep', delay: 0.45, wrap: false }),
   live('d4-weekday', day.weekday, { size: 2.2, cls: 'serif caps soft', delay: 0.5, wrap: false }),
 ], { id: `detail-${day.key}`, tall: true, flow: h('div', { class: 'flow reveal', style: { '--d': '0.6s', '--top': '91.8cqw' } },
-  day.dressCode ? dressCode(day) : null, h('div', { class: 'panel' }, schedule(day), venue(day)), actions(day)) });
+  day.dressCode ? dressCode(day) : null, h('div', { class: 'panel' }, ...programme(day)), actions(day)) });
 
 /* ── 3 · our functions: the programme as three cards, each a button that opens its day. The day's number sits
       in a burgundy medallion, the title and the first hour beside it, and a "Tap to view" pill says what a
@@ -85,7 +91,7 @@ const card = (id, day, n, delay) => control(id,
     h('span', { class: 'fn-body' },
       h('small', { class: 'fn-when' }, `${day.weekday} · ${day.date.replace(' 2026', '')}`),
       h('b', { class: 'fn-title' }, day.title),
-      h('span', { class: 'fn-meta' }, `${day.schedule[0][0]} · ${day.venue}`),
+      h('span', { class: 'fn-meta' }, `${firstTime(day)} · ${day.where || day.venue}`),
       h('span', { class: 'fn-tap' }, 'Tap to view', h('i', { 'aria-hidden': 'true' }))),
     h('span', { class: 'fn-n', 'aria-hidden': 'true' }, n)),
   { delay, cls: 'fn-wrap', z: 5 });
@@ -182,7 +188,7 @@ const pageStars = Page(7, [
   sprAt('s-rule2', 'p7-rule2', { delay: 0.6 }),
   live('s-line', S.line, { size: 3.1, cls: 'serif italic', delay: 0.7 }),
   live('s-love', S.love, { size: 3.1, cls: 'serif', delay: 0.85, wrap: false }),
-  live('s-names', S.names, { size: 3.4, cls: 'serif bold deep', delay: 0.95, wrap: false }),
+  live('s-names', S.names, { size: 3.1, cls: 'serif bold deep', delay: 0.95, wrap: false }), /* two lines of names, a little smaller than the bride side's one */
 ], { id: 'page-stars' });
 
 /* ── the closing (the plate's empty top is cut: the words follow the stars' page) ── */

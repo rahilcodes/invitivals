@@ -1,6 +1,6 @@
 /* ─────────────────────────────────────────────────────────────
    Vaishali & Arpan (arpan-vaishali-wedding-only): the groom-side invitation with the wedding day only;
-   a copy of vaishali-arpan-wedding made by tools/vaishali-arpan-wedding-variants.mjs — edit the main folder and rerun it.
+   a copy of arpan-vaishali-wedding made by tools/vaishali-arpan-wedding-variants.mjs — edit the main folder and rerun it.
    Every word on the page comes from here (and index.html's meta tags).
    Dates are ISO in India time (+05:30).
    ───────────────────────────────────────────────────────────── */
@@ -9,11 +9,11 @@ export const config = {
 
   /* page 1 */
   hero: {
-    /* the client's final round (5 Nov) opens the slide with Ganesha and his mantra; the earlier Nirankar
-       invocation stays here in case the family wants it back: set ganesha to '' and restore these two */
-    ganesha: 'assets/p1-ganesha.webp',
-    invocation: '', /* was 'Ek Tu Hi Nirankar' */
-    hindi: ['वक्रतुण्ड महाकाय सूर्यकोटि समप्रभ।', 'निर्विघ्नं कुरु मे देव सर्वकार्येषु सर्वदा॥'], /* was ['तेरे आसरा ले के करता हूँ काम,', 'मेरे सतगुरु तुझको लाखो सलाम ।'] */
+    /* the groom's family opens with the Nirankar invocation (6 Nov), in place of the bride side's Ganesha and
+       mantra: set ganesha to 'assets/p1-ganesha.webp', invocation to '' and the mantra here to show those */
+    ganesha: '',
+    invocation: 'EK TU HI NIRANKAR',
+    hindi: ['तेरा आसरा ले के करता हूँ काम।', 'मेरे सतगुरु, तुमको लाखों सलाम।'],
     blessings: 'With Blessings',
     parents: ['Smt. Neelam Singla &', 'Late Sh. Suresh Singla'],
     request: ['With joy and love, we invite you to bless', 'the wedding of our beloved son.'],
@@ -28,11 +28,21 @@ export const config = {
   /* the wedding, for the countdown and Save the Date */
   wedding: { start: '2026-11-20T20:00:00+05:30', dateLine: '20 November 2026', weekday: 'Friday', time: '8:00 PM', ics: 'event.ics', gcalHours: 3 /* Google Calendar needs an end; the invitation gives none */ },
 
-  /* page 3 → the wedding day only (this link's days; the main link has all three). Each day's Google Maps link is the client's own, used as supplied. */
+  /* page 3 → the wedding day only (this link's days; the main link has all three). Each Google Maps link is the client's own, used as supplied.
+     A day in several places lists "sections": each with its own hours, venue and map link, one after the
+     other on the day's page; the day's own venue/mapsUrl is the main one (its bottom button, Save the Date),
+     and "where" is the short line on its programme card. */
   days: [
     {
-      key: 'day3', date: '20 November 2026', weekday: 'Friday', title: 'The Wedding Celebration', time: '8:00 PM',
-      schedule: [['8:00 PM', 'Welcome of Baraat'], ['9:00 PM', 'Dinner'], ['', 'Vidaai – Taron Ki Chhaon Mein']],
+      key: 'day3', date: '20 November 2026', weekday: 'Friday', title: 'The Wedding Celebration', time: '8:00 PM', where: 'Rohini & Pitampura',
+      sections: [
+        { label: 'Morning', schedule: [['11:00 AM', 'Haldi'], ['12:00 PM onwards', 'Lunch']],
+          venue: 'Hotel Ornate Inn', address: ['Sec 03, Rohini, Delhi – 110085'], mapsUrl: 'https://share.google/MRgZkBZfuOQ4PYgRV' },
+        { label: 'Evening · Pre-Wedding Rituals', schedule: [['5:00 PM', 'Sehrabandi'], ['6:00 PM', 'Ghudchadi']],
+          venue: 'Hotel Ornate Inn', address: ['Sec 03, Rohini, Delhi – 110085'], mapsUrl: 'https://share.google/MRgZkBZfuOQ4PYgRV' },
+        { label: 'Wedding Celebration', schedule: [['7:00 PM', 'Departure of Baraat'], ['8:00 PM onwards', 'Dinner'], ['', 'Vidaai – Taron Ki Chhaon Mein']],
+          venue: 'The Sherioan By Kawatra Tent', address: ['Colosseum Hall, Pitampura, Delhi – 110034.', '(Near DCP Office, Outer District)'], mapsUrl: 'https://share.google/6FekKRjN2AlnVlOxE' },
+      ],
       venue: 'The Sherioan By Kawatra Tent', venueLines: ['The Sherioan By', 'Kawatra Tent'], address: ['Colosseum Hall, Pitampura, Delhi – 110034.', '(Near DCP Office, Outer District)'],
       mapsUrl: 'https://share.google/6FekKRjN2AlnVlOxE', ics: 'event.ics', start: '2026-11-20T20:00:00+05:30',
     },
@@ -55,7 +65,7 @@ export const config = {
     ],
   },
 
-  stars: { title: 'A Little Message from Our Little Stars', big: 'My Bua is getting married!', line: ['Please join us to celebrate', 'this beautiful new beginning!'], love: 'With love,', names: 'Mishika, Navya & Himanshi' },
+  stars: { title: 'A Little Message from Our Little Stars', big: ['My Mama & Chachu', 'are getting married!'], line: ['Please join us to celebrate', 'this beautiful new beginning!'], love: 'With love,', names: ['Viraj/Himank, Tawisha, Poorvi,', 'Rutvik, Amayra & Atharv ❤️'] },
 
   /* logo: the couple's own AV monogram (the client's file, its black background keyed out by the tool),
      in place of the demo's heart flourish under the hashtag; set logo to '' to show the heart again */

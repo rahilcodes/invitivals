@@ -13,14 +13,17 @@ TZNAME:IST
 END:STANDARD
 END:VTIMEZONE
 BEGIN:VEVENT
-UID:vaishali-arpan-wedding-20261119@invitivals.com
-DTSTAMP:20261104T000000Z
-DTSTART;TZID=Asia/Kolkata:20261119T190000
+UID:arpan-vaishali-wedding-20261119@invitivals.com
+DTSTAMP:20261106T000000Z
+DTSTART;TZID=Asia/Kolkata:20261119T120000
 SUMMARY:Arpan & Vaishali · The Engagement Celebration
 LOCATION:Golden Apple Mansion\, Hall No. 2\, Darbaar Hall\, Pitampura\, Del
  hi
-DESCRIPTION:7:00 PM – Engagement Ceremony\n8:00 PM onwards – Dinner\n\n
- Map: https://share.google/7iebx6d5qkqSQan4a
+DESCRIPTION:Afternoon\n12:00 PM – Mehandi with Bhaat\n2:00 PM – Lunch\n
+ Hotel Ornate Inn\, Sec 03\, Rohini\, Delhi – 110085\nMap: https://share.
+ google/oaI7jLmCTHcueqsIm\n\nEvening\n7:00 PM – Engagement Ceremony\n8:00
+  PM onwards – Dinner\nGolden Apple Mansion\, Hall No. 2\, Darbaar Hall\,
+  Pitampura\, Delhi\n\nMap: https://share.google/zOVsh0H6mxrvN1ajR
 URL:https://invitivals.com/arpan-vaishali-wedding/
 BEGIN:VALARM
 TRIGGER:-P1D

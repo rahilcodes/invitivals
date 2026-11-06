@@ -8,9 +8,9 @@ Object.assign(art, {
      every box is as tall as its words, with a steady gap of ~0.8 % between groups and a smaller one between a
      name and its own line. The block starts below the arch's cusps (~13.2 % at x 39 / 63 %) and ends above
      the painted couple, whose heads begin at ~57 % on the right (x > 72 %) */
-  'h-ganesha': { x: 48.7, y: 12.4, w: 7.4, h: 5.65 }, /* the demo's small Ganesha, 140×190, under the arch's point */
-  'h-invocation': { x: 32.4, y: 12.0, w: 40, h: 1.3 }, /* only when the invocation line is set (then Ganesha is not) */
-  'h-hindi': { x: 27.4, y: 18.9, w: 50, h: 4.2 },
+  'h-ganesha': { x: 48.7, y: 12.4, w: 7.4, h: 5.65 }, /* the demo's small Ganesha (the bride side; not shown here) */
+  'h-invocation': { x: 32.4, y: 14.6, w: 40, h: 1.3 }, /* the groom side: the Nirankar invocation under the arch's point */
+  'h-hindi': { x: 27.4, y: 16.9, w: 50, h: 4.2 },
   'h-rule1': { x: 40.4, y: 24.0, w: 24, h: 1.913 },
   'h-blessings': { x: 32.4, y: 26.6, w: 40, h: 1.3 },
   'h-parents': { x: 29.4, y: 28.5, w: 46, h: 4.44 },
@@ -60,7 +60,7 @@ Object.assign(art, {
   's-rule2': { x: 32.412, y: 50.0, w: 35.6, h: 3.708 },
   's-line': { x: 25, y: 54.2, w: 50, h: 5 },
   's-love': { x: 30, y: 59.8, w: 40, h: 2.4 },
-  's-names': { x: 22, y: 62.4, w: 56, h: 2.8 },
+  's-names': { x: 22, y: 62.4, w: 56, h: 5.6 }, /* two lines of names */
 
   /* closing on plate 8 (the page shows the plate from 26 % down; Page() converts these) */
   'z-title': { x: 15, y: 38.8, w: 70, h: 8.4 },

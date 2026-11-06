@@ -30,7 +30,9 @@ export function CalendarSheet(C) {
         action: 'TEMPLATE', text: day.key === 'day3' ? `Wedding of ${C.couple.groom} & ${C.couple.bride}` : `${C.couple.groom} & ${C.couple.bride} · ${day.title}`,
         dates: `${z(start)}/${z(end)}`, ctz: 'Asia/Kolkata',
         location: [day.venue, ...day.address].join(', '),
-        details: [day.title, ...day.schedule.map(([t, w]) => (t ? `${t} – ${w}` : w)), '', `Map: ${day.mapsUrl}`].join('\n'),
+        details: (day.sections
+          ? [day.title, ...day.sections.flatMap((p) => ['', p.label, ...p.schedule.map(([t, w]) => (t ? `${t} – ${w}` : w)), `${p.venue}, ${p.address.join(', ')}`, `Map: ${p.mapsUrl}`])]
+          : [day.title, ...day.schedule.map(([t, w]) => (t ? `${t} – ${w}` : w)), '', `Map: ${day.mapsUrl}`]).join('\n'),
       });
       sheet.hidden = false;
       ics.focus({ preventScroll: true });
