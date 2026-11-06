@@ -186,7 +186,7 @@ const pageStars = Page(7, [
   sprAt('s-rule2', 'p7-rule2', { delay: 0.6 }),
   live('s-line', S.line, { size: 3.1, cls: 'serif italic', delay: 0.7 }),
   live('s-love', S.love, { size: 3.1, cls: 'serif', delay: 0.85, wrap: false }),
-  live('s-names', S.names, { size: 3.4, cls: 'serif bold deep', delay: 0.95, wrap: false }), /* two lines: the box is two lines tall */
+  live('s-names', S.names, { size: 3.1, cls: 'serif bold deep', delay: 0.95, wrap: false }), /* two lines of names, a little smaller than the bride side's one */
 ], { id: 'page-stars' });
 
 /* ── the closing (the plate's empty top is cut: the words follow the stars' page) ── */

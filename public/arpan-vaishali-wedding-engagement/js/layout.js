@@ -9,8 +9,8 @@ Object.assign(art, {
      name and its own line. The block starts below the arch's cusps (~13.2 % at x 39 / 63 %) and ends above
      the painted couple, whose heads begin at ~57 % on the right (x > 72 %) */
   'h-ganesha': { x: 48.7, y: 12.4, w: 7.4, h: 5.65 }, /* the demo's small Ganesha (the bride side; not shown here) */
-  'h-invocation': { x: 32.4, y: 14.6, w: 40, h: 1.3 }, /* the groom side: the Nirankar invocation under the arch's point */
-  'h-hindi': { x: 27.4, y: 16.9, w: 50, h: 4.2 },
+  'h-invocation': { x: 32.4, y: 15.4, w: 40, h: 1.3 }, /* the groom side: the Nirankar invocation under the arch's point */
+  'h-hindi': { x: 27.4, y: 17.7, w: 50, h: 4.2 },
   'h-rule1': { x: 40.4, y: 24.0, w: 24, h: 1.913 },
   'h-blessings': { x: 32.4, y: 26.6, w: 40, h: 1.3 },
   'h-parents': { x: 29.4, y: 28.5, w: 46, h: 4.44 },
