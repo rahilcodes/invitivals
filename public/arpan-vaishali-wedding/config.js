@@ -65,9 +65,9 @@ export const config = {
     {
       key: 'day3', date: '20 November 2026', weekday: 'Friday', title: 'The Wedding Celebration', time: '8:00 PM', where: 'Rohini & Pitampura',
       sections: [
-        { label: 'Morning', schedule: [['11:00 AM', 'Haldi'], ['12:00 PM onwards', 'Lunch']],
+        { label: 'Morning', schedule: [['11:00 AM', 'Haldi'], ['12:00 PM onwards', 'Lunch']] }, /* at the Ornate Inn too: its one block follows the rituals (7 Nov) */
+        { label: 'Evening · Pre-Wedding Rituals', schedule: [['5:00 PM', 'Sehrabandi'], ['6:00 PM', 'Ghudchadi']],
           venue: 'Hotel Ornate Inn', address: ['Sec 03, Rohini, Delhi – 110085'], mapsUrl: 'https://share.google/MRgZkBZfuOQ4PYgRV' },
-        { label: 'Evening · Pre-Wedding Rituals', schedule: [['5:00 PM', 'Sehrabandi'], ['6:00 PM', 'Ghudchadi']] }, /* same venue as the morning: no venue block (7 Nov) */
         { label: 'Wedding Celebration', schedule: [['7:00 PM', 'Departure of Baraat'], ['8:00 PM onwards', 'Dinner']],
           venue: 'The Sherioan By Kawatra Tent', address: ['Colosseum Hall, Pitampura, Delhi – 110034.', '(Near DCP Office, Outer District)'], mapsUrl: 'https://share.google/6FekKRjN2AlnVlOxE' },
       ],

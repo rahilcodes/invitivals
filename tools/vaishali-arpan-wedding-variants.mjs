@@ -48,8 +48,8 @@ const GROOM_DAYS = [
       'Evening', '7:00 PM – Engagement Ceremony', '8:00 PM onwards – Dinner', 'Golden Apple Mansion, Hall No. 2, Darbaar Hall, Pitampura, Delhi'] },
   { file: 'event.ics', start: '20261120T200000', title: 'Wedding of Arpan & Vaishali',
     venue: 'The Sherioan By Kawatra Tent, Colosseum Hall, Pitampura, Delhi – 110034 (Near DCP Office, Outer District)', map: 'https://share.google/6FekKRjN2AlnVlOxE',
-    lines: ['Morning', '11:00 AM – Haldi', '12:00 PM onwards – Lunch', ORNATE, 'Map: https://share.google/MRgZkBZfuOQ4PYgRV', '',
-      'Evening · Pre-Wedding Rituals (same venue)', '5:00 PM – Sehrabandi', '6:00 PM – Ghudchadi', '',
+    lines: ['Morning', '11:00 AM – Haldi', '12:00 PM onwards – Lunch', '',
+      'Evening · Pre-Wedding Rituals', '5:00 PM – Sehrabandi', '6:00 PM – Ghudchadi', ORNATE, 'Map: https://share.google/MRgZkBZfuOQ4PYgRV', '',
       'Wedding Celebration', '7:00 PM – Departure of Baraat', '8:00 PM onwards – Dinner', 'The Sherioan By Kawatra Tent, Colosseum Hall, Pitampura, Delhi – 110034 (Near DCP Office, Outer District)'] },
 ];
 const esc = (s) => String(s).replace(/([,;\\])/g, '\\$1').replace(/\n/g, '\\n');
