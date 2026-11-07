@@ -13,21 +13,19 @@ TZNAME:IST
 END:STANDARD
 END:VTIMEZONE
 BEGIN:VEVENT
-UID:arpan-vaishali-wedding-20261120@invitivals.com
+UID:arpan-vaishali-wedding-engagement-20261120@invitivals.com
 DTSTAMP:20261106T000000Z
 DTSTART;TZID=Asia/Kolkata:20261120T200000
 SUMMARY:Wedding of Arpan & Vaishali
 LOCATION:The Sherioan By Kawatra Tent\, Colosseum Hall\, Pitampura\, Delhi 
  – 110034 (Near DCP Office\, Outer District)
-DESCRIPTION:Morning\n11:00 AM – Haldi\n12:00 PM onwards – Lunch\nHotel 
- Ornate Inn\, Sec 03\, Rohini\, Delhi – 110085\nMap: https://share.google
- /MRgZkBZfuOQ4PYgRV\n\nEvening · Pre-Wedding Rituals\n5:00 PM – Sehraban
- di\n6:00 PM – Ghudchadi\nHotel Ornate Inn\, Sec 03\, Rohini\, Delhi – 
- 110085\nMap: https://share.google/MRgZkBZfuOQ4PYgRV\n\nWedding Celebration
- \n7:00 PM – Departure of Baraat\n8:00 PM onwards – Dinner\nVidaai – 
- Taron Ki Chhaon Mein\nThe Sherioan By Kawatra Tent\, Colosseum Hall\, Pita
- mpura\, Delhi – 110034 (Near DCP Office\, Outer District)\n\nMap: https:
- //share.google/6FekKRjN2AlnVlOxE
+DESCRIPTION:Morning\n11:00 AM – Haldi\n12:00 PM onwards – Lunch\n\nEven
+ ing · Pre-Wedding Rituals\n5:00 PM – Sehrabandi\n6:00 PM – Ghudchadi\
+ nHotel Ornate Inn\, Sec 03\, Rohini\, Delhi – 110085\nMap: https://share
+ .google/MRgZkBZfuOQ4PYgRV\n\nWedding Celebration\n7:00 PM – Departure of
+  Baraat\n8:00 PM onwards – Dinner\nThe Sherioan By Kawatra Tent\, Coloss
+ eum Hall\, Pitampura\, Delhi – 110034 (Near DCP Office\, Outer District)
+ \n\nMap: https://share.google/6FekKRjN2AlnVlOxE
 URL:https://invitivals.com/arpan-vaishali-wedding-engagement/
 BEGIN:VALARM
 TRIGGER:-P1D

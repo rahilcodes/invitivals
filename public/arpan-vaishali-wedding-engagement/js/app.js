@@ -31,6 +31,7 @@ const page1 = Page(1, [
   sprAt('h-rule1', 'p1-rule1', { delay: 0.4 }),
   live('h-blessings', H.blessings, { size: 2.3, cls: 'serif caps soft', delay: 0.5, wrap: false }),
   live('h-parents', H.parents, { size: 3.15, cls: 'serif bold deep', delay: 0.6 }),
+  H.parents2 ? live('h-parents2', H.parents2, { size: 2.75, cls: 'serif semibold deep', delay: 0.65 }) : null,
   live('h-request', H.request, { size: 2.5, cls: 'serif italic', delay: 0.7 }),
   live('h-bride', C.couple.groom, { size: 8, cls: 'name burgundy', delay: 0.6, slow: true, wrap: false }),
   live('h-bride-of', H.groomOf, { size: 2.5, cls: 'serif semibold', delay: 0.9 }),
@@ -62,7 +63,7 @@ const venue = (part) => h('div', { class: 'venue' }, h('p', { class: 'venue-name
 /* a day in several places: each section with its heading, hours, venue and its own map link */
 const mapLink = (part) => h('a', { class: 'fn-tap venue-map', href: part.mapsUrl, target: '_blank', rel: 'noopener', 'aria-label': `Open ${part.venue} in Google Maps` }, 'Open in Google Maps', h('i', { 'aria-hidden': 'true' }));
 const programme = (day) => day.sections
-  ? day.sections.map((part) => h('div', { class: 'section' }, h('p', { class: 'seg' }, part.label), schedule(part), venue(part), mapLink(part)))
+  ? day.sections.map((part) => h('div', { class: 'section' }, h('p', { class: 'seg' }, part.label), schedule(part), part.venue ? venue(part) : null, part.venue ? mapLink(part) : null))
   : [schedule(day), venue(day)];
 const firstTime = (day) => (day.sections ? day.sections[0] : day).schedule[0][0];
 const actions = (day) => h('div', { class: 'actions' },

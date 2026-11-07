@@ -25,7 +25,9 @@ const ALL = ['day1', 'day2', 'day3'];
 const VARIANTS = [
   { slug: 'vaishali-arpan-wedding-engagement', from: BRIDE, keep: ['day2', 'day3'], dates: '19 – 20 November 2026' },
   { slug: 'vaishali-arpan-wedding-only', from: BRIDE, keep: ['day3'], dates: '20 November 2026' },
-  { slug: 'arpan-vaishali-wedding-engagement', from: GROOM, keep: ['day2', 'day3'], dates: '19 – 20 November 2026', groom: true },
+  /* arpan-vaishali-wedding-engagement began as a copy of the groom master but has been edited by hand since
+     7 Nov (the client's corrections for that link alone: Lunch at 1:00 PM on 19 Nov), so it is NOT rebuilt here;
+     only its two calendar files are written below, from its own lines */
   { slug: 'arpan-vaishali-wedding-only', from: GROOM, keep: ['day3'], dates: '20 November 2026', groom: true },
 ];
 const ICS = { day1: 'event-18nov.ics', day2: 'event-19nov.ics', day3: 'event.ics' };
@@ -55,18 +57,22 @@ const GROOM_DAYS = [
 const esc = (s) => String(s).replace(/([,;\\])/g, '\\$1').replace(/\n/g, '\\n');
 const fold = (l) => { const b = Buffer.from(l); if (b.length <= 75) return l; const out = []; let i = 0, first = true;
   while (i < b.length) { let n = first ? 75 : 74; while (i + n < b.length && (b[i + n] & 0xc0) === 0x80) n--; out.push((first ? '' : ' ') + b.subarray(i, i + n).toString()); i += n; first = false; } return out.join('\r\n'); };
-for (const d of GROOM_DAYS) {
-  const ics = [
+const icsOf = (d, slug) => [
     'BEGIN:VCALENDAR', 'VERSION:2.0', 'PRODID:-//Invitivals//Arpan & Vaishali Wedding//EN', 'CALSCALE:GREGORIAN', 'METHOD:PUBLISH',
     'BEGIN:VTIMEZONE', 'TZID:Asia/Kolkata', 'BEGIN:STANDARD', 'DTSTART:19700101T000000', 'TZOFFSETFROM:+0530', 'TZOFFSETTO:+0530', 'TZNAME:IST', 'END:STANDARD', 'END:VTIMEZONE',
-    'BEGIN:VEVENT', `UID:${GROOM}-${d.start.slice(0, 8)}@invitivals.com`, 'DTSTAMP:20261106T000000Z', `DTSTART;TZID=Asia/Kolkata:${d.start}`,
+    'BEGIN:VEVENT', `UID:${slug}-${d.start.slice(0, 8)}@invitivals.com`, 'DTSTAMP:20261106T000000Z', `DTSTART;TZID=Asia/Kolkata:${d.start}`,
     `SUMMARY:${esc(d.title)}`, `LOCATION:${esc(d.venue)}`, `DESCRIPTION:${esc([...d.lines, '', `Map: ${d.map}`].join('\n'))}`,
-    `URL:https://invitivals.com/${GROOM}/`, 'BEGIN:VALARM', 'TRIGGER:-P1D', 'ACTION:DISPLAY', `DESCRIPTION:${esc(d.title)} tomorrow`, 'END:VALARM',
+    `URL:https://invitivals.com/${slug}/`, 'BEGIN:VALARM', 'TRIGGER:-P1D', 'ACTION:DISPLAY', `DESCRIPTION:${esc(d.title)} tomorrow`, 'END:VALARM',
     'END:VEVENT', 'END:VCALENDAR', '',
-  ];
-  fs.writeFileSync(path.join(ROOT, 'public', GROOM, d.file), ics.map(fold).join('\r\n'));
-}
+];
+for (const d of GROOM_DAYS) fs.writeFileSync(path.join(ROOT, 'public', GROOM, d.file), icsOf(d, GROOM).map(fold).join('\r\n'));
 console.log(`✓ ${GROOM}: 3 × .ics`);
+{
+  const E = 'arpan-vaishali-wedding-engagement';
+  const days = GROOM_DAYS.slice(1).map((d) => ({ ...d, lines: d.lines.map((l) => (l === '2:00 PM – Lunch' ? '1:00 PM – Lunch' : l)) }));
+  for (const d of days) fs.writeFileSync(path.join(ROOT, 'public', E, d.file), icsOf(d, E).map(fold).join('\r\n'));
+  console.log(`✓ ${E}: 2 × .ics (Lunch at 1:00 PM)`);
+}
 if (process.argv[2] === 'source') process.exit(0); // "source": only the groom master's files; the copies stay as they are
 const og = (slug, dates, groom) => {
   const r = spawnSync(process.execPath, ['--experimental-websocket', path.join(ROOT, 'tools/vaishali-arpan-wedding.mjs'), 'og', slug, dates.toUpperCase(), ...(groom ? ['groom'] : [])], { stdio: 'inherit' });

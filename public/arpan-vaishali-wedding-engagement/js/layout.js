@@ -9,17 +9,18 @@ Object.assign(art, {
      name and its own line. The block starts below the arch's cusps (~13.2 % at x 39 / 63 %) and ends above
      the painted couple, whose heads begin at ~57 % on the right (x > 72 %) */
   'h-ganesha': { x: 48.7, y: 12.4, w: 7.4, h: 5.65 }, /* the demo's small Ganesha (the bride side; not shown here) */
-  'h-invocation': { x: 32.4, y: 15.4, w: 40, h: 1.3 }, /* the groom side: the Nirankar invocation under the arch's point */
-  'h-hindi': { x: 27.4, y: 17.7, w: 50, h: 4.2 },
-  'h-rule1': { x: 40.4, y: 24.0, w: 24, h: 1.913 },
-  'h-blessings': { x: 32.4, y: 26.6, w: 40, h: 1.3 },
-  'h-parents': { x: 29.4, y: 28.5, w: 46, h: 4.44 },
-  'h-request': { x: 28.4, y: 33.7, w: 48, h: 3.8 },
-  'h-bride': { x: 25.4, y: 38.3, w: 54, h: 5.4 },
-  'h-bride-of': { x: 29.4, y: 44.1, w: 46, h: 3.66 },
-  'h-with': { x: 37.4, y: 48.6, w: 30, h: 1.35 },
-  'h-groom': { x: 25.4, y: 50.5, w: 54, h: 5.4 },
-  'h-groom-of': { x: 29.4, y: 56.3, w: 46, h: 3.66 },
+  'h-invocation': { x: 32.4, y: 14.2, w: 40, h: 1.3 }, /* the groom side: the Nirankar invocation under the arch's point */
+  'h-hindi': { x: 27.4, y: 16.4, w: 50, h: 4.2 },
+  'h-rule1': { x: 40.4, y: 21.9, w: 24, h: 1.913 },
+  'h-blessings': { x: 32.4, y: 24.4, w: 40, h: 1.3 },
+  'h-parents': { x: 29.4, y: 26.2, w: 46, h: 4.44 },  /* the grandparents, two lines */
+  'h-parents2': { x: 27.4, y: 30.8, w: 50, h: 3.9 },  /* the parents, two lines, a little smaller */
+  'h-request': { x: 28.4, y: 35.1, w: 48, h: 3.8 },
+  'h-bride': { x: 25.4, y: 39.1, w: 54, h: 5.4 },
+  'h-bride-of': { x: 29.4, y: 44.9, w: 46, h: 3.66 },
+  'h-with': { x: 37.4, y: 49.3, w: 30, h: 1.35 },
+  'h-groom': { x: 25.4, y: 51.1, w: 54, h: 5.4 },
+  'h-groom-of': { x: 29.4, y: 56.9, w: 46, h: 3.66 },
 
   /* page 2: the parchment's date, three lines */
   'p2-date3': { x: 35, y: 57.8, w: 30, h: 12.4 },
