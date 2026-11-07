@@ -12,7 +12,8 @@
    Each copy has its days trimmed in config.js, the programme cards centred for their number, its own
    address and dates in the link preview, and its own og.jpg (the main tool renders it with the dates and
    the names' order passed in). Rerun after any change to either source folder.
-     node --experimental-websocket tools/vaishali-arpan-wedding-variants.mjs */
+     node --experimental-websocket tools/vaishali-arpan-wedding-variants.mjs          (everything)
+     node --experimental-websocket tools/vaishali-arpan-wedding-variants.mjs source   (only the groom master's .ics) */
 import fs from 'node:fs';
 import path from 'node:path';
 import { spawnSync } from 'node:child_process';
@@ -48,8 +49,8 @@ const GROOM_DAYS = [
   { file: 'event.ics', start: '20261120T200000', title: 'Wedding of Arpan & Vaishali',
     venue: 'The Sherioan By Kawatra Tent, Colosseum Hall, Pitampura, Delhi – 110034 (Near DCP Office, Outer District)', map: 'https://share.google/6FekKRjN2AlnVlOxE',
     lines: ['Morning', '11:00 AM – Haldi', '12:00 PM onwards – Lunch', ORNATE, 'Map: https://share.google/MRgZkBZfuOQ4PYgRV', '',
-      'Evening · Pre-Wedding Rituals', '5:00 PM – Sehrabandi', '6:00 PM – Ghudchadi', ORNATE, 'Map: https://share.google/MRgZkBZfuOQ4PYgRV', '',
-      'Wedding Celebration', '7:00 PM – Departure of Baraat', '8:00 PM onwards – Dinner', 'Vidaai – Taron Ki Chhaon Mein', 'The Sherioan By Kawatra Tent, Colosseum Hall, Pitampura, Delhi – 110034 (Near DCP Office, Outer District)'] },
+      'Evening · Pre-Wedding Rituals (same venue)', '5:00 PM – Sehrabandi', '6:00 PM – Ghudchadi', '',
+      'Wedding Celebration', '7:00 PM – Departure of Baraat', '8:00 PM onwards – Dinner', 'The Sherioan By Kawatra Tent, Colosseum Hall, Pitampura, Delhi – 110034 (Near DCP Office, Outer District)'] },
 ];
 const esc = (s) => String(s).replace(/([,;\\])/g, '\\$1').replace(/\n/g, '\\n');
 const fold = (l) => { const b = Buffer.from(l); if (b.length <= 75) return l; const out = []; let i = 0, first = true;
@@ -66,6 +67,7 @@ for (const d of GROOM_DAYS) {
   fs.writeFileSync(path.join(ROOT, 'public', GROOM, d.file), ics.map(fold).join('\r\n'));
 }
 console.log(`✓ ${GROOM}: 3 × .ics`);
+if (process.argv[2] === 'source') process.exit(0); // "source": only the groom master's files; the copies stay as they are
 const og = (slug, dates, groom) => {
   const r = spawnSync(process.execPath, ['--experimental-websocket', path.join(ROOT, 'tools/vaishali-arpan-wedding.mjs'), 'og', slug, dates.toUpperCase(), ...(groom ? ['groom'] : [])], { stdio: 'inherit' });
   if (r.status) throw new Error('og.jpg failed');

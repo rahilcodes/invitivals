@@ -31,7 +31,7 @@ export function CalendarSheet(C) {
         dates: `${z(start)}/${z(end)}`, ctz: 'Asia/Kolkata',
         location: [day.venue, ...day.address].join(', '),
         details: (day.sections
-          ? [day.title, ...day.sections.flatMap((p) => ['', p.label, ...p.schedule.map(([t, w]) => (t ? `${t} – ${w}` : w)), `${p.venue}, ${p.address.join(', ')}`, `Map: ${p.mapsUrl}`])]
+          ? [day.title, ...day.sections.flatMap((p) => ['', p.label, ...p.schedule.map(([t, w]) => (t ? `${t} – ${w}` : w)), ...(p.venue ? [`${p.venue}, ${p.address.join(', ')}`, `Map: ${p.mapsUrl}`] : [])])]
           : [day.title, ...day.schedule.map(([t, w]) => (t ? `${t} – ${w}` : w)), '', `Map: ${day.mapsUrl}`]).join('\n'),
       });
       sheet.hidden = false;

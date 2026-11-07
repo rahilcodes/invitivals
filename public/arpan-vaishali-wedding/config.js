@@ -17,7 +17,9 @@ export const config = {
     invocation: 'EK TU HI NIRANKAR',
     hindi: ['तेरा आसरा ले के करता हूँ काम।', 'मेरे सतगुरु, तुमको लाखों सलाम।'],
     blessings: 'With Blessings',
-    parents: ['Smt. Neelam Singla &', 'Late Sh. Suresh Singla'],
+    /* the hosts (7 Nov): the grandparents first, the parents under them */
+    parents: ['Late Smt. Soma Devi &', 'Late Sh. Kedar Nath Singla'],
+    parents2: ['Smt. Neelam Singla', '(W/o Late Sh. Suresh Singla)'],
     request: ['With joy and love, we invite you to bless', 'the wedding of our beloved son.'],
     brideOf: ['Daughter of Mrs. Vanita Gupta &', 'Mr. Subhash Chand Gupta'],
     with: 'With',
@@ -65,9 +67,8 @@ export const config = {
       sections: [
         { label: 'Morning', schedule: [['11:00 AM', 'Haldi'], ['12:00 PM onwards', 'Lunch']],
           venue: 'Hotel Ornate Inn', address: ['Sec 03, Rohini, Delhi – 110085'], mapsUrl: 'https://share.google/MRgZkBZfuOQ4PYgRV' },
-        { label: 'Evening · Pre-Wedding Rituals', schedule: [['5:00 PM', 'Sehrabandi'], ['6:00 PM', 'Ghudchadi']],
-          venue: 'Hotel Ornate Inn', address: ['Sec 03, Rohini, Delhi – 110085'], mapsUrl: 'https://share.google/MRgZkBZfuOQ4PYgRV' },
-        { label: 'Wedding Celebration', schedule: [['7:00 PM', 'Departure of Baraat'], ['8:00 PM onwards', 'Dinner'], ['', 'Vidaai – Taron Ki Chhaon Mein']],
+        { label: 'Evening · Pre-Wedding Rituals', schedule: [['5:00 PM', 'Sehrabandi'], ['6:00 PM', 'Ghudchadi']] }, /* same venue as the morning: no venue block (7 Nov) */
+        { label: 'Wedding Celebration', schedule: [['7:00 PM', 'Departure of Baraat'], ['8:00 PM onwards', 'Dinner']],
           venue: 'The Sherioan By Kawatra Tent', address: ['Colosseum Hall, Pitampura, Delhi – 110034.', '(Near DCP Office, Outer District)'], mapsUrl: 'https://share.google/6FekKRjN2AlnVlOxE' },
       ],
       venue: 'The Sherioan By Kawatra Tent', venueLines: ['The Sherioan By', 'Kawatra Tent'], address: ['Colosseum Hall, Pitampura, Delhi – 110034.', '(Near DCP Office, Outer District)'],
