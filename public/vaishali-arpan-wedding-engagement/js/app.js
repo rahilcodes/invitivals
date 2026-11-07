@@ -31,6 +31,7 @@ const page1 = Page(1, [
   sprAt('h-rule1', 'p1-rule1', { delay: 0.4 }),
   live('h-blessings', H.blessings, { size: 2.3, cls: 'serif caps soft', delay: 0.5, wrap: false }),
   live('h-parents', H.parents, { size: 3.15, cls: 'serif bold deep', delay: 0.6 }),
+  H.parents2 ? live('h-parents2', H.parents2, { size: 2.75, cls: 'serif semibold deep', delay: 0.65 }) : null,
   live('h-request', H.request, { size: 2.5, cls: 'serif italic', delay: 0.7 }),
   live('h-bride', C.couple.bride, { size: 8, cls: 'name burgundy', delay: 0.6, slow: true, wrap: false }),
   live('h-bride-of', H.brideOf, { size: 2.5, cls: 'serif semibold', delay: 0.9 }),

@@ -10,16 +10,17 @@ Object.assign(art, {
      the painted couple, whose heads begin at ~57 % on the right (x > 72 %) */
   'h-ganesha': { x: 48.7, y: 12.4, w: 7.4, h: 5.65 }, /* the demo's small Ganesha, 140×190, under the arch's point */
   'h-invocation': { x: 32.4, y: 12.0, w: 40, h: 1.3 }, /* only when the invocation line is set (then Ganesha is not) */
-  'h-hindi': { x: 27.4, y: 18.9, w: 50, h: 4.2 },
-  'h-rule1': { x: 40.4, y: 24.0, w: 24, h: 1.913 },
-  'h-blessings': { x: 32.4, y: 26.6, w: 40, h: 1.3 },
-  'h-parents': { x: 29.4, y: 28.5, w: 46, h: 4.44 },
-  'h-request': { x: 28.4, y: 33.7, w: 48, h: 3.8 },
-  'h-bride': { x: 25.4, y: 38.3, w: 54, h: 5.4 },
-  'h-bride-of': { x: 29.4, y: 44.1, w: 46, h: 3.66 },
-  'h-with': { x: 37.4, y: 48.6, w: 30, h: 1.35 },
-  'h-groom': { x: 25.4, y: 50.5, w: 54, h: 5.4 },
-  'h-groom-of': { x: 29.4, y: 56.3, w: 46, h: 3.66 },
+  'h-hindi': { x: 27.4, y: 18.4, w: 50, h: 4.2 },
+  'h-rule1': { x: 40.4, y: 23.2, w: 24, h: 1.913 },
+  'h-blessings': { x: 32.4, y: 25.6, w: 40, h: 1.3 },
+  'h-parents': { x: 29.4, y: 27.3, w: 46, h: 4.44 },  /* the grandparents, two lines */
+  'h-parents2': { x: 27.4, y: 31.7, w: 50, h: 3.9 },  /* the parents, two lines, a little smaller */
+  'h-request': { x: 28.4, y: 35.9, w: 48, h: 3.8 },
+  'h-bride': { x: 25.4, y: 39.6, w: 54, h: 5.4 },
+  'h-bride-of': { x: 29.4, y: 45.4, w: 46, h: 3.66 },
+  'h-with': { x: 37.4, y: 49.8, w: 30, h: 1.35 },
+  'h-groom': { x: 25.4, y: 51.6, w: 54, h: 5.4 },
+  'h-groom-of': { x: 29.4, y: 57.4, w: 46, h: 3.66 },
 
   /* page 2: the parchment's date, three lines */
   'p2-date3': { x: 35, y: 57.8, w: 30, h: 12.4 },

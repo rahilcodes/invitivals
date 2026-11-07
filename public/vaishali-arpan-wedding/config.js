@@ -14,7 +14,9 @@ export const config = {
     invocation: '', /* was 'Ek Tu Hi Nirankar' */
     hindi: ['वक्रतुण्ड महाकाय सूर्यकोटि समप्रभ।', 'निर्विघ्नं कुरु मे देव सर्वकार्येषु सर्वदा॥'], /* was ['तेरे आसरा ले के करता हूँ काम,', 'मेरे सतगुरु तुझको लाखो सलाम ।'] */
     blessings: 'With Blessings',
-    parents: 'Mrs. Vanita Gupta & Mr. Subhash Chand Gupta',
+    /* the hosts (7 Nov): the bride's grandparents first, her parents under them, in the client's own words */
+    parents: ['Late Smt. Resham Devi &', 'Late Sh. Shiv Dayal Gupta'],
+    parents2: ['Smt. Vanita Gupta &', 'Sh. Subhash Chand Gupta'],
     request: ['With joy and love, we invite you to bless', 'the wedding of our beloved daughter.'],
     brideOf: 'Granddaughter of Late Mrs. Resham Devi & Late Mr. Shiv Dayal Gupta',
     with: 'With',
