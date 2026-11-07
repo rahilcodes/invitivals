@@ -28,7 +28,7 @@ const VARIANTS = [
   /* arpan-vaishali-wedding-engagement began as a copy of the groom master but has been edited by hand since
      7 Nov (the client's corrections for that link alone: Lunch at 1:00 PM on 19 Nov), so it is NOT rebuilt here;
      only its two calendar files are written below, from its own lines */
-  { slug: 'arpan-vaishali-wedding-only', from: GROOM, keep: ['day3'], dates: '20 November 2026', groom: true },
+  /* arpan-vaishali-wedding-only likewise, hand-edited since 7 Nov (no Morning section on the wedding day) */
 ];
 const ICS = { day1: 'event-18nov.ics', day2: 'event-19nov.ics', day3: 'event.ics' };
 /* the programme cards (a source page's three sit at 33.6 / 53.4 / 73.2 %, 16.8 % tall): fewer cards keep the
@@ -72,6 +72,10 @@ console.log(`✓ ${GROOM}: 3 × .ics`);
   const days = GROOM_DAYS.slice(1).map((d) => ({ ...d, lines: d.lines.map((l) => (l === '2:00 PM – Lunch' ? '1:00 PM – Lunch' : l)) }));
   for (const d of days) fs.writeFileSync(path.join(ROOT, 'public', E, d.file), icsOf(d, E).map(fold).join('\r\n'));
   console.log(`✓ ${E}: 2 × .ics (Lunch at 1:00 PM)`);
+  const W = 'arpan-vaishali-wedding-only';
+  const w3 = GROOM_DAYS[2], cut = w3.lines.indexOf('Evening · Pre-Wedding Rituals');
+  fs.writeFileSync(path.join(ROOT, 'public', W, w3.file), icsOf({ ...w3, lines: w3.lines.slice(cut) }, W).map(fold).join('\r\n'));
+  console.log(`✓ ${W}: event.ics (from the evening rituals on)`);
 }
 if (process.argv[2] === 'source') process.exit(0); // "source": only the groom master's files; the copies stay as they are
 const og = (slug, dates, groom) => {
