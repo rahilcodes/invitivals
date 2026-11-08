@@ -72,6 +72,10 @@ console.log(`✓ ${GROOM}: 3 × .ics`);
   const days = GROOM_DAYS.slice(1).map((d) => ({ ...d, lines: d.lines.map((l) => (l === '2:00 PM – Lunch' ? '1:00 PM – Lunch' : l)) }));
   for (const d of days) fs.writeFileSync(path.join(ROOT, 'public', E, d.file), icsOf(d, E).map(fold).join('\r\n'));
   console.log(`✓ ${E}: 2 × .ics (Lunch at 1:00 PM)`);
+  const EV = 'arpan-vaishali-wedding-engagement-evening'; // the engagement link for evening guests (8 Nov): the day from 'Evening' on
+  const e2 = days[0], ev = { ...e2, start: '20261119T190000', lines: e2.lines.slice(e2.lines.indexOf('Evening')) };
+  for (const d of [ev, days[1]]) fs.writeFileSync(path.join(ROOT, 'public', EV, d.file), icsOf(d, EV).map(fold).join('\r\n'));
+  console.log(`✓ ${EV}: 2 × .ics (the evening on)`);
   const W = 'arpan-vaishali-wedding-only';
   const w3 = GROOM_DAYS[2], cut = w3.lines.indexOf('Evening · Pre-Wedding Rituals');
   fs.writeFileSync(path.join(ROOT, 'public', W, w3.file), icsOf({ ...w3, lines: w3.lines.slice(cut) }, W).map(fold).join('\r\n'));
