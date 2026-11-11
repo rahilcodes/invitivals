@@ -1,7 +1,7 @@
 /* Nandana Vanam — the page's script. The door, the scroll-ins, the song, the bell and the petals behave as in the
    approved design; added for this invitation: the scratch card, the countdown in the event's own timezone, the RSVP
    form and the Save the Date links. Everything about the client comes from ../config.js. */
-import { invite as C } from '../config.js?v=2';
+import { invite as C } from '../config.js?v=4';
 
 const $ = (id) => document.getElementById(id);
 const app = $('app'), scroller = $('scroller'), doorScene = $('doorScene'), musicBtn = $('musicBtn');
@@ -114,14 +114,14 @@ document.addEventListener('visibilitychange', () => { if (!document.hidden) tick
 /* ---------------- scratch card ----------------
    A gold foil on a canvas over the date. Rubbing (finger, pen or mouse) clears it; past 45% it lifts by itself.
    Only the foil takes the finger (touch-action: none on the canvas), so the page scrolls normally everywhere else.
-   "Tap to Reveal" and the keyboard do the same without scratching. Once revealed it stays revealed. */
+   "Tap to Reveal" and the keyboard do the same without scratching. Once revealed it stays revealed for this visit
+   only: nothing is stored, so every fresh opening or reload shows the unscratched card again (client, 2026-11-12). */
 (function scratch() {
   const card = $('scard'), foil = $('foil'), hint = $('scardHint'), btn = $('scardBtn'), live = $('scardLive'), face = $('scardFace');
   if (!card || !foil) return;
-  const KEY = 'nv-date-revealed';
   let done = false, g = null, W = 0, H = 0;
   const said = `${C.scratch.weekday}, ${C.scratch.day} ${C.scratch.month} ${C.scratch.year}`;
-  function reveal(save) {
+  function reveal() {
     if (done) return;
     done = true;
     card.classList.add('is-revealed');
@@ -129,13 +129,10 @@ document.addEventListener('visibilitychange', () => { if (!document.hidden) tick
     hint.hidden = true;
     btn.hidden = true;
     live.textContent = 'The date is ' + said + '.';
-    if (save) try { localStorage.setItem(KEY, '1'); } catch (e) {}
   }
-  btn.addEventListener('click', () => reveal(true));
-  let was = false;
-  try { was = localStorage.getItem(KEY) === '1'; } catch (e) {}
+  btn.addEventListener('click', () => reveal());
   g = foil.getContext && foil.getContext('2d', { willReadFrequently: true });
-  if (was || !g) { reveal(false); return; }
+  if (!g) { reveal(); return; }                           // no canvas at all: the date is simply shown
 
   function paint() {
     const r = foil.getBoundingClientRect(), dpr = Math.min(window.devicePixelRatio || 1, 2);
@@ -179,8 +176,8 @@ document.addEventListener('visibilitychange', () => { if (!document.hidden) tick
     try {
       const step = 8, d = g.getImageData(0, 0, W, H).data; let clear = 0, n = 0;
       for (let y = 0; y < H; y += step) for (let x = 0; x < W; x += step) { n++; if (d[(y * W + x) * 4 + 3] < 40) clear++; }
-      if (clear / n > .45) reveal(true);
-    } catch (e) { if (moves > 60) reveal(true); }
+      if (clear / n > .45) reveal();
+    } catch (e) { if (moves > 60) reveal(); }
   }
   foil.addEventListener('pointerdown', (e) => { if (done) return; tryPaint(); down = true; last = null; try { foil.setPointerCapture(e.pointerId); } catch (x) {} rub(at(e)); e.preventDefault(); });
   foil.addEventListener('pointermove', (e) => { if (down && !done) { rub(at(e)); e.preventDefault(); } });
@@ -237,56 +234,34 @@ setInterval(() => {
 
 /* ---------------- Save the Date (only on the page once the end time is confirmed in config) ---------------- */
 (function calendar() {
+  /* The button is an ordinary link to Google Calendar's event-creation screen (its address is written into the page
+     by the tool), opened by the guest's own tap in a new tab — nothing is downloaded. After the tap a quiet line
+     offers the calendar file, for a guest whose phone could not open Google Calendar. */
   const btn = $('saveDate'), status = $('saveStatus');
-  if (!btn) return;
-  const stamp = (t) => new Date(t).toISOString().replace(/[-:]/g, '').replace(/\.\d+Z$/, 'Z');
-  /* no end time is confirmed: the Google link (used only if the file cannot be had) then carries the start alone */
-  const end = C.calendar.endTime ? zonedInstant(C.date, C.calendar.endTime, C.timeZone, C.utcOffsetFallback) : START;
-  const details = `Hosts: ${C.calendar.hosts}\n\n${C.events.map((e) => `${e.name} — ${e.label}`).join('\n')}\n\nMap: ${C.venue.mapsUrl}`;
-  const gcal = 'https://calendar.google.com/calendar/render?' + new URLSearchParams({ action: 'TEMPLATE', text: C.calendar.title, dates: stamp(START) + '/' + stamp(end), ctz: C.timeZone, location: C.calendar.location, details }).toString();
-  /* The tap: make sure the calendar file is really there, then hand it over. iPhones and iPads open a .ics link
-     straight in Calendar ("Add to Calendar"); everywhere else it is saved as a file that the calendar app opens.
-     If the file cannot be fetched, say so and offer Google Calendar instead — never a silent nothing. */
-  const isIOS = /iPhone|iPad|iPod/.test(navigator.userAgent) || (/Macintosh/.test(navigator.userAgent) && navigator.maxTouchPoints > 1);
-  let busy = false;
-  btn.addEventListener('click', async (e) => {
-    e.preventDefault();
-    if (busy) return;
-    busy = true; status.className = 'save-status'; status.textContent = '';
-    try {
-      const ctl = new AbortController(), timer = setTimeout(() => ctl.abort(), 12000);
-      const res = await fetch(btn.getAttribute('href'), { cache: 'no-store', signal: ctl.signal });
-      clearTimeout(timer);
-      const text = res.ok ? await res.text() : '';
-      if (!/^BEGIN:VCALENDAR/.test(text) || !/BEGIN:VEVENT/.test(text)) throw new Error('not a calendar file');
-      if (isIOS) { window.location.href = btn.href; }
-      else {
-        const url = URL.createObjectURL(new Blob([text], { type: 'text/calendar;charset=utf-8' }));
-        const a = document.createElement('a');
-        a.href = url; a.download = btn.getAttribute('download'); a.style.display = 'none';
-        document.body.appendChild(a); a.click(); a.remove();
-        setTimeout(() => URL.revokeObjectURL(url), 30000);
-      }
+  if (!btn || !status) return;
+  /* the link goes through Google's sign-in address so a signed-out guest still reaches the event; on Android the
+     direct address is used instead, which the Google Calendar app can open itself */
+  if (/Android/i.test(navigator.userAgent) && btn.dataset.direct) btn.href = btn.dataset.direct;
+  btn.addEventListener('click', () => {
+    setTimeout(() => {
       status.className = 'save-status ok';
-      status.textContent = isIOS ? 'Opening your calendar…' : 'Calendar file downloaded. Open it to add the event.';
-    } catch (err) {
-      status.className = 'save-status';
-      status.innerHTML = 'Sorry, the calendar file could not be downloaded. Please try again, or <a href="' + gcal.replace(/&/g, '&amp;') + '" target="_blank" rel="noopener">add it to Google Calendar</a>.';
-    }
-    busy = false;
+      status.innerHTML = 'Google Calendar is opening with the details filled in. Not opening? <a href="event.ics">Use the calendar file instead</a>.';
+    }, 600);
   });
 })();
 
 /* ---------------- RSVP ----------------
    Sent to rsvp.php, which stores the reply and notifies the hosts. "Thank you" is shown only when the server answers
-   that it stored the reply; any failure says so and offers the same reply by WhatsApp or email, already written. */
+   that it stored the reply; any failure says so and offers the same reply by WhatsApp or email, already written.
+   The thank-you lasts for this visit only: nothing is kept in the browser, so every fresh opening or reload shows the
+   empty form and a guest can reply again (client, 2026-11-12). The replies themselves stay on the server. */
 (function rsvp() {
   const form = $('rsvp');
   if (!form) return;
   const send = $('rsvpSend'), status = $('rsvpStatus'), guestsFld = $('guestsFld');
   const f = { name: $('rName'), email: $('rEmail'), guests: $('rGuests'), message: $('rMsg') };
-  const KEY = 'nv-rsvp-sent';
   let busy = false, sent = false;
+  form.reset();                                            // a browser must not bring back what was typed before a reload
   const attending = () => { const r = form.querySelector('input[name=attending]:checked'); return r ? r.value : ''; };
   const setErr = (id, input, msg) => {
     const el = $(id); el.textContent = msg || ''; el.hidden = !msg;
@@ -334,7 +309,6 @@ setInterval(() => {
       ? `Thank you, ${escH(v.name)}. Your reply has been received. You will be missed.`
       : `Thank you, ${escH(v.name)}. Your reply has been received. We look forward to welcoming you.`);
   }
-  try { const p = JSON.parse(localStorage.getItem(KEY) || 'null'); if (p && p.name) thank(p); } catch (e) {}
 
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
@@ -355,7 +329,6 @@ setInterval(() => {
     } catch (err) { ok = false; }
     busy = false;
     if (ok) {
-      try { localStorage.setItem(KEY, JSON.stringify({ name: v.name, attending: v.attending })); } catch (x) {}
       thank(v);
     } else {
       send.disabled = false; send.querySelector('span').textContent = 'SEND RSVP';
@@ -363,6 +336,12 @@ setInterval(() => {
     }
   });
 })();
+
+/* ---------------- every opening is a fresh one ----------------
+   A page restored whole from the back/forward cache would still show the revealed date and the thank-you: reload it.
+   The two keys an earlier version of this page kept are removed. */
+window.addEventListener('pageshow', (e) => { if (e.persisted) window.location.reload(); });
+try { localStorage.removeItem('nv-date-revealed'); localStorage.removeItem('nv-rsvp-sent'); } catch (e) {}
 
 /* ---------------- discourage casual copying of the artwork (as in the approved design) ---------------- */
 document.addEventListener('contextmenu', (e) => { if (!e.target.closest('input, textarea')) e.preventDefault(); });

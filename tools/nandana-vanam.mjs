@@ -45,6 +45,20 @@ put('css/base.css', `/* lifted unchanged from the approved design (public/poorna
 const img = (name, attrs = '') => `<img src="assets/${name}.webp" ${attrs}>`;
 const first = C.events[0];
 const hasEnd = /^\d\d:\d\d$/.test(C.calendar.endTime || '');
+const local = (t) => C.date.replace(/-/g, '') + 'T' + t.replace(':', '') + '00';
+/* Google Calendar's event-creation URL. The times are the event's own wall-clock times with ctz naming its timezone,
+   so Google places it at 4:40 PM Eastern for every guest, daylight saving included. No end is confirmed: the end
+   equals the start rather than an invented one. */
+const GCAL = 'https://calendar.google.com/calendar/render?' + new URLSearchParams({
+  action: 'TEMPLATE', text: C.calendar.title,
+  dates: local(C.events[0].time) + '/' + local(/^\d\d:\d\d$/.test(C.calendar.endTime || '') ? C.calendar.endTime : C.events[0].time),
+  ctz: C.timeZone, location: C.calendar.location,
+  details: C.events.map((e) => `${e.name} — ${e.label}`).join('\n') + '\n\nGoogle Maps: ' + C.venue.mapsUrl,
+}).toString();
+/* A guest who is not signed in to Google is sent by that address to Google's product page and loses the event
+   (seen 2026-11-12), so the button goes through Google's own sign-in address with the event as its destination:
+   signed in, it passes straight through; signed out, it asks to sign in and then opens the event. */
+const GCAL_SIGNIN = 'https://accounts.google.com/ServiceLogin?' + new URLSearchParams({ service: 'cl', continue: GCAL }).toString();
 const calendarOn = !!C.calendar.enabled;   // the end time is optional: without one the event has a start and no DTEND
 const url = `https://invitivals.com/${C.slug}/`;
 const desc = `You are cordially invited to the ${C.hero.ceremony} Ceremony of our new home, ${C.hero.home} — ${C.dateText}.`;
@@ -54,7 +68,6 @@ const icsEsc = (s) => String(s).replace(/\\/g, '\\\\').replace(/;/g, '\\;').repl
 const fold = (l) => { const out = []; let b = Buffer.from(l, 'utf8'); let lim = 75;
   while (b.length > lim) { let cut = lim; while ((b[cut] & 0xC0) === 0x80) cut--; out.push(b.subarray(0, cut).toString('utf8')); b = b.subarray(cut); lim = 74; }
   out.push(b.toString('utf8')); return out.join('\r\n '); };
-const local = (t) => C.date.replace(/-/g, '') + 'T' + t.replace(':', '') + '00';
 function ics() {
   const lines = [
     'BEGIN:VCALENDAR', 'VERSION:2.0', 'PRODID:-//Invitivals//Nandana Vanam//EN', 'CALSCALE:GREGORIAN', 'METHOD:PUBLISH',
@@ -168,7 +181,7 @@ ${C.hero.invocations.map((l) => `          <div>${esc(l)}</div>`).join('\n')}
           <div class="plaque-addr">${esc(C.venue.lines.join(' ').replace(/,? \d{5}$/, ''))}</div>
         </div>
         <div style="font-size:${U(17)};font-weight:600;margin-top:${U(4)}">On ${esc(C.dateText)}</div>
-${calendarOn ? `        <a class="gold-btn save-date" id="saveDate" href="event.ics" download="nandana-vanam-gruhapravesam.ics">${ICON.cal}SAVE THE DATE</a>
+${calendarOn ? `        <a class="gold-btn save-date" id="saveDate" href="${esc(GCAL_SIGNIN)}" data-direct="${esc(GCAL)}" target="_blank" rel="noopener">${ICON.cal}SAVE THE DATE</a>
         <p class="save-status" id="saveStatus" role="status" aria-live="polite"></p>
 ` : ''}      </section>
 
@@ -309,7 +322,7 @@ ${C.events.map((e, i) => `          <div class="card">
   </button>
 </div>
 <noscript><p style="position:fixed;inset:auto 0 0 0;z-index:99;margin:0;padding:14px;text-align:center;background:#f6ecd6;color:#6b3f10;font-family:Georgia,serif">Please enable JavaScript to open this invitation.</p></noscript>
-<script type="module" src="js/app.js?v=2"></script>
+<script type="module" src="js/app.js?v=4"></script>
 <script src="/_credit/v1/credit.js" defer data-into="#scroller" data-color="#6d4a2e"></script>
 </body>
 </html>

@@ -24,7 +24,7 @@ BEGIN:VEVENT
 UID:nandana-vanam-2026-12-12@invitivals.com
 DTSTAMP:20261112T000000Z
 DTSTART;TZID=America/New_York:20261212T164000
-SUMMARY:Gruhapravesam Ceremony – Nandana Vanam
+SUMMARY:Gruhapravesham Ceremony – Nandana Vanam
 LOCATION:Nandana Vanam\, 1305 Addison Lake St\, Fuquay Varina\, NC 27526
 DESCRIPTION:Hosts: Sri Srinivas Sai Pavan Nunna & Smt. Harsha Jasmin Mallel
  a\n\nGruhapravesham — 4:40 PM\nSatyanarayana Swamy Pooja — 6:40 PM\nDi
@@ -35,7 +35,7 @@ STATUS:CONFIRMED
 TRANSP:OPAQUE
 BEGIN:VALARM
 ACTION:DISPLAY
-DESCRIPTION:Gruhapravesam Ceremony – Nandana Vanam
+DESCRIPTION:Gruhapravesham Ceremony – Nandana Vanam
 TRIGGER:-P1D
 END:VALARM
 END:VEVENT

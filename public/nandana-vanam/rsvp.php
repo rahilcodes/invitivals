@@ -79,12 +79,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     $fh = fopen(DATA_FILE, 'c+');
     if (!$fh || !flock($fh, LOCK_EX)) reply(500, ['ok' => false, 'error' => 'The reply could not be stored']);
-    /* the same reply sent twice (a double tap, a retry) is stored once; a flood from one address is refused */
+    /* the same reply sent twice within two minutes (a double tap, a retry) is stored once — sent again later it is a
+       new reply and is recorded as one; a flood from one address is refused */
     $existing = rows($fh);
     $recent = 0;
     foreach ($existing as $r) {
         if (strcasecmp($r['email'] ?? '', $email) === 0 && ($r['name'] ?? '') === $name && ($r['attending'] ?? '') === $attending
-            && (int)($r['guests'] ?? 0) === $guests && ($r['message'] ?? '') === $message) { flock($fh, LOCK_UN); fclose($fh); reply(200, ['ok' => true, 'duplicate' => true]); }
+            && (int)($r['guests'] ?? 0) === $guests && ($r['message'] ?? '') === $message && strtotime($r['at'] ?? '') > time() - 120) { flock($fh, LOCK_UN); fclose($fh); reply(200, ['ok' => true, 'duplicate' => true]); }
         if (($r['ip'] ?? '') === $ip && strtotime($r['at'] ?? '') > time() - 3600) $recent++;
     }
     if ($recent >= 12 && !$test) { flock($fh, LOCK_UN); fclose($fh); reply(429, ['ok' => false, 'error' => 'Too many replies from this connection; please try later']); }

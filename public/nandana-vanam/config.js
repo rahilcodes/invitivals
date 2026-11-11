@@ -54,12 +54,13 @@ export const invite = {
     maxGuests: 20,
   },
 
-  /* Save the Date (.ics).
+  /* Save the Date: the button opens Google Calendar's "new event" screen with the details filled in (client,
+     2026-11-12: no automatic .ics download). event.ics is still written, only as the fallback link shown after the tap.
      No end time: the client first supplied 4:00 PM (before the 4:40 PM start), then asked (2026-11-12) for the
      confirmed start only, with the end omitted — so event.ics carries DTSTART and no DTEND, and nothing is invented.
      If an end is ever confirmed, put it here as 'HH:MM' (24-hour, the event's local time) and run the tool. */
   calendar: {
-    title: 'Gruhapravesam Ceremony – Nandana Vanam',
+    title: 'Gruhapravesham Ceremony – Nandana Vanam',   // the client's spelling for the calendar event (2026-11-12)
     hosts: 'Sri Srinivas Sai Pavan Nunna & Smt. Harsha Jasmin Mallela',
     location: 'Nandana Vanam, 1305 Addison Lake St, Fuquay Varina, NC 27526',
     enabled: true,
