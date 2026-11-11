@@ -1,0 +1,19 @@
+# This invitation may be corrected in place, so browsers re-check the page, its script and its styles
+# (a quick "not modified" when nothing changed). Artwork, fonts and the song rarely change and stay cached.
+<IfModule mod_headers.c>
+  <FilesMatch "\.(html|js|css|ics)$">
+    Header set Cache-Control "no-cache"
+  </FilesMatch>
+  <FilesMatch "\.(webp|woff2|mp3|jpg)$">
+    Header set Cache-Control "public, max-age=2592000"
+  </FilesMatch>
+</IfModule>
+<IfModule mod_mime.c>
+  AddType text/calendar .ics
+  AddType font/woff2 .woff2
+</IfModule>
+# the RSVP replies live in data/ and are never served
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteRule ^data/ - [F]
+</IfModule>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<!-- the link-preview cover of /nandana-vanam/ (1200 x 630), from the invitation's own artwork and fonts.
+     Shot by:  chrome --headless --screenshot --window-size=1200,630 tools/nandana-vanam-og.html  → public/nandana-vanam/og-cover.jpg
+     The middle 630 px square holds everything that matters, so WhatsApp's square crop keeps it. -->
+<html><head><meta charset="utf-8">
+<style>
+@font-face{font-family:CG;font-weight:500;font-style:italic;src:url(../public/nandana-vanam/fonts/f1.woff2)}
+@font-face{font-family:CG;font-weight:500 700;src:url(../public/nandana-vanam/fonts/f2.woff2)}
+html,body{margin:0}
+body{width:1200px;height:630px;overflow:hidden;position:relative;font-family:CG,Georgia,serif;color:#7a4a12;text-align:center;
+  background:radial-gradient(90% 120% at 50% 45%,#fbf3df 0%,#f3e5c8 60%,#e8d2a4 100%)}
+.frame{position:absolute;inset:16px;border:2px solid #c9a35c;box-shadow:inset 0 0 0 6px #f6ecd6,inset 0 0 0 7px rgba(201,163,92,.6)}
+.toran{position:absolute;left:0;top:-6px;width:100%;mix-blend-mode:multiply}
+.door{position:absolute;bottom:26px;height:500px}
+.door.l{left:44px}.door.r{right:44px;transform:scaleX(-1)}
+.cow{position:absolute;left:50%;bottom:34px;width:150px;transform:translateX(-50%)}
+.scene{position:absolute;left:50%;bottom:17px;width:730px;transform:translateX(-50%)}
+.words{position:absolute;left:50%;top:40px;width:900px;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center}
+.k{font-size:25px;letter-spacing:7px;text-indent:7px}
+.c{font-size:86px;font-weight:600;color:#8a4a1a;line-height:1.02;margin-top:6px}
+.s{font-size:27px;font-style:italic;margin-top:2px}
+.h{font-size:82px;font-weight:700;letter-spacing:2px;color:#9c3d2e;line-height:1.05;margin-top:6px}
+.rule{display:flex;align-items:center;gap:14px;margin:6px 0 4px}
+.rule i{display:block;width:120px;height:1.5px;background:linear-gradient(90deg,rgba(201,163,92,0),#c9a35c)}
+.rule i:last-child{transform:scaleX(-1)}
+.rule img{width:40px;mix-blend-mode:multiply}
+.d{font-size:34px;font-weight:700;letter-spacing:1px}
+</style></head><body>
+<img class="scene" src="../public/nandana-vanam/assets/footer-scene.webp" alt="">
+<div class="frame"></div>
+<div class="words">
+  <div class="k">GRUHAPRAVESAM CEREMONY</div>
+  <div class="h">Nandana Vanam</div>
+  <div class="rule"><i></i><img src="../public/nandana-vanam/assets/lotus.webp" alt=""><i></i></div>
+  <div class="d">Saturday, December 12, 2026</div>
+</div>
+</body></html>
