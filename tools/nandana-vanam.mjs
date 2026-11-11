@@ -44,7 +44,8 @@ put('css/base.css', `/* lifted unchanged from the approved design (public/poorna
 /* ── the day ───────────────────────────────────────────────────────────────── */
 const img = (name, attrs = '') => `<img src="assets/${name}.webp" ${attrs}>`;
 const first = C.events[0];
-const calendarOn = /^\d\d:\d\d$/.test(C.calendar.endTime || '');
+const hasEnd = /^\d\d:\d\d$/.test(C.calendar.endTime || '');
+const calendarOn = !!C.calendar.enabled;   // the end time is optional: without one the event has a start and no DTEND
 const url = `https://invitivals.com/${C.slug}/`;
 const desc = `You are cordially invited to the ${C.hero.ceremony} Ceremony of our new home, ${C.hero.home} — ${C.dateText}.`;
 
@@ -62,7 +63,7 @@ function ics() {
     'BEGIN:DAYLIGHT', 'DTSTART:19700308T020000', 'RRULE:FREQ=YEARLY;BYMONTH=3;BYDAY=2SU', 'TZOFFSETFROM:-0500', 'TZOFFSETTO:-0400', 'TZNAME:EDT', 'END:DAYLIGHT',
     'END:VTIMEZONE',
     'BEGIN:VEVENT', `UID:${C.slug}-${C.date}@invitivals.com`, 'DTSTAMP:20261112T000000Z',
-    `DTSTART;TZID=${C.timeZone}:${local(first.time)}`, `DTEND;TZID=${C.timeZone}:${local(C.calendar.endTime)}`,
+    `DTSTART;TZID=${C.timeZone}:${local(first.time)}`, ...(hasEnd ? [`DTEND;TZID=${C.timeZone}:${local(C.calendar.endTime)}`] : []),
     `SUMMARY:${icsEsc(C.calendar.title)}`, `LOCATION:${icsEsc(C.calendar.location)}`,
     `DESCRIPTION:${icsEsc(`Hosts: ${C.calendar.hosts}\n\n${C.events.map((e) => `${e.name} — ${e.label}`).join('\n')}\n\nMap: ${C.venue.mapsUrl}\n${url}`)}`,
     `URL:${url}`, 'STATUS:CONFIRMED', 'TRANSP:OPAQUE',
@@ -73,7 +74,7 @@ function ics() {
 }
 if (C.timeZone !== 'America/New_York') throw new Error('the VTIMEZONE block in this tool is written for America/New_York');
 if (calendarOn) {
-  if (C.calendar.endTime <= first.time) throw new Error(`calendar.endTime ${C.calendar.endTime} is not after the ${first.time} start`);
+  if (hasEnd && C.calendar.endTime <= first.time) throw new Error(`calendar.endTime ${C.calendar.endTime} is not after the ${first.time} start`);
   put('event.ics', ics());
 } else if (fs.existsSync(path.join(D, 'event.ics'))) fs.unlinkSync(path.join(D, 'event.ics'));
 
@@ -121,7 +122,7 @@ const html = `<!DOCTYPE html>
 <link rel="preload" href="fonts/f2.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="assets/door-frame.webp" as="image">
 <link rel="stylesheet" href="css/base.css?v=1">
-<link rel="stylesheet" href="css/invite.css?v=1">
+<link rel="stylesheet" href="css/invite.css?v=2">
 </head>
 <body>
 <div id="app" style="position:fixed;inset:0;background:#f2e3c8">
@@ -140,8 +141,11 @@ const html = `<!DOCTYPE html>
           ${img('cow-calf', 'style="display:block;width:100%" alt="Kamadhenu cow and calf"')}
         </div>
       </div>
-      <div class="hero-words" style="position:absolute;left:8%;right:8%;text-align:center;display:flex;flex-direction:column;gap:${U(6)};color:#7a4a12">
-        <div class="t-in" style="font-size:${U(14)};letter-spacing:${U(2)};transition:opacity 1.1s ease .4s, transform 1.1s ease .4s">${esc(C.hero.kicker)}</div>
+      <div class="hero-words${(C.hero.invocations || []).length ? ' hero-words--inv' : ''}" style="position:absolute;left:8%;right:8%;text-align:center;display:flex;flex-direction:column;gap:${U(6)};color:#7a4a12">
+${(C.hero.invocations || []).length ? `        <div class="t-in invocations" style="display:flex;flex-direction:column;gap:${U(3)};font-size:${U(11.5)};letter-spacing:${U(1)};font-style:italic;transition:opacity 1.1s ease .2s, transform 1.1s ease .2s">
+${C.hero.invocations.map((l) => `          <div>${esc(l)}</div>`).join('\n')}
+        </div>
+` : ''}        <div class="t-in" style="font-size:${U(14)};letter-spacing:${U(2)};${(C.hero.invocations || []).length ? `margin-top:${U(8)};` : ''}transition:opacity 1.1s ease .4s, transform 1.1s ease .4s">${esc(C.hero.kicker)}</div>
         <h1 class="t-in" style="margin:0;font-size:${U(44)};font-weight:600;color:#8a4a1a;line-height:1.05;transition:opacity 1.2s ease .8s, transform 1.2s ease .8s">${esc(C.hero.ceremony)}</h1>
         <div class="t-in" style="font-size:${U(16)};font-style:italic;transition:opacity 1.2s ease 1.2s, transform 1.2s ease 1.2s">${esc(C.hero.sub)}</div>
         <div class="t-in" style="font-size:${U(30)};font-weight:700;letter-spacing:${U(1)};color:#9c3d2e;text-shadow:0 0 6px rgba(246,236,214,.95), 0 0 14px rgba(246,236,214,.8);transition:opacity 1.2s ease 1.6s, transform 1.2s ease 1.6s">${esc(C.hero.home)}</div>
@@ -164,7 +168,9 @@ const html = `<!DOCTYPE html>
           <div class="plaque-addr">${esc(C.venue.lines.join(' ').replace(/,? \d{5}$/, ''))}</div>
         </div>
         <div style="font-size:${U(17)};font-weight:600;margin-top:${U(4)}">On ${esc(C.dateText)}</div>
-      </section>
+${calendarOn ? `        <a class="gold-btn save-date" id="saveDate" href="event.ics" download="nandana-vanam-gruhapravesam.ics">${ICON.cal}SAVE THE DATE</a>
+        <p class="save-status" id="saveStatus" role="status" aria-live="polite"></p>
+` : ''}      </section>
 
       <!-- OUR SPECIAL DAY: the scratch card -->
       <section data-reveal="2" class="sec" style="opacity:0" aria-labelledby="h-day">
@@ -218,9 +224,7 @@ ${C.events.map((e, i) => `          <div class="card">
         <div style="font-size:${U(19)};font-weight:700;letter-spacing:${U(1.5)};color:#9c3d2e">${esc(C.venue.name)}</div>
         <address style="font-style:normal;font-size:${U(17)};line-height:1.7">${C.venue.lines.map(esc).join('<br>')}</address>
         <a class="line-btn" href="${esc(C.venue.mapsUrl)}" target="_blank" rel="noopener">${ICON.pin}VIEW ON MAP</a>
-${calendarOn ? `        <a class="gold-btn" id="saveDate" href="event.ics" download="nandana-vanam-gruhapravesam.ics">${ICON.cal}SAVE THE DATE</a>
-        <a class="link-btn" id="gcal" href="#" target="_blank" rel="noopener">Add to Google Calendar</a>
-` : ''}      </section>
+      </section>
 
       <div data-reveal="6" class="shloka" style="opacity:0">
         <div class="shloka-text">&#2405; &#2358;&#2369;&#2349;&#2306; &#2349;&#2357;&#2340;&#2369; &#2405;</div>
@@ -305,10 +309,10 @@ ${calendarOn ? `        <a class="gold-btn" id="saveDate" href="event.ics" downl
   </button>
 </div>
 <noscript><p style="position:fixed;inset:auto 0 0 0;z-index:99;margin:0;padding:14px;text-align:center;background:#f6ecd6;color:#6b3f10;font-family:Georgia,serif">Please enable JavaScript to open this invitation.</p></noscript>
-<script type="module" src="js/app.js?v=1"></script>
+<script type="module" src="js/app.js?v=2"></script>
 <script src="/_credit/v1/credit.js" defer data-into="#scroller" data-color="#6d4a2e"></script>
 </body>
 </html>
 `;
 put('index.html', html);
-console.log(`✓ ${C.slug}: index.html, css/base.css, ${Object.keys(assets).length} images, ${seen.size} fonts, music` + (calendarOn ? ', event.ics' : ' — Save the Date OFF (calendar.endTime not confirmed)'));
+console.log(`✓ ${C.slug}: index.html, css/base.css, ${Object.keys(assets).length} images, ${seen.size} fonts, music` + (calendarOn ? ', event.ics' : ' — Save the Date OFF (calendar.enabled is not set)'));

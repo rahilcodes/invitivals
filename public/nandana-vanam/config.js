@@ -7,6 +7,13 @@ export const invite = {
 
   /* the cover */
   hero: {
+    /* the devotional lines over the heading, exactly as the client wrote them (2026-11-12) */
+    invocations: [
+      '॥ Sri Parvati Parameshwara Prasanna ॥',
+      '॥ Sri Venkateshwara Swamy Prasanna ॥',
+      '॥ Sri Shirdi Sai Baba Prasanna ॥',
+      '॥ Sri Bhoo Lakshmi Varaha Prasanna ॥',
+    ],
     kicker: 'WE CORDIALLY INVITE YOU TO THE',
     ceremony: 'Gruhapravesam',
     sub: 'of our new home',
@@ -48,13 +55,14 @@ export const invite = {
   },
 
   /* Save the Date (.ics).
-     END TIME REQUIRES CONFIRMATION: the client supplied 4:00 PM, which is before the 4:40 PM start, so no end time is
-     set and the Save the Date button stays off the page. Put the confirmed end here as 'HH:MM' (24-hour, event's local
-     time, e.g. '22:00') and run the tool: the button and event.ics appear. */
+     No end time: the client first supplied 4:00 PM (before the 4:40 PM start), then asked (2026-11-12) for the
+     confirmed start only, with the end omitted — so event.ics carries DTSTART and no DTEND, and nothing is invented.
+     If an end is ever confirmed, put it here as 'HH:MM' (24-hour, the event's local time) and run the tool. */
   calendar: {
     title: 'Gruhapravesam Ceremony – Nandana Vanam',
     hosts: 'Sri Srinivas Sai Pavan Nunna & Smt. Harsha Jasmin Mallela',
     location: 'Nandana Vanam, 1305 Addison Lake St, Fuquay Varina, NC 27526',
+    enabled: true,
     endTime: null,
   },
 

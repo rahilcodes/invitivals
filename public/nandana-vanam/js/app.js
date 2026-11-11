@@ -1,7 +1,7 @@
 /* Nandana Vanam — the page's script. The door, the scroll-ins, the song, the bell and the petals behave as in the
    approved design; added for this invitation: the scratch card, the countdown in the event's own timezone, the RSVP
    form and the Save the Date links. Everything about the client comes from ../config.js. */
-import { invite as C } from '../config.js?v=1';
+import { invite as C } from '../config.js?v=2';
 
 const $ = (id) => document.getElementById(id);
 const app = $('app'), scroller = $('scroller'), doorScene = $('doorScene'), musicBtn = $('musicBtn');
@@ -237,12 +237,44 @@ setInterval(() => {
 
 /* ---------------- Save the Date (only on the page once the end time is confirmed in config) ---------------- */
 (function calendar() {
-  const gcal = $('gcal');
-  if (!gcal || !C.calendar.endTime) return;
+  const btn = $('saveDate'), status = $('saveStatus');
+  if (!btn) return;
   const stamp = (t) => new Date(t).toISOString().replace(/[-:]/g, '').replace(/\.\d+Z$/, 'Z');
-  const end = zonedInstant(C.date, C.calendar.endTime, C.timeZone, C.utcOffsetFallback);
+  /* no end time is confirmed: the Google link (used only if the file cannot be had) then carries the start alone */
+  const end = C.calendar.endTime ? zonedInstant(C.date, C.calendar.endTime, C.timeZone, C.utcOffsetFallback) : START;
   const details = `Hosts: ${C.calendar.hosts}\n\n${C.events.map((e) => `${e.name} — ${e.label}`).join('\n')}\n\nMap: ${C.venue.mapsUrl}`;
-  gcal.href = 'https://calendar.google.com/calendar/render?' + new URLSearchParams({ action: 'TEMPLATE', text: C.calendar.title, dates: stamp(START) + '/' + stamp(end), ctz: C.timeZone, location: C.calendar.location, details }).toString();
+  const gcal = 'https://calendar.google.com/calendar/render?' + new URLSearchParams({ action: 'TEMPLATE', text: C.calendar.title, dates: stamp(START) + '/' + stamp(end), ctz: C.timeZone, location: C.calendar.location, details }).toString();
+  /* The tap: make sure the calendar file is really there, then hand it over. iPhones and iPads open a .ics link
+     straight in Calendar ("Add to Calendar"); everywhere else it is saved as a file that the calendar app opens.
+     If the file cannot be fetched, say so and offer Google Calendar instead — never a silent nothing. */
+  const isIOS = /iPhone|iPad|iPod/.test(navigator.userAgent) || (/Macintosh/.test(navigator.userAgent) && navigator.maxTouchPoints > 1);
+  let busy = false;
+  btn.addEventListener('click', async (e) => {
+    e.preventDefault();
+    if (busy) return;
+    busy = true; status.className = 'save-status'; status.textContent = '';
+    try {
+      const ctl = new AbortController(), timer = setTimeout(() => ctl.abort(), 12000);
+      const res = await fetch(btn.getAttribute('href'), { cache: 'no-store', signal: ctl.signal });
+      clearTimeout(timer);
+      const text = res.ok ? await res.text() : '';
+      if (!/^BEGIN:VCALENDAR/.test(text) || !/BEGIN:VEVENT/.test(text)) throw new Error('not a calendar file');
+      if (isIOS) { window.location.href = btn.href; }
+      else {
+        const url = URL.createObjectURL(new Blob([text], { type: 'text/calendar;charset=utf-8' }));
+        const a = document.createElement('a');
+        a.href = url; a.download = btn.getAttribute('download'); a.style.display = 'none';
+        document.body.appendChild(a); a.click(); a.remove();
+        setTimeout(() => URL.revokeObjectURL(url), 30000);
+      }
+      status.className = 'save-status ok';
+      status.textContent = isIOS ? 'Opening your calendar…' : 'Calendar file downloaded. Open it to add the event.';
+    } catch (err) {
+      status.className = 'save-status';
+      status.innerHTML = 'Sorry, the calendar file could not be downloaded. Please try again, or <a href="' + gcal.replace(/&/g, '&amp;') + '" target="_blank" rel="noopener">add it to Google Calendar</a>.';
+    }
+    busy = false;
+  });
 })();
 
 /* ---------------- RSVP ----------------

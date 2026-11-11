@@ -4,6 +4,16 @@
 .sr-only{position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
 h1,h2,h3{font-family:inherit}
 .hero-words{top:17%}
+/* with the devotional lines the block starts where the approved design starts its own */
+.hero-words--inv{top:13.5%}
+.invocations{font-family:'Cormorant Garamond','Tiro Devanagari Sanskrit',Georgia,serif;text-shadow:0 0 6px rgba(246,236,214,.95),0 0 12px rgba(246,236,214,.75)}
+.invocations div{white-space:nowrap}
+/* Save the Date, under the date line */
+.save-date{align-self:center;margin-top:calc(10 * var(--u));min-height:max(44px, calc(48 * var(--u)))}
+.save-status{margin:0;font-size:calc(15 * var(--u));line-height:1.5;color:#9c3d2e}
+.save-status:empty{display:none}
+.save-status.ok{color:#2f5a35}
+.save-status a{font-weight:700}
 .amp{font-style:italic;font-weight:500;color:#a07840}
 #doorScene:focus-visible,#ringBell:focus-visible{outline:2px solid #8a5a1e;outline-offset:4px}
 
