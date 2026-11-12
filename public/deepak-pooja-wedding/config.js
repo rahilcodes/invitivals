@@ -9,7 +9,7 @@
    invitation is: copy the folder, edit this file, swap photos.
    Dates are ISO strings in India time (+05:30).
    Only what the client supplied is used: no Haldi venue name (its map link only),
-   no grandparents, no ceremony time beyond "7:00 PM onwards · Dinner".
+   no grandparents, no ceremony time beyond "7:15 PM onwards · Dinner".
    ───────────────────────────────────────────────────────────── */
 export const weddingConfig = {
   groomName: 'Deepak',
@@ -25,7 +25,7 @@ export const weddingConfig = {
   guestFallback: 'You & Your Family',
   shareText: 'You are invited to the wedding of Deepak & Pooja · 29 November 2026, Noida',
 
-  weddingDate: '2026-11-29T19:00:00+05:30',
+  weddingDate: '2026-11-29T19:15:00+05:30',
   weddingEnd: '',
   weddingTimeLabel: '7 PM onwards',
   ceremonyTitle: 'Wedding Celebration',
@@ -33,7 +33,7 @@ export const weddingConfig = {
   muhurtham: '',
 
   venue: 'R.S Farm Banquet',
-  venueAddress: 'Near Parthala Bridge, Sector 12, Noida, Uttar Pradesh 201307',
+  venueAddress: 'Near Parthala Bridge, Sector 121, Noida, Uttar Pradesh 201307',
   venueCity: 'Noida',
   mapsUrl: 'https://share.google/wCmAaZipCqtWKXlEY',
   venueImage: 'assets/venue-rs-farm-mandap.webp', // the client's RS Farm image (2026-10-30), replacing the aisle photo
@@ -71,9 +71,9 @@ export const weddingConfig = {
   /* icon: vratham | nichayam | ring | haldi | mehendi | sangeet | muhurtham | forever | reception */
   events: [
     /* no Haldi on the groom side (client, 2026-11-03) */
-    { icon: 'forever', name: 'Wedding Celebration', date: '2026-11-29T19:00:00+05:30', main: true,
-      details: [['Time', '7:00 PM onwards · Dinner']],
-      venue: 'R.S Farm Banquet, Near Parthala Bridge, Sector 12, Noida, Uttar Pradesh 201307',
+    { icon: 'forever', name: 'Wedding Celebration', date: '2026-11-29T19:15:00+05:30', main: true,
+      details: [['Time', '7:15 PM onwards · Dinner']],
+      venue: 'R.S Farm Banquet, Near Parthala Bridge, Sector 121, Noida, Uttar Pradesh 201307',
       maps: 'https://share.google/wCmAaZipCqtWKXlEY' },
   ],
 
@@ -87,7 +87,7 @@ export const weddingConfig = {
 
   travelNote: 'The venue, one tap from your maps',
   travel: [
-    { icon: 'pin', title: 'R.S Farm Banquet', text: 'R.S Farm Banquet, Near Parthala Bridge, Sector 12, Noida, Uttar Pradesh 201307 · Wedding Celebration', link: { label: 'Wedding map', href: 'https://share.google/wCmAaZipCqtWKXlEY' } },
+    { icon: 'pin', title: 'R.S Farm Banquet', text: 'R.S Farm Banquet, Near Parthala Bridge, Sector 121, Noida, Uttar Pradesh 201307 · Wedding Celebration', link: { label: 'Wedding map', href: 'https://share.google/wCmAaZipCqtWKXlEY' } },
   ],
 
   contact: null,
