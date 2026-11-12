@@ -2,8 +2,9 @@
 /* RSVP for the Nandana Vanam Gruhapravesam invitation.
  *
  *   POST rsvp.php  (JSON {name, attending: "yes"|"no", guests; email and message are optional and no longer asked for})
- *       → appends one JSON line to data/entries.php, emails the hosts, answers {ok:true}
- *         ({ok:true} means STORED; the email is a notification on top and its result is recorded with the entry)
+ *       → appends one JSON line to data/entries.php, tries to email the hosts, answers {ok:true, mailed:true|false}
+ *         (ok means STORED; mailed says whether the server really sent the email. On 2026-11-13 the hosting account
+ *         answers "550 Local sendmail disabled", so mailed is false and the page opens the guest's email app instead)
  *   GET  rsvp.php?key=ADMIN_KEY          → the replies as a page (for the hosts)
  *   GET  rsvp.php?key=ADMIN_KEY&csv=1    → the replies as a CSV download
  *
@@ -92,9 +93,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     $mailed = null;
     if (!$test && NOTIFY_TO !== '') {
-        $subject = 'RSVP: ' . $name . ' — ' . ($attending === 'yes' ? 'Joyfully accepts (' . $guests . ')' : 'Regretfully declines');
-        $body = EVENT . "\n\nName: $name\n" . ($email !== '' ? "Email: $email\n" : '') . 'Attending: ' . ($attending === 'yes' ? "Joyfully accepts\nNumber of guests: $guests" : 'Regretfully declines')
-            . ($message !== '' ? "\n\nMessage:\n$message" : '') . "\n\nAll replies: https://invitivals.com/nandana-vanam/rsvp.php?key=" . ADMIN_KEY . "\n";
+        $subject = 'Nandana Vanam – Gruhapravesham RSVP';
+        $body = "Guest Name: $name\r\n\r\nAttendance: " . ($attending === 'yes' ? "Attending\r\n\r\nNumber of Guests: $guests" : 'Unable to Attend')
+            . ($email !== '' ? "\r\n\r\nEmail: $email" : '') . ($message !== '' ? "\r\n\r\nMessage:\r\n$message" : '')
+            . "\r\n\r\nAll replies: https://invitivals.com/nandana-vanam/rsvp.php?key=" . ADMIN_KEY . "\r\n";
         $headers = 'From: Nandana Vanam Invitation <' . MAIL_FROM . '>' . ($email !== '' ? "\r\nReply-To: " . $email : '') . "\r\nMIME-Version: 1.0\r\nContent-Type: text/plain; charset=UTF-8\r\nContent-Transfer-Encoding: 8bit";
         $mailed = @mail(NOTIFY_TO, '=?UTF-8?B?' . base64_encode($subject) . '?=', $body, $headers, '-f' . MAIL_FROM);
     }
@@ -105,7 +107,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $ok = fwrite($fh, $line);
     fflush($fh); flock($fh, LOCK_UN); fclose($fh);
     if ($ok === false) reply(500, ['ok' => false, 'error' => 'The reply could not be stored']);
-    reply(200, ['ok' => true]);
+    reply(200, ['ok' => true, 'mailed' => $mailed === true]);   // mailed: the server itself emailed the hosts (false while the host has mail switched off)
 }
 
 /* ── the hosts' view ── */

@@ -135,7 +135,7 @@ const html = `<!DOCTYPE html>
 <link rel="preload" href="fonts/f2.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="assets/door-frame.webp" as="image">
 <link rel="stylesheet" href="css/base.css?v=1">
-<link rel="stylesheet" href="css/invite.css?v=3">
+<link rel="stylesheet" href="css/invite.css?v=4">
 </head>
 <body>
 <div id="app" style="position:fixed;inset:0;background:#f2e3c8">
@@ -162,8 +162,8 @@ ${C.hero.invocations.map((l) => `          <div>${esc(l)}</div>`).join('\n')}
         <h1 class="t-in" style="margin:0;font-size:${U(44)};font-weight:600;color:#8a4a1a;line-height:1.05;transition:opacity 1.2s ease .8s, transform 1.2s ease .8s">${esc(C.hero.ceremony)}</h1>
         <div class="t-in" style="font-size:${U(16)};font-style:italic;transition:opacity 1.2s ease 1.2s, transform 1.2s ease 1.2s">${esc(C.hero.sub)}</div>
         <div class="t-in" style="font-size:${U(30)};font-weight:700;letter-spacing:${U(1)};color:#9c3d2e;text-shadow:0 0 6px rgba(246,236,214,.95), 0 0 14px rgba(246,236,214,.8);transition:opacity 1.2s ease 1.6s, transform 1.2s ease 1.6s">${esc(C.hero.home)}</div>
-        <div class="t-in" style="font-size:${U(17)};font-weight:600;letter-spacing:${U(1)};margin-top:${U(-4)};text-shadow:0 0 6px rgba(246,236,214,.95), 0 0 14px rgba(246,236,214,.8);transition:opacity 1.2s ease 2s, transform 1.2s ease 2s">${esc(C.dateText)}</div>
-      </div>
+${C.hero.showDate === false ? '' : `        <div class="t-in" style="font-size:${U(17)};font-weight:600;letter-spacing:${U(1)};margin-top:${U(-4)};text-shadow:0 0 6px rgba(246,236,214,.95), 0 0 14px rgba(246,236,214,.8);transition:opacity 1.2s ease 2s, transform 1.2s ease 2s">${esc(C.dateText)}</div>
+`}      </div>
     </div>
     <!-- ============ CONTENT ============ -->
     <div style="position:relative;width:100%;max-width:520px;margin:0 auto;background:linear-gradient(180deg,#f6ecd6 0%,#f3e5c8 50%,#f6ecd6 100%);padding:${U(52)} ${U(30)} ${U(70)};box-sizing:border-box;display:flex;flex-direction:column;gap:${U(52)};color:#6b3f10;text-align:center" id="contentCol">
@@ -238,7 +238,6 @@ ${C.events.map((e, i) => `          <div class="card">
           </div>
           <div class="rsvp-status" id="rsvpStatus" role="status" aria-live="polite"></div>
         </form>
-        <p class="rsvp-direct">Or reply directly:<br><a href="mailto:${esc(C.rsvp.email)}">${esc(C.rsvp.email)}</a><br><a href="https://wa.me/${esc(C.rsvp.whatsapp)}" target="_blank" rel="noopener">WhatsApp ${esc(C.rsvp.phoneText)}</a></p>
       </section>
 
       <div data-reveal="8" style="opacity:0;display:flex;flex-direction:column;gap:${U(10)};align-items:center">
@@ -270,7 +269,9 @@ ${C.events.map((e, i) => `          <div class="card">
       </section>
     </div>
   </main>
-  <!-- ============ DOOR OVERLAY ============ -->
+${C.hero.scrollCue ? `  <!-- ============ SCROLL CUE: shown when the doors have opened, gone once the guest scrolls ============ -->
+  <div class="scroll-cue" id="scrollCue" aria-hidden="true"><span>${esc(C.hero.scrollCue)}</span><svg viewBox="0 0 24 14"><path d="M3 2l9 9 9-9"/></svg></div>
+` : ''}  <!-- ============ DOOR OVERLAY ============ -->
   <div id="overlay" style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;background:radial-gradient(120% 90% at 50% 40%, #f8ecd2 0%, #eed7ab 55%, #dfc08a 100%)">
     <div id="doorScene" role="button" tabindex="0" aria-label="Open the door to enter the invitation" style="position:relative;width:min(94vw, 60vh);aspect-ratio:1024/1536;perspective:1700px;perspective-origin:50% 42%;cursor:pointer">
       <div style="position:absolute;left:23.73%;top:23.44%;width:54.4%;height:67.19%;background:radial-gradient(85% 60% at 50% 42%, #ffdf9e 0%, #b97b2e 45%, #4a2408 100%);overflow:hidden">
@@ -295,7 +296,7 @@ ${C.events.map((e, i) => `          <div class="card">
   </button>
 </div>
 <noscript><p style="position:fixed;inset:auto 0 0 0;z-index:99;margin:0;padding:14px;text-align:center;background:#f6ecd6;color:#6b3f10;font-family:Georgia,serif">Please enable JavaScript to open this invitation.</p></noscript>
-<script type="module" src="js/app.js?v=5"></script>
+<script type="module" src="js/app.js?v=6"></script>
 <script src="/_credit/v1/credit.js" defer data-into="#scroller" data-color="#6d4a2e"></script>
 </body>
 </html>

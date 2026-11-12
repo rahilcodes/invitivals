@@ -1,7 +1,7 @@
 /* Nandana Vanam — the page's script. The door, the scroll-ins, the song, the bell and the petals behave as in the
    approved design; added for this invitation: the countdown in the event's own timezone, the RSVP and the Save the
    Date link. Everything about the client comes from ../config.js. */
-import { invite as C } from '../config.js?v=5';
+import { invite as C } from '../config.js?v=6';
 
 const $ = (id) => document.getElementById(id);
 const app = $('app'), scroller = $('scroller'), doorScene = $('doorScene'), musicBtn = $('musicBtn');
@@ -32,9 +32,14 @@ function checkReveals() {
   }
 }
 scroller.addEventListener('scroll', checkReveals, { passive: true });
+/* "SCROLL TO EXPLORE" shows once the doors have opened (CSS, on #app.gone) and leaves for good at the first scroll */
+const scrollCue = $('scrollCue');
+let cueGone = !scrollCue;
+function hideCue() { if (!cueGone && scroller.scrollTop > 24) { cueGone = true; scrollCue.classList.add('is-hidden'); } }
+scroller.addEventListener('scroll', hideCue, { passive: true });
 window.addEventListener('resize', checkReveals);
 /* a safety net: should a browser ever swallow a scroll event, nothing on screen stays invisible for long */
-setInterval(() => { if (opened) checkReveals(); }, 600);
+setInterval(() => { if (opened) { checkReveals(); hideCue(); } }, 600);
 
 /* ---------------- background song (Web Audio) ----------------
    The song starts WITH the door tap, not after the doors have opened (client, 2026-11-12). To make that possible the
@@ -190,9 +195,12 @@ setInterval(() => {
 })();
 
 /* ---------------- RSVP ----------------
-   A name, a guest counter and two buttons. Tapping "I'LL BE THERE" or "UNABLE TO ATTEND" sends the reply to rsvp.php,
-   which stores it with the time and notifies the hosts. The thank-you is shown only when the server answers that it
-   stored the reply; any failure says so, lets the guest tap again, and offers the same reply by WhatsApp or email.
+   A name, a guest counter and two buttons. Tapping "I'LL BE THERE" or "UNABLE TO ATTEND" does two things:
+   · the reply is recorded by rsvp.php (the hosts' list), and
+   · it goes to the hosts' email address (config.rsvp.email). The host's server cannot send mail (config.rsvp.serverEmail
+     is false), so the guest's own email app is opened with the reply written out, inside the tap itself, and the guest
+     presses Send. The page says exactly that — never that an email "was sent".
+   If rsvp.php ever does send the email itself (serverEmail true and the server confirms it), the email app is not opened.
    Nothing is kept in the browser: every fresh opening or reload shows the empty form (client, 2026-11-12). */
 (function rsvp() {
   const form = $('rsvp');
@@ -216,10 +224,11 @@ setInterval(() => {
   name.addEventListener('input', () => nameErr(''));
   form.addEventListener('submit', (e) => e.preventDefault());           // Enter in the name box does not send by itself
 
-  function direct(v) {
-    const text = `RSVP — ${C.calendar.title}\nName: ${v.name}\n` + (v.attending === 'yes' ? `Will be there\nGuests: ${v.guests}` : 'Unable to attend');
-    return `<div class="alt"><a href="https://wa.me/${C.rsvp.whatsapp}?text=${encodeURIComponent(text)}" target="_blank" rel="noopener">SEND BY WHATSAPP</a>` +
-      `<a href="mailto:${C.rsvp.email}?subject=${encodeURIComponent('RSVP — ' + C.calendar.title)}&body=${encodeURIComponent(text)}">SEND BY EMAIL</a></div>`;
+  /* the reply as an email to the hosts: recipient, subject and body all filled in (CRLF line ends, as mail apps expect) */
+  function mailto(v) {
+    const body = ['Guest Name: ' + v.name, '', 'Attendance: ' + (v.attending === 'yes' ? 'Attending' : 'Unable to Attend')]
+      .concat(v.attending === 'yes' ? ['', 'Number of Guests: ' + v.guests] : []).join('\r\n');
+    return 'mailto:' + C.rsvp.email + '?subject=' + encodeURIComponent(C.rsvp.subject) + '&body=' + encodeURIComponent(body);
   }
   function lock(on, chosen) {
     busy = on;
@@ -233,10 +242,12 @@ setInterval(() => {
     if (v.name.length < 2) { nameErr('Please enter your full name.'); say('', ''); name.focus(); return; }
     nameErr('');
     if (v.attending === 'yes') v.guests = guests;
-    const label = btn.textContent;
+    const label = btn.textContent, mail = mailto(v);
+    /* the server cannot email: open the guest's email app now, while this is still the tap itself */
+    if (!C.rsvp.serverEmail) window.location.href = mail;
     lock(true, btn); btn.textContent = 'SENDING…';
     say('', '');
-    let ok = false, why = '';
+    let ok = false, why = '', mailed = false;
     try {
       const ctl = new AbortController(), timer = setTimeout(() => ctl.abort(), 15000);
       const res = await fetch(C.rsvp.endpoint, { method: 'POST', headers: { 'Content-Type': 'application/json' }, signal: ctl.signal,
@@ -244,18 +255,24 @@ setInterval(() => {
       clearTimeout(timer);
       const body = await res.json().catch(() => null);
       ok = res.ok && body && body.ok === true;
+      mailed = !!(ok && body.mailed === true);
       if (!ok && body && body.error) why = body.error;
     } catch (e) { ok = false; }
     btn.textContent = label;
-    if (ok) {
-      sent = true; busy = false;
-      form.classList.add('is-sent');
-      say('ok', v.attending === 'yes'
-        ? `<b>THANK YOU</b>${escH(v.name)}, your reply has been received.<br>We look forward to welcoming ${v.guests === 1 ? 'you' : 'the ' + v.guests + ' of you'}.`
-        : `<b>THANK YOU</b>${escH(v.name)}, your reply has been received.<br>You will be missed.`);
+    const again = `<br><a class="again" href="${escH(mail)}">EMAIL NOT OPEN? TAP HERE</a>`;
+    const what = v.attending === 'yes' ? `attending, ${v.guests} ${v.guests === 1 ? 'guest' : 'guests'}` : 'unable to attend';
+    if (ok && mailed) {                                    // the server itself emailed the hosts
+      sent = true; busy = false; form.classList.add('is-sent');
+      say('ok', `<b>THANK YOU</b>${escH(v.name)}, your reply (${what}) has been sent to the hosts.`);
+    } else if (ok) {                                       // recorded; the email is in the guest's own email app
+      sent = true; busy = false; form.classList.add('is-sent');
+      say('ok', `<b>THANK YOU</b>${escH(v.name)}, your reply (${what}) has been recorded.<br>An email to the hosts should now be open in your email app: please press <u>Send</u> there.` + again);
+    } else if (!C.rsvp.serverEmail) {                      // not recorded, but the email is still ready to send
+      lock(false);
+      say('bad', `Your reply could not be recorded here${why ? ' (' + escH(why) + ')' : ''}. An email to the hosts should now be open in your email app: please press <u>Send</u> there, or tap a button to try again.` + again);
     } else {
       lock(false);
-      say('bad', `Sorry, your reply could not be sent${why ? ' (' + escH(why) + ')' : ''}. Please tap again, or send it directly:` + direct(v));
+      say('bad', `Sorry, your reply could not be sent${why ? ' (' + escH(why) + ')' : ''}. Please tap again, or send it by email:` + again);
     }
   }
   for (const b of btns) b.addEventListener('click', () => send(b));

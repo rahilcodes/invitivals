@@ -77,9 +77,19 @@ h1,h2,h3{font-family:inherit}
 .rsvp-status .alt{display:flex;flex-wrap:wrap;justify-content:center;gap:calc(8 * var(--u));margin-top:calc(10 * var(--u))}
 .rsvp-status .alt a{display:inline-block;border:1.5px solid #8a5a1e;padding:calc(9 * var(--u)) calc(16 * var(--u));font-size:calc(13.5 * var(--u));font-weight:700;letter-spacing:calc(1.5 * var(--u));text-decoration:none;color:#8a5a1e}
 .rsvp2.is-sent .r2-fld,.rsvp2.is-sent .r2-btns{display:none}
-.rsvp-direct{margin:calc(4 * var(--u)) 0 0;font-size:calc(15.5 * var(--u));line-height:1.75;color:#7a4a12}
-.rsvp-direct a{font-weight:600;word-break:break-word}
+
 
 /* the elders: each couple on two lines, a little air between the couples */
 .elders{font-size:calc(19.5 * var(--u));font-weight:700;color:#8a4a1a;line-height:1.4}
 .elders + .elders{margin-top:calc(6 * var(--u))}
+
+/* ---------- SCROLL TO EXPLORE: a quiet cue at the foot of the screen, from the doors opening until the first scroll ---------- */
+.scroll-cue{position:absolute;left:50%;bottom:calc(16px + env(safe-area-inset-bottom,0px));z-index:6;transform:translate(-50%,8px);display:flex;flex-direction:column;align-items:center;gap:calc(4 * var(--u));padding:calc(8 * var(--u)) calc(16 * var(--u)) calc(7 * var(--u));border:1px solid rgba(201,163,92,.75);border-radius:calc(30 * var(--u));background:#fffaeb;box-shadow:0 3px 14px rgba(90,50,10,.2);color:#7a4a12;font:700 calc(11 * var(--u))/1 'Cormorant Garamond',Georgia,serif;letter-spacing:calc(3 * var(--u));white-space:nowrap;pointer-events:none;opacity:0;visibility:hidden;transition:opacity .7s ease,transform .7s ease,visibility 0s linear .7s}
+.scroll-cue span{padding-left:calc(3 * var(--u))}
+.scroll-cue svg{width:calc(16 * var(--u));height:calc(9 * var(--u));fill:none;stroke:#a9792b;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round;animation:cueBob 1.8s ease-in-out infinite}
+#app.gone .scroll-cue{opacity:1;visibility:visible;transform:translate(-50%,0);transition:opacity .9s ease .5s,transform .9s ease .5s,visibility 0s}
+#app.gone .scroll-cue.is-hidden{opacity:0;visibility:hidden;transform:translate(-50%,8px);transition:opacity .5s ease,transform .5s ease,visibility 0s linear .5s}
+@keyframes cueBob{0%,100%{transform:translateY(0)}50%{transform:translateY(calc(3 * var(--u)))}}
+@media (prefers-reduced-motion: reduce){.scroll-cue svg{animation:none}}
+/* a link under the RSVP note */
+.rsvp-status .again{display:inline-block;margin-top:calc(8 * var(--u));font-size:calc(13 * var(--u));font-weight:700;letter-spacing:calc(2 * var(--u));color:#8a4a1a;text-decoration:underline;text-underline-offset:calc(4 * var(--u))}
