@@ -731,3 +731,8 @@ html.is-open .intro.is-skipped .intro-video { transform: none; transition: none;
 .pair-name { white-space: nowrap; font-size: min(5.2vw, 21px); letter-spacing: .2em; padding-left: .2em; }
 /* each event's own Google Maps link, as a clear button */
 .t-actions .t-map { padding: 0 14px; min-height: 40px; border: 1px solid rgba(184, 137, 50, .75); border-radius: 999px; background: rgba(255, 250, 238, .5); color: var(--maroon); }
+
+/* the venue's own photograph (a wide picture in the same arch): centred on the building's entrance and its name */
+.venue-frame img { object-position: 50% 50%; }
+/* "Open WhatsApp again", under the note that follows an RSVP or a wish */
+.wa-again { display: inline-block; margin-top: 8px; font-family: var(--caps); font-size: 10.5px; letter-spacing: .14em; text-transform: uppercase; color: var(--maroon); text-decoration: underline; text-underline-offset: 4px; }

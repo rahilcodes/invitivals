@@ -7,10 +7,10 @@ export const VenueSection = (cfg) => `
   <div class="sec-inner">
     ${Heading('The Wedding Venue', '', { id: 'venue-h' })}
     <figure class="venue-frame" data-reveal>
-      <img src="${cfg.venueImage}" alt="" loading="lazy" decoding="async" data-parallax="0.035">
+      <img src="${cfg.venueImage}" alt="${cfg.venueImageAlt || ''}" loading="lazy" decoding="async" data-parallax="0.035">
     </figure>
     <p class="venue-name" data-reveal>${cfg.venue}</p>
     <p class="venue-addr" data-reveal>${cfg.venueAddress}</p>
-    <div data-reveal>${Button({ label: 'Open in Google Maps', icon: 'map', href: cfg.mapsUrl })}</div>
+    <div data-reveal>${Button({ label: 'Open in Google Maps', icon: 'map', href: cfg.mapsUrl, attrs: 'data-map' }).replace(' target="_blank" rel="noopener"', ' rel="noopener"')}</div>
   </div>
 </section>`;

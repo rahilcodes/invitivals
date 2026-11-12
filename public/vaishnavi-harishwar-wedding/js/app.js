@@ -1,22 +1,25 @@
 /* InvitationPage — composes one continuous invitation from weddingConfig. */
-import { weddingConfig as cfg } from '../config.js';
+/* ?v=2 on an import = that file changed on 2026-11-13. The site lets browsers and its CDN keep scripts for a week, so a
+   changed file is asked for under a new address; raise the number (here and in index.html) whenever one changes again. */
+import { weddingConfig as cfg } from '../config.js?v=2';
 import { GoldDefs, GoldThread } from './decor.js';
 import { guestName } from './util.js';
+import { initMapLinks } from './links.js';
 import { IntroExperience, initIntro } from './sections/intro.js';
 import { HeroSection } from './sections/hero.js';
 import { WelcomeSection } from './sections/welcome.js';
 import { FamilySection } from './sections/families.js';
-import { EventsSection, initEvents } from './sections/events.js';
+import { EventsSection, initEvents } from './sections/events.js?v=2';
 import { CeremonySection } from './sections/ceremony.js';
-import { VenueSection } from './sections/venue.js';
+import { VenueSection } from './sections/venue.js?v=2';
 import { CountdownSection, initCountdown } from './sections/countdown.js';
 import { SaveTheDateSection, initSaveTheDate, weddingCalendar } from './sections/save-the-date.js';
-import { RSVPSection, initRSVP } from './sections/rsvp.js';
-import { WishesSection, initWishes } from './sections/wishes.js';
+import { RSVPSection, initRSVP } from './sections/rsvp.js?v=2';
+import { WishesSection, initWishes } from './sections/wishes.js?v=2';
 import { ThankYouSection } from './sections/thank-you.js';
 import { initReveals, initParallax, initParticles } from './motion.js';
 import { createMusic } from './music.js';
-import { createMenu } from './menu.js';
+import { createMenu } from './menu.js?v=2';
 
 /* sections in reading order; GoldThread stitches them without a horizontal break,
    every third stitch is a kolam instead of a plain diamond */
@@ -43,6 +46,7 @@ if (cfg.regional) {
   document.documentElement.style.setProperty('--regional', `'${cfg.regional.font}'`);
 }
 
+initMapLinks();
 initEvents(cfg);
 initCountdown(cfg);
 initSaveTheDate(cfg);

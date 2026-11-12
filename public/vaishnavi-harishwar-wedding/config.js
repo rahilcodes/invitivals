@@ -34,7 +34,8 @@ export const weddingConfig = {
   venueAddress: 'Beside Bharat Petrol Pump, ORR Exit 12, Sagar Road, Bongloor, Ibrahimpatnam.',
   venueCity: 'Bongloor, Ibrahimpatnam',
   mapsUrl: WEDDING_MAP,
-  venueImage: 'assets/gallery-gopuram.webp',
+  venueImage: 'assets/venue-ysr.webp',          // the family's own photograph of YSR Conventions (2026-11-13)
+  venueImageAlt: 'YSR Conventions, lit up in the evening',
 
   /* the invitation, in the families' words */
   welcome: {
@@ -79,12 +80,11 @@ export const weddingConfig = {
       maps: 'https://maps.app.goo.gl/iock2XPHctgD1s8s8' },
   ],
 
-  /* RSVP and wishes are written for the guest and opened in WhatsApp.
-     NO NUMBER WAS SUPPLIED: with whatsapp empty, WhatsApp opens with the message ready and the guest picks the
-     family's chat. Put the family's number here (country code first, digits only, e.g. '9198…') and replies go
-     straight to it. */
-  rsvp: { deadline: '', whatsapp: '' },
-  contact: { whatsapp: '' },
+  /* RSVP and wishes are written for the guest and opened in WhatsApp, addressed to the bride (+91 6281830575,
+     client 2026-11-13). The number is country code first, digits only, no "+". WhatsApp opens with the message
+     ready; the guest still presses Send there. */
+  rsvp: { deadline: '', whatsapp: '916281830575' },
+  contact: { whatsapp: '916281830575' },
 
   wishes: { prompt: 'Leave your blessings for the couple.' },
 

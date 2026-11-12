@@ -23,7 +23,7 @@ export const EventsSection = (cfg) => `
             ${e.text ? `<p class="t-text">${e.text}</p>` : ''}
             ${e.dress ? `<p class="t-dress"><span>Attire</span>${e.dress}</p>` : ''}
             <p class="t-actions">
-              <a class="t-map" href="${e.maps}" target="_blank" rel="noopener" aria-label="Open ${e.name} venue in Google Maps">${Icon('pin', 'ico ico-xs')}Open in Google Maps</a>
+              <a class="t-map" data-map href="${e.maps}" rel="noopener" aria-label="Open ${e.name} venue in Google Maps">${Icon('pin', 'ico ico-xs')}Open in Google Maps</a>
               <button type="button" data-cal="${i}">${Icon('calendar', 'ico ico-xs')}Remind me</button>
               ${e.main ? '<a href="#ceremony">The ceremony ↓</a>' : ''}
             </p>

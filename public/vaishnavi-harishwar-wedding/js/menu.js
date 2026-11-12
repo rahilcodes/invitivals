@@ -2,6 +2,7 @@
    chapters so a guest returning for the venue or RSVP doesn't have to scroll the whole way. */
 import { Icon, Kolam } from './decor.js';
 import { $, $$, shareInvite, addToCalendar } from './util.js';
+import { initMapLinks } from './links.js';
 
 const LINKS = [
   ['welcome', 'Invitation'], ['families', 'Families'], ['events', 'Celebrations'], ['ceremony', 'Wedding'],
@@ -26,7 +27,7 @@ export function createMenu(cfg, calendar) {
       <div class="sheet-actions">
         <button type="button" class="js-share">${Icon('send', 'ico ico-xs')}Share</button>
         <button type="button" class="js-cal">${Icon('calendar', 'ico ico-xs')}Calendar</button>
-        <a href="${cfg.mapsUrl}" target="_blank" rel="noopener">${Icon('pin', 'ico ico-xs')}Map</a>
+        <a data-map href="${cfg.mapsUrl}" rel="noopener">${Icon('pin', 'ico ico-xs')}Map</a>
       </div>
       <button type="button" class="sheet-close" aria-label="Close menu">×</button>
     </div>`;
@@ -50,6 +51,7 @@ export function createMenu(cfg, calendar) {
   return {
     show() {
       document.body.append(btn, sheet);
+      initMapLinks(sheet);
       requestAnimationFrame(() => btn.classList.add('is-shown'));
       // every share button on the page (menu + thank-you) shares the plain link
       $$('.js-share').forEach((b) => b.addEventListener('click', () => shareInvite(cfg.shareText)));

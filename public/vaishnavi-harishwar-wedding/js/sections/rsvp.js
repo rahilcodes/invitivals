@@ -1,6 +1,8 @@
-/* RSVPSection — name, number of guests, and two answers. The reply goes to the family on WhatsApp. */
+/* RSVPSection — name, number of guests, and two answers. The reply is written out and opened in WhatsApp, addressed
+   to the bride; the guest presses Send there, so the page never claims the reply has been received. */
 import { Heading, Button, FloralVine } from '../decor.js';
-import { $, whatsappLink } from '../util.js';
+import { $, esc } from '../util.js';
+import { openWhatsApp } from '../links.js';
 
 export const RSVPSection = (cfg) => `
 <section class="sec rsvp" id="rsvp" aria-labelledby="rsvp-h">
@@ -41,14 +43,18 @@ export function initRSVP(cfg, guest) {
     name.closest('.field').classList.remove('is-invalid');
     const yes = b.dataset.answer === 'yes';
     const who = name.value.trim();
-    const msg = yes
-      ? `Namaskaram! ${who} will be there for the wedding of ${cfg.brideName} & ${cfg.groomName}. Guests: ${out.value}.`
-      : `Namaskaram! ${who} is unable to attend the wedding of ${cfg.brideName} & ${cfg.groomName}, but sends warm blessings.`;
-    window.open(whatsappLink(cfg.rsvp.whatsapp, msg), '_blank', 'noopener');
+    const msg = [
+      'Hello! I am responding to Vaishnavi and Harishwar\'s wedding invitation.',
+      '',
+      `Name: ${who}`,
+      `Attendance: ${yes ? 'Attending' : 'Unable to Attend'}`,
+      ...(yes ? [`Number of Guests: ${out.value}`] : []),
+      '',
+      'Thank you!',
+    ].join('\n');
+    const url = openWhatsApp(cfg.rsvp.whatsapp, msg);
     const thanks = $('#rsvp-thanks');
-    thanks.innerHTML = yes
-      ? `Thank you, ${who.replace(/</g, '&lt;')}. We can’t wait to see you there.`
-      : `Thank you, ${who.replace(/</g, '&lt;')}. You will be in our hearts on the day.`;
+    thanks.innerHTML = `Thank you, ${esc(who)}. WhatsApp is opening with your reply to the bride.<br>Please press <b>Send</b> there to deliver it.<br><a class="wa-again" href="${esc(url)}" target="_blank" rel="noopener">Open WhatsApp again</a>`;
     form.hidden = true; thanks.hidden = false;
   }));
 }
