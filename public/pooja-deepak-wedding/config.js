@@ -24,7 +24,7 @@ export const weddingConfig = {
 
   weddingDate: '2026-11-29T19:15:00+05:30',
   weddingEnd: '',
-  weddingTimeLabel: '7 PM onwards',
+  weddingTimeLabel: '7:15 PM onwards',
   ceremonyTitle: 'Wedding Celebration',
   ceremonyLine: 'Your presence will make our celebration complete.<br>Please join us for the wedding and dinner.',
   muhurtham: '',
