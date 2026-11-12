@@ -93,3 +93,7 @@ h1,h2,h3{font-family:inherit}
 @media (prefers-reduced-motion: reduce){.scroll-cue svg{animation:none}}
 /* a link under the RSVP note */
 .rsvp-status .again{display:inline-block;margin-top:calc(8 * var(--u));font-size:calc(13 * var(--u));font-weight:700;letter-spacing:calc(2 * var(--u));color:#8a4a1a;text-decoration:underline;text-underline-offset:calc(4 * var(--u))}
+
+/* Save the Date now sits under the RSVP (client, 2026-11-13): the same button, set a little apart from the form */
+.sec > .save-date{margin-top:calc(22 * var(--u))}
+.sec > .save-status{text-align:center}

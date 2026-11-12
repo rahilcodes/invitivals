@@ -27,7 +27,7 @@
 <link rel="preload" href="fonts/f2.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="assets/door-frame.webp" as="image">
 <link rel="stylesheet" href="css/base.css?v=1">
-<link rel="stylesheet" href="css/invite.css?v=4">
+<link rel="stylesheet" href="css/invite.css?v=5">
 </head>
 <body>
 <div id="app" style="position:fixed;inset:0;background:#f2e3c8">
@@ -75,8 +75,6 @@
           <div class="plaque-addr">1305 Addison Lake St, Fuquay Varina, NC</div>
         </div>
         <div style="font-size:calc(17 * var(--u));font-weight:600;margin-top:calc(4 * var(--u))">On Saturday, December 12, 2026</div>
-        <a class="gold-btn save-date" id="saveDate" href="https://accounts.google.com/ServiceLogin?service=cl&amp;continue=https%3A%2F%2Fcalendar.google.com%2Fcalendar%2Frender%3Faction%3DTEMPLATE%26text%3DGruhapravesham%2BCeremony%2B%25E2%2580%2593%2BNandana%2BVanam%26dates%3D20261212T160400%252F20261212T160400%26ctz%3DAmerica%252FNew_York%26location%3DNandana%2BVanam%252C%2B1305%2BAddison%2BLake%2BSt%252C%2BFuquay%2BVarina%252C%2BNC%2B27526%26details%3DGruhapravesham%2B%25E2%2580%2594%2B4%253A04%2BPM%250ASatyanarayana%2BSwamy%2BPooja%2B%25E2%2580%2594%2B6%253A00%2BPM%250ADinner%2B%25E2%2580%2594%2B8%253A00%2BPM%250A%250AGoogle%2BMaps%253A%2Bhttps%253A%252F%252Fshare.google%252FE4Nl01ck8vAjr4h9J" data-direct="https://calendar.google.com/calendar/render?action=TEMPLATE&amp;text=Gruhapravesham+Ceremony+%E2%80%93+Nandana+Vanam&amp;dates=20261212T160400%2F20261212T160400&amp;ctz=America%2FNew_York&amp;location=Nandana+Vanam%2C+1305+Addison+Lake+St%2C+Fuquay+Varina%2C+NC+27526&amp;details=Gruhapravesham+%E2%80%94+4%3A04+PM%0ASatyanarayana+Swamy+Pooja+%E2%80%94+6%3A00+PM%0ADinner+%E2%80%94+8%3A00+PM%0A%0AGoogle+Maps%3A+https%3A%2F%2Fshare.google%2FE4Nl01ck8vAjr4h9J" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.500" y="5" width="17" height="15" rx="2"/><path d="M3.500 10h17M8 3v4M16 3v4"/><path d="M8 14h3v3H8z" fill="currentColor" stroke="none"/></svg>SAVE THE DATE</a>
-        <p class="save-status" id="saveStatus" role="status" aria-live="polite"></p>
       </section>
 
       <!-- EVENT DETAILS -->
@@ -121,7 +119,7 @@
         <div class="shloka-sub">MAY ALL BE AUSPICIOUS</div>
       </div>
 
-      <!-- KINDLY RSVP: name, a guest counter, and two buttons that send the reply (client's reference, 2026-11-12) -->
+      <!-- KINDLY RSVP: name, contact number (both required), a guest counter, and two buttons that send the reply (client's reference, 2026-11-12) -->
       <section data-reveal="7" class="sec" style="opacity:0" aria-labelledby="h-rsvp">
         <h2 class="sec-title" id="h-rsvp">KINDLY RSVP</h2>
         <p class="r2-sub">We would love to know if you can join us</p>
@@ -130,6 +128,11 @@
             <label class="r2-label" for="rName">YOUR NAME</label>
             <input class="r2-name" id="rName" name="name" type="text" placeholder="Full name" autocomplete="name" autocapitalize="words" maxlength="80" required aria-describedby="eName">
             <p class="err" id="eName" hidden></p>
+          </div>
+          <div class="r2-fld">
+            <label class="r2-label" for="rPhone">CONTACT NUMBER</label>
+            <input class="r2-name" id="rPhone" name="phone" type="tel" inputmode="tel" placeholder="Enter your contact number" autocomplete="tel" maxlength="24" required aria-describedby="ePhone">
+            <p class="err" id="ePhone" hidden></p>
           </div>
           <div class="r2-fld" id="guestsFld">
             <span class="r2-label" id="lGuests">GUESTS</span>
@@ -146,6 +149,9 @@
           </div>
           <div class="rsvp-status" id="rsvpStatus" role="status" aria-live="polite"></div>
         </form>
+        <!-- Save the Date: moved here from under the house name and date (client, 2026-11-13); the same button -->
+        <a class="gold-btn save-date" id="saveDate" href="https://accounts.google.com/ServiceLogin?service=cl&amp;continue=https%3A%2F%2Fcalendar.google.com%2Fcalendar%2Frender%3Faction%3DTEMPLATE%26text%3DGruhapravesham%2BCeremony%2B%25E2%2580%2593%2BNandana%2BVanam%26dates%3D20261212T160400%252F20261212T160400%26ctz%3DAmerica%252FNew_York%26location%3DNandana%2BVanam%252C%2B1305%2BAddison%2BLake%2BSt%252C%2BFuquay%2BVarina%252C%2BNC%2B27526%26details%3DGruhapravesham%2B%25E2%2580%2594%2B4%253A04%2BPM%250ASatyanarayana%2BSwamy%2BPooja%2B%25E2%2580%2594%2B6%253A00%2BPM%250ADinner%2B%25E2%2580%2594%2B8%253A00%2BPM%250A%250AGoogle%2BMaps%253A%2Bhttps%253A%252F%252Fshare.google%252FE4Nl01ck8vAjr4h9J" data-direct="https://calendar.google.com/calendar/render?action=TEMPLATE&amp;text=Gruhapravesham+Ceremony+%E2%80%93+Nandana+Vanam&amp;dates=20261212T160400%2F20261212T160400&amp;ctz=America%2FNew_York&amp;location=Nandana+Vanam%2C+1305+Addison+Lake+St%2C+Fuquay+Varina%2C+NC+27526&amp;details=Gruhapravesham+%E2%80%94+4%3A04+PM%0ASatyanarayana+Swamy+Pooja+%E2%80%94+6%3A00+PM%0ADinner+%E2%80%94+8%3A00+PM%0A%0AGoogle+Maps%3A+https%3A%2F%2Fshare.google%2FE4Nl01ck8vAjr4h9J" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.500" y="5" width="17" height="15" rx="2"/><path d="M3.500 10h17M8 3v4M16 3v4"/><path d="M8 14h3v3H8z" fill="currentColor" stroke="none"/></svg>SAVE THE DATE</a>
+        <p class="save-status" id="saveStatus" role="status" aria-live="polite"></p>
       </section>
 
       <div data-reveal="8" style="opacity:0;display:flex;flex-direction:column;gap:calc(10 * var(--u));align-items:center">
@@ -204,7 +210,7 @@
   </button>
 </div>
 <noscript><p style="position:fixed;inset:auto 0 0 0;z-index:99;margin:0;padding:14px;text-align:center;background:#f6ecd6;color:#6b3f10;font-family:Georgia,serif">Please enable JavaScript to open this invitation.</p></noscript>
-<script type="module" src="js/app.js?v=8"></script>
+<script type="module" src="js/app.js?v=9"></script>
 <script src="/_credit/v1/credit.js" defer data-into="#scroller" data-color="#6d4a2e"></script>
 </body>
 </html>

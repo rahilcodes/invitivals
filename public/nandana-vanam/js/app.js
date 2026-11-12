@@ -1,7 +1,7 @@
 /* Nandana Vanam — the page's script. The door, the scroll-ins, the song, the bell and the petals behave as in the
    approved design; added for this invitation: the countdown in the event's own timezone, the RSVP and the Save the
    Date link. Everything about the client comes from ../config.js. */
-import { invite as C } from '../config.js?v=8';
+import { invite as C } from '../config.js?v=9';
 
 const $ = (id) => document.getElementById(id);
 const app = $('app'), scroller = $('scroller'), doorScene = $('doorScene'), musicBtn = $('musicBtn');
@@ -195,7 +195,7 @@ setInterval(() => {
 })();
 
 /* ---------------- RSVP ----------------
-   A name, a guest counter and two buttons. Tapping "I'LL BE THERE" or "UNABLE TO ATTEND" does two things:
+   A name and a contact number (both required), a guest counter and two buttons. Tapping "I'LL BE THERE" or "UNABLE TO ATTEND" does two things:
    · the reply is recorded by rsvp.php (the hosts' list), and
    · it goes to the hosts' email address (config.rsvp.email). The host's server cannot send mail (config.rsvp.serverEmail
      is false), so the guest's own email app is opened with the reply written out, inside the tap itself, and the guest
@@ -205,7 +205,7 @@ setInterval(() => {
 (function rsvp() {
   const form = $('rsvp');
   if (!form) return;
-  const status = $('rsvpStatus'), name = $('rName'), err = $('eName');
+  const status = $('rsvpStatus'), name = $('rName'), err = $('eName'), phone = $('rPhone'), perr = $('ePhone');
   const count = $('gCount'), minus = $('gMinus'), plus = $('gPlus'), btns = [$('rYes'), $('rNo')];
   const MIN = 1, MAX = C.rsvp.maxGuests;
   let guests = Math.min(MAX, Math.max(MIN, C.rsvp.defaultGuests || 2)), busy = false, sent = false;
@@ -213,6 +213,12 @@ setInterval(() => {
   const escH = (s) => String(s).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
   const say = (cls, html) => { status.className = 'rsvp-status ' + cls; status.innerHTML = html; };
   const nameErr = (msg) => { err.textContent = msg || ''; err.hidden = !msg; name.setAttribute('aria-invalid', msg ? 'true' : 'false'); };
+  const phoneErr = (msg) => { perr.textContent = msg || ''; perr.hidden = !msg; phone.setAttribute('aria-invalid', msg ? 'true' : 'false'); };
+  /* a contact number from any country: digits with an optional leading +, spaces, hyphens, dots and brackets allowed,
+     7 to 15 digits in all (the international limit) — nothing stricter, so no real number is turned away */
+  const phoneProblem = (p) => !p ? 'Please enter your contact number.'
+    : !/^\+?[0-9\s().-]+$/.test(p) ? 'Please use digits only (a leading + for the country code is fine).'
+    : (p.replace(/\D/g, '').length < 7 || p.replace(/\D/g, '').length > 15) ? 'Please enter a complete contact number.' : '';
 
   function showCount() {
     count.textContent = String(guests);
@@ -222,25 +228,31 @@ setInterval(() => {
   plus.addEventListener('click', () => { if (!busy && guests < MAX) { guests++; showCount(); } });
   showCount();
   name.addEventListener('input', () => nameErr(''));
+  phone.addEventListener('input', () => phoneErr(''));
   form.addEventListener('submit', (e) => e.preventDefault());           // Enter in the name box does not send by itself
 
   /* the reply as an email to the hosts: recipient, subject and body all filled in (CRLF line ends, as mail apps expect) */
   function mailto(v) {
-    const body = ['Guest Name: ' + v.name, '', 'Attendance: ' + (v.attending === 'yes' ? 'Attending' : 'Unable to Attend')]
+    const body = ['Guest Name: ' + v.name, '', 'Contact Number: ' + v.phone, '', 'Attendance: ' + (v.attending === 'yes' ? 'Attending' : 'Unable to Attend')]
       .concat(v.attending === 'yes' ? ['', 'Number of Guests: ' + v.guests] : []).join('\r\n');
     return 'mailto:' + C.rsvp.email + '?subject=' + encodeURIComponent(C.rsvp.subject) + '&body=' + encodeURIComponent(body);
   }
   function lock(on, chosen) {
     busy = on;
     for (const b of btns) { b.disabled = on; b.classList.toggle('is-selected', on && b === chosen); b.setAttribute('aria-pressed', String(on && b === chosen)); }
-    name.readOnly = on; showCount();
+    name.readOnly = on; phone.readOnly = on; showCount();
   }
 
   async function send(btn) {
     if (busy || sent) return;
-    const v = { name: name.value.trim().replace(/\s+/g, ' '), attending: btn.dataset.attending, guests: 0 };
-    if (v.name.length < 2) { nameErr('Please enter your full name.'); say('', ''); name.focus(); return; }
-    nameErr('');
+    const v = { name: name.value.trim().replace(/\s+/g, ' '), phone: phone.value.trim().replace(/\s+/g, ' '), attending: btn.dataset.attending, guests: 0 };
+    const badName = v.name.length < 2 ? 'Please enter your full name.' : '', badPhone = phoneProblem(v.phone);
+    nameErr(badName); phoneErr(badPhone);
+    if (badName || badPhone) {                             // both are required: nothing is sent, nothing opens
+      say('bad', badName && badPhone ? 'Please enter your full name and contact number.' : badName || badPhone);
+      (badName ? name : phone).focus();
+      return;
+    }
     if (v.attending === 'yes') v.guests = guests;
     const label = btn.textContent, mail = mailto(v);
     /* the server cannot email: open the guest's email app now, while this is still the tap itself */

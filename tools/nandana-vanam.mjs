@@ -135,7 +135,7 @@ const html = `<!DOCTYPE html>
 <link rel="preload" href="fonts/f2.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="assets/door-frame.webp" as="image">
 <link rel="stylesheet" href="css/base.css?v=1">
-<link rel="stylesheet" href="css/invite.css?v=4">
+<link rel="stylesheet" href="css/invite.css?v=5">
 </head>
 <body>
 <div id="app" style="position:fixed;inset:0;background:#f2e3c8">
@@ -181,9 +181,7 @@ ${C.hero.showDate === false ? '' : `        <div class="t-in" style="font-size:$
           <div class="plaque-addr">${esc(C.venue.lines.join(' ').replace(/,? \d{5}$/, ''))}</div>
         </div>
         <div style="font-size:${U(17)};font-weight:600;margin-top:${U(4)}">On ${esc(C.dateText)}</div>
-${calendarOn ? `        <a class="gold-btn save-date" id="saveDate" href="${esc(GCAL_SIGNIN)}" data-direct="${esc(GCAL)}" target="_blank" rel="noopener">${ICON.cal}SAVE THE DATE</a>
-        <p class="save-status" id="saveStatus" role="status" aria-live="polite"></p>
-` : ''}      </section>
+      </section>
 
       <!-- EVENT DETAILS -->
       <section data-reveal="4" class="events" style="opacity:0;display:flex;flex-direction:column;gap:${U(18)};align-items:center" aria-labelledby="h-ev">
@@ -213,7 +211,7 @@ ${C.events.map((e, i) => `          <div class="card">
         <div class="shloka-sub">MAY ALL BE AUSPICIOUS</div>
       </div>
 
-      <!-- KINDLY RSVP: name, a guest counter, and two buttons that send the reply (client's reference, 2026-11-12) -->
+      <!-- KINDLY RSVP: name, contact number (both required), a guest counter, and two buttons that send the reply (client's reference, 2026-11-12) -->
       <section data-reveal="7" class="sec" style="opacity:0" aria-labelledby="h-rsvp">
         <h2 class="sec-title" id="h-rsvp">KINDLY RSVP</h2>
         <p class="r2-sub">We would love to know if you can join us</p>
@@ -222,6 +220,11 @@ ${C.events.map((e, i) => `          <div class="card">
             <label class="r2-label" for="rName">YOUR NAME</label>
             <input class="r2-name" id="rName" name="name" type="text" placeholder="Full name" autocomplete="name" autocapitalize="words" maxlength="80" required aria-describedby="eName">
             <p class="err" id="eName" hidden></p>
+          </div>
+          <div class="r2-fld">
+            <label class="r2-label" for="rPhone">CONTACT NUMBER</label>
+            <input class="r2-name" id="rPhone" name="phone" type="tel" inputmode="tel" placeholder="Enter your contact number" autocomplete="tel" maxlength="24" required aria-describedby="ePhone">
+            <p class="err" id="ePhone" hidden></p>
           </div>
           <div class="r2-fld" id="guestsFld">
             <span class="r2-label" id="lGuests">GUESTS</span>
@@ -238,7 +241,10 @@ ${C.events.map((e, i) => `          <div class="card">
           </div>
           <div class="rsvp-status" id="rsvpStatus" role="status" aria-live="polite"></div>
         </form>
-      </section>
+        <!-- Save the Date: moved here from under the house name and date (client, 2026-11-13); the same button -->
+${calendarOn ? `        <a class="gold-btn save-date" id="saveDate" href="${esc(GCAL_SIGNIN)}" data-direct="${esc(GCAL)}" target="_blank" rel="noopener">${ICON.cal}SAVE THE DATE</a>
+        <p class="save-status" id="saveStatus" role="status" aria-live="polite"></p>
+` : ''}      </section>
 
       <div data-reveal="8" style="opacity:0;display:flex;flex-direction:column;gap:${U(10)};align-items:center">
         <div style="font-style:italic;font-size:${U(17.5)};line-height:1.7;color:#7a4a12">${esc(C.closing)}</div>
@@ -296,7 +302,7 @@ ${C.hero.scrollCue ? `  <!-- ============ SCROLL CUE: shown when the doors have 
   </button>
 </div>
 <noscript><p style="position:fixed;inset:auto 0 0 0;z-index:99;margin:0;padding:14px;text-align:center;background:#f6ecd6;color:#6b3f10;font-family:Georgia,serif">Please enable JavaScript to open this invitation.</p></noscript>
-<script type="module" src="js/app.js?v=8"></script>
+<script type="module" src="js/app.js?v=9"></script>
 <script src="/_credit/v1/credit.js" defer data-into="#scroller" data-color="#6d4a2e"></script>
 </body>
 </html>
