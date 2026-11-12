@@ -169,9 +169,13 @@ ${C.hero.showDate === false ? '' : `        <div class="t-in" style="font-size:$
     <div style="position:relative;width:100%;max-width:520px;margin:0 auto;background:linear-gradient(180deg,#f6ecd6 0%,#f3e5c8 50%,#f6ecd6 100%);padding:${U(52)} ${U(30)} ${U(70)};box-sizing:border-box;display:flex;flex-direction:column;gap:${U(52)};color:#6b3f10;text-align:center" id="contentCol">
       <div class="toran-wrap">${img('toran', 'alt=""')}</div>
 
-      <!-- the home, the date and Save the Date (the blessings and the families that used to open this block now follow
-           the RSVP — client, 2026-11-13) -->
+      <!-- the families and the invitation -->
       <section data-reveal="1" style="opacity:0;display:flex;flex-direction:column;gap:${U(10)}">
+        <div style="font-style:italic;font-size:${U(17)};letter-spacing:${U(1)}">With the blessings of</div>
+        ${C.blessingsOf.map((n) => `<div class="elders">${esc(n).replace(' &amp; ', ' &amp;<br>')}</div>`).join('')}
+        ${DIVIDER}
+        <div style="font-size:${U(21)};font-weight:700;line-height:1.4">${esc(C.hosts[0])}<br><span class="amp">&amp;</span><br>${esc(C.hosts[1])}</div>
+        <div style="font-style:italic;font-size:${U(16.5)};line-height:1.6;margin-top:${U(8)}">${esc(C.inviteLine)}</div>
         <div class="plaque">
           <div class="plaque-row">${img('lotus', 'alt=""')}<div class="plaque-name">${esc(C.hero.home)}</div>${img('lotus', 'alt="" style="transform:scaleX(-1)"')}</div>
           <div class="plaque-addr">${esc(C.venue.lines.join(' ').replace(/,? \d{5}$/, ''))}</div>
@@ -209,7 +213,7 @@ ${C.events.map((e, i) => `          <div class="card">
         <div class="shloka-sub">MAY ALL BE AUSPICIOUS</div>
       </div>
 
-      <!-- KINDLY RSVP: name, contact number (both required), a guest counter, and two buttons that send the reply (client's reference, 2026-11-12) -->
+      <!-- KINDLY RSVP: name, a guest counter, and two buttons that send the reply (client's reference, 2026-11-12) -->
       <section data-reveal="7" class="sec" style="opacity:0" aria-labelledby="h-rsvp">
         <h2 class="sec-title" id="h-rsvp">KINDLY RSVP</h2>
         <p class="r2-sub">We would love to know if you can join us</p>
@@ -218,11 +222,6 @@ ${C.events.map((e, i) => `          <div class="card">
             <label class="r2-label" for="rName">YOUR NAME</label>
             <input class="r2-name" id="rName" name="name" type="text" placeholder="Full name" autocomplete="name" autocapitalize="words" maxlength="80" required aria-describedby="eName">
             <p class="err" id="eName" hidden></p>
-          </div>
-          <div class="r2-fld">
-            <label class="r2-label" for="rPhone">CONTACT NUMBER</label>
-            <input class="r2-name" id="rPhone" name="phone" type="tel" inputmode="tel" placeholder="Enter your contact number" autocomplete="tel" maxlength="24" required aria-describedby="ePhone">
-            <p class="err" id="ePhone" hidden></p>
           </div>
           <div class="r2-fld" id="guestsFld">
             <span class="r2-label" id="lGuests">GUESTS</span>
@@ -239,15 +238,6 @@ ${C.events.map((e, i) => `          <div class="card">
           </div>
           <div class="rsvp-status" id="rsvpStatus" role="status" aria-live="polite"></div>
         </form>
-      </section>
-
-      <!-- the blessings and the families: moved here, as they were, from the top of the page (client, 2026-11-13) -->
-      <section data-reveal="11" style="opacity:0;display:flex;flex-direction:column;gap:${U(10)}">
-        <div style="font-style:italic;font-size:${U(17)};letter-spacing:${U(1)}">With the blessings of</div>
-        ${C.blessingsOf.map((n) => `<div class="elders">${esc(n).replace(' &amp; ', ' &amp;<br>')}</div>`).join('')}
-        ${DIVIDER}
-        <div style="font-size:${U(21)};font-weight:700;line-height:1.4">${esc(C.hosts[0])}<br><span class="amp">&amp;</span><br>${esc(C.hosts[1])}</div>
-        <div style="font-style:italic;font-size:${U(16.5)};line-height:1.6;margin-top:${U(8)}">${esc(C.inviteLine)}</div>
       </section>
 
       <div data-reveal="8" style="opacity:0;display:flex;flex-direction:column;gap:${U(10)};align-items:center">
@@ -306,7 +296,7 @@ ${C.hero.scrollCue ? `  <!-- ============ SCROLL CUE: shown when the doors have 
   </button>
 </div>
 <noscript><p style="position:fixed;inset:auto 0 0 0;z-index:99;margin:0;padding:14px;text-align:center;background:#f6ecd6;color:#6b3f10;font-family:Georgia,serif">Please enable JavaScript to open this invitation.</p></noscript>
-<script type="module" src="js/app.js?v=7"></script>
+<script type="module" src="js/app.js?v=8"></script>
 <script src="/_credit/v1/credit.js" defer data-into="#scroller" data-color="#6d4a2e"></script>
 </body>
 </html>

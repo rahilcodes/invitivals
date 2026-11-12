@@ -1,7 +1,7 @@
 <?php
 /* RSVP for the Nandana Vanam Gruhapravesam invitation.
  *
- *   POST rsvp.php  (JSON {name, phone, attending: "yes"|"no", guests; email and message are optional and no longer asked for})
+ *   POST rsvp.php  (JSON {name, attending: "yes"|"no", guests; email and message are optional and no longer asked for})
  *       → appends one JSON line to data/entries.php, tries to email the hosts, answers {ok:true, mailed:true|false}
  *         (ok means STORED; mailed says whether the server really sent the email. On 2026-11-13 the hosting account
  *         answers "550 Local sendmail disabled", so mailed is false and the page opens the guest's email app instead)
@@ -61,15 +61,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     $name = clean($in['name'] ?? '', 80);
     $email = clean($in['email'] ?? '', 120);
-    $phone = clean($in['phone'] ?? '', 24);
     $attending = $in['attending'] ?? '';
     $message = clean($in['message'] ?? '', 600, false);
     $guests = (int)($in['guests'] ?? 0);
     $len = function_exists('mb_strlen') ? mb_strlen($name, 'UTF-8') : strlen($name);
     if ($len < 2) reply(422, ['ok' => false, 'error' => 'Please enter your full name']);
-    $digits = strlen(preg_replace('/\D/', '', $phone));   // any country's number: 7 to 15 digits, with + ( ) - . and spaces allowed
-    if ($phone === '') reply(422, ['ok' => false, 'error' => 'Please enter your contact number']);
-    if (!preg_match('/^\+?[0-9\s().-]+$/', $phone) || $digits < 7 || $digits > 15) reply(422, ['ok' => false, 'error' => 'Please enter a valid contact number']);
     if ($email !== '' && !filter_var($email, FILTER_VALIDATE_EMAIL)) reply(422, ['ok' => false, 'error' => 'Please enter a valid email address']);
     if (!in_array($attending, ['yes', 'no'], true)) reply(422, ['ok' => false, 'error' => 'Please choose whether you will attend']);
     if ($attending === 'yes' && ($guests < 1 || $guests > MAX_GUESTS)) reply(422, ['ok' => false, 'error' => 'The number of guests must be from 1 to ' . MAX_GUESTS]);
@@ -89,7 +85,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $existing = rows($fh);
     $recent = 0;
     foreach ($existing as $r) {
-        if (strcasecmp($r['email'] ?? '', $email) === 0 && ($r['name'] ?? '') === $name && ($r['phone'] ?? '') === $phone && ($r['attending'] ?? '') === $attending
+        if (strcasecmp($r['email'] ?? '', $email) === 0 && ($r['name'] ?? '') === $name && ($r['attending'] ?? '') === $attending
             && (int)($r['guests'] ?? 0) === $guests && ($r['message'] ?? '') === $message && strtotime($r['at'] ?? '') > time() - 120) { flock($fh, LOCK_UN); fclose($fh); reply(200, ['ok' => true, 'duplicate' => true]); }
         if (($r['ip'] ?? '') === $ip && strtotime($r['at'] ?? '') > time() - 3600) $recent++;
     }
@@ -98,13 +94,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $mailed = null;
     if (!$test && NOTIFY_TO !== '') {
         $subject = 'Nandana Vanam – Gruhapravesham RSVP';
-        $body = "Guest Name: $name\r\n\r\nContact Number: $phone\r\n\r\nAttendance: " . ($attending === 'yes' ? "Attending\r\n\r\nNumber of Guests: $guests" : 'Unable to Attend')
+        $body = "Guest Name: $name\r\n\r\nAttendance: " . ($attending === 'yes' ? "Attending\r\n\r\nNumber of Guests: $guests" : 'Unable to Attend')
             . ($email !== '' ? "\r\n\r\nEmail: $email" : '') . ($message !== '' ? "\r\n\r\nMessage:\r\n$message" : '')
             . "\r\n\r\nAll replies: https://invitivals.com/nandana-vanam/rsvp.php?key=" . ADMIN_KEY . "\r\n";
         $headers = 'From: Nandana Vanam Invitation <' . MAIL_FROM . '>' . ($email !== '' ? "\r\nReply-To: " . $email : '') . "\r\nMIME-Version: 1.0\r\nContent-Type: text/plain; charset=UTF-8\r\nContent-Transfer-Encoding: 8bit";
         $mailed = @mail(NOTIFY_TO, '=?UTF-8?B?' . base64_encode($subject) . '?=', $body, $headers, '-f' . MAIL_FROM);
     }
-    $row = ['at' => gmdate('c'), 'name' => $name, 'phone' => $phone, 'email' => $email, 'attending' => $attending, 'guests' => $guests, 'message' => $message, 'ip' => $ip, 'mailed' => $mailed];
+    $row = ['at' => gmdate('c'), 'name' => $name, 'email' => $email, 'attending' => $attending, 'guests' => $guests, 'message' => $message, 'ip' => $ip, 'mailed' => $mailed];
     if ($test) $row['test'] = true;
     fseek($fh, 0, SEEK_END);
     $line = (ftell($fh) === 0 ? GUARD : '') . json_encode($row, JSON_UNESCAPED_UNICODE) . "\n";
@@ -123,8 +119,8 @@ if (isset($_GET['csv'])) {
     header('Content-Disposition: attachment; filename="rsvp-nandana-vanam.csv"');
     $out = fopen('php://output', 'w');
     fwrite($out, "\xEF\xBB\xBF");
-    fputcsv($out, ['Time (UTC)', 'Name', 'Contact number', 'Email', 'Attending', 'Guests', 'Message', 'Test']);
-    foreach ($rows as $r) fputcsv($out, [$r['at'] ?? '', $r['name'] ?? '', $r['phone'] ?? '', $r['email'] ?? '', $r['attending'] ?? '', $r['guests'] ?? '', $r['message'] ?? '', empty($r['test']) ? '' : 'test']);
+    fputcsv($out, ['Time (UTC)', 'Name', 'Email', 'Attending', 'Guests', 'Message', 'Test']);
+    foreach ($rows as $r) fputcsv($out, [$r['at'] ?? '', $r['name'] ?? '', $r['email'] ?? '', $r['attending'] ?? '', $r['guests'] ?? '', $r['message'] ?? '', empty($r['test']) ? '' : 'test']);
     exit;
 }
 $e = fn($s) => htmlspecialchars((string)$s, ENT_QUOTES, 'UTF-8');
@@ -145,10 +141,10 @@ th{background:#f3e5c8;font-weight:600} td.msg{white-space:pre-wrap;max-width:46c
 </style></head><body>
 <h1>Nandana Vanam · RSVP replies</h1>
 <p class="sum"><?= count($yes) ?> accept (<?= $heads ?> guests in all) · <?= $no ?> decline · <a href="?key=<?= $e($key) ?>&amp;csv=1">Download CSV</a></p>
-<div class="wrap"><table><thead><tr><th>Time (UTC)</th><th>Name</th><th>Contact number</th><th>Email</th><th>Attending</th><th>Guests</th><th>Message</th></tr></thead><tbody>
-<?php if (!$rows): ?><tr><td colspan="7">No replies yet.</td></tr><?php endif; ?>
+<div class="wrap"><table><thead><tr><th>Time (UTC)</th><th>Name</th><th>Email</th><th>Attending</th><th>Guests</th><th>Message</th></tr></thead><tbody>
+<?php if (!$rows): ?><tr><td colspan="6">No replies yet.</td></tr><?php endif; ?>
 <?php foreach ($rows as $r): ?>
-<tr<?= empty($r['test']) ? '' : ' class="test"' ?>><td><?= $e($r['at'] ?? '') ?></td><td><?= $e($r['name'] ?? '') ?><?= empty($r['test']) ? '' : ' (test)' ?></td><td><?= $e($r['phone'] ?? '') ?></td><td><?= $e($r['email'] ?? '') ?></td><td class="<?= $e($r['attending'] ?? '') ?>"><?= ($r['attending'] ?? '') === 'yes' ? 'Accepts' : 'Declines' ?></td><td><?= $e($r['guests'] ?? '') ?></td><td class="msg"><?= $e($r['message'] ?? '') ?></td></tr>
+<tr<?= empty($r['test']) ? '' : ' class="test"' ?>><td><?= $e($r['at'] ?? '') ?></td><td><?= $e($r['name'] ?? '') ?><?= empty($r['test']) ? '' : ' (test)' ?></td><td><?= $e($r['email'] ?? '') ?></td><td class="<?= $e($r['attending'] ?? '') ?>"><?= ($r['attending'] ?? '') === 'yes' ? 'Accepts' : 'Declines' ?></td><td><?= $e($r['guests'] ?? '') ?></td><td class="msg"><?= $e($r['message'] ?? '') ?></td></tr>
 <?php endforeach; ?>
 </tbody></table></div>
 </body></html>
