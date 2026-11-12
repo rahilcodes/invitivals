@@ -27,7 +27,7 @@
 <link rel="preload" href="fonts/f2.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="assets/door-frame.webp" as="image">
 <link rel="stylesheet" href="css/base.css?v=1">
-<link rel="stylesheet" href="css/invite.css?v=2">
+<link rel="stylesheet" href="css/invite.css?v=3">
 </head>
 <body>
 <div id="app" style="position:fixed;inset:0;background:#f2e3c8">
@@ -76,39 +76,8 @@
           <div class="plaque-addr">1305 Addison Lake St, Fuquay Varina, NC</div>
         </div>
         <div style="font-size:calc(17 * var(--u));font-weight:600;margin-top:calc(4 * var(--u))">On Saturday, December 12, 2026</div>
-        <a class="gold-btn save-date" id="saveDate" href="https://accounts.google.com/ServiceLogin?service=cl&amp;continue=https%3A%2F%2Fcalendar.google.com%2Fcalendar%2Frender%3Faction%3DTEMPLATE%26text%3DGruhapravesham%2BCeremony%2B%25E2%2580%2593%2BNandana%2BVanam%26dates%3D20261212T164000%252F20261212T164000%26ctz%3DAmerica%252FNew_York%26location%3DNandana%2BVanam%252C%2B1305%2BAddison%2BLake%2BSt%252C%2BFuquay%2BVarina%252C%2BNC%2B27526%26details%3DGruhapravesham%2B%25E2%2580%2594%2B4%253A40%2BPM%250ASatyanarayana%2BSwamy%2BPooja%2B%25E2%2580%2594%2B6%253A40%2BPM%250ADinner%2B%25E2%2580%2594%2B8%253A30%2BPM%250A%250AGoogle%2BMaps%253A%2Bhttps%253A%252F%252Fshare.google%252FE4Nl01ck8vAjr4h9J" data-direct="https://calendar.google.com/calendar/render?action=TEMPLATE&amp;text=Gruhapravesham+Ceremony+%E2%80%93+Nandana+Vanam&amp;dates=20261212T164000%2F20261212T164000&amp;ctz=America%2FNew_York&amp;location=Nandana+Vanam%2C+1305+Addison+Lake+St%2C+Fuquay+Varina%2C+NC+27526&amp;details=Gruhapravesham+%E2%80%94+4%3A40+PM%0ASatyanarayana+Swamy+Pooja+%E2%80%94+6%3A40+PM%0ADinner+%E2%80%94+8%3A30+PM%0A%0AGoogle+Maps%3A+https%3A%2F%2Fshare.google%2FE4Nl01ck8vAjr4h9J" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.500" y="5" width="17" height="15" rx="2"/><path d="M3.500 10h17M8 3v4M16 3v4"/><path d="M8 14h3v3H8z" fill="currentColor" stroke="none"/></svg>SAVE THE DATE</a>
+        <a class="gold-btn save-date" id="saveDate" href="https://accounts.google.com/ServiceLogin?service=cl&amp;continue=https%3A%2F%2Fcalendar.google.com%2Fcalendar%2Frender%3Faction%3DTEMPLATE%26text%3DGruhapravesham%2BCeremony%2B%25E2%2580%2593%2BNandana%2BVanam%26dates%3D20261212T160000%252F20261212T160000%26ctz%3DAmerica%252FNew_York%26location%3DNandana%2BVanam%252C%2B1305%2BAddison%2BLake%2BSt%252C%2BFuquay%2BVarina%252C%2BNC%2B27526%26details%3DGruhapravesham%2B%25E2%2580%2594%2B4%253A00%2BPM%250ASatyanarayana%2BSwamy%2BPooja%2B%25E2%2580%2594%2B6%253A40%2BPM%250ADinner%2B%25E2%2580%2594%2B8%253A30%2BPM%250A%250AGoogle%2BMaps%253A%2Bhttps%253A%252F%252Fshare.google%252FE4Nl01ck8vAjr4h9J" data-direct="https://calendar.google.com/calendar/render?action=TEMPLATE&amp;text=Gruhapravesham+Ceremony+%E2%80%93+Nandana+Vanam&amp;dates=20261212T160000%2F20261212T160000&amp;ctz=America%2FNew_York&amp;location=Nandana+Vanam%2C+1305+Addison+Lake+St%2C+Fuquay+Varina%2C+NC+27526&amp;details=Gruhapravesham+%E2%80%94+4%3A00+PM%0ASatyanarayana+Swamy+Pooja+%E2%80%94+6%3A40+PM%0ADinner+%E2%80%94+8%3A30+PM%0A%0AGoogle+Maps%3A+https%3A%2F%2Fshare.google%2FE4Nl01ck8vAjr4h9J" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.500" y="5" width="17" height="15" rx="2"/><path d="M3.500 10h17M8 3v4M16 3v4"/><path d="M8 14h3v3H8z" fill="currentColor" stroke="none"/></svg>SAVE THE DATE</a>
         <p class="save-status" id="saveStatus" role="status" aria-live="polite"></p>
-      </section>
-
-      <!-- OUR SPECIAL DAY: the scratch card -->
-      <section data-reveal="2" class="sec" style="opacity:0" aria-labelledby="h-day">
-        <h2 class="sec-title" id="h-day">OUR SPECIAL DAY</h2>
-        <div class="divider"><img src="assets/lotus.webp" alt=""></div>
-        <div class="scard" id="scard">
-          <div class="scard-face" id="scardFace" aria-hidden="true">
-            <div class="scard-k">Saturday</div>
-            <div class="scard-n">12</div>
-            <div class="scard-m">December <span>2026</span></div>
-            <div class="scard-t">Gruhapravesham · 4:40 PM</div>
-          </div>
-          <canvas class="scard-foil" id="foil" aria-hidden="true"></canvas>
-        </div>
-        <p class="scard-hint" id="scardHint">SCRATCH TO REVEAL</p>
-        <button class="link-btn" id="scardBtn" type="button">Tap to Reveal</button>
-        <p class="sr-only" id="scardLive" role="status" aria-live="polite"></p>
-      </section>
-
-      <!-- OUR COUNTDOWN -->
-      <section data-reveal="3" class="sec" style="opacity:0" aria-labelledby="h-cd">
-        <h2 class="sec-title" id="h-cd">OUR COUNTDOWN</h2>
-        <p class="sec-sub">COUNTING DOWN TO OUR SPECIAL DAY</p>
-        <div class="countdown cd-boxes" id="countdown" role="timer" aria-label="Time until the ceremony begins">
-          <div class="cd-cell"><b id="cdD">&ndash;</b><span>DAYS</span></div>
-          <div class="cd-cell"><b id="cdH">&ndash;</b><span>HOURS</span></div>
-          <div class="cd-cell"><b id="cdM">&ndash;</b><span>MINUTES</span></div>
-          <div class="cd-cell"><b id="cdS">&ndash;</b><span>SECONDS</span></div>
-        </div>
-        <p class="cd-note">Gruhapravesham · 4:40 PM Eastern Time<br>Saturday, December 12, 2026<br>Fuquay Varina, North Carolina, USA</p>
       </section>
 
       <!-- EVENT DETAILS -->
@@ -121,7 +90,7 @@
             <img src="assets/entry.webp" style="width:calc(180 * var(--u));margin-bottom:calc(8 * var(--u))" alt="Family entering the new home">
             <h3 style="margin:0;font-size:calc(21 * var(--u));font-weight:700;color:#9c3d2e">Gruhapravesham</h3>
             <div style="font-size:calc(16 * var(--u))">Saturday, December 12, 2026</div>
-            <div style="font-size:calc(17 * var(--u));font-weight:600">4:40 PM</div>
+            <div style="font-size:calc(17 * var(--u));font-weight:600">4:00 PM</div>
           </div>
           <div class="tl-sep"><div class="tl-line"></div><div class="diya-wrap"><div class="diya-glow"></div><img src="assets/diya.webp" alt=""></div><div class="tl-line dn"></div></div>
           <div class="card">
@@ -153,38 +122,29 @@
         <div class="shloka-sub">MAY ALL BE AUSPICIOUS</div>
       </div>
 
-      <!-- KINDLY REPLY: the RSVP -->
+      <!-- KINDLY RSVP: name, a guest counter, and two buttons that send the reply (client's reference, 2026-11-12) -->
       <section data-reveal="7" class="sec" style="opacity:0" aria-labelledby="h-rsvp">
-        <h2 class="sec-title" id="h-rsvp">KINDLY REPLY</h2>
-        <div class="divider"><img src="assets/lotus.webp" alt=""></div>
-        <form class="rsvp" id="rsvp" novalidate>
-          <div class="fld">
-            <label for="rName">Full Name <i aria-hidden="true">*</i></label>
-            <div class="inp"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-7 8-7s8 2.6 8 7"/></svg><input id="rName" name="name" type="text" autocomplete="name" maxlength="80" required aria-describedby="eName"></div>
+        <h2 class="sec-title" id="h-rsvp">KINDLY RSVP</h2>
+        <p class="r2-sub">We would love to know if you can join us</p>
+        <form class="rsvp2" id="rsvp" novalidate>
+          <div class="r2-fld">
+            <label class="r2-label" for="rName">YOUR NAME</label>
+            <input class="r2-name" id="rName" name="name" type="text" placeholder="Full name" autocomplete="name" autocapitalize="words" maxlength="80" required aria-describedby="eName">
             <p class="err" id="eName" hidden></p>
           </div>
-          <div class="fld">
-            <label for="rEmail">Email Address <i aria-hidden="true">*</i></label>
-            <div class="inp"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3.5 7l8.500 6.500L20.500 7"/></svg><input id="rEmail" name="email" type="email" inputmode="email" autocomplete="email" autocapitalize="off" spellcheck="false" maxlength="120" required aria-describedby="eEmail"></div>
-            <p class="err" id="eEmail" hidden></p>
-          </div>
-          <fieldset class="fld attend" aria-describedby="eAttend">
-            <legend>Will You Attend? <i aria-hidden="true">*</i></legend>
-            <label class="choice"><input type="radio" name="attending" value="yes" required><span>Joyfully Accept</span></label>
-            <label class="choice"><input type="radio" name="attending" value="no"><span>Regretfully Decline</span></label>
-            <p class="err" id="eAttend" hidden></p>
-          </fieldset>
-          <div class="fld" id="guestsFld">
-            <label for="rGuests">Number of Guests</label>
-            <div class="inp"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="9" cy="8" r="3.500"/><path d="M2.500 20c0-3.600 2.900-6 6.500-6s6.500 2.400 6.500 6"/><path d="M16 4.800a3.500 3.500 0 0 1 0 6.400M18 14.300c2.100.800 3.500 2.700 3.500 5.700"/></svg><input id="rGuests" name="guests" type="number" inputmode="numeric" min="1" max="20" step="1" value="1" aria-describedby="eGuests"></div>
-            <p class="err" id="eGuests" hidden></p>
-          </div>
-          <div class="fld">
-            <label for="rMsg">Message <em>(optional)</em></label>
-            <div class="inp inp--area"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5h16v11H9l-5 4z"/><path d="M8 9h8M8 12.500h5"/></svg><textarea id="rMsg" name="message" rows="3" maxlength="600"></textarea></div>
+          <div class="r2-fld" id="guestsFld">
+            <span class="r2-label" id="lGuests">GUESTS</span>
+            <div class="r2-count" role="group" aria-labelledby="lGuests">
+              <button type="button" class="r2-step" id="gMinus" aria-label="One guest fewer">&minus;</button>
+              <output class="r2-num" id="gCount" aria-live="polite">2</output>
+              <button type="button" class="r2-step" id="gPlus" aria-label="One guest more">+</button>
+            </div>
           </div>
           <div class="hp" aria-hidden="true"><label>Leave this empty <input type="text" name="website" tabindex="-1" autocomplete="off"></label></div>
-          <button class="gold-btn" id="rsvpSend" type="submit"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 3L10 14M21 3l-7 18-4-7-7-4z"/></svg><span>SEND RSVP</span></button>
+          <div class="r2-btns">
+            <button type="button" class="r2-btn r2-yes" id="rYes" data-attending="yes">I&rsquo;LL BE THERE</button>
+            <button type="button" class="r2-btn r2-no" id="rNo" data-attending="no">UNABLE TO ATTEND</button>
+          </div>
           <div class="rsvp-status" id="rsvpStatus" role="status" aria-live="polite"></div>
         </form>
         <p class="rsvp-direct">Or reply directly:<br><a href="mailto:caharshajasmin777@gmail.com">caharshajasmin777@gmail.com</a><br><a href="https://wa.me/17162594524" target="_blank" rel="noopener">WhatsApp +1 716-259-4524</a></p>
@@ -196,7 +156,7 @@
         <div style="font-size:calc(19 * var(--u));font-weight:600;line-height:1.6">Sri Srinivas Sai Pavan Nunna<br>&amp; Smt. Harsha Jasmin Mallela</div>
         <div style="font-size:calc(14 * var(--u));letter-spacing:calc(1.5 * var(--u));margin-top:calc(10 * var(--u));color:#a07840">&#10022; &nbsp;SHUBH GRUHAPRAVESHAM&nbsp; &#10022;</div>
       </div>
-      <div data-reveal="9" style="opacity:0;position:relative;margin:0 calc(-30 * var(--u)) calc(-70 * var(--u))">
+      <div data-reveal="9" style="opacity:0;position:relative;margin:0 calc(-30 * var(--u))">
         <div style="position:absolute;left:8%;bottom:14%;width:34%;z-index:1">
           <div style="animation:cowSway 4.5s ease-in-out infinite">
             <img src="assets/cow-calf.webp" style="display:block;width:100%;transform:scaleX(-1)" alt="Kamadhenu cow and calf">
@@ -204,6 +164,19 @@
         </div>
         <img src="assets/footer-scene.webp" style="display:block;width:100%;position:relative" alt="Temple doorway garden">
       </div>
+
+      <!-- OUR COUNTDOWN: the last section of the invitation, after everything else (client, 2026-11-12) -->
+      <section data-reveal="10" class="sec" style="opacity:0" aria-labelledby="h-cd">
+        <h2 class="sec-title" id="h-cd">OUR COUNTDOWN</h2>
+        <p class="sec-sub">COUNTING DOWN TO OUR SPECIAL DAY</p>
+        <div class="countdown cd-boxes" id="countdown" role="timer" aria-label="Time until the ceremony begins">
+          <div class="cd-cell"><b id="cdD">&ndash;</b><span>DAYS</span></div>
+          <div class="cd-cell"><b id="cdH">&ndash;</b><span>HOURS</span></div>
+          <div class="cd-cell"><b id="cdM">&ndash;</b><span>MINUTES</span></div>
+          <div class="cd-cell"><b id="cdS">&ndash;</b><span>SECONDS</span></div>
+        </div>
+        <p class="cd-note">Gruhapravesham · 4:00 PM Eastern Time<br>Saturday, December 12, 2026<br>Fuquay Varina, North Carolina, USA</p>
+      </section>
     </div>
   </main>
   <!-- ============ DOOR OVERLAY ============ -->
@@ -231,7 +204,7 @@
   </button>
 </div>
 <noscript><p style="position:fixed;inset:auto 0 0 0;z-index:99;margin:0;padding:14px;text-align:center;background:#f6ecd6;color:#6b3f10;font-family:Georgia,serif">Please enable JavaScript to open this invitation.</p></noscript>
-<script type="module" src="js/app.js?v=4"></script>
+<script type="module" src="js/app.js?v=5"></script>
 <script src="/_credit/v1/credit.js" defer data-into="#scroller" data-color="#6d4a2e"></script>
 </body>
 </html>

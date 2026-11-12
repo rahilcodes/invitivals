@@ -135,7 +135,7 @@ const html = `<!DOCTYPE html>
 <link rel="preload" href="fonts/f2.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="assets/door-frame.webp" as="image">
 <link rel="stylesheet" href="css/base.css?v=1">
-<link rel="stylesheet" href="css/invite.css?v=2">
+<link rel="stylesheet" href="css/invite.css?v=3">
 </head>
 <body>
 <div id="app" style="position:fixed;inset:0;background:#f2e3c8">
@@ -185,37 +185,6 @@ ${calendarOn ? `        <a class="gold-btn save-date" id="saveDate" href="${esc(
         <p class="save-status" id="saveStatus" role="status" aria-live="polite"></p>
 ` : ''}      </section>
 
-      <!-- OUR SPECIAL DAY: the scratch card -->
-      <section data-reveal="2" class="sec" style="opacity:0" aria-labelledby="h-day">
-        <h2 class="sec-title" id="h-day">OUR SPECIAL DAY</h2>
-        ${DIVIDER}
-        <div class="scard" id="scard">
-          <div class="scard-face" id="scardFace" aria-hidden="true">
-            <div class="scard-k">${esc(C.scratch.weekday)}</div>
-            <div class="scard-n">${esc(C.scratch.day)}</div>
-            <div class="scard-m">${esc(C.scratch.month)} <span>${esc(C.scratch.year)}</span></div>
-            <div class="scard-t">${esc(first.name)} · ${esc(first.label)}</div>
-          </div>
-          <canvas class="scard-foil" id="foil" aria-hidden="true"></canvas>
-        </div>
-        <p class="scard-hint" id="scardHint">SCRATCH TO REVEAL</p>
-        <button class="link-btn" id="scardBtn" type="button">Tap to Reveal</button>
-        <p class="sr-only" id="scardLive" role="status" aria-live="polite"></p>
-      </section>
-
-      <!-- OUR COUNTDOWN -->
-      <section data-reveal="3" class="sec" style="opacity:0" aria-labelledby="h-cd">
-        <h2 class="sec-title" id="h-cd">OUR COUNTDOWN</h2>
-        <p class="sec-sub">COUNTING DOWN TO OUR SPECIAL DAY</p>
-        <div class="countdown cd-boxes" id="countdown" role="timer" aria-label="Time until the ceremony begins">
-          <div class="cd-cell"><b id="cdD">&ndash;</b><span>DAYS</span></div>
-          <div class="cd-cell"><b id="cdH">&ndash;</b><span>HOURS</span></div>
-          <div class="cd-cell"><b id="cdM">&ndash;</b><span>MINUTES</span></div>
-          <div class="cd-cell"><b id="cdS">&ndash;</b><span>SECONDS</span></div>
-        </div>
-        <p class="cd-note">${esc(first.name)} · ${esc(first.label)} Eastern Time<br>${esc(C.dateText)}<br>${esc(C.place)}</p>
-      </section>
-
       <!-- EVENT DETAILS -->
       <section data-reveal="4" class="events" style="opacity:0;display:flex;flex-direction:column;gap:${U(18)};align-items:center" aria-labelledby="h-ev">
         ${img('rangoli', 'class="rangoli-bed" alt=""')}
@@ -244,38 +213,29 @@ ${C.events.map((e, i) => `          <div class="card">
         <div class="shloka-sub">MAY ALL BE AUSPICIOUS</div>
       </div>
 
-      <!-- KINDLY REPLY: the RSVP -->
+      <!-- KINDLY RSVP: name, a guest counter, and two buttons that send the reply (client's reference, 2026-11-12) -->
       <section data-reveal="7" class="sec" style="opacity:0" aria-labelledby="h-rsvp">
-        <h2 class="sec-title" id="h-rsvp">KINDLY REPLY</h2>
-        ${DIVIDER}
-        <form class="rsvp" id="rsvp" novalidate>
-          <div class="fld">
-            <label for="rName">Full Name <i aria-hidden="true">*</i></label>
-            <div class="inp">${ICON.user}<input id="rName" name="name" type="text" autocomplete="name" maxlength="80" required aria-describedby="eName"></div>
+        <h2 class="sec-title" id="h-rsvp">KINDLY RSVP</h2>
+        <p class="r2-sub">We would love to know if you can join us</p>
+        <form class="rsvp2" id="rsvp" novalidate>
+          <div class="r2-fld">
+            <label class="r2-label" for="rName">YOUR NAME</label>
+            <input class="r2-name" id="rName" name="name" type="text" placeholder="Full name" autocomplete="name" autocapitalize="words" maxlength="80" required aria-describedby="eName">
             <p class="err" id="eName" hidden></p>
           </div>
-          <div class="fld">
-            <label for="rEmail">Email Address <i aria-hidden="true">*</i></label>
-            <div class="inp">${ICON.mail}<input id="rEmail" name="email" type="email" inputmode="email" autocomplete="email" autocapitalize="off" spellcheck="false" maxlength="120" required aria-describedby="eEmail"></div>
-            <p class="err" id="eEmail" hidden></p>
-          </div>
-          <fieldset class="fld attend" aria-describedby="eAttend">
-            <legend>Will You Attend? <i aria-hidden="true">*</i></legend>
-            <label class="choice"><input type="radio" name="attending" value="yes" required><span>Joyfully Accept</span></label>
-            <label class="choice"><input type="radio" name="attending" value="no"><span>Regretfully Decline</span></label>
-            <p class="err" id="eAttend" hidden></p>
-          </fieldset>
-          <div class="fld" id="guestsFld">
-            <label for="rGuests">Number of Guests</label>
-            <div class="inp">${ICON.guests}<input id="rGuests" name="guests" type="number" inputmode="numeric" min="1" max="${C.rsvp.maxGuests}" step="1" value="1" aria-describedby="eGuests"></div>
-            <p class="err" id="eGuests" hidden></p>
-          </div>
-          <div class="fld">
-            <label for="rMsg">Message <em>(optional)</em></label>
-            <div class="inp inp--area">${ICON.note}<textarea id="rMsg" name="message" rows="3" maxlength="600"></textarea></div>
+          <div class="r2-fld" id="guestsFld">
+            <span class="r2-label" id="lGuests">GUESTS</span>
+            <div class="r2-count" role="group" aria-labelledby="lGuests">
+              <button type="button" class="r2-step" id="gMinus" aria-label="One guest fewer">&minus;</button>
+              <output class="r2-num" id="gCount" aria-live="polite">${C.rsvp.defaultGuests}</output>
+              <button type="button" class="r2-step" id="gPlus" aria-label="One guest more">+</button>
+            </div>
           </div>
           <div class="hp" aria-hidden="true"><label>Leave this empty <input type="text" name="website" tabindex="-1" autocomplete="off"></label></div>
-          <button class="gold-btn" id="rsvpSend" type="submit">${ICON.send}<span>SEND RSVP</span></button>
+          <div class="r2-btns">
+            <button type="button" class="r2-btn r2-yes" id="rYes" data-attending="yes">I&rsquo;LL BE THERE</button>
+            <button type="button" class="r2-btn r2-no" id="rNo" data-attending="no">UNABLE TO ATTEND</button>
+          </div>
           <div class="rsvp-status" id="rsvpStatus" role="status" aria-live="polite"></div>
         </form>
         <p class="rsvp-direct">Or reply directly:<br><a href="mailto:${esc(C.rsvp.email)}">${esc(C.rsvp.email)}</a><br><a href="https://wa.me/${esc(C.rsvp.whatsapp)}" target="_blank" rel="noopener">WhatsApp ${esc(C.rsvp.phoneText)}</a></p>
@@ -287,7 +247,7 @@ ${C.events.map((e, i) => `          <div class="card">
         <div style="font-size:${U(19)};font-weight:600;line-height:1.6">${esc(C.hosts[0])}<br>&amp; ${esc(C.hosts[1])}</div>
         <div style="font-size:${U(14)};letter-spacing:${U(1.5)};margin-top:${U(10)};color:#a07840">&#10022; &nbsp;SHUBH GRUHAPRAVESHAM&nbsp; &#10022;</div>
       </div>
-      <div data-reveal="9" style="opacity:0;position:relative;margin:0 ${U(-30)} ${U(-70)}">
+      <div data-reveal="9" style="opacity:0;position:relative;margin:0 ${U(-30)}">
         <div style="position:absolute;left:8%;bottom:14%;width:34%;z-index:1">
           <div style="animation:cowSway 4.5s ease-in-out infinite">
             ${img('cow-calf', 'style="display:block;width:100%;transform:scaleX(-1)" alt="Kamadhenu cow and calf"')}
@@ -295,6 +255,19 @@ ${C.events.map((e, i) => `          <div class="card">
         </div>
         ${img('footer-scene', 'style="display:block;width:100%;position:relative" alt="Temple doorway garden"')}
       </div>
+
+      <!-- OUR COUNTDOWN: the last section of the invitation, after everything else (client, 2026-11-12) -->
+      <section data-reveal="10" class="sec" style="opacity:0" aria-labelledby="h-cd">
+        <h2 class="sec-title" id="h-cd">OUR COUNTDOWN</h2>
+        <p class="sec-sub">COUNTING DOWN TO OUR SPECIAL DAY</p>
+        <div class="countdown cd-boxes" id="countdown" role="timer" aria-label="Time until the ceremony begins">
+          <div class="cd-cell"><b id="cdD">&ndash;</b><span>DAYS</span></div>
+          <div class="cd-cell"><b id="cdH">&ndash;</b><span>HOURS</span></div>
+          <div class="cd-cell"><b id="cdM">&ndash;</b><span>MINUTES</span></div>
+          <div class="cd-cell"><b id="cdS">&ndash;</b><span>SECONDS</span></div>
+        </div>
+        <p class="cd-note">${esc(first.name)} · ${esc(first.label)} Eastern Time<br>${esc(C.dateText)}<br>${esc(C.place)}</p>
+      </section>
     </div>
   </main>
   <!-- ============ DOOR OVERLAY ============ -->
@@ -322,7 +295,7 @@ ${C.events.map((e, i) => `          <div class="card">
   </button>
 </div>
 <noscript><p style="position:fixed;inset:auto 0 0 0;z-index:99;margin:0;padding:14px;text-align:center;background:#f6ecd6;color:#6b3f10;font-family:Georgia,serif">Please enable JavaScript to open this invitation.</p></noscript>
-<script type="module" src="js/app.js?v=4"></script>
+<script type="module" src="js/app.js?v=5"></script>
 <script src="/_credit/v1/credit.js" defer data-into="#scroller" data-color="#6d4a2e"></script>
 </body>
 </html>

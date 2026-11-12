@@ -1,7 +1,7 @@
 <?php
 /* RSVP for the Nandana Vanam Gruhapravesam invitation.
  *
- *   POST rsvp.php  (JSON {name, email, attending: "yes"|"no", guests, message})
+ *   POST rsvp.php  (JSON {name, attending: "yes"|"no", guests; email and message are optional and no longer asked for})
  *       → appends one JSON line to data/entries.php, emails the hosts, answers {ok:true}
  *         ({ok:true} means STORED; the email is a notification on top and its result is recorded with the entry)
  *   GET  rsvp.php?key=ADMIN_KEY          → the replies as a page (for the hosts)
@@ -65,7 +65,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $guests = (int)($in['guests'] ?? 0);
     $len = function_exists('mb_strlen') ? mb_strlen($name, 'UTF-8') : strlen($name);
     if ($len < 2) reply(422, ['ok' => false, 'error' => 'Please enter your full name']);
-    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) reply(422, ['ok' => false, 'error' => 'Please enter a valid email address']);
+    if ($email !== '' && !filter_var($email, FILTER_VALIDATE_EMAIL)) reply(422, ['ok' => false, 'error' => 'Please enter a valid email address']);
     if (!in_array($attending, ['yes', 'no'], true)) reply(422, ['ok' => false, 'error' => 'Please choose whether you will attend']);
     if ($attending === 'yes' && ($guests < 1 || $guests > MAX_GUESTS)) reply(422, ['ok' => false, 'error' => 'The number of guests must be from 1 to ' . MAX_GUESTS]);
     if ($attending === 'no') $guests = 0;
@@ -93,9 +93,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $mailed = null;
     if (!$test && NOTIFY_TO !== '') {
         $subject = 'RSVP: ' . $name . ' — ' . ($attending === 'yes' ? 'Joyfully accepts (' . $guests . ')' : 'Regretfully declines');
-        $body = EVENT . "\n\nName: $name\nEmail: $email\nAttending: " . ($attending === 'yes' ? "Joyfully accepts\nNumber of guests: $guests" : 'Regretfully declines')
+        $body = EVENT . "\n\nName: $name\n" . ($email !== '' ? "Email: $email\n" : '') . 'Attending: ' . ($attending === 'yes' ? "Joyfully accepts\nNumber of guests: $guests" : 'Regretfully declines')
             . ($message !== '' ? "\n\nMessage:\n$message" : '') . "\n\nAll replies: https://invitivals.com/nandana-vanam/rsvp.php?key=" . ADMIN_KEY . "\n";
-        $headers = 'From: Nandana Vanam Invitation <' . MAIL_FROM . ">\r\nReply-To: " . $email . "\r\nMIME-Version: 1.0\r\nContent-Type: text/plain; charset=UTF-8\r\nContent-Transfer-Encoding: 8bit";
+        $headers = 'From: Nandana Vanam Invitation <' . MAIL_FROM . '>' . ($email !== '' ? "\r\nReply-To: " . $email : '') . "\r\nMIME-Version: 1.0\r\nContent-Type: text/plain; charset=UTF-8\r\nContent-Transfer-Encoding: 8bit";
         $mailed = @mail(NOTIFY_TO, '=?UTF-8?B?' . base64_encode($subject) . '?=', $body, $headers, '-f' . MAIL_FROM);
     }
     $row = ['at' => gmdate('c'), 'name' => $name, 'email' => $email, 'attending' => $attending, 'guests' => $guests, 'message' => $message, 'ip' => $ip, 'mailed' => $mailed];
