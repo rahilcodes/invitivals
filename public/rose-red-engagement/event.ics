@@ -1,0 +1,21 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Invitivals//Rose Red Engagement//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:rose-red-engagement-20261115@invitivals.com
+DTSTAMP:20261022T070000Z
+DTSTART:20261115T070000Z
+DTEND:20261115T110000Z
+SUMMARY:Nandini & Madhu — Engagement Ceremony
+DESCRIPTION:Engagement Ceremony · Sunday\, 15 November 2026 · 12:30 PM onwards
+LOCATION:Udupi Sri Krishnarajathadri Party Hall\, 330\, 13th Cross Rd\, near Sri Saibaba Devastana\, Malleshwaram\, Bengaluru\, Karnataka 560003
+URL:https://invitivals.com/rose-red-engagement/
+BEGIN:VALARM
+TRIGGER:-P1D
+ACTION:DISPLAY
+DESCRIPTION:Nandini & Madhu's engagement is tomorrow
+END:VALARM
+END:VEVENT
+END:VCALENDAR
