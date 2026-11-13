@@ -45,7 +45,7 @@ export const invite = {
   venue: {
     name: 'NANDANA VANAM',
     lines: ['1305 Addison Lake St,', 'Fuquay Varina, NC 27526'],
-    mapsUrl: 'https://share.google/E4Nl01ck8vAjr4h9J',
+    mapsUrl: 'https://maps.app.goo.gl/YFw1pWvuSKryaumr5?g_st=ic',
   },
 
   /* An RSVP is recorded by rsvp.php: every reply (name, contact number, attendance, guests, time) lands in one list
