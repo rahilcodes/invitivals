@@ -117,3 +117,47 @@ date, functions menu, গায়ে হলুদ, লক্ষ্মী পূ
 - `tools/build-bengali-wedding-art.mjs` builds the older pieces still used by the venues section and the banner;
   `assets/og.jpg` by `node tools/bengali-wedding-og.mjs`
 - `?open` skips the envelope while working on the page; in `astro dev` open `…/index.html`
+
+## Christian Wedding — Golden Aisle (`public/christian-wedding/`)
+
+An Invitivals design demo (Adrian & Elina are the designer's sample names, not a client). The pack's backgrounds are
+used whole and in their numbered order, one per screen, and the sections follow the designer's MOCKUP on them:
+1.png the doors (tap to open → VIDEO.mp4, fullscreen where allowed) · 2.png the hero with the couple cut-out and live
+names · SCREENING 8 scratch-to-reveal date + wedding details · 9 love story · 10 families · 11 the schedule (each
+function opens a details sheet with Directions and Add to Calendar) · 12 venues + the verse · 13 countdown + memories ·
+14 RSVP · 15 wishes + gift · ENDING.png Thank You.
+
+- `config.js` — every word, date, link and file path; fields marked ⚠️ are not in the pack (map links, RSVP/wishes
+  destination, gift details, the real wedding date)
+- `css/invite.css` — each screen is its plate at 941:1672; `.p8 … .p15` set the content box to the plate's clear
+  area (plates 8, 13, 14, 15 are framed on both sides; 9–12 have one floral column on the left). Sizes are in cqw.
+- `js/` — `app.js` assembles the screens; `opening.js` doors/film/replay; `audio.js` music with pause, mute and
+  volume; `scratch.js`, `countdown.js`, `detail.js` (the sheet), `rsvp.js`. Every import carries `?v=N`: bump them
+  together with the two in index.html on each change.
+- `assets/` by `node tools/build-christian-wedding-art.mjs` from `invites/src/christian-wedding/` (the zip, not committed);
+  photos are cut inside their baked frames; `og` mode redraws the link preview only
+- `?open` skips the doors while working on the page; in `astro dev` open `…/index.html`
+
+## Marathi Wedding (`public/marathi-wedding/`)
+
+An Invitivals design demo built from the designer's "marathi wedding" pack (आदिती आणि सिद्धार्थ, रॉयल पॅलेस, पुणे and
+the 21–24 November 2024 dates are the pack's own sample text, not a client). The eight clean screens are used whole
+and in order, one per section, with the pack's cut-out elements placed where the designer's "with text" references
+put them: 1 hero (tassels, bell, the couple, the flower sprigs cut from the reference) · 2 the three embroidered
+frames · 3 the calendar (live month grid; "तारीख उलगडा करा" closes the pearl heart on the day, then saves to the
+calendar) · 4 the four functions with their pictures and map buttons · 5 the venue · 6 "उपस्थिती नोंदवा" (attendance
+sheet) + the wishes bar · 7 "आशीर्वाद स्वरूप भेट" · 8 आभार. `opening page.png` is the door: one tap starts the song
+and plays `ai video.mp4` (the same door, muted) which dissolves into the hero.
+
+- `config.js` — every word, date, venue, link and file path; empty fields are what the pack does not supply (the
+  venues' Google Maps links, the gift details, the couple's photos for the frames)
+- `rsvp.php` — stores attendance and wishes in `data/` next to the page; the family reads them at
+  `rsvp.php?key=…` (the key is at the top of the file — change it before sharing)
+- `css/invite.css`, `js/` — the same canvas engine as the emerald Muslim template (941:1671 pages, cqw text);
+  `calendar.js` the month grid and reveal, `rsvp.js` the sheet and the wishes bar, `gift.js` the details sheet,
+  `ornaments.js` the thin gold line ornaments of the references as SVG
+- `assets/` by `node tools/build-marathi-wedding-art.mjs` from `invites/src/marathi-wedding/` (the zip, not
+  committed): three elements had a baked checkerboard instead of alpha (keyed out), the calendar's printed
+  November grid and the wishes bar's placeholder are painted out so the page can render its own
+- in `astro dev` open `…/marathi-wedding/index.html`; `public-php` in `.claude/launch.json` serves the folder with
+  PHP so the RSVP works locally
