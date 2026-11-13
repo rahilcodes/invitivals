@@ -132,7 +132,7 @@ for (const [n, items] of Object.entries(FX)) {
     const X = (x0 + bx0) / W * 100, Y = (y0 + by0) / H * 100, WW = lw / W * 100;
     const d = kind === 'sway' ? 0 : (kind === 'btn' ? .35 : kind === 'name' ? .2 : 0) + order++ * .14;
     manifest.push({ page: +n, id, file, kind, x: +X.toFixed(3), y: +Y.toFixed(3), w: +WW.toFixed(3) });
-    tags.push(`<img class="fx ${kind === 'sway' ? 'sway' : 'lift'}${kind === 'btn' ? ' lift--btn' : ''}${kind === 'name' ? ' lift--name' : ''}" src="assets/fx/${file}?v=6" alt="" aria-hidden="true" width="${lw}" height="${lh}" loading="${n === '1' ? 'eager' : 'lazy'}" decoding="async" style="left:${X.toFixed(3)}%;top:${Y.toFixed(3)}%;width:${WW.toFixed(3)}%;--d:${d.toFixed(2)}s">`);
+    tags.push(`<img class="fx ${kind === 'sway' ? 'sway' : 'lift'}${kind === 'btn' ? ' lift--btn' : ''}${kind === 'name' ? ' lift--name' : ''}" src="assets/fx/${file}?v=7" alt="" aria-hidden="true" width="${lw}" height="${lh}" loading="${n === '1' ? 'eager' : 'lazy'}" decoding="async" style="left:${X.toFixed(3)}%;top:${Y.toFixed(3)}%;width:${WW.toFixed(3)}%;--d:${d.toFixed(2)}s">`);
     console.log(`p${n} ${id}`.padEnd(14), mode.padEnd(5), `${lw}×${lh}`);
   }
   await sharp(plate, { raw: { width: W, height: H, channels: C } }).webp({ quality: 88, effort: 6 }).toFile(path.join(PUB, `assets/bg/q${n}.webp`));

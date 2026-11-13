@@ -5,7 +5,7 @@
    pages and the Our Functions view; the
    scratch-to-reveal date; maps and calendar; music; RSVP and contact.
    ───────────────────────────────────────────────────────────────────────────── */
-import { invite as C } from '../config.js?v=6';
+import { invite as C } from '../config.js?v=7';
 
 const $ = (s, r = document) => r.querySelector(s);
 const $$ = (s, r = document) => [...r.querySelectorAll(s)];
@@ -24,7 +24,7 @@ for (const el of $$('[data-t]')) { const v = get(el.dataset.t); if (v != null) e
 
 /* ── container units: phones without them get the same sizes from the stage's width ── */
 if (!(window.CSS && CSS.supports && CSS.supports('width', '1cqw'))) {
-  const cq = () => stage.style.setProperty('--cq', (stage.getBoundingClientRect().width || Math.min(innerWidth, 520)) / 100 + 'px');
+  const cq = () => { const v = (stage.getBoundingClientRect().width || Math.min(innerWidth, 520)) / 100 + 'px'; stage.style.setProperty('--cq', v); $('#fnstage').style.setProperty('--cq', v); };
   cq(); addEventListener('resize', cq); addEventListener('orientationchange', () => setTimeout(cq, 300));
 }
 
@@ -37,47 +37,53 @@ for (const ev of C.events) {
     <p>${esc(C.labels.date)}: ${esc(ev.dateBn)}। ${esc(C.labels.time)}: ${esc(ev.timeBn)}। ${esc(C.labels.venue)}: ${esc(ev.venue.join(' '))}</p>`;
   if (maps) maps.href = mapsUrl(ev);
 }
-/* ── Our Functions: every function's card (date, time, place, map, calendar) in a view of its own inside the
-   invitation. It opens from page 3; Back (the button or the browser's) returns to the same place in the scroll. ── */
-const fview = $('#functions');
-$('#vlist').innerHTML = C.events.map((ev) => `<article class="vcard" id="card-${ev.id}">
-    <h3>${esc(ev.label)}</h3><p class="when">${esc(ev.dateBn)} · ${esc(ev.timeBn)}</p><p class="where">${lines(ev.venue)}</p>
-    <div class="row"><a class="btn btn--primary" href="${mapsUrl(ev)}" target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#i-pin"/></svg>${esc(C.labels.maps)}</a>
-    <button class="btn" type="button" data-cal="${ev.id}"><svg aria-hidden="true"><use href="#i-cal"/></svg>${esc(C.labels.calendar)}</button></div></article>`).join('');
-let savedY = 0, fviewFrom = null;
-function openFview(focusId, from, push = true) {
-  if (!fview.hidden) return;
-  savedY = window.scrollY; fviewFrom = from || null;
-  fview.hidden = false; fview.scrollTop = 0;
-  document.body.classList.add('fview-open');
+/* ── the five function pages are not in the scroll. activeFunction is null (the invitation) or a function's id:
+   a row of the menu on page 3 opens that function's own designed page as a full view; its "অনুষ্ঠান তালিকা" button,
+   Escape or the browser's Back close it and put the invitation back at the same scroll position. ── */
+const fnview = $('#fnview');
+const FN_IDS = C.events.map((ev) => ev.id);
+let activeFunction = null, savedY = 0, fnFrom = null;
+function replay(sec) {                                   // the page's words and pieces make their entrance each time it opens
+  const els = $$(ANIM, sec);
+  for (const el of els) el.classList.remove('in');
+  void sec.offsetWidth;
+  setTimeout(() => { for (const el of els) el.classList.add('in'); }, 80);
+}
+function openFunction(id, from, push = true) {
+  const sec = FN_IDS.includes(id) && document.getElementById(id); if (!sec) return;
+  if (activeFunction === null) savedY = window.scrollY;
+  for (const s of $$('.page.fn', fnview)) s.classList.toggle('is-active', s === sec);
+  activeFunction = id; fnFrom = from || fnFrom;
+  fnview.hidden = false; fnview.scrollTop = 0;
+  document.body.classList.add('fn-open');
   stage.setAttribute('aria-hidden', 'true'); stage.inert = true;
-  if (push) { try { history.pushState({ fview: 1, y: savedY }, '', '#functions'); } catch {} }
-  const card = focusId && $(`#card-${focusId}`);
-  for (const c of $$('.vcard.is-target', fview)) c.classList.remove('is-target');
-  setTimeout(() => {
-    if (card) { fview.scrollTop = Math.max(0, card.offsetTop - $('.fview__bar').offsetHeight - 12); card.classList.add('is-target'); }
-    $('#fviewBack').focus({ preventScroll: true });
-  }, 30);
+  if (push) { try { history.pushState({ fn: id }, '', '#' + id); } catch {} }
+  replay(sec);
+  setTimeout(() => $('.back', sec)?.focus({ preventScroll: true }), 30);
 }
-function closeFview(fromPop = false) {
-  if (fview.hidden) return;
-  fview.hidden = true;
-  document.body.classList.remove('fview-open');
+function closeFunction(fromPop = false) {
+  if (activeFunction === null) return;
+  activeFunction = null;
+  fnview.hidden = true;
+  for (const s of $$('.page.fn.is-active', fnview)) s.classList.remove('is-active');
+  document.body.classList.remove('fn-open');
   stage.removeAttribute('aria-hidden'); stage.inert = false;
-  window.scrollTo(0, savedY);                                     // the exact place the guest left
-  requestAnimationFrame(() => { window.scrollTo(0, savedY); fviewFrom?.focus({ preventScroll: true }); });
-  if (!fromPop && history.state && history.state.fview) history.back();
+  window.scrollTo(0, savedY);                                     // the menu, exactly where the guest left it
+  requestAnimationFrame(() => { window.scrollTo(0, savedY); fnFrom?.focus({ preventScroll: true }); });
+  if (!fromPop && history.state && history.state.fn) history.back();
 }
-$('#fviewBack').addEventListener('click', () => closeFview());
-addEventListener('popstate', () => { if (!fview.hidden && location.hash !== '#functions') closeFview(true); else if (fview.hidden && location.hash === '#functions' && opened) openFview(null, null, false); });
-document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && !fview.hidden && $('#sheet').hidden) closeFview(); });
+addEventListener('popstate', () => {
+  const id = location.hash.slice(1);
+  if (FN_IDS.includes(id) && opened) openFunction(id, null, false); else closeFunction(true);
+});
+document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && activeFunction !== null && $('#sheet').hidden) closeFunction(); });
 document.addEventListener('click', (e) => {
-  const a = e.target.closest('[data-fview]'); if (!a) return;
-  e.preventDefault(); openFview(a.dataset.fview, a);
+  const row = e.target.closest('[data-fn]'); if (row) { e.preventDefault(); openFunction(row.dataset.fn, row); return; }
+  const back = e.target.closest('[data-fnback]'); if (back) { e.preventDefault(); closeFunction(); }
 });
 /* in-page links scroll smoothly and never leave a stale hash in the address */
 document.addEventListener('click', (e) => {
-  const a = e.target.closest('a[href^="#"]'); if (!a || a.hasAttribute('data-fview')) return;
+  const a = e.target.closest('a[href^="#"]'); if (!a || a.hasAttribute('data-fn') || a.hasAttribute('data-fnback')) return;
   const t = document.getElementById(a.getAttribute('href').slice(1)); if (!t) return;
   e.preventDefault(); t.scrollIntoView({ behavior: reduced ? 'auto' : 'smooth', block: 'start' });
   setTimeout(() => { const f = t.querySelector('.back, .hit, h2'); if (f) { if (f.matches('h2')) f.setAttribute('tabindex', '-1'); f.focus({ preventScroll: true }); } }, reduced ? 0 : 600);
@@ -149,7 +155,10 @@ function openStage() {
   setTimeout(() => { opening.remove(); try { film.removeAttribute('src'); film.load(); } catch {} repaint(); }, 1300);
   setTimeout(repaint, 2600);
   watch();
-  if (location.hash === '#functions') { try { history.replaceState(null, '', location.pathname + location.search); history.pushState({ fview: 1 }, '', '#functions'); } catch {} openFview(null, null, false); }
+  const want = location.hash.slice(1);
+  if (FN_IDS.includes(want)) { try { history.replaceState(null, '', location.pathname + location.search); history.pushState({ fn: want }, '', '#' + want); } catch {} openFunction(want, null, false); }
+  setTimeout(() => { for (const img of $$('img', fnview)) img.loading = 'eager'; }, 2500);     // the function pages are ready before they are asked for
+  startSparkles();
 }
 function repaint() {
   requestAnimationFrame(() => {
@@ -274,3 +283,39 @@ document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && !sheet.h
     } catch { st.textContent = 'দুঃখিত, পাঠানো যায়নি। অনুগ্রহ করে হোয়াটসঅ্যাপ বা ফোনে জানান।'; }
   });
 })();
+
+/* ── golden sparkles: a dozen or so tiny warm-gold motes drifting down over the invitation and the function pages.
+   One canvas above everything but the opening and the calendar sheet; it never takes a tap. ── */
+function startSparkles() {
+  const cv = $('#sparkles'); if (!cv || reduced || cv.dataset.on) return; cv.dataset.on = '1';
+  const ctx = cv.getContext('2d'), dpr = Math.min(2, devicePixelRatio || 1);
+  let W = 0, H = 0, raf = 0, last = 0;
+  const parts = [];
+  const size = () => { W = innerWidth; H = innerHeight; cv.width = Math.round(W * dpr); cv.height = Math.round(H * dpr); ctx.setTransform(dpr, 0, 0, dpr, 0, 0); };
+  const N = () => Math.max(10, Math.min(18, Math.round(innerWidth / 30)));
+  const make = (fresh) => { const bright = Math.random() < .22; return {
+    x: Math.random() * W, y: fresh ? -10 - Math.random() * H * .25 : Math.random() * H, r: bright ? 1.6 + Math.random() * 1.2 : .8 + Math.random() * 1,
+    vy: 14 + Math.random() * 16, drift: 6 + Math.random() * 10, ph: Math.random() * 6.28, sp: .5 + Math.random() * .7,
+    life: 0, span: 7 + Math.random() * 8, peak: bright ? .85 : .35 + Math.random() * .3, bright, tw: 1.2 + Math.random() * 1.6 }; };
+  size(); for (let i = 0; i < N(); i++) { const p = make(false); p.life = Math.random() * p.span; parts.push(p); }
+  addEventListener('resize', () => { size(); const n = N(); while (parts.length < n) parts.push(make(true)); parts.length = n; });
+  const tick = (t) => {
+    const dt = Math.min(.05, (t - last) / 1000 || .016); last = t;
+    ctx.clearRect(0, 0, W, H);
+    for (let i = 0; i < parts.length; i++) {
+      const p = parts[i]; p.life += dt; p.ph += dt * p.sp; p.y += p.vy * dt; p.x += Math.sin(p.ph) * p.drift * dt;
+      const k = p.life / p.span; if (k >= 1 || p.y > H + 12) { parts[i] = make(true); continue; }
+      const fadeIO = Math.min(1, k / .18, (1 - k) / .25), al = p.peak * fadeIO * (.75 + .25 * Math.sin(p.ph * p.tw));
+      if (al <= 0) continue;
+      const g = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, p.r * 3.2);
+      g.addColorStop(0, 'rgba(255, 236, 170, ' + al + ')'); g.addColorStop(.35, 'rgba(240, 196, 92, ' + al * .55 + ')'); g.addColorStop(1, 'rgba(226, 170, 60, 0)');
+      ctx.fillStyle = g; ctx.beginPath(); ctx.arc(p.x, p.y, p.r * 3.2, 0, 6.2832); ctx.fill();
+      if (p.bright) { ctx.strokeStyle = 'rgba(255, 244, 205, ' + al * .8 + ')'; ctx.lineWidth = .7; const L = p.r * 3.4; ctx.beginPath(); ctx.moveTo(p.x - L, p.y); ctx.lineTo(p.x + L, p.y); ctx.moveTo(p.x, p.y - L); ctx.lineTo(p.x, p.y + L); ctx.stroke(); }
+    }
+    raf = requestAnimationFrame(tick);
+  };
+  const run = () => { if (!raf && !document.hidden) { last = performance.now(); raf = requestAnimationFrame(tick); } };
+  document.addEventListener('visibilitychange', () => { if (document.hidden) { cancelAnimationFrame(raf); raf = 0; } else run(); });
+  window.__sparkles = parts;
+  run();
+}
