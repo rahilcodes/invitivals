@@ -1,5 +1,5 @@
 /* VenueSection — the mandapam in a soft arch, address and map. */
-import { Heading, Button, FloralVine } from '../decor.js';
+import { Heading, Button, FloralVine } from '../decor.js?v=3';
 
 export const VenueSection = (cfg) => `
 <section class="sec venue" id="venue" aria-labelledby="venue-h">

@@ -1,12 +1,12 @@
 /* QuickMenu — a small lotus seal beside the music button; opens a sheet of the invitation's
    chapters so a guest returning for the venue or RSVP doesn't have to scroll the whole way. */
-import { Icon, Kolam } from './decor.js';
-import { $, $$, shareInvite, addToCalendar } from './util.js';
-import { initMapLinks } from './links.js';
+import { Icon, Kolam } from './decor.js?v=3';
+import { $, $$, shareInvite, addToCalendar } from './util.js?v=3';
+import { initMapLinks } from './links.js?v=3';
 
 const LINKS = [
   ['welcome', 'Invitation'], ['families', 'Families'], ['events', 'Celebrations'], ['ceremony', 'Wedding'],
-  ['venue', 'Venue'], ['save', 'Save the Date'], ['rsvp', 'RSVP'], ['wishes', 'Wishes'],
+  ['venue', 'Venue'], ['moments', 'Moments'], ['save', 'Save the Date'], ['rsvp', 'RSVP'], ['wishes', 'Wishes'],
 ];
 
 export function createMenu(cfg, calendar) {
@@ -22,7 +22,7 @@ export function createMenu(cfg, calendar) {
   sheet.innerHTML = `
     <div class="sheet-card">
       ${Kolam('sheet-kolam')}
-      <p class="eyebrow">${cfg.brideName} &amp; ${cfg.groomName}</p>
+      <p class="eyebrow">${cfg.first} &amp; ${cfg.second}</p>
       <nav class="sheet-links">${LINKS.map(([id, label]) => `<a href="#${id}">${label}</a>`).join('')}</nav>
       <div class="sheet-actions">
         <button type="button" class="js-share">${Icon('send', 'ico ico-xs')}Share</button>

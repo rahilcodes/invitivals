@@ -1,6 +1,6 @@
 /* CeremonySection — the muhurtham, framed by a gold temple arch, bells either side, deepams lit beneath. */
-import { TempleOrnament, GoldBell, BrassLamp, Kalasha, GoldDivider } from '../decor.js';
-import { day, month, year, weekday } from '../util.js';
+import { TempleOrnament, GoldBell, BrassLamp, Kalasha, GoldDivider } from '../decor.js?v=3';
+import { day, month, year, weekday } from '../util.js?v=3';
 
 export const CeremonySection = (cfg) => `
 <section class="sec ceremony" id="ceremony" aria-labelledby="ceremony-h">

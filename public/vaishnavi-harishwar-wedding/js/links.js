@@ -1,7 +1,7 @@
 /* How this invitation opens Google Maps and WhatsApp (added 2026-11-13).
    In a file of its own on purpose: a guest whose browser still holds an older copy of the other scripts gets this
    one fresh, so old and new files always fit together. */
-import { whatsappLink } from './util.js';
+import { whatsappLink } from './util.js?v=3';
 
 /* A phone or tablet (any touch-first device), as opposed to a desktop browser. */
 export const isHandheld = () => /Android|iPhone|iPad|iPod|Mobile|Silk|Opera Mini/i.test(navigator.userAgent)

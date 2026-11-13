@@ -13,17 +13,30 @@
    ───────────────────────────────────────────────────────────── */
 const WEDDING_MAP = 'https://maps.app.goo.gl/TfF4wG2QPkEMxsNW8';
 
+/* which family sends this copy: 'bride' = vaishnavi-harishwar-wedding, 'groom' = harishwar-vaishnavi-wedding.
+   It decides whose name comes first wherever the two names stand together, and which family's own ceremony is shown. */
+const SIDE = 'bride';
+const BRIDE = 'Vaishnavi';
+const GROOM = 'Challa Harishwar Reddy';   // the groom's full name, as the client corrected it (2026-11-13)
+const brideFirst = SIDE === 'bride';
+
 export const weddingConfig = {
-  groomName: 'Harishwar Reddy',
-  brideName: 'Vaishnavi',
-  /* the cover, the monogram and every title put the bride first, as the client's first screen does */
+  side: SIDE,
+  slug: brideFirst ? 'vaishnavi-harishwar-wedding' : 'harishwar-vaishnavi-wedding',
+  groomName: GROOM,
+  brideName: BRIDE,
+  /* the two names in this copy's order ("Vaishnavi weds Challa Harishwar Reddy" on the bride's, the reverse on the
+     groom's), and the letters of the monogram: V, and H for Harishwar (Challa is the family name) */
+  first: brideFirst ? BRIDE : GROOM,
+  second: brideFirst ? GROOM : BRIDE,
+  initials: brideFirst ? ['V', 'H'] : ['H', 'V'],
   tagline: [],
   invocation: null,
   /* the blessing over the names on the cover; font = any Google Font that covers it */
   regional: { text: 'శుభమస్తు!', meaning: 'Shubhamastu', font: 'Noto Serif Telugu' },
   /* ?to=Name in the link greets each guest personally; this is used when there is none */
   guestFallback: 'You & Your Family',
-  shareText: 'You are invited to the wedding of Vaishnavi & Harishwar Reddy · 3 December 2026',
+  shareText: `You are invited to the wedding of ${brideFirst ? BRIDE : GROOM} & ${brideFirst ? GROOM : BRIDE} · 3 December 2026`,
 
   weddingDate: '2026-12-03T10:15:00+05:30',
   weddingEnd: null,                      // not supplied: a calendar entry runs three hours from the start
@@ -40,7 +53,7 @@ export const weddingConfig = {
   /* the invitation, in the families' words */
   welcome: {
     title: 'Wedding Invitation',
-    hosts: 'Sri Harishwar Reddy & Smt. Vaishnavi',
+    hosts: `Sri ${GROOM} & Smt. ${BRIDE}`,
     lines: [
       'Cordially invite you and your family',
       'to join them in celebrating their wedding',
@@ -51,37 +64,46 @@ export const weddingConfig = {
   families: {
     bride: {
       label: "Bride's Family",
-      person: 'Vaishnavi',
+      person: BRIDE,
+      initial: 'V',
       relation: 'Daughter of',
-      parents: ['Sri Manne Krishna Reddy', 'Smt. Manne Manjula'],
+      parents: ['Sri Manne Krishna Reddy', 'Smt. Manne Manjulatha'],   // mother's name corrected by the client (2026-11-13)
     },
     groom: {
       label: "Groom's Family",
-      person: 'Harishwar Reddy',
+      person: GROOM,
+      initial: 'H',
       relation: 'Son of',
       parents: ['Sri Challa Sanjeeva Reddy', 'Smt. Challa Sarala'],
     },
   },
 
   /* icon: vratham | nichayam | haldi | mehendi | sangeet | muhurtham | reception
-     maps: the exact Google Maps link the family supplied for that venue — never a search */
+     maps: the exact Google Maps link the family supplied for that venue — never a search.
+     Each copy shows its own family's ceremony and the wedding (client, 2026-11-13): the bride's has no Pellikoduku,
+     the groom's has no Pellikuthuru. The reception is for a few invited guests only and is on neither copy. */
   events: [
-    { icon: 'haldi', name: 'Pellikuthuru', sub: 'Bride’s Ceremony', date: '2026-11-30T10:00:00+05:30', time: '10:00 AM',
+    { only: 'bride', icon: 'haldi', name: 'Pellikuthuru', sub: 'Bride’s Ceremony', date: '2026-11-30T10:00:00+05:30', time: '10:00 AM',
       venue: 'Plot No. 61, Road No. 1, R. Ranga Raju Colony, Turkayamjal, Brahmanpally Road.',
       maps: 'https://maps.app.goo.gl/Bki9Vce6XxJDiKo3A' },
-    { icon: 'vratham', name: 'Pellikoduku', sub: 'Groom’s Ceremony', date: '2026-12-02T16:00:00+05:30', time: '4:00 PM',
+    { only: 'groom', icon: 'vratham', name: 'Pellikoduku', sub: 'Groom’s Ceremony', date: '2026-12-02T16:00:00+05:30', time: '4:00 PM',
       venue: '19-5-82/6/17/C/1, N.M. Guda, Attapur, Hyderabad.',
       maps: 'https://maps.app.goo.gl/zrpXg7EmEqaJvBtL9' },
     { icon: 'muhurtham', name: 'Wedding Ceremony', date: '2026-12-03T10:15:00+05:30', time: '10:15 AM', main: true,
       venue: 'Y.S.R. Convention, Beside Bharat Petrol Pump, ORR Exit 12, Sagar Road, Bongloor, Ibrahimpatnam.',
       maps: WEDDING_MAP },
-    { icon: 'reception', name: 'Wedding Reception', date: '2026-12-04T19:00:00+05:30', time: '7:00 PM',
-      venue: 'Varahi Farm House, Poshettyguda Village, Shamshabad.',
-      maps: 'https://maps.app.goo.gl/iock2XPHctgD1s8s8' },
-  ],
+  ].filter((e) => !e.only || e.only === SIDE),
 
-  /* RSVP and wishes are written for the guest and opened in WhatsApp, addressed to the bride (+91 6281830575,
-     client 2026-11-13). The number is country code first, digits only, no "+". WhatsApp opens with the message
+  /* the couple's own photograph (client, 2026-11-13), shown as it is in the Moments section */
+  moments: {
+    title: 'Moments',
+    sub: 'Glimpses we will treasure forever',
+    photo: 'assets/moments-couple.webp', width: 1100, height: 1211,
+    alt: 'Vaishnavi and Challa Harishwar Reddy',
+  },
+
+  /* RSVP (name and the answer only: no guest count, no contact number — client, 2026-11-13) and wishes are written
+     for the guest and opened in WhatsApp, addressed to the bride (+91 6281830575, client 2026-11-13) on both copies. The number is country code first, digits only, no "+". WhatsApp opens with the message
      ready; the guest still presses Send there. */
   rsvp: { deadline: '', whatsapp: '916281830575' },
   contact: { whatsapp: '916281830575' },

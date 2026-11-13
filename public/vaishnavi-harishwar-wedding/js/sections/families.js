@@ -1,11 +1,11 @@
 /* FamilySection — the two households, set like the inside leaf of a printed patrika. */
-import { Heading, Mandala, FloralVine, Cameo } from '../decor.js';
+import { Heading, Mandala, FloralVine, Cameo } from '../decor.js?v=3';
 
 const Family = (f) => `
   <div class="family" data-reveal>
-    ${Cameo(f.person)}
+    ${Cameo(f.initial || f.person)}
     <p class="eyebrow">${f.label}</p>
-    <p class="family-person">${f.person}</p>
+    <p class="family-person${f.person.length > 12 ? " is-long" : ""}">${f.person}</p>
     <p class="family-rel">${f.relation}</p>
     <p class="family-parents">${f.parents.join('<br><i class="fam-amp">&amp;</i><br>')}</p>
     ${f.grandparents ? `<p class="family-gp">${f.grandparents}</p>` : ''}

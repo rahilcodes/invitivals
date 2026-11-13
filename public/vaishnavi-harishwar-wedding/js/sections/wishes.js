@@ -1,8 +1,8 @@
 /* WishesSection — a note to the couple, written out and opened in WhatsApp, addressed to the bride; the guest presses
    Send there. */
-import { Heading, Button, BrassLamp } from '../decor.js';
-import { $, esc } from '../util.js';
-import { openWhatsApp } from '../links.js';
+import { Heading, Button, BrassLamp } from '../decor.js?v=3';
+import { $, esc } from '../util.js?v=3';
+import { openWhatsApp } from '../links.js?v=3';
 
 export const WishesSection = (cfg) => `
 <section class="sec wishes" id="wishes" aria-labelledby="wishes-h">
@@ -29,7 +29,7 @@ export function initWishes(cfg, guest) {
     if (!who) { form.elements.name.focus(); form.elements.name.closest('.field').classList.add('is-invalid'); return; }
     form.elements.name.closest('.field').classList.remove('is-invalid');
     const text = [
-      'Hello! I would like to send my wishes to Vaishnavi and Harishwar.',
+      `Hello! I would like to send my wishes to ${cfg.first} and ${cfg.second}.`,
       '',
       `From: ${who}`,
       '',

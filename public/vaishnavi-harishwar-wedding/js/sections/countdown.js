@@ -1,6 +1,6 @@
 /* CountdownSection — four engraved numerals, no boxes. */
-import { Heading, Kolam } from '../decor.js';
-import { $ } from '../util.js';
+import { Heading, Kolam } from '../decor.js?v=3';
+import { $ } from '../util.js?v=3';
 
 const UNITS = [['d', 'Days'], ['h', 'Hours'], ['m', 'Minutes'], ['s', 'Seconds']];
 

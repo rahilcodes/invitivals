@@ -1,6 +1,6 @@
 /* Motion: scroll reveals, gentle parallax, gold dust. Never hijacks scrolling;
    with prefers-reduced-motion everything is simply shown. */
-import { $$, reducedMotion } from './util.js';
+import { $$, reducedMotion } from './util.js?v=3';
 
 export function initReveals() {
   const items = $$('[data-reveal]');

@@ -1,5 +1,5 @@
 /* Background music: starts inside the tap that opens the invitation, fades in, and can be paused. */
-import { Icon } from './decor.js';
+import { Icon } from './decor.js?v=3';
 
 export function createMusic(src) {
   const audio = new Audio(src);

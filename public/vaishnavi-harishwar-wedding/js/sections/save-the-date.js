@@ -1,6 +1,6 @@
 /* SaveTheDateSection — the date set large, one tap to the guest's calendar. */
-import { Heading, Button, Kolam } from '../decor.js';
-import { $, day, year, addToCalendar } from '../util.js';
+import { Heading, Button, Kolam } from '../decor.js?v=3';
+import { $, day, year, addToCalendar } from '../util.js?v=3';
 
 const mm = (iso) => new Intl.DateTimeFormat('en-IN', { timeZone: 'Asia/Kolkata', month: '2-digit' }).format(new Date(iso));
 
@@ -17,7 +17,7 @@ export const SaveTheDateSection = (cfg) => `
 </section>`;
 
 export const weddingCalendar = (cfg) => ({
-  title: `Wedding of ${cfg.brideName} & ${cfg.groomName}`,
+  title: `Wedding of ${cfg.first} & ${cfg.second}`,
   start: cfg.weddingDate, end: cfg.weddingEnd || undefined,
   details: `${cfg.muhurtham ? cfg.muhurtham + '. ' : ''}Wedding Ceremony · ${cfg.weddingTimeLabel}. Map: ${cfg.mapsUrl}`,
   location: `${cfg.venue}, ${cfg.venueAddress}`,

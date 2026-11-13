@@ -736,3 +736,22 @@ html.is-open .intro.is-skipped .intro-video { transform: none; transition: none;
 .venue-frame img { object-position: 50% 50%; }
 /* "Open WhatsApp again", under the note that follows an RSVP or a wish */
 .wa-again { display: inline-block; margin-top: 8px; font-family: var(--caps); font-size: 10.5px; letter-spacing: .14em; text-transform: uppercase; color: var(--maroon); text-decoration: underline; text-underline-offset: 4px; }
+
+/* ── 2026-11-13 revisions ─────────────────────────────────── */
+/* the groom's full name, "Challa Harishwar Reddy", on one line of the cover; both names keep one size */
+.names .name { font-size: min(calc((100vw - 40px) / 9.6), 6svh, 46px); }
+.names .name-long { margin: 0 -70px; }
+.pair-name { font-size: min(4.3vw, 19px); letter-spacing: .14em; padding-left: .14em; }
+/* RSVP: the name is required */
+.rsvp-need { margin: -8px 0 14px; font-style: italic; font-size: 15px; color: var(--maroon); }
+/* Moments: the couple's photograph, whole, in a cream mount with a fine gold frame */
+.mo-frame { position: relative; margin: 10px auto 0; padding: 11px; max-width: 340px; background: linear-gradient(160deg, #fdf6e6, #f6e8cd); border: 1px solid rgba(184, 137, 50, .85);
+  box-shadow: 0 0 0 4px var(--paper), 0 0 0 5px rgba(184, 137, 50, .4), 0 22px 34px -22px rgba(74, 14, 24, .55); }
+.mo-frame img { display: block; width: 100%; height: auto; outline: 1px solid rgba(184, 137, 50, .7); outline-offset: 3px; }
+.mo-frame::after { content: ''; position: absolute; inset: 5px; border: 1px solid rgba(184, 137, 50, .35); pointer-events: none; }
+.mo-corner { position: absolute; width: 34px; height: 34px; fill: none; stroke: var(--gold); stroke-width: 1.2; stroke-linecap: round; background: transparent; pointer-events: none; }
+.mo-corner path:nth-of-type(3), .mo-corner circle { fill: var(--gold); stroke: none; }
+.mo-tl { left: -9px; top: -9px; } .mo-tr { right: -9px; top: -9px; transform: scaleX(-1); }
+.mo-bl { left: -9px; bottom: -9px; transform: scaleY(-1); } .mo-br { right: -9px; bottom: -9px; transform: scale(-1); }
+/* the groom's full name on one line of his family leaf */
+.family-person.is-long { white-space: nowrap; margin-left: -40px; margin-right: -40px; padding: 0; font-size: min(calc((100vw - 40px) / 9.6), 40px); }

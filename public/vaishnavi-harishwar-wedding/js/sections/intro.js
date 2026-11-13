@@ -1,9 +1,9 @@
 /* IntroExperience — the sealed doors video. Tap breaks the seal, the doors open,
    and the final arch frame dissolves into the hero, which is composed to match it. */
-import { $, escScript, reducedMotion } from '../util.js';
+import { $, escScript, reducedMotion } from '../util.js?v=3';
 
 export const IntroExperience = (cfg, guest) => `
-<div class="intro" id="intro" role="dialog" aria-label="Wedding invitation of ${cfg.brideName} and ${cfg.groomName}">
+<div class="intro" id="intro" role="dialog" aria-label="Wedding invitation of ${cfg.first} and ${cfg.second}">
   <video class="intro-video" id="intro-video" src="${cfg.intro.video}" poster="${cfg.intro.poster}"
          muted playsinline preload="auto" disablepictureinpicture></video>
   <span class="intro-glow" aria-hidden="true"></span>

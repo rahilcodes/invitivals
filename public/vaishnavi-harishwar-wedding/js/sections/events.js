@@ -1,7 +1,7 @@
 /* EventsSection — the days of celebration on one vertical gold line.
    Each event carries its dress code, a map and its own calendar entry; the line knows what is today. */
-import { Heading, Icon, FloralVine } from '../decor.js';
-import { $$, day, monthShort, weekdayShort, addToCalendar, dayState } from '../util.js';
+import { Heading, Icon, FloralVine } from '../decor.js?v=3';
+import { $$, day, monthShort, weekdayShort, addToCalendar, dayState } from '../util.js?v=3';
 
 const WORDS = ['', 'One', 'Two', 'Three', 'Four', 'Five', 'Six', 'Seven'];
 const dayCount = (events) => new Set(events.map((e) => e.date.slice(0, 10))).size;
@@ -45,7 +45,7 @@ export function initEvents(cfg) {
   $$('[data-cal]').forEach((b) => b.addEventListener('click', () => {
     const e = cfg.events[+b.dataset.cal];
     addToCalendar({
-      title: `${e.name} · ${cfg.brideName} & ${cfg.groomName}`,
+      title: `${e.name} · ${cfg.first} & ${cfg.second}`,
       start: e.date, details: `${e.sub ? e.sub + '. ' : ''}Map: ${e.maps}`, location: e.venue,
     });
   }));

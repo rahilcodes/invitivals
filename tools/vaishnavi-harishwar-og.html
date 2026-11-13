@@ -30,5 +30,7 @@
   <script>
     const q = new URLSearchParams(location.search);
     for (const k of ['a', 'b', 'd', 'p']) document.getElementById(k).textContent = q.get(k) || '';
+    /* s = size of the two names in px (the groom's full name needs 58) */
+    if (q.get('s')) document.querySelectorAll('.name').forEach((n) => { n.style.fontSize = q.get('s') + 'px'; });
   </script>
 </body></html>
