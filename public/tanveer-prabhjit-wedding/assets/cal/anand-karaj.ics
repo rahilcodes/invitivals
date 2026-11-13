@@ -1,0 +1,21 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Creativals//Wedding Invitation//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:20270214T033000Z-anand-karaj@invitivals.com
+DTSTAMP:20261113T125405Z
+DTSTART:20270214T033000Z
+DTEND:20270214T063000Z
+SUMMARY:Anand Karaj — Tanveer & Prabhjit
+DESCRIPTION:Wedding Ceremony
+LOCATION:Sant Garh Harkhowaliye\, Jalandhar\, Punjab\, India
+URL:https://invitivals.com/tanveer-prabhjit-wedding/
+BEGIN:VALARM
+TRIGGER:-P1D
+ACTION:DISPLAY
+DESCRIPTION:Anand Karaj — Tanveer & Prabhjit
+END:VALARM
+END:VEVENT
+END:VCALENDAR

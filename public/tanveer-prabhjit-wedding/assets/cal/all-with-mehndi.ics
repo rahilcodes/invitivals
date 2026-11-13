@@ -1,0 +1,156 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Creativals//Wedding Invitation//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:20270209T053000Z-bride-paath@invitivals.com
+DTSTAMP:20261113T125405Z
+DTSTART:20270209T053000Z
+DTEND:20270209T083000Z
+SUMMARY:Bride-side Paath — Tanveer & Prabhjit
+DESCRIPTION:
+LOCATION:Sant Garh Harkhowaliye\, Jalandhar\, Punjab\, India
+URL:https://invitivals.com/tanveer-prabhjit-wedding/
+BEGIN:VALARM
+TRIGGER:-P1D
+ACTION:DISPLAY
+DESCRIPTION:Bride-side Paath — Tanveer & Prabhjit
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:20270211T053000Z-groom-paath@invitivals.com
+DTSTAMP:20261113T125405Z
+DTSTART:20270211T053000Z
+DTEND:20270211T083000Z
+SUMMARY:Groom-side Paath & Bhog — Tanveer & Prabhjit
+DESCRIPTION:
+LOCATION:Bassi Jalal\, Tanda
+URL:https://invitivals.com/tanveer-prabhjit-wedding/
+BEGIN:VALARM
+TRIGGER:-P1D
+ACTION:DISPLAY
+DESCRIPTION:Groom-side Paath & Bhog — Tanveer & Prabhjit
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:20270212T033000Z-mehndi@invitivals.com
+DTSTAMP:20261113T125405Z
+DTSTART:20270212T033000Z
+DTEND:20270212T063000Z
+SUMMARY:Mehndi Ceremony — Tanveer & Prabhjit
+DESCRIPTION:
+LOCATION:Irmenia Farms\, Bhogpur
+URL:https://invitivals.com/tanveer-prabhjit-wedding/
+BEGIN:VALARM
+TRIGGER:-P1D
+ACTION:DISPLAY
+DESCRIPTION:Mehndi Ceremony — Tanveer & Prabhjit
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:20270212T083000Z-haldi@invitivals.com
+DTSTAMP:20261113T125405Z
+DTSTART:20270212T083000Z
+DTEND:20270212T113000Z
+SUMMARY:Haldi Ceremony — Tanveer & Prabhjit
+DESCRIPTION:
+LOCATION:Irmenia Farms\, Bhogpur
+URL:https://invitivals.com/tanveer-prabhjit-wedding/
+BEGIN:VALARM
+TRIGGER:-P1D
+ACTION:DISPLAY
+DESCRIPTION:Haldi Ceremony — Tanveer & Prabhjit
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:20270212T133000Z-jagoo@invitivals.com
+DTSTAMP:20261113T125405Z
+DTSTART:20270212T133000Z
+DTEND:20270212T163000Z
+SUMMARY:Jagoo Ceremony — Tanveer & Prabhjit
+DESCRIPTION:
+LOCATION:Irmenia Farms\, Bhogpur
+URL:https://invitivals.com/tanveer-prabhjit-wedding/
+BEGIN:VALARM
+TRIGGER:-P1D
+ACTION:DISPLAY
+DESCRIPTION:Jagoo Ceremony — Tanveer & Prabhjit
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:20270213T133000Z-chooda@invitivals.com
+DTSTAMP:20261113T125405Z
+DTSTART:20270213T133000Z
+DTEND:20270213T163000Z
+SUMMARY:Chooda Ceremony — Tanveer & Prabhjit
+DESCRIPTION:
+LOCATION:Our Residence\, Jalandhar
+URL:https://invitivals.com/tanveer-prabhjit-wedding/
+BEGIN:VALARM
+TRIGGER:-P1D
+ACTION:DISPLAY
+DESCRIPTION:Chooda Ceremony — Tanveer & Prabhjit
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:20270214T033000Z-anand-karaj@invitivals.com
+DTSTAMP:20261113T125405Z
+DTSTART:20270214T033000Z
+DTEND:20270214T063000Z
+SUMMARY:Anand Karaj — Tanveer & Prabhjit
+DESCRIPTION:Wedding Ceremony
+LOCATION:Sant Garh Harkhowaliye\, Jalandhar\, Punjab\, India
+URL:https://invitivals.com/tanveer-prabhjit-wedding/
+BEGIN:VALARM
+TRIGGER:-P1D
+ACTION:DISPLAY
+DESCRIPTION:Anand Karaj — Tanveer & Prabhjit
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:20270214T063000Z-lunch@invitivals.com
+DTSTAMP:20261113T125405Z
+DTSTART:20270214T063000Z
+DTEND:20270214T093000Z
+SUMMARY:Wedding Lunch — Tanveer & Prabhjit
+DESCRIPTION:
+LOCATION:Hotel Kamal Grand\, Grand Trunk Road\, near Lamba Pind Chowk Bypass\, Div Colony\, Preet Nagar\, Jalandhar
+URL:https://invitivals.com/tanveer-prabhjit-wedding/
+BEGIN:VALARM
+TRIGGER:-P1D
+ACTION:DISPLAY
+DESCRIPTION:Wedding Lunch — Tanveer & Prabhjit
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:20270214T123000Z-doli@invitivals.com
+DTSTAMP:20261113T125405Z
+DTSTART:20270214T123000Z
+DTEND:20270214T153000Z
+SUMMARY:Doli Ceremony — Tanveer & Prabhjit
+DESCRIPTION:
+LOCATION:Our Residence\, Jalandhar
+URL:https://invitivals.com/tanveer-prabhjit-wedding/
+BEGIN:VALARM
+TRIGGER:-P1D
+ACTION:DISPLAY
+DESCRIPTION:Doli Ceremony — Tanveer & Prabhjit
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:20270215T093000Z-reception@invitivals.com
+DTSTAMP:20261113T125405Z
+DTSTART:20270215T093000Z
+DTEND:20270215T123000Z
+SUMMARY:Wedding Reception — Tanveer & Prabhjit
+DESCRIPTION:
+LOCATION:Ajit Castle\, Tanda Hoshiarpur Road
+URL:https://invitivals.com/tanveer-prabhjit-wedding/
+BEGIN:VALARM
+TRIGGER:-P1D
+ACTION:DISPLAY
+DESCRIPTION:Wedding Reception — Tanveer & Prabhjit
+END:VALARM
+END:VEVENT
+END:VCALENDAR

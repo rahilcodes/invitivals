@@ -1,0 +1,21 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Creativals//Wedding Invitation//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:20270214T063000Z-lunch@invitivals.com
+DTSTAMP:20261113T125405Z
+DTSTART:20270214T063000Z
+DTEND:20270214T093000Z
+SUMMARY:Wedding Lunch — Tanveer & Prabhjit
+DESCRIPTION:
+LOCATION:Hotel Kamal Grand\, Grand Trunk Road\, near Lamba Pind Chowk Bypass\, Div Colony\, Preet Nagar\, Jalandhar
+URL:https://invitivals.com/tanveer-prabhjit-wedding/
+BEGIN:VALARM
+TRIGGER:-P1D
+ACTION:DISPLAY
+DESCRIPTION:Wedding Lunch — Tanveer & Prabhjit
+END:VALARM
+END:VEVENT
+END:VCALENDAR
