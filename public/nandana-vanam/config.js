@@ -23,8 +23,8 @@ export const invite = {
   },
 
   /* the families */
-  /* the two family surnames were removed from every name at the client's request, 2026-11-14 */
-  blessingsOf: ['Sri Ratnarao & Smt. Varalakshmi', 'Sri Nageswara Rao & Smt. Hemalatha'],
+  /* the parents keep their surnames (restored at the client's request, 2026-11-14); the hosts' own names stay without */
+  blessingsOf: ['Sri Nunna Ratnarao & Smt. Nunna Varalakshmi', 'Sri Mallela Nageswara Rao & Smt. Mallela Hemalatha'],
   hosts: ['Sri Srinivas Sai Pavan', 'Smt. Harsha Jasmin'],
   inviteLine: 'Cordially invite you and your family to celebrate the Gruhapravesham Ceremony of their new home.',
 
