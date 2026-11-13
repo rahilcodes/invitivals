@@ -35,3 +35,9 @@ invites/src/brown-theme-wedding-zip/
 
 # modern wedding source pack (public/modern-wedding)
 invites/src/modern-wedding/
+
+# christian wedding source pack (tools/build-christian-wedding-art.mjs)
+invites/src/christian-wedding/
+
+# muslim emerald wedding source pack (public/muslim-emerald-wedding)
+invites/src/muslim-temp-2-zip/
