@@ -1,27 +1,22 @@
-/* ScratchDate — page 3. The gold plate painted into 3.png is covered by a canvas
-   that shows the same plate; scratching (pointer or touch) rubs it away to the
-   pack's gold-brush plate with the date beneath. A tap on "Scratch to Reveal"
-   (keyboard too) wipes it with an animation; the date is also announced. */
+/* ScratchDate — page 3. The reference plate already shows the revealed date on
+   its gold-brush plaque. A canvas painted with the plain gold plate (cut from
+   the pack's blank 3.png) covers exactly that plaque; the seal that overlaps
+   the plaque's corner is left uncovered so it never doubles. Scratching with a
+   finger or mouse rubs the cover away; the painted "Scratch to Reveal" pill is
+   a tap fallback that wipes it. The date is announced for screen readers. */
 import { h, reducedMotion } from './util.js';
-import { at } from './page.js';
-import { artSizes } from './art-sizes.js';
+import { at, hotspot } from './page.js';
 
-export function ScratchDate(cfg, { plate, onRevealed }) {
-  /* plate: { x, y, w, h } of the gold plate in percent of the page */
-  const [aw, ah] = artSizes['plate-after'];
-  const under = h('img', { class: 'plate-after', src: 'assets/plate-after.webp', alt: `${cfg.day} ${cfg.month} ${cfg.year}`, width: aw, height: ah, loading: 'lazy', decoding: 'async' });
+export function ScratchDate(cfg, { plate, pill, seal }) {
+  /* plate / pill: { x, y, w, h } in percent of the page; seal: { cx, cy, r } relative to the plate box */
   const label = `${cfg.day} ${cfg.month} ${cfg.year}`;
-  const ownText = label !== cfg.artworkLabel
-    ? h('div', { class: 'plate-text', 'aria-hidden': 'true' }, h('b', {}, cfg.day), h('span', {}, `${cfg.month} ${cfg.year}`))
-    : null;
   const canvas = h('canvas', { class: 'scratch', 'aria-hidden': 'true' });
-  const box = h('div', { class: 'scratch-box', id: 'date-plate', role: 'img', 'aria-label': `Scratch to reveal the date: ${label}` }, under, ownText, canvas);
-  const wrap = at(box, { x: plate.x, y: plate.y, w: plate.w, z: 4, reveal: false, hit: true });
-  wrap.style.height = `${plate.h}%`;
+  const box = h('div', { class: 'scratch-box', id: 'date-plate', role: 'img', 'aria-label': `Scratch to reveal the date: ${label}` }, canvas);
+  const wrap = at(box, { x: plate.x, y: plate.y, w: plate.w, h: plate.h, z: 4, hit: true });
   box.style.height = '100%';
 
   const ctx = canvas.getContext('2d');
-  const cover = new Image(); cover.src = 'assets/plate-before.webp';
+  const cover = new Image(); cover.src = 'assets/plate-cover.webp';
   let W = 0, H = 0, revealed = false, scratched = 0, painted = false;
 
   function paint() {
@@ -32,8 +27,10 @@ export function ScratchDate(cfg, { plate, onRevealed }) {
     canvas.width = Math.round(W * dpr); canvas.height = Math.round(H * dpr);
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
     ctx.globalCompositeOperation = 'source-over';
-    if (cover.complete && cover.naturalWidth) ctx.drawImage(cover, 0, 0, W, H); else ctx.fillStyle = '#d9b45a', ctx.fillRect(0, 0, W, H);
+    if (cover.complete && cover.naturalWidth) ctx.drawImage(cover, 0, 0, W, H); else { ctx.fillStyle = '#d9b45a'; ctx.fillRect(0, 0, W, H); }
     ctx.globalCompositeOperation = 'destination-out';
+    // the seal painted over the plaque's corner stays visible from the start
+    ctx.beginPath(); ctx.arc(seal.cx * W, seal.cy * H, seal.r * W, 0, Math.PI * 2); ctx.fill();
     painted = true;
   }
   cover.onload = () => { if (!revealed) paint(); };
@@ -42,12 +39,12 @@ export function ScratchDate(cfg, { plate, onRevealed }) {
   function rub(x, y) {
     const r = Math.max(14, W * 0.07);
     ctx.beginPath(); ctx.arc(x, y, r, 0, Math.PI * 2); ctx.fill();
-    scratched += r * r * 3.14 * 0.6; // rough coverage estimate, overlaps counted twice on purpose
+    scratched += r * r * 3.14 * 0.6; // rough coverage estimate
     if (scratched > W * H * 0.85) reveal();
   }
   let down = false, last = null;
   const pos = (e) => { const r = canvas.getBoundingClientRect(); return [e.clientX - r.left, e.clientY - r.top]; };
-  canvas.addEventListener('pointerdown', (e) => { if (revealed) return; down = true; canvas.setPointerCapture(e.pointerId); last = pos(e); rub(...last); hint.classList.add('dim'); e.preventDefault(); });
+  canvas.addEventListener('pointerdown', (e) => { if (revealed) return; down = true; canvas.setPointerCapture(e.pointerId); last = pos(e); rub(...last); e.preventDefault(); });
   canvas.addEventListener('pointermove', (e) => {
     if (!down || revealed) return;
     const p = pos(e);
@@ -61,18 +58,13 @@ export function ScratchDate(cfg, { plate, onRevealed }) {
   function reveal() {
     if (revealed) return; revealed = true;
     canvas.classList.add('gone');
-    box.classList.add('revealed');
-    hint.classList.add('dim');
-    hintBtn.setAttribute('aria-expanded', 'true');
+    pillBtn.setAttribute('aria-expanded', 'true');
     live.textContent = `Our date: ${label}`;
     setTimeout(() => canvas.remove(), reducedMotion() ? 50 : 1400);
-    if (onRevealed) onRevealed();
   }
-
-  const hintBtn = h('button', { class: 'pill outline', type: 'button', 'aria-controls': 'date-plate', 'aria-expanded': 'false', onclick: reveal },
-    h('span', {}, 'Scratch to Reveal'), h('i', { class: 'ico', html: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M9 11.5V5.5a1.5 1.5 0 0 1 3 0V11m0-3.5a1.5 1.5 0 0 1 3 0V12m0-2a1.5 1.5 0 0 1 3 0v5.5a5 5 0 0 1-5 5h-1.6a5 5 0 0 1-4-2L5.2 15a1.5 1.5 0 0 1 2.3-1.9L9 14.5V8"/></svg>' }));
-  const hint = at(hintBtn, { x: 50, y: plate.hintY, w: 44, hit: true, delay: 0.6, cls: 'hint-wrap' });
+  const pillBtn = h('button', { type: 'button', 'aria-label': 'Scratch to reveal the date', 'aria-controls': 'date-plate', 'aria-expanded': 'false', onclick: reveal });
   const live = h('div', { class: 'sr-only', role: 'status', 'aria-live': 'polite' });
-  hint.append(live);
-  return [wrap, hint];
+  const pillHit = hotspot(pillBtn, pill);
+  pillHit.append(live);
+  return [wrap, pillHit];
 }

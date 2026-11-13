@@ -1,16 +1,15 @@
-/* ContactBars — page 11: the three bars painted into the artwork (icons included)
-   become Call / WhatsApp / Email actions. A bar whose detail is not configured
-   says so instead of pretending. */
+/* ContactBars — page 11: the three bars painted in the reference plate (icons,
+   labels and chevrons included) get invisible Call / WhatsApp / Email actions.
+   A bar whose detail is not configured says so instead of pretending. */
 import { h, toast } from './util.js';
 
 export function contactBar(label, href, { configured }) {
-  const inner = [h('span', { class: 'lbl' }, label)]; // the chevron is painted in the artwork
   if (!configured) {
-    const b = h('button', { class: 'bar', type: 'button', 'aria-label': `${label} — not configured yet` }, ...inner);
+    const b = h('button', { type: 'button', 'aria-label': `${label} — not configured yet` });
     b.addEventListener('click', () => toast(`${label} details are not configured yet.`));
     return b;
   }
-  return h('a', { class: 'bar', href, target: href.startsWith('http') ? '_blank' : null, rel: href.startsWith('http') ? 'noopener' : null }, ...inner);
+  return h('a', { href, 'aria-label': label, target: href.startsWith('http') ? '_blank' : null, rel: href.startsWith('http') ? 'noopener' : null });
 }
 
 export function contactBars(c) {

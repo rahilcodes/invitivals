@@ -85,12 +85,21 @@ button { font: inherit; cursor: pointer; }
 .pin-ico { display: block; color: var(--gold-deep); }
 .pin-ico svg { width: 100%; height: auto; }
 
+/* ── invisible hit areas over painted buttons ── */
+.hotspot { display: block; width: 100%; height: 100%; background: transparent; border: 0; padding: 0; margin: 0; border-radius: 999px; cursor: pointer; -webkit-tap-highlight-color: rgba(201,162,79,.25); }
+.hotspot:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; }
+.hotspot:active { background: rgba(255,255,255,.08); }
+
 /* ── motion ── */
 /* the .el wrapper holds the reference position; only its first child animates, so the
    settled position is the reference position to the pixel */
 .reveal > :first-child { opacity: 0; transform: translateY(1.4cqw); transition: opacity .8s cubic-bezier(.22,.61,.36,1), transform .8s cubic-bezier(.22,.61,.36,1); transition-delay: var(--d, 0s); will-change: opacity, transform; }
 .reveal.from-top > :first-child { transform: translateY(-1.5cqw); }
 .page.on .reveal > :first-child, .no-io .reveal > :first-child { opacity: 1; transform: none; }
+/* each plate (hero excepted — the film dissolves onto it) fades in once as it scrolls into view;
+   the plate is one picture, so nothing can end up out of place */
+.page:not(.page-2) > .bg, .page:not(.page-2) > .el { opacity: 0; transition: opacity .75s cubic-bezier(.22,.61,.36,1); }
+.page.on > .bg, .page.on > .el, .no-io .page > .bg, .no-io .page > .el { opacity: 1; }
 .sway > * { animation: sway 7s ease-in-out infinite; animation-delay: var(--sd, 0s); transform-origin: 50% 0; }
 .sway.hang > * { animation-name: hang; }
 @keyframes sway { 0%, 100% { transform: rotate(-.6deg) translateY(0); } 50% { transform: rotate(.6deg) translateY(.4cqw); } }
@@ -175,35 +184,23 @@ button { font: inherit; cursor: pointer; }
 .collage { display: grid; grid-template-columns: repeat(2, 1fr); gap: 2cqw; }
 .collage img { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; border: 1px solid var(--gold); border-radius: 1.4cqw; box-shadow: 0 1cqw 3cqw rgba(0,0,0,.3); transform: rotate(calc((var(--i) - 1) * 1.2deg)); }
 
-/* ── page 10: the RSVP form on the parchment ── */
-.rsvp-form { display: flex; flex-direction: column; gap: 2.2cqw; width: 100%; }
-.rsvp-form .box { margin: 0; padding: 0; border: 1px solid var(--gold); border-radius: 2.2cqw; background: linear-gradient(180deg, rgba(255,250,238,.9), rgba(251,243,223,.88)); box-shadow: 0 .4cqw 1.6cqw rgba(90,70,30,.12), inset 0 0 0 1px rgba(255,255,255,.5); overflow: hidden; }
-.rsvp-form .row { display: flex; align-items: center; gap: 2.2cqw; min-height: 40px; padding: 1.6cqw 3cqw; font-family: var(--serif); font-size: 3.1cqw; font-weight: 500; color: var(--green-ink); }
-.rsvp-form .row + .row { border-top: 1px solid rgba(201,162,79,.45); }
-.rsvp-form .choices label { cursor: pointer; }
-.rsvp-form .choices input { position: absolute; opacity: 0; width: 1px; height: 1px; }
-.rsvp-form .radio { display: block; width: 4.2cqw; height: 4.2cqw; border-radius: 50%; border: 1.5px solid var(--gold-deep); flex: none; position: relative; background: #fffaf0; }
-.rsvp-form input:checked + .radio::after { content: ''; position: absolute; inset: 22%; border-radius: 50%; background: var(--green-ink); }
-.rsvp-form input:focus-visible + .radio { outline: 2px solid var(--gold); outline-offset: 2px; }
-.rsvp-form input[type=text], .rsvp-form select, .rsvp-form textarea { flex: 1; width: 100%; min-width: 0; font: 500 3.1cqw var(--serif); color: var(--green-ink); background: transparent; border: 0; padding: 0; outline: none; }
-.rsvp-form textarea { display: block; padding: 1.8cqw 3cqw; min-height: 40px; resize: none; line-height: 1.3; }
-.rsvp-form ::placeholder { color: rgba(28,74,57,.55); font-style: italic; }
-.rsvp-form input:focus-visible, .rsvp-form select:focus-visible, .rsvp-form textarea:focus-visible { box-shadow: 0 0 0 2px rgba(201,162,79,.5); border-radius: 1cqw; }
-.rsvp-form .glabel { font-family: var(--cinzel); font-size: 2.1cqw; letter-spacing: .14em; text-transform: uppercase; color: var(--gold-deep); }
-.rsvp-form select { appearance: none; -webkit-appearance: none; background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 6'%3E%3Cpath d='M1 1l4 4 4-4' fill='none' stroke='%23a8812f' stroke-width='1.4'/%3E%3C/svg%3E") no-repeat right 1cqw center / 2.2cqw; padding-right: 4cqw; }
-.rsvp-form .send { margin-top: .4cqw; }
-.form-err { margin: -1cqw 0 0; min-height: 3.2cqw; font-size: 2.5cqw; color: #9b1b1b; text-align: center; line-height: 1.2; white-space: normal; }
-.form-err:empty { display: none; }
+/* ── page 10: real controls over the painted RSVP form ── */
+.rsvp-form .choices { margin: 0; padding: 0; border: 0; }
+.rsvp-form .choice { display: block; position: relative; width: 100%; height: 100%; cursor: pointer; border-radius: 1.5cqw; }
+.rsvp-form .choice .dot { position: absolute; top: 50%; transform: translate(-50%, -50%); border-radius: 50%; background: var(--green-ink); opacity: 0; transition: opacity .2s; box-shadow: 0 0 0 .4cqw rgba(255,250,236,.6); }
+.rsvp-form .choice input:checked + .dot { opacity: 1; }
+.rsvp-form .choice input:focus-visible + .dot { opacity: .35; outline: 2px solid var(--gold); outline-offset: 1.2cqw; }
+.rsvp-form .msg { position: relative; width: 100%; height: 100%; }
+.rsvp-form .msg .patch { position: absolute; background: #fcf4e6; border-radius: 1cqw; opacity: 0; transition: opacity .15s; pointer-events: none; }
+.rsvp-form .msg.active .patch { opacity: 1; }
+.rsvp-form textarea { position: absolute; inset: 0; width: 100%; height: 100%; box-sizing: border-box; padding: 4.6cqw 3.4cqw 1.5cqw 3.6cqw; background: transparent; border: 0; outline: none; resize: none; font: 500 3.3cqw/1.3 var(--serif); color: var(--green-ink); border-radius: 2.4cqw; }
+.rsvp-form textarea:focus-visible { box-shadow: 0 0 0 2px rgba(201,162,79,.55); }
 .form-note { margin: 0; font-size: 2.3cqw; font-style: italic; color: #6f5a2c; text-align: center; line-height: 1.3; white-space: normal; }
+.form-note.done { color: var(--green-ink); font-style: normal; font-weight: 600; }
 .form-note:empty { display: none; }
-.rsvp-done { text-align: center; font-family: var(--serif); color: var(--green-ink); font-size: 3.2cqw; line-height: 1.35; white-space: normal; }
-.rsvp-done .tick { font-size: 9cqw; color: var(--green-ink); }
-.rsvp-done p { margin: 1cqw 0; }
 
 /* ── page 11: contact bars over the painted ones ── */
 .bar { display: flex; align-items: center; justify-content: space-between; width: 100%; height: 100%; min-height: 44px; padding: 0 5cqw 0 15.5cqw; background: none; border: 0; border-radius: 999px; color: var(--green-ink); font-family: var(--serif); font-weight: 600; font-size: 3.3cqw; text-decoration: none; }
-.bar-wrap { height: 4.7%; }
-.bar-wrap .bar { height: 100%; }
 .bar .chev { color: var(--gold-deep); width: 1.8cqw; height: 1.8cqw; }
 .bar:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; }
 

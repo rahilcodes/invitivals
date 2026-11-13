@@ -52,11 +52,9 @@ export function openDetail(ev, buildPage, opener) {
 export const weekdayOf = (ev) => ev.weekday || new Date(ev.start).toLocaleDateString('en-GB', { weekday: 'long', timeZone: 'Asia/Kolkata' });
 export const dateOf = (ev) => new Date(ev.start).toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric', timeZone: 'Asia/Kolkata' });
 
-/* the action buttons of a detail page */
-export function saveTheDate(ev, couple, { small = false } = {}) {
-  const b = h('button', { class: `pill outline ${small ? 'small' : ''}`, type: 'button', 'aria-label': `Add ${ev.title} to your calendar` },
-    h('i', { class: 'ico', html: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><rect x="3.5" y="5" width="17" height="15" rx="2"/><path d="M3.5 9.5h17M8 3v4M16 3v4"/></svg>' }),
-    h('span', {}, 'Add to Calendar'));
+/* the actions behind the painted buttons of a detail page: no visuals of their own */
+export function saveTheDate(ev, couple) {
+  const b = h('button', { type: 'button', 'aria-label': `Add ${ev.title} to your calendar` });
   const event = { title: `${ev.title} — ${couple}`, start: ev.start, end: ev.end, location: [ev.venue, ev.city].filter(Boolean).join(', '), details: (ev.tagline || []).join(' ') };
   b.addEventListener('click', () => {
     if (isApple()) { downloadIcs(event); toast('Calendar file downloaded — open it to add the date.'); }
@@ -64,13 +62,12 @@ export function saveTheDate(ev, couple, { small = false } = {}) {
   });
   return b;
 }
-export function openMaps(ev, { small = false } = {}) {
-  const inner = [h('i', { class: 'ico', html: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a7 7 0 0 0-7 7c0 5.2 7 13 7 13s7-7.8 7-13a7 7 0 0 0-7-7zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5z" fill="currentColor"/></svg>' }), h('span', {}, 'View on Map')];
+export function openMaps(ev) {
   const href = mapsHref({ venue: ev.venue, address: [ev.city], mapsUrl: ev.mapsUrl });
   if (!href) {
-    const b = h('button', { class: `pill solid ${small ? 'small' : ''}`, type: 'button', 'aria-label': `${ev.title} map — venue not configured` }, ...inner);
+    const b = h('button', { type: 'button', 'aria-label': `${ev.title} map — venue not configured` });
     b.addEventListener('click', () => toast('The venue and its map link are not configured yet.'));
     return b;
   }
-  return h('a', { class: `pill solid ${small ? 'small' : ''}`, href, target: '_blank', rel: 'noopener', 'aria-label': `Open the ${ev.title} venue in Google Maps` }, ...inner);
+  return h('a', { href, target: '_blank', rel: 'noopener', 'aria-label': `Open the ${ev.title} venue in Google Maps` });
 }

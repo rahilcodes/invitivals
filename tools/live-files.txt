@@ -1014,6 +1014,17 @@ muslim-emerald-wedding/assets/og.jpg
 muslim-emerald-wedding/assets/opening.mp4
 muslim-emerald-wedding/assets/plate-after.webp
 muslim-emerald-wedding/assets/plate-before.webp
+muslim-emerald-wedding/assets/plate-cover.webp
+muslim-emerald-wedding/assets/ref1.webp
+muslim-emerald-wedding/assets/ref10.webp
+muslim-emerald-wedding/assets/ref2.webp
+muslim-emerald-wedding/assets/ref3.webp
+muslim-emerald-wedding/assets/ref4.webp
+muslim-emerald-wedding/assets/ref5.webp
+muslim-emerald-wedding/assets/ref6.webp
+muslim-emerald-wedding/assets/ref7.webp
+muslim-emerald-wedding/assets/ref8.webp
+muslim-emerald-wedding/assets/ref9.webp
 muslim-emerald-wedding/assets/vine-1.webp
 muslim-emerald-wedding/assets/vine-2.webp
 muslim-emerald-wedding/config.js
