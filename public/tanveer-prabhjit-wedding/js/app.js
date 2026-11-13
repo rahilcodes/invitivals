@@ -14,13 +14,13 @@ import { EventsSection, ScheduleSection } from './sections/events.js';
 import { CountdownSection, initCountdown } from './sections/countdown.js';
 import { GallerySection, initGallery } from './sections/gallery.js';
 import { GettingHereSection, initGettingHere } from './sections/getting-here.js';
-import { RSVPSection, initRSVP } from './sections/rsvp.js';
 import { ClosingSection, initClosing } from './sections/closing.js';
 import { initReveals, initParallax, initParticles } from './motion.js';
 import { createMusic } from './music.js';
 import { createMenu } from './menu.js';
 import { enhanceCalendarLinks } from './calendar.js';
 import { initMapLinks } from './links.js';
+import { initCalendarAll } from './cal-all.js';
 
 const params = new URLSearchParams(location.search);
 const guest = guestName();
@@ -28,7 +28,7 @@ const events = cfg.events.filter((e) => !e.gate || params.has(e.gate));
 const view = {
   ...cfg,
   events,
-  allIcs: events.some((e) => e.gate) ? 'assets/cal/all-with-mehndi.ics' : 'assets/cal/all.ics',
+  allIcs: 'assets/cal/tanveer-prabhjit-wedding.ics',   // every event, in India time (tools/tanveer-prabhjit-cal.mjs)
 };
 
 /* a section whose config is null is left out, and the gold threads close up around it */
@@ -41,7 +41,6 @@ const chapters = [
   CountdownSection(view),
   view.gallery ? GallerySection(view) : '',
   view.gettingHere ? GettingHereSection(view) : '',
-  view.rsvp ? RSVPSection(view, guest) : '',
 ].filter(Boolean);
 const markup = GoldDefs() + (view.sideBorders ? PageBorders(view.sideBorders) : '')
   + chapters.join(GoldThread())
@@ -77,11 +76,11 @@ const onScroll = () => {
 addEventListener('scroll', onScroll, { passive: true });
 
 enhanceCalendarLinks();
+initCalendarAll(view);
 initMapLinks();
 initCountdown(view);
 if (view.gallery) initGallery(view);
 if (view.gettingHere) initGettingHere(view);
-if (view.rsvp) initRSVP(view, guest);
 initClosing(view);
 
 const music = createMusic(view.music, { onBlocked: () => toast('Tap ♪ to play the music') });

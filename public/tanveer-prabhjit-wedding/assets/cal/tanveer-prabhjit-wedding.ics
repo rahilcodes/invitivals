@@ -1,0 +1,195 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Invitivals//Tanveer & Prabhjit Wedding//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+X-WR-CALNAME:Tanveer & Prabhjit · Wedding
+X-WR-TIMEZONE:Asia/Kolkata
+BEGIN:VTIMEZONE
+TZID:Asia/Kolkata
+BEGIN:STANDARD
+DTSTART:19700101T000000
+TZOFFSETFROM:+0530
+TZOFFSETTO:+0530
+TZNAME:IST
+END:STANDARD
+END:VTIMEZONE
+BEGIN:VEVENT
+UID:20270209T110000-bride-paath@tanveer-prabhjit.invitivals.com
+DTSTAMP:20261114T000000Z
+DTSTART;TZID=Asia/Kolkata:20270209T110000
+DTEND;TZID=Asia/Kolkata:20270209T140000
+SUMMARY:Bride-side Paath — Tanveer & Prabhjit
+LOCATION:Sant Garh Harkhowaliye\, Jalandhar\, Punjab\, India
+DESCRIPTION:Map: https://maps.app.goo.gl/FVjFhzY7ZSvAdkKC9?g_st=ic\nhttps:/
+ /invitivals.com/tanveer-prabhjit-wedding/
+URL:https://invitivals.com/tanveer-prabhjit-wedding/
+STATUS:CONFIRMED
+TRANSP:OPAQUE
+BEGIN:VALARM
+TRIGGER:-P1D
+ACTION:DISPLAY
+DESCRIPTION:Bride-side Paath — Tanveer & Prabhjit
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:20270211T110000-groom-paath@tanveer-prabhjit.invitivals.com
+DTSTAMP:20261114T000000Z
+DTSTART;TZID=Asia/Kolkata:20270211T110000
+DTEND;TZID=Asia/Kolkata:20270211T140000
+SUMMARY:Groom-side Paath & Bhog — Tanveer & Prabhjit
+LOCATION:Bassi Jalal\, Tanda
+DESCRIPTION:https://invitivals.com/tanveer-prabhjit-wedding/
+URL:https://invitivals.com/tanveer-prabhjit-wedding/
+STATUS:CONFIRMED
+TRANSP:OPAQUE
+BEGIN:VALARM
+TRIGGER:-P1D
+ACTION:DISPLAY
+DESCRIPTION:Groom-side Paath & Bhog — Tanveer & Prabhjit
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:20270212T090000-mehndi@tanveer-prabhjit.invitivals.com
+DTSTAMP:20261114T000000Z
+DTSTART;TZID=Asia/Kolkata:20270212T090000
+DTEND;TZID=Asia/Kolkata:20270212T120000
+SUMMARY:Mehndi Ceremony — Tanveer & Prabhjit
+LOCATION:Irmenia Farms\, Bhogpur
+DESCRIPTION:Map: https://maps.app.goo.gl/srxaVKEia1appzuv5\nhttps://invitiv
+ als.com/tanveer-prabhjit-wedding/
+URL:https://invitivals.com/tanveer-prabhjit-wedding/
+STATUS:CONFIRMED
+TRANSP:OPAQUE
+BEGIN:VALARM
+TRIGGER:-P1D
+ACTION:DISPLAY
+DESCRIPTION:Mehndi Ceremony — Tanveer & Prabhjit
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:20270212T140000-haldi@tanveer-prabhjit.invitivals.com
+DTSTAMP:20261114T000000Z
+DTSTART;TZID=Asia/Kolkata:20270212T140000
+DTEND;TZID=Asia/Kolkata:20270212T170000
+SUMMARY:Haldi Ceremony — Tanveer & Prabhjit
+LOCATION:Irmenia Farms\, Bhogpur
+DESCRIPTION:Map: https://maps.app.goo.gl/srxaVKEia1appzuv5\nhttps://invitiv
+ als.com/tanveer-prabhjit-wedding/
+URL:https://invitivals.com/tanveer-prabhjit-wedding/
+STATUS:CONFIRMED
+TRANSP:OPAQUE
+BEGIN:VALARM
+TRIGGER:-P1D
+ACTION:DISPLAY
+DESCRIPTION:Haldi Ceremony — Tanveer & Prabhjit
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:20270212T190000-jagoo@tanveer-prabhjit.invitivals.com
+DTSTAMP:20261114T000000Z
+DTSTART;TZID=Asia/Kolkata:20270212T190000
+DTEND;TZID=Asia/Kolkata:20270212T220000
+SUMMARY:Jagoo Ceremony — Tanveer & Prabhjit
+LOCATION:Irmenia Farms\, Bhogpur
+DESCRIPTION:Map: https://maps.app.goo.gl/srxaVKEia1appzuv5\nhttps://invitiv
+ als.com/tanveer-prabhjit-wedding/
+URL:https://invitivals.com/tanveer-prabhjit-wedding/
+STATUS:CONFIRMED
+TRANSP:OPAQUE
+BEGIN:VALARM
+TRIGGER:-P1D
+ACTION:DISPLAY
+DESCRIPTION:Jagoo Ceremony — Tanveer & Prabhjit
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:20270213T190000-chooda@tanveer-prabhjit.invitivals.com
+DTSTAMP:20261114T000000Z
+DTSTART;TZID=Asia/Kolkata:20270213T190000
+DTEND;TZID=Asia/Kolkata:20270213T220000
+SUMMARY:Chooda Ceremony — Tanveer & Prabhjit
+LOCATION:Our Residence\, Jalandhar
+DESCRIPTION:https://invitivals.com/tanveer-prabhjit-wedding/
+URL:https://invitivals.com/tanveer-prabhjit-wedding/
+STATUS:CONFIRMED
+TRANSP:OPAQUE
+BEGIN:VALARM
+TRIGGER:-P1D
+ACTION:DISPLAY
+DESCRIPTION:Chooda Ceremony — Tanveer & Prabhjit
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:20270214T090000-anand-karaj@tanveer-prabhjit.invitivals.com
+DTSTAMP:20261114T000000Z
+DTSTART;TZID=Asia/Kolkata:20270214T090000
+DTEND;TZID=Asia/Kolkata:20270214T120000
+SUMMARY:Anand Karaj — Tanveer & Prabhjit
+LOCATION:Sant Garh Harkhowaliye\, Jalandhar\, Punjab\, India
+DESCRIPTION:Wedding Ceremony\nMap: https://maps.app.goo.gl/FVjFhzY7ZSvAdkKC
+ 9?g_st=ic\nhttps://invitivals.com/tanveer-prabhjit-wedding/
+URL:https://invitivals.com/tanveer-prabhjit-wedding/
+STATUS:CONFIRMED
+TRANSP:OPAQUE
+BEGIN:VALARM
+TRIGGER:-P1D
+ACTION:DISPLAY
+DESCRIPTION:Anand Karaj — Tanveer & Prabhjit
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:20270214T120000-lunch@tanveer-prabhjit.invitivals.com
+DTSTAMP:20261114T000000Z
+DTSTART;TZID=Asia/Kolkata:20270214T120000
+DTEND;TZID=Asia/Kolkata:20270214T150000
+SUMMARY:Wedding Lunch — Tanveer & Prabhjit
+LOCATION:Hotel Kamal Grand\, Grand Trunk Road\, near Lamba Pind Chowk Bypas
+ s\, Div Colony\, Preet Nagar\, Jalandhar
+DESCRIPTION:Map: https://maps.app.goo.gl/zJTfwXFxhKdqW4oA8?g_st=ic\nhttps:/
+ /invitivals.com/tanveer-prabhjit-wedding/
+URL:https://invitivals.com/tanveer-prabhjit-wedding/
+STATUS:CONFIRMED
+TRANSP:OPAQUE
+BEGIN:VALARM
+TRIGGER:-P1D
+ACTION:DISPLAY
+DESCRIPTION:Wedding Lunch — Tanveer & Prabhjit
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:20270214T180000-doli@tanveer-prabhjit.invitivals.com
+DTSTAMP:20261114T000000Z
+DTSTART;TZID=Asia/Kolkata:20270214T180000
+DTEND;TZID=Asia/Kolkata:20270214T210000
+SUMMARY:Doli Ceremony — Tanveer & Prabhjit
+LOCATION:Our Residence\, Jalandhar
+DESCRIPTION:https://invitivals.com/tanveer-prabhjit-wedding/
+URL:https://invitivals.com/tanveer-prabhjit-wedding/
+STATUS:CONFIRMED
+TRANSP:OPAQUE
+BEGIN:VALARM
+TRIGGER:-P1D
+ACTION:DISPLAY
+DESCRIPTION:Doli Ceremony — Tanveer & Prabhjit
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:20270215T150000-reception@tanveer-prabhjit.invitivals.com
+DTSTAMP:20261114T000000Z
+DTSTART;TZID=Asia/Kolkata:20270215T150000
+DTEND;TZID=Asia/Kolkata:20270215T180000
+SUMMARY:Wedding Reception — Tanveer & Prabhjit
+LOCATION:Ajit Castle\, Tanda Hoshiarpur Road
+DESCRIPTION:Map: https://maps.app.goo.gl/xqh5APJBeHfv7ndT7?g_st=ic\nhttps:/
+ /invitivals.com/tanveer-prabhjit-wedding/
+URL:https://invitivals.com/tanveer-prabhjit-wedding/
+STATUS:CONFIRMED
+TRANSP:OPAQUE
+BEGIN:VALARM
+TRIGGER:-P1D
+ACTION:DISPLAY
+DESCRIPTION:Wedding Reception — Tanveer & Prabhjit
+END:VALARM
+END:VEVENT
+END:VCALENDAR

@@ -665,3 +665,20 @@ html.is-open .intro{opacity:0;pointer-events:none}
 .rsvp-gap{display:block;height:14px}
 .rsvp-contact{margin-top:14px;display:flex;justify-content:center}
 .rsvp-contact .btn{min-height:44px}
+
+/* ── "Add All to Calendar": the sheet with the one file and the per-event Google Calendar links ── */
+.cal-sheet{z-index:47}
+.cal-card{max-height:88svh;overflow-y:auto;-webkit-overflow-scrolling:touch;padding-bottom:calc(26px + env(safe-area-inset-bottom,0px))}
+.cal-card .cal-file{width:100%;max-width:320px;min-height:48px;justify-content:center}
+.cal-hint{margin:10px auto 0;max-width:30ch;font-style:italic;font-size:.95rem;line-height:1.45;color:var(--ink-soft)}
+.cal-hint b{font-style:normal;font-weight:600;color:var(--ink-navy)}
+.cal-or{display:flex;align-items:center;gap:10px;margin:20px 0 6px;font-family:var(--caps);font-size:.56rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold-deep)}
+.cal-or i{flex:1;height:1px;background:linear-gradient(90deg,transparent,rgba(184,137,47,.55))}
+.cal-or i:last-child{transform:scaleX(-1)}
+.cal-list{list-style:none;margin:0;padding:0;text-align:left}
+.cal-list li{display:grid;grid-template-columns:1fr auto;grid-template-areas:"when add" "name add";column-gap:12px;align-items:center;padding:9px 2px;border-bottom:1px solid rgba(184,137,47,.2)}
+.cal-when{grid-area:when;font-family:var(--caps);font-size:.54rem;letter-spacing:.14em;text-transform:uppercase;color:var(--gold-deep)}
+.cal-name{grid-area:name;font-size:1.08rem;line-height:1.25;color:var(--ink-navy)}
+.cal-add{grid-area:add;display:inline-flex;align-items:center;justify-content:center;min-width:64px;min-height:40px;padding:0 14px;border-radius:999px;border:1px solid rgba(184,137,47,.6);font-family:var(--caps);font-size:.58rem;letter-spacing:.16em;text-transform:uppercase;text-decoration:none;color:var(--ink-navy);background:rgba(255,253,246,.6)}
+.cal-add.is-done{border-color:transparent;background:transparent;color:var(--gold-deep)}
+.cal-card .khanda{display:block;width:34px;margin:0 auto 10px}

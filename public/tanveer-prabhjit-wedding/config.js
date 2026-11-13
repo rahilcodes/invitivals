@@ -53,9 +53,20 @@ export const weddingConfig = {
   venueCity: 'Jalandhar',
 
   blessing: {
-    title: ['With the Blessings of', 'Waheguru Ji'],
+    title: ['With the Blessings of', 'Sri Guru Granth Sahib Ji'],
     lines: [],                            // no welcome card: the client supplied no further wording
-    quote: null,                          // no Gurbani quotation was supplied for this family
+    /* the Gurbani written into the sky of the arch (client, 2026-11-14), laid out as on the design they chose: the
+       two lines, a fine rule, the scripture, then Ang · Raag · Mahla.
+       The client's reference pictures read "ਜਲਿ ਥਲਿ ਮਹੀਅਲਿ" and "ਅੰਗ ੨੯੬"; their typed brief had "ਮਹਿਆਲਿ" and "ਅੰਗ ੨੬੬".
+       The pictures were followed (ਮਹੀਅਲਿ is how the line stands in Gurbani) and both differences were reported to them. */
+    quote: {
+      eyebrow: '',
+      lines: ['ਕਰਣ ਕਾਰਣ ਪ੍ਰਭੁ ਏਕੁ ਹੈ ਦੂਸਰ ਨਾਹੀ ਕੋਇ ॥', 'ਨਾਨਕ ਤਿਸੁ ਬਲਿਹਾਰਣੈ ਜਲਿ ਥਲਿ ਮਹੀਅਲਿ ਸੋਇ ॥੧॥'],
+      lang: 'pa',
+      source: 'ਸ੍ਰੀ ਗੁਰੂ ਗ੍ਰੰਥ ਸਾਹਿਬ ਜੀ',
+      sourceLang: 'pa',
+      ref: 'ਅੰਗ ੨੯੬ · ਰਾਗੁ ਗਉੜੀ · ਮਹਲਾ ੫',
+    },
   },
 
   families: {
@@ -150,14 +161,7 @@ export const weddingConfig = {
   gallery: null,
   gettingHere: null,
 
-  /* replies open in WhatsApp, addressed to this number (full international form, digits only) */
-  rsvp: {
-    title: 'RSVP',
-    note: 'Tanveer Kaur or Prabhjit Singh',
-    deadline: '',                         // none supplied
-    whatsapp: '12368813150',
-    whatsappText: '+1 236-881-3150',
-  },
+  rsvp: null, // the whole RSVP section was removed at the client's request (2026-11-14)
 
   closing: {
     title: ['With Love', 'and Blessings'],
