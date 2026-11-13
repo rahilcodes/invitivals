@@ -15,7 +15,7 @@
    Without that file the replies are still stored and emailed; only the hosts' view and test mode are off. */
 $__k = is_file(__DIR__ . '/rsvp.secret.php') ? (include __DIR__ . '/rsvp.secret.php') : '';
 define('ADMIN_KEY', is_string($__k) ? $__k : '');
-const NOTIFY_TO = 'caharshajasmin777@gmail.com';
+const NOTIFY_TO = '';   // no email: the hosts read the replies in the list below (client, 2026-11-14)
 const MAIL_FROM = 'rsvp@invitivals.com';
 const EVENT = 'Gruhapravesam Ceremony – Nandana Vanam';
 const MAX_GUESTS = 20;

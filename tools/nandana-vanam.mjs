@@ -302,7 +302,7 @@ ${C.hero.scrollCue ? `  <!-- ============ SCROLL CUE: shown when the doors have 
   </button>
 </div>
 <noscript><p style="position:fixed;inset:auto 0 0 0;z-index:99;margin:0;padding:14px;text-align:center;background:#f6ecd6;color:#6b3f10;font-family:Georgia,serif">Please enable JavaScript to open this invitation.</p></noscript>
-<script type="module" src="js/app.js?v=9"></script>
+<script type="module" src="js/app.js?v=10"></script>
 <script src="/_credit/v1/credit.js" defer data-into="#scroller" data-color="#6d4a2e"></script>
 </body>
 </html>

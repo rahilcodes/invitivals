@@ -23,8 +23,9 @@ export const invite = {
   },
 
   /* the families */
-  blessingsOf: ['Sri Nunna Ratnarao & Smt. Nunna Varalakshmi', 'Sri Mallela Nageswara Rao & Smt. Mallela Hemalatha'],
-  hosts: ['Sri Srinivas Sai Pavan Nunna', 'Smt. Harsha Jasmin Mallela'],
+  /* the two family surnames were removed from every name at the client's request, 2026-11-14 */
+  blessingsOf: ['Sri Ratnarao & Smt. Varalakshmi', 'Sri Nageswara Rao & Smt. Hemalatha'],
+  hosts: ['Sri Srinivas Sai Pavan', 'Smt. Harsha Jasmin'],
   inviteLine: 'Cordially invite you and your family to celebrate the Gruhapravesham Ceremony of their new home.',
 
   /* the day — the event's own wall-clock time and IANA timezone; never the visitor's */
@@ -47,16 +48,13 @@ export const invite = {
     mapsUrl: 'https://share.google/E4Nl01ck8vAjr4h9J',
   },
 
-  /* An RSVP is recorded by rsvp.php (the hosts' list) and goes to the hosts by email.
-     serverEmail: the hosting account has outgoing PHP mail switched off ("550 Local sendmail disabled", checked
-     2026-11-13), so the server cannot send it. While this is false, the button opens the guest's own email app with the
-     reply written out to `email`, and the guest presses Send. If the host enables mail, set it to true: rsvp.php then
-     emails the hosts itself and the guest's email app is not opened. */
+  /* An RSVP is recorded by rsvp.php: every reply (name, contact number, attendance, guests, time) lands in one list
+     the hosts open with their private link (rsvp.php?key=…, also as CSV). There is no email step any more: the client
+     found following up on separate emails too awkward (2026-11-14).
+     NEXT: the client wants the replies in Google Forms / Sheets. A form cannot be created from here (it needs the
+     owner's Google account), so the form's link is awaited; when it arrives, the replies are sent to it instead. */
   rsvp: {
     endpoint: 'rsvp.php',
-    email: 'caharshajasmin777@gmail.com',
-    subject: 'Nandana Vanam – Gruhapravesham RSVP',
-    serverEmail: false,
     maxGuests: 20,
     defaultGuests: 2,
   },
@@ -68,7 +66,7 @@ export const invite = {
      If an end is ever confirmed, put it here as 'HH:MM' (24-hour, the event's local time) and run the tool. */
   calendar: {
     title: 'Gruhapravesham Ceremony – Nandana Vanam',   // the client's spelling for the calendar event (2026-11-12)
-    hosts: 'Sri Srinivas Sai Pavan Nunna & Smt. Harsha Jasmin Mallela',
+    hosts: 'Sri Srinivas Sai Pavan & Smt. Harsha Jasmin',
     location: 'Nandana Vanam, 1305 Addison Lake St, Fuquay Varina, NC 27526',
     enabled: true,
     endTime: null,
