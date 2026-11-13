@@ -1,12 +1,14 @@
 /* ─────────────────────────────────────────────────────────────
-   Brown Theme Wedding — Arjun & Aadhya (sample names from the designer pack).
-   Everything the page shows comes from this object; a client version is
-   this file edited plus photos in assets/.  Dates are ISO in India time (+05:30).
+   Brown Theme Wedding: an Invitivals design demo, not a client's invitation.
+   Names, dates and places are the designer's sample wording from the references.
+   While a value equals the reference's wording the page shows the reference's own lettering;
+   edit it and that line becomes live text in the same place.
+   Dates are ISO in India time (+05:30).
    ───────────────────────────────────────────────────────────── */
 export const config = {
   couple: {
-    groom: 'Arjun',   // the pack has gold calligraphy for exactly "Arjun" and "Aadhya";
-    bride: 'Aadhya',  // other names fall back to styled text
+    groom: 'Arjun',
+    bride: 'Aadhya',
   },
   hero: {
     blessing: ['With the blessings of', 'Lord Ganesha'],
@@ -23,28 +25,28 @@ export const config = {
       end: '2026-11-01T15:00:00+05:30',
       day: '1', suffix: 'st', month: 'November', year: '2026', time: '11:00 AM',
       venue: 'Virupakshi Gardens',
-      address: ['Karimnagar road, Govindpalli', 'Jagtial, Telangana, 505327'],
+      address: ['Karimnagar road, Govindpalli,', 'Jagtial, Telangana, 505327'],
       mapsUrl: '', // paste the client's Google Maps link; empty = a search for the address above
     },
     reception: {
       title: 'Reception',
       tagline: ['We would be delighted', 'to have you with us at'],
-      start: '2026-11-01T19:00:00+05:30',
-      end: '2026-11-01T22:00:00+05:30',
+      start: '2026-11-01T11:00:00+05:30', // the time the reference shows
+      end: '2026-11-01T15:00:00+05:30',
       day: '1', suffix: 'st', month: 'November', year: '2026', time: '11:00 AM',
-      venue: '',   // not supplied — the detail page says so instead of inventing one
-      address: [],
-      mapsUrl: '', // no venue, no link: the Maps button shows a demo notice
+      // the reference names no reception venue, so none is printed; the calendar entry and Maps button use the demo's one sample venue
+      venue: 'Virupakshi Gardens',
+      address: ['Karimnagar road, Govindpalli,', 'Jagtial, Telangana, 505327'],
+      mapsUrl: '',
     },
   },
 
-  /* page 6 — replaceable photos; no client photos were supplied, these are
-     demo crops of the designer's own page-6 artwork */
+  /* page 6: replaceable photos. These three are the designer's own, taken from the reference's panels */
   memories: {
     photos: [
-      { src: 'assets/demo-1.webp', alt: 'Demo photo 1', demo: true },
-      { src: 'assets/demo-2.webp', alt: 'Demo photo 2', demo: true },
-      { src: 'assets/demo-3.webp', alt: 'Demo photo 3', demo: true },
+      { src: 'assets/photo-1.webp', alt: 'The couple, forehead to forehead' },
+      { src: 'assets/photo-2.webp', alt: 'The couple, seen from behind' },
+      { src: 'assets/photo-3.webp', alt: 'The couple, smiling in an embrace' },
     ],
   },
 

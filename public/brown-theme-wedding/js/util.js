@@ -4,7 +4,7 @@ export const h = (tag, attrs = {}, ...children) => {
   for (const [k, v] of Object.entries(attrs)) {
     if (v == null || v === false) continue;
     if (k === 'class') el.className = v;
-    else if (k === 'style' && typeof v === 'object') Object.assign(el.style, v);
+    else if (k === 'style' && typeof v === 'object') { for (const [p, val] of Object.entries(v)) { if (p.startsWith('--')) el.style.setProperty(p, val); else el.style[p] = val; } }
     else if (k === 'html') el.innerHTML = v;
     else if (k.startsWith('on')) el.addEventListener(k.slice(2), v);
     else el.setAttribute(k, v === true ? '' : v);
@@ -48,16 +48,29 @@ export function downloadIcs({ title, start, end, location, details }) {
 /* Google Maps: the configured link, else a search for the address */
 export function mapsHref(ev) {
   if (ev.mapsUrl) return ev.mapsUrl;
-  const q = [ev.venue, ...(ev.address || [])].filter(Boolean).join(', ');
+  const q = [ev.venue, ...(ev.address || [])].filter(Boolean).join(', ').replace(/,\s*,/g, ',');
   return q ? `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(q)}` : '';
 }
 
-/* fade in each page's overlays as it scrolls into view */
+/* every text block and ornament enters when it first scrolls into view, once. The page itself is
+   marked too (for things that start with it), and whatever a browser could not observe is shown after a
+   moment, so nothing ever stays hidden. */
 export function observePages(root) {
-  const io = new IntersectionObserver((entries) => {
-    for (const e of entries) if (e.isIntersecting) { e.target.classList.add('on'); io.unobserve(e.target); }
+  const blocks = [...root.querySelectorAll('.reveal')];
+  const pages = [...root.querySelectorAll('.page')];
+  if (!('IntersectionObserver' in window)) { pages.forEach((p) => p.classList.add('on')); blocks.forEach((b) => b.classList.add('in')); return; }
+  const ioPage = new IntersectionObserver((entries) => {
+    for (const e of entries) if (e.isIntersecting) {
+      e.target.classList.add('on'); ioPage.unobserve(e.target);
+      const page = e.target;
+      setTimeout(() => page.querySelectorAll('.reveal').forEach((b) => b.classList.add('in')), 2600);
+    }
   }, { threshold: 0.18 });
-  root.querySelectorAll('.page').forEach((p) => io.observe(p));
+  pages.forEach((p) => ioPage.observe(p));
+  const io = new IntersectionObserver((entries) => {
+    for (const e of entries) if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+  }, { threshold: 0.35, rootMargin: '0px 0px -6% 0px' });
+  blocks.forEach((b) => io.observe(b));
 }
 
 export const icons = {

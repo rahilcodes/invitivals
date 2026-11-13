@@ -1,47 +1,71 @@
-/* InvitationPage — one canvas with the artwork's aspect ratio.
-   Overlays are placed by their CENTRE in percent of the canvas (x, y) with a
-   width in percent; heights follow each picture's own proportions, so the whole
-   composition scales as one. Text sizes are in cqw (percent of canvas width). */
+/* InvitationPage: one canvas with its reference's aspect ratio. The plate fills it, and every
+   overlay takes its box, in % of the canvas, from js/art.js (measured by the build tool), so the whole
+   composition scales as one and settles exactly as the reference. */
 import { h } from './util.js';
-import { artSizes } from './art-sizes.js';
+import { art } from './art.js';
 
-export function InvitationPage(n, overlays, { lazy = true } = {}) {
-  const [w, hgt] = artSizes[`bg${n}`];
-  const page = h('section', { class: 'page', id: `page-${n}`, style: { aspectRatio: `${w} / ${hgt}` }, 'data-page': n });
-  page.append(h('img', { class: 'bg', src: `assets/bg${n}.webp`, alt: '', loading: lazy ? 'lazy' : 'eager', decoding: 'async', fetchpriority: lazy ? 'low' : 'high', width: w, height: hgt }));
-  for (const o of overlays) page.append(o);
+export function InvitationPage(n, overlays) {
+  const [w, ph] = art[`plate${n}`].px;
+  const page = h('section', { class: 'page', id: `page-${n}`, style: { aspectRatio: `${w} / ${ph}` }, 'data-page': n });
+  const plate = h('img', { class: 'plate', src: `assets/plate${n}.webp`, alt: '', decoding: 'sync', width: w, height: ph });
+  // overlays wait for their plate, so a slow connection never shows them floating on an empty page
+  const ready = () => page.classList.add('ready');
+  plate.addEventListener('load', ready); plate.addEventListener('error', ready);
+  if (plate.complete) ready();
+  page.append(plate);
+  for (const o of overlays) if (o) page.append(o);
   return page;
 }
 
-/* a picture from the pack: art('p1-ganesha', { x, y, w, delay, motion }) */
-export function art(id, { x, y, w, delay = 0, motion = '', z = 2, reveal = true, alt = '', cls = '' } = {}) {
-  const [iw, ih] = artSizes[id];
-  const el = h('div', { class: `el ${reveal ? 'reveal' : ''} ${cls}`, style: { left: `${x}%`, top: `${y}%`, width: `${w}%`, zIndex: z, '--d': `${delay}s` } });
-  const inner = h('div', { class: motion, style: { '--sd': `${-(x * 0.13 + y * 0.07) % 7}s` } });
-  inner.append(h('img', { src: `assets/${id}.webp`, alt, width: iw, height: ih, loading: 'lazy', decoding: 'async', style: { aspectRatio: `${iw} / ${ih}` } }));
-  el.append(inner);
+export const box = (id) => {
+  const a = art[id];
+  return { left: `${a.x}%`, top: `${a.y}%`, width: `${a.w}%`, height: `${a.h}%` };
+};
+
+/* an overlay picture: spr('p1-groom', { delay, motion, z, alt }) */
+export function spr(id, { delay = 0, motion = '', z = 2, alt = '', cls = '', still = false, origin = '', slow = false } = {}) {
+  const el = h('div', { class: `s ${still ? '' : 'reveal'} ${slow ? 'slow' : ''} ${cls}`, style: { ...box(id), zIndex: z, '--d': `${delay}s` } });
+  const img = h('img', { src: `assets/${id}.webp`, alt, decoding: 'async', draggable: 'false', class: motion });
+  if (origin) img.style.transformOrigin = origin;
+  el.append(img);
   return el;
 }
 
-/* text: txt(['line', 'line'], { x, y, w, size, cls }) — size in cqw, lh = line-height */
-export function txt(lines, { x = 50, y, w = 90, size = 3.4, cls = 'serif', lh = 1.3, delay = 0, z = 3, html = false } = {}) {
-  const el = h('div', { class: 'el reveal', style: { left: `${x}%`, top: `${y}%`, width: `${w}%`, zIndex: z, '--d': `${delay}s` } });
-  const t = h('div', { class: `txt ${cls}`, style: { fontSize: `${size}cqw`, lineHeight: lh } });
-  for (const l of [].concat(lines)) t.append(html ? h('span', { class: 'l', html: l }) : h('span', { class: 'l' }, l));
-  el.append(t);
+/* text in the reference's lettering while the value is the reference's; live text in its box once it is edited */
+export function textOr(value, refValue, id, { size = 3.4, cls = 'serif', delay = 0, z = 3, hold = false, slow = false } = {}) {
+  if (value === refValue) return spr(id, { delay, z, alt: value, cls: hold ? 'hold' : '', still: hold, slow });
+  return h('div', { class: `s live ${hold ? 'hold' : 'reveal'} ${slow ? 'slow' : ''} ${cls}`, style: { ...box(id), zIndex: z, fontSize: `${size}cqw`, '--d': `${delay}s` } }, value);
+}
+
+/* a butterfly: the pack's own PNG in the reference's pose, split along its body into two wings that
+   fold on the Y axis, inside a wrapper that floats and now and then makes a short flight. Every one
+   gets its own timings, so no two move together. */
+let bflyCount = 0;
+export function butterfly(id, { z = 2 } = {}) {
+  const a = art[id];
+  const k = bflyCount++;
+  const rnd = (lo, hi) => lo + ((Math.sin(k * 12.9898 + 78.233) * 43758.5453) % 1 + 1) % 1 * (hi - lo);
+  const el = h('div', { class: 's bfly', style: { ...box(id), zIndex: z } });
+  // the body line in the sprite is the PNG's vertical axis turned by rot degrees; wings are the two halves of that line
+  const d = ((a.rot || 0) * Math.PI) / 180;
+  const aspect = (a.w * 941) / (a.h * 1672); // box width / height in pixels
+  const ax = Math.sin(d), ay = -Math.cos(d), nx = Math.cos(d), ny = Math.sin(d);
+  const pt = (sx, sy) => `${(50 + sx * 100).toFixed(1)}% ${(50 + sy * 100 * aspect).toFixed(1)}%`;
+  const side = (sgn) => [pt(-ax * 3, -ay * 3), pt(ax * 3, ay * 3), pt(ax * 3 + sgn * nx * 3, ay * 3 + sgn * ny * 3), pt(-ax * 3 + sgn * nx * 3, -ay * 3 + sgn * ny * 3)].join(', ');
+  const wing = (cls, sgn) => h('div', { class: `wing ${cls}`, style: { clipPath: `polygon(${side(sgn)})`, '--tilt': `${a.rot || 0}deg` } },
+    h('img', { src: `assets/${id}.webp`, alt: '', decoding: 'async', draggable: 'false' }));
+  const body = h('div', { class: 'bfly-body', style: { '--wd': `${rnd(2.2, 3.4).toFixed(2)}s`, '--wdel': `-${rnd(0, 3).toFixed(2)}s` } }, wing('l', -1), wing('r', 1));
+  const hop = h('div', { class: 'bfly-hop', style: { '--hd': `${rnd(13, 22).toFixed(1)}s`, '--hdel': `-${rnd(0, 14).toFixed(1)}s`, '--hx': `${rnd(-1, 1) < 0 ? -1 : 1}` } }, body);
+  const float = h('div', { class: 'bfly-float', style: { '--fd': `${rnd(5, 8).toFixed(2)}s`, '--fdel': `-${rnd(0, 6).toFixed(2)}s` } }, hop);
+  el.append(float);
   return el;
 }
 
-/* the thin gold rule with an ornament in the middle */
-export function divider({ x = 50, y, w = 30, glyph = '❖', delay = 0, plain = false } = {}) {
-  const el = h('div', { class: 'el reveal', style: { left: `${x}%`, top: `${y}%`, width: `${w}%`, '--d': `${delay}s`, zIndex: 3 } });
-  el.append(h('div', { class: `divider ${plain ? 'plain' : ''}` }, h('i', {}, glyph)));
-  return el;
-}
-
-/* any custom node at a position */
-export function at(node, { x = 50, y, w, z = 4, reveal = true, delay = 0, hit = false, cls = '' } = {}) {
-  const el = h('div', { class: `el ${reveal ? 'reveal' : ''} ${hit ? 'hit' : ''} ${cls}`, style: { left: `${x}%`, top: `${y}%`, width: `${w}%`, zIndex: z, '--d': `${delay}s` } });
+/* a real control over its artwork */
+export function control(id, node, { delay = 0, z = 6, cls = '' } = {}) {
+  const el = h('div', { class: `s hit reveal ${cls}`, style: { ...box(id), zIndex: z, '--d': `${delay}s` } });
   el.append(node);
   return el;
 }
+
+export const pic = (id, alt = '') => h('img', { src: `assets/${id}.webp`, alt, decoding: 'async', draggable: 'false' });

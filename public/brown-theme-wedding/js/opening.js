@@ -5,7 +5,7 @@
    beneath, so the film fades straight onto page 1 — no black frame. */
 import { h } from './util.js';
 
-export function OpeningScreen(cfg, { audio, onOpened }) {
+export function OpeningScreen(cfg, { audio, onStart, onOpened }) {
   const tap = h('button', { class: 'tap', type: 'button', 'aria-label': 'Tap to open the invitation' },
     h('span', { class: 'ring', 'aria-hidden': 'true' }), h('span', {}, 'Tap to Open'));
   const frame = h('div', { class: 'frame' }, h('img', { class: 'art', src: cfg.poster, alt: 'Sealed wedding invitation', fetchpriority: 'high', decoding: 'async' }), tap);
@@ -33,6 +33,7 @@ export function OpeningScreen(cfg, { audio, onOpened }) {
     const fs = document.documentElement.requestFullscreen || document.documentElement.webkitRequestFullscreen;
     // best effort, never awaited: some browsers leave this promise pending, and the film must not wait for it
     if (fs) { try { const p = fs.call(document.documentElement, { navigationUI: 'hide' }); if (p && p.catch) p.catch(() => {}); } catch { /* not allowed here, that's fine */ } }
+    onStart(); // the invitation is complete behind the film from now on, so the film can fade straight onto it
     audio.prime();
     film.classList.add('playing');
     opening.classList.add('out');

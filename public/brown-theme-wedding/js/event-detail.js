@@ -2,10 +2,11 @@
    the invitation with Back. The invitation keeps its scroll position and the
    music keeps playing; the browser's back button closes the view too. */
 import { h, toast, downloadIcs, mapsHref, observePages } from './util.js';
+import { config as C } from '../config.js';
 
 let current = null;
 
-export function openDetail(key, buildPage) {
+export function openDetail(key, plate, buildPage) {
   if (current) return;
   const scrollY = window.scrollY;
   if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
@@ -13,7 +14,8 @@ export function openDetail(key, buildPage) {
   const view = h('div', { class: 'detail', role: 'dialog', 'aria-modal': 'true', 'aria-label': `${key} details` });
   const back = h('button', { class: 'back', type: 'button' }, 'Back');
   const column = h('div', { class: 'column' }, buildPage());
-  view.append(back, column);
+  // on screens taller than the artwork, its own colours continue behind it
+  view.append(h('div', { class: 'detail-bg', style: { backgroundImage: `url(assets/plate${plate}.webp)` }, 'aria-hidden': 'true' }), back, column);
   document.body.append(view);
   document.body.classList.add('locked');
   document.body.style.top = `-${scrollY}px`;
@@ -40,19 +42,16 @@ export function openDetail(key, buildPage) {
 
 /* the two action buttons of a detail page */
 export function saveTheDate(ev, art) {
-  const b = h('button', { class: 'img-btn', type: 'button', 'aria-label': `Save the date — ${ev.title}` }, art);
+  const b = h('button', { class: 'img-btn', type: 'button', 'aria-label': `Save the date: ${ev.title}` }, art);
   b.addEventListener('click', () => {
-    downloadIcs({ title: `${ev.title} — Arjun & Aadhya`, start: ev.start, end: ev.end, location: [ev.venue, ...(ev.address || [])].filter(Boolean).join(', '), details: (ev.tagline || []).join(' ') });
-    toast('Calendar file downloaded — open it to add the date.');
+    downloadIcs({
+      title: `${ev.title}: ${C.couple.groom} & ${C.couple.bride}`, start: ev.start, end: ev.end,
+      location: [ev.venue, ...(ev.address || [])].filter(Boolean).join(', ').replace(/,\s*,/g, ','), details: (ev.tagline || []).join(' '),
+    });
+    toast('Calendar file downloaded. Open it to add the date.');
   });
   return b;
 }
 export function openMaps(ev, art) {
-  const href = mapsHref(ev);
-  if (!href) {
-    const b = h('button', { class: 'img-btn', type: 'button', 'aria-label': `${ev.title} map — demo, no venue link yet` }, art);
-    b.addEventListener('click', () => toast('Demo: the venue and its map link are not configured yet.'));
-    return b;
-  }
-  return h('a', { class: 'img-btn', href, target: '_blank', rel: 'noopener', 'aria-label': `Open the ${ev.title} venue in Google Maps` }, art);
+  return h('a', { class: 'img-btn', href: mapsHref(ev), target: '_blank', rel: 'noopener', 'aria-label': `Open the ${ev.title} venue in Google Maps` }, art);
 }
