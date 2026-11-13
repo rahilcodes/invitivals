@@ -2,7 +2,7 @@
    invitation. The page beneath keeps its scroll position and the music keeps
    playing; Back, Escape and the browser's back button all close it and return
    focus to the card that opened it. */
-import { h, toast, downloadIcs, mapsHref, observePages } from './util.js';
+import { h, toast, downloadIcs, googleCalendarHref, isApple, mapsHref, observePages } from './util.js';
 
 let current = null;
 
@@ -57,9 +57,10 @@ export function saveTheDate(ev, couple, { small = false } = {}) {
   const b = h('button', { class: `pill outline ${small ? 'small' : ''}`, type: 'button', 'aria-label': `Add ${ev.title} to your calendar` },
     h('i', { class: 'ico', html: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><rect x="3.5" y="5" width="17" height="15" rx="2"/><path d="M3.5 9.5h17M8 3v4M16 3v4"/></svg>' }),
     h('span', {}, 'Add to Calendar'));
+  const event = { title: `${ev.title} — ${couple}`, start: ev.start, end: ev.end, location: [ev.venue, ev.city].filter(Boolean).join(', '), details: (ev.tagline || []).join(' ') };
   b.addEventListener('click', () => {
-    downloadIcs({ title: `${ev.title} — ${couple}`, start: ev.start, end: ev.end, location: [ev.venue, ev.city].filter(Boolean).join(', '), details: (ev.tagline || []).join(' ') });
-    toast('Calendar file downloaded — open it to add the date.');
+    if (isApple()) { downloadIcs(event); toast('Calendar file downloaded — open it to add the date.'); }
+    else { const w = window.open(googleCalendarHref(event), '_blank', 'noopener'); if (!w) { downloadIcs(event); toast('Calendar file downloaded — open it to add the date.'); } }
   });
   return b;
 }

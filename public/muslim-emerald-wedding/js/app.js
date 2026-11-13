@@ -17,6 +17,7 @@ import { contactBars } from './contact.js';
 
 const app = document.getElementById('app');
 const audio = AudioControl(C.opening);
+window.invitation = { music: audio.element }; // for checks in the console
 const sparkle = SparkleOverlay();
 const couple = C.couple.short;
 const icon = {
@@ -74,9 +75,9 @@ function detailPage(ev) {
     txt(ev.title, { y: top.title, size: 10, cls: 'cinzel green bold', delay: 0.2 }),
     n === 6 ? art('f-line-2', { x: 50, y: top.line, w: 28, delay: 0.3, z: 3 }) : null,
     txt(ev.tagline, { y: top.tag, size: 3.5, cls: 'display italic green', lh: 1.25, delay: 0.4 }),
-    txt(weekdayOf(ev), { y: bottom.day, size: 3.4, cls: 'display italic green', delay: 0.3 }),
-    txt(dateOf(ev), { y: bottom.date, size: 5.2, cls: 'display bold green', delay: 0.4 }),
-    txt(ev.time, { y: bottom.time, size: n === 9 ? 2.9 : 3.2, cls: n === 9 ? 'serif caps green' : 'display italic green', delay: 0.5 }),
+    txt(weekdayOf(ev), { y: bottom.day, size: 3.4, cls: 'display italic green halo', delay: 0.3 }),
+    txt(dateOf(ev), { y: bottom.date, size: 5.2, cls: 'display bold green halo', delay: 0.4 }),
+    txt(ev.time, { y: bottom.time, size: n === 9 ? 2.9 : 3.2, cls: n === 9 ? 'serif caps green halo' : 'display italic green halo', delay: 0.5 }),
   ];
   if (n === 9) {
     overlays.push(
@@ -129,8 +130,8 @@ const page10 = InvitationPage(10, [
   txt(C.rsvp.title, { y: 16, size: 7.4, cls: 'cinzel green bold', delay: 0.2 }),
   divider({ y: 20, w: 20, glyph: '❖', delay: 0.3 }),
   txt(C.rsvp.lines, { y: 23.4, size: 2.75, cls: 'serif green', lh: 1.4, delay: 0.4 }),
-  at(RSVPForm(C.rsvp), { x: 50.5, y: 52.2, w: 54, hit: true, delay: 0.5, cls: 'form-wrap' }),
-  divider({ y: 76.5, w: 16, glyph: '❖', delay: 0.7 }),
+  at(RSVPForm(C.rsvp), { x: 50.5, y: 34.3, w: 54, hit: true, delay: 0.5, cls: 'form-wrap from-top' }), // top-anchored: on narrow phones the rows keep their 40px tap height and the form grows downward, never into the text
+  divider({ y: 89, w: 16, glyph: '❖', delay: 0.7 }),
 ]);
 
 /* ── 11 · need help / thank you — the three bars (and their icons) are painted in the artwork ── */

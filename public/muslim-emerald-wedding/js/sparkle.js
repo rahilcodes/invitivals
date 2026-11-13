@@ -8,12 +8,12 @@ export function SparkleOverlay() {
   document.body.append(c);
   const ctx = c.getContext('2d');
   let W = 0, H = 0, dpr = 1, raf = 0, running = false;
-  const N = 22;
+  const N = Math.min(48, Math.max(26, Math.round(innerWidth * innerHeight / 18000)));
   const P = [];
   const spawn = (p = {}) => Object.assign(p, {
     x: Math.random() * W, y: Math.random() * H, r: 0.8 + Math.random() * 1.6,
-    vx: (Math.random() - 0.5) * 0.08, vy: -0.05 - Math.random() * 0.12,
-    a: 0, max: 0.25 + Math.random() * 0.3, life: 0, span: 500 + Math.random() * 500,
+    vx: (Math.random() - 0.5) * 0.08, vy: 0.04 + Math.random() * 0.12, // drifting gently downward
+    a: 0, max: 0.3 + Math.random() * 0.4, life: 0, span: 420 + Math.random() * 520, tw: 0.4 + Math.random() * 1.2, ph: Math.random() * 6.28,
   });
   function resize() {
     dpr = Math.min(2, devicePixelRatio || 1);
@@ -27,12 +27,13 @@ export function SparkleOverlay() {
     for (const p of P) {
       p.life++;
       const t = p.life / p.span;
-      p.a = p.max * Math.sin(Math.PI * Math.min(1, t)); // ease in, ease out — never a flash
+      p.a = p.max * Math.sin(Math.PI * Math.min(1, t)) * (0.75 + 0.25 * Math.sin(p.life * 0.05 * p.tw + p.ph)); // ease in/out with a soft twinkle, never a flash
       p.x += p.vx; p.y += p.vy;
-      if (t >= 1 || p.y < -10) spawn(p);
+      if (t >= 1 || p.y > H + 10) spawn(p);
       const g = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, p.r * 3);
-      g.addColorStop(0, `rgba(255,228,160,${p.a})`);
-      g.addColorStop(1, 'rgba(255,228,160,0)');
+      const warm = p.tw > 1.2 ? '255,248,230' : '255,222,150';
+      g.addColorStop(0, `rgba(${warm},${p.a})`);
+      g.addColorStop(1, `rgba(${warm},0)`);
       ctx.fillStyle = g;
       ctx.beginPath(); ctx.arc(p.x, p.y, p.r * 3, 0, Math.PI * 2); ctx.fill();
     }

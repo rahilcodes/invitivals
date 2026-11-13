@@ -45,6 +45,14 @@ export function downloadIcs({ title, start, end, location, details }) {
   setTimeout(() => URL.revokeObjectURL(a.href), 4000);
 }
 
+/* Google Calendar "add event" link for the same event (Android and desktop) */
+export function googleCalendarHref({ title, start, end, location, details }) {
+  const endIso = end || new Date(new Date(start).getTime() + 3 * 3600e3).toISOString();
+  const q = new URLSearchParams({ action: 'TEMPLATE', text: title, dates: `${stamp(start)}/${stamp(endIso)}`, details: details || '', location: location || '', ctz: 'Asia/Kolkata' });
+  return `https://calendar.google.com/calendar/render?${q}`;
+}
+export const isApple = () => /iPhone|iPad|iPod|Macintosh/.test(navigator.userAgent) && !/Android/.test(navigator.userAgent);
+
 /* Google Maps: the configured link, else a search for the address */
 export function mapsHref(ev) {
   if (ev.mapsUrl) return ev.mapsUrl;
@@ -54,6 +62,7 @@ export function mapsHref(ev) {
 
 /* fade in each page's overlays as it scrolls into view */
 export function observePages(root) {
+  if (!('IntersectionObserver' in window)) { document.documentElement.classList.add('no-io'); return; }
   const io = new IntersectionObserver((entries) => {
     for (const e of entries) if (e.isIntersecting) { e.target.classList.add('on'); io.unobserve(e.target); }
   }, { threshold: 0.18 });

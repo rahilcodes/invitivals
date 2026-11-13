@@ -1,14 +1,18 @@
-/* AudioControl — one looping music player for the whole invitation and its
-   fixed mute button. The player is started muted inside the opening tap (so
-   browsers allow it) and faded in once the film has finished, so the film's
-   own soundtrack and the music never compete. Volume lives in config. */
+/* AudioControl — ONE looping music player for the whole invitation and its
+   fixed mute button. It lives outside the pages, is created once, and starts
+   inside the very first tap (the same gesture that opens the doors), so the
+   song plays through the film, the hero dissolve and every section without
+   restarting. The film's own track is muted; the song is the only music.
+   Volume lives in config. If the browser still refuses playback, the button
+   shows as muted so the guest can start the song with a tap. */
 import { h } from './util.js';
 
 export function AudioControl(cfg) {
   const music = new Audio();
-  music.loop = true; music.preload = 'none'; music.volume = 0;
+  music.loop = true; music.preload = 'auto'; music.volume = 0; music.crossOrigin = null;
+  if (cfg.music) music.src = cfg.music; // buffering begins on load, so the tap starts it at once
   let wanted = true; // the guest's own choice
-  let fadeTimer = null, primed = false;
+  let fadeTimer = null, started = false;
 
   const btn = h('button', { class: 'audio', type: 'button', 'aria-label': 'Mute music', 'aria-pressed': 'false', onclick: () => set(!wanted) });
   btn.innerHTML =
@@ -21,11 +25,6 @@ export function AudioControl(cfg) {
     btn.setAttribute('aria-pressed', String(!wanted));
     btn.setAttribute('aria-label', wanted ? 'Mute music' : 'Play music');
   }
-  function set(on) {
-    wanted = on; render();
-    if (on) { music.muted = false; music.play().catch(() => {}); fadeTo(cfg.musicVolume, 1.2); }
-    else music.muted = true;
-  }
   function fadeTo(target, seconds) {
     clearInterval(fadeTimer);
     const steps = Math.max(1, Math.round(seconds * 20));
@@ -35,29 +34,30 @@ export function AudioControl(cfg) {
       if (i >= steps) clearInterval(fadeTimer);
     }, 50);
   }
-  // pause when the tab is hidden, resume when it is back (if the guest wants music)
+  /* muting keeps the playback position; unmuting continues from the same place */
+  function set(on) {
+    wanted = on; render();
+    if (on) { music.muted = false; music.play().catch(() => { wanted = false; render(); }); fadeTo(cfg.musicVolume, 1); }
+    else music.muted = true;
+  }
+  // pause when the tab is hidden, resume where it was when it is back (if the guest wants music)
   document.addEventListener('visibilitychange', () => {
-    if (!primed) return;
+    if (!started) return;
     if (document.hidden) music.pause(); else if (wanted) music.play().catch(() => {});
   });
   addEventListener('pagehide', () => { clearInterval(fadeTimer); music.pause(); });
 
   return {
-    /* call inside the user gesture: starts the player silently */
-    prime() {
-      if (!cfg.music) return;
-      primed = true; music.src = cfg.music; music.muted = true;
-      return music.play().catch(() => {});
-    },
-    /* the film is over: let the music in */
-    begin() {
-      if (!cfg.music) return;
+    /* call FIRST inside the opening tap: the song starts right away and fades up */
+    start() {
+      if (!cfg.music || started) return;
+      started = true;
       btn.classList.add('shown');
-      if (!wanted) return;
-      if (!primed) { primed = true; music.src = cfg.music; }
       music.muted = false;
-      music.play().catch(() => {});
+      try { music.volume = 0; } catch { /* iOS */ }
+      const p = music.play();
       fadeTo(cfg.musicVolume, cfg.musicFadeSeconds);
+      if (p && p.catch) p.catch(() => { wanted = false; render(); }); // blocked: offer the button instead of pretending
     },
     element: music,
   };
