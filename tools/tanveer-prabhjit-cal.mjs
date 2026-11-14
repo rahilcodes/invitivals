@@ -1,6 +1,7 @@
 /* The "all events" calendar file of public/tanveer-prabhjit-wedding.
 
-     node tools/tanveer-prabhjit-cal.mjs        (run it after tools/sikh-finish.mjs, whenever an event changes)
+     node tools/tanveer-prabhjit-cal.mjs [folder]   (run it after tools/sikh-finish.mjs, whenever an event changes;
+                                                    folder = tanveer-prabhjit-wedding by default, or prabhjit-tanveer-wedding, the groom's page)
 
    tools/sikh-finish.mjs writes assets/cal/all.ics for every Sikh-engine page. This page's "Add All to Calendar" uses a
    file of its own instead, assets/cal/tanveer-prabhjit-wedding.ics, written here from the same config.js with what the
@@ -15,10 +16,13 @@ import path from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
-const DIR = path.join(ROOT, 'public', 'tanveer-prabhjit-wedding');
+const SLUG = process.argv[2] || 'tanveer-prabhjit-wedding';
+const DIR = path.join(ROOT, 'public', SLUG);
 const { weddingConfig: cfg } = await import(pathToFileURL(path.join(DIR, 'config.js')).href + '?t=' + Date.now());
-const URL_ = 'https://invitivals.com/tanveer-prabhjit-wedding/';
+const URL_ = `https://invitivals.com/${SLUG}/`;
 const TZ = 'Asia/Kolkata';
+/* the two short names in the page's own order: the bride first on her family's page, the groom first on his */
+const PAIR = cfg.hostSide === 'bride' ? `${cfg.shortBride} & ${cfg.shortGroom}` : `${cfg.shortGroom} & ${cfg.shortBride}`;
 const HOURS = 3;
 
 const esc = (s) => String(s ?? '').replace(/\\/g, '\\\\').replace(/;/g, '\\;').replace(/,/g, '\\,').replace(/\n/g, '\\n');
@@ -31,12 +35,12 @@ const plus = (iso, h) => { const [d, t] = [iso.slice(0, 10), iso.slice(11, 19)];
   return new Date(ms).toISOString().slice(0, 19).replace(/[-:]/g, ''); };
 
 const lines = [
-  'BEGIN:VCALENDAR', 'VERSION:2.0', 'PRODID:-//Invitivals//Tanveer & Prabhjit Wedding//EN', 'CALSCALE:GREGORIAN', 'METHOD:PUBLISH',
-  `X-WR-CALNAME:${esc(`${cfg.shortBride} & ${cfg.shortGroom} · Wedding`)}`, `X-WR-TIMEZONE:${TZ}`,
+  'BEGIN:VCALENDAR', 'VERSION:2.0', `PRODID:-//Invitivals//${PAIR} Wedding//EN`, 'CALSCALE:GREGORIAN', 'METHOD:PUBLISH',
+  `X-WR-CALNAME:${esc(`${PAIR} · Wedding`)}`, `X-WR-TIMEZONE:${TZ}`,
   'BEGIN:VTIMEZONE', `TZID:${TZ}`, 'BEGIN:STANDARD', 'DTSTART:19700101T000000', 'TZOFFSETFROM:+0530', 'TZOFFSETTO:+0530', 'TZNAME:IST', 'END:STANDARD', 'END:VTIMEZONE',
 ];
 for (const ev of cfg.events) {
-  const title = `${ev.name} — ${cfg.shortBride} & ${cfg.shortGroom}`;
+  const title = `${ev.name} — ${PAIR}`;
   const desc = [ev.subtitle, ev.maps ? `Map: ${ev.maps}` : '', URL_].filter(Boolean).join('\n');
   lines.push(
     'BEGIN:VEVENT', `UID:${wall(ev.date)}-${ev.id}@tanveer-prabhjit.invitivals.com`, 'DTSTAMP:20261114T000000Z',
@@ -48,5 +52,5 @@ for (const ev of cfg.events) {
 }
 lines.push('END:VCALENDAR');
 const out = lines.map(fold).join('\r\n') + '\r\n';
-fs.writeFileSync(path.join(DIR, 'assets', 'cal', 'tanveer-prabhjit-wedding.ics'), out);
-console.log(`✓ assets/cal/tanveer-prabhjit-wedding.ics — ${cfg.events.length} events, ${out.length} bytes`);
+fs.writeFileSync(path.join(DIR, 'assets', 'cal', `${SLUG}.ics`), out);
+console.log(`✓ ${SLUG}/assets/cal/${SLUG}.ics — ${cfg.events.length} events, ${out.length} bytes`);

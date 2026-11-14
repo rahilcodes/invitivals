@@ -1,6 +1,7 @@
 /* The link-preview picture (1200 x 630) of public/tanveer-prabhjit-wedding.
 
-     node tools/tanveer-prabhjit-og.mjs
+     node tools/tanveer-prabhjit-og.mjs [folder]   (default tanveer-prabhjit-wedding; prabhjit-tanveer-wedding = the groom's page,
+                                                   whose card reads "Prabhjit weds Tanveer")
 
    tools/sikh-finish.mjs draws this from the design's source pack (invites/src/sikh-premium), which is not on this
    machine, so it skips og.jpg. This draws the same card — the Khanda, "THE ANAND KARAJ OF", the names, the date and
@@ -10,7 +11,7 @@ import { fileURLToPath, pathToFileURL } from 'node:url';
 import sharp from 'sharp';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
-const DIR = path.join(ROOT, 'public', 'tanveer-prabhjit-wedding');
+const DIR = path.join(ROOT, 'public', process.argv[2] || 'tanveer-prabhjit-wedding');
 const { weddingConfig: cfg } = await import(pathToFileURL(path.join(DIR, 'config.js')).href);
 const main = cfg.events.find((e) => e.main);
 const fmt = (o) => new Intl.DateTimeFormat('en-IN', { timeZone: 'Asia/Kolkata', ...o }).format(new Date(main.date));
@@ -29,8 +30,8 @@ const svg = Buffer.from(`<svg width="1200" height="630" xmlns="http://www.w3.org
     <path d="M50 88 C33 86 20 68 25 46 C28 36 35 30 42 27"/><path d="M50 88 C67 86 80 68 75 46 C72 36 65 30 58 27"/>
   </g>
   <g text-anchor="middle" font-family="Georgia, 'Times New Roman', serif">
-    <text x="600" y="456" font-size="26" letter-spacing="9" fill="#e7c87a">THE ${esc(main.name).toUpperCase()} OF</text>
-    <text x="600" y="530" font-size="68" font-style="italic" fill="#f8f0df">${esc(cfg.shortBride)} &amp; ${esc(cfg.shortGroom)}</text>
+    <text x="600" y="456" font-size="26" letter-spacing="9" fill="#e7c87a">THE ${esc(main.name).toUpperCase()}${cfg.hostSide === 'bride' ? ' OF' : ''}</text>
+    <text x="600" y="530" font-size="68" font-style="italic" fill="#f8f0df">${cfg.hostSide === 'bride' ? `${esc(cfg.shortBride)} &amp; ${esc(cfg.shortGroom)}` : `${esc(cfg.shortGroom)} weds ${esc(cfg.shortBride)}`}</text>
     <text x="600" y="582" font-size="24" letter-spacing="6" fill="#f1e6cf">${dateLine} · ${esc(cfg.venueCity).toUpperCase()}</text>
   </g></svg>`);
 const info = await sharp(bg).composite([{ input: svg }]).jpeg({ quality: 86, mozjpeg: true }).toFile(path.join(DIR, 'assets', 'og.jpg'));
