@@ -303,6 +303,8 @@ try {
   await sharp(await shot(ikHtml, 520, 420, true)).trim().resize({ height: 220 }).webp({ quality: 92, alphaQuality: 100 }).toFile(path.join(A, 'ik-onkar.webp'));
   const ik = await sharp(path.join(A, 'ik-onkar.webp')).metadata(); console.log(`✓ ik-onkar.webp ${ik.width}×${ik.height}`);
   await sharp(await shot(ogHtml, 1200, 630, false)).jpeg({ quality: 86, mozjpeg: true }).toFile(path.join(A, 'og.jpg'));
-  console.log('✓ og.jpg');
+  /* index.html names the preview by this second filename: WhatsApp had kept the first picture, and a new address is never mistaken for it */
+  fs.copyFileSync(path.join(A, 'og.jpg'), path.join(A, 'cover-20dec2026.jpg'));
+  console.log('✓ og.jpg, cover-20dec2026.jpg');
   ws.close();
 } finally { chrome.kill(); await sleep(400); try { fs.rmSync(work, { recursive: true, force: true }); } catch {} }
