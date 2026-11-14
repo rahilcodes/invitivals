@@ -24,10 +24,18 @@ const H = C.hero, B = C.couple;
 const image = (id, src, alt, { delay = 0, z = 3, cls = '', slow = false } = {}) =>
   h('div', { class: `s reveal ${slow ? 'slow' : ''} ${cls}`, style: { ...box(id), zIndex: z, '--d': `${delay}s` } }, h('img', { src, alt, decoding: 'async', draggable: 'false' }));
 
-/* ── 1 · the invitation ── */
+/* a butterfly that flaps where it sits: the design's own painted butterfly, cut out by the build tool, over a
+   wall made whole beneath it. The picture is pressed towards its body line and let out again (the wings
+   closing and opening), and the whole of it rises and settles a hair, so it looks alive without leaving its place.
+   angle = the direction across the body, ox/oy = the body's place in the picture (%). */
+const flap = (id, { angle, ox, oy, t, del, z = 2 }) => h('div', { class: 's bf', style: { ...box(id), zIndex: z, '--bt': `${(t * 1.9).toFixed(2)}s`, '--bd': `${del}s` }, 'aria-hidden': 'true' },
+  h('img', { src: `assets/${id}.webp`, alt: '', decoding: 'async', draggable: 'false', style: { transformOrigin: `${ox}% ${oy}%`, '--a': `${angle}deg`, '--t': `${t}s`, '--d': `${del}s` } }));
+
+/* ── the invitation ── */
 const page1 = Page(1, [
   spr('p1-flowers-a', { still: true, motion: 'sway soft', origin: '0% 45%', z: 1 }),
   spr('p1-flowers-b', { still: true, motion: 'sway soft alt', origin: '0% 50%', z: 1 }),
+  flap('bf-hero', { angle: -16, ox: 41, oy: 52, t: 2.9, del: -0.4, z: 2 }),
   H.ikOnkar ? image('h-ik', H.ikOnkar, 'Ik Onkar', { delay: 0.1 }) : null,
   live('h-blessings', H.blessings, { size: 2.6, cls: 'serif italic', delay: 0.25 }),
   sprAt('h-rule1', 'p1-rule1', { delay: 0.35 }),
@@ -64,6 +72,8 @@ const page2 = Page(2, [
   spr('p2-flowers-b', { still: true, motion: 'sway soft alt', origin: '100% 20%', z: 1 }),
   spr('p2-flowers-c', { still: true, motion: 'sway soft alt', origin: '0% 60%', z: 1 }),
   spr('p2-flowers-d', { still: true, motion: 'sway soft', origin: '100% 60%', z: 1 }),
+  flap('bf-a', { angle: -49, ox: 43, oy: 72, t: 2.6, del: -1.1, z: 2 }),
+  flap('bf-b', { angle: 52, ox: 48, oy: 75, t: 3.1, del: -0.2, z: 2 }),
   spr('p2-title', { delay: 0.2, alt: 'Reveal Our Date' }),
   spr('p2-rule', { delay: 0.45 }),
   spr('p2-click', { delay: 0.6, alt: 'Click the button' }),
@@ -83,7 +93,7 @@ const mapsBtn = (day, label) => { const a = openMaps(day, [glyph(PIN), h('span',
 const schedule = (day) => h('ol', { class: 'timeline' }, ...day.schedule.map(([t, what, note]) => h('li', { class: t ? '' : 'no-time' },
   t ? h('time', {}, t) : null, h('span', {}, what, note ? h('em', {}, note) : null))));
 const venue = (day) => h('div', { class: 'venue' }, h('p', { class: 'venue-name' }, day.venue), h('p', { class: 'venue-addr' }, ...day.address.flatMap((l, i) => (i ? [h('br'), l] : [l]))));
-const actions = (day) => h('div', { class: `actions ${day.mapsUrl ? '' : 'one'}` }, saveBtn(day, SD.button), day.mapsUrl ? mapsBtn(day, 'Open in Google Maps') : null);
+const actions = (day) => h('div', { class: `actions ${day.mapsUrl ? '' : 'one'}` }, saveBtn(day, SD.button), day.mapsUrl ? mapsBtn(day, SD.maps) : null);
 
 const dayPage = (day) => () => Page(4, [
   live('d4-title', day.titleLines || day.title, { size: 4.1, cls: 'serif caps burgundy', delay: 0.15 }),

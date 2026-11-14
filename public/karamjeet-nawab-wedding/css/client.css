@@ -162,3 +162,21 @@ a.sd-btn .ico { color: var(--burgundy); }
 .actions { display: flex; justify-content: center; align-items: stretch; gap: 2.4cqw; margin-top: 4cqw; }
 .actions .sd-btn { flex: 0 0 auto; width: calc((100% - 2.4cqw) / 2); height: 11cqw; font-size: 2.75cqw; }
 .actions.one .sd-btn { width: 46cqw; }
+
+/* the date on the parchment: three centred lines — 20th / December / 2026 */
+.s.live.date3 { flex-direction: column; gap: .5cqw; white-space: nowrap; line-height: 1.1; }
+.s.live.date3 > span { display: block; text-align: center; }
+.s.live.date3 .d-day { font-weight: 600; font-size: 1.55em; line-height: 1; }
+.s.live.date3 .d-day sup { font-size: .5em; vertical-align: .72em; margin-left: .04em; }
+
+/* butterflies that flap in place */
+.bf { pointer-events: none; animation: bf-rise var(--bt, 5s) ease-in-out var(--bd, 0s) infinite; will-change: transform; }
+.bf > img { display: block; width: 100%; height: 100%; max-width: none; animation: bf-flap var(--t, 2.8s) ease-in-out var(--d, 0s) infinite; will-change: transform; backface-visibility: hidden; }
+@keyframes bf-flap {
+  0%, 46%, 100% { transform: rotate(var(--a)) scaleX(1) rotate(calc(-1 * var(--a))); }
+  8%, 24%, 38% { transform: rotate(var(--a)) scaleX(.5) rotate(calc(-1 * var(--a))); }
+  16%, 31% { transform: rotate(var(--a)) scaleX(.96) rotate(calc(-1 * var(--a))); }
+  70% { transform: rotate(var(--a)) scaleX(.72) rotate(calc(-1 * var(--a))); }
+}
+@keyframes bf-rise { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-.45cqw); } }
+@media (prefers-reduced-motion: reduce) { .bf, .bf > img { animation: none; } }

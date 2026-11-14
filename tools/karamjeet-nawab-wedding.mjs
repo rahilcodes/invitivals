@@ -105,12 +105,67 @@ function fillDown(p, x0p, x1p, y0p, y1p, feather = 6) {
   }
 }
 
+/* ── the three butterflies that flap: each is cut out of the design's own reference page (the painted butterfly
+      itself, in its own place), and the plate under it is made whole, so the wings can move without showing a
+      patch. `box` is the butterfly's rectangle in plate pixels; `clone` (hero only) is where the flowers that
+      fill its place are copied from; the walls of page 2 are filled column by column from above and below. ── */
+const BF = {
+  hero: { name: 'bf-hero', box: [0, 440, 156, 612], keep: true },   // among the flowers: the design's own soft patch stays under it
+ 
+  a: { name: 'bf-a', box: [640, 590, 780, 768], not: [[640, 722, 699, 768]], also: [[646, 636, 696, 714]] },   // not the brass corner of the slot; also its antennae
+  b: { name: 'bf-b', box: [146, 876, 289, 1030] },   // the reference's open parchment and its shadow begin right of this
+};
+async function butterfly(p, ref, { name, box: [x0, y0, x1, y1], keep: clone, not = [], also = [] }) {
+  const w = x1 - x0, h = y1 - y0, n = w * h, at = (x, y) => (y * p.w + x) * 4;
+  const diff = (a, b, i) => Math.max(Math.abs(a[i] - b[i]), Math.abs(a[i + 1] - b[i + 1]), Math.abs(a[i + 2] - b[i + 2]));
+  /* where the old plate differs from the reference: the butterfly and the old patch around it */
+  let m = new Uint8Array(n);
+  for (let y = 0; y < h; y++) for (let x = 0; x < w; x++) if (diff(ref.d, p.d, at(x0 + x, y0 + y)) > (clone ? 18 : 9)) m[y * w + x] = 1;
+  const grow = (src, r, need) => { const o = new Uint8Array(n); for (let y = 0; y < h; y++) for (let x = 0; x < w; x++) { let c = 0, t = 0; for (let dy = -r; dy <= r; dy++) for (let dx = -r; dx <= r; dx++) { const X = x + dx, Y = y + dy; if (X < 0 || Y < 0 || X >= w || Y >= h) continue; t++; c += src[Y * w + X]; } o[y * w + x] = c >= need(t) ? 1 : 0; } return o; };
+  for (const [ax0, ay0, ax1, ay1] of not) for (let y = ay0; y < ay1; y++) for (let x = ax0; x < ax1; x++) m[(y - y0) * w + (x - x0)] = 0;
+  m = grow(m, 2, (t) => t * 0.45);   // drop specks
+  m = grow(m, clone ? 7 : 6, () => 1); // and reach a little past the edge
+  for (const [ax0, ay0, ax1, ay1] of also) for (let y = ay0; y < ay1; y++) for (let x = ax0; x < ax1; x++) m[(y - y0) * w + (x - x0)] = 1;
+  for (const [ax0, ay0, ax1, ay1] of not) for (let y = ay0; y < ay1; y++) for (let x = ax0; x < ax1; x++) m[(y - y0) * w + (x - x0)] = 0;
+  for (let y = 0; y < h; y++) { m[y * w] = clone && x0 === 0 ? m[y * w] : 0; m[y * w + w - 1] = 0; } for (let x = 0; x < w; x++) { m[x] = 0; m[(h - 1) * w + x] = 0; }
+  const before = Buffer.from(p.d);
+  if (!clone) for (let x = 0; x < w; x++) { let y = 0; while (y < h) { if (!m[y * w + x]) { y++; continue; } let e = y; while (e < h && m[e * w + x]) e++;
+      for (let c = 0; c < 3; c++) { const top = before[at(x0 + x, y0 + y - 1) + c], bot = before[at(x0 + x, y0 + e) + c]; for (let k = y; k < e; k++) { const t = (k - y + 1) / (e - y + 1); p.d[at(x0 + x, y0 + k) + c] = Math.round(top * (1 - t) + bot * t); } } y = e; } }
+  /* the rest of the rectangle is the reference itself (the old plate was the same there), and the filled part is smoothed a little into it */
+  const soft = await sharp(p.d, { raw: { width: p.w, height: p.h, channels: 4 } }).extract({ left: x0, top: y0, width: w, height: h }).blur(1.3).raw().toBuffer();
+  if (!clone) for (let y = 0; y < h; y++) for (let x = 0; x < w; x++) { const i = at(x0 + x, y0 + y); for (let c = 0; c < 3; c++) p.d[i + c] = m[y * w + x] ? soft[(y * w + x) * 4 + c] : before[i + c]; }
+  /* the butterfly: the reference's pixels, opaque where they differ from the wall now under them */
+  const a = new Float32Array(n), base = clone ? before : p.d;
+  for (let y = 0; y < h; y++) for (let x = 0; x < w; x++) if (m[y * w + x]) a[y * w + x] = Math.min(1, Math.max(0, (diff(ref.d, base, at(x0 + x, y0 + y)) - (clone ? 30 : 9)) / 20));
+  const a8 = Buffer.alloc(n); for (let i = 0; i < n; i++) a8[i] = a[i] * 255;
+  const bl = await sharp(a8, { raw: { width: w, height: h, channels: 1 } }).blur(3).toColourspace('b-w').extractChannel(0).raw().toBuffer();
+  for (let i = 0; i < n; i++) if (bl[i] > 170) a8[i] = 255;   // the wings' pale panels are part of it too
+  /* only the butterfly itself: the largest connected piece (loose flecks of wall or petal are dropped) */
+  { const lab = new Int32Array(n); let best = 0, bestN = 0, cur = 0;
+    for (let s0 = 0; s0 < n; s0++) { if (a8[s0] < 90 || lab[s0]) continue; cur++; let cnt = 0; const st = [s0]; lab[s0] = cur;
+      while (st.length) { const i = st.pop(); cnt++; const x = i % w, y = (i / w) | 0; for (const [dx, dy] of [[1, 0], [-1, 0], [0, 1], [0, -1]]) { const X = x + dx, Y = y + dy; if (X < 0 || Y < 0 || X >= w || Y >= h) continue; const j = Y * w + X; if (a8[j] >= 90 && !lab[j]) { lab[j] = cur; st.push(j); } } }
+      if (cnt > bestN) { bestN = cnt; best = cur; } }
+    const keep = new Uint8Array(n); for (let i = 0; i < n; i++) if (lab[i] === best) keep[i] = 1; const near = grow(keep, 2, () => 1);
+    for (let i = 0; i < n; i++) if (!near[i]) a8[i] = 0;
+    /* and no holes inside it: whatever the outside cannot reach belongs to the butterfly */
+    const out_ = new Uint8Array(n), st = []; const seed = (i) => { if (a8[i] < 90 && !out_[i]) { out_[i] = 1; st.push(i); } };
+    for (let x = 0; x < w; x++) { seed(x); seed((h - 1) * w + x); } for (let y = 0; y < h; y++) { seed(y * w); seed(y * w + w - 1); }
+    while (st.length) { const i = st.pop(), x = i % w, y = (i / w) | 0; if (x) seed(i - 1); if (x < w - 1) seed(i + 1); if (y) seed(i - w); if (y < h - 1) seed(i + w); }
+    for (let i = 0; i < n; i++) if (!out_[i]) a8[i] = 255; }
+  const fin = await sharp(a8, { raw: { width: w, height: h, channels: 1 } }).blur(0.7).toColourspace('b-w').extractChannel(0).raw().toBuffer();
+  const out = Buffer.alloc(n * 4);
+  for (let y = 0; y < h; y++) for (let x = 0; x < w; x++) { const i = at(x0 + x, y0 + y), o = (y * w + x) * 4; out[o] = ref.d[i]; out[o + 1] = ref.d[i + 1]; out[o + 2] = ref.d[i + 2]; out[o + 3] = fin[y * w + x]; }
+  await sharp(out, { raw: { width: w, height: h, channels: 4 } }).webp({ quality: 92, alphaQuality: 100 }).toFile(path.join(A, name + '.webp'));
+  console.log(`✓ ${name}.webp ${w}×${h} at ${((x0 / p.w) * 100).toFixed(3)} %, ${((y0 / p.h) * 100).toFixed(3)} % (${((w / p.w) * 100).toFixed(3)} × ${((h / p.h) * 100).toFixed(3)} %)`);
+  return { x0, y0, x1, y1, mask: m };
+}
+
 async function plates() {
   const art = JSON.parse(fs.readFileSync(path.join(ROOT, 'public', 'vaishali-arpan-wedding', 'js', 'art.js'), 'utf8').match(/export const art = (\{.*\});/s)[1]);
 
   /* plate 1 */
   const p1 = await raw(path.join(DEMO, 'plate1.webp')), r1 = await raw(path.join(PACK, '1.png'));
-  pasteRef(p1, r1, art['p1-butterfly']);
+  const bf1 = await butterfly(p1, r1, BF.hero);
   /* the painted couple stood on x > 57 %, y > 55 %. Each row takes the pattern of the band just over their heads
      (the wall, the arch's gold frame, the curtain), lit as that row's own wall is at the left of the block. */
   const X0 = Math.round(0.535 * W), Y0 = Math.round(0.553 * H), XL0 = Math.round(0.455 * W), XL1 = Math.round(0.505 * W);
@@ -128,10 +183,14 @@ async function plates() {
   const sw = W - X0 + 24;
   for (let y = Y0 + 20; y < H; y++) for (let x = X0; x < W; x++) { const i = (y * W + x) * 4, j = ((y - Y0) * sw + (x - X0 + 24)) * 4; for (let c = 0; c < 3; c++) p1.d[i + c] = soft[j + c]; }
   await save(p1, path.join(A, 'plate1.webp'));
+  /* the same patch of flowers in the flower cut-out that lies over the plate there (its pixels are the plate's) */
+  { const fl = await raw(path.join(DEMO, 'p1-flowers-a.webp'));
+    for (let y = bf1.y0; y < bf1.y1; y++) for (let x = bf1.x0; x < Math.min(bf1.x1, fl.w); x++) if (bf1.mask[(y - bf1.y0) * (bf1.x1 - bf1.x0) + (x - bf1.x0)]) for (let c = 0; c < 3; c++) fl.d[(y * fl.w + x) * 4 + c] = p1.d[(y * W + x) * 4 + c];
+    await sharp(fl.d, { raw: { width: fl.w, height: fl.h, channels: 4 } }).webp({ quality: 90, alphaQuality: 95 }).toFile(path.join(A, 'p1-flowers-a.webp')); }
 
   /* plate 2 */
   const p2 = await raw(path.join(DEMO, 'plate2.webp')), r2 = await raw(path.join(PACK, '2.png'));
-  pasteRef(p2, r2, art['p2-butterfly-a']); pasteRef(p2, r2, art['p2-butterfly-b'], 2.2, 7, 31.2); /* the reference's open parchment begins at 31.7 % */
+  await butterfly(p2, r2, BF.a); await butterfly(p2, r2, BF.b);
   await save(p2, path.join(A, 'plate2.webp'));
 
   /* plate 5: the reference client's retouched plate (no ghost lettering), butterflies painted back, and the
@@ -160,7 +219,7 @@ function ics() {
   make('event.ics', `${SLUG}-20261220`, '20261220T090000', '20261220T170000', 'Wedding of Karamjeet Kaur & Nawab Singh Sekhon', 'The Regal Classic, Dirba',
     'Wedding Ceremony\n9:00 AM – Arrival of Barat\n10:30 AM – Anand Karaj\n12:00 PM – Wedding Lunch\n4:00 PM – Vidai\n\nMap: https://maps.app.goo.gl/ADWkDFmXzhfkApjC6');
   make('event-19dec.ics', `${SLUG}-20261219`, '20261219T150000', '20261219T210000', 'Karamjeet Kaur & Nawab Singh Sekhon · Shagan & Jago', 'Our Residence, Village Seona, PO Badshahpur',
-    'Pre-Wedding Celebrations\n3:00 PM – Shagan Ceremony\n6:00 PM – Jago Ceremony');
+    'Pre-Wedding Celebrations\n3:00 PM – Shagan Ceremony\n6:00 PM – Jago Ceremony\n\nMap: https://maps.app.goo.gl/pKNZnUQNF3oxxuLw8');
   console.log('✓ event.ics, event-19dec.ics');
 }
 
@@ -190,8 +249,8 @@ const sealHtml = `<!DOCTYPE html><meta charset="utf-8"><style>
 svg{position:absolute;inset:13%;width:74%;height:74%;filter:drop-shadow(0 2px 2px rgba(70,35,10,.5)) drop-shadow(0 -1px 1px rgba(255,240,210,.4))}
 </style><div class="face"></div><div class="rim"></div>
 <svg viewBox="0 0 200 200"><defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ffe9a8"/><stop offset=".45" stop-color="#f0b93c"/><stop offset="1" stop-color="#c98a1c"/></linearGradient></defs>
-<circle cx="100" cy="100" r="88" fill="none" stroke="url(#g)" stroke-width="4"/><circle cx="100" cy="100" r="78" fill="none" stroke="url(#g)" stroke-width="1.6" stroke-dasharray="1.5 6" stroke-linecap="round"/>
-<g fill="url(#g)">${petals}${petals2}<circle cx="100" cy="100" r="9"/></g><circle cx="100" cy="100" r="4" fill="#b4824c"/></svg>${READY}`;
+<!-- a plain face: the client wanted nothing inside the seal -->
+</svg>${READY}`;
 
 const ikHtml = `<!DOCTYPE html><meta charset="utf-8">${FONTS}<style>*{margin:0}html,body{background:transparent}body{width:520px;height:420px;display:flex;align-items:center;justify-content:center}
 p{font:500 260px/1 'Noto Sans Gurmukhi',sans-serif;background:linear-gradient(160deg,#b9862f,#7a4a14 55%,#a87428);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;filter:drop-shadow(0 3px 2px rgba(255,236,196,.9)) drop-shadow(0 -1px 1px rgba(80,40,10,.25))}
@@ -199,18 +258,19 @@ p{font:500 260px/1 'Noto Sans Gurmukhi',sans-serif;background:linear-gradient(16
 
 const ogHtml = `<!DOCTYPE html><meta charset="utf-8">${FONTS}<style>
 *{margin:0;box-sizing:border-box}body{width:1200px;height:630px;overflow:hidden;position:relative;background:#e9cfa8;font-variant-numeric:lining-nums}
-.bg{position:absolute;left:0;top:-330px;width:1200px;height:2132px}
-.fl{position:absolute;left:-60px;top:-90px;width:400px}
+.bg{position:absolute;left:0;top:-400px;width:1200px;height:2132px}
+.fl{position:absolute;left:-40px;top:-70px;width:440px}
+.bf{position:absolute;left:-40px;top:328px;width:141px}
 .cp{position:absolute;right:26px;bottom:-150px;height:700px;filter:drop-shadow(0 0 26px rgba(255,232,186,.75))}
 .veil{position:absolute;left:0;right:0;bottom:0;height:120px;background:linear-gradient(transparent,rgba(240,220,186,.92))}
-.c{position:absolute;left:150px;width:640px;top:0;height:630px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding-top:6px}
+.c{position:absolute;left:260px;width:680px;top:0;height:630px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding-top:6px}
 .k{font:600 20px 'Cormorant Garamond',serif;letter-spacing:.36em;padding-left:.36em;color:#8a5a1e}
-.n{margin-top:10px;font:italic 500 62px/1.12 'Playfair Display',Georgia,serif;letter-spacing:.01em;background:linear-gradient(180deg,#7b1e2b,#5a1420 55%,#7b1e2b);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;filter:drop-shadow(0 2px 2px rgba(255,235,200,.85));white-space:nowrap}
+.n{margin-top:8px;font:italic 500 70px/1.12 'Playfair Display',Georgia,serif;letter-spacing:.01em;background:linear-gradient(180deg,#7b1e2b,#5a1420 55%,#7b1e2b);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;filter:drop-shadow(0 2px 2px rgba(255,235,200,.85));white-space:nowrap}
 .a{font:600 19px 'Cormorant Garamond',serif;letter-spacing:.4em;padding-left:.4em;color:#8a5a1e;margin:10px 0 0}
 .d{margin-top:24px;font:700 28px 'Cormorant Garamond',serif;letter-spacing:.14em;padding-left:.14em;color:#4a291b}
 .p{margin-top:6px;font:600 18px 'Cormorant Garamond',serif;letter-spacing:.3em;padding-left:.3em;color:#8a5a1e}
 </style>
-<img class="bg" src="${url(path.join(A, 'plate1.webp'))}"><img class="fl" src="${url(path.join(A, 'p1-flowers-a.webp'))}"><img class="cp" src="${url(path.join(SRC, 'couple-cut.png'))}"><div class="veil"></div>
+<img class="bg" src="${url(path.join(A, 'plate1.webp'))}"><img class="fl" src="${url(path.join(A, 'p1-flowers-a.webp'))}"><img class="bf" src="${url(path.join(A, 'bf-hero.webp'))}">
 <div class="c"><p class="k">WEDDING INVITATION</p><p class="n">Karamjeet Kaur</p><p class="a">WEDS</p><p class="n">Nawab Singh Sekhon</p><p class="d">20 DECEMBER 2026</p><p class="p">THE REGAL CLASSIC · DIRBA</p></div>${READY}`;
 
 const work = fs.mkdtempSync(path.join(os.tmpdir(), 'inv-kn-'));
@@ -239,7 +299,7 @@ try {
   const face = await sharp(sealPng).resize(SEAL.r * 2, SEAL.r * 2).png().toBuffer();
   await sharp(path.join(DEMO, 'opening.webp')).composite([{ input: face, left: SEAL.cx - SEAL.r, top: SEAL.cy - SEAL.r }]).webp({ quality: 92 }).toFile(path.join(A, 'opening.webp'));
   await sharp(sealPng).png().toFile(path.join(A, 'seal.png'));
-  console.log('✓ opening.webp, seal.png (a flower on the seal, no initials)');
+  console.log('✓ opening.webp, seal.png (a plain seal face: no flower, no initials)');
   await sharp(await shot(ikHtml, 520, 420, true)).trim().resize({ height: 220 }).webp({ quality: 92, alphaQuality: 100 }).toFile(path.join(A, 'ik-onkar.webp'));
   const ik = await sharp(path.join(A, 'ik-onkar.webp')).metadata(); console.log(`✓ ik-onkar.webp ${ik.width}×${ik.height}`);
   await sharp(await shot(ogHtml, 1200, 630, false)).jpeg({ quality: 86, mozjpeg: true }).toFile(path.join(A, 'og.jpg'));

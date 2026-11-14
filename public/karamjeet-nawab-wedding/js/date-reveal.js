@@ -14,7 +14,7 @@ export function DateReveal(d) {
   const paperEl = h('div', { class: 's scroll-paper', style: { ...box('p2-paper'), zIndex: 3, '--closed': `${closedInset}%` } }, h('img', { src: 'assets/p2-paper.webp', alt: '', decoding: 'async' }));
   const rollerEl = h('div', { class: 's scroll-roller', style: { ...box('p2-roller'), zIndex: 4, '--travel': `-${travel}%` } }, h('img', { src: 'assets/p2-roller.webp', alt: '', decoding: 'async' }));
   const date = h('div', { class: 's live wrap serif hold date3', style: { ...box('p2-date3'), zIndex: 5, fontSize: '4.6cqw' } },
-    h('b', {}, d.day, h('sup', {}, d.suffix)), h('br'), d.month, h('br'), d.year);
+    h('span', { class: 'd-day' }, d.day, h('sup', {}, d.suffix)), h('span', {}, d.month), h('span', {}, d.year));
   const words = [
     date,
     spr('p2-daterule', { cls: 'hold', z: 5, still: true }),

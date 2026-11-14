@@ -5,20 +5,25 @@ import { art } from './art.js';
 Object.assign(art, {
   /* page 1: the invitation, centred on the arch (its axis is at 52.4 %). One vertical rhythm from the arch's
      point down to 53 %; the couple stand below it, on the right, from 58 % */
-  'h-ik': { x: 46.4, y: 12.5, w: 12, h: 3.55 },         /* 419×220 */
-  'h-blessings': { x: 30.4, y: 16.9, w: 44, h: 3.8 },
-  'h-rule1': { x: 40.4, y: 21.2, w: 24, h: 1.913 },
-  'h-parents': { x: 26.4, y: 23.7, w: 52, h: 4.6 },
-  'h-request': { x: 26.4, y: 29.0, w: 52, h: 5.6 },
-  'h-bride': { x: 22.4, y: 35.6, w: 60, h: 4.0 },
-  'h-with': { x: 37.4, y: 40.5, w: 30, h: 1.4 },
-  'h-groom': { x: 22.4, y: 42.6, w: 60, h: 4.0 },
-  'h-rule2': { x: 40.4, y: 47.6, w: 24, h: 1.913 },
-  'h-date': { x: 22.4, y: 50.4, w: 60, h: 1.5 },
-  'h-venue': { x: 22.4, y: 52.4, w: 60, h: 1.6 },
+  'h-ik': { x: 46.4, y: 14.7, w: 12, h: 3.55 },         /* 419×220 */
+  'h-blessings': { x: 30.4, y: 19.1, w: 44, h: 3.8 },
+  'h-rule1': { x: 40.4, y: 23.4, w: 24, h: 1.913 },
+  'h-parents': { x: 26.4, y: 25.9, w: 52, h: 4.6 },
+  'h-request': { x: 26.4, y: 31.2, w: 52, h: 5.6 },
+  'h-bride': { x: 22.4, y: 37.8, w: 60, h: 4.0 },
+  'h-with': { x: 37.4, y: 42.7, w: 30, h: 1.4 },
+  'h-groom': { x: 22.4, y: 44.8, w: 60, h: 4.0 },
+  'h-rule2': { x: 40.4, y: 49.8, w: 24, h: 1.913 },
+  'h-date': { x: 22.4, y: 52.6, w: 60, h: 1.5 },
+  'h-venue': { x: 22.4, y: 54.6, w: 60, h: 1.6 },
   /* the couple: 1086×1448, 56 % of the page wide, reaching a little past the right edge as the design's own
      couple did; the picture's cut lower edge dissolves into the mist at the foot of the page */
-  'h-couple': { x: 46, y: 58.2, w: 56, h: 42.02 },
+  'h-couple': { x: 46, y: 59.4, w: 56, h: 42.02 },
+
+  /* the three butterflies that flap in place: the rectangles the build tool cut them from */
+  'bf-hero': { x: 0, y: 26.316, w: 16.578, h: 10.287 },
+  'bf-a': { x: 68.013, y: 35.287, w: 14.878, h: 10.646 },
+  'bf-b': { x: 15.515, y: 52.392, w: 15.197, h: 9.211 },
 
   /* the families on plate 7, inside the frame's clear middle */
   'm-b-label': { x: 25, y: 27.4, w: 50, h: 1.4 },
@@ -57,11 +62,11 @@ Object.assign(art, {
   /* Save the Date on plate 5. The card and the two buttons are ONE block: the same left and right edges
      (11–89 %), a clear gap between the card and the buttons, the two buttons equal with a gap between them.
      (On the design's reference page the card was narrower than the button row and sat on top of it.) */
-  'sd-title': { x: 15, y: 13.8, w: 70, h: 5.6 },
-  'sd-rule': { x: 40.914, y: 20.4, w: 18.597, h: 1.794 },
-  'sd-names': { x: 20, y: 22.9, w: 60, h: 4.2 },
-  'sd-venue': { x: 20, y: 28.0, w: 60, h: 1.9 },
-  'sd-addr': { x: 20, y: 30.2, w: 60, h: 1.7 },
+  'sd-title': { x: 15, y: 17.0, w: 70, h: 5.6 },
+  'sd-rule': { x: 40.914, y: 23.6, w: 18.597, h: 1.794 },
+  'sd-names': { x: 20, y: 26.1, w: 60, h: 4.2 },
+  'sd-venue': { x: 20, y: 31.2, w: 60, h: 1.9 },
+  'sd-addr': { x: 20, y: 33.4, w: 60, h: 1.7 },
   'sd-card': { x: 11, y: 40.3, w: 78, h: 11.3 },
   'sd-save': { x: 11, y: 52.9, w: 38.2, h: 7.5 },
   'sd-maps': { x: 50.8, y: 52.9, w: 38.2, h: 7.5 },

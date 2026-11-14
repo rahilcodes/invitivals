@@ -40,7 +40,7 @@ export const config = {
       key: 'day1', date: '19 December 2026', weekday: 'Saturday', title: 'Pre-Wedding Celebrations', titleLines: ['Pre-Wedding', 'Celebrations'], card: 'Shagan 3:00 PM · Jago 6:00 PM',
       schedule: [['3:00 PM', 'Shagan Ceremony'], ['6:00 PM', 'Jago Ceremony']],
       venue: 'Our Residence', address: ['Village Seona, PO Badshahpur.'],
-      mapsUrl: '', ics: 'event-19dec.ics', start: '2026-12-19T15:00:00+05:30', end: '2026-12-19T21:00:00+05:30' /* three hours after the Jago begins */,
+      mapsUrl: 'https://maps.app.goo.gl/pKNZnUQNF3oxxuLw8' /* the family's link for the residence (2026-11-14) */, ics: 'event-19dec.ics', start: '2026-12-19T15:00:00+05:30', end: '2026-12-19T21:00:00+05:30' /* three hours after the Jago begins */,
       calendarTitle: 'Karamjeet Kaur & Nawab Singh Sekhon · Shagan & Jago',
     },
     {
