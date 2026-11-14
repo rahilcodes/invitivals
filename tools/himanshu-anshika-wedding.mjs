@@ -15,14 +15,14 @@
 
    Different from the reference, as the client asked: no "Hand in Hand" photograph page; the venue page shows a dhol
    (the studio's own painting, its navy trims turned maroon for this palette) instead of a venue photograph; the HA
-   monogram on the seal, the scratch card, the countdown and the closing.
+   monogram on the seal, the scratch card (by itself, no disc) and the countdown; the closing arch says "Thank You".
    Every name and detail is set exactly as the family wrote it ("Ghudchadi", "Sh." and "Shri" as written). */
 import fs from 'node:fs';
 import path from 'node:path';
 
 const ROOT = path.resolve(path.dirname(new URL(import.meta.url).pathname.replace(/^\/([A-Z]:)/, '$1')), '..');
 const SLUG = 'himanshu-anshika-wedding', D = path.join(ROOT, 'public', SLUG), REF = path.join(ROOT, 'public/lokesh-akansha-wedding');
-const URL_ = `https://invitivals.com/${SLUG}/`, V = 1, COVER = 'cover-25nov2026.jpg';
+const URL_ = `https://invitivals.com/${SLUG}/`, V = 2, COVER = 'cover-himanshu-anshika-v2.jpg';   // a new file name whenever the cover changes: WhatsApp keeps a preview per image address
 const esc = (s) => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 
 const VENUE = { name: 'Utsav Green Farm', lines: ['Baldev Vihar Colony,', 'Shaheed Bhagat Singh Nagar,', 'Karala, Delhi – 110081.'], mapsUrl: 'https://maps.app.goo.gl/kNHvEiNqpcpL9mu49' };
@@ -59,8 +59,8 @@ const CSS = `
 .dhol img { position: relative; z-index: 1; display: block; width: 100%; height: auto; transform-origin: 50% 88%; animation: dhol-sway 3.6s ease-in-out infinite; filter: drop-shadow(0 calc(var(--cq) * .8) calc(var(--cq) * 1.2) rgba(80, 40, 20, .22)); }
 @keyframes dhol-sway { 0%, 100% { transform: rotate(-1.6deg); } 50% { transform: rotate(1.6deg) translateY(calc(var(--cq) * -.5)); } }
 .addr span { display: block; }
-/* the closing: the monogram inside the painted arch */
-.arch-words .mono { --w: 21; }
+/* the closing: "Thank You" inside the painted arch */
+.thanks { font-family: var(--script); color: var(--maroon); font-size: calc(var(--cq) * 10.4); line-height: 1.1; white-space: nowrap; }
 .sign { font-family: var(--script); color: var(--maroon); font-size: calc(var(--cq) * 6.2); line-height: 1.15; margin-top: calc(var(--cq) * 1); }
 @media (prefers-reduced-motion: reduce) { .dhol img, .mono::after { animation: none; } }
 `;
@@ -77,11 +77,11 @@ if (process.argv[2] === 'init') {
   let js = fs.readFileSync(path.join(REF, 'js/app.js'), 'utf8').replace(/\r\n/g, '\n');
   const sw = (a, b) => { if (js.split(a).length !== 2) throw new Error('app.js: ' + a.slice(0, 50)); js = js.replace(a, () => b); };
   sw('Lokesh & Akansha — the wedding, groom side.', 'Himanshu & Anshika — the wedding.');
-  sw("'../config.js?v=3'", `'../config.js?v=${V}'`);
+  sw("'../config.js?v=3'", "'../config.js?v=1'");
   sw("'assets/el/la-logo.webp'", "'assets/el/ha-logo.webp'");
   sw("the couple's L & A monogram", "the couple's HA monogram");
   sw("ctx.drawImage(logo, (W - L) / 2, H * .15, L, L); ctx.shadowColor = 'transparent';",
-    "const cx = W / 2, cy = H * .15 + L / 2, R = L * .54, dg = ctx.createRadialGradient(cx - R * .3, cy - R * .4, R * .1, cx, cy, R); dg.addColorStop(0, '#5a2d1c'); dg.addColorStop(.62, '#2a130b'); dg.addColorStop(1, '#1b0c07');\n      ctx.fillStyle = dg; ctx.beginPath(); ctx.arc(cx, cy, R, 0, 6.2832); ctx.fill(); ctx.shadowColor = 'transparent';\n      ctx.strokeStyle = '#f8e7c2'; ctx.lineWidth = R * .05; ctx.beginPath(); ctx.arc(cx, cy, R * 1.025, 0, 6.2832); ctx.stroke(); ctx.strokeStyle = '#a67a26'; ctx.lineWidth = 1.5 * dpr; ctx.beginPath(); ctx.arc(cx, cy, R * 1.055, 0, 6.2832); ctx.stroke();\n      ctx.drawImage(logo, cx - L * .485, cy - L * .485, L * .97, L * .97);");
+    "const S = L * 1.14; ctx.drawImage(logo, (W - S) / 2, H * .15 + L / 2 - S / 2, S, S); ctx.shadowColor = 'transparent';   // the monogram by itself, on the foil (client, 2026-11-14: no dark disc behind it)");
   sw("ctx.fillText('Our special days await', W / 2, H * .74)", "ctx.fillText('Our special day awaits', W / 2, H * .75)");
   sw("W / 2, H * .83);", "W / 2, H * .84);");
   sw('countdown to the Pheras', 'countdown to the wedding day');
@@ -322,7 +322,8 @@ const html = `<!DOCTYPE html>
         <p class="message rise" style="--d:.3s">Your gracious presence and blessings will make our wedding day truly memorable.</p>
         <p class="sign rise" style="--d:.4s">Himanshu &amp; Anshika</p>
       </div>
-      <div class="arch-words">${MONO(21, 'pop', '.3s')}</div>
+      <!-- inside the painted arch (client, 2026-11-14: "Thank You" here, not the monogram) -->
+      <div class="arch-words"><p class="thanks rise" style="--d:.3s">Thank You</p><img class="orn rise" style="width:calc(var(--cq) * 13);margin:calc(var(--cq) * .6) auto 0;--d:.45s" src="assets/el/garland.webp" alt="" loading="lazy"></div>
       <p class="credit">Created by <a href="https://invitivals.com/?utm_source=invitation&amp;utm_medium=footer&amp;utm_campaign=${SLUG}" target="_blank" rel="noopener">Invitivals</a></p>
     </div>
   </section>

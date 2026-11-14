@@ -162,10 +162,7 @@ if (cue) {
     const L = W * .5;
     if (logo.complete && logo.naturalWidth) {
       ctx.shadowColor = 'rgba(90,55,15,.45)'; ctx.shadowBlur = 6 * dpr; ctx.shadowOffsetY = 2 * dpr;
-      const cx = W / 2, cy = H * .15 + L / 2, R = L * .54, dg = ctx.createRadialGradient(cx - R * .3, cy - R * .4, R * .1, cx, cy, R); dg.addColorStop(0, '#5a2d1c'); dg.addColorStop(.62, '#2a130b'); dg.addColorStop(1, '#1b0c07');
-      ctx.fillStyle = dg; ctx.beginPath(); ctx.arc(cx, cy, R, 0, 6.2832); ctx.fill(); ctx.shadowColor = 'transparent';
-      ctx.strokeStyle = '#f8e7c2'; ctx.lineWidth = R * .05; ctx.beginPath(); ctx.arc(cx, cy, R * 1.025, 0, 6.2832); ctx.stroke(); ctx.strokeStyle = '#a67a26'; ctx.lineWidth = 1.5 * dpr; ctx.beginPath(); ctx.arc(cx, cy, R * 1.055, 0, 6.2832); ctx.stroke();
-      ctx.drawImage(logo, cx - L * .485, cy - L * .485, L * .97, L * .97);
+      const S = L * 1.14; ctx.drawImage(logo, (W - S) / 2, H * .15 + L / 2 - S / 2, S, S); ctx.shadowColor = 'transparent';   // the monogram by itself, on the foil (client, 2026-11-14: no dark disc behind it)
     }
     ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
     ctx.fillStyle = '#6e1630'; ctx.font = `${Math.round(H * .066)}px "Pinyon Script", cursive`; ctx.fillText('Our special day awaits', W / 2, H * .75);

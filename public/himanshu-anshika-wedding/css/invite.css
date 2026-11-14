@@ -310,7 +310,7 @@ p, h1, h2, h3 { margin: 0; }
 .dhol img { position: relative; z-index: 1; display: block; width: 100%; height: auto; transform-origin: 50% 88%; animation: dhol-sway 3.6s ease-in-out infinite; filter: drop-shadow(0 calc(var(--cq) * .8) calc(var(--cq) * 1.2) rgba(80, 40, 20, .22)); }
 @keyframes dhol-sway { 0%, 100% { transform: rotate(-1.6deg); } 50% { transform: rotate(1.6deg) translateY(calc(var(--cq) * -.5)); } }
 .addr span { display: block; }
-/* the closing: the monogram inside the painted arch */
-.arch-words .mono { --w: 21; }
+/* the closing: "Thank You" inside the painted arch */
+.thanks { font-family: var(--script); color: var(--maroon); font-size: calc(var(--cq) * 10.4); line-height: 1.1; white-space: nowrap; }
 .sign { font-family: var(--script); color: var(--maroon); font-size: calc(var(--cq) * 6.2); line-height: 1.15; margin-top: calc(var(--cq) * 1); }
 @media (prefers-reduced-motion: reduce) { .dhol img, .mono::after { animation: none; } }
