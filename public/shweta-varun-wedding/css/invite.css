@@ -299,7 +299,8 @@ p, h1, h2, h3 { margin: 0; }
 .amp__and.weds { font-size: calc(var(--cq) * 6.4); padding: 0 .1em; }
 /* the couple's S&V monogram, by itself: no disc, no box, only its own shadow on the paper */
 .mono { display: block; flex: none; width: calc(var(--cq) * var(--w, 30)); height: auto; filter: drop-shadow(0 calc(var(--cq) * .9) calc(var(--cq) * 1.4) rgba(96, 58, 12, .34)) drop-shadow(0 0 calc(var(--cq) * .3) rgba(110, 70, 20, .3)); }
-.arch-words .mono { --w: 23; }
+/* the closing arch says "Thank You" (client, 2026-11-15: no monogram there) */
+.thanks { font-family: var(--script); color: var(--maroon); font-size: calc(var(--cq) * 10.4); line-height: 1.1; white-space: nowrap; }
 /* the hosts, and the words of the invitation */
 .hosts { font-family: var(--serif); font-weight: 700; color: var(--maroon); font-size: calc(var(--cq) * 5.4); line-height: 1.25; text-wrap: balance; }
 .hosts i { display: block; font-family: var(--script); font-style: normal; font-weight: 400; color: var(--gold); font-size: calc(var(--cq) * 5.6); line-height: 1; margin: calc(var(--cq) * .4) 0; }
