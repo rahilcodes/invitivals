@@ -1,0 +1,31 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Invitivals//Karamjeet Kaur & Nawab Singh Sekhon Wedding//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VTIMEZONE
+TZID:Asia/Kolkata
+BEGIN:STANDARD
+DTSTART:19700101T000000
+TZOFFSETFROM:+0530
+TZOFFSETTO:+0530
+TZNAME:IST
+END:STANDARD
+END:VTIMEZONE
+BEGIN:VEVENT
+UID:karamjeet-nawab-wedding-20261219@invitivals.com
+DTSTAMP:20261114T000000Z
+DTSTART;TZID=Asia/Kolkata:20261219T150000
+DTEND;TZID=Asia/Kolkata:20261219T210000
+SUMMARY:Karamjeet Kaur & Nawab Singh Sekhon · Shagan & Jago
+LOCATION:Our Residence\, Village Seona\, PO Badshahpur
+DESCRIPTION:Pre-Wedding Celebrations\n3:00 PM – Shagan Ceremony\n6:00 PM 
+ – Jago Ceremony
+URL:https://invitivals.com/karamjeet-nawab-wedding/
+BEGIN:VALARM
+TRIGGER:-P1D
+ACTION:DISPLAY
+DESCRIPTION:Karamjeet Kaur & Nawab Singh Sekhon · Shagan & Jago tomorrow
+END:VALARM
+END:VEVENT
+END:VCALENDAR

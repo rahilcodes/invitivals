@@ -1,0 +1,32 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Invitivals//Karamjeet Kaur & Nawab Singh Sekhon Wedding//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VTIMEZONE
+TZID:Asia/Kolkata
+BEGIN:STANDARD
+DTSTART:19700101T000000
+TZOFFSETFROM:+0530
+TZOFFSETTO:+0530
+TZNAME:IST
+END:STANDARD
+END:VTIMEZONE
+BEGIN:VEVENT
+UID:karamjeet-nawab-wedding-20261220@invitivals.com
+DTSTAMP:20261114T000000Z
+DTSTART;TZID=Asia/Kolkata:20261220T090000
+DTEND;TZID=Asia/Kolkata:20261220T170000
+SUMMARY:Wedding of Karamjeet Kaur & Nawab Singh Sekhon
+LOCATION:The Regal Classic\, Dirba
+DESCRIPTION:Wedding Ceremony\n9:00 AM – Arrival of Barat\n10:30 AM – An
+ and Karaj\n12:00 PM – Wedding Lunch\n4:00 PM – Vidai\n\nMap: https://m
+ aps.app.goo.gl/ADWkDFmXzhfkApjC6
+URL:https://invitivals.com/karamjeet-nawab-wedding/
+BEGIN:VALARM
+TRIGGER:-P1D
+ACTION:DISPLAY
+DESCRIPTION:Wedding of Karamjeet Kaur & Nawab Singh Sekhon tomorrow
+END:VALARM
+END:VEVENT
+END:VCALENDAR

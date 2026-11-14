@@ -1,0 +1,164 @@
+/* Karamjeet Kaur & Nawab Singh Sekhon: additions to the design's stylesheet (css/invite.css, unchanged). Live words in measured
+   boxes (no reference lettering for these lines), the programme cards, the day pages that flow below their
+   plate, the countdown tray, the Save the Date page, the Add to Calendar sheet, and the film's seal patch.
+   Every word is set in dark browns (the demo's light gold reads poorly on the cream plates). */
+:root {
+  --ink: #4a291b;        /* body words: deep chocolate */
+  --ink-soft: #593522;   /* small capitals and labels: walnut */
+  --ink-deep: #3b2214;   /* names, headings in capitals */
+  --card: #fbf0dc;       /* the solid cream of every card */
+  --deva: 'Noto Serif Devanagari', 'Kohinoor Devanagari', 'Mangal', serif;
+}
+body { font-variant-numeric: lining-nums; }
+.s.live { color: var(--ink); }
+.s.live.wrap { white-space: normal; line-height: 1.3; }
+.s.live.caps { text-transform: uppercase; letter-spacing: .2em; padding-left: .2em; font-weight: 700; line-height: 1.3; }
+.s.live.soft { color: var(--ink-soft); }
+.s.live.caps.tight { letter-spacing: .1em; padding-left: .1em; }
+.s.live.burgundy { color: var(--burgundy); }
+.s.live.deep { color: var(--ink-deep); }
+.s.live.bold { font-weight: 700; }
+.s.live.semibold { font-weight: 600; }
+.s.live.italic { font-style: italic; }
+.s.live.deva { font-family: var(--deva); font-weight: 500; line-height: 1.45; white-space: nowrap; }
+.s.live.script { line-height: 1.05; }
+.s.live.name { font-family: 'Playfair Display', 'Cormorant Garamond', Georgia, serif; font-style: italic; font-weight: 500; letter-spacing: .01em; line-height: 1.15; }
+.s.live.serif.wrap { line-height: 1.25; }
+.s.live.italic.wrap { line-height: 1.3; }
+.s.live.date3 { color: var(--burgundy); line-height: 1.12; }
+.s.live.date3 b { font-weight: 600; font-size: 1.7em; line-height: 1; }
+.s.live.date3 sup { font-size: .42em; vertical-align: .9em; margin-left: .05em; }
+.hint, .tap-hint { color: var(--ink); font-weight: 600; }
+.tap-hint { opacity: .85; }
+
+/* ── page 3: the programme cards, each a button that opens its day ── */
+.fn-wrap { filter: drop-shadow(0 1.6cqw 3.2cqw rgba(84, 44, 16, .26)); }
+.fn { position: relative; display: flex; align-items: center; gap: 3.4cqw; width: 100%; height: 100%; padding: 2.4cqw 3cqw 2.4cqw 2.8cqw; border: 0; border-radius: 3.4cqw; text-align: left; color: var(--ink);
+  background: var(--card) linear-gradient(160deg, #fdf6e8, #f6e5c8); box-shadow: 0 0 0 .45cqw rgba(252, 243, 228, .9), 0 0 0 .7cqw rgba(201, 162, 79, .95); transition: transform .25s ease, filter .25s ease; }
+.fn::before { content: ""; position: absolute; inset: 1.1cqw; border-radius: 2.4cqw; border: 1px solid rgba(201, 162, 79, .55); pointer-events: none; }
+.fn:active { transform: scale(.985); filter: brightness(1.04); }
+.fn:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; }
+@media (hover: hover) { .fn:hover { transform: translateY(-.4cqw); filter: brightness(1.03); } }
+.fn-day { flex: 0 0 auto; display: flex; flex-direction: column; align-items: center; justify-content: center; width: 15.2cqw; height: 15.2cqw; border-radius: 50%; color: var(--cream);
+  background: radial-gradient(circle at 35% 30%, #8a2634, #5a1420 70%, #4a0f1a); box-shadow: 0 0 0 .5cqw #f3e2c4, 0 0 0 .75cqw var(--gold), 0 1cqw 2.2cqw rgba(84, 44, 16, .3); }
+.fn-day b { font-weight: 600; font-size: 6.2cqw; line-height: 1; font-variant-numeric: lining-nums; }
+.fn-day small { margin-top: .5cqw; font-weight: 700; font-size: 1.9cqw; letter-spacing: .22em; padding-left: .22em; text-transform: uppercase; color: #f0d08a; }
+.fn-body { display: flex; flex-direction: column; align-items: flex-start; min-width: 0; flex: 1 1 auto; }
+.fn-when { font-weight: 700; font-size: 2cqw; letter-spacing: .18em; text-transform: uppercase; color: var(--ink-soft); }
+.fn-title { display: block; margin: .9cqw 0 .8cqw; font-weight: 700; font-size: 3.45cqw; line-height: 1.15; color: var(--ink-deep); }
+.fn-meta { font-weight: 500; font-size: 2.35cqw; line-height: 1.25; color: var(--ink); }
+.fn-tap { display: inline-flex; align-items: center; gap: 1.2cqw; margin-top: 2cqw; padding: 1.25cqw 2.6cqw 1.25cqw 3cqw; border-radius: 99px; background: linear-gradient(180deg, #8a2430, #5e1420); color: var(--cream); font-weight: 700; font-size: 2.05cqw; letter-spacing: .2em; text-transform: uppercase; box-shadow: 0 .8cqw 1.8cqw rgba(90, 20, 30, .3); }
+.fn-tap i { width: 1.5cqw; height: 1.5cqw; border-right: 1.5px solid currentColor; border-top: 1.5px solid currentColor; transform: rotate(45deg); animation: nudge 1.6s ease-in-out infinite; }
+@keyframes nudge { 0%, 100% { transform: translateX(0) rotate(45deg); } 50% { transform: translateX(.6cqw) rotate(45deg); } }
+.fn-n { position: absolute; top: 1.9cqw; right: 2.6cqw; font-family: var(--serif); font-weight: 600; font-size: 2.3cqw; letter-spacing: .16em; color: var(--gold); }
+
+/* ── a day's detail page: plate at the top, words in flow below its arch; the page ends with its card ── */
+.page.tall { overflow: hidden; background: none; }
+/* the plate fades in from the blurred backdrop at its top edge, and out above its own painted buttons (78 % down),
+   which the card would otherwise half-cover */
+.page.tall > img.plate { height: auto; bottom: auto; -webkit-mask-image: linear-gradient(to bottom, transparent, #000 6%, #000 70%, transparent 77%); mask-image: linear-gradient(to bottom, transparent, #000 6%, #000 70%, transparent 77%); }
+.detail { overflow-x: hidden; }
+.detail .column { justify-content: center; }
+.flow { position: relative; z-index: 5; margin-top: var(--top); padding: 0 8cqw 5cqw; }
+.flow .panel, .dress { padding: 3.2cqw 4cqw 4cqw; border-radius: 3cqw; background: var(--card) linear-gradient(180deg, #fdf5e6, #f7e8cc); border: 1px solid rgba(201, 162, 79, .8); box-shadow: 0 0 0 .8cqw rgba(252, 242, 226, .55), 0 1.4cqw 3.6cqw rgba(84, 44, 16, .24); }
+.dress { margin: 0 0 3.2cqw; padding: 2.6cqw 3cqw 3cqw; text-align: center; }
+.dress-title { margin: 0; font-weight: 700; font-size: 3.6cqw; color: var(--ink-deep); }
+.swatches { list-style: none; display: flex; justify-content: center; gap: 2.6cqw; margin: 2.4cqw 0 0; padding: 0; }
+.swatches li { width: 12.5cqw; aspect-ratio: 1; border-radius: 50%; padding: .6cqw; background: linear-gradient(150deg, #f3d999, #b98a3e 50%, #f0d08a); box-shadow: 0 .8cqw 2cqw rgba(84, 44, 16, .25); }
+.swatches img { width: 100%; height: 100%; border-radius: 50%; }
+.timeline { list-style: none; margin: 0; padding: 0; position: relative; }
+.timeline::before { content: ""; position: absolute; left: 1.6cqw; top: 1.6cqw; bottom: 1.6cqw; width: 1px; background: linear-gradient(var(--gold), rgba(201, 162, 79, .25)); }
+.timeline li { position: relative; padding: 1.3cqw 0 1.3cqw 6cqw; }
+.timeline li::before { content: ""; position: absolute; left: 1.6cqw; top: 2.6cqw; width: 2cqw; height: 2cqw; border-radius: 50%; transform: translateX(-50%); background: var(--gold); box-shadow: 0 0 0 2px var(--card); }
+.timeline time { display: block; font-weight: 700; font-size: 2.5cqw; letter-spacing: .14em; text-transform: uppercase; color: var(--ink-soft); }
+.timeline span { display: block; font-weight: 600; font-size: 3.5cqw; line-height: 1.25; color: var(--ink-deep); }
+.timeline .no-time span { font-style: italic; color: var(--burgundy); }
+.timeline em { display: block; margin-top: .6cqw; font-weight: 500; font-size: 2.9cqw; line-height: 1.3; color: #4b241f; }
+.venue { margin-top: 3cqw; padding-top: 3cqw; border-top: 1px solid rgba(201, 162, 79, .6); text-align: center; }
+.venue-name { margin: 0; font-weight: 700; font-size: 3.6cqw; letter-spacing: .08em; text-transform: uppercase; line-height: 1.25; color: var(--ink-deep); }
+.venue-addr { margin: 1cqw 0 0; font-size: 3.1cqw; line-height: 1.4; color: var(--ink); }
+.actions { display: flex; justify-content: center; gap: 1.5cqw; margin-top: 4cqw; }
+.actions .img-wrap { width: 34cqw; height: 10.4cqw; filter: drop-shadow(0 .8cqw 1.8cqw rgba(84, 44, 16, .25)); }
+.page.tall .reveal.flow { transform: translateY(1.4cqw); }
+.page.tall.ready .reveal.flow.in { transform: none; }
+
+/* ── the countdown: four light tiles on the plain wall, equal, with a hairline of gold ── */
+.cd-tray { display: flex; flex-direction: column; justify-content: center; }
+.cd { display: grid; grid-template-columns: repeat(4, 1fr); gap: 2.4cqw; height: 100%; }
+.cd div { display: flex; flex-direction: column; align-items: center; justify-content: center; border-radius: 2.4cqw; background: rgba(255, 250, 241, .88); border: 1px solid rgba(201, 162, 79, .9); box-shadow: 0 0 0 .5cqw rgba(255, 250, 241, .55), 0 1.2cqw 2.8cqw rgba(84, 44, 16, .16); }
+.cd b { font-weight: 600; font-size: 6.4cqw; line-height: 1; color: var(--burgundy); font-variant-numeric: tabular-nums lining-nums; }
+.cd span { margin-top: 1.1cqw; font-weight: 700; font-size: 1.8cqw; letter-spacing: .2em; padding-left: .2em; text-transform: uppercase; color: var(--ink-soft); }
+.cd[hidden] { display: none; }
+.cd-done { margin: 0; text-align: center; font-family: var(--script); font-size: 5.2cqw; line-height: 1.1; color: var(--burgundy); }
+.cd-done[hidden] { display: none; }
+
+/* ── Save the Date: the date-and-time card and the two buttons ── */
+.sd-card { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: .5cqw; padding: 2cqw 3cqw; border-radius: 3cqw; text-align: center; background: var(--card) linear-gradient(180deg, #fdf6e8, #f6e5c8); border: 1px solid rgba(201, 162, 79, .9); box-shadow: 0 0 0 .5cqw rgba(252, 243, 228, .8), 0 1.4cqw 3.2cqw rgba(84, 44, 16, .22); }
+.sd-card small { font-weight: 700; font-size: 1.9cqw; letter-spacing: .26em; padding-left: .26em; text-transform: uppercase; color: var(--ink-soft); }
+.sd-card b { font-weight: 700; font-size: 3.5cqw; line-height: 1.2; color: var(--ink-deep); }
+.sd-rule { display: block; width: 34cqw; height: 1px; margin: 1.5cqw 0; background: linear-gradient(90deg, transparent, var(--gold) 20%, var(--gold) 80%, transparent); position: relative; }
+.sd-rule::after { content: ""; position: absolute; left: 50%; top: 50%; width: 1.3cqw; height: 1.3cqw; transform: translate(-50%, -50%) rotate(45deg); background: var(--gold); box-shadow: 0 0 0 .5cqw var(--card); }
+.sd-btn { display: flex; align-items: center; justify-content: center; gap: 1.6cqw; width: 100%; height: 100%; padding: 0 2cqw; border-radius: 2.4cqw; font-weight: 700; font-size: 2.55cqw; letter-spacing: .06em; text-decoration: none; transition: transform .2s ease, filter .2s ease; }
+.sd-btn .ico { display: block; width: 3.4cqw; height: 3.4cqw; flex: 0 0 auto; }
+.sd-btn .ico svg { display: block; width: 100%; height: 100%; }
+.sd-btn:active { transform: scale(.98); filter: brightness(1.06); }
+.sd-btn:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; }
+button.sd-btn { background: linear-gradient(180deg, #8a2430, #5e1420); color: var(--cream); border: 1px solid rgba(201, 162, 79, .7); box-shadow: 0 0 0 .5cqw rgba(252, 243, 228, .85), 0 1.2cqw 2.6cqw rgba(90, 20, 30, .32); }
+a.sd-btn { background: var(--card) linear-gradient(180deg, #fdf6e8, #f3e0c0); color: var(--ink-deep); border: 1px solid var(--gold); box-shadow: 0 0 0 .5cqw rgba(252, 243, 228, .85), 0 1.2cqw 2.6cqw rgba(84, 44, 16, .22); }
+a.sd-btn .ico { color: var(--burgundy); }
+
+/* ── the closing: the couple's monogram ── */
+.z-logo img { object-fit: contain; filter: drop-shadow(0 .6cqw 1.4cqw rgba(84, 44, 16, .28)); }
+
+/* ── Add to Calendar sheet ── */
+.sheet { position: fixed; inset: 0; z-index: 70; display: flex; align-items: flex-end; justify-content: center; }
+.sheet[hidden] { display: none; }
+.sheet-backdrop { position: absolute; inset: 0; background: rgba(30, 15, 8, .62); animation: fade .25s ease; }
+.sheet-box { position: relative; width: min(100%, 440px); margin: 0 auto; padding: 22px 20px calc(18px + env(safe-area-inset-bottom, 0px)); border-radius: 18px 18px 0 0; background: linear-gradient(180deg, #fbf1dd, #f1ddbb); border: 1px solid var(--gold); border-bottom: 0; box-shadow: 0 -10px 40px rgba(0, 0, 0, .35); text-align: center; animation: up .3s cubic-bezier(.22, .61, .36, 1); }
+.sheet-title { margin: 0; font-family: var(--script); font-size: 38px; line-height: 1.1; color: var(--burgundy); }
+.sheet-sub { margin: 4px 0 14px; font-size: 15px; color: var(--ink); }
+.sheet-opt { display: block; margin-top: 10px; padding: 14px; min-height: 48px; border-radius: 12px; border: 1px solid var(--gold); background: #fff9ee; color: var(--ink-deep); font-weight: 700; font-size: 16px; letter-spacing: .06em; text-decoration: none; }
+.sheet-opt small { font-weight: 500; font-size: 13px; color: var(--ink-soft); }
+.sheet-opt:active { background: #f7e6c6; }
+.sheet-close { margin-top: 12px; padding: 10px 24px; border: 0; background: none; color: var(--ink); font-size: 14px; letter-spacing: .2em; text-transform: uppercase; }
+@keyframes fade { from { opacity: 0; } }
+@keyframes up { from { transform: translateY(100%); } }
+
+/* ── the opening film: the VA seal face over the film's seal, and the burst that covers its breaking ── */
+.film-stage { position: relative; width: 100%; height: 100dvh; overflow: hidden; }
+.film-stage video { position: absolute; inset: 0; }
+.film .seal, .film .burst { position: absolute; pointer-events: none; will-change: opacity; }
+.film .seal { opacity: 0; }
+.film .burst { opacity: 0; border-radius: 50%; background: radial-gradient(circle closest-side, #fff8e6 0%, #ffecc4 34%, rgba(255, 232, 190, .98) 56%, rgba(255, 220, 160, .6) 76%, rgba(255, 210, 140, 0) 100%); }
+
+@media (prefers-reduced-motion: reduce) { .fn-tap i { animation: none; } }
+
+/* ═══ this invitation's own ═══════════════════════════════════════════════ */
+/* the couple: the client's picture, cut out, standing in the hero. Its cut lower edge dissolves into the mist
+   at the foot of the page; a breath of the wall's own light around the figures seats them in the scene. */
+.couple img { object-fit: contain; -webkit-mask-image: linear-gradient(to bottom, #000 78%, transparent 97%); mask-image: linear-gradient(to bottom, #000 78%, transparent 97%);
+  filter: drop-shadow(0 0 1.8cqw rgba(255, 232, 188, .55)) drop-shadow(-.6cqw 1cqw 2.4cqw rgba(84, 44, 16, .22)) saturate(.96) brightness(1.03); }
+.s.reveal.couple { transform: translateY(2.4cqw); transition-duration: 1.5s; }
+.page.ready .s.reveal.couple.in { transform: none; }
+.hint { left: 27%; }
+
+/* the special invitation in the closing: a quiet card of its own */
+.special { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: .7cqw; padding: 1.6cqw 3cqw; border-radius: 3cqw; text-align: center; color: var(--ink);
+  background: var(--card) linear-gradient(180deg, #fdf6e8, #f6e5c8); border: 1px solid rgba(201, 162, 79, .9); box-shadow: 0 0 0 .5cqw rgba(252, 243, 228, .8), 0 1.4cqw 3.2cqw rgba(84, 44, 16, .2); }
+.special small { font-weight: 700; font-size: 2.1cqw; letter-spacing: .24em; padding-left: .24em; text-transform: uppercase; color: var(--ink-soft); }
+.special b { font-weight: 700; font-size: 4.3cqw; line-height: 1.15; color: var(--burgundy); }
+.special em { font-size: 2.9cqw; line-height: 1.1; color: var(--ink); }
+
+/* Save the Date: the day and the hour side by side in one card as wide as the button row under it */
+.sd-card { flex-direction: row; gap: 0; padding: 0 2cqw; }
+.sd-card > div { flex: 1 1 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: .9cqw; min-width: 0; }
+.sd-card b { font-size: 3.3cqw; white-space: nowrap; }
+.sd-card .sd-rule { flex: 0 0 1px; width: 1px; height: 56%; margin: 0 1cqw; background: linear-gradient(180deg, transparent, var(--gold) 20%, var(--gold) 80%, transparent); }
+.sd-btn { white-space: nowrap; font-size: 2.6cqw; cursor: pointer; font-family: inherit; }
+.s.hit > .sd-btn { width: 100%; height: 100%; }
+
+/* a day's buttons: the page's own, equal in width and height, centred under the card with one gap between
+   them; a day without a map has a single centred button */
+.actions { display: flex; justify-content: center; align-items: stretch; gap: 2.4cqw; margin-top: 4cqw; }
+.actions .sd-btn { flex: 0 0 auto; width: calc((100% - 2.4cqw) / 2); height: 11cqw; font-size: 2.75cqw; }
+.actions.one .sd-btn { width: 46cqw; }
