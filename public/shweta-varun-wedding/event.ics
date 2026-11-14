@@ -1,0 +1,57 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Invitivals//Shweta & Varun Wedding//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VTIMEZONE
+TZID:Asia/Kolkata
+BEGIN:STANDARD
+DTSTART:19700101T000000
+TZOFFSETFROM:+0530
+TZOFFSETTO:+0530
+TZNAME:IST
+END:STANDARD
+END:VTIMEZONE
+BEGIN:VEVENT
+UID:shweta-varun-wedding-mehndi@invitivals.com
+DTSTAMP:20261115T000000Z
+DTSTART;TZID=Asia/Kolkata:20261211T190000
+DTEND;TZID=Asia/Kolkata:20261211T230000
+SUMMARY:Mehndi Ceremony · Shweta & Varun
+LOCATION:Gulmohar Hall\, Ground Floor\, Ola Vakkola Banquets\, Police Sta
+ tion\, B-25/198\, Near Vakola\, Anand Nagar\, Vakola\, Santacruz East\, 
+ Mumbai\, Maharashtra – 400055
+DESCRIPTION:Friday\, 11 December 2026\n7:00 PM – 11:00 PM\n\nVenue: Gul
+ mohar Hall\, Ground Floor\, Ola Vakkola Banquets\, Police Station\, B-25
+ /198\, Near Vakola\, Anand Nagar\, Vakola\, Santacruz East\, Mumbai\, Ma
+ harashtra – 400055\nMap: https://maps.app.goo.gl/kPECwfKd4jfSxxuc6?g_s
+ t=iw\n\nhttps://invitivals.com/shweta-varun-wedding/
+URL:https://invitivals.com/shweta-varun-wedding/
+BEGIN:VALARM
+TRIGGER:-P1D
+ACTION:DISPLAY
+DESCRIPTION:Mehndi Ceremony · Shweta & Varun tomorrow
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:shweta-varun-wedding-wedding@invitivals.com
+DTSTAMP:20261115T000000Z
+DTSTART;TZID=Asia/Kolkata:20261213T171800
+DTEND;TZID=Asia/Kolkata:20261213T230000
+SUMMARY:Wedding of Shweta & Varun
+LOCATION:Peninsula Grand Hotel\, Concorde Ball Room\, 6th Floor\, 90 Feet
+  Road\, Sakinaka\, Opposite Sakinaka Metro Station\, Mumbai\, Maharashtr
+ a
+DESCRIPTION:Sunday\, 13 December 2026\nMuhurtham: 5:18 PM (Vrashabha Lagn
+ a)\nReception & Dinner: up to 11:00 PM\n\nVenue: Peninsula Grand Hotel\,
+  Concorde Ball Room\, 6th Floor\, 90 Feet Road\, Sakinaka\, Opposite Sak
+ inaka Metro Station\, Mumbai\, Maharashtra\nMap: https://share.google/7Z
+ rttUvmxz9kOpCak\n\nhttps://invitivals.com/shweta-varun-wedding/
+URL:https://invitivals.com/shweta-varun-wedding/
+BEGIN:VALARM
+TRIGGER:-P1D
+ACTION:DISPLAY
+DESCRIPTION:Wedding of Shweta & Varun tomorrow
+END:VALARM
+END:VEVENT
+END:VCALENDAR
