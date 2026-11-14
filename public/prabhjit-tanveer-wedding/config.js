@@ -21,7 +21,7 @@
 /* the family's own Google Maps links, exactly as supplied — never a search, never a guess */
 const MAP = {
   santGarh: 'https://maps.app.goo.gl/FVjFhzY7ZSvAdkKC9?g_st=ic',   // Sant Garh Harkhowaliye — Anand Karaj
-  iremia: 'https://maps.app.goo.gl/srxaVKEia1appzuv5',             // Iremia Farms — Mehndi, Haldi, Jagoo
+  iremia: 'https://maps.app.goo.gl/srxaVKEia1appzuv5',             // Iremia Farms — Haldi, Jagoo
   kamalGrand: 'https://maps.app.goo.gl/zJTfwXFxhKdqW4oA8?g_st=ic',  // Hotel Kamal Grand — Wedding Lunch
   ajitCastle: 'https://maps.app.goo.gl/xqh5APJBeHfv7ndT7?g_st=ic',  // Ajit Castle — Wedding Reception
 };
@@ -82,25 +82,19 @@ export const weddingConfig = {
 
   story: null,
 
-  schedule: { sub: 'Five days of celebration' },   /* 11, 12, 13, 14 and 15 February */
+  schedule: { sub: 'Four days of celebration' },   /* 11, 12, 14 and 15 February, now that the Chooda of the 13th is not on this invitation */
 
   /* in the order of the days. art: dhol | horse | gurudwara | lantern, or icon: faith | heart | family | lunch | hall
      maps: only where the family supplied a link; an event without one shows no map button */
   events: [
     /* the groom's family's own Paath (the bride's page has the Bride-side Paath of 9 February here instead); no map link was supplied for it */
     {
-      id: 'groom-paath', icon: 'faith', menu: 'Groom-side Paath & Bhog',
-      name: 'Groom-side Paath & Bhog',
+      id: 'groom-paath', icon: 'faith', menu: 'Paath and Bhog',   /* shown as "Paath and Bhog" (client, 2026-11-15; was "Groom-side Paath & Bhog") */
+      name: 'Paath and Bhog',
       date: '2027-02-11T11:00:00+05:30', time: '11:00 AM',
       venue: 'Bassi Jalal', address: 'Tanda',
     },
-    {
-      id: 'mehndi', icon: 'heart', menu: 'Mehndi',
-      name: 'Mehndi Ceremony',
-      date: '2027-02-12T09:00:00+05:30', time: '9:00 AM',
-      venue: 'Iremia Farms', address: 'Bhogpur',
-      maps: MAP.iremia,
-    },
+    /* the Mehndi (12 Feb) and the Chooda (13 Feb) are not on the groom's invitation (client, 2026-11-15); the bride's page keeps both */
     {
       id: 'haldi', icon: 'family', menu: 'Haldi',
       name: 'Haldi Ceremony',
@@ -114,12 +108,6 @@ export const weddingConfig = {
       date: '2027-02-12T19:00:00+05:30', time: '7:00 PM',
       venue: 'Iremia Farms', address: 'Bhogpur',
       maps: MAP.iremia,
-    },
-    {
-      id: 'chooda', icon: 'heart', menu: 'Chooda',
-      name: 'Chooda Ceremony',
-      date: '2027-02-13T19:00:00+05:30', time: '7:00 PM',
-      venue: 'Our Residence', address: 'Jalandhar',
     },
     {
       id: 'anand-karaj', art: 'gurudwara', main: true, menu: 'Anand Karaj',

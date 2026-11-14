@@ -84,8 +84,8 @@ export const weddingConfig = {
      maps: only where the family supplied a link; an event without one shows no map button */
   events: [
     {
-      id: 'bride-paath', icon: 'faith', menu: 'Bride-side Paath',
-      name: 'Bride-side Paath',
+      id: 'bride-paath', icon: 'faith', menu: 'Paath',   /* shown as "Paath" (client, 2026-11-15; was "Bride-side Paath") */
+      name: 'Paath',
       date: '2027-02-09T11:00:00+05:30', time: '11:00 AM',
       venue: 'Sant Garh Harkhowaliye', address: 'Jalandhar, Punjab, India',
       maps: MAP.santGarh,

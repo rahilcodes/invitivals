@@ -5,17 +5,17 @@ CALSCALE:GREGORIAN
 METHOD:PUBLISH
 BEGIN:VEVENT
 UID:20270209T053000Z-bride-paath@invitivals.com
-DTSTAMP:20261114T173519Z
+DTSTAMP:20261114T194050Z
 DTSTART:20270209T053000Z
 DTEND:20270209T083000Z
-SUMMARY:Bride-side Paath — Tanveer & Prabhjit
+SUMMARY:Paath — Tanveer & Prabhjit
 DESCRIPTION:
 LOCATION:Sant Garh Harkhowaliye\, Jalandhar\, Punjab\, India
 URL:https://invitivals.com/tanveer-prabhjit-wedding/
 BEGIN:VALARM
 TRIGGER:-P1D
 ACTION:DISPLAY
-DESCRIPTION:Bride-side Paath — Tanveer & Prabhjit
+DESCRIPTION:Paath — Tanveer & Prabhjit
 END:VALARM
 END:VEVENT
 END:VCALENDAR

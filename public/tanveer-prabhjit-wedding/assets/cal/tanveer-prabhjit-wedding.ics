@@ -19,7 +19,7 @@ UID:20270209T110000-bride-paath@tanveer-prabhjit.invitivals.com
 DTSTAMP:20261114T000000Z
 DTSTART;TZID=Asia/Kolkata:20270209T110000
 DTEND;TZID=Asia/Kolkata:20270209T140000
-SUMMARY:Bride-side Paath — Tanveer & Prabhjit
+SUMMARY:Paath — Tanveer & Prabhjit
 LOCATION:Sant Garh Harkhowaliye\, Jalandhar\, Punjab\, India
 DESCRIPTION:Map: https://maps.app.goo.gl/FVjFhzY7ZSvAdkKC9?g_st=ic\nhttps:/
  /invitivals.com/tanveer-prabhjit-wedding/
@@ -29,7 +29,7 @@ TRANSP:OPAQUE
 BEGIN:VALARM
 TRIGGER:-P1D
 ACTION:DISPLAY
-DESCRIPTION:Bride-side Paath — Tanveer & Prabhjit
+DESCRIPTION:Paath — Tanveer & Prabhjit
 END:VALARM
 END:VEVENT
 BEGIN:VEVENT
