@@ -313,4 +313,7 @@ p, h1, h2, h3 { margin: 0; }
 /* the closing: "Thank You" inside the painted arch */
 .thanks { font-family: var(--script); color: var(--maroon); font-size: calc(var(--cq) * 10.4); line-height: 1.1; white-space: nowrap; }
 .sign { font-family: var(--script); color: var(--maroon); font-size: calc(var(--cq) * 6.2); line-height: 1.15; margin-top: calc(var(--cq) * 1); }
+/* the Sangeet Night page (client, 2026-11-15): a larger medallion, and the hour set like the timeline's hours */
+.medal--lg { width: calc(var(--cq) * 19); height: calc(var(--cq) * 19); margin-top: calc(var(--cq) * 3.4); }
+.hours { font-family: var(--caps); font-weight: 600; color: var(--gold); font-size: calc(var(--cq) * 4.3); letter-spacing: .1em; margin-top: calc(var(--cq) * 3); }
 @media (prefers-reduced-motion: reduce) { .dhol img, .mono::after { animation: none; } }

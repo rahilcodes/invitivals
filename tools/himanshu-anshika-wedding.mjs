@@ -22,7 +22,7 @@ import path from 'node:path';
 
 const ROOT = path.resolve(path.dirname(new URL(import.meta.url).pathname.replace(/^\/([A-Z]:)/, '$1')), '..');
 const SLUG = 'himanshu-anshika-wedding', D = path.join(ROOT, 'public', SLUG), REF = path.join(ROOT, 'public/lokesh-akansha-wedding');
-const URL_ = `https://invitivals.com/${SLUG}/`, V = 2, COVER = 'cover-himanshu-anshika-v2.jpg';   // a new file name whenever the cover changes: WhatsApp keeps a preview per image address
+const URL_ = `https://invitivals.com/${SLUG}/`, V = 3, COVER = 'cover-himanshu-anshika-v2.jpg';   // a new file name whenever the cover changes: WhatsApp keeps a preview per image address
 const esc = (s) => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 
 const VENUE = { name: 'Utsav Green Farm', lines: ['Baldev Vihar Colony,', 'Shaheed Bhagat Singh Nagar,', 'Karala, Delhi – 110081.'], mapsUrl: 'https://maps.app.goo.gl/kNHvEiNqpcpL9mu49' };
@@ -62,6 +62,9 @@ const CSS = `
 /* the closing: "Thank You" inside the painted arch */
 .thanks { font-family: var(--script); color: var(--maroon); font-size: calc(var(--cq) * 10.4); line-height: 1.1; white-space: nowrap; }
 .sign { font-family: var(--script); color: var(--maroon); font-size: calc(var(--cq) * 6.2); line-height: 1.15; margin-top: calc(var(--cq) * 1); }
+/* the Sangeet Night page (client, 2026-11-15): a larger medallion, and the hour set like the timeline's hours */
+.medal--lg { width: calc(var(--cq) * 19); height: calc(var(--cq) * 19); margin-top: calc(var(--cq) * 3.4); }
+.hours { font-family: var(--caps); font-weight: 600; color: var(--gold); font-size: calc(var(--cq) * 4.3); letter-spacing: .1em; margin-top: calc(var(--cq) * 3); }
 @media (prefers-reduced-motion: reduce) { .dhol img, .mono::after { animation: none; } }
 `;
 
@@ -102,6 +105,7 @@ if (process.argv[2] === 'init') {
 }
 
 const ICON = {
+  sangeet: '<path d="M19 35V13l17-4v22"/><path d="M19 20l17-4"/><circle cx="14.500" cy="35" r="4.500"/><circle cx="31.500" cy="31" r="4.500"/>',
   horse: '<path d="M36 43c0-8-1-14-4-19-1-4-1-8-3-11l-2-6-2 5c-3-1-7 0-10 3l-6 7c-2 2-2 5 0 6l3 1c2 0 3-1 4-2l4-2c2 4 2 10-1 16l-1 2"/><circle cx="20" cy="15" r="1"/><path d="M30 13c4 3 7 9 8 16M31 19c3 4 5 9 5 15M16 22l5-7M10 23.5h1.5"/><path d="M27 7l3-3 1 4"/>',
   dhol: '<path d="M10 18c-2 0-3 3-3 6s1 6 3 6M38 18c2 0 3 3 3 6s-1 6-3 6"/><path d="M10 18c6-3 22-3 28 0M10 30c6 3 22 3 28 0"/><path d="M10 18v12M38 18v12M17 17v14M24 16.5v15M31 17v14"/><path d="M16 12l3-4M30 12l-3-4"/>',
 };
@@ -225,6 +229,23 @@ const html = `<!DOCTYPE html>
           <p class="fam__k">Granddaughter of</p>
           <p class="fam__g">Late Shri Ram Sunder Tiwari</p>
         </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- the Sangeet Night, two evenings before the wedding (added for the client, 2026-11-15; no map link was supplied) -->
+  <section class="page" id="p-sangeet">
+    <div class="art art--fit" style="--h:169.29">
+      <img class="bg" src="assets/bg/p2.webp" alt="" width="964" height="1632" loading="lazy" decoding="async">
+      ${TASSELS}
+      <div class="flow" style="--top:31;--side:14">
+        <h2 class="script script--md rise">Sangeet Night</h2>
+        <span class="medal medal--lg pop" style="--d:.1s" aria-hidden="true"><svg viewBox="0 0 48 48">${ICON.sangeet}</svg></span>
+        <p class="datebar gap-m rise" style="--d:.15s">Monday<small>23 November 2026</small></p>
+        <p class="hours rise" style="--d:.2s">07:00 PM</p>
+        <img class="orn rise" style="width:calc(var(--cq) * 16);--d:.25s" src="assets/el/garland.webp" alt="" loading="lazy">
+        <svg class="pin" viewBox="0 0 24 24" aria-hidden="true">${PINPATH}</svg>
+        <p class="venue rise">H-2, Panchsheel Vihar</p>
       </div>
     </div>
   </section>
