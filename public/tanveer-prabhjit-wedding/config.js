@@ -17,7 +17,7 @@
 /* the family's own Google Maps links, exactly as supplied — never a search, never a guess */
 const MAP = {
   santGarh: 'https://maps.app.goo.gl/FVjFhzY7ZSvAdkKC9?g_st=ic',   // Sant Garh Harkhowaliye — Bride-side Paath, Anand Karaj
-  irmenia: 'https://maps.app.goo.gl/srxaVKEia1appzuv5',             // Irmenia Farms — Mehndi, Haldi, Jagoo
+  iremia: 'https://maps.app.goo.gl/srxaVKEia1appzuv5',             // Iremia Farms — Mehndi, Haldi, Jagoo
   kamalGrand: 'https://maps.app.goo.gl/zJTfwXFxhKdqW4oA8?g_st=ic',  // Hotel Kamal Grand — Wedding Lunch
   ajitCastle: 'https://maps.app.goo.gl/xqh5APJBeHfv7ndT7?g_st=ic',  // Ajit Castle — Wedding Reception
 };
@@ -78,7 +78,7 @@ export const weddingConfig = {
 
   story: null,
 
-  schedule: { sub: 'Six days of celebration' },
+  schedule: { sub: 'Five days of celebration' }   /* 9, 12, 13, 14 and 15 February, now that the 11th is not on this invitation */,
 
   /* in the order of the days. art: dhol | horse | gurudwara | lantern, or icon: faith | heart | family | lunch | hall
      maps: only where the family supplied a link; an event without one shows no map button */
@@ -90,32 +90,27 @@ export const weddingConfig = {
       venue: 'Sant Garh Harkhowaliye', address: 'Jalandhar, Punjab, India',
       maps: MAP.santGarh,
     },
-    {
-      id: 'groom-paath', icon: 'faith', menu: 'Groom-side Paath & Bhog',
-      name: 'Groom-side Paath & Bhog',
-      date: '2027-02-11T11:00:00+05:30', time: '11:00 AM',
-      venue: 'Bassi Jalal', address: 'Tanda',
-    },
+    /* the Groom-side Paath & Bhog (11 Feb, Bassi Jalal) is a groom-side event: taken off this bride-side invitation (client, 2026-11-14) */
     {
       id: 'mehndi', icon: 'heart', menu: 'Mehndi',
       name: 'Mehndi Ceremony',
       date: '2027-02-12T09:00:00+05:30', time: '9:00 AM',
-      venue: 'Irmenia Farms', address: 'Bhogpur',
-      maps: MAP.irmenia,
+      venue: 'Iremia Farms', address: 'Bhogpur',
+      maps: MAP.iremia,
     },
     {
       id: 'haldi', icon: 'family', menu: 'Haldi',
       name: 'Haldi Ceremony',
       date: '2027-02-12T14:00:00+05:30', time: '2:00 PM',
-      venue: 'Irmenia Farms', address: 'Bhogpur',
-      maps: MAP.irmenia,
+      venue: 'Iremia Farms', address: 'Bhogpur',
+      maps: MAP.iremia,
     },
     {
       id: 'jagoo', art: 'dhol', menu: 'Jagoo',
       name: 'Jagoo Ceremony',
       date: '2027-02-12T19:00:00+05:30', time: '7:00 PM',
-      venue: 'Irmenia Farms', address: 'Bhogpur',
-      maps: MAP.irmenia,
+      venue: 'Iremia Farms', address: 'Bhogpur',
+      maps: MAP.iremia,
     },
     {
       id: 'chooda', icon: 'heart', menu: 'Chooda',

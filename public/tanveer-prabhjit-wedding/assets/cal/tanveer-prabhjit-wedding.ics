@@ -33,29 +33,12 @@ DESCRIPTION:Bride-side Paath — Tanveer & Prabhjit
 END:VALARM
 END:VEVENT
 BEGIN:VEVENT
-UID:20270211T110000-groom-paath@tanveer-prabhjit.invitivals.com
-DTSTAMP:20261114T000000Z
-DTSTART;TZID=Asia/Kolkata:20270211T110000
-DTEND;TZID=Asia/Kolkata:20270211T140000
-SUMMARY:Groom-side Paath & Bhog — Tanveer & Prabhjit
-LOCATION:Bassi Jalal\, Tanda
-DESCRIPTION:https://invitivals.com/tanveer-prabhjit-wedding/
-URL:https://invitivals.com/tanveer-prabhjit-wedding/
-STATUS:CONFIRMED
-TRANSP:OPAQUE
-BEGIN:VALARM
-TRIGGER:-P1D
-ACTION:DISPLAY
-DESCRIPTION:Groom-side Paath & Bhog — Tanveer & Prabhjit
-END:VALARM
-END:VEVENT
-BEGIN:VEVENT
 UID:20270212T090000-mehndi@tanveer-prabhjit.invitivals.com
 DTSTAMP:20261114T000000Z
 DTSTART;TZID=Asia/Kolkata:20270212T090000
 DTEND;TZID=Asia/Kolkata:20270212T120000
 SUMMARY:Mehndi Ceremony — Tanveer & Prabhjit
-LOCATION:Irmenia Farms\, Bhogpur
+LOCATION:Iremia Farms\, Bhogpur
 DESCRIPTION:Map: https://maps.app.goo.gl/srxaVKEia1appzuv5\nhttps://invitiv
  als.com/tanveer-prabhjit-wedding/
 URL:https://invitivals.com/tanveer-prabhjit-wedding/
@@ -73,7 +56,7 @@ DTSTAMP:20261114T000000Z
 DTSTART;TZID=Asia/Kolkata:20270212T140000
 DTEND;TZID=Asia/Kolkata:20270212T170000
 SUMMARY:Haldi Ceremony — Tanveer & Prabhjit
-LOCATION:Irmenia Farms\, Bhogpur
+LOCATION:Iremia Farms\, Bhogpur
 DESCRIPTION:Map: https://maps.app.goo.gl/srxaVKEia1appzuv5\nhttps://invitiv
  als.com/tanveer-prabhjit-wedding/
 URL:https://invitivals.com/tanveer-prabhjit-wedding/
@@ -91,7 +74,7 @@ DTSTAMP:20261114T000000Z
 DTSTART;TZID=Asia/Kolkata:20270212T190000
 DTEND;TZID=Asia/Kolkata:20270212T220000
 SUMMARY:Jagoo Ceremony — Tanveer & Prabhjit
-LOCATION:Irmenia Farms\, Bhogpur
+LOCATION:Iremia Farms\, Bhogpur
 DESCRIPTION:Map: https://maps.app.goo.gl/srxaVKEia1appzuv5\nhttps://invitiv
  als.com/tanveer-prabhjit-wedding/
 URL:https://invitivals.com/tanveer-prabhjit-wedding/
