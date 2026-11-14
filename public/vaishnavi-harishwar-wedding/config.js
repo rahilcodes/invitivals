@@ -53,7 +53,8 @@ export const weddingConfig = {
   /* the invitation, in the families' words */
   welcome: {
     title: 'Wedding Invitation',
-    hosts: `Sri ${GROOM} & Smt. ${BRIDE}`,
+    /* this copy's order (client, 2026-11-14): the bride first on the bride's invitation */
+    hosts: brideFirst ? `Smt. ${BRIDE} & Sri ${GROOM}` : `Sri ${GROOM} & Smt. ${BRIDE}`,
     lines: [
       'Cordially invite you and your family',
       'to join them in celebrating their wedding',
@@ -66,14 +67,14 @@ export const weddingConfig = {
       label: "Bride's Family",
       person: BRIDE,
       initial: 'V',
-      relation: 'Daughter of',
+      relation: 'Only Daughter of',   // client, 2026-11-14
       parents: ['Sri Manne Krishna Reddy', 'Smt. Manne Manjulatha'],   // mother's name corrected by the client (2026-11-13)
     },
     groom: {
       label: "Groom's Family",
       person: GROOM,
       initial: 'H',
-      relation: 'Son of',
+      relation: 'Elder Son of',   // client, 2026-11-14
       parents: ['Sri Challa Sanjeeva Reddy', 'Smt. Challa Sarala'],
     },
   },
@@ -83,7 +84,7 @@ export const weddingConfig = {
      Each copy shows its own family's ceremony and the wedding (client, 2026-11-13): the bride's has no Pellikoduku,
      the groom's has no Pellikuthuru. The reception is for a few invited guests only and is on neither copy. */
   events: [
-    { only: 'bride', icon: 'haldi', name: 'Pellikuthuru', sub: 'Bride’s Ceremony', date: '2026-11-30T10:00:00+05:30', time: '10:00 AM',
+    { only: 'bride', icon: 'haldi', name: 'Pellikuthuru', sub: 'Bride’s Ceremony', date: '2026-11-30T17:00:00+05:30', time: '5:00 PM',   /* 5:00 PM (client, 2026-11-14; was 10:00 AM) */
       venue: 'Plot No. 61, Road No. 1, R. Ranga Raju Colony, Turkayamjal, Brahmanpally Road.',
       maps: 'https://maps.app.goo.gl/Bki9Vce6XxJDiKo3A' },
     { only: 'groom', icon: 'vratham', name: 'Pellikoduku', sub: 'Groom’s Ceremony', date: '2026-12-02T16:00:00+05:30', time: '4:00 PM',

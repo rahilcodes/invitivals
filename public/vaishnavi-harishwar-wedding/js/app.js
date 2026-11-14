@@ -1,7 +1,7 @@
 /* InvitationPage — composes one continuous invitation from weddingConfig. */
 /* ?v=3 on every import = the files as of the 2026-11-13 revisions. The site lets browsers and its CDN keep scripts for a week, so a
    changed file is asked for under a new address; raise the number (here and in index.html) whenever one changes again. */
-import { weddingConfig as cfg } from '../config.js?v=3';
+import { weddingConfig as cfg } from '../config.js?v=4';
 import { GoldDefs, GoldThread } from './decor.js?v=3';
 import { guestName } from './util.js?v=3';
 import { initMapLinks } from './links.js?v=3';
@@ -15,19 +15,19 @@ import { VenueSection } from './sections/venue.js?v=3';
 import { CountdownSection, initCountdown } from './sections/countdown.js?v=3';
 import { MomentsSection } from './sections/moments.js?v=3';
 import { SaveTheDateSection, initSaveTheDate, weddingCalendar } from './sections/save-the-date.js?v=3';
-import { RSVPSection, initRSVP } from './sections/rsvp.js?v=3';
 import { WishesSection, initWishes } from './sections/wishes.js?v=3';
 import { ThankYouSection } from './sections/thank-you.js?v=3';
 import { initReveals, initParallax, initParticles } from './motion.js?v=3';
 import { createMusic } from './music.js?v=3';
-import { createMenu } from './menu.js?v=3';
+import { createMenu } from './menu.js?v=4';
 
 /* sections in reading order; GoldThread stitches them without a horizontal break,
    every third stitch is a kolam instead of a plain diamond */
+/* no RSVP on the bride's invitation (client, 2026-11-14): the section, its menu link and its start-up call are gone from this copy */
 /* this client's invitation has no Our Story, Getting There, Need Help or Gifting; Moments is the couple's one photograph */
 const SECTIONS = [
   HeroSection, WelcomeSection, FamilySection, EventsSection, CeremonySection,
-  VenueSection, CountdownSection, MomentsSection, SaveTheDateSection, RSVPSection, WishesSection, ThankYouSection,
+  VenueSection, CountdownSection, MomentsSection, SaveTheDateSection, WishesSection, ThankYouSection,
 ];
 const NO_THREAD_AFTER = new Set([HeroSection, ThankYouSection]);
 const guest = guestName();
@@ -51,7 +51,6 @@ initMapLinks();
 initEvents(cfg);
 initCountdown(cfg);
 initSaveTheDate(cfg);
-initRSVP(cfg, guest);
 initWishes(cfg, guest);
 
 const music = createMusic(cfg.music);
