@@ -180,3 +180,7 @@ a.sd-btn .ico { color: var(--burgundy); }
 }
 @keyframes bf-rise { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-.45cqw); } }
 @media (prefers-reduced-motion: reduce) { .bf, .bf > img { animation: none; } }
+
+/* 2026-11-14, the client's instruction: nothing is laid over the opening film. The seal face and the burst of
+   light that covered the film's own wax seal are switched off, so the film plays exactly as it was made. */
+.film .seal, .film .burst { display: none !important; }
