@@ -105,23 +105,6 @@ DESCRIPTION:Wedding Lunch — Prabhjit & Tanveer
 END:VALARM
 END:VEVENT
 BEGIN:VEVENT
-UID:20270214T180000-doli@tanveer-prabhjit.invitivals.com
-DTSTAMP:20261114T000000Z
-DTSTART;TZID=Asia/Kolkata:20270214T180000
-DTEND;TZID=Asia/Kolkata:20270214T210000
-SUMMARY:Doli Ceremony — Prabhjit & Tanveer
-LOCATION:Our Residence\, Jalandhar
-DESCRIPTION:https://invitivals.com/prabhjit-tanveer-wedding/
-URL:https://invitivals.com/prabhjit-tanveer-wedding/
-STATUS:CONFIRMED
-TRANSP:OPAQUE
-BEGIN:VALARM
-TRIGGER:-P1D
-ACTION:DISPLAY
-DESCRIPTION:Doli Ceremony — Prabhjit & Tanveer
-END:VALARM
-END:VEVENT
-BEGIN:VEVENT
 UID:20270215T150000-reception@tanveer-prabhjit.invitivals.com
 DTSTAMP:20261114T000000Z
 DTSTART;TZID=Asia/Kolkata:20270215T150000

@@ -123,12 +123,7 @@ export const weddingConfig = {
       venue: 'Hotel Kamal Grand', address: 'Grand Trunk Road, near Lamba Pind Chowk Bypass, Div Colony, Preet Nagar, Jalandhar',
       maps: MAP.kamalGrand,
     },
-    {
-      id: 'doli', icon: 'family', menu: 'Doli',
-      name: 'Doli Ceremony',
-      date: '2027-02-14T18:00:00+05:30', time: '6:00 PM',
-      venue: 'Our Residence', address: 'Jalandhar',
-    },
+    /* the Doli (14 Feb, 6:00 PM) is not on the groom's invitation either (client, 2026-11-15); the bride's page keeps it */
     {
       id: 'reception', art: 'lantern', menu: 'Reception',
       name: 'Wedding Reception',
