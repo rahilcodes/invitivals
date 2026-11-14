@@ -890,8 +890,8 @@ marathi-wedding/js/gift.js
 marathi-wedding/js/opening.js
 marathi-wedding/js/ornaments.js
 marathi-wedding/js/page.js
+marathi-wedding/js/petals.js
 marathi-wedding/js/rsvp.js
-marathi-wedding/js/sparkle.js
 marathi-wedding/js/util.js
 marathi-wedding/rsvp.php
 modern-wedding/.htaccess

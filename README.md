@@ -138,26 +138,31 @@ function opens a details sheet with Directions and Add to Calendar) · 12 venues
   photos are cut inside their baked frames; `og` mode redraws the link preview only
 - `?open` skips the doors while working on the page; in `astro dev` open `…/index.html`
 
-## Marathi Wedding (`public/marathi-wedding/`)
+## Marathi Wedding — English edition (`public/marathi-wedding/`)
 
-An Invitivals design demo built from the designer's "marathi wedding" pack (आदिती आणि सिद्धार्थ, रॉयल पॅलेस, पुणे and
-the 21–24 November 2024 dates are the pack's own sample text, not a client). The eight clean screens are used whole
+An Invitivals design demo built from the designer's "marathi wedding" pack, converted to English on the client's
+instruction (14 Nov 2026): one English page, no language switcher. Aditi & Siddharth, Royal Palace, Pune and the
+21–24 November 2024 dates are the pack's sample text translated, not a client. The eight clean screens are used whole
 and in order, one per section, with the pack's cut-out elements placed where the designer's "with text" references
-put them: 1 hero (tassels, bell, the couple, the flower sprigs cut from the reference) · 2 the three embroidered
-frames · 3 the calendar (live month grid; "तारीख उलगडा करा" closes the pearl heart on the day, then saves to the
-calendar) · 4 the four functions with their pictures and map buttons · 5 the venue · 6 "उपस्थिती नोंदवा" (attendance
-sheet) + the wishes bar · 7 "आशीर्वाद स्वरूप भेट" · 8 आभार. `opening page.png` is the door: one tap starts the song
-and plays `ai video.mp4` (the same door, muted) which dissolves into the hero.
+put them, and every English line in the region its Marathi line occupies there: 1 hero (tassels, bell, the couple,
+the flower sprigs cut from the reference; names in Great Vibes for the reference's embroidered calligraphy) · 2 the
+three embroidered frames with English captions · 3 the calendar (live month grid; "Reveal the Date" closes the pearl
+heart on the day, then saves to the calendar) · 4 the four functions with their pictures and map buttons · 5 the
+venue · 6 "Confirm Attendance" (attendance sheet) + the wishes bar · 7 "Gift as a Blessing" · 8 Gratitude.
+`opening page.png` is the door: one tap starts the song and plays `ai video.mp4` (muted) which dissolves into the
+hero. Small dark-pink petals fall over the whole page (`js/petals.js`, a fixed canvas kept inside the column).
 
 - `config.js` — every word, date, venue, link and file path; empty fields are what the pack does not supply (the
   venues' Google Maps links, the gift details, the couple's photos for the frames)
 - `rsvp.php` — stores attendance and wishes in `data/` next to the page; the family reads them at
   `rsvp.php?key=…` (the key is at the top of the file — change it before sharing)
-- `css/invite.css`, `js/` — the same canvas engine as the emerald Muslim template (941:1671 pages, cqw text);
-  `calendar.js` the month grid and reveal, `rsvp.js` the sheet and the wishes bar, `gift.js` the details sheet,
-  `ornaments.js` the thin gold line ornaments of the references as SVG
+- `css/invite.css`, `js/` — the same canvas engine as the emerald Muslim template (941:1671 pages, cqw text).
+  Reveals: the `.el` wrapper holds the reference position, only its first child animates (`a-wipe` headings,
+  `a-rise` dates and venue, `a-soft` pictures and buttons, plain fade-up for the rest). Every import carries
+  `?v=N`: bump them together with the two in index.html on each change (`?v=2` now).
 - `assets/` by `node tools/build-marathi-wedding-art.mjs` from `invites/src/marathi-wedding/` (the zip, not
-  committed): three elements had a baked checkerboard instead of alpha (keyed out), the calendar's printed
-  November grid and the wishes bar's placeholder are painted out so the page can render its own
+  committed): three elements had a baked checkerboard instead of alpha (keyed out); every printed Marathi word is
+  painted out — the calendar's November grid, the four buttons' embossed labels, the wishes bar's placeholder, the
+  frames' captions — and the page writes its own. `tools/marathi-wedding-og.mjs` cuts og.jpg from a shoot of the hero.
 - in `astro dev` open `…/marathi-wedding/index.html`; `public-php` in `.claude/launch.json` serves the folder with
   PHP so the RSVP works locally

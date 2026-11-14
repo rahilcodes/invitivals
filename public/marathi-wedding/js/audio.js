@@ -5,7 +5,7 @@
    restarting. The film's own track is muted; the song is the only music.
    Volume lives in config. If the browser still refuses playback, the button
    shows as muted so the guest can start the song with a tap. */
-import { h } from './util.js';
+import { h } from './util.js?v=2';
 
 export function AudioControl(cfg) {
   const music = new Audio();

@@ -24,7 +24,7 @@ export function toast(msg, ms = 3400) {
   toastTimer = setTimeout(() => toastEl.classList.remove('shown'), ms);
 }
 
-/* ── dates in India time, written in Marathi ── */
+/* ── dates in India time, written with the configured month and weekday names ── */
 const IST = 'Asia/Kolkata';
 export function partsOf(iso) {
   const d = new Date(iso);

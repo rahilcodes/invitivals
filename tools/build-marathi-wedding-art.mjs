@@ -5,9 +5,9 @@
  * Elements: trimmed, WebP with alpha, long side at most 1000px. Three elements come
  * with a baked-in checkerboard instead of transparency (the magenta tassel pendant,
  * the hands polaroid, the "सदैव सोबत" memory card): the checkerboard is keyed out.
- * The calendar's printed "नवंबर 2024" grid is painted over with its own parchment so
- * the month is rendered live for the configured date; the wishes bar's printed
- * placeholder is removed so a real input can sit on it.
+ * The page is English-only, so every printed Marathi word is painted out with the
+ * surface around it (the calendar's "नवंबर 2024" grid, the four buttons' labels, the
+ * wishes bar's placeholder, the three frames' captions) and the page writes its own.
  * Prints js/art-sizes.js.
  */
 import fs from 'node:fs';
@@ -76,15 +76,15 @@ async function keyCheckerboard(file) {
 
 /* ── paint printed text out of a flat area: text pixels (by colour) inside the zones are
       replaced by a wide normalised blur of the surrounding surface ── */
-async function inpaintText(file, zones, isText, radius = 16) {
-  const { data, info } = await sharp(file).ensureAlpha().raw().toBuffer({ resolveWithObject: true });
+async function inpaintText(file, zones, isText, radius = 16, grow = 2) {
+  const { data, info } = await (file.toBuffer ? file : sharp(file)).ensureAlpha().raw().toBuffer({ resolveWithObject: true });
   const w = info.width, h = info.height, n = w * h;
   const mask = new Uint8Array(n);
   for (const z of zones) for (let y = z.y0; y < z.y1; y++) for (let x = z.x0; x < z.x1; x++) {
-    const i = y * w + x; if (data[i * 4 + 3] > 0 && isText(data[i * 4], data[i * 4 + 1], data[i * 4 + 2])) mask[i] = 1;
+    const i = y * w + x; if (data[i * 4 + 3] > 0 && isText(data[i * 4], data[i * 4 + 1], data[i * 4 + 2], i)) mask[i] = 1;
   }
   const dil = new Uint8Array(n);
-  for (let y = 0; y < h; y++) for (let x = 0; x < w; x++) if (mask[y * w + x]) for (let dy = -2; dy <= 2; dy++) for (let dx = -2; dx <= 2; dx++) { const yy = y + dy, xx = x + dx; if (yy >= 0 && yy < h && xx >= 0 && xx < w) dil[yy * w + xx] = 1; }
+  for (let y = 0; y < h; y++) for (let x = 0; x < w; x++) if (mask[y * w + x]) for (let dy = -grow; dy <= grow; dy++) for (let dx = -grow; dx <= grow; dx++) { const yy = y + dy, xx = x + dx; if (yy >= 0 && yy < h && xx >= 0 && xx < w) dil[yy * w + xx] = 1; }
   const wgt = new Float32Array(n), ch = [new Float32Array(n), new Float32Array(n), new Float32Array(n)];
   for (let i = 0; i < n; i++) if (!dil[i] && data[i * 4 + 3] > 200) { wgt[i] = 1; ch[0][i] = data[i * 4]; ch[1][i] = data[i * 4 + 1]; ch[2][i] = data[i * 4 + 2]; }
   // separable box blur with prefix sums
@@ -94,8 +94,57 @@ async function inpaintText(file, zones, isText, radius = 16) {
     for (let x = 0; x < w; x++) { const p = new Float32Array(h + 1); for (let y = 0; y < h; y++) p[y + 1] = p[y] + t[y * w + x]; for (let y = 0; y < h; y++) out[y * w + x] = p[Math.min(h, y + radius + 1)] - p[Math.max(0, y - radius)]; }
     return out;
   };
-  const wb = blur(wgt), cb = ch.map(blur);
-  for (let i = 0; i < n; i++) if (dil[i] && wb[i] > 0) { data[i * 4] = cb[0][i] / wb[i]; data[i * 4 + 1] = cb[1][i] / wb[i]; data[i * 4 + 2] = cb[2][i] / wb[i]; }
+  let wb = blur(wgt), cb = ch.map(blur);
+  for (let i = 0; i < n; i++) if (dil[i] && wb[i] > 0) { data[i * 4] = cb[0][i] / wb[i]; data[i * 4 + 1] = cb[1][i] / wb[i]; data[i * 4 + 2] = cb[2][i] / wb[i]; dil[i] = 2; }
+  if ([...dil].some((v) => v === 1)) { radius *= 4; wb = blur(wgt); cb = ch.map(blur); for (let i = 0; i < n; i++) if (dil[i] === 1 && wb[i] > 0) { data[i * 4] = cb[0][i] / wb[i]; data[i * 4 + 1] = cb[1][i] / wb[i]; data[i * 4 + 2] = cb[2][i] / wb[i]; } }
+  return sharp(data, { raw: { width: w, height: h, channels: 4 } }).png().toBuffer();
+}
+/* the buttons' embossed lettering (body, highlight and shadow pixels): the maroon body is
+   painted out first; what still differs from a wide blur of that result is the emboss. Each
+   row's band from the first to the last lettering pixel (body or emboss) is refilled by
+   interpolating the pill surface sampled either side of it, then smoothed down the rows,
+   so the pill's own gradient runs on unbroken and no stripe shows */
+async function inpaintEmboss(file, zones, { thresh = 22, pad = 12 } = {}) {
+  const orig = (await sharp(file).ensureAlpha().raw().toBuffer({ resolveWithObject: true })).data;
+  const pass1 = await inpaintText(file, zones, darkOrMaroon, 24, 3);
+  const { data, info } = await sharp(pass1).ensureAlpha().raw().toBuffer({ resolveWithObject: true });
+  const w = info.width, h = info.height, n = w * h, R = 40;
+  const avg = new Float32Array(n * 3), t = new Float32Array(n * 3);
+  for (let c = 0; c < 3; c++) {
+    for (let y = 0; y < h; y++) { const pre = new Float32Array(w + 1); for (let x = 0; x < w; x++) pre[x + 1] = pre[x] + data[(y * w + x) * 4 + c]; for (let x = 0; x < w; x++) { const a = Math.max(0, x - R), b = Math.min(w, x + R + 1); t[(y * w + x) * 3 + c] = (pre[b] - pre[a]) / (b - a); } }
+    for (let x = 0; x < w; x++) { const pre = new Float32Array(h + 1); for (let y = 0; y < h; y++) pre[y + 1] = pre[y] + t[(y * w + x) * 3 + c]; for (let y = 0; y < h; y++) { const a = Math.max(0, y - R), b = Math.min(h, y + R + 1); avg[(y * w + x) * 3 + c] = (pre[b] - pre[a]) / (b - a); } }
+  }
+  const sample = (x, y) => { // mean of the de-lettered surface over a 7×7 window
+    const out = [0, 0, 0]; let k = 0;
+    for (let dy = -3; dy <= 3; dy++) for (let dx = -3; dx <= 3; dx++) { const xx = Math.min(w - 1, Math.max(0, x + dx)), yy = Math.min(h - 1, Math.max(0, y + dy)); const i = (yy * w + xx) * 4; if (data[i + 3] < 200) continue; out[0] += data[i]; out[1] += data[i + 1]; out[2] += data[i + 2]; k++; }
+    return k ? out.map((v) => v / k) : [data[(y * w + x) * 4], data[(y * w + x) * 4 + 1], data[(y * w + x) * 4 + 2]];
+  };
+  const band = new Uint8Array(n);
+  for (const z of zones) for (let y = z.y0; y < z.y1; y++) {
+    let first = -1, last = -1;
+    for (let x = z.x0; x < z.x1; x++) {
+      const i = y * w + x;
+      if (orig[i * 4 + 3] < 200) continue;
+      const d = Math.abs(data[i * 4] - avg[i * 3]) + Math.abs(data[i * 4 + 1] - avg[i * 3 + 1]) + Math.abs(data[i * 4 + 2] - avg[i * 3 + 2]);
+      if (d > thresh || darkOrMaroon(orig[i * 4], orig[i * 4 + 1], orig[i * 4 + 2])) { if (first < 0) first = x; last = x; }
+    }
+    if (first < 0) continue;
+    const a = Math.max(z.x0 - pad, first - pad), b = Math.min(z.x1 - 1 + pad, last + pad);
+    const L = sample(a - 4, y), Rr = sample(b + 4, y);
+    for (let x = a; x <= b; x++) {
+      const k = (x - a + 1) / (b - a + 2), i = (y * w + x) * 4;
+      data[i] = L[0] * (1 - k) + Rr[0] * k; data[i + 1] = L[1] * (1 - k) + Rr[1] * k; data[i + 2] = L[2] * (1 - k) + Rr[2] * k;
+      band[y * w + x] = 1;
+    }
+  }
+  // smooth the refilled band down the rows (radius 4) and add a faint grain
+  const copy = Buffer.from(data);
+  for (let i = 0; i < n; i++) if (band[i]) {
+    const x = i % w, y = (i / w) | 0; const acc = [0, 0, 0]; let k = 0;
+    for (let dy = -4; dy <= 4; dy++) { const yy = y + dy; if (yy < 0 || yy >= h) continue; const j = (yy * w + x) * 4; acc[0] += copy[j]; acc[1] += copy[j + 1]; acc[2] += copy[j + 2]; k++; }
+    const g = ((x * 7 + y * 13) % 5) - 2;
+    data[i * 4] = acc[0] / k + g; data[i * 4 + 1] = acc[1] / k + g; data[i * 4 + 2] = acc[2] / k + g;
+  }
   return sharp(data, { raw: { width: w, height: h, channels: 4 } }).png().toBuffer();
 }
 const darkOrMaroon = (r, g, b) => (r < 150 && g < 150 && b < 150) || (r > 100 && g < 95 && b < 115 && r - g > 50);
@@ -108,15 +157,16 @@ const elements = {
   butterfly: '1/Champagne Gold Embroidered Butterfly Ornament.png',
   'tassel-m': { file: '1/Ornate Magenta Silk Tassel Pendant.png', key: true },
   'tassel-p': '2/Luxurious Pink and Gold Tassel.png',
-  'pol-1': '2/Embroidered Sunset Couple Polaroid-1.png',
-  'pol-2': { file: '2/Embroidered Wedding Hands Polaroid (1).png', key: true },
-  'pol-3': { file: '2/Embroidered Sunset Palace Memory Card-3.png', key: true },
+  // the frames' printed captions (आपली गोष्ट…, हमारी बंधन…, सदैव सोबत…) are painted out, the heart stays; the page writes English captions
+  'pol-1': { file: '2/Embroidered Sunset Couple Polaroid-1.png', inpaint: [{ x0: 440, y0: 940, x1: 920, y1: 1110 }] },
+  'pol-2': { file: '2/Embroidered Wedding Hands Polaroid (1).png', key: true, inpaint: [{ x0: 420, y0: 950, x1: 925, y1: 1150 }] },
+  'pol-3': { file: '2/Embroidered Sunset Palace Memory Card-3.png', key: true, inpaint: [{ x0: 470, y0: 900, x1: 960, y1: 1080 }] },
   calendar: {
     file: '3/Luxurious November 2024 Floral Calendar.png',
     inpaint: [{ x0: 380, y0: 330, x1: 750, y1: 392 }, { x0: 330, y0: 205, x1: 410, y1: 270 }, { x0: 240, y0: 452, x1: 880, y1: 508 }, { x0: 240, y0: 535, x1: 880, y1: 925 }],
   },
   // the pill of the reveal button alone: the pack's flower wings either side would sit on the garlands of 3.png
-  'btn-reveal': { file: '3/Ornate Marathi Wedding Invitation Button.png', crop: { left: 400, top: 160, width: 1345, height: 440 } },
+  'btn-reveal': { file: '3/Ornate Marathi Wedding Invitation Button.png', emboss: [{ x0: 560, y0: 270, x1: 1545, y1: 455 }], crop: { left: 400, top: 160, width: 1345, height: 440 } },
   // the tassel alone (bead, cap, skirt) — the hero hangs these from the pearl strings painted in 1.png
   'tassel-s': { file: '1/Ornate Magenta Silk Tassel Pendant.png', key: true, cropAfterTrim: { y0: 0.38, y1: 1 } },
   heart: '3/Ornate Pearl and Pink Beaded Heart Frame.png',
@@ -124,19 +174,21 @@ const elements = {
   mehndi: '4/Ornate Golden Bowl of Festive Powders.png',
   mandap: '4/Luxurious Magenta Wedding Mandap Stage.png',
   throne: '4/Ornate Gold Wedding Throne Vignette.png',
-  'btn-map': '4/Luxury Beige Map Button with Marathi Text.png',
+  'btn-map': { file: '4/Luxury Beige Map Button with Marathi Text.png', emboss: [{ x0: 640, y0: 240, x1: 1600, y1: 500 }] }, // the pin and chevron stay
   lotus: '5/Ornate Golden Lotus Emblem.png',
-  'btn-rsvp': '6/Luxurious Peach Marathi RSVP Button-1.png',
+  'btn-rsvp': { file: '6/Luxurious Peach Marathi RSVP Button-1.png', emboss: [{ x0: 600, y0: 230, x1: 1700, y1: 520 }] }, // the envelope and chevron stay
   'bar-wish': { file: '6/तुमच्या शुभेच्छांसाठी सुवर्ण संदेशपट्टी-2.png', inpaint: [{ x0: 150, y0: 230, x1: 1700, y1: 520 }] },
   divider: '7/Luxurious Gold Floral Ornamental Divider.png',
   'gift-icon': '7/Ornate Magenta and Gold Gift Bow.png',
   bird: '7/Ornate Pink and Gold Embroidered Bird.png',
-  'btn-gift': '7/आशीर्वाद स्वरूप भेट बटन.png',
+  'btn-gift': { file: '7/आशीर्वाद स्वरूप भेट बटन.png', emboss: [{ x0: 250, y0: 230, x1: 1660, y1: 500 }] }, // the chevron stays
 };
 for (const [id, spec] of Object.entries(elements)) {
   const o = typeof spec === 'string' ? { file: spec } : spec;
   const file = `${EL}/${o.file}`;
-  let input = o.key ? await keyCheckerboard(file) : o.inpaint ? await inpaintText(file, o.inpaint, darkOrMaroon) : file;
+  let input = o.key ? await keyCheckerboard(file) : file;
+  if (o.inpaint) input = await inpaintText(input, o.inpaint, darkOrMaroon);
+  if (o.emboss) input = await inpaintEmboss(input, o.emboss);
   if (o.crop) input = await sharp(input).extract(o.crop).png().toBuffer();
   let trimmed = await sharp(input).trim({ threshold: 6 }).png().toBuffer({ resolveWithObject: true });
   if (o.cropAfterTrim) {
@@ -187,8 +239,8 @@ for (const [id, spec] of Object.entries(elements)) {
   }
 }
 
-/* ── link preview: the names band of the designer's own text reference ── */
-await sharp(await sharp(`${SRC}/with text temp for reference/1 (1).png`).resize(W, H, { fit: 'fill' }).png().toBuffer()).extract({ left: 0, top: 300, width: 941, height: 494 }).resize(1200, 630).jpeg({ quality: 85 }).toFile(`${OUT}/og.jpg`);
+/* ── link preview (og.jpg): the names band of the page's own English hero, cut from a headless
+      shoot by tools/marathi-wedding-og.mjs; not rebuilt here ── */
 
 /* ── film and song ── */
 fs.copyFileSync(`${SRC}/ai video.mp4`, `${OUT}/opening.mp4`);

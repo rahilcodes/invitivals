@@ -87,14 +87,14 @@ header('Content-Type: text/html; charset=utf-8');
 ?>
 <!DOCTYPE html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="robots" content="noindex">
-<title>आदिती आणि सिद्धार्थ · RSVP &amp; wishes</title>
+<title>Aditi &amp; Siddharth · RSVP &amp; wishes</title>
 <style>
 body{font-family:Georgia,'Nirmala UI',serif;background:#f8efe3;color:#4a1f2e;margin:0;padding:24px}
 h1{font-weight:400;margin:0 0 6px} .sum{color:#8a5a74;margin:0 0 18px} a{color:#7b4668}
 table{width:100%;border-collapse:collapse;background:#fff;border:1px solid #e3cfd9} th,td{padding:8px 10px;border-bottom:1px solid #eee0e7;text-align:left;vertical-align:top;font-size:14px}
 th{background:#f0e2e9;font-weight:600} td.msg{white-space:pre-wrap;max-width:46ch} .yes{color:#2c6e3a} .no{color:#9b1b1b}
 </style></head><body>
-<h1>आदिती आणि सिद्धार्थ · RSVP &amp; wishes</h1>
+<h1>Aditi &amp; Siddharth · RSVP &amp; wishes</h1>
 <p class="sum"><?= $yes ?> will attend (<?= $guests ?> guests) · <?= $no ?> unable to attend · <?= $wishes ?> wishes · <a href="?key=<?= $e($key) ?>&amp;csv=1">Download CSV</a></p>
 <table><thead><tr><th>Time (UTC)</th><th>Kind</th><th>Attending</th><th>Name</th><th>Guests</th><th>Message</th></tr></thead><tbody>
 <?php if (!$rows): ?><tr><td colspan="6">No entries yet.</td></tr><?php endif; ?>

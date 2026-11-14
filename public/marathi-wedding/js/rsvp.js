@@ -1,11 +1,11 @@
-/* RSVP — screen 6. The pack's printed "उपस्थिती नोंदवा" button opens an
-   attendance sheet (name, coming or not, number of guests); the pack's wishes
+/* RSVP — screen 6. The pack's envelope button (its printed label painted out,
+   "Confirm Attendance" written on it) opens an attendance sheet (name, coming or not, number of guests); the pack's wishes
    bar is a real input that sends a wish with the guest's name. Both post JSON
    to rsvp.php; a reply is remembered on the device so the sheet reopens filled
    in and the wish keeps the name. */
-import { h, toast, openSheet } from './util.js';
-import { icon } from './ornaments.js';
-import { artSizes } from './art-sizes.js';
+import { h, toast, openSheet } from './util.js?v=2';
+import { icon } from './ornaments.js?v=2';
+import { artSizes } from './art-sizes.js?v=2';
 
 const fill = (s, name) => s.replace('{name}', name);
 
@@ -22,9 +22,10 @@ export function RSVP(cfg) {
 
   /* ── the printed button and the status line under it ── */
   const [bw, bh] = artSizes['btn-rsvp'];
-  const open = h('button', { class: 'img-btn', type: 'button', 'aria-haspopup': 'dialog', 'aria-label': F.title },
-    h('img', { src: 'assets/btn-rsvp.webp', alt: '', width: bw, height: bh, loading: 'lazy', decoding: 'async' }));
-  const status = h('p', { class: 'rsvp-status', role: 'status', lang: 'mr' });
+  const open = h('button', { class: 'img-btn has-mail', type: 'button', 'aria-haspopup': 'dialog', 'aria-label': cfg.button },
+    h('img', { src: 'assets/btn-rsvp.webp', alt: '', width: bw, height: bh, loading: 'lazy', decoding: 'async' }),
+    h('span', { class: 'lbl', style: { fontSize: '3.1cqw' }, 'aria-hidden': 'true' }, cfg.button));
+  const status = h('p', { class: 'rsvp-status', role: 'status' });
   const wrap = h('div', { class: 'rsvp-wrap' }, open, status);
   const showStatus = (s) => { if (s && s.name && s.attending) status.textContent = fill(s.attending === 'yes' ? F.recordedYes : F.recordedNo, s.name); };
   showStatus(load());
@@ -33,12 +34,12 @@ export function RSVP(cfg) {
     const saved = load();
     const yes = h('input', { type: 'radio', name: 'attending', value: 'yes', id: 'rsvp-yes' });
     const no = h('input', { type: 'radio', name: 'attending', value: 'no', id: 'rsvp-no' });
-    const name = h('input', { type: 'text', id: 'rsvp-name', autocomplete: 'name', maxlength: '80', placeholder: F.name, 'aria-label': F.name, lang: 'mr' });
+    const name = h('input', { type: 'text', id: 'rsvp-name', autocomplete: 'name', maxlength: '80', placeholder: F.name, 'aria-label': F.name });
     const guests = h('select', { id: 'rsvp-guests', 'aria-label': F.guests });
     for (let i = 1; i <= cfg.maxGuests; i++) guests.append(h('option', { value: String(i) }, String(i)));
-    const err = h('p', { class: 'form-err', role: 'alert', lang: 'mr' });
-    const send = h('button', { class: 'pill solid', type: 'submit' }, h('i', { class: 'ico', html: icon('send') }), h('span', { lang: 'mr' }, F.send));
-    const form = h('form', { class: 'rsvp-form', novalidate: true, lang: 'mr' },
+    const err = h('p', { class: 'form-err', role: 'alert' });
+    const send = h('button', { class: 'pill solid', type: 'submit' }, h('i', { class: 'ico', html: icon('send') }), h('span', {}, F.send));
+    const form = h('form', { class: 'rsvp-form', novalidate: true },
       h('div', { class: 'box' }, h('div', { class: 'row' }, name)),
       h('fieldset', { class: 'box choices' }, h('legend', { class: 'sr-only' }, F.title),
         h('label', { class: 'row', for: 'rsvp-yes' }, yes, h('i', { class: 'radio', 'aria-hidden': 'true' }), h('span', {}, F.accept)),
@@ -78,12 +79,12 @@ export function RSVP(cfg) {
 
   /* ── the wishes bar: the pack's bar (its printed placeholder removed) with a real input on it ── */
   const [ww, wh] = artSizes['bar-wish'];
-  const wish = h('input', { type: 'text', class: 'wish-input', maxlength: '300', placeholder: cfg.wishPlaceholder, 'aria-label': cfg.wishesTitle, lang: 'mr', autocomplete: 'off' });
-  const wishSend = h('button', { class: 'wish-send', type: 'submit', 'aria-label': F.send });
+  const wish = h('input', { type: 'text', class: 'wish-input', maxlength: '300', placeholder: cfg.wishPlaceholder, 'aria-label': cfg.wishesTitle, autocomplete: 'off' });
+  const wishSend = h('button', { class: 'wish-send', type: 'submit', 'aria-label': F.send + ' wishes' });
   const bar = h('div', { class: 'wish-bar' }, h('img', { src: 'assets/bar-wish.webp', alt: '', width: ww, height: wh, loading: 'lazy', decoding: 'async' }), wish, wishSend);
-  const who = h('input', { type: 'text', class: 'wish-name', maxlength: '80', placeholder: F.name, 'aria-label': F.name, lang: 'mr', autocomplete: 'name' });
+  const who = h('input', { type: 'text', class: 'wish-name', maxlength: '80', placeholder: F.name, 'aria-label': F.name, autocomplete: 'name' });
   const whoWrap = h('div', { class: 'wish-name-wrap' }, who);
-  const wishErr = h('p', { class: 'form-err', role: 'alert', lang: 'mr' });
+  const wishErr = h('p', { class: 'form-err', role: 'alert' });
   const wishForm = h('form', { class: 'wish-form', novalidate: true }, bar, whoWrap, wishErr);
   const needName = () => { if (!who.value.trim() && load().name) who.value = load().name; return !who.value.trim(); }; // a name given on the attendance sheet carries over
   wish.addEventListener('focus', () => { if (needName()) wishForm.classList.add('ask-name'); });

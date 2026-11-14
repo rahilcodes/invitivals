@@ -2,8 +2,8 @@
    Overlays are placed by their CENTRE in percent of the canvas (x, y) with a
    width in percent; heights follow each picture's own proportions, so the whole
    composition scales as one. Text sizes are in cqw (percent of canvas width). */
-import { h } from './util.js';
-import { artSizes } from './art-sizes.js';
+import { h } from './util.js?v=2';
+import { artSizes } from './art-sizes.js?v=2';
 
 export function InvitationPage(n, overlays, { lazy = true, cls = '' } = {}) {
   const [w, hgt] = artSizes[`bg${n}`];
@@ -28,9 +28,10 @@ export function art(id, { x, y, w, height, delay = 0, motion = '', z = 2, reveal
 }
 
 /* text: txt(['line', 'line'], { x, y, w, size, cls }) — size in cqw, lh = line-height */
-export function txt(lines, { x = 50, y, w = 90, size = 3.4, cls = 'body', lh = 1.3, delay = 0, z = 3, html = false, align = 'center', id } = {}) {
-  const el = h('div', { class: 'el reveal', style: { left: `${x}%`, top: `${y}%`, width: `${w}%`, zIndex: z, '--d': `${delay}s` }, id });
-  const t = h('div', { class: `txt ${cls}`, style: { fontSize: `${size}cqw`, lineHeight: lh, textAlign: align }, lang: 'mr' });
+export function txt(lines, { x = 50, y, w = 90, size = 3.4, cls = 'body', lh = 1.3, delay = 0, z = 3, html = false, align = 'center', id, anim = '' } = {}) {
+  // anim: '' fade-up · 'a-wipe' masked wipe (headings) · 'a-rise' longer rise (dates, venue) · 'a-soft' soft settle
+  const el = h('div', { class: `el reveal ${anim}`, style: { left: `${x}%`, top: `${y}%`, width: `${w}%`, zIndex: z, '--d': `${delay}s` }, id });
+  const t = h('div', { class: `txt ${cls}`, style: { fontSize: `${size}cqw`, lineHeight: lh, textAlign: align } });
   for (const l of [].concat(lines)) t.append(html ? h('span', { class: 'l', html: l }) : h('span', { class: 'l' }, l));
   el.append(t);
   return el;

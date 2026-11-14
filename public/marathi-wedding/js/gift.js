@@ -1,18 +1,20 @@
-/* Gift — screen 7. The pack's printed "आशीर्वाद स्वरूप भेट" button opens the
+/* Gift — screen 7. The pack's button (its printed label painted out, "Gift as a
+   Blessing" written on it) opens the
    configured details (UPI ID with a copy button, bank lines, a note). With
    nothing configured it says so instead of pretending. */
-import { h, toast, openSheet } from './util.js';
-import { icon } from './ornaments.js';
-import { artSizes } from './art-sizes.js';
+import { h, toast, openSheet } from './util.js?v=2';
+import { icon } from './ornaments.js?v=2';
+import { artSizes } from './art-sizes.js?v=2';
 
 export function GiftButton(cfg, F) {
   const [bw, bh] = artSizes['btn-gift'];
   const configured = !!(cfg.upiId || (cfg.bank && cfg.bank.length) || cfg.note);
-  const btn = h('button', { class: 'img-btn', type: 'button', 'aria-haspopup': configured ? 'dialog' : null, 'aria-label': cfg.sheetTitle },
-    h('img', { src: 'assets/btn-gift.webp', alt: '', width: bw, height: bh, loading: 'lazy', decoding: 'async' }));
+  const btn = h('button', { class: 'img-btn has-chev', type: 'button', 'aria-haspopup': configured ? 'dialog' : null, 'aria-label': cfg.button },
+    h('img', { src: 'assets/btn-gift.webp', alt: '', width: bw, height: bh, loading: 'lazy', decoding: 'async' }),
+    h('span', { class: 'lbl', style: { fontSize: '3.3cqw' }, 'aria-hidden': 'true' }, cfg.button));
   btn.addEventListener('click', () => {
     if (!configured) { toast(cfg.notConfigured); return; }
-    const body = h('div', { class: 'gift-body', lang: 'mr' });
+    const body = h('div', { class: 'gift-body' });
     if (cfg.note) body.append(h('p', { class: 'gift-note' }, cfg.note));
     if (cfg.upiId) {
       const copy = h('button', { class: 'pill small', type: 'button' }, h('i', { class: 'ico', html: icon('copy') }), h('span', {}, cfg.copy));

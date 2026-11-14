@@ -1,15 +1,15 @@
-/* OpeningScreen — the pack's door artwork with a "स्पर्श करा" mark; the whole
+/* OpeningScreen — the pack's door artwork with a "Tap to Open" mark; the whole
    screen is the tap. The one tap starts the song (same gesture), asks for
    fullscreen synchronously, and plays the pack's film — the same door scene,
    the bride reaching for the lotus medallion — muted, so the song is the only
    music. The hero is rendered beneath; just before the film ends it dissolves
-   away over the hero. A "पुढे जा" button is there throughout. */
-import { h } from './util.js';
-import { icon } from './ornaments.js';
+   away over the hero. A "Continue" button is there throughout. */
+import { h } from './util.js?v=2';
+import { icon } from './ornaments.js?v=2';
 
 export function OpeningScreen(cfg, ui, { audio, onOpened }) {
   const mark = h('span', { class: 'mark', 'aria-hidden': 'true' }, h('span', { class: 'ring' }));
-  const label = h('span', { class: 'tap-label', 'aria-hidden': 'true' }, h('i', { html: icon('hand') }), h('span', { lang: 'mr' }, cfg.tap));
+  const label = h('span', { class: 'tap-label', 'aria-hidden': 'true' }, h('i', { html: icon('hand') }), h('span', {}, cfg.tap));
   const tap = h('button', { class: 'tap', type: 'button', 'aria-label': cfg.tap }, mark, label);
   const frame = h('div', { class: 'frame' }, h('img', { class: 'art', src: cfg.poster, alt: '', fetchpriority: 'high', decoding: 'async' }), tap);
   const opening = h('div', { class: 'opening' }, h('div', { class: 'column' }, frame));
