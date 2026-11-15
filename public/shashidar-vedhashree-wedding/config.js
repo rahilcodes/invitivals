@@ -2,8 +2,8 @@
    Shashidar Reddy & Vedhashree, the wedding. The words are in index.html; this holds what the page script needs. */
 export const invite = {
   slug: 'shashidar-vedhashree-wedding',
-  /* the song; null = no music and no music button */
-  music: 'assets/media/music.mp3',
+  /* the family's song, "Kalyanam Vybhogam" (client, 2026-11-15); null = no music and no music button */
+  music: 'assets/media/kalyanam-vybhogam.mp3',
   /* the map links exactly as the family supplied them */
   venues: {
     "pellikoduku": {

@@ -22,7 +22,7 @@ import path from 'node:path';
 const ROOT = path.resolve(path.dirname(new URL(import.meta.url).pathname.replace(/^\/([A-Z]:)/, '$1')), '..');
 const SLUG = 'shashidar-vedhashree-wedding', D = path.join(ROOT, 'public', SLUG), REF = path.join(ROOT, 'public/lokesh-akansha-wedding');
 const SRC = path.join(ROOT, 'invites/src', SLUG);
-const URL_ = `https://invitivals.com/${SLUG}/`, V = 2, COVER = 'cover-shashidar-vedhashree.jpg';
+const URL_ = `https://invitivals.com/${SLUG}/`, V = 3, COVER = 'cover-shashidar-vedhashree.jpg';
 const esc = (s) => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 
 /* both links exactly as the family supplied them */
@@ -79,7 +79,10 @@ if (process.argv[2] === 'init') {
   for (const d of ['assets/bg', 'assets/el', 'assets/media', 'css', 'js']) fs.mkdirSync(path.join(D, d), { recursive: true });
   for (const f of ['bg/p1', 'bg/p2', 'bg/p4', 'bg/p6', 'el/bell', 'el/bell2', 'el/ganesha', 'el/garland', 'el/bird', 'el/tasselA', 'el/tasselB'])
     fs.copyFileSync(path.join(REF, `assets/${f}.webp`), path.join(D, `assets/${f}.webp`));
-  for (const f of ['favicon.svg', '.htaccess', 'assets/media/music.mp3']) fs.copyFileSync(path.join(REF, f), path.join(D, f));
+  for (const f of ['favicon.svg', '.htaccess']) fs.copyFileSync(path.join(REF, f), path.join(D, f));
+  /* the family's song (client, 2026-11-15): "Kalyanam Vybhogam" (Srinivasa Kalyanam), re-encoded to 192 kbps for phones —
+     ffmpeg -i <the client's file> -vn -c:a libmp3lame -b:a 192k -ar 44100 -map_metadata -1 invites/src/shashidar-vedhashree-wedding/kalyanam-vybhogam.mp3 */
+  fs.copyFileSync(path.join(SRC, 'kalyanam-vybhogam.mp3'), path.join(D, 'assets/media/kalyanam-vybhogam.mp3'));
   fs.writeFileSync(path.join(D, 'css/invite.css'), fs.readFileSync(path.join(REF, 'css/invite.css'), 'utf8').replace(/\r\n/g, '\n')
     .replace('Lokesh & Akansha — the wedding, groom side (shared by lokesh-akansha-wedding and lokesh-akansha-wedding-day;\n   written by tools/lokesh-akansha-wedding.mjs from this file).', 'Shashidar Reddy & Vedhashree — the wedding (set up once by tools/shashidar-vedhashree-wedding.mjs init; this copy is this page\'s own).') + CSS);
   /* the page script: the same opening, music, scroll-in and petals; this page has no scratch card, calendar sheet or
@@ -87,7 +90,7 @@ if (process.argv[2] === 'init') {
   let js = fs.readFileSync(path.join(REF, 'js/app.js'), 'utf8').replace(/\r\n/g, '\n');
   const sw = (a, b) => { if (js.split(a).length !== 2) throw new Error('app.js: ' + a.slice(0, 50)); js = js.replace(a, () => b); };
   sw('Lokesh & Akansha — the wedding, groom side.', 'Shashidar Reddy & Vedhashree — the wedding (no scratch card, calendar sheet or countdown on this page: those parts below stay idle).');
-  sw("'../config.js?v=3'", "'../config.js?v=1'");
+  sw("'../config.js?v=3'", "'../config.js?v=2'");
   sw("'assets/el/la-logo.webp'", "'assets/el/shv-logo.webp'");
   fs.writeFileSync(path.join(D, 'js/app.js'), js);
   /* the client's own pictures, only resized: the monogram, the couple, S.N.R. Convention */
@@ -299,8 +302,8 @@ const config = `/* written by tools/shashidar-vedhashree-wedding.mjs — edit th
    Shashidar Reddy & Vedhashree, the wedding. The words are in index.html; this holds what the page script needs. */
 export const invite = {
   slug: '${SLUG}',
-  /* the song; null = no music and no music button */
-  music: 'assets/media/music.mp3',
+  /* the family's song, "Kalyanam Vybhogam" (client, 2026-11-15); null = no music and no music button */
+  music: 'assets/media/kalyanam-vybhogam.mp3',
   /* the map links exactly as the family supplied them */
   venues: ${JSON.stringify({ pellikoduku: { name: 'Pellikoduku', mapsUrl: MAPS.pellikoduku }, wedding: { name: 'S.N.R. Convention', address: 'Pillar No. 122, Attapur, Ring Road, Hyderabad.', mapsUrl: MAPS.wedding } }, null, 2).replace(/\n/g, '\n  ')},
   /* give up on the opening film after this long and go straight to the invitation */
