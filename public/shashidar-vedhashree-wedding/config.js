@@ -8,7 +8,7 @@ export const invite = {
   venues: {
     "pellikoduku": {
       "name": "Pellikoduku",
-      "mapsUrl": "https://maps.app.goo.gl/CNe2pkKXkZi5uaKR9?g_st=ac"
+      "mapsUrl": "https://maps.app.goo.gl/YChWv6wywWbBsaX59?g_st=aw"
     },
     "wedding": {
       "name": "S.N.R. Convention",

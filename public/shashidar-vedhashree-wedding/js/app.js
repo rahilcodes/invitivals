@@ -3,7 +3,7 @@
    then the cover), the scroll-in of every piece, the Save the Date scratch card, the venue map links, the falling
    petals, and the family's song when ../config.js names one (no song: no music button).
    ───────────────────────────────────────────────────────────────────────────── */
-import { invite as C } from '../config.js?v=2';
+import { invite as C } from '../config.js?v=3';
 
 const $ = (s, r = document) => r.querySelector(s);
 const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;

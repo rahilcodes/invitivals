@@ -22,11 +22,11 @@ import path from 'node:path';
 const ROOT = path.resolve(path.dirname(new URL(import.meta.url).pathname.replace(/^\/([A-Z]:)/, '$1')), '..');
 const SLUG = 'shashidar-vedhashree-wedding', D = path.join(ROOT, 'public', SLUG), REF = path.join(ROOT, 'public/lokesh-akansha-wedding');
 const SRC = path.join(ROOT, 'invites/src', SLUG);
-const URL_ = `https://invitivals.com/${SLUG}/`, V = 3, COVER = 'cover-shashidar-vedhashree.jpg';
+const URL_ = `https://invitivals.com/${SLUG}/`, V = 4, COVER = 'cover-shashidar-vedhashree.jpg';
 const esc = (s) => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 
 /* both links exactly as the family supplied them */
-const MAPS = { pellikoduku: 'https://maps.app.goo.gl/CNe2pkKXkZi5uaKR9?g_st=ac', wedding: 'https://share.google/KiSOigmUouCuVlQQr' };
+const MAPS = { pellikoduku: 'https://maps.app.goo.gl/YChWv6wywWbBsaX59?g_st=aw' /* the family's new link (2026-11-15) */, wedding: 'https://share.google/KiSOigmUouCuVlQQr' };
 
 const CSS = `
 
@@ -72,6 +72,9 @@ const CSS = `
 .page--end .script--end { font-size: calc(var(--cq) * 10.6); line-height: 1.08; }
 .page--end .message { font-size: calc(var(--cq) * 4.1); }
 .hosts { font-family: var(--serif); font-weight: 700; color: var(--maroon); font-size: calc(var(--cq) * 4.4); line-height: 1.3; margin-top: calc(var(--cq) * 1.6); text-wrap: balance; }
+/* "Invited by -" over the hosts (client, 2026-11-15) */
+.invited { font-family: var(--caps); font-weight: 600; color: var(--gold); font-size: calc(var(--cq) * 3.3); letter-spacing: .22em; padding-left: .22em; text-transform: uppercase; }
+.page--end .hosts { font-size: calc(var(--cq) * 4.6); line-height: 1.4; margin-top: calc(var(--cq) * 1.4); }
 `;
 
 if (process.argv[2] === 'init') {
@@ -90,7 +93,7 @@ if (process.argv[2] === 'init') {
   let js = fs.readFileSync(path.join(REF, 'js/app.js'), 'utf8').replace(/\r\n/g, '\n');
   const sw = (a, b) => { if (js.split(a).length !== 2) throw new Error('app.js: ' + a.slice(0, 50)); js = js.replace(a, () => b); };
   sw('Lokesh & Akansha — the wedding, groom side.', 'Shashidar Reddy & Vedhashree — the wedding (no scratch card, calendar sheet or countdown on this page: those parts below stay idle).');
-  sw("'../config.js?v=3'", "'../config.js?v=2'");
+  sw("'../config.js?v=3'", "'../config.js?v=3'");
   sw("'assets/el/la-logo.webp'", "'assets/el/shv-logo.webp'");
   fs.writeFileSync(path.join(D, 'js/app.js'), js);
   /* the client's own pictures, only resized: the monogram, the couple, S.N.R. Convention */
@@ -247,8 +250,8 @@ const html = `<!DOCTYPE html>
       <div class="flow" style="--top:31;--side:14">
         <h2 class="script script--lg rise">Pellikoduku</h2>
         <span class="medal medal--lg pop" style="--d:.1s" aria-hidden="true"><svg viewBox="0 0 48 48">${KALASHA}</svg></span>
-        <p class="datebar gap-m rise" style="--d:.15s">Tuesday<small>17 November 2026</small></p>
-        <p class="hours rise" style="--d:.2s">10:30 AM</p>
+        <p class="datebar gap-m rise" style="--d:.15s">Monday<small>16 November 2026</small></p>
+        <p class="hours rise" style="--d:.2s">5:00 PM</p>
         <img class="orn rise" style="width:calc(var(--cq) * 16);--d:.25s" src="assets/el/garland.webp" alt="" loading="lazy">
         ${mapBtn('pellikoduku', 'View Event Location')}
       </div>
@@ -283,8 +286,9 @@ const html = `<!DOCTYPE html>
       <div class="flow" style="--top:5;--side:17;--bottom:0">
         <h2 class="script script--end rise">With Love<br>&amp; Blessings</h2>
         <img class="orn rise" style="width:calc(var(--cq) * 18);margin:calc(var(--cq) * 1) auto calc(var(--cq) * 1.6);--d:.2s" src="assets/el/garland.webp" alt="" loading="lazy">
-        <p class="message rise" style="--d:.3s">We warmly invite you to join us and bless the couple as they begin their beautiful journey together.</p>
-        <p class="hosts rise" style="--d:.4s">Smt. Challa Pranitha &amp; Sri Chandra Reddy</p>
+        <!-- invited by, exactly as the family wrote it (2026-11-15) -->
+        <p class="invited rise" style="--d:.3s">Invited by -</p>
+        <p class="hosts rise" style="--d:.4s">Smt. &amp; Sri Challa Pranitha &amp; Chandra Reddy<br>and Sri Suman Reddy</p>
       </div>
       <!-- inside the painted arch (client, 2026-11-15: "Thank You" here, not the monogram) -->
       <div class="arch-words"><p class="thanks rise" style="--d:.3s">Thank You</p><img class="orn rise" style="width:calc(var(--cq) * 13);margin:calc(var(--cq) * .6) auto 0;--d:.45s" src="assets/el/garland.webp" alt="" loading="lazy"></div>

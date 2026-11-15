@@ -332,3 +332,6 @@ p, h1, h2, h3 { margin: 0; }
 .page--end .script--end { font-size: calc(var(--cq) * 10.6); line-height: 1.08; }
 .page--end .message { font-size: calc(var(--cq) * 4.1); }
 .hosts { font-family: var(--serif); font-weight: 700; color: var(--maroon); font-size: calc(var(--cq) * 4.4); line-height: 1.3; margin-top: calc(var(--cq) * 1.6); text-wrap: balance; }
+/* "Invited by -" over the hosts (client, 2026-11-15) */
+.invited { font-family: var(--caps); font-weight: 600; color: var(--gold); font-size: calc(var(--cq) * 3.3); letter-spacing: .22em; padding-left: .22em; text-transform: uppercase; }
+.page--end .hosts { font-size: calc(var(--cq) * 4.6); line-height: 1.4; margin-top: calc(var(--cq) * 1.4); }
