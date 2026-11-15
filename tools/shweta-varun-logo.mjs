@@ -15,8 +15,10 @@ import path from 'node:path';
 import sharp from 'sharp';
 
 const ROOT = path.resolve(path.dirname(new URL(import.meta.url).pathname.replace(/^\/([A-Z]:)/, '$1')), '..');
-const SRC = path.join(ROOT, 'invites/src/shweta-varun-wedding');
-const { data, info } = await sharp(path.join(SRC, 'sv-logo-source.jpg')).removeAlpha().raw().toBuffer({ resolveWithObject: true });
+/* node tools/shweta-varun-logo.mjs [page folder] [mark]  — defaults: shweta-varun-wedding sv; also used for shashidar-vedhashree-wedding shv */
+const SLUG = process.argv[2] || 'shweta-varun-wedding', MARK = process.argv[3] || 'sv';
+const SRC = path.join(ROOT, 'invites/src', SLUG);
+const { data, info } = await sharp(path.join(SRC, `${MARK}-logo-source.jpg`)).removeAlpha().raw().toBuffer({ resolveWithObject: true });
 const W = info.width, H = info.height, n = W * H, A = new Float32Array(n);
 for (let i = 0; i < n; i++) {
   const r = data[i * 3], g = data[i * 3 + 1], b = data[i * 3 + 2], mx = Math.max(r, g, b), mn = Math.min(r, g, b);
@@ -50,9 +52,9 @@ for (let i = 0; i < n; i++) {
   out[i * 4] = r; out[i * 4 + 1] = g; out[i * 4 + 2] = b; out[i * 4 + 3] = Math.round(a * 255);
 }
 const png = await sharp(out, { raw: { width: W, height: H, channels: 4 } }).png().toBuffer();
-await sharp(png).toFile(path.join(SRC, 'sv-logo.png'));
-await sharp(png).flatten({ background: '#000' }).jpeg({ quality: 96, chromaSubsampling: '4:4:4' }).toFile(path.join(ROOT, 'invites/src/saicharan-lakshmi-engagement/sv-logo.jpg'));
+await sharp(png).toFile(path.join(SRC, `${MARK}-logo.png`));
+await sharp(png).flatten({ background: '#000' }).jpeg({ quality: 96, chromaSubsampling: '4:4:4' }).toFile(path.join(ROOT, `invites/src/saicharan-lakshmi-engagement/${MARK}-logo.jpg`));
 /* proof sheets for the eye: on cream, on gold foil, on dark */
 const proof = await Promise.all(['#efdcc0', '#e3c589', '#2a130b'].map((bg) => sharp(png).resize(420).flatten({ background: bg }).toBuffer()));
-await sharp({ create: { width: 1272, height: 420, channels: 3, background: '#fff' } }).composite(proof.map((input, i) => ({ input, left: i * 426, top: 0 }))).jpeg({ quality: 90 }).toFile(path.join(SRC, 'sv-logo-proof.jpg'));
-console.log('✓ sv-logo.png', W + 'x' + H);
+await sharp({ create: { width: 1272, height: 420, channels: 3, background: '#fff' } }).composite(proof.map((input, i) => ({ input, left: i * 426, top: 0 }))).jpeg({ quality: 90 }).toFile(path.join(SRC, `${MARK}-logo-proof.jpg`));
+console.log('✓', SLUG, MARK + '-logo.png', W + 'x' + H);
