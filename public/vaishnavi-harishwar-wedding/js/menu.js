@@ -6,7 +6,7 @@ import { initMapLinks } from './links.js?v=3';
 
 const LINKS = [
   ['welcome', 'Invitation'], ['families', 'Families'], ['events', 'Celebrations'], ['ceremony', 'Wedding'],
-  ['venue', 'Venue'], ['moments', 'Moments'], ['save', 'Save the Date'], ['wishes', 'Wishes'],
+  ['venue', 'Venue'], ['moments', 'Moments'], ['save', 'Save the Date'],
 ];
 
 export function createMenu(cfg, calendar) {
