@@ -20,19 +20,20 @@ import path from 'node:path';
 const ROOT = path.resolve(path.dirname(new URL(import.meta.url).pathname.replace(/^\/([A-Z]:)/, '$1')), '..');
 const SLUG = 'shweta-varun-wedding', D = path.join(ROOT, 'public', SLUG), REF = path.join(ROOT, 'public/lokesh-akansha-wedding');
 const SRC = path.join(ROOT, 'invites/src', SLUG);
-const URL_ = `https://invitivals.com/${SLUG}/`, V = 2, COVER = 'cover-shweta-varun.jpg';
+const URL_ = `https://invitivals.com/${SLUG}/`, V = 3, COVER = 'cover-shweta-varun.jpg';
 const esc = (s) => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 
 /* both links exactly as the family supplied them */
-const MEHNDI = { name: 'Gulmohar Hall, Ground Floor', sub: 'Ola Vakkola Banquets',
-  lines: ['Police Station, B-25/198', 'Near Vakola, Anand Nagar, Vakola', 'Santacruz East, Mumbai', 'Maharashtra – 400055'], mapsUrl: 'https://maps.app.goo.gl/kPECwfKd4jfSxxuc6?g_st=iw' };
+const MEHNDI = { name: 'Ola Vakkola Banquets', sub: '',   /* venue and address as corrected by the client (2026-11-15) */
+  lines: ['B-25/198, Near Vakola,', 'Anand Nagar, Vakola,', 'Santacruz East, Mumbai,', 'Maharashtra – 400055.'],
+  address: 'B-25/198, Near Vakola, Anand Nagar, Vakola, Santacruz East, Mumbai, Maharashtra – 400055.', mapsUrl: 'https://maps.app.goo.gl/kPECwfKd4jfSxxuc6?g_st=iw' };
 const HOTEL = { name: 'Peninsula Grand Hotel', sub: 'Concorde Ball Room, 6th Floor',
   lines: ['90 Feet Road, Sakinaka', 'Opposite Sakinaka Metro Station', 'Mumbai, Maharashtra'], mapsUrl: 'https://share.google/7ZrttUvmxz9kOpCak' };
-const full = (v) => [v.name, v.sub, ...v.lines].join(', ');
+const full = (v) => (v.address ? `${v.name}, ${v.address}` : [v.name, v.sub, ...v.lines].join(', '));
 /* the two calendar entries: every time here is the family's own (the Mehndi 7:00–11:00 PM; the wedding from the
    Muhurtham at 5:18 PM to the end of the reception and dinner at 11:00 PM) */
 const CAL = [
-  { id: 'mehndi', title: 'Mehndi Ceremony · Shweta & Varun', start: '20261211T190000', end: '20261211T230000', venue: MEHNDI, notes: 'Friday, 11 December 2026\n7:00 PM – 11:00 PM' },
+  { id: 'mehndi', title: 'Mehndi Ceremony · Shweta & Varun', start: '20261210T190000', end: '20261210T230000', venue: MEHNDI, notes: 'Thursday, 10 December 2026\n7:00 PM – 11:00 PM' },
   { id: 'wedding', title: 'Wedding of Shweta & Varun', start: '20261213T171800', end: '20261213T230000', venue: HOTEL, notes: 'Sunday, 13 December 2026\nMuhurtham: 5:18 PM (Vrashabha Lagna)\nReception & Dinner: up to 11:00 PM' },
 ];
 const COUNTDOWN = '2026-12-13T17:18:00+05:30';
@@ -118,7 +119,8 @@ const P4BELLS = `<img class="el swing" style="left:12%;top:${at(15, 177.68)};wid
 const mapBtn = (k, label, cls = '') => `<a class="maps ${cls} rise" data-maps="${k}" target="_blank" rel="noopener" style="--d:.35s"><svg viewBox="0 0 24 24" aria-hidden="true">${PINPATH}</svg><span>${label}</span></a>`;
 const place = (v) => `<svg class="pin" viewBox="0 0 24 24" aria-hidden="true">${PINPATH}</svg>
         <p class="venue rise">${esc(v.name)}</p>
-        <p class="venue-sub rise" style="--d:.1s">${esc(v.sub)}</p>
+${v.sub ? `
+        <p class="venue-sub rise" style="--d:.1s">${esc(v.sub)}</p>` : ''}
         <p class="addr rise" style="--d:.15s">${v.lines.map((l) => `<span>${esc(l)}</span>`).join('')}</p>`;
 
 const icsText = (t) => String(t).replace(/\\/g, '\\\\').replace(/\n/g, '\\n').replace(/[,;]/g, (c) => '\\' + c);
@@ -206,45 +208,7 @@ const html = `<!DOCTYPE html>
     </div>
   </section>
 
-  <!-- 2 · the invitation, in the hosts' words, under the couple's monogram -->
-  <section class="page" id="p-invite">
-    <div class="art art--fit" style="--h:177.68">
-      <img class="bg" src="assets/bg/p4.webp" alt="" width="941" height="1672" loading="lazy" decoding="async">
-      ${P4BELLS}
-      <div class="flow" style="--top:24;--side:15">
-        ${MONO(31)}
-        <p class="hosts gap-l rise" style="--d:.15s">Smt. Premlata<i>&amp;</i>Shri Manohar R. Amin</p>
-        <img class="orn rise" style="width:calc(var(--cq) * 18);--d:.2s" src="assets/el/garland.webp" alt="" loading="lazy">
-        <p class="para rise" style="--d:.25s">Solicit the pleasure of your company with family on the auspicious occasion of the wedding ceremony of their daughter.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- 3 · the couple and their elders, exactly as the family wrote them -->
-  <section class="page" id="p-fam">
-    <div class="art art--fit" style="--h:177.68">
-      <img class="bg" src="assets/bg/p1.webp" alt="" width="941" height="1672" loading="lazy" decoding="async">${bells(5.5, 11.5, true)}
-      <div class="flow" style="--top:25;--side:10">
-        <div class="fam rise">
-          <h2 class="fam__n fam__n--sm">Chi. Sow. Shweta</h2>
-          <p class="fam__k">Granddaughter of</p>
-          <p class="fam__g">Late Smt. Yamuna &amp; Shri Rukka M. Amin</p>
-          <p class="fam__g">Late Smt. Vimala &amp; Shri Muddu B Karkera</p>
-        </div>
-        <p class="with rise" style="--d:.1s">WITH</p>
-        <div class="fam rise" style="--d:.15s">
-          <h2 class="fam__n fam__n--sm">Chi. Varun</h2>
-          <p class="fam__k">Son of</p>
-          <p class="fam__p">Smt. Purnima &amp; Shri Vishwanath B. Salian</p>
-          <p class="fam__k">Grandson of</p>
-          <p class="fam__g">Late Kamala &amp; Baburao Amin</p>
-          <p class="fam__g">Smt. Gulabi &amp; Late Thimappa Poojari</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- 4 · Save the Date: a gold-foil scratch card with the S&V monogram; underneath, the wedding date. Then Add to Calendar -->
+  <!-- 2 · Save the Date: a gold-foil scratch card with the S&V monogram; underneath, the wedding date. Then Add to Calendar -->
   <section class="page" id="p-save">
     <div class="art art--fit" style="--h:169.29">
       <img class="bg" src="assets/bg/p2.webp" alt="" width="964" height="1632" loading="lazy" decoding="async">
@@ -269,6 +233,48 @@ const html = `<!DOCTYPE html>
     </div>
   </section>
 
+  <!-- 3 · Our Families: the bride and her elders, WITH, the groom and his — exactly as the family wrote them (2026-11-15) -->
+  <section class="page" id="p-fam">
+    <div class="art art--fit" style="--h:177.68">
+      <img class="bg" src="assets/bg/p1.webp" alt="" width="941" height="1672" loading="lazy" decoding="async">${bells(5.5, 11.5, true)}
+      <div class="flow" style="--top:24;--side:10">
+        <h2 class="script script--lg rise">Our Families</h2>
+        <img class="orn rise" style="width:calc(var(--cq) * 18);--d:.15s" src="assets/el/garland.webp" alt="" loading="lazy">
+        <div class="fam rise" style="--d:.25s">
+          <h3 class="fam__n fam__n--sm">Chi. Sow. Shweta</h3>
+          <p class="fam__k">Daughter of</p>
+          <p class="fam__p">Smt. Premlata &amp; Shri. Manohar R. Amin</p>
+          <p class="fam__k">Granddaughter of</p>
+          <p class="fam__g">Late Smt. Yamuna &amp; Shri Rukka M. Amin</p>
+          <p class="fam__g">Late Smt. Vimala &amp; Shri Muddu B. Karkera</p>
+        </div>
+        <p class="with rise" style="--d:.1s">WITH</p>
+        <div class="fam rise" style="--d:.15s">
+          <h3 class="fam__n fam__n--sm">Chi. Varun</h3>
+          <p class="fam__k">Son of</p>
+          <p class="fam__p">Smt. Purnima &amp; Shri Vishwanath B. Salian</p>
+          <p class="fam__k">Grandson of</p>
+          <p class="fam__g">Late Kamala &amp; Baburao Amin</p>
+          <p class="fam__g">Smt. Gulabi &amp; Late Thimappa Poojari</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4 · the invitation, in the hosts' words, under the couple's monogram -->
+  <section class="page" id="p-invite">
+    <div class="art art--fit" style="--h:177.68">
+      <img class="bg" src="assets/bg/p4.webp" alt="" width="941" height="1672" loading="lazy" decoding="async">
+      ${P4BELLS}
+      <div class="flow" style="--top:24;--side:15">
+        ${MONO(31)}
+        <p class="hosts gap-l rise" style="--d:.15s">Smt. Premlata<i>&amp;</i>Shri Manohar R. Amin</p>
+        <img class="orn rise" style="width:calc(var(--cq) * 18);--d:.2s" src="assets/el/garland.webp" alt="" loading="lazy">
+        <p class="para rise" style="--d:.25s">Solicit the pleasure of your company with family on the auspicious occasion of the wedding ceremony of their daughter.</p>
+      </div>
+    </div>
+  </section>
+
   <!-- 5 · the Mehndi -->
   <section class="page" id="p-mehndi">
     <div class="art art--fit" style="--h:177.68">
@@ -276,7 +282,7 @@ const html = `<!DOCTYPE html>
       <div class="flow" style="--top:24;--side:13">
         <h2 class="script script--lg rise">Mehndi Ceremony</h2>
         <span class="medal medal--lg pop" style="--d:.1s" aria-hidden="true"><svg viewBox="0 0 48 48">${ICON.mehndi}</svg></span>
-        <p class="datebar gap-m rise" style="--d:.15s">Friday<small>11 December 2026</small></p>
+        <p class="datebar gap-m rise" style="--d:.15s">Thursday<small>10 December 2026</small></p>
         <p class="hours rise" style="--d:.2s">7:00 PM – 11:00 PM</p>
         <img class="orn rise" style="width:calc(var(--cq) * 16);--d:.25s" src="assets/el/garland.webp" alt="" loading="lazy">
         ${place(MEHNDI)}
@@ -362,11 +368,11 @@ const html = `<!DOCTYPE html>
 <div class="sheet" id="sheet" hidden>
   <div class="sheet__veil" data-close></div>
   <div class="sheet__card" role="dialog" aria-modal="true" aria-labelledby="sheetTitle">
-    <p class="sheet__kicker">11 &amp; 13 December 2026 · Mumbai</p>
+    <p class="sheet__kicker">10 &amp; 13 December 2026 · Mumbai</p>
     <h2 class="sheet__title" id="sheetTitle">Save the Date</h2>
     <a class="sheet__btn sheet__btn--primary" href="event.ics" download="shweta-varun-wedding.ics"><svg viewBox="0 0 24 24" aria-hidden="true">${CALPATH}</svg>Apple / Android calendar (.ics)</a>
     <p class="sheet__note">Google Calendar</p>
-    <a class="sheet__btn" href="${gcal(CAL[0])}" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm1 5v5.4l3.6 2.1-.8 1.3L11 13V7z"/></svg>Mehndi · 11 December</a>
+    <a class="sheet__btn" href="${gcal(CAL[0])}" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm1 5v5.4l3.6 2.1-.8 1.3L11 13V7z"/></svg>Mehndi · 10 December</a>
     <a class="sheet__btn" id="gcal" href="${gcal(CAL[1])}" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm1 5v5.4l3.6 2.1-.8 1.3L11 13V7z"/></svg>Wedding · 13 December</a>
     <button class="sheet__close" type="button" data-close>Close</button>
   </div>

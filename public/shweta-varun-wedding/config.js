@@ -7,8 +7,8 @@ export const invite = {
   /* the venue links exactly as the family supplied them */
   venues: {
     "mehndi": {
-      "name": "Ola Vakkola Banquets",
-      "address": "Gulmohar Hall, Ground Floor, Ola Vakkola Banquets, Police Station, B-25/198, Near Vakola, Anand Nagar, Vakola, Santacruz East, Mumbai, Maharashtra – 400055",
+      "name": "",
+      "address": "Ola Vakkola Banquets, B-25/198, Near Vakola, Anand Nagar, Vakola, Santacruz East, Mumbai, Maharashtra – 400055.",
       "mapsUrl": "https://maps.app.goo.gl/kPECwfKd4jfSxxuc6?g_st=iw"
     },
     "hotel": {
