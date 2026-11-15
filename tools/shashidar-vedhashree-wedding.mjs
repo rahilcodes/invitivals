@@ -22,7 +22,7 @@ import path from 'node:path';
 const ROOT = path.resolve(path.dirname(new URL(import.meta.url).pathname.replace(/^\/([A-Z]:)/, '$1')), '..');
 const SLUG = 'shashidar-vedhashree-wedding', D = path.join(ROOT, 'public', SLUG), REF = path.join(ROOT, 'public/lokesh-akansha-wedding');
 const SRC = path.join(ROOT, 'invites/src', SLUG);
-const URL_ = `https://invitivals.com/${SLUG}/`, V = 1, COVER = 'cover-shashidar-vedhashree.jpg';
+const URL_ = `https://invitivals.com/${SLUG}/`, V = 2, COVER = 'cover-shashidar-vedhashree.jpg';
 const esc = (s) => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 
 /* both links exactly as the family supplied them */
@@ -43,7 +43,8 @@ const CSS = `
   background: linear-gradient(to bottom, rgba(255, 236, 200, .16), rgba(255, 236, 200, 0) 30%, rgba(239, 220, 192, 0) 80%, rgba(239, 220, 192, .5)); box-shadow: inset 0 0 calc(var(--cq) * 6) rgba(120, 70, 30, .22); }
 /* the couple's S&V monogram, by itself: no disc, no box, only its own shadow on the paper */
 .mono { display: block; flex: none; width: calc(var(--cq) * var(--w, 30)); height: auto; filter: drop-shadow(0 calc(var(--cq) * .9) calc(var(--cq) * 1.4) rgba(96, 58, 12, .34)) drop-shadow(0 0 calc(var(--cq) * .3) rgba(110, 70, 20, .3)); }
-.arch-words .mono { --w: 23; }
+/* the closing arch says "Thank You" (client, 2026-11-15: no monogram there) */
+.thanks { font-family: var(--script); color: var(--maroon); font-size: calc(var(--cq) * 10.4); line-height: 1.1; white-space: nowrap; }
 /* Save the Date, shown outright: the card of the design, taller for the hour and the place; nothing to scratch */
 .scard.scard--open { aspect-ratio: 4 / 5.5; margin-top: calc(var(--cq) * 3); }
 .scard--open .scard__num { font-size: calc(var(--cq) * 15); }
@@ -215,8 +216,8 @@ const html = `<!DOCTYPE html>
       <img class="bg" src="assets/bg/p1.webp" alt="" width="941" height="1672" loading="lazy" decoding="async">${bells(5.5, 11.5, true)}
       <div class="flow" style="--top:24;--side:10">
         <h2 class="script script--lg rise">Our Families</h2>
-        ${MONO(18, 'pop', '.1s')}
-        <p class="invoke gap-m rise" style="--d:.15s">|| Sri Ganeshaya Namah ||</p>
+        <img class="orn rise" style="width:calc(var(--cq) * 18);--d:.1s" src="assets/el/garland.webp" alt="" loading="lazy">
+        <p class="invoke rise" style="--d:.15s">|| Sri Ganeshaya Namah ||</p>
         <p class="bless rise" style="--d:.2s">Srirasthu · Shubhamasthu · Avighnamasthu</p>
         <p class="para para--invite rise" style="--d:.25s">We solicit your gracious presence with family and friends on the auspicious occasion of the marriage of our youngest brother.</p>
         <img class="orn rise" style="width:calc(var(--cq) * 18);--d:.3s" src="assets/el/garland.webp" alt="" loading="lazy">
@@ -229,7 +230,7 @@ const html = `<!DOCTYPE html>
         <div class="fam rise" style="--d:.15s">
           <h3 class="fam__n fam__n--sm fam__n--xs">Chi. La. Sow. Vedhashree</h3>
           <p class="fam__k">Youngest daughter of</p>
-          <p class="fam__p">Smt. &amp; Sri Dosala Chandrakala –<br>Shekhar Reddy</p>
+          <p class="fam__p">Smt. Dosala Chandrakala &amp;<br>Sri. Shekhar Reddy</p>
         </div>
       </div>
     </div>
@@ -271,7 +272,7 @@ const html = `<!DOCTYPE html>
     </div>
   </section>
 
-  <!-- 6 · the final greeting: the closing words, the hosts, and the monogram inside the painted arch -->
+  <!-- 6 · the final greeting: the closing words, the hosts, and "Thank You" inside the painted arch -->
   <section class="page page--end" id="p-end">
     <div class="art" style="--h:150">
       <img class="bg" src="assets/bg/p6.webp" alt="" width="1024" height="1536" loading="lazy" decoding="async">
@@ -282,7 +283,8 @@ const html = `<!DOCTYPE html>
         <p class="message rise" style="--d:.3s">We warmly invite you to join us and bless the couple as they begin their beautiful journey together.</p>
         <p class="hosts rise" style="--d:.4s">Smt. Challa Pranitha &amp; Sri Chandra Reddy</p>
       </div>
-      <div class="arch-words">${MONO(23, 'pop', '.3s')}</div>
+      <!-- inside the painted arch (client, 2026-11-15: "Thank You" here, not the monogram) -->
+      <div class="arch-words"><p class="thanks rise" style="--d:.3s">Thank You</p><img class="orn rise" style="width:calc(var(--cq) * 13);margin:calc(var(--cq) * .6) auto 0;--d:.45s" src="assets/el/garland.webp" alt="" loading="lazy"></div>
       <p class="credit">Created by <a href="https://invitivals.com/?utm_source=invitation&amp;utm_medium=footer&amp;utm_campaign=${SLUG}" target="_blank" rel="noopener">Invitivals</a></p>
     </div>
   </section>

@@ -303,7 +303,8 @@ p, h1, h2, h3 { margin: 0; }
   background: linear-gradient(to bottom, rgba(255, 236, 200, .16), rgba(255, 236, 200, 0) 30%, rgba(239, 220, 192, 0) 80%, rgba(239, 220, 192, .5)); box-shadow: inset 0 0 calc(var(--cq) * 6) rgba(120, 70, 30, .22); }
 /* the couple's S&V monogram, by itself: no disc, no box, only its own shadow on the paper */
 .mono { display: block; flex: none; width: calc(var(--cq) * var(--w, 30)); height: auto; filter: drop-shadow(0 calc(var(--cq) * .9) calc(var(--cq) * 1.4) rgba(96, 58, 12, .34)) drop-shadow(0 0 calc(var(--cq) * .3) rgba(110, 70, 20, .3)); }
-.arch-words .mono { --w: 23; }
+/* the closing arch says "Thank You" (client, 2026-11-15: no monogram there) */
+.thanks { font-family: var(--script); color: var(--maroon); font-size: calc(var(--cq) * 10.4); line-height: 1.1; white-space: nowrap; }
 /* Save the Date, shown outright: the card of the design, taller for the hour and the place; nothing to scratch */
 .scard.scard--open { aspect-ratio: 4 / 5.5; margin-top: calc(var(--cq) * 3); }
 .scard--open .scard__num { font-size: calc(var(--cq) * 15); }
