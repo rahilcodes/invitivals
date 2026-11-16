@@ -20,7 +20,7 @@ import path from 'node:path';
 const ROOT = path.resolve(path.dirname(new URL(import.meta.url).pathname.replace(/^\/([A-Z]:)/, '$1')), '..');
 const SLUG = 'shweta-varun-wedding', D = path.join(ROOT, 'public', SLUG), REF = path.join(ROOT, 'public/lokesh-akansha-wedding');
 const SRC = path.join(ROOT, 'invites/src', SLUG);
-const URL_ = `https://invitivals.com/${SLUG}/`, V = 3, COVER = 'cover-shweta-varun.jpg';
+const URL_ = `https://invitivals.com/${SLUG}/`, V = 4, COVER = 'cover-shweta-varun.jpg';
 const esc = (s) => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 
 /* both links exactly as the family supplied them */
@@ -241,6 +241,7 @@ const html = `<!DOCTYPE html>
         <h2 class="script script--lg rise">Our Families</h2>
         <img class="orn rise" style="width:calc(var(--cq) * 18);--d:.15s" src="assets/el/garland.webp" alt="" loading="lazy">
         <div class="fam rise" style="--d:.25s">
+          <p class="fam__l">The Bride</p>
           <h3 class="fam__n fam__n--sm">Chi. Sow. Shweta</h3>
           <p class="fam__k">Daughter of</p>
           <p class="fam__p">Smt. Premlata &amp; Shri. Manohar R. Amin</p>
@@ -250,6 +251,7 @@ const html = `<!DOCTYPE html>
         </div>
         <p class="with rise" style="--d:.1s">WITH</p>
         <div class="fam rise" style="--d:.15s">
+          <p class="fam__l">The Groom</p>
           <h3 class="fam__n fam__n--sm">Chi. Varun</h3>
           <p class="fam__k">Son of</p>
           <p class="fam__p">Smt. Purnima &amp; Shri Vishwanath B. Salian</p>
@@ -261,19 +263,7 @@ const html = `<!DOCTYPE html>
     </div>
   </section>
 
-  <!-- 4 · the invitation, in the hosts' words, under the couple's monogram -->
-  <section class="page" id="p-invite">
-    <div class="art art--fit" style="--h:177.68">
-      <img class="bg" src="assets/bg/p4.webp" alt="" width="941" height="1672" loading="lazy" decoding="async">
-      ${P4BELLS}
-      <div class="flow" style="--top:24;--side:15">
-        ${MONO(31)}
-        <p class="hosts gap-l rise" style="--d:.15s">Smt. Premlata<i>&amp;</i>Shri Manohar R. Amin</p>
-        <img class="orn rise" style="width:calc(var(--cq) * 18);--d:.2s" src="assets/el/garland.webp" alt="" loading="lazy">
-        <p class="para rise" style="--d:.25s">Solicit the pleasure of your company with family on the auspicious occasion of the wedding ceremony of their daughter.</p>
-      </div>
-    </div>
-  </section>
+  <!-- (the hosts' page was removed at the client's request, 2026-11-16) -->
 
   <!-- 5 · the Mehndi -->
   <section class="page" id="p-mehndi">
