@@ -606,7 +606,13 @@ html.lb-open,html.lb-open body{overflow:hidden}
   <svg class="divider draw-me" aria-hidden="true"><use href="#i-divider"/></svg>
 </header>
       <div class="day">
-  <div class="dateplate rv"><div class="plaque"><span class="pl-day">Friday</span><span class="pl-sep" aria-hidden="true">|</span><span class="pl-date">11 December 2026</span></div></div>
+  <!-- scratch to reveal the date (client, 2026-11-16): the design's own foil panel; a button for screen readers reveals it too -->
+  <div class="scratch rv" data-label="Friday, 11 December 2026" data-sub="the Sagan date">
+    <div class="plaque"><span class="pl-day">Friday</span><span class="pl-sep" aria-hidden="true">|</span><span class="pl-date">11 December 2026</span></div>
+    <canvas class="foil" aria-hidden="true"></canvas>
+    <button class="sr reveal-btn" type="button">Reveal the date: Friday, 11 December 2026</button>
+  </div>
+  <p class="scratch-hint rv">Scratch the panel to reveal the date</p>
   
   <ol class="events">
   <li class="ev ev--eve ev--crown rv" style="--d:0ms">
@@ -626,7 +632,13 @@ html.lb-open,html.lb-open body{overflow:hidden}
   </div>
 </div>
       <div class="day day--night">
-  <div class="dateplate rv"><div class="plaque"><span class="pl-day">Saturday</span><span class="pl-sep" aria-hidden="true">|</span><span class="pl-date">12 December 2026</span></div></div>
+  <!-- scratch to reveal the date (client, 2026-11-16): the design's own foil panel; a button for screen readers reveals it too -->
+  <div class="scratch rv" data-label="Saturday, 12 December 2026" data-sub="the wedding date">
+    <div class="plaque"><span class="pl-day">Saturday</span><span class="pl-sep" aria-hidden="true">|</span><span class="pl-date">12 December 2026</span></div>
+    <canvas class="foil" aria-hidden="true"></canvas>
+    <button class="sr reveal-btn" type="button">Reveal the date: Saturday, 12 December 2026</button>
+  </div>
+  <p class="scratch-hint rv">Scratch the panel to reveal the date</p>
   <p class="day-title rv">Wedding Ceremony</p>
   <ol class="events">
   <li class="ev ev--eve rv" style="--d:0ms">
@@ -830,7 +842,7 @@ html.lb-open,html.lb-open body{overflow:hidden}
       ctx.strokeStyle='rgba(213,175,98,.55)';ctx.lineWidth=1;ctx.strokeRect(6.5,6.5,w-13,h-13);
       ctx.fillStyle='#F3D592';ctx.textAlign='center';ctx.textBaseline='middle';
       ctx.font='600 11px Cinzel, Georgia, serif';ctx.fillText('S C R A T C H   T O   R E V E A L',w/2,h/2-10);
-      ctx.font='italic 600 15px "Cormorant Garamond", Georgia, serif';ctx.fillText('the wedding date',w/2,h/2+11);
+      ctx.font='italic 600 15px "Cormorant Garamond", Georgia, serif';ctx.fillText(box.getAttribute('data-sub')||'the wedding date',w/2,h/2+11);
       for(var i=0;i<18;i++){ctx.fillStyle='rgba(243,213,146,'+(.15+Math.random()*.35)+')';var x=Math.random()*w,y=Math.random()*h,r=.8+Math.random()*1.4;ctx.beginPath();ctx.arc(x,y,r,0,7);ctx.fill();}
       painted=true;
     }

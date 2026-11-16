@@ -12,7 +12,7 @@
 
    Differences from the reference, as asked: the Ganesha slide second with "The celebrations begin in" and the
    countdown to 12 December; families as supplied; two event days, each with its own venue and map button; the
-   date plaques are shown outright (no scratch panels); an Our Moments gallery with a lightbox; RSVP with the two
+   date plaques are the design's scratch-to-reveal panels (since 2026-11-16, at the client's request); an Our Moments gallery with a lightbox; RSVP with the two
    numbers supplied; the closing "With Best Compliments — Dadke & Nanke — Invitation from Mrs. Meena & Mr. Mukesh Chopra". */
 import fs from 'node:fs';
 import path from 'node:path';
@@ -29,11 +29,11 @@ const HOSTS = 'Mrs. Meena & Mr. Mukesh Chopra';
 const GROOM = { role: 'The Groom', name: 'KARAN', rel: 'Grandson of', of: 'Late Smt. Raj Rani & Late Sh. Gian Chand Chopra' };
 const BRIDE = { role: 'The Bride', name: 'RHYTHM', rel: 'Daughter of', of: 'Mrs. Monica & Mr. Jitendra Batra' };
 const DAYS = [
-  { key: '2026-12-11', day: 'Friday', date: '11 December 2026', icon: 'i-tilak',
+  { key: '2026-12-11', day: 'Friday', date: '11 December 2026', icon: 'i-tilak', sub: 'the Sagan date',
     events: [{ name: 'Sagan Ceremony', time: '7:00 PM onwards' }],
     venue: { name: 'Talab by Miraya', addr: ['Vasundhara, Ghaziabad, U.P.'], map: 'https://maps.app.goo.gl/jVfVtfjFooYwwdNH9?g_st=iw', label: 'View Sagan Venue on Google Maps' },
     cal: { title: 'Sagan Ceremony · Karan & Rhythm', start: '20261211T190000', end: '20261211T220000', notes: 'Sagan Ceremony – 7:00 PM onwards' } },
-  { key: '2026-12-12', day: 'Saturday', date: '12 December 2026', icon: 'i-baraat', night: true,
+  { key: '2026-12-12', day: 'Saturday', date: '12 December 2026', icon: 'i-baraat', night: true, sub: 'the wedding date',
     title: 'Wedding Ceremony',
     events: [{ name: 'Sehra Bandi', time: '7:00 PM' }, { name: 'Departure of Barat', time: '8:00 PM' }],
     venue: { name: 'Emerald Greens', addr: ['Govindpuram, Ghaziabad, U.P.'], map: 'https://maps.app.goo.gl/eXXiEZqZ6iPuwx1VA?g_st=iw', label: 'View Wedding Venue on Google Maps' },
@@ -161,7 +161,13 @@ const phone = (n) => { const pretty = n.slice(0, 5) + ' ' + n.slice(5); return `
     </div>
   </li>`; };
 const day = (d) => `<div class="day${d.night ? ' day--night' : ''}">
-  <div class="dateplate rv"><div class="plaque"><span class="pl-day">${d.day}</span><span class="pl-sep" aria-hidden="true">|</span><span class="pl-date">${d.date}</span></div></div>
+  <!-- scratch to reveal the date (client, 2026-11-16): the design's own foil panel; a button for screen readers reveals it too -->
+  <div class="scratch rv" data-label="${d.day}, ${d.date}" data-sub="${d.sub}">
+    <div class="plaque"><span class="pl-day">${d.day}</span><span class="pl-sep" aria-hidden="true">|</span><span class="pl-date">${d.date}</span></div>
+    <canvas class="foil" aria-hidden="true"></canvas>
+    <button class="sr reveal-btn" type="button">Reveal the date: ${d.day}, ${d.date}</button>
+  </div>
+  <p class="scratch-hint rv">Scratch the panel to reveal the date</p>
   ${d.title ? `<p class="day-title rv">${d.title}</p>` : ''}
   <ol class="events">
   ${d.events.map((e, i) => `<li class="ev ev--eve${d.events.length === 1 ? ' ev--crown' : ''} rv" style="--d:${i * 70}ms">
@@ -306,7 +312,8 @@ const MAIN = `<main id="invite">
 `;
 between('<main id="invite">', '<script>\n(function(){', MAIN);
 
-/* the script: share text and address; the gallery's lightbox */
+/* the script: share text and address; the foil's small line names the date it hides; the gallery's lightbox */
+rep("ctx.fillText('the wedding date',w/2,h/2+11);", "ctx.fillText(box.getAttribute('data-sub')||'the wedding date',w/2,h/2+11);");
 rep("navigator.share({title:document.title,text:'Aashna & Sanket — Wedding Invitation',url:'https://invitivals.com/aashna-sanket-celebrations/'})", `navigator.share({title:document.title,text:'Karan & Rhythm — Wedding Invitation',url:'${URL_}'})`);
 const LB = `
   // Our Moments: tap a photograph to see it large; arrows, swipe and the keyboard move between them
