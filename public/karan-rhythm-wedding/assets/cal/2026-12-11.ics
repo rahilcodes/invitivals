@@ -1,0 +1,30 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Invitivals//Karan & Rhythm//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VTIMEZONE
+TZID:Asia/Kolkata
+BEGIN:STANDARD
+DTSTART:19700101T000000
+TZOFFSETFROM:+0530
+TZOFFSETTO:+0530
+TZNAME:IST
+END:STANDARD
+END:VTIMEZONE
+BEGIN:VEVENT
+UID:karan-rhythm-wedding-2026-12-11@invitivals.com
+DTSTAMP:20261116T000000Z
+DTSTART;TZID=Asia/Kolkata:20261211T190000
+DTEND;TZID=Asia/Kolkata:20261211T220000
+SUMMARY:Sagan Ceremony · Karan & Rhythm
+LOCATION:Talab by Miraya\, Vasundhara\, Ghaziabad\, U.P.
+DESCRIPTION:Sagan Ceremony – 7:00 PM onwards\nMap: https://maps.app.goo.gl/jVfVtfjFooYwwdNH9?g_st=iw\nhttps://invitivals.com/karan-rhythm-wedding/
+URL:https://invitivals.com/karan-rhythm-wedding/
+BEGIN:VALARM
+TRIGGER:-P1D
+ACTION:DISPLAY
+DESCRIPTION:Sagan Ceremony · Karan & Rhythm
+END:VALARM
+END:VEVENT
+END:VCALENDAR
