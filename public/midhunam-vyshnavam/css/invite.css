@@ -1,0 +1,121 @@
+/* Midhunam & Vyshnavam — what this invitation adds to the design (base.css): the section headings, the boxed
+   countdown, the calendar links on the cards, the RSVP form and the buttons. Same palette, same serif, same --u unit. */
+
+.sr-only{position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
+h1,h2,h3{font-family:inherit}
+.hero-words{top:17%}
+/* with the devotional lines the block starts where the approved design starts its own */
+.hero-words--inv{top:13.5%}
+.invocations{font-family:'Cormorant Garamond','Tiro Devanagari Sanskrit',Georgia,serif;text-shadow:0 0 6px rgba(246,236,214,.95),0 0 12px rgba(246,236,214,.75)}
+.invocations div{white-space:nowrap}
+/* Save the Date, under the date line */
+.save-date{align-self:center;margin-top:calc(10 * var(--u));min-height:max(44px, calc(48 * var(--u)))}
+.save-status{margin:0;font-size:calc(15 * var(--u));line-height:1.5;color:#9c3d2e}
+.save-status:empty{display:none}
+.save-status.ok{color:#2f5a35}
+.save-status a{font-weight:700}
+.amp{font-style:italic;font-weight:500;color:#a07840}
+#doorScene:focus-visible,#ringBell:focus-visible{outline:2px solid #8a5a1e;outline-offset:4px}
+
+/* ---------- section headings ---------- */
+.sec{display:flex;flex-direction:column;align-items:center;gap:calc(10 * var(--u))}
+.sec-title{margin:0;font-size:calc(24 * var(--u));font-weight:700;letter-spacing:calc(3 * var(--u));color:#8a4a1a;line-height:1.2}
+.sec-sub{margin:0;font-size:calc(12.5 * var(--u));letter-spacing:calc(2.5 * var(--u));color:#a07840}
+.sec .divider{margin:0 auto calc(4 * var(--u))}
+
+/* ---------- buttons ---------- */
+.line-btn{display:inline-flex;align-items:center;gap:calc(8 * var(--u));border:1.5px solid #8a5a1e;padding:calc(10 * var(--u)) calc(26 * var(--u));font-size:calc(15 * var(--u));letter-spacing:calc(2 * var(--u));text-decoration:none;margin-top:calc(6 * var(--u));color:#8a5a1e;-webkit-tap-highlight-color:transparent}
+.line-btn svg,.gold-btn svg{width:calc(17 * var(--u));height:calc(17 * var(--u));fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round;flex:none}
+.gold-btn{display:inline-flex;align-items:center;justify-content:center;gap:calc(9 * var(--u));min-height:calc(48 * var(--u));padding:calc(12 * var(--u)) calc(30 * var(--u));box-sizing:border-box;border:1px solid #a9792b;border-radius:calc(30 * var(--u));background:linear-gradient(180deg,#f6e2a6 0%,#e3bd66 48%,#c9973f 100%);box-shadow:0 calc(4 * var(--u)) calc(12 * var(--u)) rgba(110,70,15,.28),inset 0 1px 0 rgba(255,255,255,.65),inset 0 0 0 calc(3 * var(--u)) rgba(255,246,214,.28);color:#5a3209;font:700 calc(15.5 * var(--u))/1 'Cormorant Garamond',Georgia,serif;letter-spacing:calc(2.5 * var(--u));text-decoration:none;cursor:pointer;-webkit-tap-highlight-color:transparent;transition:transform .15s ease,filter .2s ease}
+.gold-btn:hover{color:#5a3209;filter:brightness(1.05)}
+.gold-btn:active{transform:translateY(1px) scale(.985)}
+.gold-btn:focus-visible,.line-btn:focus-visible,.link-btn:focus-visible{outline:2px solid #8a4a1a;outline-offset:3px}
+.gold-btn[disabled]{cursor:default;filter:saturate(.55) brightness(1.04);opacity:.8}
+.link-btn{background:none;border:0;padding:calc(6 * var(--u)) calc(10 * var(--u));font:600 calc(15 * var(--u))/1.2 'Cormorant Garamond',Georgia,serif;letter-spacing:calc(1 * var(--u));color:#8a5a1e;text-decoration:underline;text-underline-offset:calc(4 * var(--u));cursor:pointer;-webkit-tap-highlight-color:transparent}
+
+/* ---------- OUR COUNTDOWN ---------- */
+.cd-boxes{gap:calc(9 * var(--u));margin-top:calc(8 * var(--u));width:100%}
+.cd-boxes .cd-cell{flex:1 1 0;min-width:0;max-width:calc(76 * var(--u));padding:calc(12 * var(--u)) 0 calc(10 * var(--u));border:1px solid #d8b878;border-radius:calc(8 * var(--u));background:linear-gradient(180deg,#fffaf0,#f6e9cf);box-shadow:inset 0 0 0 calc(3 * var(--u)) #fbf2de,inset 0 0 0 calc(4 * var(--u)) rgba(201,163,92,.5),0 calc(3 * var(--u)) calc(10 * var(--u)) rgba(110,70,15,.12)}
+.cd-boxes .cd-cell b{font-size:calc(30 * var(--u))}
+.cd-boxes .cd-cell span{font-size:calc(9 * var(--u));letter-spacing:calc(1.4 * var(--u))}
+.cd-note{margin:calc(4 * var(--u)) 0 0;font-style:italic;font-size:calc(14.5 * var(--u));line-height:1.6;color:#7a4a12}
+.cd-done{padding:calc(14 * var(--u)) 0}
+
+/* ---------- KINDLY RSVP: an underlined name, a guest counter, two pill buttons (client's reference, 2026-11-12) ---------- */
+.r2-sub{margin:calc(-2 * var(--u)) 0 0;font-style:italic;font-size:calc(17 * var(--u));line-height:1.5;color:#7a4a12}
+.rsvp2{width:100%;max-width:calc(300 * var(--u));margin:calc(14 * var(--u)) auto 0;display:flex;flex-direction:column;gap:calc(26 * var(--u));text-align:center}
+.r2-fld{display:flex;flex-direction:column;align-items:center;gap:calc(8 * var(--u));min-width:0}
+.r2-label{font-size:calc(12.5 * var(--u));font-weight:700;letter-spacing:calc(3.5 * var(--u));text-indent:calc(3.5 * var(--u));color:#a07840}
+.r2-name{width:100%;box-sizing:border-box;border:0;border-bottom:1px solid #c9a35c;border-radius:0;outline:0;background:transparent;padding:calc(6 * var(--u)) calc(4 * var(--u)) calc(9 * var(--u));text-align:center;color:#4f2d0a;font:600 max(16px, calc(21 * var(--u)))/1.3 'Cormorant Garamond',Georgia,serif;-webkit-user-select:text;user-select:text;-webkit-appearance:none;appearance:none;transition:border-color .2s,box-shadow .2s}
+.r2-name::placeholder{color:#b99a6a;font-style:italic;font-weight:500;opacity:1}
+.r2-name:focus{border-bottom-color:#8a4a1a;box-shadow:0 1px 0 0 #8a4a1a}
+.r2-name[aria-invalid=true]{border-bottom-color:#9c3d2e;box-shadow:0 1px 0 0 #9c3d2e}
+.r2-count{display:flex;align-items:center;justify-content:center;gap:calc(26 * var(--u))}
+.r2-step{width:max(44px, calc(46 * var(--u)));height:max(44px, calc(46 * var(--u)));flex:none;display:flex;align-items:center;justify-content:center;padding:0 0 calc(3 * var(--u));border:1px solid #c9a35c;border-radius:50%;background:#fffdf6;color:#8a4a1a;font:500 calc(26 * var(--u))/1 'Cormorant Garamond',Georgia,serif;cursor:pointer;-webkit-tap-highlight-color:transparent;transition:background .2s,border-color .2s,transform .12s}
+.r2-step:hover{background:#fbf2de;border-color:#a9792b}
+.r2-step:active{transform:scale(.94)}
+.r2-step[disabled]{opacity:.38;cursor:default}
+.r2-num{min-width:calc(46 * var(--u));font-size:calc(40 * var(--u));font-weight:600;line-height:1;color:#8a4a1a;font-variant-numeric:tabular-nums}
+.r2-btns{display:flex;flex-direction:column;gap:calc(12 * var(--u));margin-top:calc(2 * var(--u))}
+.r2-btn{width:100%;min-height:max(48px, calc(54 * var(--u)));box-sizing:border-box;padding:calc(12 * var(--u)) calc(18 * var(--u));border-radius:calc(40 * var(--u));font:700 calc(15 * var(--u))/1.1 'Cormorant Garamond',Georgia,serif;letter-spacing:calc(3 * var(--u));text-indent:calc(3 * var(--u));cursor:pointer;-webkit-tap-highlight-color:transparent;transition:transform .15s ease,filter .2s ease,box-shadow .2s ease,background .2s,opacity .2s}
+.r2-yes{border:1px solid #c9a35c;background:linear-gradient(180deg,#8f3423,#6b2115 60%,#5c1c12);color:#f6e2a6;box-shadow:0 calc(4 * var(--u)) calc(12 * var(--u)) rgba(92,28,18,.28),inset 0 0 0 calc(2.5 * var(--u)) rgba(233,196,106,.28)}
+.r2-no{border:1px solid #c9a35c;background:rgba(255,253,246,.55);color:#7e2a1c}
+.r2-btn:hover{filter:brightness(1.06)}
+.r2-btn:active{transform:translateY(1px) scale(.985)}
+.r2-btn.is-selected{box-shadow:0 0 0 calc(3 * var(--u)) rgba(201,163,92,.6)}
+.r2-no.is-selected{background:#f6e9cf}
+.r2-btn[disabled]{cursor:default}
+.r2-btn[disabled]:not(.is-selected){opacity:.45}
+.r2-step:focus-visible,.r2-btn:focus-visible{outline:2px solid #8a4a1a;outline-offset:3px}
+.err{margin:0;font-size:calc(14.5 * var(--u));font-style:italic;color:#9c3d2e}
+.hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+.rsvp-status{text-align:center;font-size:calc(16.5 * var(--u));line-height:1.55;color:#6b3f10}
+.rsvp-status:empty{display:none}
+.rsvp-status.ok{padding:calc(20 * var(--u)) calc(16 * var(--u));border:1px solid #d8b878;border-radius:calc(10 * var(--u));background:linear-gradient(180deg,#fffaf0,#f8ecd4);box-shadow:inset 0 0 0 calc(4 * var(--u)) #fbf2de,inset 0 0 0 calc(5 * var(--u)) rgba(201,163,92,.5);color:#6b2115;font-size:calc(18 * var(--u));font-weight:600}
+.rsvp-status.ok b{display:block;margin-bottom:calc(4 * var(--u));font-size:calc(13 * var(--u));letter-spacing:calc(3 * var(--u));color:#a07840}
+.rsvp-status.bad{color:#9c3d2e}
+.rsvp-status .alt{display:flex;flex-wrap:wrap;justify-content:center;gap:calc(8 * var(--u));margin-top:calc(10 * var(--u))}
+.rsvp-status .alt a{display:inline-block;border:1.5px solid #8a5a1e;padding:calc(9 * var(--u)) calc(16 * var(--u));font-size:calc(13.5 * var(--u));font-weight:700;letter-spacing:calc(1.5 * var(--u));text-decoration:none;color:#8a5a1e}
+.rsvp2.is-sent .r2-fld,.rsvp2.is-sent .r2-btns{display:none}
+
+
+/* the elders: each couple on two lines, a little air between the couples */
+.elders{font-size:calc(19.5 * var(--u));font-weight:700;color:#8a4a1a;line-height:1.4}
+.elders + .elders{margin-top:calc(6 * var(--u))}
+
+/* ---------- SCROLL TO EXPLORE: a quiet cue at the foot of the screen, from the doors opening until the first scroll ---------- */
+.scroll-cue{position:absolute;left:50%;bottom:calc(16px + env(safe-area-inset-bottom,0px));z-index:6;transform:translate(-50%,8px);display:flex;flex-direction:column;align-items:center;gap:calc(4 * var(--u));padding:calc(8 * var(--u)) calc(16 * var(--u)) calc(7 * var(--u));border:1px solid rgba(201,163,92,.75);border-radius:calc(30 * var(--u));background:#fffaeb;box-shadow:0 3px 14px rgba(90,50,10,.2);color:#7a4a12;font:700 calc(11 * var(--u))/1 'Cormorant Garamond',Georgia,serif;letter-spacing:calc(3 * var(--u));white-space:nowrap;pointer-events:none;opacity:0;visibility:hidden;transition:opacity .7s ease,transform .7s ease,visibility 0s linear .7s}
+.scroll-cue span{padding-left:calc(3 * var(--u))}
+.scroll-cue svg{width:calc(16 * var(--u));height:calc(9 * var(--u));fill:none;stroke:#a9792b;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round;animation:cueBob 1.8s ease-in-out infinite}
+#app.gone .scroll-cue{opacity:1;visibility:visible;transform:translate(-50%,0);transition:opacity .9s ease .5s,transform .9s ease .5s,visibility 0s}
+#app.gone .scroll-cue.is-hidden{opacity:0;visibility:hidden;transform:translate(-50%,8px);transition:opacity .5s ease,transform .5s ease,visibility 0s linear .5s}
+@keyframes cueBob{0%,100%{transform:translateY(0)}50%{transform:translateY(calc(3 * var(--u)))}}
+@media (prefers-reduced-motion: reduce){.scroll-cue svg{animation:none}}
+/* a link under the RSVP note */
+.rsvp-status .again{display:inline-block;margin-top:calc(8 * var(--u));font-size:calc(13 * var(--u));font-weight:700;letter-spacing:calc(2 * var(--u));color:#8a4a1a;text-decoration:underline;text-underline-offset:calc(4 * var(--u))}
+
+/* Save the Date now sits under the RSVP (client, 2026-11-13): the same button, set a little apart from the form */
+.sec > .save-date{margin-top:calc(22 * var(--u))}
+.sec > .save-status{text-align:center}
+
+/* ---------- this invitation's own ---------- */
+/* the cover: the Devanagari line, the four invocations, then the three lines of the title */
+.hero-words--inv{top:11.5%}
+.hero-deva{font-family:'Tiro Devanagari Sanskrit','Noto Serif Devanagari',serif;font-size:calc(16 * var(--u));color:#8a4a1a;text-shadow:0 0 6px rgba(246,236,214,.95),0 0 12px rgba(246,236,214,.75)}
+.hero-home{margin-top:calc(2 * var(--u));font-size:calc(23 * var(--u));font-weight:700;letter-spacing:calc(1.5 * var(--u));text-transform:uppercase;color:#9c3d2e;line-height:1.2;white-space:nowrap}
+/* each elder, with her own line beneath */
+.elders small{display:block;font-size:calc(15.5 * var(--u));font-weight:500;font-style:italic;color:#7a4a12}
+.elders + .elders{margin-top:calc(8 * var(--u))}
+.homes-k{margin-top:calc(16 * var(--u));font-size:calc(13 * var(--u));font-weight:700;letter-spacing:calc(3.5 * var(--u));text-indent:calc(3.5 * var(--u));color:#a07840}
+/* Add to Google Calendar, under a card's time */
+.cal-link{display:inline-flex;align-items:center;justify-content:center;gap:calc(7 * var(--u));min-height:44px;margin-top:calc(6 * var(--u));padding:calc(8 * var(--u)) calc(16 * var(--u));box-sizing:border-box;border:1px solid #c9a35c;border-radius:calc(30 * var(--u));background:rgba(255,253,246,.7);color:#8a4a1a;font-size:calc(12 * var(--u));font-weight:700;letter-spacing:calc(1.8 * var(--u));text-decoration:none;-webkit-tap-highlight-color:transparent}
+.cal-link svg{width:calc(15 * var(--u));height:calc(15 * var(--u));fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round;flex:none}
+.cal-link:focus-visible{outline:2px solid #8a4a1a;outline-offset:3px}
+.venue-note{font-style:italic;font-size:calc(16 * var(--u));line-height:1.5;color:#7a4a12}
+/* the optional message */
+.r2-opt{font-weight:500;letter-spacing:calc(1 * var(--u));text-transform:none;font-style:italic}
+.r2-msg{width:100%;box-sizing:border-box;min-height:calc(84 * var(--u));resize:vertical;border:1px solid #c9a35c;border-radius:calc(8 * var(--u));outline:0;background:rgba(255,253,246,.6);padding:calc(10 * var(--u)) calc(12 * var(--u));color:#4f2d0a;font:500 max(16px, calc(17 * var(--u)))/1.4 'Cormorant Garamond',Georgia,serif;-webkit-user-select:text;user-select:text;-webkit-appearance:none;appearance:none;transition:border-color .2s,box-shadow .2s}
+.r2-msg::placeholder{color:#b99a6a;font-style:italic;opacity:1}
+.r2-msg:focus{border-color:#8a4a1a;box-shadow:0 0 0 1px #8a4a1a}
+.plaque-name{font-size:calc(22 * var(--u));white-space:nowrap}
+.invocations div{font-size:calc(12 * var(--u))}
