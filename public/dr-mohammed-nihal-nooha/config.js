@@ -19,18 +19,21 @@ export const config = {
     brideOf: ['Daughter of', 'Mr. and Mrs. Masood Ahmed'],
   },
 
-  /* pages 2 and 3. `start` is the only time supplied ("onwards"): the calendar entries begin then and carry no
+  /* page 2, Save Our Date: the month's calendar with the two ceremonies marked */
+  saveOurDate: { year: 2027, month: 1, marks: [{ day: 9, label: 'Nikah Ceremony' }, { day: 11, label: 'Walima Ceremony' }] },
+
+  /* page 3, Our Functions (and the buttons of page 2). `start` is the only time supplied ("onwards"): the calendar entries begin then and carry no
      invented end. `mapsUrl` is the family's own link, used as it is. */
   events: [
     {
       key: 'nikah', title: 'Nikah Ceremony', date: 'Saturday, 9th January 2027', time: '11:30 AM onwards',
-      start: '2027-01-09T11:30:00+05:30', local: '20270109T113000', venue: 'Hidden Leaf Resort, Shimoga',
-      mapsUrl: 'https://share.google/DJD3AS4V8UoEhtGd5', mapsLabel: 'Open Nikah Venue in Google Maps', ics: 'nikah.ics',
+      start: '2027-01-09T11:30:00+05:30', local: '20270109T113000', venue: 'Hidden Leaf Resort, Shimoga', venueLines: ['Hidden Leaf Resort,', 'Shimoga'],
+      mapsUrl: 'https://share.google/DJD3AS4V8UoEhtGd5', ics: 'nikah.ics',
     },
     {
       key: 'walima', title: 'Walima Ceremony', date: 'Monday, 11th January 2027', time: '11:30 AM onwards',
-      start: '2027-01-11T11:30:00+05:30', local: '20270111T113000', venue: 'Indiana Convention Hall, Mangaluru',
-      mapsUrl: 'https://share.google/NmQoWq2kjiKA5V9Ii', mapsLabel: 'Open Walima Venue in Google Maps', ics: 'walima.ics',
+      start: '2027-01-11T11:30:00+05:30', local: '20270111T113000', venue: 'Indiana Convention Hall, Mangaluru', venueLines: ['Indiana Convention Hall,', 'Mangaluru'],
+      mapsUrl: 'https://share.google/NmQoWq2kjiKA5V9Ii', ics: 'walima.ics',
     },
   ],
   timeZone: 'Asia/Kolkata',
@@ -39,7 +42,7 @@ export const config = {
   countdown: { lead: 'Until We Say', word: 'Nikah', target: '2027-01-09T11:30:00+05:30' },
 
   /* page 5 */
-  closing: { lines: ['We look forward to', 'your presence and Duas.'] },
+  closing: { title: 'Thank You', lines: ['We look forward to', 'your presence and Duas.'] },
 
   opening: {
     video: 'assets/opening.mp4',

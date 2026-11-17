@@ -8,7 +8,7 @@
    over as well, so no guest is ever left on a frozen or empty screen.
    The invitation is already complete beneath the film, and the film dissolves onto it while it is still moving:
    no black frame, no loading screen. The music comes in with that dissolve; the film's own sound fades under it. */
-import { h } from './util.js?v=1';
+import { h } from './util.js?v=2';
 
 export function OpeningScreen(cfg, { audio, onStart, onOpened }) {
   const tap = h('button', { class: 'tap', type: 'button', 'aria-label': 'Tap to open the invitation' },

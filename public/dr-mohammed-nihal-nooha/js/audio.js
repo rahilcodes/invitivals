@@ -2,7 +2,7 @@
    The music is started inside the opening tap (muted), which browsers allow, and unmuted with a fade
    as the hero page appears, so it runs on seamlessly across every page. If the browser still blocks it,
    the button shows a discreet "music" prompt instead of pretending to play. */
-import { h } from './util.js?v=1';
+import { h } from './util.js?v=2';
 
 export function AudioControl(cfg) {
   const music = new Audio(cfg.music);

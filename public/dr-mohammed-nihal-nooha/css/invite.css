@@ -89,74 +89,100 @@ button { font: inherit; cursor: pointer; }
 
 /* ═════════ this invitation's own pages ═════════ */
 :root { --ink: #4a1f35; --plum2: #5a2a47; --rose: #8a5a74; --champagne: #b08a4e; }
-.page > .card, .page > .reveal, .page > .digit, .page > .digit-label { position: absolute; z-index: 2; }
+.page > .card, .page > .reveal, .page > .digit, .page > .digit-label, .page > .s, .page > .hit, .page > .reveal-hit, .page > .legend { position: absolute; z-index: 2; }
 .page:not(.ready) > :not(.plate) { visibility: hidden; }
 .card { display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; color: var(--ink); }
 .card p, .card h1, .card h2 { margin: 0; }
 .card img { width: 100%; height: auto; -webkit-user-drag: none; user-select: none; }
 
-/* ── page 1: Bismillah, the NN monogram, the hosts and the couple, inside the ivory card ── */
-.p-hero .card { left: 21%; right: 20.5%; top: 18.6%; bottom: 21.6%; }
-.bismillah { width: 39cqw; }
-.p-hero .mono { width: 12.6cqw; margin-top: 1.6cqw; }
-.card .hosts { margin-top: 2.4cqw; font-weight: 700; font-size: 4.15cqw; letter-spacing: .02em; line-height: 1.2; color: var(--plum2); }
-.card .request { margin-top: 1.2cqw; font-style: italic; font-weight: 500; font-size: 3.3cqw; line-height: 1.36; color: var(--ink); }
-.card .name { margin-top: 2.2cqw; font-family: var(--script); font-weight: 400; font-size: 7.5cqw; line-height: 1.08; color: var(--plum2); white-space: nowrap; }
+/* ── page 1: Bismillah, the NN monogram, the hosts and the couple, inside the ivory card.
+      The card's arch peaks at 50% of the page and is 38% wide where the calligraphy sits, so the calligraphy (its
+      picture is trimmed to its ink, so its box is its true width) is centred on that axis with air on both sides. ── */
+.p-hero .card { left: 20%; right: 19.5%; top: 21.6%; bottom: 22.6%; }
+.bismillah { width: 29cqw; }
+.p-hero .mono { width: 10.6cqw; margin-top: 1.5cqw; }
+.card .hosts { margin-top: 2cqw; font-weight: 700; font-size: 4.1cqw; letter-spacing: .02em; line-height: 1.2; color: var(--plum2); }
+.card .request { margin-top: 1cqw; font-style: italic; font-weight: 500; font-size: 3.25cqw; line-height: 1.34; color: var(--ink); }
+.card .name { margin-top: 1.8cqw; font-family: var(--script); font-weight: 400; font-size: 7.5cqw; line-height: 1.06; color: var(--plum2); white-space: nowrap; }
 .name span { display: block; }
-.card .and { display: flex; align-items: center; gap: 2.2cqw; margin: 2cqw 0 1.4cqw; font-weight: 600; font-size: 2.7cqw; letter-spacing: .34em; padding-left: .34em; color: var(--champagne); }
+.card .and { display: flex; align-items: center; gap: 2.2cqw; margin: 1.7cqw 0 1.1cqw; font-weight: 600; font-size: 2.7cqw; letter-spacing: .34em; padding-left: .34em; color: var(--champagne); }
 .and i { display: block; width: 9cqw; height: 1px; background: linear-gradient(90deg, rgba(176,138,78,0), var(--champagne)); }
 .and i:last-child { transform: scaleX(-1); }
 .card .name--bride { margin-top: 0; font-size: 9cqw; }
-.card .of { margin-top: 1.8cqw; font-weight: 600; font-size: 3.6cqw; line-height: 1.3; color: var(--ink); }
+.card .of { margin-top: 1.4cqw; font-weight: 600; font-size: 3.55cqw; line-height: 1.3; color: var(--ink); }
 .of em { display: block; font-weight: 500; font-size: 3cqw; color: var(--rose); }
 
-/* ── pages 2 and 3: a ceremony ── */
-.p-nikah .card { left: 16%; right: 16%; top: 20%; bottom: 19%; }
-.p-walima .card { left: 21%; right: 20.5%; top: 23.6%; bottom: 22.6%; }
-.p-walima .rule { margin-bottom: 1.8cqw; }
-.p-walima .card .label { margin-top: 2.2cqw; }
-.p-walima .btn--plum { margin-top: 2.8cqw; }
-.p-walima .btn--ivory { margin-top: 1.6cqw; }
-.p-walima .ics { margin-top: .2cqw; }
-.orn { width: 13cqw; opacity: .9; }
-.card .title { margin-top: 1.2cqw; font-family: var(--script); font-weight: 400; font-size: 11.4cqw; line-height: 1.1; color: var(--plum2); white-space: nowrap; }
-.p-walima .card .title { font-size: 10.4cqw; }
-.rule { width: 20cqw; margin: 1cqw 0 2.6cqw; }
-.line { display: flex; align-items: center; justify-content: center; gap: 1.6cqw; font-weight: 600; font-size: 4.3cqw; line-height: 1.5; color: var(--ink); white-space: nowrap; }
-.ico { display: inline-flex; flex: none; }
-.ico svg { width: 1.05em; height: 1.05em; fill: none; stroke: currentColor; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
-.line .ico { color: var(--rose); }
-.card .label { margin-top: 3cqw; font-weight: 700; font-size: 2.7cqw; letter-spacing: .36em; padding-left: .36em; text-transform: uppercase; color: var(--champagne); }
-.card .venue { margin-top: .6cqw; font-weight: 700; font-size: 4.5cqw; line-height: 1.25; color: var(--plum2); text-wrap: balance; }
-.btn { display: flex; align-items: center; justify-content: center; gap: 1.8cqw; width: 100%; max-width: 58cqw; min-height: max(44px, 11cqw); box-sizing: border-box; padding: 1.6cqw 4cqw; border-radius: 99px; font-weight: 700; font-size: max(10.5px, 2.75cqw); letter-spacing: .14em; line-height: 1.25; text-transform: uppercase; text-decoration: none; -webkit-tap-highlight-color: transparent; }
-.btn span { text-wrap: balance; }
-.btn .ico svg { width: 1.5em; height: 1.5em; }
-.btn--plum { margin-top: 3.6cqw; color: #fbf1ea; background: linear-gradient(180deg, #8a5574, #5a2a47); border: 1px solid rgba(233, 207, 154, .9); box-shadow: 0 .8cqw 2.4cqw rgba(74, 31, 53, .32), inset 0 0 0 .5cqw rgba(233, 207, 154, .18); }
-.btn--ivory { margin-top: 2cqw; color: var(--plum2); background: linear-gradient(180deg, #fffaf3, #f1e2d2); border: 1px solid #c8a468; box-shadow: 0 .6cqw 1.8cqw rgba(74, 31, 53, .16); }
-.btn:active { filter: brightness(1.08); }
-.btn:focus-visible, .ics:focus-visible { outline: 2px solid var(--champagne); outline-offset: 3px; }
-.ics { margin-top: 1cqw; padding: 2.6cqw 3cqw; font-style: italic; font-weight: 600; font-size: max(11px, 2.9cqw); color: var(--rose); text-decoration: underline; text-underline-offset: .25em; }
+/* ── pieces placed by the reference's own boxes (pages 2 and 3) ── */
+.s { pointer-events: none; }
+.s > img { display: block; width: 100%; height: 100%; max-width: none; -webkit-user-drag: none; user-select: none; }
+.hit { z-index: 6 !important; display: block; padding: 0; border: 0; border-radius: 99px; background: transparent; -webkit-tap-highlight-color: transparent; transition: background .2s; cursor: pointer; }
+.hit::before { content: ''; position: absolute; inset: -5px -2px; }           /* a finger-sized target around the painted pill */
+.hit:active { background: rgba(255, 255, 255, .26); }
+.hit:focus-visible, .reveal-hit:focus-visible { outline: 2px solid var(--champagne); outline-offset: 2px; }
 
-/* ── page 4: until we say Nikah ── */
-.until { left: 34%; width: 37%; top: 23%; height: 24%; margin: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; font-weight: 400; }
-.until span { font-family: var(--serif); font-weight: 500; font-size: 3.5cqw; letter-spacing: .04em; line-height: 1.1; color: #f7e9de; text-shadow: 0 .2cqw .6cqw rgba(60, 20, 40, .45); }
-.until b { font-family: var(--script); font-weight: 400; font-size: 10.6cqw; line-height: 1.02; padding: 0 .12em; background: linear-gradient(180deg, #fff6df 10%, #e9cf9a 55%, #cfa765 95%); -webkit-background-clip: text; background-clip: text; color: transparent; -webkit-text-fill-color: transparent; filter: drop-shadow(0 .25cqw .5cqw rgba(50, 15, 35, .5)); }
-.until-rule { left: 43.7%; width: 20.3%; top: 47.4%; }
+/* ── page 2: Save Our Date ── */
+.orn2 img { height: auto; }
+.month { margin: 0; display: flex; align-items: center; justify-content: center; font-weight: 500; font-size: 3.6cqw; letter-spacing: .14em; padding-left: .14em; text-transform: uppercase; white-space: nowrap; line-height: 1; color: var(--ink); }
+/* the figures stand in the painted panel's own seven columns (SUN … SAT are in the plate), six rows for January 2027 */
+.cal { left: 21.4%; width: 56.9%; top: 45.3%; height: 15.5%; display: grid; grid-template-columns: repeat(7, 1fr); grid-auto-rows: 1fr; align-items: center; justify-items: center; color: var(--ink); font-weight: 500; font-size: 3.25cqw; line-height: 1; font-variant-numeric: lining-nums; }
+.day { position: relative; display: flex; align-items: center; justify-content: center; width: 100%; height: 100%; }
+.day--mark b { position: relative; font-weight: 600; transition: color .5s ease .3s; }
+.day__heart { position: absolute; left: 50%; top: 50%; width: 7.6cqw; max-width: none; height: auto; transform: translate(-50%, -47%) scale(.35); opacity: 0; transition: opacity .7s ease .25s, transform .9s cubic-bezier(.2, 1.4, .4, 1) .25s; pointer-events: none; }
+.day--mark:nth-of-type(n) + .day--mark .day__heart, .day--mark ~ .day--mark .day__heart { transition-delay: .55s; }
+.revealed .day__heart { opacity: 1; transform: translate(-50%, -47%); }
+.reveal-pill { transition: opacity .6s ease; }
+.reveal-pill > img { animation: pill-glow 2.6s ease-in-out infinite; }
+@keyframes pill-glow { 0%, 100% { filter: drop-shadow(0 0 0 rgba(255, 220, 235, 0)); } 50% { filter: drop-shadow(0 0 1.2cqw rgba(255, 214, 232, .9)); } }
+.reveal-hit { z-index: 6 !important; padding: 0; border: 0; border-radius: 99px; background: transparent; -webkit-tap-highlight-color: transparent; cursor: pointer; }
+.revealed .reveal-pill { opacity: 0; }
+.revealed .reveal-hit { pointer-events: none; }
+.legend { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: .9cqw; opacity: 0; transform: translateY(6px); transition: opacity .7s ease .5s, transform .7s ease .5s; pointer-events: none; }
+.legend p { margin: 0; font-size: 3.4cqw; line-height: 1.2; white-space: nowrap; color: var(--ink); }
+.legend b { font-weight: 700; color: var(--plum2); }
+.legend p::before { content: '♥'; margin-right: .5em; font-size: .8em; color: #c79a4a; }
+.revealed .legend { opacity: 1; transform: none; }
+
+/* ── page 3: Our Functions ── */
+.ev-title { margin: 0; display: flex; align-items: center; justify-content: center; font-family: var(--serif); font-weight: 500; font-size: 4.7cqw; line-height: 1; white-space: nowrap; color: var(--ink); }
+.ev-line { margin: 0; display: flex; align-items: center; font-weight: 500; font-size: 2.9cqw; line-height: 1; white-space: nowrap; color: var(--ink); }
+.ev-line.ev-venue { display: block; line-height: 1.28; }
+
+/* ── the chooser sheet (page 2's two buttons each serve both ceremonies) ── */
+.sheet { position: fixed; inset: 0; z-index: 70; display: flex; align-items: flex-end; justify-content: center; padding: 16px 16px calc(16px + env(safe-area-inset-bottom, 0px)); }
+.sheet[hidden] { display: none; }
+.sheet__veil { position: absolute; inset: 0; background: rgba(60, 25, 45, .55); backdrop-filter: blur(3px); }
+.sheet__card { position: relative; width: min(100%, 420px); max-height: calc(100dvh - 32px); overflow: auto; display: flex; flex-direction: column; gap: 10px; padding: 22px 18px 16px; border: 1px solid rgba(216, 179, 106, .8); border-radius: 18px; background: linear-gradient(180deg, #fdf6f0, #f3e3df); box-shadow: 0 20px 60px rgba(40, 10, 25, .45); color: var(--ink); text-align: center; }
+.sheet__title { margin: 0 0 2px; font-family: var(--script); font-weight: 400; font-size: 36px; line-height: 1.1; color: var(--plum2); }
+.sheet__note { margin: 6px 0 -2px; font-size: 12px; font-weight: 700; letter-spacing: .2em; text-transform: uppercase; color: var(--champagne); }
+.sheet__btn { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px; min-height: 52px; padding: 9px 14px; border-radius: 14px; border: 1px solid rgba(233, 207, 154, .9); background: linear-gradient(180deg, #8a5574, #5a2a47); color: #fbf1ea; text-decoration: none; -webkit-tap-highlight-color: transparent; }
+.sheet__btn b { font-weight: 700; font-size: 17px; letter-spacing: .04em; }
+.sheet__btn span { font-size: 14px; opacity: .92; }
+.sheet__btn--quiet { min-height: 46px; background: linear-gradient(180deg, #fffaf3, #f1e2d2); border-color: #c8a468; color: var(--plum2); }
+.sheet__btn:focus-visible, .sheet__close:focus-visible { outline: 2px solid var(--champagne); outline-offset: 2px; }
+.sheet__close { margin-top: 4px; min-height: 44px; border: 0; background: none; color: var(--rose); font: 600 15px var(--serif); letter-spacing: .16em; text-transform: uppercase; }
+
+/* ── page 4: until we say Nikah. The plaque's field is painted clean in the plate; the heading stands on the axis of
+      the four boxes below it (54.1% of the page), each line centred on it. ── */
+.until { left: 34.1%; width: 40%; top: 24.4%; height: 22%; margin: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: .5cqw; text-align: center; font-weight: 400; }
+.until span { font-family: var(--serif); font-weight: 500; font-size: 3.3cqw; letter-spacing: .06em; padding-left: .06em; line-height: 1.1; color: #f7e9de; text-shadow: 0 .2cqw .6cqw rgba(60, 20, 40, .45); }
+.until b { font-family: var(--script); font-weight: 400; font-size: 9.6cqw; line-height: 1.05; padding: 0 .16em; background: linear-gradient(180deg, #fff6df 10%, #e9cf9a 55%, #cfa765 95%); -webkit-background-clip: text; background-clip: text; color: transparent; -webkit-text-fill-color: transparent; filter: drop-shadow(0 .25cqw .5cqw rgba(50, 15, 35, .5)); }
+.until-rule { left: 43.95%; width: 20.3%; top: 47.6%; }
 .until-rule img { width: 100%; height: auto; }
 .digit { top: 57.386%; width: 8.378%; height: 10.627%; display: flex; align-items: center; justify-content: center; color: #f7e9de; font-weight: 600; font-size: 5.3cqw; line-height: 1; font-variant-numeric: tabular-nums lining-nums; letter-spacing: .02em; text-shadow: 0 .15cqw .4cqw rgba(60, 20, 40, .45); }
 .digit span { display: block; min-width: 2.2ch; text-align: center; }
 .digit span.n3 { font-size: .78em; }
 .digit-label { top: 68%; width: 8.378%; text-align: center; color: #f3dfd3; font-weight: 500; font-size: 1.75cqw; letter-spacing: .04em; line-height: 1.2; }
 
-/* ── page 5: the closing ── */
+/* ── page 5: the closing. "Thank You" stands between the plate's two gold rules; the message is centred in the
+      cartouche (which spans 18% to 82% of the page, 55% to 72% down). ── */
 .p-end .mono { left: 39.2%; width: 21.6%; top: 20.6%; }
 .p-end .mono img { width: 100%; height: auto; filter: drop-shadow(0 .4cqw .8cqw rgba(40, 10, 25, .45)); }
-.pair { left: 14%; right: 14%; top: 41.9%; margin: 0; text-align: center; font-family: var(--script); font-size: 5.9cqw; line-height: 1.2; white-space: nowrap; color: #f6e3bd; text-shadow: 0 .2cqw .6cqw rgba(40, 10, 25, .5); }
-.closing { left: 27%; right: 22.5%; top: 58.6%; height: 15%; margin: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; font-style: italic; font-weight: 600; font-size: 3.7cqw; line-height: 1.4; color: var(--plum2); }
+.thanks { left: 14%; right: 14%; top: 39.4%; height: 10.4%; margin: 0; display: flex; align-items: center; justify-content: center; font-family: var(--script); font-weight: 400; font-size: 11.6cqw; line-height: 1; white-space: nowrap; background: linear-gradient(180deg, #fff6df 10%, #e9cf9a 55%, #cfa765 95%); -webkit-background-clip: text; background-clip: text; color: transparent; -webkit-text-fill-color: transparent; filter: drop-shadow(0 .25cqw .5cqw rgba(40, 10, 25, .5)); }
+.closing { left: 25%; right: 25%; top: 56.6%; height: 14.2%; margin: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; font-style: italic; font-weight: 600; font-size: 3.75cqw; line-height: 1.42; color: var(--plum2); }
 .created { z-index: 4; }
 
 @media (prefers-reduced-motion: reduce) {
-  .tap .ring, .audio .on, .audio.blocked { animation: none !important; }
+  .tap .ring, .audio .on, .audio.blocked, .reveal-pill > img { animation: none !important; }
   .reveal, .invitation, .film.fade { transition-duration: .01s !important; transition-delay: 0s !important; }
   .reveal { opacity: 1; transform: none; }
   .sparkle { display: none; }
