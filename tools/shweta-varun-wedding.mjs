@@ -20,20 +20,16 @@ import path from 'node:path';
 const ROOT = path.resolve(path.dirname(new URL(import.meta.url).pathname.replace(/^\/([A-Z]:)/, '$1')), '..');
 const SLUG = 'shweta-varun-wedding', D = path.join(ROOT, 'public', SLUG), REF = path.join(ROOT, 'public/lokesh-akansha-wedding');
 const SRC = path.join(ROOT, 'invites/src', SLUG);
-const URL_ = `https://invitivals.com/${SLUG}/`, V = 4, COVER = 'cover-shweta-varun.jpg';
+const URL_ = `https://invitivals.com/${SLUG}/`, V = 5, COVER = 'cover-shweta-varun.jpg';
 const esc = (s) => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 
-/* both links exactly as the family supplied them */
-const MEHNDI = { name: 'Ola Vakkola Banquets', sub: '',   /* venue and address as corrected by the client (2026-11-15) */
-  lines: ['B-25/198, Near Vakola,', 'Anand Nagar, Vakola,', 'Santacruz East, Mumbai,', 'Maharashtra – 400055.'],
-  address: 'B-25/198, Near Vakola, Anand Nagar, Vakola, Santacruz East, Mumbai, Maharashtra – 400055.', mapsUrl: 'https://maps.app.goo.gl/kPECwfKd4jfSxxuc6?g_st=iw' };
+/* the link exactly as the family supplied it (the Mehndi and its venue were removed at the client's request, 2026-11-17) */
 const HOTEL = { name: 'Peninsula Grand Hotel', sub: 'Concorde Ball Room, 6th Floor',
   lines: ['90 Feet Road, Sakinaka', 'Opposite Sakinaka Metro Station', 'Mumbai, Maharashtra'], mapsUrl: 'https://share.google/7ZrttUvmxz9kOpCak' };
 const full = (v) => (v.address ? `${v.name}, ${v.address}` : [v.name, v.sub, ...v.lines].join(', '));
-/* the two calendar entries: every time here is the family's own (the Mehndi 7:00–11:00 PM; the wedding from the
-   Muhurtham at 5:18 PM to the end of the reception and dinner at 11:00 PM) */
+/* the calendar entry: every time here is the family's own (from the Muhurtham at 5:18 PM to the end of the
+   reception and dinner at 11:00 PM) */
 const CAL = [
-  { id: 'mehndi', title: 'Mehndi Ceremony · Shweta & Varun', start: '20261210T190000', end: '20261210T230000', venue: MEHNDI, notes: 'Thursday, 10 December 2026\n7:00 PM – 11:00 PM' },
   { id: 'wedding', title: 'Wedding of Shweta & Varun', start: '20261213T171800', end: '20261213T230000', venue: HOTEL, notes: 'Sunday, 13 December 2026\nMuhurtham: 5:18 PM (Vrashabha Lagna)\nReception & Dinner: up to 11:00 PM' },
 ];
 const COUNTDOWN = '2026-12-13T17:18:00+05:30';
@@ -102,7 +98,6 @@ if (process.argv[2] === 'init') {
 }
 
 const ICON = {
-  mehndi: '<path d="M17 42V24c0-2 3-2 3 0v-11c0-2 3-2 3 0v10-13c0-2 3-2 3 0v13-10c0-2 3-2 3 0v13-5c0-2 3-2 3 0v13c0 6-4 10-9 10s-9-3-9-6z"/><circle cx="25" cy="31" r="3"/><path d="M25 25v3M25 34v3M19 31h3M28 31h3"/>',
   agni: '<path d="M8 40h32M11 40v-6h26v6"/><path d="M14 34v-4h20v4"/><path d="M24 29c-6-3-6-9-1-14 0 4 2 5 3 6 1-3 0-6-1-9 5 3 9 9 4 17"/><path d="M18 29c-2-2-2-5 0-7M30 29c2-2 2-5 0-7"/>',
   dinner: '<path d="M6 36h36"/><path d="M9 36c0-9 6.500-15 15-15s15 6 15 15"/><path d="M24 21v-3"/><circle cx="24" cy="16" r="2"/><path d="M12 40h24"/><path d="M16 31c1-3 3-5 6-6"/>',
 };
@@ -265,22 +260,6 @@ const html = `<!DOCTYPE html>
 
   <!-- (the hosts' page was removed at the client's request, 2026-11-16) -->
 
-  <!-- 5 · the Mehndi -->
-  <section class="page" id="p-mehndi">
-    <div class="art art--fit" style="--h:177.68">
-      <img class="bg" src="assets/bg/p1.webp" alt="" width="941" height="1672" loading="lazy" decoding="async">${bells(5.5, 11.5, true)}
-      <div class="flow" style="--top:24;--side:13">
-        <h2 class="script script--lg rise">Mehndi Ceremony</h2>
-        <span class="medal medal--lg pop" style="--d:.1s" aria-hidden="true"><svg viewBox="0 0 48 48">${ICON.mehndi}</svg></span>
-        <p class="datebar gap-m rise" style="--d:.15s">Thursday<small>10 December 2026</small></p>
-        <p class="hours rise" style="--d:.2s">7:00 PM – 11:00 PM</p>
-        <img class="orn rise" style="width:calc(var(--cq) * 16);--d:.25s" src="assets/el/garland.webp" alt="" loading="lazy">
-        ${place(MEHNDI)}
-        ${mapBtn('mehndi', 'Open in Google Maps')}
-      </div>
-    </div>
-  </section>
-
   <!-- 6 · the wedding ceremony and reception -->
   <section class="page" id="p-wedding">
     <div class="art art--fit" style="--h:177.68">
@@ -358,12 +337,11 @@ const html = `<!DOCTYPE html>
 <div class="sheet" id="sheet" hidden>
   <div class="sheet__veil" data-close></div>
   <div class="sheet__card" role="dialog" aria-modal="true" aria-labelledby="sheetTitle">
-    <p class="sheet__kicker">10 &amp; 13 December 2026 · Mumbai</p>
+    <p class="sheet__kicker">13 December 2026 · Mumbai</p>
     <h2 class="sheet__title" id="sheetTitle">Save the Date</h2>
     <a class="sheet__btn sheet__btn--primary" href="event.ics" download="shweta-varun-wedding.ics"><svg viewBox="0 0 24 24" aria-hidden="true">${CALPATH}</svg>Apple / Android calendar (.ics)</a>
     <p class="sheet__note">Google Calendar</p>
-    <a class="sheet__btn" href="${gcal(CAL[0])}" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm1 5v5.4l3.6 2.1-.8 1.3L11 13V7z"/></svg>Mehndi · 10 December</a>
-    <a class="sheet__btn" id="gcal" href="${gcal(CAL[1])}" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm1 5v5.4l3.6 2.1-.8 1.3L11 13V7z"/></svg>Wedding · 13 December</a>
+    <a class="sheet__btn" id="gcal" href="${gcal(CAL[0])}" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm1 5v5.4l3.6 2.1-.8 1.3L11 13V7z"/></svg>Wedding · 13 December</a>
     <button class="sheet__close" type="button" data-close>Close</button>
   </div>
 </div>
@@ -379,7 +357,7 @@ export const invite = {
   /* the song; null = no music and no music button */
   music: 'assets/media/music.mp3',
   /* the venue links exactly as the family supplied them */
-  venues: ${JSON.stringify({ mehndi: { name: MEHNDI.sub, address: full(MEHNDI), mapsUrl: MEHNDI.mapsUrl }, hotel: { name: HOTEL.name, address: full(HOTEL), mapsUrl: HOTEL.mapsUrl } }, null, 2).replace(/\n/g, '\n  ')},
+  venues: ${JSON.stringify({ hotel: { name: HOTEL.name, address: full(HOTEL), mapsUrl: HOTEL.mapsUrl } }, null, 2).replace(/\n/g, '\n  ')},
   /* give up on the opening film after this long and go straight to the invitation */
   videoTimeoutMs: 20000,
 };

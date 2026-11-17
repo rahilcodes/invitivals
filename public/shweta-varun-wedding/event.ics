@@ -13,26 +13,6 @@ TZNAME:IST
 END:STANDARD
 END:VTIMEZONE
 BEGIN:VEVENT
-UID:shweta-varun-wedding-mehndi@invitivals.com
-DTSTAMP:20261115T000000Z
-DTSTART;TZID=Asia/Kolkata:20261210T190000
-DTEND;TZID=Asia/Kolkata:20261210T230000
-SUMMARY:Mehndi Ceremony · Shweta & Varun
-LOCATION:Ola Vakkola Banquets\, B-25/198\, Near Vakola\, Anand Nagar\, Va
- kola\, Santacruz East\, Mumbai\, Maharashtra – 400055.
-DESCRIPTION:Thursday\, 10 December 2026\n7:00 PM – 11:00 PM\n\nVenue: O
- la Vakkola Banquets\, B-25/198\, Near Vakola\, Anand Nagar\, Vakola\, Sa
- ntacruz East\, Mumbai\, Maharashtra – 400055.\nMap: https://maps.app.g
- oo.gl/kPECwfKd4jfSxxuc6?g_st=iw\n\nhttps://invitivals.com/shweta-varun-w
- edding/
-URL:https://invitivals.com/shweta-varun-wedding/
-BEGIN:VALARM
-TRIGGER:-P1D
-ACTION:DISPLAY
-DESCRIPTION:Mehndi Ceremony · Shweta & Varun tomorrow
-END:VALARM
-END:VEVENT
-BEGIN:VEVENT
 UID:shweta-varun-wedding-wedding@invitivals.com
 DTSTAMP:20261115T000000Z
 DTSTART;TZID=Asia/Kolkata:20261213T171800
