@@ -56,7 +56,7 @@ export const weddingConfig = {
       label: 'The Bride',
       person: 'Gun',
       relation: 'Daughter of',
-      parents: ['Smt. Shashi Devi &', 'Ch. Rupesh Singh Dedhia'],
+      parents: ['Smt. Shashi Devi &', 'Ch. Rupesh Singh Dedha'],
       familyName: 'Dedha',                 // the family name under the bride's parents (client, 2026-11-17)
     },
     groom: {
