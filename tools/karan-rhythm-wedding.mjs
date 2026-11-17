@@ -1,7 +1,9 @@
 #!/usr/bin/env node
 /* Karan & Rhythm — the wedding, Saturday 12 December 2026, Ghaziabad (client brief 2026-11-16).
 
-     node tools/karan-rhythm-wedding.mjs
+     node tools/karan-rhythm-wedding.mjs           the full invitation (Sagan + wedding): public/karan-rhythm-wedding
+     node tools/karan-rhythm-wedding.mjs only      the wedding-only link (client, 2026-11-17): public/karan-rhythm-wedding-only,
+                                                   the same page with the wedding day alone (no Sagan day, venue, map or calendar entry)
 
    A separate invitation at public/karan-rhythm-wedding, on the design the client chose:
    public/aashna-sanket-celebrations (a hand-built single page). That page is only READ here — its styles, script,
@@ -20,15 +22,16 @@ import { fileURLToPath } from 'node:url';
 import sharp from 'sharp';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
-const SLUG = 'karan-rhythm-wedding', URL_ = `https://invitivals.com/${SLUG}/`, COVER = 'cover-karan-rhythm.jpg';
-const REF = path.join(ROOT, 'public/aashna-sanket-celebrations'), D = path.join(ROOT, 'public', SLUG), SRC = path.join(ROOT, 'invites/src', SLUG);
+const ONLY = process.argv[2] === 'only';          // the wedding-only link
+const SLUG = ONLY ? 'karan-rhythm-wedding-only' : 'karan-rhythm-wedding', URL_ = `https://invitivals.com/${SLUG}/`, COVER = ONLY ? 'cover-karan-rhythm-wedding.jpg' : 'cover-karan-rhythm.jpg';
+const REF = path.join(ROOT, 'public/aashna-sanket-celebrations'), D = path.join(ROOT, 'public', SLUG), SRC = path.join(ROOT, 'invites/src/karan-rhythm-wedding');
 const esc = (s) => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 
 /* ── the family's words ── */
 const HOSTS = 'Mrs. Meena & Mr. Mukesh Chopra';
 const GROOM = { role: 'The Groom', name: 'KARAN', rel: 'Grandson of', of: 'Late Smt. Raj Rani & Late Sh. Gian Chand Chopra' };
 const BRIDE = { role: 'The Bride', name: 'RHYTHM', rel: 'Daughter of', of: 'Mrs. Monica & Mr. Jitendra Batra' };
-const DAYS = [
+const ALL_DAYS = [
   { key: '2026-12-11', day: 'Friday', date: '11 December 2026', icon: 'i-tilak', sub: 'the Sagan date',
     events: [{ name: 'Sagan Ceremony', time: '7:00 PM onwards' }],
     venue: { name: 'Talab by Miraya', addr: ['Vasundhara, Ghaziabad, U.P.'], map: 'https://maps.app.goo.gl/jVfVtfjFooYwwdNH9?g_st=iw', label: 'View Sagan Venue on Google Maps' },
@@ -39,6 +42,7 @@ const DAYS = [
     venue: { name: 'Emerald Greens', addr: ['Govindpuram, Ghaziabad, U.P.'], map: 'https://maps.app.goo.gl/eXXiEZqZ6iPuwx1VA?g_st=iw', label: 'View Wedding Venue on Google Maps' },
     cal: { title: 'Wedding of Karan & Rhythm', start: '20261212T190000', end: '20261212T230000', notes: 'Sehra Bandi – 7:00 PM\nDeparture of Barat – 8:00 PM' } },
 ];
+const DAYS = ONLY ? ALL_DAYS.filter((d) => d.key === '2026-12-12') : ALL_DAYS;
 const COUNT_TO = '2026-12-12T19:00:00+05:30';   // the wedding day: Sehra Bandi, 7:00 PM IST
 const PHONES = ['9818084085', '9811062670'];
 /* the photographs, in the order the gallery shows them: the wide black-and-white one leads, then two pairs */
@@ -55,6 +59,8 @@ const WA_MSG = 'Namaste! I have received the wedding invitation of Karan & Rhyth
 for (const d of ['assets/cal', 'assets/moments']) fs.mkdirSync(path.join(D, d), { recursive: true });
 for (const f of ['.htaccess', 'assets/hero.webp', 'assets/ganesha.webp', 'assets/footer.webp', 'assets/intro-poster.webp', 'assets/intro.mp4', 'assets/music.mp3'])
   fs.copyFileSync(path.join(REF, f), path.join(D, f));
+/* the wedding-only link shares the full invitation's cover picture (it names only the wedding date), under its own file name */
+if (ONLY) fs.copyFileSync(path.join(ROOT, 'public/karan-rhythm-wedding/assets/cover-karan-rhythm.jpg'), path.join(D, 'assets', COVER));
 for (const p of PHOTOS) {
   const src = path.join(SRC, p.f + '.jpg');
   await sharp(src).rotate().resize({ width: p.wide ? 1200 : 900, withoutEnlargement: true }).webp({ quality: 80, effort: 6 }).toFile(path.join(D, `assets/moments/${p.f}.webp`));
@@ -137,6 +143,12 @@ const CSS = `
 .lb-n{position:absolute;bottom:max(16px,env(safe-area-inset-bottom));left:0;right:0;margin:0;text-align:center;font:600 11px/1 var(--caps);letter-spacing:.3em;color:#D5AF62}
 html.lb-open,html.lb-open body{overflow:hidden}
 @media (max-width:520px){.lb-prev,.lb-next{top:auto;bottom:max(8px,env(safe-area-inset-bottom))}.lb-prev{left:16px}.lb-next{right:16px}.lb-n{bottom:max(24px,calc(env(safe-area-inset-bottom) + 16px))}}
+/* the scroll button on the cover, made easier to see (client, 2026-11-17): a maroon ring, an ivory band and a gold
+   outer line round the solid ivory disc, and the same ring round the word. Its bobbing animation is the design's, untouched. */
+.cue svg{background:#FFF8EC;border:2px solid var(--maroon);
+  box-shadow:0 0 0 3px #FFF8EC,0 0 0 4.5px #C79A45,0 0 0 9px rgba(255,245,229,.3),0 8px 20px rgba(60,20,20,.5)}
+.cue{gap:11px}
+.cue span{padding:5px 10px;background:#FFF8EC;border:1px solid var(--maroon);box-shadow:0 3px 10px rgba(60,20,20,.35)}
 /* the closing */
 .finale-copy .k2{margin-top:16px;font:600 clamp(10px,3vw,12px)/1 var(--caps);letter-spacing:.24em;text-indent:.24em;color:var(--gold);font-style:normal}
 .finale-copy .hosts{margin-top:8px;font:600 clamp(17px,5vw,20px)/1.35 var(--serif);font-style:normal;color:var(--maroon)}
@@ -242,7 +254,7 @@ const MAIN = `<main id="invite">
       </div>
     </section>
 
-    <!-- 4 · the two days, each with its own venue and map -->
+    <!-- 4 · ${ONLY ? 'the wedding day, with its venue and map' : 'the two days, each with its own venue and map'} -->
     <section class="celebrations" aria-labelledby="h-cel">
       <svg class="sprig r" style="top:16px" aria-hidden="true"><use href="#i-sprig"/></svg>
       ${head('h-cel', 'Wedding Celebrations')}
@@ -336,6 +348,7 @@ const LB = `
   // copy a number / the address / the link`;
 rep('\n\n  // copy a number / the address / the link', LB);
 
+if (ONLY && /sagan|talab|vasundhara|11 December|20261211|2026-12-11/i.test(h)) throw new Error('the Sagan is still on the wedding-only page');
 if (/aashna|sanket|mathur|shrivastava|rama celebration|9354525269|9999066723/i.test(h.replace(/\/\*[\s\S]*?\*\//g, '').replace(/<!--[\s\S]*?-->/g, ''))) throw new Error('the reference couple is still on the page');
-fs.writeFileSync(path.join(D, 'index.html'), h.replace('<!doctype html>', '<!doctype html>\n<!-- written by tools/karan-rhythm-wedding.mjs from the design of public/aashna-sanket-celebrations — edit the tool, not this file -->'));
+fs.writeFileSync(path.join(D, 'index.html'), h.replace('<!doctype html>', '<!doctype html>\n<!-- written by tools/karan-rhythm-wedding.mjs from the design of public/aashna-sanket-celebrations — edit the tool, not this file -->'.replace('.mjs', ONLY ? '.mjs only' : '.mjs')));
 console.log('✓', SLUG, PHOTOS.map((p) => `${p.f} ${p.w}x${p.h}`).join(', '));

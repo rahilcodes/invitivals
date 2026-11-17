@@ -443,6 +443,12 @@ html.js .archcap .draw{transition-duration:2.6s}
 .lb-n{position:absolute;bottom:max(16px,env(safe-area-inset-bottom));left:0;right:0;margin:0;text-align:center;font:600 11px/1 var(--caps);letter-spacing:.3em;color:#D5AF62}
 html.lb-open,html.lb-open body{overflow:hidden}
 @media (max-width:520px){.lb-prev,.lb-next{top:auto;bottom:max(8px,env(safe-area-inset-bottom))}.lb-prev{left:16px}.lb-next{right:16px}.lb-n{bottom:max(24px,calc(env(safe-area-inset-bottom) + 16px))}}
+/* the scroll button on the cover, made easier to see (client, 2026-11-17): a maroon ring, an ivory band and a gold
+   outer line round the solid ivory disc, and the same ring round the word. Its bobbing animation is the design's, untouched. */
+.cue svg{background:#FFF8EC;border:2px solid var(--maroon);
+  box-shadow:0 0 0 3px #FFF8EC,0 0 0 4.5px #C79A45,0 0 0 9px rgba(255,245,229,.3),0 8px 20px rgba(60,20,20,.5)}
+.cue{gap:11px}
+.cue span{padding:5px 10px;background:#FFF8EC;border:1px solid var(--maroon);box-shadow:0 3px 10px rgba(60,20,20,.35)}
 /* the closing */
 .finale-copy .k2{margin-top:16px;font:600 clamp(10px,3vw,12px)/1 var(--caps);letter-spacing:.24em;text-indent:.24em;color:var(--gold);font-style:normal}
 .finale-copy .hosts{margin-top:8px;font:600 clamp(17px,5vw,20px)/1.35 var(--serif);font-style:normal;color:var(--maroon)}
