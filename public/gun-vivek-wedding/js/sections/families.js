@@ -9,6 +9,7 @@ const Family = (f) => `
     ${f.note ? `<p class="family-note">${f.note}</p>` : ''}
     <p class="family-rel">${f.relation}</p>
     <p class="family-parents">${f.parents.join('<br>')}</p>
+    ${f.familyName ? `<p class="family-name">${f.familyName}</p>` : ''}
     ${f.grandparents ? `<p class="family-gp">${f.grandparents}</p>` : ''}
   </div>`;
 

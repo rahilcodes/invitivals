@@ -28,7 +28,7 @@ export const HeroSection = (cfg) => `
       <p class="hero-date h-in" style="--h:8">
         <span>${[weekday(cfg.weddingDate), cfg.weddingTimeLabel].filter(Boolean).join(' · ')}</span>
         <b>${day(cfg.weddingDate)} ${month(cfg.weddingDate)} ${year(cfg.weddingDate)}</b>
-        <em>${cfg.venueCity}</em>
+        <em>${cfg.heroPlace || cfg.venueCity}</em>
       </p>
     </div>
     <div class="hero-couple-wrap" data-parallax="0.05">${WeddingCouple({ cls: 'hero-couple', eager: true })}</div>

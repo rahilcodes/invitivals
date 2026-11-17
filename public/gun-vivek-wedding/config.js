@@ -15,7 +15,7 @@ export const weddingConfig = {
   brideFirst: true, // "Gun Weds Vivek": the bride is written first everywhere
   tagline: ['Together Forever'],
   /* the three blessings over the names, as the family wrote them */
-  blessings: ['॥ Jai Kallka Maa ॥', '॥ Jai Babu Mohan Ram ॥', '॥ Jai Baba Shyangiri ॥'],
+  blessings: ['॥ Jai Kalka Maa ॥', '॥ Jai baba mohan ram ॥', '॥ Jai baba shyamgiri ॥'],   // corrected by the client, 2026-11-17: spelling and capitals exactly as typed
   invocation: null,
   regional: null,
   /* ?to=Name in the link greets each guest personally; this is used when there is none */
@@ -34,6 +34,7 @@ export const weddingConfig = {
   venue: VENUE,
   venueAddress: ADDRESS,
   venueCity: 'CBD Ground',
+  heroPlace: 'THE VIVANN',                // the cover's place line (client, 2026-11-17); the ceremony card keeps the venue and CBD Ground
   mapsUrl: MAP,
   venueImage: 'assets/venue-vivann-platinum.webp', // the family's own picture of Vivann Platinum, only resized
 
@@ -56,6 +57,7 @@ export const weddingConfig = {
       person: 'Gun',
       relation: 'Daughter of',
       parents: ['Smt. Shashi Devi &', 'Ch. Rupesh Singh Dedhia'],
+      familyName: 'Dedha',                 // the family name under the bride's parents (client, 2026-11-17)
     },
     groom: {
       label: 'The Groom',
@@ -65,11 +67,10 @@ export const weddingConfig = {
     },
   },
   familyOrder: ['bride', 'groom'],
-  /* the family elders, named after both families */
+  /* the family elders, named after both families: only these two names (client, 2026-11-17: no ladies' names) */
   elders: {
     title: 'Family Elders',
-    /* each couple on its own, set like the parents above (the & ends the first line) */
-    lines: ['Late Smt. Asarfi Devi &<br>Late Ch. Gyan Chand Nambardar', 'Smt. Jagarti Devi &<br>Late Ch. Mahavir Singh Nambardar'],
+    lines: ['Late Ch. Gyanchand Nambardar', 'Late Ch. Mahavir Singh Nambardar'],
   },
 
   eventsHeading: 'Wedding Celebrations',
@@ -93,7 +94,7 @@ export const weddingConfig = {
   thankYou: {
     title: 'Thank You',
     lines: ['For being a part of our special day.', 'Your love and blessings', 'mean the world to us.'],
-    signoff: 'With love, Gun & Vivek',
+    signoff: 'With Love,<br>Dedha Family',
   },
 
   creditCampaign: 'gun-vivek-wedding',

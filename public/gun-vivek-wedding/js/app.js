@@ -1,13 +1,13 @@
 /* InvitationPage — composes one continuous invitation from weddingConfig.
    Gun & Vivek (client, 2026-11-16): no RSVP, no Getting There and no Warm Wishes — those modules are not in this copy. */
-import { weddingConfig as cfg } from '../config.js?v=1';
+import { weddingConfig as cfg } from '../config.js?v=2';
 import { GoldDefs, GoldThread } from './decor.js?v=1';
 import { guestName } from './util.js?v=1';
 import { IntroExperience, initIntro } from './sections/intro.js?v=1';
-import { HeroSection } from './sections/hero.js?v=1';
+import { HeroSection } from './sections/hero.js?v=2';
 import { WelcomeSection } from './sections/welcome.js?v=1';
 import { StorySection } from './sections/story.js?v=1';
-import { FamilySection } from './sections/families.js?v=1';
+import { FamilySection } from './sections/families.js?v=2';
 import { EventsSection, initEvents } from './sections/events.js?v=1';
 import { CeremonySection } from './sections/ceremony.js?v=1';
 import { VenueSection } from './sections/venue.js?v=1';

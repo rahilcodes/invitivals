@@ -733,3 +733,5 @@ html.is-open .intro.is-skipped .intro-video { transform: none; transition: none;
 .venue-frame { height: auto; aspect-ratio: 16 / 9; border-radius: 16px; margin: 12px auto 22px; box-shadow: 0 0 0 1px rgba(184, 137, 50, .55), 0 0 0 6px #fbf1e1, 0 0 0 7px rgba(184, 137, 50, .45), 0 22px 34px -20px rgba(74, 14, 24, .6); }
 .venue-frame::after { inset: 7px; border-radius: 10px; }
 .venue-frame img { height: 106%; margin-top: -3%; object-position: 50% 45%; }
+/* the family name under the bride's parents (client, 2026-11-17) */
+.family-name { margin: 10px 0 0; font-family: var(--caps); font-weight: 600; font-size: 15px; letter-spacing: .32em; padding-left: .32em; text-transform: uppercase; color: var(--gold-deep); }
