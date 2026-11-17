@@ -175,3 +175,59 @@ button { font: inherit; cursor: pointer; }
 .cover { position: absolute; left: 50%; top: 0; height: max(100dvh, calc(var(--col) * 16 / 9)); aspect-ratio: 9 / 16; transform: translateX(-50%); transition: height .9s ease; }
 .film .column, .opening .column { height: 100dvh; }
 .film.fade .cover { height: calc(var(--col) * 16 / 9); }
+
+/* ═════════ one continuous sheet (2026-11-17) ═════════
+   Every page after the first is the card's own paper between two garlands (the card's foot flowers): the garland
+   closes the page and, turned upside down, opens the next one, so the flowers meet their mirror image across the
+   joining line. The garland is 941 x 630 (66.95cqw tall) and fades into the paper at its inner edge. Its flowers
+   stand up to 46cqw from the page edge inside the text column, so that column starts and ends 46cqw in. */
+.sheet { background: #f6ecd8; overflow: hidden; }
+.sheet > .paper { position: absolute; inset: 0; background: #f6ecd8 url(../assets/paper.webp) center / 100% 100% no-repeat; }
+.sheet > .garland { position: absolute; left: 0; width: 100%; height: auto; max-width: none; z-index: 1; pointer-events: none; -webkit-user-drag: none; user-select: none; }
+.garland--foot { bottom: 0; }
+.garland--head { top: 0; transform: scaleY(-1); }
+.sheet > .card { top: 46cqw; bottom: 46cqw; }
+.page > .chosen { position: absolute; z-index: 2; }
+
+/* ── Save Our Date ── */
+.p-date .month { margin: .4cqw 0 2.6cqw; font-size: 3.5cqw; letter-spacing: .26em; padding-left: .26em; text-transform: uppercase; }
+.cal { display: grid; grid-template-columns: repeat(7, 1fr); width: 70cqw; padding: 2.2cqw 2.4cqw 2.6cqw; border: 1px solid var(--champagne); border-radius: 3cqw; background: linear-gradient(180deg, rgba(255, 252, 244, .94), rgba(249, 240, 220, .92)); box-shadow: 0 .8cqw 2.2cqw rgba(120, 90, 30, .16), inset 0 0 0 .6cqw rgba(255, 255, 255, .55), inset 0 0 0 .75cqw rgba(184, 146, 74, .35); color: var(--ink); font-family: var(--caps); font-variant-numeric: lining-nums; }
+.cal > span { display: flex; align-items: center; justify-content: center; height: 8.2cqw; }
+.cal .dow { height: 7cqw; margin-bottom: .8cqw; border-bottom: 1px solid rgba(184, 146, 74, .5); font-weight: 600; font-size: 2.25cqw; letter-spacing: .12em; padding-left: .12em; text-transform: uppercase; color: #8a6526; }
+.cal .day { position: relative; font-weight: 500; font-size: 3.5cqw; line-height: 1; }
+.day--mark b { position: relative; font-weight: 600; transition: color .5s ease .3s; }
+.day__heart { position: absolute; left: 50%; top: 50%; width: 9.2cqw; line-height: 0; transform: translate(-50%, -46%) scale(.3); opacity: 0; transition: opacity .7s ease .2s, transform .9s cubic-bezier(.2, 1.4, .4, 1) .2s; pointer-events: none; filter: drop-shadow(0 .3cqw .5cqw rgba(120, 90, 30, .35)); }
+.day__heart svg { display: block; width: 100%; height: auto; }
+.revealed .day__heart { opacity: 1; transform: translate(-50%, -46%); }
+.revealed .day--mark b { color: #fffaf0; }
+.revealbox { position: relative; width: 62cqw; min-height: max(44px, 10.4cqw); margin-top: 3.6cqw; }
+.revealbox .btn { position: absolute; inset: 0; width: 100%; margin: 0; cursor: pointer; transition: opacity .5s ease, transform .15s ease, filter .15s ease; }
+.btn--reveal { animation: glow 2.6s ease-in-out infinite; }
+@keyframes glow { 0%, 100% { box-shadow: 0 .6cqw 1.6cqw rgba(120, 90, 30, .28), 0 0 0 0 rgba(214, 178, 104, 0); } 50% { box-shadow: 0 .6cqw 1.6cqw rgba(120, 90, 30, .28), 0 0 0 1.6cqw rgba(214, 178, 104, .28); } }
+.revealed .btn--reveal { opacity: 0; pointer-events: none; animation: none; }
+.legend { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: .7cqw; opacity: 0; transform: translateY(6px); transition: opacity .7s ease .45s, transform .7s ease .45s; pointer-events: none; white-space: nowrap; }
+.legend b { font-family: var(--caps); font-weight: 600; font-size: 3.5cqw; letter-spacing: .1em; color: #8a6526; }
+.legend span { font-style: italic; font-weight: 600; font-size: 3.5cqw; color: var(--ink); }
+.revealed .legend { opacity: 1; transform: none; }
+button.btn { cursor: pointer; }
+.p-date .btn { margin-top: 2.4cqw; }
+.p-date .revealbox + .btn { margin-top: 3cqw; }
+
+/* ── the chosen card, whole, laid on the sheet: its own proportions, nothing cropped ── */
+.chosen { left: 7%; width: 86%; top: 50%; margin: 0; transform: translateY(-50%); line-height: 0; border-radius: 1.2cqw; box-shadow: 0 0 0 1px rgba(184, 146, 74, .75), 0 0 0 1.1cqw #fbf5e6, 0 0 0 calc(1.1cqw + 1px) rgba(184, 146, 74, .6), 0 2.4cqw 6cqw rgba(90, 65, 20, .32); }
+.chosen.reveal { transform: translateY(calc(-50% + 12px)); }
+.page.on.ready .chosen.reveal, .no-io .chosen.reveal { transform: translateY(-50%); }
+.chosen img { display: block; width: 100%; height: auto; border-radius: 1.2cqw; }
+
+/* ── the small sheet behind Save the Date ── */
+.chooser { position: fixed; inset: 0; z-index: 70; display: flex; align-items: flex-end; justify-content: center; padding: 16px 16px calc(16px + env(safe-area-inset-bottom, 0px)); }
+.chooser[hidden] { display: none; }
+.chooser__veil { position: absolute; inset: 0; background: rgba(60, 45, 20, .5); backdrop-filter: blur(3px); }
+.chooser__card { position: relative; width: min(100%, 400px); max-height: calc(100dvh - 32px); overflow: auto; display: flex; flex-direction: column; align-items: center; gap: 10px; padding: 22px 18px 14px; border: 1px solid rgba(184, 146, 74, .85); border-radius: 18px; background: linear-gradient(180deg, #fffaf0, #f5ead3); box-shadow: 0 20px 60px rgba(60, 45, 20, .4); color: var(--ink); text-align: center; }
+.chooser__title { margin: 0; font-family: var(--script); font-weight: 400; font-size: 38px; line-height: 1.1; color: #9a7230; }
+.chooser__sub { margin: 0 0 4px; font-size: 16px; font-weight: 500; line-height: 1.4; }
+.chooser .btn { width: 100%; min-height: 50px; margin: 0; font-size: 12.5px; }
+.chooser__close { min-height: 44px; padding: 0 20px; border: 0; background: none; color: var(--soft); font: 600 13px var(--caps); letter-spacing: .2em; text-transform: uppercase; }
+.chooser__close:focus-visible { outline: 2px solid var(--champagne); outline-offset: 2px; }
+@media (min-width: 700px) { .chooser { align-items: center; } }
+@media (prefers-reduced-motion: reduce) { .btn--reveal { animation: none !important; } }

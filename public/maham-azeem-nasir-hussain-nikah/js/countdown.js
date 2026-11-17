@@ -1,7 +1,7 @@
 /* Countdown — live days, hours, minutes and seconds to the Nikah, four equal tiles. The target is one absolute
    instant (Pakistan time is written into it), so it is right in any guest's time zone. Tabular figures in fixed
    tiles, so nothing shifts; zeros once the moment has come. */
-import { h } from './util.js?v=1';
+import { h } from './util.js?v=2';
 
 const LABELS = ['Days', 'Hours', 'Minutes', 'Seconds'];
 

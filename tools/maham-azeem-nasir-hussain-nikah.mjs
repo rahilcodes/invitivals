@@ -51,8 +51,10 @@ async function lift(boxes, name) {
       d[k * 3 + c] = Math.max(0, Math.min(255, Math.round(card[k * 3 + c] * (1 - a) + v * a)));
     }
   }
+  if (!name) return d;
   const out = await sharp(d, { raw: { width: W, height: H, channels: 3 } }).webp({ quality: 90, effort: 6 }).toFile(path.join(OUT, name + '.webp'));
   sizes[name] = [out.width, out.height];
+  return d;
 }
 const LOWER = [
   [150, 425, 800, 1075],     // Nikah Invitation, the names, the request
@@ -62,7 +64,26 @@ const LOWER = [
   [240, 1420, 705, 1515],    // the closing line
 ];
 await lift(LOWER, 'plate-a');
-await lift([[228, 205, 720, 425], [392, 40, 552, 205], ...LOWER], 'plate-b');
+const UPPER = [[228, 205, 720, 425], [392, 40, 552, 205]];
+/* plate-b is no longer a page of its own (it is still read by the sharing cover) */
+await lift([...UPPER, ...LOWER], 'plate-b');
+
+/* ── one continuous invitation (2026-11-17). Stacking the whole card page after page put its cut-off bottom flowers
+      against the next page's top flowers. Pages after the first are now built from two pieces of the card:
+        garland — the card's foot (its two flower corners and the small ornament), fading into paper at its upper
+                  edge. It closes every page, and the SAME piece turned upside down opens the next one, so the
+                  flowers meet their own mirror image across each joining line: no cut, no seam;
+        paper   — the card's clear paper between the flowers (lanterns lifted off), stretched between the two. ── */
+{ const GY = 1040, GH = H - GY, FEATHER = 80;
+  const clean = await lift([...UPPER, ...LOWER, [5, 430, 112, 870], [828, 430, W - 6, 870], [390, 1515, 550, 1610]], null);
+  const g = Buffer.alloc(W * GH * 4);
+  for (let y = 0; y < GH; y++) for (let x = 0; x < W; x++) { const i = ((GY + y) * W + x) * 3, o = (y * W + x) * 4, t = Math.min(1, y / FEATHER); g[o] = clean[i]; g[o + 1] = clean[i + 1]; g[o + 2] = clean[i + 2]; g[o + 3] = Math.round(255 * t * t * (3 - 2 * t)); }
+  const gi = await sharp(g, { raw: { width: W, height: GH, channels: 4 } }).webp({ quality: 90, alphaQuality: 100, effort: 6 }).toFile(path.join(OUT, 'garland.webp'));
+  sizes.garland = [gi.width, gi.height];
+  const PY0 = 880, PY1 = 1040;     // below the lanterns, above the flowers: nothing but paper
+  const pi = await sharp(clean, { raw: { width: W, height: H, channels: 3 } }).extract({ left: 0, top: PY0, width: W, height: PY1 - PY0 }).blur(6).webp({ quality: 92, effort: 6 }).toFile(path.join(OUT, 'paper.webp'));
+  sizes.paper = [pi.width, pi.height];
+}
 
 /* the chosen card itself, exactly as supplied */
 fs.copyFileSync(path.join(SRC, 'invitation.jpg'), path.join(OUT, 'invitation.jpg'));

@@ -2,7 +2,7 @@
    twinkling, a few catching the light as small four-point glints, and a micro-glitter trail under the
    guest's finger. One fixed, device-pixel-ratio-aware canvas with pointer-events none, so it never
    blocks scrolling, links or inputs; the trail listens passively. Off entirely for reduced motion. */
-import { h, reducedMotion } from './util.js?v=1';
+import { h, reducedMotion } from './util.js?v=2';
 
 const TINTS = [[255, 246, 220], [246, 226, 178], [232, 204, 146], [218, 184, 112], [205, 168, 96], [255, 252, 240]];
 

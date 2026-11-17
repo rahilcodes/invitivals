@@ -14,7 +14,10 @@ export const config = {
   /* page 2 */
   message: ['With gratitude and joy, we request', 'the honour of your presence', 'at our Nikah ceremony.'],
 
-  /* page 4: the one event */
+  /* Save Our Date (after the couple): the month of the Nikah with its day marked once the guest taps Reveal Date */
+  saveOurDate: { title: 'Save Our Date', year: 2026, month: 12, day: 21, reveal: 'Reveal Date', save: 'Save the Date', maps: 'View on Google Maps' },
+
+  /* the one event */
   event: {
     title: 'Nikah Ceremony',
     weekday: 'Monday', day: '21', month: 'December', year: '2026', time: '2:00 PM – 5:00 PM',
