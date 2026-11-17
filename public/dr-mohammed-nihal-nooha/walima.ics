@@ -1,0 +1,26 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Invitivals//Wedding Invitation//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VTIMEZONE
+TZID:Asia/Kolkata
+BEGIN:STANDARD
+DTSTART:19700101T000000
+TZOFFSETFROM:+0530
+TZOFFSETTO:+0530
+TZNAME:IST
+END:STANDARD
+END:VTIMEZONE
+BEGIN:VEVENT
+UID:dr-mohammed-nihal-nooha-walima@invitivals.com
+DTSTAMP:20261117T000000Z
+DTSTART;TZID=Asia/Kolkata:20270111T113000
+SUMMARY:Walima Ceremony — Dr. Mohammed Nihal & Nooha
+LOCATION:Indiana Convention Hall\, Mangaluru
+DESCRIPTION:Monday\, 11th January 2027\, 11:30 AM onwards\nVenue: Indiana
+  Convention Hall\, Mangaluru\nLocation: https://share.google/NmQoWq2kjiK
+ A5V9Ii\n\nhttps://invitivals.com/dr-mohammed-nihal-nooha/
+URL:https://share.google/NmQoWq2kjiKA5V9Ii
+END:VEVENT
+END:VCALENDAR

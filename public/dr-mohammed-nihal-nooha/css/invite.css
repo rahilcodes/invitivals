@@ -1,0 +1,175 @@
+/* Dr. Mohammed Nihal & Nooha, on the Modern Wedding design: every page is a canvas with its plate's aspect ratio;
+   the wording is live text set in units of the page width (cqw), so plate, lettering and buttons scale as one. */
+:root {
+  --col: min(100vw, calc(100dvh * 941 / 1672));
+  --plum: #4a1f35;
+  --mauve: #8a5a74;
+  --gold: #d8b36a;
+  --cream: #fbf1ea;
+  --serif: 'Cormorant Garamond', 'Cormorant', Georgia, serif;
+  --script: 'Great Vibes', 'Pinyon Script', cursive;
+}
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+html, body { margin: 0; min-height: 100%; }
+body {
+  background: #d6c0b8 radial-gradient(ellipse at 50% 20%, #efe0d6 0%, #d9c3bd 55%, #bfa3a6 100%) fixed;
+  color: var(--plum);
+  font-family: var(--serif);
+  overflow-x: hidden;
+}
+body.locked { overflow: hidden; }
+img { display: block; max-width: 100%; }
+button { font: inherit; cursor: pointer; }
+.sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+/* the portrait column: full phone width, or the width that fits the viewport height */
+.app { width: 100%; }
+.column { width: var(--col); margin: 0 auto; position: relative; }
+.invitation { position: relative; opacity: 0; }
+.invitation.shown { opacity: 1; }
+
+/* ── page canvas ── */
+.page { position: relative; width: 100%; container-type: inline-size; background: #e6d3dc; }
+.page img.plate { position: absolute; inset: 0; width: 100%; height: 100%; }
+
+/* the satin band across every joining line: centred on the boundary, above both pages */
+.satin { position: absolute; left: -1%; top: 0; width: 102%; aspect-ratio: 1400 / 148; transform: translateY(-50%); z-index: 9; pointer-events: none; }
+.satin img { width: 100%; height: 100%; }
+
+/* ── motion ── */
+/* text enters once, as its page scrolls into view: a fade with a 12px rise, eased out, lines staggered by --d.
+   Only opacity and transform change, so the final position is exactly the reference's. */
+.reveal { opacity: 0; transform: translateY(12px); transition: opacity .8s cubic-bezier(.22, .61, .36, 1), transform .8s cubic-bezier(.22, .61, .36, 1); transition-delay: var(--d, 0s); will-change: opacity, transform; }
+.page.on.ready .reveal, .no-io .reveal { opacity: 1; transform: none; }
+.created { position: absolute; left: 50%; bottom: 1.4%; transform: translateX(-50%); z-index: 4; color: var(--cream); font-size: 2.2cqw; letter-spacing: .14em; white-space: nowrap; text-decoration: none; padding: .7cqw 2.4cqw; border-radius: 99px; background: rgba(74,31,53,.55); }
+.created b { font-weight: 700; letter-spacing: .2em; }
+
+/* ── opening screen: the film's first frame, Tap to Play ── */
+.opening { position: fixed; inset: 0; z-index: 50; background: #c9afc0 radial-gradient(ellipse at 50% 20%, #e8d3dd 0%, #cfb5c4 55%, #b596a9 100%); display: flex; align-items: flex-start; justify-content: center; overflow: hidden; transition: opacity .8s ease; }
+.opening.out { opacity: 0; pointer-events: none; }
+/* the poster fills the whole viewport (its satin runs to every edge), so a phone taller than 9:16 never shows a bare strip */
+.opening .frame { position: relative; width: 100%; height: 100dvh; container-type: inline-size; }
+.opening .art { width: 100%; height: 100%; object-fit: cover; }
+.tap { position: absolute; left: 50%; bottom: 9%; transform: translateX(-50%); display: flex; flex-direction: column; align-items: center; gap: 10px; background: none; border: 0; color: var(--cream); letter-spacing: .3em; text-transform: uppercase; font-size: clamp(11px, 2.8cqw, 15px); padding: 12px 20px; }
+.tap .ring { width: 62px; height: 62px; border-radius: 50%; border: 1px solid rgba(251,241,234,.9); display: grid; place-items: center; box-shadow: 0 0 0 0 rgba(251,241,234,.5); animation: pulse 2.4s ease-out infinite; backdrop-filter: blur(3px); background: rgba(74,31,53,.28); }
+.tap .ring::before { content: ''; width: 0; height: 0; border-left: 15px solid var(--cream); border-top: 9px solid transparent; border-bottom: 9px solid transparent; margin-left: 4px; }
+.tap span { text-shadow: 0 1px 8px rgba(40,10,25,.6); }
+@keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(251,241,234,.55); } 100% { box-shadow: 0 0 0 18px rgba(251,241,234,0); } }
+
+/* ── opening film: same box as the poster and as page 1, so nothing jumps ── */
+.film { position: fixed; inset: 0; z-index: 45; background: #c9afc0 radial-gradient(ellipse at 50% 20%, #e8d3dd 0%, #cfb5c4 55%, #b596a9 100%); display: none; align-items: flex-start; justify-content: center; overflow: hidden; }
+.film.playing { display: flex; }
+/* the film fills the viewport like the poster; as it ends it settles to the hero's exact box while dissolving onto it */
+.film video { width: 100%; height: 100%; object-fit: cover; background: transparent; display: block; }
+.film.fade { transition: opacity .9s ease; opacity: 0; pointer-events: none; }
+.skip { position: fixed; right: calc(14px + env(safe-area-inset-right, 0px)); bottom: calc(18px + env(safe-area-inset-bottom, 0px)); z-index: 46; background: rgba(74,31,53,.5); border: 1px solid rgba(251,241,234,.5); color: var(--cream); border-radius: 999px; padding: 8px 16px; font-size: 12px; letter-spacing: .2em; text-transform: uppercase; }
+
+/* ── music control ── */
+.audio { position: fixed; top: calc(12px + env(safe-area-inset-top, 0px)); right: calc(12px + env(safe-area-inset-right, 0px)); z-index: 60; height: 42px; min-width: 42px; padding: 0 10px; border-radius: 999px; border: 1px solid rgba(251,241,234,.7); background: rgba(74,31,53,.55); color: var(--cream); display: none; align-items: center; justify-content: center; gap: 8px; backdrop-filter: blur(4px); }
+.audio.shown { display: flex; }
+.audio svg { width: 20px; height: 20px; flex: none; }
+.audio .off, .audio .lbl { display: none; }
+.audio.muted .on { display: none; }
+.audio.muted .off { display: block; }
+.audio.blocked .lbl { display: inline; font-size: 12px; letter-spacing: .16em; text-transform: uppercase; }
+.audio.blocked { animation: nudge 2.2s ease-in-out infinite; }
+.audio .on { animation: beat 1.6s ease-in-out infinite; }
+@keyframes beat { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.12); } }
+@keyframes nudge { 0%, 100% { box-shadow: 0 0 0 0 rgba(251,241,234,.5); } 50% { box-shadow: 0 0 0 8px rgba(251,241,234,0); } }
+
+
+/* ── toast ── */
+.toast { position: fixed; left: 50%; bottom: calc(24px + env(safe-area-inset-bottom, 0px)); transform: translate(-50%, 20px); z-index: 80; background: rgba(74,31,53,.93); color: var(--cream); border: 1px solid rgba(216,179,106,.6); padding: 12px 18px; border-radius: 12px; font-size: 15px; max-width: min(92vw, 420px); text-align: center; opacity: 0; transition: opacity .3s, transform .3s; pointer-events: none; }
+.toast.shown { opacity: 1; transform: translate(-50%, 0); }
+
+/* ── sparkle overlay ── */
+.sparkle { position: fixed; inset: 0; z-index: 30; pointer-events: none; opacity: 0; transition: opacity 2s ease; }
+.sparkle.shown { opacity: 1; }
+
+/* ═════════ this invitation's own pages ═════════ */
+:root { --ink: #4a1f35; --plum2: #5a2a47; --rose: #8a5a74; --champagne: #b08a4e; }
+.page > .card, .page > .reveal, .page > .digit, .page > .digit-label { position: absolute; z-index: 2; }
+.page:not(.ready) > :not(.plate) { visibility: hidden; }
+.card { display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; color: var(--ink); }
+.card p, .card h1, .card h2 { margin: 0; }
+.card img { width: 100%; height: auto; -webkit-user-drag: none; user-select: none; }
+
+/* ── page 1: Bismillah, the NN monogram, the hosts and the couple, inside the ivory card ── */
+.p-hero .card { left: 21%; right: 20.5%; top: 18.6%; bottom: 21.6%; }
+.bismillah { width: 39cqw; }
+.p-hero .mono { width: 12.6cqw; margin-top: 1.6cqw; }
+.card .hosts { margin-top: 2.4cqw; font-weight: 700; font-size: 4.15cqw; letter-spacing: .02em; line-height: 1.2; color: var(--plum2); }
+.card .request { margin-top: 1.2cqw; font-style: italic; font-weight: 500; font-size: 3.3cqw; line-height: 1.36; color: var(--ink); }
+.card .name { margin-top: 2.2cqw; font-family: var(--script); font-weight: 400; font-size: 7.5cqw; line-height: 1.08; color: var(--plum2); white-space: nowrap; }
+.name span { display: block; }
+.card .and { display: flex; align-items: center; gap: 2.2cqw; margin: 2cqw 0 1.4cqw; font-weight: 600; font-size: 2.7cqw; letter-spacing: .34em; padding-left: .34em; color: var(--champagne); }
+.and i { display: block; width: 9cqw; height: 1px; background: linear-gradient(90deg, rgba(176,138,78,0), var(--champagne)); }
+.and i:last-child { transform: scaleX(-1); }
+.card .name--bride { margin-top: 0; font-size: 9cqw; }
+.card .of { margin-top: 1.8cqw; font-weight: 600; font-size: 3.6cqw; line-height: 1.3; color: var(--ink); }
+.of em { display: block; font-weight: 500; font-size: 3cqw; color: var(--rose); }
+
+/* ── pages 2 and 3: a ceremony ── */
+.p-nikah .card { left: 16%; right: 16%; top: 20%; bottom: 19%; }
+.p-walima .card { left: 21%; right: 20.5%; top: 23.6%; bottom: 22.6%; }
+.p-walima .rule { margin-bottom: 1.8cqw; }
+.p-walima .card .label { margin-top: 2.2cqw; }
+.p-walima .btn--plum { margin-top: 2.8cqw; }
+.p-walima .btn--ivory { margin-top: 1.6cqw; }
+.p-walima .ics { margin-top: .2cqw; }
+.orn { width: 13cqw; opacity: .9; }
+.card .title { margin-top: 1.2cqw; font-family: var(--script); font-weight: 400; font-size: 11.4cqw; line-height: 1.1; color: var(--plum2); white-space: nowrap; }
+.p-walima .card .title { font-size: 10.4cqw; }
+.rule { width: 20cqw; margin: 1cqw 0 2.6cqw; }
+.line { display: flex; align-items: center; justify-content: center; gap: 1.6cqw; font-weight: 600; font-size: 4.3cqw; line-height: 1.5; color: var(--ink); white-space: nowrap; }
+.ico { display: inline-flex; flex: none; }
+.ico svg { width: 1.05em; height: 1.05em; fill: none; stroke: currentColor; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
+.line .ico { color: var(--rose); }
+.card .label { margin-top: 3cqw; font-weight: 700; font-size: 2.7cqw; letter-spacing: .36em; padding-left: .36em; text-transform: uppercase; color: var(--champagne); }
+.card .venue { margin-top: .6cqw; font-weight: 700; font-size: 4.5cqw; line-height: 1.25; color: var(--plum2); text-wrap: balance; }
+.btn { display: flex; align-items: center; justify-content: center; gap: 1.8cqw; width: 100%; max-width: 58cqw; min-height: max(44px, 11cqw); box-sizing: border-box; padding: 1.6cqw 4cqw; border-radius: 99px; font-weight: 700; font-size: max(10.5px, 2.75cqw); letter-spacing: .14em; line-height: 1.25; text-transform: uppercase; text-decoration: none; -webkit-tap-highlight-color: transparent; }
+.btn span { text-wrap: balance; }
+.btn .ico svg { width: 1.5em; height: 1.5em; }
+.btn--plum { margin-top: 3.6cqw; color: #fbf1ea; background: linear-gradient(180deg, #8a5574, #5a2a47); border: 1px solid rgba(233, 207, 154, .9); box-shadow: 0 .8cqw 2.4cqw rgba(74, 31, 53, .32), inset 0 0 0 .5cqw rgba(233, 207, 154, .18); }
+.btn--ivory { margin-top: 2cqw; color: var(--plum2); background: linear-gradient(180deg, #fffaf3, #f1e2d2); border: 1px solid #c8a468; box-shadow: 0 .6cqw 1.8cqw rgba(74, 31, 53, .16); }
+.btn:active { filter: brightness(1.08); }
+.btn:focus-visible, .ics:focus-visible { outline: 2px solid var(--champagne); outline-offset: 3px; }
+.ics { margin-top: 1cqw; padding: 2.6cqw 3cqw; font-style: italic; font-weight: 600; font-size: max(11px, 2.9cqw); color: var(--rose); text-decoration: underline; text-underline-offset: .25em; }
+
+/* ── page 4: until we say Nikah ── */
+.until { left: 34%; width: 37%; top: 23%; height: 24%; margin: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; font-weight: 400; }
+.until span { font-family: var(--serif); font-weight: 500; font-size: 3.5cqw; letter-spacing: .04em; line-height: 1.1; color: #f7e9de; text-shadow: 0 .2cqw .6cqw rgba(60, 20, 40, .45); }
+.until b { font-family: var(--script); font-weight: 400; font-size: 10.6cqw; line-height: 1.02; padding: 0 .12em; background: linear-gradient(180deg, #fff6df 10%, #e9cf9a 55%, #cfa765 95%); -webkit-background-clip: text; background-clip: text; color: transparent; -webkit-text-fill-color: transparent; filter: drop-shadow(0 .25cqw .5cqw rgba(50, 15, 35, .5)); }
+.until-rule { left: 43.7%; width: 20.3%; top: 47.4%; }
+.until-rule img { width: 100%; height: auto; }
+.digit { top: 57.386%; width: 8.378%; height: 10.627%; display: flex; align-items: center; justify-content: center; color: #f7e9de; font-weight: 600; font-size: 5.3cqw; line-height: 1; font-variant-numeric: tabular-nums lining-nums; letter-spacing: .02em; text-shadow: 0 .15cqw .4cqw rgba(60, 20, 40, .45); }
+.digit span { display: block; min-width: 2.2ch; text-align: center; }
+.digit span.n3 { font-size: .78em; }
+.digit-label { top: 68%; width: 8.378%; text-align: center; color: #f3dfd3; font-weight: 500; font-size: 1.75cqw; letter-spacing: .04em; line-height: 1.2; }
+
+/* ── page 5: the closing ── */
+.p-end .mono { left: 39.2%; width: 21.6%; top: 20.6%; }
+.p-end .mono img { width: 100%; height: auto; filter: drop-shadow(0 .4cqw .8cqw rgba(40, 10, 25, .45)); }
+.pair { left: 14%; right: 14%; top: 41.9%; margin: 0; text-align: center; font-family: var(--script); font-size: 5.9cqw; line-height: 1.2; white-space: nowrap; color: #f6e3bd; text-shadow: 0 .2cqw .6cqw rgba(40, 10, 25, .5); }
+.closing { left: 27%; right: 22.5%; top: 58.6%; height: 15%; margin: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; font-style: italic; font-weight: 600; font-size: 3.7cqw; line-height: 1.4; color: var(--plum2); }
+.created { z-index: 4; }
+
+@media (prefers-reduced-motion: reduce) {
+  .tap .ring, .audio .on, .audio.blocked { animation: none !important; }
+  .reveal, .invitation, .film.fade { transition-duration: .01s !important; transition-delay: 0s !important; }
+  .reveal { opacity: 1; transform: none; }
+  .sparkle { display: none; }
+}
+
+/* ── the poster and the film share one box: 9:16, as wide as the column and at least as tall as the screen (the
+      picture's satin runs to every edge, so a tall phone never shows a bare strip); the NN seal face sits in it ── */
+.cover { position: absolute; left: 50%; top: 0; height: max(100dvh, calc(var(--col) * 16 / 9)); aspect-ratio: 9 / 16; transform: translateX(-50%); transition: height .9s ease; }
+.film .column, .opening .column { height: 100dvh; }
+.film.fade .cover { height: calc(var(--col) * 16 / 9); }
+.seal { position: absolute; aspect-ratio: 480 / 436; transform: translate(-50%, -50%); transition: opacity .3s ease; pointer-events: none; }
+.seal img { display: block; width: 100%; height: 100%; }
+.burst { position: absolute; aspect-ratio: 1; transform: translate(-50%, -50%) scale(.3); border-radius: 50%; opacity: 0; pointer-events: none; background: radial-gradient(circle, rgba(255, 250, 236, 1) 0%, rgba(255, 244, 220, .96) 34%, rgba(255, 236, 205, .55) 56%, rgba(255, 236, 205, 0) 72%); transition: opacity .28s ease, transform .5s ease; }
+.film.broken .seal { opacity: 0; }
+.film.broken .burst { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+.film.cleared .burst { opacity: 0; transform: translate(-50%, -50%) scale(1.25); transition: opacity .7s ease, transform .9s ease; }
