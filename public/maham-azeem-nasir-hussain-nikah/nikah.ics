@@ -1,0 +1,32 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Invitivals//Wedding Invitation//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VTIMEZONE
+TZID:Asia/Karachi
+BEGIN:STANDARD
+DTSTART:19700101T000000
+TZOFFSETFROM:+0500
+TZOFFSETTO:+0500
+TZNAME:PKT
+END:STANDARD
+END:VTIMEZONE
+BEGIN:VEVENT
+UID:maham-azeem-nasir-hussain-nikah@invitivals.com
+DTSTAMP:20261117T000000Z
+DTSTART;TZID=Asia/Karachi:20261221T140000
+DTEND;TZID=Asia/Karachi:20261221T170000
+SUMMARY:Nikah Ceremony — Maham Azeem & Nasir Hussain
+LOCATION:The Kitchen Garden\, Sialkot\, Pakistan
+DESCRIPTION:Monday\, 21 December 2026\, 2:00 PM – 5:00 PM (Pakistan time)
+
+ Venue: The Kitchen Garden\, Sialkot\, Pakistan
+Location: https://maps.app
+ .goo.gl/KAGqM6aHq6YW6QG3A
+
+https://invitivals.com/maham-azeem-nasir-hussa
+ in-nikah/
+URL:https://maps.app.goo.gl/KAGqM6aHq6YW6QG3A
+END:VEVENT
+END:VCALENDAR

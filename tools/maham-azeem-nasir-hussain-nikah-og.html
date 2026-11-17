@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<!-- The sharing cover (1200 x 630) of public/maham-azeem-nasir-hussain-nikah: open this file in a 1200 x 630 window,
+     save the picture as assets/cover-maham-nasir.jpg (JPEG, quality 86). The flowers are the four corners of the
+     client's own card (plate-b), each shown uncropped in its corner; the monogram is the client's M N. -->
+<html lang="en"><head><meta charset="utf-8">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=Great+Vibes&display=swap" rel="stylesheet">
+<style>
+  html, body { margin: 0; }
+  body { width: 1200px; height: 630px; position: relative; overflow: hidden; background: #f7edd8; font-family: 'Cinzel', Georgia, serif; color: #4d3b22; }
+  .c { position: absolute; width: 300px; height: 300px; background: url(../public/maham-azeem-nasir-hussain-nikah/assets/plate-b.webp) no-repeat; background-size: 700px auto; }
+  .tl { left: 0; top: 0; background-position: 0 0; }
+  .tr { right: 0; top: 0; background-position: 100% 0; }
+  .bl { left: 0; bottom: 0; background-position: 0 100%; }
+  .br { right: 0; bottom: 0; background-position: 100% 100%; }
+  .c::after { content: ''; position: absolute; inset: 0; }
+  .tl::after { background: linear-gradient(90deg, rgba(247,237,216,0) 50%, #f7edd8 100%), linear-gradient(180deg, rgba(247,237,216,0) 55%, #f7edd8 100%); }
+  .tr::after { background: linear-gradient(270deg, rgba(247,237,216,0) 50%, #f7edd8 100%), linear-gradient(180deg, rgba(247,237,216,0) 55%, #f7edd8 100%); }
+  .bl::after { background: linear-gradient(90deg, rgba(247,237,216,0) 50%, #f7edd8 100%), linear-gradient(0deg, rgba(247,237,216,0) 55%, #f7edd8 100%); }
+  .br::after { background: linear-gradient(270deg, rgba(247,237,216,0) 50%, #f7edd8 100%), linear-gradient(0deg, rgba(247,237,216,0) 55%, #f7edd8 100%); }
+  .mid { position: absolute; left: 300px; right: 300px; top: 0; bottom: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; }
+  .mono { height: 190px; }
+  .k { margin-top: 14px; font-size: 19px; font-weight: 500; letter-spacing: .34em; padding-left: .34em; }
+  .n { margin-top: 12px; font-size: 44px; font-weight: 500; line-height: 1.16; letter-spacing: .03em; white-space: nowrap; background: linear-gradient(180deg, #c9a252, #a67c33 55%, #8a6526); -webkit-background-clip: text; color: transparent; }
+  .n i { font-family: 'Great Vibes', cursive; font-style: normal; font-size: 46px; padding: 0 .1em; }
+  .n span { font-size: 1.28em; }
+  .d { margin-top: 14px; font-size: 18px; font-weight: 500; letter-spacing: .2em; padding-left: .2em; }
+</style></head>
+<body>
+  <div class="c tl"></div><div class="c tr"></div><div class="c bl"></div><div class="c br"></div>
+  <div class="mid">
+    <img class="mono" src="../public/maham-azeem-nasir-hussain-nikah/assets/mn-gold.webp" alt="">
+    <div class="k">NIKAH INVITATION</div>
+    <div class="n"><span>M</span>AHAM <span>A</span>ZEEM <i>&amp;</i> <span>N</span>ASIR <span>H</span>USSAIN</div>
+    <div class="d">MONDAY, 21 DECEMBER 2026 · SIALKOT</div>
+  </div>
+</body></html>
