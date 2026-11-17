@@ -31,8 +31,10 @@ const page1 = Page(1, [
   sprAt('h-rule1', 'p1-rule1', { delay: 0.4 }),
   live('h-blessings', H.eyebrow, { size: 2.3, cls: 'serif caps soft', delay: 0.5, wrap: false }),
   live('h-bride', NAMES[0], { size: 8, cls: 'name burgundy', delay: 0.6, slow: true, wrap: false }),
+  C.degrees ? live('h-bride-deg', C.degrees.bride, { size: 2.55, cls: 'serif semibold deep lines', delay: 0.68 }) : null,
   C.couple ? live('h-with', '&', { size: 5.2, cls: 'name soft', delay: 0.75, wrap: false }) : null,
   live('h-groom', NAMES[1], { size: 8, cls: 'name burgundy', delay: 0.9, slow: true, wrap: false }),
+  C.degrees ? live('h-groom-deg', C.degrees.groom, { size: 2.55, cls: 'serif semibold deep lines', delay: 0.98 }) : null,
   sprAt('h-rule2', 'p1-rule1', { delay: 1 }),
   live('h-dates', H.dates, { size: 3.4, cls: 'serif caps bold deep', delay: 1.1, wrap: false }),
   live('h-place', H.place, { size: 2.6, cls: 'serif italic', delay: 1.2 }),
@@ -78,13 +80,14 @@ const page2 = Page(2, [
 const label = (what) => (C.couple ? `${what} · ${C.couple.bride} & ${C.couple.groom}` : what);
 const schedule = (day) => h('ol', { class: 'timeline' }, ...day.schedule.map(([t, what, note, start]) => h('li', { class: t ? '' : 'no-time' },
   t ? h('time', {}, t) : null, h('span', {}, what, note ? h('em', {}, note) : null),
-  start ? h('a', { class: 'gcal', href: gcalHref({ title: label(what), start, place: [day.venue, ...day.address].join(' '), details: [`${what} – ${t}`, note, `Map: ${day.mapsUrl}`].filter(Boolean).join('\n') }), target: '_blank', rel: 'noopener' }, 'Add to Google Calendar') : null)));
+  start ? h('a', { class: 'gcal', href: gcalHref({ title: label(day.schedule.length === 1 ? `${day.title} – ${what}` : what), start, place: [day.venue, ...day.address].join(' '), details: [`${what} – ${t}`, note, `Map: ${day.mapsUrl}`].filter(Boolean).join('\n') }), target: '_blank', rel: 'noopener' }, 'Add to Google Calendar') : null)));
 const venue = (day) => h('div', { class: 'venue' }, h('p', { class: 'venue-k' }, 'Venue'), h('p', { class: 'venue-name' }, day.venue), day.address.length ? h('p', { class: 'venue-addr' }, ...day.address.flatMap((l, i) => (i ? [h('br'), l] : [l]))) : null);
 const actions = (day) => h('div', { class: 'actions' },
   h('div', { class: 'img-wrap' }, openMaps(day, pic('p4-maps', `Open ${day.venue} in Google Maps`))));
 
 const dayPage = (day) => () => Page(4, [
-  live('d4-title', day.titleLines || day.title, { size: day.titleLines ? 3.6 : 4.1, cls: 'serif caps burgundy', delay: 0.15 }),
+  live('d4-title', day.titleLines || day.title, { size: 3.8, cls: 'serif caps burgundy', delay: 0.15 }),
+  day.sub ? live('d4-sub', day.sub, { size: 3, cls: 'serif italic soft', delay: 0.22, wrap: false }) : null,
   sprAt('d4-rule', 'p4-rule', { delay: 0.3 }),
   live('d4-date', day.date, { size: 2.4, cls: 'serif caps deep', delay: 0.45, wrap: false }),
   live('d4-weekday', day.weekday, { size: 2.2, cls: 'serif caps soft', delay: 0.5, wrap: false }),
@@ -94,15 +97,15 @@ const dayPage = (day) => () => Page(4, [
 /* ── 3 · our functions: the programme as three cards, each a button that opens its day. The day's number sits
       in a burgundy medallion, the title and the first hour beside it, and a "Tap to view" pill says what a
       tap does, so nobody wonders whether the cards are live. ── */
-const [day1, day2, day3] = C.days;
 const firstTime = (day) => day.schedule.find(([, , , s]) => s)?.[0] || day.schedule[0][0];
 const monthShort = (date) => date.split(' ')[1].slice(0, 3);
 const card = (id, day, n, delay) => control(id,
-  h('button', { class: 'fn', type: 'button', 'aria-label': `${day.title}, ${day.weekday} ${day.date}: view the programme`, onclick: () => openDetail(day.title, 4, dayPage(day)) },
+  h('button', { class: 'fn', type: 'button', 'aria-label': `${day.title}${day.sub ? ` (${day.sub})` : ''}, ${day.weekday} ${day.date}: view the programme`, onclick: () => openDetail(day.title, 4, dayPage(day)) },
     h('span', { class: 'fn-day', 'aria-hidden': 'true' }, h('b', {}, day.date.split(' ')[0]), h('small', {}, monthShort(day.date))),
     h('span', { class: 'fn-body' },
       h('small', { class: 'fn-when' }, `${day.weekday} · ${day.date.replace(' 2026', '')}`),
       h('b', { class: 'fn-title' }, day.title),
+      day.sub ? h('em', { class: 'fn-sub' }, day.sub) : null,
       h('span', { class: 'fn-meta' }, `${firstTime(day)} · ${day.venue}`),
       h('span', { class: 'fn-tap' }, 'Tap to view', h('i', { 'aria-hidden': 'true' }))),
     h('span', { class: 'fn-n', 'aria-hidden': 'true' }, n)),
@@ -114,9 +117,7 @@ const page3 = Page(3, [
   spr('p3-flowers-c', { motion: 'sway', origin: '0% 50%', delay: 0.3, z: 2 }),
   spr('p3-flowers-d', { motion: 'sway alt', origin: '100% 50%', delay: 0.2, z: 2 }),
   spr('p3-flowers-e', { motion: 'sway', origin: '100% 50%', delay: 0.3, z: 2 }),
-  card('f-card-a', day1, 'I', 0.4),
-  card('f-card-b', day2, 'II', 0.6),
-  card('f-card-c', day3, 'III', 0.8),
+  ...C.days.map((day, i) => card(`f-card-${'abcd'[i]}`, day, ['I', 'II', 'III', 'IV'][i], 0.4 + i * 0.15)),
 ], { id: 'page-3' });
 
 /* ── the countdown: the plain upper half of plate 8, soft florals in its corners, four light tiles ── */

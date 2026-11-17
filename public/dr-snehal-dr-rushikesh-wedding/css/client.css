@@ -149,3 +149,14 @@ a.sd-btn .ico { color: var(--burgundy); }
 .timeline .gcal:active { transform: scale(.97); }
 .timeline li + li { margin-top: 1.6cqw; }
 .venue-k { margin: 0 0 1cqw; font-weight: 700; font-size: 2.1cqw; letter-spacing: .3em; padding-left: .3em; text-transform: uppercase; color: var(--ink-soft); }
+
+/* ── four functions (2026-11-17): the cards are lower than the three day cards were, and each has the ceremony
+      under the function's name ── */
+.fn { padding: 1.8cqw 3cqw 1.8cqw 2.8cqw; }
+.fn-day { width: 14cqw; height: 14cqw; }
+.fn-day b { font-size: 5.8cqw; }
+.fn-when { font-size: 1.9cqw; }
+.fn-title { margin: .7cqw 0 0; font-size: 3.6cqw; }
+.fn-sub { display: block; margin: .15cqw 0 .55cqw; font-style: italic; font-weight: 500; font-size: 2.6cqw; line-height: 1.2; color: var(--burgundy); }
+.fn-meta { font-size: 2.25cqw; }
+.fn-tap { margin-top: 1.2cqw; padding: .95cqw 2.4cqw .95cqw 2.8cqw; font-size: 1.9cqw; }

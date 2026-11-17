@@ -16,11 +16,14 @@ Object.assign(art, {
   'h-blessings': { x: 32.4, y: 26.4, w: 40, h: 1.3 },
   /* (2026-11-17, the couple named) bride, "&", groom with room between them */
   'h-bride': { x: 22.4, y: 28.6, w: 60, h: 5.4 },
-  'h-with': { x: 37.4, y: 34.15, w: 30, h: 2.3 },
-  'h-groom': { x: 22.4, y: 36.6, w: 60, h: 5.4 },
-  'h-rule2': { x: 40.4, y: 43.0, w: 24, h: 1.913 },
-  'h-dates': { x: 22.4, y: 45.7, w: 60, h: 2.2 },
-  'h-place': { x: 24.4, y: 48.8, w: 56, h: 3.7 },
+  /* each name has its degrees right under it (client, 2026-11-17); everything below moved down to make room */
+  'h-bride-deg': { x: 19.4, y: 34.0, w: 66, h: 1.9 },
+  'h-with': { x: 37.4, y: 36.1, w: 30, h: 2.3 },
+  'h-groom': { x: 22.4, y: 38.3, w: 60, h: 5.4 },
+  'h-groom-deg': { x: 19.4, y: 43.7, w: 66, h: 3.6 },
+  'h-rule2': { x: 40.4, y: 47.7, w: 24, h: 1.913 },
+  'h-dates': { x: 22.4, y: 50.1, w: 60, h: 2.2 },
+  'h-place': { x: 24.4, y: 52.9, w: 56, h: 3.7 },
 
   /* the Bride and Groom pages on plate 7 (the design's empty gold frame, axis at 50 %): clear of its flowers
      between y ≈ 22 and 66 % and x ≈ 28 and 72 %. The Groom's page mirrors the plate and these boxes. */
@@ -36,12 +39,15 @@ Object.assign(art, {
   'p2-date3': { x: 35.37, y: 57.6, w: 30, h: 12.6 },
 
   /* page 3: the programme, three cards under the plate's "Our Functions" lettering, over the venue's bokeh */
-  'f-card-a': { x: 12, y: 33.6, w: 76, h: 16.8 },
-  'f-card-b': { x: 12, y: 53.4, w: 76, h: 16.8 },
-  'f-card-c': { x: 12, y: 73.2, w: 76, h: 16.8 },
+  /* four functions since 2026-11-17 (were three day cards of 16.8) */
+  'f-card-a': { x: 12, y: 31.2, w: 76, h: 13.7 },
+  'f-card-b': { x: 12, y: 46.3, w: 76, h: 13.7 },
+  'f-card-c': { x: 12, y: 61.4, w: 76, h: 13.7 },
+  'f-card-d': { x: 12, y: 76.5, w: 76, h: 13.7 },
 
   /* the three day pages on plate 4: title over the arch, date in the plate's own gold frame (44.6–50 %) */
-  'd4-title': { x: 17, y: 28.4, w: 66, h: 9.2 },
+  'd4-title': { x: 17, y: 28.2, w: 66, h: 6.4 },
+  'd4-sub': { x: 17, y: 34.9, w: 66, h: 2.2 },
   'd4-rule': { x: 40.914, y: 37.8, w: 18.597, h: 1.794 },
   'd4-date': { x: 33, y: 45, w: 34, h: 2.6 },
   'd4-weekday': { x: 34.5, y: 47.5, w: 31, h: 2.1 },

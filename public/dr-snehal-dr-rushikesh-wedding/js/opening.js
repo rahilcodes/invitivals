@@ -3,8 +3,8 @@
    the invitation's music is primed silently inside the same gesture and fades in only when the film is over,
    so the two never play together. The invitation is already rendered beneath, so the film fades straight
    onto page 1. Skip ends the film early; a film that cannot play, stalls or errors gives way at once.
-   The demo film's wax seal reads CL: a face lettered VA (cfg.sealFace) is laid over it, placed from the
-   video's rendered box, until the seal breaks; a burst of light then covers the flying pieces. */
+   This page's film carries the couple's own monogram on its seal (see the config), so no face is laid over it
+   and no burst of light hides the seal breaking: without cfg.sealFace both are left out. */
 import { h } from './util.js';
 
 export function OpeningScreen(cfg, { audio, onStart, onOpened }) {
@@ -21,6 +21,7 @@ export function OpeningScreen(cfg, { audio, onStart, onOpened }) {
   const film = h('div', { class: 'film' }, h('div', { class: 'column' }, stage));
   const skip = h('button', { class: 'skip', type: 'button', style: { display: 'none' } }, 'Skip');
   document.body.append(opening, film, skip);
+  if (!cfg.sealFace) { seal.remove(); burst.remove(); }
 
   let opened = false, done = false, raf = 0, lastT = -1, lastMove = 0, letGoOpening = null;
   const timers = [];
@@ -29,7 +30,7 @@ export function OpeningScreen(cfg, { audio, onStart, onOpened }) {
   /* the seal face and the burst sit where the film's seal is, whatever the viewport makes of the film */
   function place() {
     const W = stage.clientWidth, Hh = stage.clientHeight;
-    if (!W || !Hh) return;
+    if (!W || !Hh || !cfg.seal) return;
     const vw = video.videoWidth || 720, vh = video.videoHeight || 1280;
     const scale = Math.max(W / vw, Hh / vh); // object-fit: cover, centred
     const dw = vw * scale, dh = vh * scale, x0 = (W - dw) / 2, y0 = (Hh - dh) / 2;
@@ -45,7 +46,7 @@ export function OpeningScreen(cfg, { audio, onStart, onOpened }) {
   function frameStep() {
     if (done) return;
     const t = video.currentTime;
-    const b0 = cfg.sealUntil, b1 = cfg.burstEnd;
+    const b0 = cfg.sealUntil || 0, b1 = cfg.burstEnd || 0;
     seal.style.opacity = t < b0 ? '1' : '0';
     let glow = 0;
     if (t >= b0 - 0.15 && t < b0) glow = (t - (b0 - 0.15)) / 0.15;

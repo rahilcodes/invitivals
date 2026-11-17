@@ -1,10 +1,11 @@
 /* ─────────────────────────────────────────────────────────────
    Dr. Snehal & Dr. Rushikesh: 3–5 December 2026, IKON Celebration and Nandini Lawns, Chhatrapati Sambhajinagar.
    A separate copy of the IKON Celebration page (public/ikon-celebration-wedding, client brief 2026-11-16, never
-   edited for this) with the couple and their families added (client brief 2026-11-17). The seal stays plain
-   (no initials were supplied). Every family name is exactly as the client wrote it.
-   Every other word is the client's. Nothing they did not supply is shown: the 4 December Mehendi has no date or
-   time ("To be confirmed", and no calendar button); no event has an end time, and none is invented.
+   edited for this) with the couple and their families added (client brief 2026-11-17). Every family name is exactly as the client
+   wrote it. Second brief of 2026-11-17: the SR monogram on the wax seal (in the film itself, see
+   tools/dr-snehal-dr-rushikesh-film), the couple's degrees under their names, the four functions under the names
+   the client gave them, and the Mehendi once only: 3 December, from 5:00 PM (it is no longer listed on the 4th).
+   Every other word is the client's. No event has an end time, and none is invented.
    Dates are ISO in India time (+05:30).
    ───────────────────────────────────────────────────────────── */
 const IKON = {
@@ -15,6 +16,8 @@ const NANDINI = { venue: 'Nandini Lawns', address: [], mapsUrl: 'https://maps.ap
 
 export const config = {
   couple: { bride: 'Dr. Snehal', groom: 'Dr. Rushikesh' },
+  /* the qualifications, exactly as the client wrote them, under each name on the first page */
+  degrees: { bride: ['(M.B.B.S., M.D. Radio Diagnosis)'], groom: ['(M.B.B.S., M.D., General Medicine,', 'DM-Nephrology)'] },   // the groom's, on two lines so it stays readable on a phone
 
   /* the Bride and Groom pages (the design's gold frame; the Groom's mirrored). Each array is the lines as they
      are set, so the long names break where they read naturally and never wrap on their own. */
@@ -43,27 +46,29 @@ export const config = {
   /* the wedding, for the countdown and Save the Date */
   wedding: { start: '2026-12-05T18:00:00+05:30', dateLine: '5 December 2026', weekday: 'Saturday', time: '6:00 PM Onwards', title: 'Wedding Ceremony & Varmala', ...IKON },
 
-  /* page 3 → the three days (detail pages). schedule rows: [time, event, note, start]; `start` (ISO) gives the
-     row its own "Add to Google Calendar" link; a row without one (the unconfirmed Mehendi) has none. */
+  /* page 3 → the four functions, in the order they happen; each opens its own detail page. `title` is the name
+     the client gave the function (`titleLines`: how it is set between the arch's flowers on its own page), `sub` the ceremony it is. schedule rows: [time, event, note, start]; `start`
+     (ISO) gives the row its own "Add to Google Calendar" link. */
   days: [
     {
-      key: 'day0', date: '3 December 2026', weekday: 'Thursday', title: 'Mehendi Celebration', titleLines: ['Mehendi', 'Celebration'],
-      schedule: [['6:00 PM onwards', 'Mehendi Celebration', '', '2026-12-03T18:00:00+05:30']],
+      key: 'mehendi', date: '3 December 2026', weekday: 'Thursday', title: 'Mehfil-e-Mehendi', titleLines: ['Mehfil-e-', 'Mehendi'], sub: 'Mehendi Ceremony',
+      schedule: [['5:00 PM onwards', 'Mehendi Ceremony', '', '2026-12-03T17:00:00+05:30']],
       ...NANDINI,
     },
     {
-      key: 'day1', date: '4 December 2026', weekday: 'Friday', title: 'Haldi, Mehendi & Sangeet',
-      schedule: [
-        ['12:00 PM', 'Haldi Ceremony', 'Dress Code: Shades of Yellow & Pink', '2026-12-04T12:00:00+05:30'],
-        ['Date & Time: To be confirmed', 'Mehendi Ceremony', 'Dress Code: Shades of Green', null],
-        ['7:00 PM', 'Sangeet Ceremony', 'Dress Code: Shimmer & Sparkle', '2026-12-04T19:00:00+05:30'],
-      ],
+      key: 'haldi', date: '4 December 2026', weekday: 'Friday', title: 'Sunshine Hustle', titleLines: ['Sunshine', 'Hustle'], sub: 'Haldi Ceremony',
+      schedule: [['12:00 PM', 'Haldi Ceremony', 'Dress Code: Shades of Yellow & Pink', '2026-12-04T12:00:00+05:30']],
       ...IKON,
     },
     {
-      key: 'day2', date: '5 December 2026', weekday: 'Saturday', title: 'Saptapadi & the Wedding',
+      key: 'sangeet', date: '4 December 2026', weekday: 'Friday', title: 'Rhythm of Love', titleLines: ['Rhythm', 'of Love'], sub: 'Sangeet Ceremony',
+      schedule: [['7:00 PM', 'Sangeet Ceremony', 'Dress Code: Shimmer & Sparkle', '2026-12-04T19:00:00+05:30']],
+      ...IKON,
+    },
+    {
+      key: 'wedding', date: '5 December 2026', weekday: 'Saturday', title: 'Saptpadi & Varmala', titleLines: ['Saptpadi &', 'Varmala'], sub: 'The Wedding',
       schedule: [
-        ['10:00 AM', 'Saptapadi', 'Theme / Attire: Maharashtrian Traditional', '2026-12-05T10:00:00+05:30'],
+        ['10:00 AM', 'Saptpadi', 'Theme / Attire: Maharashtrian Traditional', '2026-12-05T10:00:00+05:30'],
         ['6:00 PM Onwards', 'Wedding Ceremony', 'Dress Code: Formal Indian', '2026-12-05T18:00:00+05:30'],
         ['7:00 PM', 'Varmala', '', '2026-12-05T19:00:00+05:30'],
       ],
@@ -81,17 +86,13 @@ export const config = {
   closing: { title: ['With Love', '& Blessings'], lines: 'We cordially invite you to join us and bless the couple as they begin their beautiful journey together.' },
 
   opening: {
-    video: 'assets/opening.mp4',
-    poster: 'assets/opening.webp',
+    /* the film and the still, with the couple's SR monogram embossed on the wax seal in the picture itself
+       (tools/dr-snehal-dr-rushikesh-film): it cracks and flies apart with the seal, so nothing is laid over the film */
+    video: 'assets/opening-sr.mp4',
+    poster: 'assets/opening-sr.webp',
     music: 'assets/music.mp3',
     musicFadeSeconds: 3,
     musicVolume: 0.8,
-    /* the design's film has a lettered wax seal: this plain face (no initials — the names are not known) is laid
-       over it until the seal breaks at `sealUntil` seconds; a burst of light then covers the flying pieces */
-    sealFace: 'assets/seal.png',
-    seal: { cx: 0.526, cy: 0.499, r: 0.141 },
-    sealUntil: 2.42,
-    burstEnd: 3.3,
     filmMaxSeconds: 14,
   },
 };
