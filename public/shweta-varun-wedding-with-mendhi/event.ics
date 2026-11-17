@@ -1,0 +1,57 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Invitivals//Shweta & Varun Wedding with Mendhi//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VTIMEZONE
+TZID:Asia/Kolkata
+BEGIN:STANDARD
+DTSTART:19700101T000000
+TZOFFSETFROM:+0530
+TZOFFSETTO:+0530
+TZNAME:IST
+END:STANDARD
+END:VTIMEZONE
+BEGIN:VEVENT
+UID:shweta-varun-wedding-with-mendhi-mendhi@invitivals.com
+DTSTAMP:20261115T000000Z
+DTSTART;TZID=Asia/Kolkata:20261210T190000
+DTEND;TZID=Asia/Kolkata:20261210T230000
+SUMMARY:Mendhi Ceremony · Shweta & Varun
+LOCATION:Ola Vakkola Banquets\, B-25/198\, Near Vakola\, Anand Nagar\, Va
+ kola\, Santacruz East\, Mumbai\, Maharashtra – 400055.
+DESCRIPTION:Thursday\, 10 December 2026\n7:00 PM – 11:00 PM\n\nVenue: O
+ la Vakkola Banquets\, B-25/198\, Near Vakola\, Anand Nagar\, Vakola\, Sa
+ ntacruz East\, Mumbai\, Maharashtra – 400055.\nMap: https://maps.app.g
+ oo.gl/kPECwfKd4jfSxxuc6?g_st=iw\n\nhttps://invitivals.com/shweta-varun-w
+ edding-with-mendhi/
+URL:https://invitivals.com/shweta-varun-wedding-with-mendhi/
+BEGIN:VALARM
+TRIGGER:-P1D
+ACTION:DISPLAY
+DESCRIPTION:Mendhi Ceremony · Shweta & Varun tomorrow
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:shweta-varun-wedding-with-mendhi-wedding@invitivals.com
+DTSTAMP:20261115T000000Z
+DTSTART;TZID=Asia/Kolkata:20261213T171800
+DTEND;TZID=Asia/Kolkata:20261213T230000
+SUMMARY:Wedding of Shweta & Varun
+LOCATION:Peninsula Grand Hotel\, Concorde Ball Room\, 6th Floor\, 90 Feet
+  Road\, Sakinaka\, Opposite Sakinaka Metro Station\, Mumbai\, Maharashtr
+ a
+DESCRIPTION:Sunday\, 13 December 2026\nMuhurtham: 5:18 PM (Vrashabha Lagn
+ a)\nReception & Dinner: up to 11:00 PM\n\nVenue: Peninsula Grand Hotel\,
+  Concorde Ball Room\, 6th Floor\, 90 Feet Road\, Sakinaka\, Opposite Sak
+ inaka Metro Station\, Mumbai\, Maharashtra\nMap: https://share.google/7Z
+ rttUvmxz9kOpCak\n\nhttps://invitivals.com/shweta-varun-wedding-with-mend
+ hi/
+URL:https://invitivals.com/shweta-varun-wedding-with-mendhi/
+BEGIN:VALARM
+TRIGGER:-P1D
+ACTION:DISPLAY
+DESCRIPTION:Wedding of Shweta & Varun tomorrow
+END:VALARM
+END:VEVENT
+END:VCALENDAR
