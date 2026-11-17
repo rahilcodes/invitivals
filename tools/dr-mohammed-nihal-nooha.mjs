@@ -71,7 +71,9 @@ for (const name of ['p2-title', 'p2-divider', 'p2-heart', 'p2-reveal', 'p3-title
   const rgb = await warm(f).png().toBuffer();
   await save(m.hasAlpha ? sharp(rgb).joinChannel(await sharp(f).extractChannel('alpha').toBuffer()) : sharp(rgb), name, 92);
 }
-for (const f of ['opening.mp4', 'opening.webp', 'music.mp3']) fs.copyFileSync(path.join(REF, f), path.join(OUT, f));
+/* the film and its poster are NOT copied from the reference any more: the page uses opening-nn.mp4 / opening-nn.webp,
+   rebuilt with the NN seal by tools/dr-mohammed-nihal-nooha-film (the reference's film is lettered for another couple) */
+for (const f of ['music.mp3']) fs.copyFileSync(path.join(REF, f), path.join(OUT, f));
 
 /* a shape (one grey channel = how much ink) → a trimmed picture of one colour, or of a top-to-bottom gradient */
 async function inked(alpha, w, h, fill, file, width) {

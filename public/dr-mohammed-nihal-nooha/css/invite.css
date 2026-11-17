@@ -8,6 +8,7 @@
   --cream: #fbf1ea;
   --serif: 'Cormorant Garamond', 'Cormorant', Georgia, serif;
   --script: 'Great Vibes', 'Pinyon Script', cursive;
+  --names: 'Playfair Display', 'Cormorant Garamond', Georgia, serif;   /* the couple's names (client, 2026-11-17) */
 }
 * { box-sizing: border-box; }
 html { -webkit-text-size-adjust: 100%; }
@@ -103,13 +104,14 @@ button { font: inherit; cursor: pointer; }
 .p-hero .mono { width: 10.6cqw; margin-top: 1.5cqw; }
 .card .hosts { margin-top: 2cqw; font-weight: 700; font-size: 4.1cqw; letter-spacing: .02em; line-height: 1.2; color: var(--plum2); }
 .card .request { margin-top: 1cqw; font-style: italic; font-weight: 500; font-size: 3.25cqw; line-height: 1.34; color: var(--ink); }
-.card .name { margin-top: 1.8cqw; font-family: var(--script); font-weight: 400; font-size: 7.5cqw; line-height: 1.06; color: var(--plum2); white-space: nowrap; }
+/* the couple's names: Playfair Display italic, both names in one size and weight */
+.card .name { margin-top: 2.2cqw; font-family: var(--names); font-style: italic; font-weight: 500; font-size: 5.9cqw; line-height: 1.2; letter-spacing: .005em; color: var(--plum2); white-space: nowrap; }
 .name span { display: block; }
-.card .and { display: flex; align-items: center; gap: 2.2cqw; margin: 1.7cqw 0 1.1cqw; font-weight: 600; font-size: 2.7cqw; letter-spacing: .34em; padding-left: .34em; color: var(--champagne); }
+.card .and { display: flex; align-items: center; gap: 2.2cqw; margin: 2cqw 0 1.6cqw; font-weight: 600; font-size: 2.7cqw; letter-spacing: .34em; padding-left: .34em; color: var(--champagne); }
 .and i { display: block; width: 9cqw; height: 1px; background: linear-gradient(90deg, rgba(176,138,78,0), var(--champagne)); }
 .and i:last-child { transform: scaleX(-1); }
-.card .name--bride { margin-top: 0; font-size: 9cqw; }
-.card .of { margin-top: 1.4cqw; font-weight: 600; font-size: 3.55cqw; line-height: 1.3; color: var(--ink); }
+.card .name--bride { margin-top: 0; }
+.card .of { margin-top: 2.2cqw; font-weight: 600; font-size: 3.55cqw; line-height: 1.3; color: var(--ink); }
 .of em { display: block; font-weight: 500; font-size: 3cqw; color: var(--rose); }
 
 /* ── pieces placed by the reference's own boxes (pages 2 and 3) ── */

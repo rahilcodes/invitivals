@@ -4,13 +4,13 @@
    5 the closing (NN monogram, Thank You).
    Pages 2 and 3 follow the reference's layout: their pieces take the boxes the reference measured (js/art.js).
    The NN monogram is on pages 1 and 5 only. There is no RSVP. */
-import { config as C } from '../config.js?v=2';
-import { art, box } from './art.js?v=2';
-import { h, observePages, calendarHref } from './util.js?v=2';
-import { OpeningScreen } from './opening.js?v=2';
-import { AudioControl } from './audio.js?v=2';
-import { SparkleOverlay } from './sparkle.js?v=2';
-import { Countdown } from './countdown.js?v=2';
+import { config as C } from '../config.js?v=3';
+import { art, box } from './art.js?v=3';
+import { h, observePages, calendarHref } from './util.js?v=3';
+import { OpeningScreen } from './opening.js?v=3';
+import { AudioControl } from './audio.js?v=3';
+import { SparkleOverlay } from './sparkle.js?v=3';
+import { Countdown } from './countdown.js?v=3';
 
 const app = document.getElementById('app');
 const audio = AudioControl(C.opening);

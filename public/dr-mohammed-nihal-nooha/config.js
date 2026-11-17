@@ -45,17 +45,16 @@ export const config = {
   closing: { title: 'Thank You', lines: ['We look forward to', 'your presence and Duas.'] },
 
   opening: {
-    video: 'assets/opening.mp4',
-    poster: 'assets/opening.webp',
+    /* the film and its first frame, rebuilt with the family's NN on the wax seal in every frame
+       (tools/dr-mohammed-nihal-nooha-film): the pack's own film was lettered for another couple */
+    video: 'assets/opening-nn.mp4',
+    poster: 'assets/opening-nn.webp',
     /* The film file runs 10.0 s, but its picture is finished at about 5.6 s: from there to the end it only holds the
        empty card (that hold was the "pause, then a blank screen" of the reference). The invitation therefore takes
        over at this moment of the film's own clock (not a timer: a film that buffers is waited for), and the film's
        real end, an error or a stall still hand over too. */
     filmEndsAt: 5.5,
-    /* the film's wax seal is lettered for another couple: the NN monogram on a wax-coloured face covers its
-       centre (cx, cy and diameter d in % of the film's width / height / width) until the seal breaks at `until`
-       seconds; a burst of light then covers the breaking seal until `burstEnd` */
-    seal: { face: 'assets/seal-nn.webp', cx: 50.8, cy: 46.8, d: 21.2, until: 1.3, burstEnd: 2.7 },
+    /* no `seal` overlay any more: the NN monogram is in the film's own pixels now, so nothing lies over it */
     music: 'assets/music.mp3',
     musicVolume: 0.8,
     musicFadeSeconds: 1.2,
