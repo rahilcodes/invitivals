@@ -11,7 +11,7 @@ export const invite = {
   hero: {
     deva: '॥ श्री गणेशाय नमः ॥',
     invocations: [
-      '॥ Sri Ganeshaya Namah ॥',
+      '॥ Sri Matre Namah ॥',
       '॥ Sri Venkateshwaraya Namah ॥',
       '॥ Sri Parvathi Parameshwaraya Namah ॥',
       '॥ Sri Shirdi Sainadhaya Namah ॥',
