@@ -4,13 +4,13 @@
    5 the closing (NN monogram, Thank You).
    Pages 2 and 3 follow the reference's layout: their pieces take the boxes the reference measured (js/art.js).
    The NN monogram is on pages 1 and 5 only. There is no RSVP. */
-import { config as C } from '../config.js?v=3';
-import { art, box } from './art.js?v=3';
-import { h, observePages, calendarHref } from './util.js?v=3';
-import { OpeningScreen } from './opening.js?v=3';
-import { AudioControl } from './audio.js?v=3';
-import { SparkleOverlay } from './sparkle.js?v=3';
-import { Countdown } from './countdown.js?v=3';
+import { config as C } from '../config.js?v=4';
+import { art, box } from './art.js?v=4';
+import { h, observePages, calendarHref } from './util.js?v=4';
+import { OpeningScreen } from './opening.js?v=4';
+import { AudioControl } from './audio.js?v=4';
+import { SparkleOverlay } from './sparkle.js?v=4';
+import { Countdown } from './countdown.js?v=4';
 
 const app = document.getElementById('app');
 const audio = AudioControl(C.opening);
@@ -134,9 +134,9 @@ const page3 = Page(3, 'p-func', [
   card('r', WALIMA, 0.9),
 ]);
 
-/* ── page 4: until we say Nikah (landscape) ── */
+/* ── page 4: counting down to forever (landscape) ── */
 const page4 = Page(4, 'p-count', [
-  r(0.1, 'h2', { class: 'until' }, h('span', {}, C.countdown.lead), h('b', {}, C.countdown.word)),
+  r(0.1, 'h2', { class: 'until' }, ...C.countdown.heading.map((l) => h('b', {}, l))),
   r(0.3, 'div', { class: 'until-rule' }, pic('p4-divider', '', '')),
   ...Countdown(C.countdown.target, C.countdown.word),
 ]);

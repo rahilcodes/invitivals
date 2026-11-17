@@ -163,11 +163,12 @@ button { font: inherit; cursor: pointer; }
 .sheet__btn:focus-visible, .sheet__close:focus-visible { outline: 2px solid var(--champagne); outline-offset: 2px; }
 .sheet__close { margin-top: 4px; min-height: 44px; border: 0; background: none; color: var(--rose); font: 600 15px var(--serif); letter-spacing: .16em; text-transform: uppercase; }
 
-/* ── page 4: until we say Nikah. The plaque's field is painted clean in the plate; the heading stands on the axis of
-      the four boxes below it (54.1% of the page), each line centred on it. ── */
-.until { left: 34.1%; width: 40%; top: 24.4%; height: 22%; margin: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: .5cqw; text-align: center; font-weight: 400; }
+/* ── page 4: Counting Down to Forever (client, 2026-11-17). The plaque's field is painted clean in the plate; the
+      heading stands on the axis of the four boxes below it (54.1% of the page): two lines of the same script and
+      size, each centred on it. ── */
+.until { left: 32.1%; width: 44%; top: 24.4%; height: 22%; margin: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 0; text-align: center; font-weight: 400; }
 .until span { font-family: var(--serif); font-weight: 500; font-size: 3.3cqw; letter-spacing: .06em; padding-left: .06em; line-height: 1.1; color: #f7e9de; text-shadow: 0 .2cqw .6cqw rgba(60, 20, 40, .45); }
-.until b { font-family: var(--script); font-weight: 400; font-size: 9.6cqw; line-height: 1.05; padding: 0 .16em; background: linear-gradient(180deg, #fff6df 10%, #e9cf9a 55%, #cfa765 95%); -webkit-background-clip: text; background-clip: text; color: transparent; -webkit-text-fill-color: transparent; filter: drop-shadow(0 .25cqw .5cqw rgba(50, 15, 35, .5)); }
+.until b { display: block; white-space: nowrap; font-family: var(--script); font-weight: 400; font-size: 5.9cqw; line-height: 1.2; padding: 0 .16em; background: linear-gradient(180deg, #fff6df 10%, #e9cf9a 55%, #cfa765 95%); -webkit-background-clip: text; background-clip: text; color: transparent; -webkit-text-fill-color: transparent; filter: drop-shadow(0 .25cqw .5cqw rgba(50, 15, 35, .5)); }
 .until-rule { left: 43.95%; width: 20.3%; top: 47.6%; }
 .until-rule img { width: 100%; height: auto; }
 .digit { top: 57.386%; width: 8.378%; height: 10.627%; display: flex; align-items: center; justify-content: center; color: #f7e9de; font-weight: 600; font-size: 5.3cqw; line-height: 1; font-variant-numeric: tabular-nums lining-nums; letter-spacing: .02em; text-shadow: 0 .15cqw .4cqw rgba(60, 20, 40, .45); }

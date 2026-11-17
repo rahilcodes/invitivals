@@ -39,7 +39,8 @@ export const config = {
   timeZone: 'Asia/Kolkata',
 
   /* page 4: the live countdown runs to the Nikah */
-  countdown: { lead: 'Until We Say', word: 'Nikah', target: '2027-01-09T11:30:00+05:30' },
+  /* the heading is the client's wording of 2026-11-17 (it replaced "Until We Say / Nikah"), set on two lines of one size */
+  countdown: { heading: ['Counting Down', 'to Forever'], word: 'Nikah', target: '2027-01-09T11:30:00+05:30' },
 
   /* page 5 */
   closing: { title: 'Thank You', lines: ['We look forward to', 'your presence and Duas.'] },

@@ -1,7 +1,7 @@
 /* Countdown — live days, hours, minutes and seconds to the Nikah, each figure in its own glass box of the landscape
    plaque. The target is one absolute instant (India time is written into it), so it is right in any guest's
    timezone. Tabular figures in fixed boxes, so nothing shifts; zeros once the moment has come. */
-import { h } from './util.js?v=3';
+import { h } from './util.js?v=4';
 
 const BOX = [30.82, 43.447, 56.254, 69.12];           // the four glass boxes of the plate, % of its width
 const LABELS = ['Days', 'Hours', 'Minutes', 'Seconds'];
@@ -22,7 +22,7 @@ export function Countdown(targetIso, word) {
       if (span.textContent !== text) { span.textContent = text; span.classList.toggle('n3', text.length > 2); }
     });
     const minute = Math.floor(s / 60);
-    if (minute !== lastMinute) { lastMinute = minute; live.textContent = left ? `${v[0]} days, ${v[1]} hours and ${v[2]} minutes until we say ${word}` : `The ${word} day is here`; }
+    if (minute !== lastMinute) { lastMinute = minute; live.textContent = left ? `${v[0]} days, ${v[1]} hours and ${v[2]} minutes until the ${word}` : `The ${word} day is here`; }
   }
   update();
   setInterval(update, 1000);
