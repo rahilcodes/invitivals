@@ -1,0 +1,33 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Invitivals//Balram & Anushka Wedding//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+X-WR-CALNAME:Balram & Anushka · Wedding
+X-WR-TIMEZONE:Asia/Kolkata
+BEGIN:VTIMEZONE
+TZID:Asia/Kolkata
+BEGIN:STANDARD
+DTSTART:19700101T000000
+TZOFFSETFROM:+0530
+TZOFFSETTO:+0530
+TZNAME:IST
+END:STANDARD
+END:VTIMEZONE
+BEGIN:VEVENT
+UID:20270203T103000-anand-karaj@balram-anushka.invitivals.com
+DTSTAMP:20261118T000000Z
+DTSTART;TZID=Asia/Kolkata:20270203T103000
+SUMMARY:Anand Karaj — Balram & Anushka
+LOCATION:Gurdwara Baba Chart Singh\, Banga-Garshankar Road\, 144508\, India
+DESCRIPTION:Dress Code: Shades of Pink\nMap: https://maps.app.goo.gl/bfaseQ
+ HsVytEttHM9\nhttps://invitivals.com/balram-anushka-wedding/
+URL:https://invitivals.com/balram-anushka-wedding/
+STATUS:CONFIRMED
+BEGIN:VALARM
+TRIGGER:-P1D
+ACTION:DISPLAY
+DESCRIPTION:Anand Karaj — Balram & Anushka
+END:VALARM
+END:VEVENT
+END:VCALENDAR
