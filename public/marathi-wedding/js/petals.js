@@ -3,9 +3,9 @@
    drift, rotate and re-spawn above the top; the fall is tied to real time, so
    scrolling never restarts it. On wide screens the petals stay within the
    invitation column. Off under reduced motion; paused while the tab is hidden. */
-import { h, reducedMotion } from './util.js?v=2';
+import { h, reducedMotion } from './util.js?v=3';
 
-const SHADES = ['#a83f65', '#b34870', '#9f4b68', '#b0456c'];
+const SHADES = ['#e6a7bc', '#dc8fa8', '#cf7793', '#bd6480', '#b0566f']; // light pinks to soft maroon
 
 export function PetalOverlay({ column } = {}) {
   if (reducedMotion()) return { show() {}, hide() {} };
@@ -30,14 +30,14 @@ export function PetalOverlay({ column } = {}) {
     P.length = N;
   }
   function spawn(p, anywhere = false) {
-    const s = 5 + Math.random() * 5; // petal length in px
+    const s = 6 + Math.random() * 6; // petal length in px
     return Object.assign(p, {
       x: left + Math.random() * (right - left), y: anywhere ? Math.random() * H : -s * 3 - Math.random() * H * 0.3,
       s, w: 0.55 + Math.random() * 0.25,
       vy: 18 + Math.random() * 22, // px per second
       sway: 10 + Math.random() * 22, ph: Math.random() * 6.28, sw: 0.5 + Math.random() * 0.7,
       rot: Math.random() * 6.28, vr: (Math.random() - 0.5) * 1.6, tilt: Math.random() * 6.28, vt: 0.6 + Math.random() * 1.2,
-      a: 0.55 + Math.random() * 0.3, color: SHADES[(Math.random() * SHADES.length) | 0], shape: Math.random(),
+      a: 0.6 + Math.random() * 0.3, color: SHADES[(Math.random() * SHADES.length) | 0], shape: Math.random(),
     });
   }
   function petal(p) {
@@ -53,7 +53,7 @@ export function PetalOverlay({ column } = {}) {
     else { ctx.moveTo(0, -s); ctx.bezierCurveTo(w * 1.1, -s * 0.3, w * 0.8, s * 0.8, 0.15 * w, s); ctx.quadraticCurveTo(0, s * 0.8, -0.15 * w, s); ctx.bezierCurveTo(-w * 0.8, s * 0.8, -w * 1.1, -s * 0.3, 0, -s); }
     ctx.fill();
     // a soft lighter vein so it reads as a petal, not a dot
-    ctx.globalAlpha = p.a * 0.35; ctx.strokeStyle = '#e8a8bf'; ctx.lineWidth = 0.6;
+    ctx.globalAlpha = p.a * 0.35; ctx.strokeStyle = '#f7d9e3'; ctx.lineWidth = 0.6;
     ctx.beginPath(); ctx.moveTo(0, -s * 0.7); ctx.quadraticCurveTo(w * 0.15, 0, 0, s * 0.75); ctx.stroke();
     ctx.restore();
   }

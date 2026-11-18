@@ -3,9 +3,9 @@
    bar is a real input that sends a wish with the guest's name. Both post JSON
    to rsvp.php; a reply is remembered on the device so the sheet reopens filled
    in and the wish keeps the name. */
-import { h, toast, openSheet } from './util.js?v=2';
-import { icon } from './ornaments.js?v=2';
-import { artSizes } from './art-sizes.js?v=2';
+import { h, toast, openSheet } from './util.js?v=3';
+import { icon } from './ornaments.js?v=3';
+import { artSizes } from './art-sizes.js?v=3';
 
 const fill = (s, name) => s.replace('{name}', name);
 

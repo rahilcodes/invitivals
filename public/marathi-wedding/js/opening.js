@@ -4,8 +4,8 @@
    the bride reaching for the lotus medallion — muted, so the song is the only
    music. The hero is rendered beneath; just before the film ends it dissolves
    away over the hero. A "Continue" button is there throughout. */
-import { h } from './util.js?v=2';
-import { icon } from './ornaments.js?v=2';
+import { h } from './util.js?v=3';
+import { icon } from './ornaments.js?v=3';
 
 export function OpeningScreen(cfg, ui, { audio, onOpened }) {
   const mark = h('span', { class: 'mark', 'aria-hidden': 'true' }, h('span', { class: 'ring' }));

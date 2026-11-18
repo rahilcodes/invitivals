@@ -4,17 +4,17 @@
    Positions are centre x / y and width in percent of each page canvas, read off
    the designer's "with text" references (941 × 1671): every English line sits in
    the region its Marathi line occupies there. */
-import { config as C } from '../config.js?v=2';
-import { h, observePages, reducedMotion, marathiDate as dateOf, mapsHref } from './util.js?v=2';
-import { InvitationPage, art, txt, at } from './page.js?v=2';
-import { ornament, rule, icon } from './ornaments.js?v=2';
-import { OpeningScreen } from './opening.js?v=2';
-import { AudioControl } from './audio.js?v=2';
-import { PetalOverlay } from './petals.js?v=2';
-import { DateReveal } from './calendar.js?v=2';
-import { RSVP } from './rsvp.js?v=2';
-import { GiftButton } from './gift.js?v=2';
-import { artSizes } from './art-sizes.js?v=2';
+import { config as C } from '../config.js?v=3';
+import { h, observePages, reducedMotion, marathiDate as dateOf, mapsHref } from './util.js?v=3';
+import { InvitationPage, art, txt, at } from './page.js?v=3';
+import { ornament, rule, icon } from './ornaments.js?v=3';
+import { OpeningScreen } from './opening.js?v=3';
+import { AudioControl } from './audio.js?v=3';
+import { PetalOverlay } from './petals.js?v=3';
+import { DateReveal } from './calendar.js?v=3';
+import { RSVP } from './rsvp.js?v=3';
+import { GiftButton } from './gift.js?v=3';
+import { artSizes } from './art-sizes.js?v=3';
 
 const app = document.getElementById('app');
 const audio = AudioControl({ ...C.opening, mute: C.ui.mute, unmute: C.ui.unmute });
@@ -30,23 +30,23 @@ function mapButton(target, { label, size = 3.3 }) {
     h('span', { class: 'lbl', style: { fontSize: `${size}cqw` }, 'aria-hidden': 'true' }, label));
 }
 
-/* ── 1 · hero: the pack's tassels and bell hang from the pearl strings painted on the left,
-      the designer's flower sprigs sit around the names, the couple sit at the foot ── */
-const sprig = (id, delay) => { const [w, hgt, px, py] = artSizes[id]; return art(id, { x: (px + w / 2) / 9.41, y: (py + hgt / 2) / 16.71, w: w / 9.41, delay, z: 3, lazy: false, cls: 'a-soft' }); };
+/* ── 1 · hero: the pack's tassels and bell hang from the pearl strings painted on the left, the
+      couple sit at the foot. The names sit in the clear sky right of the pillar (x 44–90), in a
+      serif italic; the reference's little flower sprigs are left out — cut from the reference
+      they read as cropped fragments beside Latin names (client, 18 Nov). ── */
 const page1 = InvitationPage(1, [
   art('tassel-s', { x: 28.7, y: 8.2, w: 6.8, height: 6.1, anchor: 'top', motion: 'sway hang', delay: 0.3, z: 2, lazy: false }),
   art('bell', { x: 35.6, y: 10.6, w: 3.6, anchor: 'top', motion: 'sway hang', delay: 0.5, z: 2, lazy: false }),
   art('tassel-s', { x: 28.7, y: 20.4, w: 6.8, height: 5.6, anchor: 'top', motion: 'sway hang', delay: 0.6, z: 2, lazy: false }),
   art('tassel-s', { x: 23.9, y: 26.6, w: 7.2, height: 5.7, anchor: 'top', motion: 'sway hang', delay: 0.45, z: 2, lazy: false }),
   art('tassel-s', { x: 11.2, y: 33.2, w: 7.4, height: 6.3, anchor: 'top', motion: 'sway hang', delay: 0.8, z: 2, lazy: false }),
-  txt(C.hero.intro, { x: 66.3, y: 13.6, w: 44, size: 3.1, cls: 'maroon body italic', lh: 1.35, delay: 0.2 }),
-  ornament('spray', { x: 66.3, y: 19.5, w: 12.5, delay: 0.35 }),
-  sprig('sprig-a', 0.6), sprig('sprig-b', 0.7), sprig('sprig-c', 0.9), sprig('sprig-d', 1),
-  txt(C.couple.bride, { x: 64, y: 27.6, w: 60, size: 13.5, cls: 'maroon names', lh: 1.1, delay: 0.5, anim: 'a-wipe' }),
-  txt(C.couple.and, { x: 66.3, y: 34.4, w: 30, size: 3.3, cls: 'maroon body italic', lh: 1.2, delay: 0.7 }),
-  txt(C.couple.groom, { x: 67.5, y: 40.4, w: 60, size: 13.5, cls: 'maroon names', lh: 1.1, delay: 0.85, anim: 'a-wipe' }),
-  rule({ x: 67, y: 48.8, w: 28, glyph: 'knot', size: 8, delay: 1.05 }),
-  txt(C.hero.invite, { x: 67, y: 52.9, w: 50, size: 2.9, cls: 'ink body', lh: 1.38, delay: 1.15, anim: 'a-rise' }),
+  txt(C.hero.intro, { x: 67, y: 13.6, w: 42, size: 3.1, cls: 'maroon body italic', lh: 1.35, delay: 0.2 }),
+  ornament('spray', { x: 67, y: 19.6, w: 12.5, delay: 0.35 }),
+  txt(C.couple.bride, { x: 67, y: 28, w: 48, size: 9.4, cls: 'maroon names', lh: 1.15, delay: 0.5, anim: 'a-wipe' }),
+  txt(C.couple.and, { x: 67, y: 34.3, w: 30, size: 3.4, cls: 'maroon body italic', lh: 1.2, delay: 0.7 }),
+  txt(C.couple.groom, { x: 67, y: 40.4, w: 48, size: 9.4, cls: 'maroon names', lh: 1.15, delay: 0.85, anim: 'a-wipe' }),
+  rule({ x: 67, y: 48.4, w: 28, glyph: 'knot', size: 8, delay: 1.05 }),
+  txt(C.hero.invite, { x: 67, y: 52.7, w: 44, size: 2.85, cls: 'ink body', lh: 1.4, delay: 1.15, anim: 'a-rise' }),
   art('couple', { x: 49.6, y: 75.7, w: 59, delay: 0.3, z: 3, lazy: false, alt: '', cls: 'a-soft' }),
   h('div', { class: 'hint', 'aria-hidden': 'true' }, h('span', {}, C.ui.scroll), h('i')),
 ], { lazy: false });
@@ -80,8 +80,8 @@ const page3 = InvitationPage(3, [
   rule({ x: 50.2, y: 17.7, w: 31, glyph: 'flower', size: 21, delay: 0.3 }),
   art('calendar', { x: 51, y: 27.2, w: 56.3, height: 58.4, anchor: 'top', delay: 0.4, z: 3, cls: 'a-soft' }),
   ...DateReveal(C.date, wedding, C.couple.short, { calendarDownloaded: C.ui.calendarDownloaded }, {
-    month: { x: 51, y: 41.2, size: 4.6 },
-    grid: { x: 51, y: 45.4, w: 44, head: 3.3, row: 3.25 },
+    month: { x: 51, y: 40.9, size: 4.6 },
+    grid: { x: 51, y: 44.9, w: 41, head: 3.8, row: 4.15 },
     button: { x: 48.4, y: 23.8, w: 44.6, label: 3.4 },
     date: { x: 50.2, y: 90, size: 3.4 },
   }),
@@ -96,7 +96,7 @@ function eventRow(ev, i, n) {
   const a = ART[ev.art] || ART.mandap;
   return [
     art(ev.art, { x: a.x, y: t + a.dy, w: a.w, delay: d, z: 2, cls: 'a-soft' }),
-    txt(ev.title, { x: 71.2, y: t, w: 44, size: 4.3, cls: 'maroon display', lh: 1.2, delay: d, anim: 'a-wipe' }),
+    txt(ev.title, { x: 71.8, y: t, w: 42, size: 4.1, cls: 'maroon display', lh: 1.2, delay: d, anim: 'a-wipe' }),
     rule({ x: 71.2, y: t + 3.1, w: 30, glyph: 'knot', size: 7, delay: d + 0.05 }),
     txt(dateOf(ev.start, C.date), { x: 68, y: t + 5.4, w: 36, size: 3, cls: 'ink body', lh: 1.2, delay: d + 0.1, anim: 'a-rise' }),
     txt(ev.time, { x: 68, y: t + 7.4, w: 36, size: 3, cls: 'ink body', lh: 1.2, delay: d + 0.15, anim: 'a-rise' }),
@@ -144,7 +144,7 @@ const page8 = InvitationPage(8, [
   art('tassel-s', { x: 4.4, y: 29.6, w: 8.6, height: 8.6, anchor: 'top', motion: 'sway hang', delay: 0.3, z: 3 }),
   rule({ x: 50.3, y: 26.6, w: 25.5, glyph: 'crown', size: 20, delay: 0.2 }),
   txt(C.closing.title, { x: 50.3, y: 31.1, w: 60, size: 4.4, cls: 'maroon display', lh: 1.2, delay: 0.3, anim: 'a-wipe' }),
-  txt(C.closing.big, { x: 50.5, y: 38.4, w: 80, size: 16.5, cls: 'maroon names', lh: 1.1, delay: 0.5, anim: 'a-wipe' }),
+  txt(C.closing.big, { x: 50.5, y: 38.2, w: 70, size: 10.5, cls: 'maroon names', lh: 1.15, delay: 0.5, anim: 'a-wipe' }),
   at(h('i', { class: 'heart-ico', html: icon('heart'), 'aria-hidden': 'true' }), { x: 50.1, y: 45.1, w: 3.4, delay: 0.65, cls: 'a-soft' }),
   txt(C.closing.lines, { x: 50.3, y: 51.1, w: 76, size: 3.5, cls: 'ink body', lh: 1.42, delay: 0.75, anim: 'a-rise' }),
   rule({ x: 50.9, y: 57.4, w: 28.7, glyph: 'crown', size: 15, delay: 0.85 }),

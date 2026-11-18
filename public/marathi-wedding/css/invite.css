@@ -14,7 +14,7 @@
   --pink: #f4c9c0;
   --body: 'EB Garamond', 'Cormorant Garamond', Georgia, serif;
   --display: 'Playfair Display', 'EB Garamond', Georgia, serif;
-  --names: 'Great Vibes', 'Pinyon Script', 'Brush Script MT', cursive;
+  --names: 'Playfair Display', 'EB Garamond', Georgia, serif;
 }
 * { box-sizing: border-box; }
 html { -webkit-text-size-adjust: 100%; }
@@ -60,7 +60,7 @@ button { font: inherit; cursor: pointer; }
 .txt .l { display: block; }
 .txt.body { font-family: var(--body); font-weight: 500; letter-spacing: .01em; }
 .txt.display { font-family: var(--display); font-weight: 700; letter-spacing: .01em; }
-.txt.names { font-family: var(--names); font-weight: 400; letter-spacing: .01em; }
+.txt.names { font-family: var(--names); font-style: italic; font-weight: 600; letter-spacing: .02em; }
 .txt.italic { font-style: italic; }
 .txt.caps { text-transform: uppercase; letter-spacing: .18em; }
 .txt.maroon { color: var(--maroon); }
@@ -159,13 +159,15 @@ button { font: inherit; cursor: pointer; }
 .cal-wrap > .cal { height: 100%; }
 .cal { display: flex; flex-direction: column; font-family: var(--body); }
 .cal-head, .cal-row { display: grid; grid-template-columns: repeat(7, 1fr); align-items: center; text-align: center; }
-.cal-head { height: var(--head); font-family: var(--display); font-weight: 600; font-size: 2.6cqw; letter-spacing: .04em; color: #4e2418; }
+.cal-head { height: var(--head); font-family: var(--display); font-weight: 600; font-size: 2.9cqw; letter-spacing: .04em; color: #4e2418; }
 .cal-head span { line-height: 1; }
-.cal-row { height: var(--row); font-size: 3.4cqw; font-weight: 500; color: #3a332c; font-variant-numeric: lining-nums; }
+.cal-row { height: var(--row); font-size: 4.2cqw; font-weight: 500; color: #3a332c; font-variant-numeric: lining-nums; }
 .cal-row span { position: relative; line-height: 1; transition: color .5s, font-weight .5s; }
 .cal-row span.lit { color: var(--maroon); font-weight: 700; }
-.heart-frame > div { opacity: 0; transform: scale(.4); transition: opacity .7s ease, transform .9s cubic-bezier(.34,1.56,.64,1); }
-.heart-frame.shown > div { opacity: 1; transform: none; }
+/* the pearl heart frame sits inside the day's cell, centred on the number */
+.heart-frame { position: absolute; left: 50%; top: 51%; width: 158%; height: auto; pointer-events: none; opacity: 0; transform: translate(-50%, -50%) scale(.4); transition: opacity .7s ease, transform .9s cubic-bezier(.34,1.56,.64,1); }
+.heart-frame img { width: 100%; height: auto; display: block; }
+.heart-frame.shown { opacity: 1; transform: translate(-50%, -50%); }
 .date-line > .txt { opacity: 0; transform: translateY(1cqw); transition: opacity .8s ease .5s, transform .8s ease .5s; }
 .page.on .date-line > .txt { opacity: 0; transform: translateY(1cqw); }
 .page.on .date-line.shown > .txt, .date-line.shown > .txt { opacity: 1; transform: none; }
@@ -241,7 +243,7 @@ button { font: inherit; cursor: pointer; }
 
 @media (prefers-reduced-motion: reduce) {
   .sway > *, .flutter > *, .tap .ring, .tap-label, .audio .on, .hint i { animation: none !important; }
-  .reveal > :first-child, .invitation, .film.fade, .opening, .sheet, .sheet .panel, .heart-frame > div, .date-line > .txt, .reveal-stack .pill, .reveal-stack .img-btn { transition-duration: .01s !important; transition-delay: 0s !important; }
+  .reveal > :first-child, .invitation, .film.fade, .opening, .sheet, .sheet .panel, .heart-frame, .date-line > .txt, .reveal-stack .pill, .reveal-stack .img-btn { transition-duration: .01s !important; transition-delay: 0s !important; }
   .page-1 img.bg { transform: none !important; }
   .petals { display: none; }
 }

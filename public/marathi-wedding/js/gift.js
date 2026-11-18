@@ -2,9 +2,9 @@
    Blessing" written on it) opens the
    configured details (UPI ID with a copy button, bank lines, a note). With
    nothing configured it says so instead of pretending. */
-import { h, toast, openSheet } from './util.js?v=2';
-import { icon } from './ornaments.js?v=2';
-import { artSizes } from './art-sizes.js?v=2';
+import { h, toast, openSheet } from './util.js?v=3';
+import { icon } from './ornaments.js?v=3';
+import { artSizes } from './art-sizes.js?v=3';
 
 export function GiftButton(cfg, F) {
   const [bw, bh] = artSizes['btn-gift'];

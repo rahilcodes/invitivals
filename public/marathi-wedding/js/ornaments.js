@@ -2,8 +2,8 @@
    stay crisp at any size: the crown-lotus over a heading, the rule with a
    quatrefoil knot, the maroon eight-petal flower of the date page, and the
    flourish of the blessings page. */
-import { h } from './util.js?v=2';
-import { at } from './page.js?v=2';
+import { h } from './util.js?v=3';
+import { at } from './page.js?v=3';
 
 const GOLD = '#b8782a', GOLD_DEEP = '#a46f26', MAROON = '#8f1127';
 

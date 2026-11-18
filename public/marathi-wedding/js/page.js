@@ -2,8 +2,8 @@
    Overlays are placed by their CENTRE in percent of the canvas (x, y) with a
    width in percent; heights follow each picture's own proportions, so the whole
    composition scales as one. Text sizes are in cqw (percent of canvas width). */
-import { h } from './util.js?v=2';
-import { artSizes } from './art-sizes.js?v=2';
+import { h } from './util.js?v=3';
+import { artSizes } from './art-sizes.js?v=3';
 
 export function InvitationPage(n, overlays, { lazy = true, cls = '' } = {}) {
   const [w, hgt] = artSizes[`bg${n}`];
