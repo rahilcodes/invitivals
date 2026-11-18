@@ -1,0 +1,69 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Invitivals//Bhumika & Siddhant Wedding//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VTIMEZONE
+TZID:Asia/Kolkata
+BEGIN:STANDARD
+DTSTART:19700101T000000
+TZOFFSETFROM:+0530
+TZOFFSETTO:+0530
+TZNAME:IST
+END:STANDARD
+END:VTIMEZONE
+BEGIN:VEVENT
+UID:bhumika-siddhant-wedding-reception-of-barat@invitivals.com
+DTSTAMP:20261118T000000Z
+DTSTART;TZID=Asia/Kolkata:20261202T120000
+SUMMARY:Reception of Barat — Bhumika & Siddhant
+LOCATION:Vedanta Farm (Jashn – The Roman Palace)\, 27 Km Stone\, Delhi-
+ Hapur Bypass Road\, NH-24\, Near AKG College\, Adhyatmik Nagar\, Ghaziab
+ ad\, U.P. – 201009.
+DESCRIPTION:Wednesday\, 2nd December 2026 · 12:00 PM\nVenue: Vedanta Far
+ m (Jashn – The Roman Palace)\, 27 Km Stone\, Delhi-Hapur Bypass Road\,
+  NH-24\, Near AKG College\, Adhyatmik Nagar\, Ghaziabad\, U.P. – 20100
+ 9.\nMap: https://www.google.com/maps/search/?api=1&query=Vedanta%20Farm%
+ 2C%20Jashn%20The%20Roman%20Palace%2C%20Delhi-Hapur%20Bypass%20Road%2C%20
+ NH-24%2C%20Near%20AKG%20College%2C%20Adhyatmik%20Nagar%2C%20Ghaziabad%2C
+ %20Uttar%20Pradesh%20201009\n\nhttps://invitivals.com/bhumika-siddhant-w
+ edding/
+URL:https://invitivals.com/bhumika-siddhant-wedding/
+END:VEVENT
+BEGIN:VEVENT
+UID:bhumika-siddhant-wedding-lunch@invitivals.com
+DTSTAMP:20261118T000000Z
+DTSTART;TZID=Asia/Kolkata:20261202T130000
+SUMMARY:Lunch — Bhumika & Siddhant
+LOCATION:Vedanta Farm (Jashn – The Roman Palace)\, 27 Km Stone\, Delhi-
+ Hapur Bypass Road\, NH-24\, Near AKG College\, Adhyatmik Nagar\, Ghaziab
+ ad\, U.P. – 201009.
+DESCRIPTION:Wednesday\, 2nd December 2026 · 1:00 PM\nVenue: Vedanta Farm
+  (Jashn – The Roman Palace)\, 27 Km Stone\, Delhi-Hapur Bypass Road\, 
+ NH-24\, Near AKG College\, Adhyatmik Nagar\, Ghaziabad\, U.P. – 201009
+ .\nMap: https://www.google.com/maps/search/?api=1&query=Vedanta%20Farm%2
+ C%20Jashn%20The%20Roman%20Palace%2C%20Delhi-Hapur%20Bypass%20Road%2C%20N
+ H-24%2C%20Near%20AKG%20College%2C%20Adhyatmik%20Nagar%2C%20Ghaziabad%2C%
+ 20Uttar%20Pradesh%20201009\n\nhttps://invitivals.com/bhumika-siddhant-we
+ dding/
+URL:https://invitivals.com/bhumika-siddhant-wedding/
+END:VEVENT
+BEGIN:VEVENT
+UID:bhumika-siddhant-wedding-vidai@invitivals.com
+DTSTAMP:20261118T000000Z
+DTSTART;TZID=Asia/Kolkata:20261202T170000
+SUMMARY:Vidai — Bhumika & Siddhant
+LOCATION:Vedanta Farm (Jashn – The Roman Palace)\, 27 Km Stone\, Delhi-
+ Hapur Bypass Road\, NH-24\, Near AKG College\, Adhyatmik Nagar\, Ghaziab
+ ad\, U.P. – 201009.
+DESCRIPTION:Wednesday\, 2nd December 2026 · 5:00 PM\nVenue: Vedanta Farm
+  (Jashn – The Roman Palace)\, 27 Km Stone\, Delhi-Hapur Bypass Road\, 
+ NH-24\, Near AKG College\, Adhyatmik Nagar\, Ghaziabad\, U.P. – 201009
+ .\nMap: https://www.google.com/maps/search/?api=1&query=Vedanta%20Farm%2
+ C%20Jashn%20The%20Roman%20Palace%2C%20Delhi-Hapur%20Bypass%20Road%2C%20N
+ H-24%2C%20Near%20AKG%20College%2C%20Adhyatmik%20Nagar%2C%20Ghaziabad%2C%
+ 20Uttar%20Pradesh%20201009\n\nhttps://invitivals.com/bhumika-siddhant-we
+ dding/
+URL:https://invitivals.com/bhumika-siddhant-wedding/
+END:VEVENT
+END:VCALENDAR

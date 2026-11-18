@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<!-- written by tools/bhumika-siddhant-wedding.mjs — edit the tool, not this file -->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex">
+<title>Bhumika &amp; Siddhant | Wedding Invitation</title>
+<meta name="description" content="With the blessings of Lord Mahavir, we invite you to celebrate the wedding of Bhumika &amp; Siddhant on 2nd December 2026. Vedanta Farm (Jashn – The Roman Palace), Ghaziabad.">
+<meta name="author" content="Invitivals">
+<meta name="theme-color" content="#eacfb3">
+<link rel="canonical" href="https://invitivals.com/bhumika-siddhant-wedding/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Invitivals">
+<meta property="og:locale" content="en_IN">
+<meta property="og:url" content="https://invitivals.com/bhumika-siddhant-wedding/">
+<meta property="og:title" content="Bhumika &amp; Siddhant | Wedding Invitation">
+<meta property="og:description" content="With the blessings of Lord Mahavir, we invite you to celebrate the wedding of Bhumika &amp; Siddhant on 2nd December 2026.">
+<meta property="og:image" content="https://invitivals.com/bhumika-siddhant-wedding/assets/cover-bhumika-siddhant.jpg">
+<meta property="og:image:secure_url" content="https://invitivals.com/bhumika-siddhant-wedding/assets/cover-bhumika-siddhant.jpg">
+<meta property="og:image:type" content="image/jpeg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Bhumika &amp; Siddhant · Wedding Invitation · 2nd December 2026">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Bhumika &amp; Siddhant | Wedding Invitation">
+<meta name="twitter:description" content="With the blessings of Lord Mahavir, we invite you to celebrate the wedding of Bhumika &amp; Siddhant on 2nd December 2026.">
+<meta name="twitter:image" content="https://invitivals.com/bhumika-siddhant-wedding/assets/cover-bhumika-siddhant.jpg">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="preload" as="image" href="assets/bg/opening-bs.webp" fetchpriority="high">
+<link rel="modulepreload" href="js/app.js?v=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Pinyon+Script&family=Cinzel:wght@500;600&family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Noto+Serif+Devanagari:wght@500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/invite.css?v=1">
+</head>
+<body class="is-closed">
+
+<!-- opening: the sealed envelope (the couple's B S on its wax seal); one tap plays the film, which fades into the first page -->
+<div class="opening" id="opening">
+  <img class="opening__art" src="assets/bg/opening-bs.webp" alt="A sealed cream envelope with the couple's gold B and S on its wax seal" width="941" height="1672" decoding="async" fetchpriority="high">
+  <video class="opening__film" id="film" playsinline webkit-playsinline muted preload="auto" src="assets/media/opening-bs-v2.mp4" aria-hidden="true"></video>
+  <button class="tap" id="tap" type="button"><span class="tap__ring" aria-hidden="true"></span><span>Tap to Open</span></button>
+</div>
+
+<audio id="music" loop preload="none"></audio>
+<button class="mute" id="mute" type="button" aria-pressed="false" aria-label="Pause music" hidden>
+  <svg viewBox="0 0 24 24" aria-hidden="true"><path class="mute__note" d="M9 18.5a2.5 2.5 0 1 1-2-2.45V6l10-2v11.5a2.5 2.5 0 1 1-2-2.45V7.4l-6 1.2z"/><path class="mute__bar" d="M4 4l16 16"/></svg>
+</button>
+<canvas class="petals" id="petals" aria-hidden="true"></canvas>
+
+<main class="stage" id="stage" aria-label="Wedding invitation of Bhumika and Siddhant">
+
+  <!-- 1 · the Jain opening: Lord Mahavir (the client's own picture), the salutation and the two lines, exactly as supplied -->
+  <section class="page page--1" id="p1">
+    <div class="art art--fit" style="--h:177.68">
+      <img class="bg" src="assets/bg/p1.webp" alt="" width="941" height="1672" decoding="async">
+      <img class="el swing" style="left:12%;top:calc(var(--cq) * 9.8);width:5%;--d:0.9s" src="assets/el/bell.webp" alt="">
+      <img class="el swing" style="left:6%;top:calc(var(--cq) * 20.4);width:5.6%;--d:1.1s" src="assets/el/bell.webp" alt="">
+      <img class="el swing" style="right:12%;top:calc(var(--cq) * 9.8);width:5%;--d:1s" src="assets/el/bell.webp" alt="">
+      <img class="el swing" style="right:6%;top:calc(var(--cq) * 20.4);width:5.6%;--d:1.2s" src="assets/el/bell.webp" alt="">
+      <div class="flow" style="--top:15;--side:8;--bottom:2">
+        <img class="mahavir pop" style="--d:.2s" src="assets/el/mahavir.webp" alt="Lord Mahavir seated in meditation beneath a tree, a jewelled canopy and a halo of light above him" width="900" height="1290" decoding="async">
+        <p class="namah rise" lang="hi" style="--d:.5s">!! श्री महावीराय नमः !!</p>
+        <img class="orn rise" style="width:calc(var(--cq) * 20);margin:calc(var(--cq) * 1) auto 0;--d:.6s" src="assets/el/garland.webp" alt="" loading="lazy">
+        <p class="shloka mangal rise" lang="hi" style="--d:.7s"><span>मंगलम भगवान वीरो, मंगलम गौतमो गणि।</span><span>मंगलम कुन्दकुन्दाद्यो, जैन धर्मोस्तु मंगलम् ॥</span></p>
+        <button class="cue rise" id="cue" type="button" style="--d:1.2s" aria-label="Scroll down to the rest of the invitation">Scroll to explore<svg viewBox="0 0 22 20" aria-hidden="true"><path d="M4 3l7 6 7-6"/><path d="M4 10l7 6 7-6"/></svg></button>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2 · the invitation: the Jain emblem, the card's opening line, Bhumika weds Siddhant, the day -->
+  <section class="page" id="p-invite">
+    <div class="art art--fit" style="--h:169.29">
+      <img class="bg" src="assets/bg/p2.webp" alt="" width="964" height="1632" loading="lazy" decoding="async">
+      <img class="el swing" style="left:5.5%;top:calc(var(--cq) * 60.9);width:8%;--d:.6s" src="assets/el/tasselB.webp" alt="" loading="lazy">
+      <img class="el swing" style="right:5.5%;top:calc(var(--cq) * 64.3);width:7%;--d:.8s" src="assets/el/tasselA.webp" alt="" loading="lazy">
+      <div class="flow" style="--top:27;--side:15">
+        <img class="jain pop" style="--w:12;--d:.1s" src="assets/el/jain-symbol.webp" alt="The Jain emblem: the swastika, the three dots and crescent, and the raised hand with Ahimsa written in it" width="520" height="873" loading="lazy" decoding="async">
+        <p class="destiny gap-m rise" style="--d:.2s">Destiny brought them together &amp; now Love will seal their bond forever.</p>
+        <img class="orn rise" style="width:calc(var(--cq) * 18);margin:calc(var(--cq) * 2.4) auto calc(var(--cq) * 2);--d:.3s" src="assets/el/garland.webp" alt="" loading="lazy">
+        <h1 class="couple-names">
+          <span class="script script--xl rise" style="--d:.4s">Bhumika</span>
+          <span class="amp rise" style="--d:.55s"><span class="amp__line" aria-hidden="true"></span><span class="amp__and weds">weds</span><span class="amp__line" aria-hidden="true"></span></span>
+          <span class="script script--xl rise" style="--d:.7s">Siddhant</span>
+        </h1>
+        <img class="orn rise" style="width:calc(var(--cq) * 18);margin:calc(var(--cq) * 2.4) auto calc(var(--cq) * 2.4);--d:.8s" src="assets/el/garland.webp" alt="" loading="lazy">
+        <p class="datebar rise" style="--d:.9s">Wednesday<small>2nd December 2026</small></p>
+        <img class="mono pop" style="--w:22;--d:1s" src="assets/el/bs-logo.webp" alt="The couple's monogram: the letters B and S in gold" width="900" height="900" loading="lazy" decoding="async">
+      </div>
+    </div>
+  </section>
+
+  <!-- 3 · Our Families: the card's own words in the card's own order -->
+  <section class="page" id="p-fam">
+    <div class="art art--fit" style="--h:177.68">
+      <img class="bg" src="assets/bg/p1.webp" alt="" width="941" height="1672" loading="lazy" decoding="async">
+      <img class="el swing" style="left:12%;top:calc(var(--cq) * 9.8);width:5%;--d:0.9s" src="assets/el/bell.webp" alt="" loading="lazy">
+      <img class="el swing" style="left:6%;top:calc(var(--cq) * 20.4);width:5.6%;--d:1.1s" src="assets/el/bell.webp" alt="" loading="lazy">
+      <img class="el swing" style="right:12%;top:calc(var(--cq) * 9.8);width:5%;--d:1s" src="assets/el/bell.webp" alt="" loading="lazy">
+      <img class="el swing" style="right:6%;top:calc(var(--cq) * 20.4);width:5.6%;--d:1.2s" src="assets/el/bell.webp" alt="" loading="lazy">
+      <div class="flow" style="--top:24;--side:10">
+        <h2 class="script script--lg rise">Our Families</h2>
+        <img class="orn rise" style="width:calc(var(--cq) * 18);--d:.1s" src="assets/el/garland.webp" alt="" loading="lazy">
+        <div class="fam gap-m rise" style="--d:.15s">
+          <p class="fam__l">The Bride</p>
+          <h3 class="fam__n fam__n--sm">Bhumika</h3>
+          <p class="fam__k">Granddaughter of</p>
+          <p class="fam__g">Late Smt. Sneh Lata Jain &amp;<br>Late Shri Mam Chand Jain</p>
+          <p class="fam__k">Daughter of</p>
+          <p class="fam__p"><span>Smt. Poonam Jain and</span><span>Shri Sanjay Jain</span></p>
+        </div>
+        <p class="para para--invite rise" style="--d:.1s">We solicit your gracious presence and blessings on the auspicious occasion of the wedding ceremony of their loving daughter.</p>
+        <p class="with rise" style="--d:.1s">WEDS</p>
+        <div class="fam rise" style="--d:.15s">
+          <p class="fam__l">The Groom</p>
+          <h3 class="fam__n fam__n--sm">Siddhant</h3>
+          <p class="fam__k">Son of</p>
+          <p class="fam__p"><span>Mrs. Ruby Jain and</span><span>Mr. Pawan Kumar Jain</span></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4 · the couple's own photograph, whole -->
+  <section class="page" id="p-photo">
+    <div class="art art--fit" style="--h:177.68">
+      <img class="bg" src="assets/bg/p4.webp" alt="" width="941" height="1672" loading="lazy" decoding="async">
+      <img class="el swing" style="left:12%;top:calc(var(--cq) * 26.7);width:5.5%;--d:.5s" src="assets/el/bell.webp" alt="" loading="lazy">
+      <img class="el swing" style="right:11%;top:calc(var(--cq) * 35.5);width:5.5%;--d:.6s" src="assets/el/bell.webp" alt="" loading="lazy">
+      <div class="flow" style="--top:27;--side:14">
+        <h2 class="script script--md script--pair rise">Bhumika <span>&amp;</span> Siddhant</h2>
+        <img class="orn rise" style="width:calc(var(--cq) * 18);--d:.15s" src="assets/el/garland.webp" alt="" loading="lazy">
+        <figure class="frame frame--couple pop" style="--d:.3s"><img src="assets/el/couple.webp" alt="Bhumika and Siddhant smiling at each other before a round wall of roses, she in an ivory embroidered lehenga, he in a navy suit" width="1000" height="1333" loading="lazy" decoding="async"></figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5 · The Wedding Day: the three events with their times, and Add to Calendar -->
+  <section class="page" id="p-day">
+    <div class="art art--fit" style="--h:169.29">
+      <img class="bg" src="assets/bg/p2.webp" alt="" width="964" height="1632" loading="lazy" decoding="async">
+      <img class="el swing" style="left:5.5%;top:calc(var(--cq) * 60.9);width:8%;--d:.6s" src="assets/el/tasselB.webp" alt="" loading="lazy">
+      <img class="el swing" style="right:5.5%;top:calc(var(--cq) * 64.3);width:7%;--d:.8s" src="assets/el/tasselA.webp" alt="" loading="lazy">
+      <div class="flow" style="--top:31;--side:14">
+        <h2 class="script script--md rise">The Wedding Day</h2>
+        <p class="datebar gap-m rise" style="--d:.15s">Wednesday<small>2nd December 2026</small></p>
+        <ol class="tl">
+          <li class="rise" style="--d:0.15s"><span class="medal" aria-hidden="true"><svg viewBox="0 0 48 48"><path d="M36 43c0-8-1-14-4-19-1-4-1-8-3-11l-2-6-2 5c-3-1-7 0-10 3l-6 7c-2 2-2 5 0 6l3 1c2 0 3-1 4-2l4-2c2 4 2 10-1 16l-1 2"/><circle cx="20" cy="15" r="1"/><path d="M30 13c4 3 7 9 8 16M31 19c3 4 5 9 5 15M16 22l5-7M10 23.500h1.500"/><path d="M27 7l3-3 1 4"/></svg></span>
+            <div><h3 class="ev__name">Reception of Barat</h3><p class="ev__time">12:00 PM</p></div></li>
+          <li class="rise" style="--d:0.30s"><span class="medal" aria-hidden="true"><svg viewBox="0 0 48 48"><path d="M6 36h36"/><path d="M9 36c0-9 6.500-15 15-15s15 6 15 15"/><path d="M24 21v-3"/><circle cx="24" cy="16" r="2"/><path d="M12 40h24"/><path d="M16 31c1-3 3-5 6-6"/></svg></span>
+            <div><h3 class="ev__name">Lunch</h3><p class="ev__time">1:00 PM</p></div></li>
+          <li class="rise" style="--d:0.45s"><span class="medal" aria-hidden="true"><svg viewBox="0 0 48 48"><path d="M3 17h42"/><path d="M12 17v17h24V17"/><path d="M11 17c3-9 23-9 26 0"/><path d="M24 8.500v-3"/><path d="M19 34V24c0-2.500 2.200-4 5-4s5 1.500 5 4v10"/><path d="M9 38h30"/><path d="M14 38v3M34 38v3"/></svg></span>
+            <div><h3 class="ev__name">Vidai</h3><p class="ev__time">5:00 PM</p></div></li>
+        </ol>
+        <button class="maps cal-btn rise" id="calBtn" type="button" style="--d:.4s" aria-haspopup="dialog"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 2h2v2h6V2h2v2h3v18H4V4h3zm-1 7v11h12V9zm2 2h3v3H8z"/></svg><span>Add to Calendar</span></button>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6 · the venue: the name and address exactly as on the card, and the map -->
+  <section class="page" id="p-venue">
+    <div class="art art--fit" style="--h:177.68">
+      <img class="bg" src="assets/bg/p4.webp" alt="" width="941" height="1672" loading="lazy" decoding="async">
+      <img class="el swing" style="left:12%;top:calc(var(--cq) * 26.7);width:5.5%;--d:.5s" src="assets/el/bell.webp" alt="" loading="lazy">
+      <img class="el swing" style="right:11%;top:calc(var(--cq) * 35.5);width:5.5%;--d:.6s" src="assets/el/bell.webp" alt="" loading="lazy">
+      <div class="flow" style="--top:30;--side:13">
+        <h2 class="script script--lg rise">Wedding Venue</h2>
+        <img class="orn rise" style="width:calc(var(--cq) * 18);--d:.1s" src="assets/el/garland.webp" alt="" loading="lazy">
+        <span class="medal medal--lg pop" style="--d:.15s" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 2a7 7 0 0 0-7 7c0 5.2 7 13 7 13s7-7.8 7-13a7 7 0 0 0-7-7zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5z"/></svg></span>
+        <p class="venue venue--caps gap-m rise" style="--d:.2s">Vedanta Farm</p>
+        <p class="venue-sub rise" style="--d:.25s">(Jashn – The Roman Palace)</p>
+        <p class="addr rise" style="--d:.3s"><span>27 Km Stone, Delhi-Hapur Bypass Road, NH-24,</span><span>Near AKG College, Adhyatmik Nagar,</span><span>Ghaziabad, U.P. – 201009.</span></p>
+        <a class="maps maps--wide rise" data-maps="venue" target="_blank" rel="noopener" style="--d:.35s"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a7 7 0 0 0-7 7c0 5.2 7 13 7 13s7-7.8 7-13a7 7 0 0 0-7-7zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5z"/></svg><span>View on Google Maps</span></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 7 · the countdown to the Reception of Barat (2 December 2026, 12:00 PM IST), worked out live -->
+  <section class="page" id="p-countdown">
+    <div class="art art--fit" style="--h:177.68">
+      <img class="bg" src="assets/bg/p1.webp" alt="" width="941" height="1672" loading="lazy" decoding="async">
+      <img class="el swing" style="left:12%;top:calc(var(--cq) * 9.8);width:5%;--d:0.9s" src="assets/el/bell.webp" alt="" loading="lazy">
+      <img class="el swing" style="left:6%;top:calc(var(--cq) * 20.4);width:5.6%;--d:1.1s" src="assets/el/bell.webp" alt="" loading="lazy">
+      <img class="el swing" style="right:12%;top:calc(var(--cq) * 9.8);width:5%;--d:1s" src="assets/el/bell.webp" alt="" loading="lazy">
+      <img class="el swing" style="right:6%;top:calc(var(--cq) * 20.4);width:5.6%;--d:1.2s" src="assets/el/bell.webp" alt="" loading="lazy">
+      <div class="flow" style="--top:26;--side:14">
+        <p class="caps caps--sm rise">Counting down to</p>
+        <h2 class="script script--lg gap-s rise" style="--d:.1s">Our Big Day</h2>
+        <img class="orn rise" style="width:calc(var(--cq) * 18);--d:.2s" src="assets/el/garland.webp" alt="" loading="lazy">
+        <div class="cd rise" id="countdown" data-target="2026-12-02T12:00:00+05:30" style="--d:.3s" role="timer" aria-live="off">
+          <div class="cd__u"><b data-cd="d">--</b><span>Days</span></div>
+          <div class="cd__u"><b data-cd="h">--</b><span>Hours</span></div>
+          <div class="cd__u"><b data-cd="m">--</b><span>Minutes</span></div>
+          <div class="cd__u"><b data-cd="s">--</b><span>Seconds</span></div>
+        </div>
+        <p class="script script--md cd__done" id="cdDone" hidden>The Big Day Is Here!</p>
+        <p class="datebar gap-m rise" style="--d:.4s">Wednesday · 2nd December 2026<small>12:00 PM</small></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 8 · R.S.V.P. (second-last): the four names of the card; no telephone numbers were supplied -->
+  <section class="page" id="p-rsvp">
+    <div class="art art--fit" style="--h:169.29">
+      <img class="bg" src="assets/bg/p2.webp" alt="" width="964" height="1632" loading="lazy" decoding="async">
+      <img class="el swing" style="left:5.5%;top:calc(var(--cq) * 60.9);width:8%;--d:.6s" src="assets/el/tasselB.webp" alt="" loading="lazy">
+      <img class="el swing" style="right:5.5%;top:calc(var(--cq) * 64.3);width:7%;--d:.8s" src="assets/el/tasselA.webp" alt="" loading="lazy">
+      <div class="flow" style="--top:33;--side:14">
+        <h2 class="script script--lg rise">R.S.V.P.</h2>
+        <img class="orn rise" style="width:calc(var(--cq) * 18);--d:.1s" src="assets/el/garland.webp" alt="" loading="lazy">
+        <ul class="rsvp">
+          <li class="rise" style="--d:0.15s">Sanjay Jain &amp; Sons</li>
+          <li class="rise" style="--d:0.25s">Kavita Fab</li>
+          <li class="rise" style="--d:0.35s">Palak Fabric</li>
+          <li class="rise" style="--d:0.45s">Naman Fab</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- 9 · the last page: With Best Compliments From, the ten names, and the children's own line in the painted arch -->
+  <section class="page page--end" id="p-end">
+    <div class="art" style="--h:150">
+      <img class="bg" src="assets/bg/p6.webp" alt="" width="1024" height="1536" loading="lazy" decoding="async">
+      <img class="el glide" style="left:5%;top:13%;width:12%;--d:.4s" src="assets/el/bird.webp" alt="" loading="lazy">
+      <div class="flow" style="--top:4;--side:17;--bottom:0">
+        <h2 class="script script--end rise">With Best<br>Compliments From:</h2>
+        <img class="orn rise" style="width:calc(var(--cq) * 16);margin:calc(var(--cq) * .8) auto 0;--d:.2s" src="assets/el/garland.webp" alt="" loading="lazy">
+        <ul class="comp rise" style="--d:.3s"><li>Sanyam</li><li>Naman</li><li>Akshat</li><li>Rajat</li><li>Shweta</li><li>Nancy</li><li>Marya</li><li>Palak</li><li>Anant</li><li>Riya</li></ul>
+      </div>
+      <div class="arch-words"><p class="mausi rise" lang="hi" style="--d:.3s"><span>हमारी मौसी की शादी में</span><span>जरूर जरूर आना।।</span></p><p class="kids rise" style="--d:.45s">Gunika, Nishtha</p></div>
+      <p class="credit">Created by <a href="https://invitivals.com/?utm_source=invitation&amp;utm_medium=footer&amp;utm_campaign=bhumika-siddhant-wedding" target="_blank" rel="noopener">Invitivals</a></p>
+    </div>
+  </section>
+</main>
+
+<div class="sheet" id="sheet" hidden>
+  <div class="sheet__veil" data-close></div>
+  <div class="sheet__card" role="dialog" aria-modal="true" aria-labelledby="sheetTitle">
+    <p class="sheet__kicker">Wednesday · 2nd December 2026</p>
+    <h2 class="sheet__title" id="sheetTitle">Save the Date</h2>
+    <a class="sheet__btn sheet__btn--primary" href="event.ics" download="bhumika-siddhant-wedding.ics"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 2h2v2h6V2h2v2h3v18H4V4h3zm-1 7v11h12V9zm2 2h3v3H8z"/></svg>Apple / Outlook calendar (.ics)</a>
+    <p class="sheet__note">Google Calendar</p>
+    <a class="sheet__btn" data-gcal="reception-of-barat" href="https://calendar.google.com/calendar/render?action=TEMPLATE&amp;text=Reception+of+Barat+%E2%80%94+Bhumika+%26+Siddhant&amp;dates=20261202T120000%2F20261202T120000&amp;ctz=Asia%2FKolkata&amp;location=Vedanta+Farm+%28Jashn+%E2%80%93+The+Roman+Palace%29%2C+27+Km+Stone%2C+Delhi-Hapur+Bypass+Road%2C+NH-24%2C+Near+AKG+College%2C+Adhyatmik+Nagar%2C+Ghaziabad%2C+U.P.+%E2%80%93+201009.&amp;details=Wednesday%2C+2nd+December+2026+%C2%B7+12%3A00+PM%0AVenue%3A+Vedanta+Farm+%28Jashn+%E2%80%93+The+Roman+Palace%29%2C+27+Km+Stone%2C+Delhi-Hapur+Bypass+Road%2C+NH-24%2C+Near+AKG+College%2C+Adhyatmik+Nagar%2C+Ghaziabad%2C+U.P.+%E2%80%93+201009.%0AMap%3A+https%3A%2F%2Fwww.google.com%2Fmaps%2Fsearch%2F%3Fapi%3D1%26query%3DVedanta%2520Farm%252C%2520Jashn%2520The%2520Roman%2520Palace%252C%2520Delhi-Hapur%2520Bypass%2520Road%252C%2520NH-24%252C%2520Near%2520AKG%2520College%252C%2520Adhyatmik%2520Nagar%252C%2520Ghaziabad%252C%2520Uttar%2520Pradesh%2520201009%0A%0Ahttps%3A%2F%2Finvitivals.com%2Fbhumika-siddhant-wedding%2F" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm1 5v5.4l3.6 2.1-.8 1.3L11 13V7z"/></svg>Reception of Barat · 12:00 PM</a>
+    <a class="sheet__btn" data-gcal="lunch" href="https://calendar.google.com/calendar/render?action=TEMPLATE&amp;text=Lunch+%E2%80%94+Bhumika+%26+Siddhant&amp;dates=20261202T130000%2F20261202T130000&amp;ctz=Asia%2FKolkata&amp;location=Vedanta+Farm+%28Jashn+%E2%80%93+The+Roman+Palace%29%2C+27+Km+Stone%2C+Delhi-Hapur+Bypass+Road%2C+NH-24%2C+Near+AKG+College%2C+Adhyatmik+Nagar%2C+Ghaziabad%2C+U.P.+%E2%80%93+201009.&amp;details=Wednesday%2C+2nd+December+2026+%C2%B7+1%3A00+PM%0AVenue%3A+Vedanta+Farm+%28Jashn+%E2%80%93+The+Roman+Palace%29%2C+27+Km+Stone%2C+Delhi-Hapur+Bypass+Road%2C+NH-24%2C+Near+AKG+College%2C+Adhyatmik+Nagar%2C+Ghaziabad%2C+U.P.+%E2%80%93+201009.%0AMap%3A+https%3A%2F%2Fwww.google.com%2Fmaps%2Fsearch%2F%3Fapi%3D1%26query%3DVedanta%2520Farm%252C%2520Jashn%2520The%2520Roman%2520Palace%252C%2520Delhi-Hapur%2520Bypass%2520Road%252C%2520NH-24%252C%2520Near%2520AKG%2520College%252C%2520Adhyatmik%2520Nagar%252C%2520Ghaziabad%252C%2520Uttar%2520Pradesh%2520201009%0A%0Ahttps%3A%2F%2Finvitivals.com%2Fbhumika-siddhant-wedding%2F" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm1 5v5.4l3.6 2.1-.8 1.3L11 13V7z"/></svg>Lunch · 1:00 PM</a>
+    <a class="sheet__btn" data-gcal="vidai" href="https://calendar.google.com/calendar/render?action=TEMPLATE&amp;text=Vidai+%E2%80%94+Bhumika+%26+Siddhant&amp;dates=20261202T170000%2F20261202T170000&amp;ctz=Asia%2FKolkata&amp;location=Vedanta+Farm+%28Jashn+%E2%80%93+The+Roman+Palace%29%2C+27+Km+Stone%2C+Delhi-Hapur+Bypass+Road%2C+NH-24%2C+Near+AKG+College%2C+Adhyatmik+Nagar%2C+Ghaziabad%2C+U.P.+%E2%80%93+201009.&amp;details=Wednesday%2C+2nd+December+2026+%C2%B7+5%3A00+PM%0AVenue%3A+Vedanta+Farm+%28Jashn+%E2%80%93+The+Roman+Palace%29%2C+27+Km+Stone%2C+Delhi-Hapur+Bypass+Road%2C+NH-24%2C+Near+AKG+College%2C+Adhyatmik+Nagar%2C+Ghaziabad%2C+U.P.+%E2%80%93+201009.%0AMap%3A+https%3A%2F%2Fwww.google.com%2Fmaps%2Fsearch%2F%3Fapi%3D1%26query%3DVedanta%2520Farm%252C%2520Jashn%2520The%2520Roman%2520Palace%252C%2520Delhi-Hapur%2520Bypass%2520Road%252C%2520NH-24%252C%2520Near%2520AKG%2520College%252C%2520Adhyatmik%2520Nagar%252C%2520Ghaziabad%252C%2520Uttar%2520Pradesh%2520201009%0A%0Ahttps%3A%2F%2Finvitivals.com%2Fbhumika-siddhant-wedding%2F" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm1 5v5.4l3.6 2.1-.8 1.3L11 13V7z"/></svg>Vidai · 5:00 PM</a>
+    <button class="sheet__close" type="button" data-close>Close</button>
+  </div>
+</div>
+<noscript><p style="padding:40px 24px;text-align:center;font-family:Georgia,serif;color:#5a3a30">Please enable JavaScript to open this invitation.</p></noscript>
+<script type="module" src="js/app.js?v=1"></script>
+</body>
+</html>
