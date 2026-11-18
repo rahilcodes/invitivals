@@ -78,8 +78,8 @@ const page2 = Page(2, [
 /* ── the three days: detail views, all on plate 4 (title over the arch, the date in its gold frame, the
       programme in one solid card below, the demo's two buttons under it; the page ends with its card) ── */
 const label = (what) => (C.couple ? `${what} · ${C.couple.bride} & ${C.couple.groom}` : what);
-const schedule = (day) => h('ol', { class: 'timeline' }, ...day.schedule.map(([t, what, note, start]) => h('li', { class: t ? '' : 'no-time' },
-  t ? h('time', {}, t) : null, h('span', {}, what, note ? h('em', {}, note) : null),
+const schedule = (day) => h('ol', { class: 'timeline' }, ...day.schedule.map(([t, what, note, start, swatches]) => h('li', { class: t ? '' : 'no-time' },
+  t ? h('time', {}, t) : null, h('span', {}, what, note ? h('em', {}, note) : null, swatches ? h('i', { class: 'dc-swatches', 'aria-hidden': 'true' }, ...swatches.map((c) => h('b', { style: { background: c } }))) : null),
   start ? h('a', { class: 'gcal', href: gcalHref({ title: label(day.schedule.length === 1 ? `${day.title} – ${what}` : what), start, place: [day.venue, ...day.address].join(' '), details: [`${what} – ${t}`, note, `Map: ${day.mapsUrl}`].filter(Boolean).join('\n') }), target: '_blank', rel: 'noopener' }, 'Add to Google Calendar') : null)));
 const venue = (day) => h('div', { class: 'venue' }, h('p', { class: 'venue-k' }, 'Venue'), h('p', { class: 'venue-name' }, day.venue), day.address.length ? h('p', { class: 'venue-addr' }, ...day.address.flatMap((l, i) => (i ? [h('br'), l] : [l]))) : null);
 const actions = (day) => h('div', { class: 'actions' },

@@ -47,12 +47,13 @@ export const config = {
   wedding: { start: '2026-12-05T18:00:00+05:30', dateLine: '5 December 2026', weekday: 'Saturday', time: '6:00 PM Onwards', title: 'Wedding Ceremony & Varmala', ...IKON },
 
   /* page 3 → the four functions, in the order they happen; each opens its own detail page. `title` is the name
-     the client gave the function (`titleLines`: how it is set between the arch's flowers on its own page), `sub` the ceremony it is. schedule rows: [time, event, note, start]; `start`
+     the client gave the function (`titleLines`: how it is set between the arch's flowers on its own page), `sub` the ceremony it is. schedule rows: [time, event, note, start, swatches]; `start`
      (ISO) gives the row its own "Add to Google Calendar" link. */
   days: [
     {
       key: 'mehendi', date: '3 December 2026', weekday: 'Thursday', title: 'Mehfil-e-Mehendi', titleLines: ['Mehfil-e-', 'Mehendi'], sub: 'Mehendi Ceremony',
-      schedule: [['5:00 PM onwards', 'Mehendi Ceremony', '', '2026-12-03T17:00:00+05:30']],
+      /* the dress code and its four greens (client, 2026-11-18); a fifth entry in a row is its colour swatches */
+      schedule: [['5:00 PM onwards', 'Mehendi Ceremony', 'Dress Code: Shades of Green', '2026-12-03T17:00:00+05:30', ['#cfe0b4', '#9dbf7a', '#5f8f4e', '#2f5d3a']]],
       ...NANDINI,
     },
     {
@@ -68,7 +69,7 @@ export const config = {
     {
       key: 'wedding', date: '5 December 2026', weekday: 'Saturday', title: 'Saptpadi & Varmala', titleLines: ['Saptpadi &', 'Varmala'], sub: 'The Wedding',
       schedule: [
-        ['10:00 AM', 'Saptpadi', 'Theme / Attire: Maharashtrian Traditional', '2026-12-05T10:00:00+05:30'],
+        ['6:00 PM', 'Saptpadi', 'Theme / Attire: Maharashtrian Traditional', '2026-12-05T18:00:00+05:30'],   // was 10:00 AM (client, 2026-11-18)
         ['6:00 PM Onwards', 'Wedding Ceremony', 'Dress Code: Formal Indian', '2026-12-05T18:00:00+05:30'],
         ['7:00 PM', 'Varmala', '', '2026-12-05T19:00:00+05:30'],
       ],

@@ -160,3 +160,7 @@ a.sd-btn .ico { color: var(--burgundy); }
 .fn-sub { display: block; margin: .15cqw 0 .55cqw; font-style: italic; font-weight: 500; font-size: 2.6cqw; line-height: 1.2; color: var(--burgundy); }
 .fn-meta { font-size: 2.25cqw; }
 .fn-tap { margin-top: 1.2cqw; padding: .95cqw 2.4cqw .95cqw 2.8cqw; font-size: 1.9cqw; }
+
+/* the colour swatches under a dress code (Mehendi: Shades of Green) */
+.timeline .dc-swatches { display: flex; gap: 1.6cqw; margin-top: 1.3cqw; }
+.timeline .dc-swatches b { width: 6.4cqw; height: 6.4cqw; border-radius: 50%; border: 1px solid rgba(255, 253, 246, .95); box-shadow: 0 0 0 1px rgba(201, 162, 79, .85), 0 .8cqw 1.6cqw rgba(84, 44, 16, .22); }
