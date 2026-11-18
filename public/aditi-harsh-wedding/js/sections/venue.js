@@ -1,0 +1,16 @@
+/* VenueSection — the mandapam in a soft arch, address and map. */
+import { Heading, Button, FloralVine, Kolam, Icon } from '../decor.js';
+
+export const VenueSection = (cfg) => `
+<section class="sec venue" id="venue" aria-labelledby="venue-h">
+  ${FloralVine({ side: 'l', top: '200px', height: '620px', crop: 85, depth: 0.05 })}
+  <div class="sec-inner">
+    ${Heading('The Venue', cfg.venueNote || 'A beautiful place to witness our new beginning', { id: 'venue-h' })}
+    ${cfg.venueImage ? `<figure class="venue-frame venue-frame--whole" data-reveal>
+      <img src="${cfg.venueImage}" alt="${cfg.venue}" loading="lazy" decoding="async" width="1080" height="913">
+    </figure>` : `<div class="venue-seal" data-reveal>${Kolam('venue-kolam')}${Icon('pin', 'ico venue-pin')}</div>`}
+    <p class="venue-name" data-reveal>${cfg.venue}</p>
+    <p class="venue-addr" data-reveal>${cfg.venueAddress}</p>
+    <div data-reveal>${Button({ label: 'View Venue on Google Maps', icon: 'map', href: cfg.mapsUrl, attrs: 'data-maps="venue"' })}</div>
+  </div>
+</section>`;

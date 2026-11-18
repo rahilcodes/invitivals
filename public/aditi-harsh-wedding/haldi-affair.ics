@@ -1,0 +1,26 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Invitivals//Wedding Invitation//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VTIMEZONE
+TZID:Asia/Kolkata
+BEGIN:STANDARD
+DTSTART:19700101T000000
+TZOFFSETFROM:+0530
+TZOFFSETTO:+0530
+TZNAME:IST
+END:STANDARD
+END:VTIMEZONE
+BEGIN:VEVENT
+UID:aditi-harsh-haldi-affair@invitivals.com
+DTSTAMP:20261118T000000Z
+DTSTART;TZID=Asia/Kolkata:20270111T140000
+SUMMARY:Haldi Affair — Aditi & Harsh
+LOCATION:Krushnakunj Mandapam\, Bhavnagar – Sidsar Road\, Shampara\, Gu
+ jarat
+DESCRIPTION:https://share.google/lUT3vx02mHjC7CFc2\n\nhttps://invitivals.
+ com/aditi-harsh-wedding/
+URL:https://share.google/lUT3vx02mHjC7CFc2
+END:VEVENT
+END:VCALENDAR
