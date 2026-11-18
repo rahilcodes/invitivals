@@ -52,8 +52,8 @@ export const config = {
   days: [
     {
       key: 'mehendi', date: '3 December 2026', weekday: 'Thursday', title: 'Mehfil-e-Mehendi', titleLines: ['Mehfil-e-', 'Mehendi'], sub: 'Mehendi Ceremony',
-      /* the dress code and its four greens (client, 2026-11-18); a fifth entry in a row is its colour swatches */
-      schedule: [['5:00 PM onwards', 'Mehendi Ceremony', 'Dress Code: Shades of Green', '2026-12-03T17:00:00+05:30', ['#cfe0b4', '#9dbf7a', '#5f8f4e', '#2f5d3a']]],
+      /* the dress code as words only (client, 2026-11-18: the colour swatches were removed the same day) */
+      schedule: [['5:00 PM onwards', 'Mehendi Ceremony', 'Dress Code: Shades of Green', '2026-12-03T17:00:00+05:30']],
       ...NANDINI,
     },
     {
