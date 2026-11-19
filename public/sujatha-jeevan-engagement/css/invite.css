@@ -30,7 +30,7 @@ img { -webkit-user-drag: none; user-select: none; }
 .stage { --cq: 1cqw; width: var(--stage); margin: 0 auto; container-type: inline-size; position: relative; }
 .page { position: relative; width: 100%; }
 /* on tall phones the hero painting ends above the fold; the band beneath runs from the painting's own beige into the page's */
-.page--1 { min-height: 100vh; min-height: 100dvh; background: linear-gradient(to bottom, #ecd4ba 70%, var(--beige)); }
+.page--1 { background: linear-gradient(to bottom, #ecd4ba 70%, var(--beige)); }   /* no full-screen minimum: on tall phones it left an empty band under the painting (client, 2026-11-20) */
 .art { position: relative; width: 100%; }
 .bg {
   display: block; width: 100%; height: auto;
@@ -123,7 +123,15 @@ img { -webkit-user-drag: none; user-select: none; }
 .hour__t { font-family: var(--serif); font-weight: 600; color: var(--green); font-size: calc(var(--cq) * 5.4); letter-spacing: .03em; line-height: 1; white-space: nowrap; }
 .hour__o { font-family: var(--serif); font-style: italic; font-weight: 500; color: var(--green-deep); font-size: calc(var(--cq) * 2.9); line-height: 1; }
 .hours__rule { width: 1px; background: linear-gradient(to bottom, transparent, var(--gold-light) 25%, var(--gold-light) 75%, transparent); }
-.mono { filter: drop-shadow(0 calc(var(--cq) * 1) calc(var(--cq) * 1.6) rgba(90, 55, 25, .22)); }
+/* the scroll cue under the names: a word, a ringed double chevron, a slow soft pulse */
+.cue { position: absolute; display: grid; justify-items: center; gap: calc(var(--cq) * 1.5); text-decoration: none; color: var(--gold); -webkit-tap-highlight-color: transparent; }
+.cue__l { font-family: var(--serif); font-weight: 700; text-transform: uppercase; letter-spacing: .34em; padding-left: .34em; font-size: calc(var(--cq) * 2.5); line-height: 1; }
+.cue__o { width: calc(var(--cq) * 9.4); height: calc(var(--cq) * 9.4); border-radius: 50%; display: grid; place-items: center; border: 1px solid rgba(169, 122, 43, .75);
+  background: radial-gradient(circle at 50% 35%, rgba(255, 250, 238, .85), rgba(255, 244, 222, .35)); animation: cue-pop 2.6s ease-in-out infinite; }
+.cue__o svg { width: 46%; height: 46%; fill: none; stroke: currentColor; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; animation: cue-dip 2.6s ease-in-out infinite; }
+@keyframes cue-pop { 0%, 100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(169, 122, 43, .32); } 50% { transform: scale(1.07); box-shadow: 0 0 0 calc(var(--cq) * 2) rgba(169, 122, 43, 0); } }
+@keyframes cue-dip { 0%, 100% { transform: translateY(calc(var(--cq) * -.35)); } 50% { transform: translateY(calc(var(--cq) * .45)); } }
+@media (prefers-reduced-motion: reduce) { .cue__o, .cue__o svg { animation: none; } }
 .te { font-family: 'Noto Serif Telugu', 'Gautami', 'Telugu Sangam MN', serif; font-weight: 700; color: #7a4f12; font-size: calc(var(--cq) * 3.9); letter-spacing: .015em; line-height: 1.35;
   text-shadow: 0 0 .5em rgba(255, 248, 232, .95), 0 0 .15em rgba(255, 248, 232, .9); }
 /* the couple's own illustration in one frame: gold edge, cream mat, a fine inner line — the whole picture shows */

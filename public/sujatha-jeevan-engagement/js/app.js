@@ -5,7 +5,7 @@
    Save the Date (.ics / Google Calendar), the music toggle and the falling petals.
    Event facts come from ../config.js.
    ───────────────────────────────────────────────────────────────────────────── */
-import { invite as C } from '../config.js?v=1';
+import { invite as C } from '../config.js?v=2';
 
 const $ = (s, r = document) => r.querySelector(s);
 const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -51,6 +51,8 @@ for (const t of ['touchend', 'pointerup', 'click', 'keydown']) opening.addEventL
 /* the hero's pieces stagger in underneath the envelope while the film plays, so the invitation is already
    complete when the envelope lifts (revealed late, the bare floral paper read as an empty slide); later pages wait for the scroll */
 function heroIn() { for (const el of $('#p1').querySelectorAll('.rise, .drop, .pop, .tilt, .slide-l, .swing')) el.classList.add('in'); }
+/* the scroll cue on the hero: a tap glides to the next page */
+$('#cue').addEventListener('click', (e) => { e.preventDefault(); $('#p2').scrollIntoView({ behavior: reduced ? 'auto' : 'smooth', block: 'start' }); });
 
 function open() {
   if (opened) return;
@@ -236,7 +238,6 @@ function pad(n) { return String(n).padStart(2, '0'); }
 /* a Date whose UTC fields equal the Kolkata wall-clock time, so the maths does not depend on the phone's zone */
 function local(date, time) { return new Date(`${date}T${time}:00Z`); }
 const location_ = `${C.venue.name}, ${C.venue.address.join(' ').replace(/,\s*$/, '')}`;
-/* the frame-less monogram on page 5 is hidden if its picture is missing */
 const ics = [
   'BEGIN:VCALENDAR', 'VERSION:2.0', 'PRODID:-//Invitivals//Engagement Invitation//EN', 'CALSCALE:GREGORIAN', 'METHOD:PUBLISH',
   'BEGIN:VTIMEZONE', `TZID:${C.event.timeZone}`, 'BEGIN:STANDARD', 'DTSTART:19700101T000000',
