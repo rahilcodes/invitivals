@@ -2,7 +2,7 @@
    the design; this invitation's own: the client's song (one copy only, started by the door tap, play/pause on the
    button), the countdown to 25 November 2026, 7:00 PM India time, and Save the Date. There is no RSVP.
    Everything about the client comes from ../config.js. */
-import { invite as C } from '../config.js?v=1';
+import { invite as C } from '../config.js?v=2';
 
 const $ = (id) => document.getElementById(id);
 const app = $('app'), scroller = $('scroller'), doorScene = $('doorScene'), musicBtn = $('musicBtn');

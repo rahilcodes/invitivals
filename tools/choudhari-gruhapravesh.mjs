@@ -19,7 +19,7 @@ const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const SRC = path.join(ROOT, 'public', 'poornajnana', 'index.html');
 const D = path.join(ROOT, 'public', 'choudhari-gruhapravesh');
 const { invite: C } = await import(pathToFileURL(path.join(D, 'config.js')).href + '?t=' + Date.now());
-const V = 1;   // raise when css/invite.css, js/app.js or config.js change, so phones fetch the new files
+const V = 2;   // raise when css/invite.css, js/app.js or config.js change, so phones fetch the new files
 
 const esc = (s) => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 const put = (rel, data) => {

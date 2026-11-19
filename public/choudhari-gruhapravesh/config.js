@@ -45,5 +45,5 @@ export const invite = {
   closing: { message: 'We look forward to celebrating this special milestone with you.', regards: 'With warm regards,', sign: 'Choudhari Family' },
 
   /* the client's own song; null = no song and no music button */
-  music: null,
+  music: 'assets/music.mp3',   // the client's file (OM GAN GANPATAYE, received 2026-11-19): its first two minutes, on a loop
 };
