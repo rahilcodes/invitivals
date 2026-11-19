@@ -69,7 +69,7 @@ export const config = {
     {
       key: 'wedding', date: '5 December 2026', weekday: 'Saturday', title: 'Saptpadi & Varmala', titleLines: ['Saptpadi &', 'Varmala'], sub: 'The Wedding',
       schedule: [
-        ['6:00 PM', 'Saptpadi', 'Theme / Attire: Maharashtrian Traditional', '2026-12-05T18:00:00+05:30'],   // was 10:00 AM (client, 2026-11-18)
+        ['10:00 AM', 'Saptpadi', 'Theme / Attire: Maharashtrian Traditional', '2026-12-05T10:00:00+05:30'],   // back to 10:00 AM (client, 2026-11-19)
         ['6:00 PM Onwards', 'Wedding Ceremony', 'Dress Code: Formal Indian', '2026-12-05T18:00:00+05:30'],
         ['7:00 PM', 'Varmala', '', '2026-12-05T19:00:00+05:30'],
       ],
