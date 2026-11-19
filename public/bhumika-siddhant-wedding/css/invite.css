@@ -333,3 +333,10 @@ p, h1, h2, h3 { margin: 0; }
 .mausi { font-family: var(--deva); font-weight: 600; color: var(--maroon); font-size: calc(var(--cq) * 3.5); line-height: 1.6; }
 .mausi span { display: block; white-space: nowrap; }
 .kids { font-family: var(--script); color: var(--gold); font-size: calc(var(--cq) * 6.6); line-height: 1.1; margin-top: calc(var(--cq) * .8); white-space: nowrap; }
+/* client, 19 Nov: the couple's names in a clear serif (Playfair Display italic) instead of the script; same maroon */
+.nm { font-family: 'Playfair Display', var(--serif); font-style: italic; font-weight: 500; letter-spacing: .005em; }
+.couple-names .script--xl.nm { font-size: calc(var(--cq) * 12.4); line-height: 1.22; }
+.fam__n.fam__n--sm.nm { font-size: calc(var(--cq) * 8.6); line-height: 1.3; }
+.script--pair.nm { font-size: calc(var(--cq) * 6.1); line-height: 1.3; }
+/* Save the Date (slide 3): one day, so one numeral on the scratch card */
+.scard__num.scard__num--one { font-size: calc(var(--cq) * 19); }

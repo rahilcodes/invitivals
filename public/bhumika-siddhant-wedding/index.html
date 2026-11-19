@@ -28,11 +28,11 @@
 <meta name="twitter:image" content="https://invitivals.com/bhumika-siddhant-wedding/assets/cover-bhumika-siddhant.jpg">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="preload" as="image" href="assets/bg/opening-bs.webp" fetchpriority="high">
-<link rel="modulepreload" href="js/app.js?v=1">
+<link rel="modulepreload" href="js/app.js?v=2">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Pinyon+Script&family=Cinzel:wght@500;600&family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Noto+Serif+Devanagari:wght@500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/invite.css?v=1">
+<link href="https://fonts.googleapis.com/css2?family=Pinyon+Script&family=Playfair+Display:ital,wght@1,500&family=Cinzel:wght@500;600&family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Noto+Serif+Devanagari:wght@500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/invite.css?v=2">
 </head>
 <body class="is-closed">
 
@@ -80,9 +80,9 @@
         <p class="destiny gap-m rise" style="--d:.2s">Destiny brought them together &amp; now Love will seal their bond forever.</p>
         <img class="orn rise" style="width:calc(var(--cq) * 18);margin:calc(var(--cq) * 2.4) auto calc(var(--cq) * 2);--d:.3s" src="assets/el/garland.webp" alt="" loading="lazy">
         <h1 class="couple-names">
-          <span class="script script--xl rise" style="--d:.4s">Bhumika</span>
+          <span class="script script--xl nm rise" style="--d:.4s">Bhumika</span>
           <span class="amp rise" style="--d:.55s"><span class="amp__line" aria-hidden="true"></span><span class="amp__and weds">weds</span><span class="amp__line" aria-hidden="true"></span></span>
-          <span class="script script--xl rise" style="--d:.7s">Siddhant</span>
+          <span class="script script--xl nm rise" style="--d:.7s">Siddhant</span>
         </h1>
         <img class="orn rise" style="width:calc(var(--cq) * 18);margin:calc(var(--cq) * 2.4) auto calc(var(--cq) * 2.4);--d:.8s" src="assets/el/garland.webp" alt="" loading="lazy">
         <p class="datebar rise" style="--d:.9s">Wednesday<small>2nd December 2026</small></p>
@@ -91,7 +91,33 @@
     </div>
   </section>
 
-  <!-- 3 · Our Families: the card's own words in the card's own order -->
+  <!-- 3 · Save the Date (client, 19 Nov): the design's gold-foil scratch card; underneath, the day. Scratch with a finger or the mouse -->
+  <section class="page" id="p-save">
+    <div class="art art--fit" style="--h:169.29">
+      <img class="bg" src="assets/bg/p2.webp" alt="" width="964" height="1632" loading="lazy" decoding="async">
+      <img class="el swing" style="left:5.5%;top:calc(var(--cq) * 60.9);width:8%;--d:.6s" src="assets/el/tasselB.webp" alt="" loading="lazy">
+      <img class="el swing" style="right:5.5%;top:calc(var(--cq) * 64.3);width:7%;--d:.8s" src="assets/el/tasselA.webp" alt="" loading="lazy">
+      <div class="flow" style="--top:33;--side:14">
+        <h2 class="script script--lg rise">Save the Date</h2>
+        <div class="scard rise" id="scard" style="--d:.3s">
+          <div class="scard__face" id="scardFace">
+            <p class="scard__kicker">Our Wedding</p>
+            <p class="scard__day">Wednesday</p>
+            <p class="scard__num scard__num--one">2</p>
+            <p class="scard__month">December <span>2026</span></p>
+            <img class="scard__orn" src="assets/el/garland.webp" alt="" loading="lazy">
+            <p class="scard__place">Ghaziabad</p>
+          </div>
+          <canvas class="scard__foil" id="foil" role="button" tabindex="0" aria-label="Scratch card: rub it with your finger or the mouse to reveal our wedding date. Press Enter to reveal." aria-describedby="scardNote"></canvas>
+          <span class="scard__hint" id="scardHint" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M9 11.2V5.5a1.5 1.5 0 0 1 3 0v4.7l.1-1.2a1.5 1.5 0 0 1 3 .1v1.3a1.5 1.5 0 0 1 3 .2V12a1.5 1.5 0 0 1 2.9.3v3.4c0 3.5-2.6 6.3-6.2 6.3h-1.3c-2 0-3.4-.8-4.7-2.4L5.7 15.6a1.6 1.6 0 0 1 2.3-2.2z"/></svg></span>
+          <p class="sr-only" id="scardNote" aria-live="polite">Scratch the card to reveal the date.</p>
+        </div>
+        <button class="maps cal-btn rise" type="button" style="--d:.4s" aria-haspopup="dialog"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 2h2v2h6V2h2v2h3v18H4V4h3zm-1 7v11h12V9zm2 2h3v3H8z"/></svg><span>Add to Calendar</span></button>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4 · Our Families: the card's own words in the card's own order -->
   <section class="page" id="p-fam">
     <div class="art art--fit" style="--h:177.68">
       <img class="bg" src="assets/bg/p1.webp" alt="" width="941" height="1672" loading="lazy" decoding="async">
@@ -104,7 +130,7 @@
         <img class="orn rise" style="width:calc(var(--cq) * 18);--d:.1s" src="assets/el/garland.webp" alt="" loading="lazy">
         <div class="fam gap-m rise" style="--d:.15s">
           <p class="fam__l">The Bride</p>
-          <h3 class="fam__n fam__n--sm">Bhumika</h3>
+          <h3 class="fam__n fam__n--sm nm">Bhumika</h3>
           <p class="fam__k">Granddaughter of</p>
           <p class="fam__g">Late Smt. Sneh Lata Jain &amp;<br>Late Shri Mam Chand Jain</p>
           <p class="fam__k">Daughter of</p>
@@ -114,7 +140,7 @@
         <p class="with rise" style="--d:.1s">WEDS</p>
         <div class="fam rise" style="--d:.15s">
           <p class="fam__l">The Groom</p>
-          <h3 class="fam__n fam__n--sm">Siddhant</h3>
+          <h3 class="fam__n fam__n--sm nm">Siddhant</h3>
           <p class="fam__k">Son of</p>
           <p class="fam__p"><span>Mrs. Ruby Jain and</span><span>Mr. Pawan Kumar Jain</span></p>
         </div>
@@ -129,7 +155,7 @@
       <img class="el swing" style="left:12%;top:calc(var(--cq) * 26.7);width:5.5%;--d:.5s" src="assets/el/bell.webp" alt="" loading="lazy">
       <img class="el swing" style="right:11%;top:calc(var(--cq) * 35.5);width:5.5%;--d:.6s" src="assets/el/bell.webp" alt="" loading="lazy">
       <div class="flow" style="--top:27;--side:14">
-        <h2 class="script script--md script--pair rise">Bhumika <span>&amp;</span> Siddhant</h2>
+        <h2 class="script script--md script--pair nm rise">Bhumika <span>&amp;</span> Siddhant</h2>
         <img class="orn rise" style="width:calc(var(--cq) * 18);--d:.15s" src="assets/el/garland.webp" alt="" loading="lazy">
         <figure class="frame frame--couple pop" style="--d:.3s"><img src="assets/el/couple.webp" alt="Bhumika and Siddhant smiling at each other before a round wall of roses, she in an ivory embroidered lehenga, he in a navy suit" width="1000" height="1333" loading="lazy" decoding="async"></figure>
       </div>
@@ -227,7 +253,7 @@
       <div class="flow" style="--top:4;--side:17;--bottom:0">
         <h2 class="script script--end rise">With Best<br>Compliments From:</h2>
         <img class="orn rise" style="width:calc(var(--cq) * 16);margin:calc(var(--cq) * .8) auto 0;--d:.2s" src="assets/el/garland.webp" alt="" loading="lazy">
-        <ul class="comp rise" style="--d:.3s"><li>Sanyam</li><li>Naman</li><li>Akshat</li><li>Rajat</li><li>Shweta</li><li>Nancy</li><li>Marya</li><li>Palak</li><li>Anant</li><li>Riya</li></ul>
+        <ul class="comp rise" style="--d:.3s"><li>Samyak</li><li>Naman</li><li>Akshat</li><li>Rajat</li><li>Shweta</li><li>Nancy</li><li>Manya</li><li>Palak</li><li>Anant</li><li>Riya</li></ul>
       </div>
       <div class="arch-words"><p class="mausi rise" lang="hi" style="--d:.3s"><span>हमारी मौसी की शादी में</span><span>जरूर जरूर आना।।</span></p><p class="kids rise" style="--d:.45s">Gunika, Nishtha</p></div>
       <p class="credit">Created by <a href="https://invitivals.com/?utm_source=invitation&amp;utm_medium=footer&amp;utm_campaign=bhumika-siddhant-wedding" target="_blank" rel="noopener">Invitivals</a></p>
@@ -249,6 +275,6 @@
   </div>
 </div>
 <noscript><p style="padding:40px 24px;text-align:center;font-family:Georgia,serif;color:#5a3a30">Please enable JavaScript to open this invitation.</p></noscript>
-<script type="module" src="js/app.js?v=1"></script>
+<script type="module" src="js/app.js?v=2"></script>
 </body>
 </html>

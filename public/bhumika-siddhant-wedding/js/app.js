@@ -1,5 +1,5 @@
 /* ─────────────────────────────────────────────────────────────────────────────
-   Bhumika & Siddhant — the wedding (no scratch card on this page: that part below stays idle). Runs the page: the one tap that opens the envelope (the film,
+   Bhumika & Siddhant — the wedding. Runs the page: the one tap that opens the envelope (the film,
    then the cover), the scroll-in of every piece, the Save the Date scratch card, the venue map links, the falling
    petals, and the family's song when ../config.js names one (no song: no music button).
    ───────────────────────────────────────────────────────────────────────────── */
@@ -165,7 +165,7 @@ if (cue) {
       ctx.drawImage(logo, (W - L) / 2, H * .15, L, L); ctx.shadowColor = 'transparent';
     }
     ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
-    ctx.fillStyle = '#6e1630'; ctx.font = `${Math.round(H * .066)}px "Pinyon Script", cursive`; ctx.fillText('Our special days await', W / 2, H * .74);
+    ctx.fillStyle = '#6e1630'; ctx.font = `${Math.round(H * .066)}px "Pinyon Script", cursive`; ctx.fillText('Our special day awaits', W / 2, H * .74);
     ctx.fillStyle = 'rgba(80,40,20,.9)'; ctx.font = `600 ${Math.round(H * .028)}px Cinzel, Georgia, serif`;
     ctx.fillText('SCRATCH TO REVEAL'.split('').join(String.fromCharCode(8202)), W / 2, H * .83);
     ctx.restore();
@@ -213,9 +213,9 @@ if (cue) {
 })();
 
 /* ── Add to Calendar: a sheet with the .ics (Apple, Android, Outlook) and Google Calendar ── */
-const sheet = $('#sheet'), calBtn = $('#calBtn');
+const sheet = $('#sheet'), calBtns = document.querySelectorAll('.cal-btn'); let calBtn = calBtns[0];   // two buttons open the one sheet
 if (sheet && calBtn) {
-  calBtn.addEventListener('click', () => { sheet.hidden = false; sheet.querySelector('a').focus(); });
+  for (const b of calBtns) b.addEventListener('click', () => { calBtn = b; sheet.hidden = false; sheet.querySelector('a').focus(); });
   for (const el of sheet.querySelectorAll('[data-close]')) el.addEventListener('click', () => { sheet.hidden = true; calBtn.focus(); });
   document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && !sheet.hidden) { sheet.hidden = true; calBtn.focus(); } });
 }

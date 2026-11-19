@@ -20,7 +20,7 @@
    The B–S monogram named in the brief did not arrive (2026-11-18): the seal and the pages carry a lettered stand-in.
 
    Slides: the sealed envelope and its film · Lord Mahavir and the two lines · the invitation (Bhumika weds Siddhant) ·
-   Our Families · the couple's photograph · The Wedding Day (three events) · Wedding Venue · the countdown ·
+   Save the Date (scratch card, slide 3 since 19 Nov) · Our Families · the couple's photograph · The Wedding Day (three events) · Wedding Venue · the countdown ·
    R.S.V.P. (second-last) · With Best Compliments From (last). No Ganesha anywhere: this is a Jain wedding.
    Every name and detail is exactly as the family wrote it; no end times, phone numbers or other names are added. */
 import fs from 'node:fs';
@@ -29,7 +29,7 @@ import path from 'node:path';
 const ROOT = path.resolve(path.dirname(new URL(import.meta.url).pathname.replace(/^\/([A-Z]:)/, '$1')), '..');
 const SLUG = 'bhumika-siddhant-wedding', D = path.join(ROOT, 'public', SLUG), REF = path.join(ROOT, 'public/lokesh-akansha-wedding');
 const SRC = path.join(ROOT, 'invites/src', SLUG);
-const URL_ = `https://invitivals.com/${SLUG}/`, V = 1, COVER = 'cover-bhumika-siddhant.jpg';
+const URL_ = `https://invitivals.com/${SLUG}/`, V = 2, COVER = 'cover-bhumika-siddhant.jpg';
 const esc = (s) => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 
 /* the venue exactly as on the family's card. No map link was supplied, so the button searches Google Maps for
@@ -46,7 +46,7 @@ const DAY = [
 ];
 const COUNTDOWN = '2026-12-02T12:00:00+05:30';
 const RSVP = ['Sanjay Jain & Sons', 'Kavita Fab', 'Palak Fabric', 'Naman Fab'];
-const COMPLIMENTS = ['Sanyam', 'Naman', 'Akshat', 'Rajat', 'Shweta', 'Nancy', 'Marya', 'Palak', 'Anant', 'Riya'];
+const COMPLIMENTS = ['Samyak', 'Naman', 'Akshat', 'Rajat', 'Shweta', 'Nancy', 'Manya', 'Palak', 'Anant', 'Riya'];
 const MANGAL = ['मंगलम भगवान वीरो, मंगलम गौतमो गणि।', 'मंगलम कुन्दकुन्दाद्यो, जैन धर्मोस्तु मंगलम् ॥'];
 
 const CSS = `
@@ -94,6 +94,13 @@ const CSS = `
 .mausi { font-family: var(--deva); font-weight: 600; color: var(--maroon); font-size: calc(var(--cq) * 3.5); line-height: 1.6; }
 .mausi span { display: block; white-space: nowrap; }
 .kids { font-family: var(--script); color: var(--gold); font-size: calc(var(--cq) * 6.6); line-height: 1.1; margin-top: calc(var(--cq) * .8); white-space: nowrap; }
+/* client, 19 Nov: the couple's names in a clear serif (Playfair Display italic) instead of the script; same maroon */
+.nm { font-family: 'Playfair Display', var(--serif); font-style: italic; font-weight: 500; letter-spacing: .005em; }
+.couple-names .script--xl.nm { font-size: calc(var(--cq) * 12.4); line-height: 1.22; }
+.fam__n.fam__n--sm.nm { font-size: calc(var(--cq) * 8.6); line-height: 1.3; }
+.script--pair.nm { font-size: calc(var(--cq) * 6.1); line-height: 1.3; }
+/* Save the Date (slide 3): one day, so one numeral on the scratch card */
+.scard__num.scard__num--one { font-size: calc(var(--cq) * 19); }
 `;
 
 if (process.argv[2] === 'init') {
@@ -109,7 +116,10 @@ if (process.argv[2] === 'init') {
      card on this page, and the script's part for it simply finds nothing to run on */
   let js = fs.readFileSync(path.join(REF, 'js/app.js'), 'utf8').replace(/\r\n/g, '\n');
   const sw = (a, b) => { if (js.split(a).length !== 2) throw new Error('app.js: ' + a.slice(0, 50)); js = js.replace(a, () => b); };
-  sw('Lokesh & Akansha — the wedding, groom side.', 'Bhumika & Siddhant — the wedding (no scratch card on this page: that part below stays idle).');
+  sw('Lokesh & Akansha — the wedding, groom side.', 'Bhumika & Siddhant — the wedding.');
+  sw("'Our special days await'", "'Our special day awaits'");
+  sw("const sheet = $('#sheet'), calBtn = $('#calBtn');", "const sheet = $('#sheet'), calBtns = document.querySelectorAll('.cal-btn'); let calBtn = calBtns[0];   // two buttons open the one sheet");
+  sw("calBtn.addEventListener('click', () => { sheet.hidden = false; sheet.querySelector('a').focus(); });", "for (const b of calBtns) b.addEventListener('click', () => { calBtn = b; sheet.hidden = false; sheet.querySelector('a').focus(); });");
   sw("'../config.js?v=3'", "'../config.js?v=1'");
   sw("'assets/el/la-logo.webp'", "'assets/el/bs-logo.webp'");
   sw('countdown to the Pheras', 'countdown to the Reception of Barat');
@@ -208,7 +218,7 @@ const html = `<!DOCTYPE html>
 <link rel="modulepreload" href="js/app.js?v=${V}">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Pinyon+Script&family=Cinzel:wght@500;600&family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Noto+Serif+Devanagari:wght@500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Pinyon+Script&family=Playfair+Display:ital,wght@1,500&family=Cinzel:wght@500;600&family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Noto+Serif+Devanagari:wght@500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/invite.css?v=${V}">
 </head>
 <body class="is-closed">
@@ -252,9 +262,9 @@ const html = `<!DOCTYPE html>
         <p class="destiny gap-m rise" style="--d:.2s">Destiny brought them together &amp; now Love will seal their bond forever.</p>
         ${GARLAND(18, '.3s', 'margin:calc(var(--cq) * 2.4) auto calc(var(--cq) * 2);')}
         <h1 class="couple-names">
-          <span class="script script--xl rise" style="--d:.4s">Bhumika</span>
+          <span class="script script--xl nm rise" style="--d:.4s">Bhumika</span>
           <span class="amp rise" style="--d:.55s"><span class="amp__line" aria-hidden="true"></span><span class="amp__and weds">weds</span><span class="amp__line" aria-hidden="true"></span></span>
-          <span class="script script--xl rise" style="--d:.7s">Siddhant</span>
+          <span class="script script--xl nm rise" style="--d:.7s">Siddhant</span>
         </h1>
         ${GARLAND(18, '.8s', 'margin:calc(var(--cq) * 2.4) auto calc(var(--cq) * 2.4);')}
         <p class="datebar rise" style="--d:.9s">Wednesday<small>2nd December 2026</small></p>
@@ -263,7 +273,32 @@ const html = `<!DOCTYPE html>
     </div>
   </section>
 
-  <!-- 3 · Our Families: the card's own words in the card's own order -->
+  <!-- 3 · Save the Date (client, 19 Nov): the design's gold-foil scratch card; underneath, the day. Scratch with a finger or the mouse -->
+  <section class="page" id="p-save">
+    <div class="art art--fit" style="--h:169.29">
+      <img class="bg" src="assets/bg/p2.webp" alt="" width="964" height="1632" loading="lazy" decoding="async">
+      ${TASSELS}
+      <div class="flow" style="--top:33;--side:14">
+        <h2 class="script script--lg rise">Save the Date</h2>
+        <div class="scard rise" id="scard" style="--d:.3s">
+          <div class="scard__face" id="scardFace">
+            <p class="scard__kicker">Our Wedding</p>
+            <p class="scard__day">Wednesday</p>
+            <p class="scard__num scard__num--one">2</p>
+            <p class="scard__month">December <span>2026</span></p>
+            <img class="scard__orn" src="assets/el/garland.webp" alt="" loading="lazy">
+            <p class="scard__place">Ghaziabad</p>
+          </div>
+          <canvas class="scard__foil" id="foil" role="button" tabindex="0" aria-label="Scratch card: rub it with your finger or the mouse to reveal our wedding date. Press Enter to reveal." aria-describedby="scardNote"></canvas>
+          <span class="scard__hint" id="scardHint" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M9 11.2V5.5a1.5 1.5 0 0 1 3 0v4.7l.1-1.2a1.5 1.5 0 0 1 3 .1v1.3a1.5 1.5 0 0 1 3 .2V12a1.5 1.5 0 0 1 2.9.3v3.4c0 3.5-2.6 6.3-6.2 6.3h-1.3c-2 0-3.4-.8-4.7-2.4L5.7 15.6a1.6 1.6 0 0 1 2.3-2.2z"/></svg></span>
+          <p class="sr-only" id="scardNote" aria-live="polite">Scratch the card to reveal the date.</p>
+        </div>
+        <button class="maps cal-btn rise" type="button" style="--d:.4s" aria-haspopup="dialog"><svg viewBox="0 0 24 24" aria-hidden="true">${CALPATH}</svg><span>Add to Calendar</span></button>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4 · Our Families: the card's own words in the card's own order -->
   <section class="page" id="p-fam">
     <div class="art art--fit" style="--h:177.68">
       <img class="bg" src="assets/bg/p1.webp" alt="" width="941" height="1672" loading="lazy" decoding="async">${bells(5.5, 11.5, true)}
@@ -272,7 +307,7 @@ const html = `<!DOCTYPE html>
         ${GARLAND(18, '.1s')}
         <div class="fam gap-m rise" style="--d:.15s">
           <p class="fam__l">The Bride</p>
-          <h3 class="fam__n fam__n--sm">Bhumika</h3>
+          <h3 class="fam__n fam__n--sm nm">Bhumika</h3>
           <p class="fam__k">Granddaughter of</p>
           <p class="fam__g">Late Smt. Sneh Lata Jain &amp;<br>Late Shri Mam Chand Jain</p>
           <p class="fam__k">Daughter of</p>
@@ -282,7 +317,7 @@ const html = `<!DOCTYPE html>
         <p class="with rise" style="--d:.1s">WEDS</p>
         <div class="fam rise" style="--d:.15s">
           <p class="fam__l">The Groom</p>
-          <h3 class="fam__n fam__n--sm">Siddhant</h3>
+          <h3 class="fam__n fam__n--sm nm">Siddhant</h3>
           <p class="fam__k">Son of</p>
           <p class="fam__p"><span>Mrs. Ruby Jain and</span><span>Mr. Pawan Kumar Jain</span></p>
         </div>
@@ -296,7 +331,7 @@ const html = `<!DOCTYPE html>
       <img class="bg" src="assets/bg/p4.webp" alt="" width="941" height="1672" loading="lazy" decoding="async">
       ${P4BELLS}
       <div class="flow" style="--top:27;--side:14">
-        <h2 class="script script--md script--pair rise">Bhumika <span>&amp;</span> Siddhant</h2>
+        <h2 class="script script--md script--pair nm rise">Bhumika <span>&amp;</span> Siddhant</h2>
         ${GARLAND(18, '.15s')}
         <figure class="frame frame--couple pop" style="--d:.3s"><img src="assets/el/couple.webp" alt="Bhumika and Siddhant smiling at each other before a round wall of roses, she in an ivory embroidered lehenga, he in a navy suit" width="1000" height="1333" loading="lazy" decoding="async"></figure>
       </div>
