@@ -1,0 +1,35 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Invitivals//Engagement Invitation//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VTIMEZONE
+TZID:Asia/Kolkata
+BEGIN:STANDARD
+DTSTART:19700101T000000
+TZOFFSETFROM:+0530
+TZOFFSETTO:+0530
+TZNAME:IST
+END:STANDARD
+END:VTIMEZONE
+BEGIN:VEVENT
+UID:sujatha-jeevan-engagement-2026-11-29@invitivals.com
+DTSTAMP:20261119T000000Z
+DTSTART;TZID=Asia/Kolkata:20261129T103000
+SUMMARY:Engagement Ceremony – Sujatha K & Jeevan L
+LOCATION:Asha Food Camp\, No. 86\, 10th Cross\, Anjanaya Temple Street\, Ma
+ lleswaram\, Bangalore – 560003
+DESCRIPTION:Engagement Ceremony of Sujatha K & Jeevan L\nSunday\, 29 Novemb
+ er 2026\nEngagement ceremony: 10:30 AM onwards\nLunch: 12:30 PM onwards\nV
+ enue: Asha Food Camp\, No. 86\, 10th Cross\, Anjanaya Temple Street\, Mall
+ eswaram\, Bangalore – 560003\nMap: https://www.google.com/maps/search/?a
+ pi=1&query=Asha%20Food%20Camp%2C%2010th%20Cross%2C%20Malleswaram%2C%20Bang
+ alore%20560003
+URL:https://invitivals.com/sujatha-jeevan-engagement/
+BEGIN:VALARM
+TRIGGER:-P1D
+ACTION:DISPLAY
+DESCRIPTION:Engagement of Sujatha K & Jeevan L is tomorrow
+END:VALARM
+END:VEVENT
+END:VCALENDAR
