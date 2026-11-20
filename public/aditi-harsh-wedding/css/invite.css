@@ -783,8 +783,8 @@ html.is-sealed .swipe-cue { opacity: 0; transform: translateY(10px); }
 .events .timeline { margin-top: 0; }
 
 /* ── Aditi & Harsh (client, 2026-11-18) ─────────────────────────────────────── */
-/* the Ganesh Vandana on the doors and the invocation over the names are in Gujarati script */
-.intro-shloka { font-family: 'Noto Serif Gujarati', var(--serif); line-height: 1.6; }
+/* the invocation over the names is in Gujarati script; the Ganesh Vandana on the doors is in Devanagari (client, 20 Nov) */
+.intro-shloka { font-family: 'Noto Serif Devanagari', 'Nirmala UI', 'Kohinoor Devanagari', var(--serif); line-height: 1.6; }
 .regional { font-size: min(19px, calc(2.4 * var(--sv))); letter-spacing: .02em; }
 
 /* Ganpati at the head of the first page, over the names */

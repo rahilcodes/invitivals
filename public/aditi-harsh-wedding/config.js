@@ -10,7 +10,7 @@
 /* the one venue of all five functions. The name and road are what the client's own map link opens
    (Google: "KRUSHNAKUNJ MANDAPAM · Bhavnagar - Sidsar Rd · Shampara, Gujarat") and what the gate in their picture says. */
 const VENUE = 'Krushnakunj Mandapam';
-const MAP = 'https://share.google/lUT3vx02mHjC7CFc2';   // the client's own link, exactly as supplied
+const MAP = 'https://maps.app.goo.gl/zSDqWw7sZbBe4Fyb9?g_st=iw';   // the client's corrected link (20 Nov), exactly as supplied
 const at = (d, t) => `2027-01-${d}T${t}:00+05:30`;
 
 export const weddingConfig = {
@@ -21,8 +21,8 @@ export const weddingConfig = {
   invocation: 'Shri Ganeshaya Namah',
   /* Ganpati at the beginning, in the family's own script (Gujarati). font = a Google Font that covers it */
   regional: { text: '॥ શ્રી ગણેશાય નમઃ ॥', meaning: 'Shri Ganeshaya Namah', font: 'Noto Serif Gujarati', lang: 'gu' },
-  /* the Ganesh Vandana on the closed doors of the opening slide (js/sections/intro.js), in Gujarati script */
-  introShloka: { lines: ['વક્રતુંડ મહાકાય સૂર્યકોટિ સમપ્રભ ।', 'નિર્વિઘ્નં કુરુ મે દેવ સર્વકાર્યેષુ સર્વદા ॥'], font: 'Noto Serif Gujarati', lang: 'sa-Gujr' },
+  /* the Ganesh Vandana on the closed doors of the opening slide (js/sections/intro.js), in Hindi (Devanagari), the client's exact text (20 Nov) */
+  introShloka: { lines: ['वक्रतुण्ड महाकाय सूर्यकोटि समप्रभ।', 'निर्विघ्नं कुरु मे देव सर्वकार्येषु सर्वदा॥'], font: 'Noto Serif Devanagari', lang: 'sa' },
   /* Ganpati over the names on the first page (the seated Ganesha of the Invitivals art library) */
   ganeshImage: 'assets/ganesha.webp',
   /* ?to=Name in the link greets each guest personally; this is used when there is none */
@@ -58,7 +58,7 @@ export const weddingConfig = {
       label: "Bride's Family",
       person: 'Aditi',
       relation: 'Daughter of',
-      parents: ['Shila Chauhan &', 'Harshal Chauhan'],
+      parents: ['Smt Shila Chauhan &', 'Sh Harshal Chauhan'],
       grandRelation: 'Granddaughter of',
       grandparents: ['Late Vrajlal Chauhan &', 'Late Nirmalaben Chauhan'],
     },
@@ -66,7 +66,7 @@ export const weddingConfig = {
       label: "Groom's Family",
       person: 'Harsh',
       relation: 'Son of',
-      parents: ['Bhagvanbhai Desai &', 'Hiraben Desai'],
+      parents: ['Smt Hiraben Desai &', 'Sh Bhagvanbhai Desai'],
       grandRelation: 'Grandson of',
       grandparents: ['Late Kalubhai Desai &', 'Late Gauriben Desai'],
     },
