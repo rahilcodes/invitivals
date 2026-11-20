@@ -18,7 +18,7 @@
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
-<link rel="preload" as="image" href="assets/intro-poster.webp" fetchpriority="high">
+<link rel="preload" as="image" href="assets/envelope.webp">
 <link rel="preload" as="font" type="font/woff2" href="assets/fonts/pinyon-script-latin-400-normal.woff2" crossorigin>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+Devanagari:wght@600;700&amp;display=swap">
@@ -209,7 +209,10 @@ a{color:inherit}
 .ev-b .ev-t{display:table}   /* its own line even on a card without a note (Haldi, Sangeet) */
 
 /* ── Ritik & Aradhana (client, 2026-11-20): what this invitation adds to the design ── */
-/* the opening film (Lord Shiva and Goddess Parvati), in place of the envelope */
+/* the sealed envelope opens first (the design's own, above everything); behind it waits the film of Lord Shiva
+   and Goddess Parvati, without its opening words; the music button stays reachable over the film */
+#env{z-index:60}
+.mute{z-index:55}
 #intro{position:fixed;inset:0;z-index:50;background:#1c0b0c;cursor:pointer;overflow:hidden;-webkit-tap-highlight-color:transparent;transition:opacity 1.2s ease,visibility 1.2s}
 #intro .stage{position:absolute;top:0;bottom:0;left:50%;width:min(100vw,max(480px,calc(100vh*9/16)));transform:translateX(-50%);overflow:hidden}
 #intro video,#intro .poster{position:absolute;inset:0;width:100%;height:100%;max-width:none;object-fit:cover;object-position:50% 60%}
@@ -233,10 +236,18 @@ a{color:inherit}
 </style>
 </head>
 <body class="locked">
-<div id="intro" role="button" tabindex="0" aria-label="Open the wedding invitation">
+<div id="env" role="dialog" aria-label="Invitation envelope">
   <div class="stage">
-    <video id="film" muted playsinline preload="auto" aria-hidden="true"><source src="assets/intro.mp4?v=1" type="video/mp4"></video>
-    <img class="poster" src="assets/intro-poster.webp" alt="Lord Shiva and Goddess Parvati seated in a flower-hung temple by the mountains. Wedding Invitation. Tap to enter." width="720" height="1280" fetchpriority="high">
+    <div class="flap f-top"></div><div class="flap f-right"></div><div class="flap f-bottom"></div><div class="flap f-left"></div>
+    <button class="seal" type="button" aria-label="Open the invitation"></button>
+  </div>
+  <div class="dear" hidden><div class="to">Dear</div><div class="nm"></div></div>
+  <div class="hint"><span>Tap the seal to open</span></div>
+</div>
+<div id="intro" role="button" tabindex="0" aria-label="Lord Shiva and Goddess Parvati. Tap to go to the invitation">
+  <div class="stage">
+    <video id="film" muted playsinline preload="auto" aria-hidden="true"><source src="assets/intro.mp4?v=2" type="video/mp4"></video>
+    <img class="poster" src="assets/intro-poster.webp?v=2" alt="Lord Shiva and Goddess Parvati seated in a flower-hung temple by the mountains" width="720" height="1280">
   </div>
 </div>
 
@@ -257,7 +268,7 @@ a{color:inherit}
     <p class="kicker reveal">Wedding Invitation</p>
     <h2 class="h2 reveal" id="story-h">Ritik &amp; Aradhana</h2>
     <div class="orn reveal"><i></i><svg viewBox="0 0 16 16"><path d="M8 0l2 6 6 2-6 2-2 6-2-6-6-2 6-2z"/></svg><i></i></div>
-    <div class="arch reveal"><img src="assets/photo-3.webp?v=1" alt="Ritik and Aradhana together in front of a temple at night, he in an ivory sherwani and she in a blush pink saree" style="object-position:50% 50%" loading="lazy" width="960" height="1280"></div>
+    <div class="arch reveal"><img src="assets/photo-3.webp?v=2" alt="Ritik and Aradhana together in front of a temple at night, he in an ivory sherwani and she in a blush pink saree" style="object-position:50% 50%" loading="lazy" width="960" height="1280"></div>
     <p class="lead letter reveal">Dear Sir/Madam,</p>
     <p class="lead letter reveal" style="margin-top:10px">We cordially invite your august presence with great pleasure on the auspicious occasion of the wedding ceremony of our elder son,</p>
     <p class="names full reveal">Ayushman Rebatiraman<small>(Ritik)</small><span class="amp">with</span>Ipsita<small>(Aradhana)</small></p>
@@ -395,9 +406,9 @@ a{color:inherit}
     <h2 class="h2 reveal" id="gal-h">Gallery</h2>
     <div class="orn reveal"><i></i><svg viewBox="0 0 16 16"><path d="M8 0l2 6 6 2-6 2-2 6-2-6-6-2 6-2z"/></svg><i></i></div>
     <div class="gal reveal" id="gal">
-        <figure class="g-item"><button type="button" class="g-btn" data-i="0" aria-label="View photo 1 larger"><img src="assets/photo-3.webp?v=1" alt="Ritik and Aradhana together in front of a temple at night, he in an ivory sherwani and she in a blush pink saree" style="object-position:50% 50%" loading="lazy" decoding="async" width="960" height="1280"></button></figure>
-        <figure class="g-item"><button type="button" class="g-btn" data-i="1" aria-label="View photo 2 larger"><img src="assets/photo-1.webp?v=1" alt="Ritik and Aradhana holding hands on the beach, he in an ivory kurta and she in a sky blue saree" style="object-position:50% 50%" loading="lazy" decoding="async" width="960" height="1280"></button></figure>
-        <figure class="g-item"><button type="button" class="g-btn" data-i="2" aria-label="View photo 3 larger"><img src="assets/photo-2.webp?v=1" alt="Ritik and Aradhana walking hand in hand through the waves, both in brown" style="object-position:50% 50%" loading="lazy" decoding="async" width="960" height="1280"></button></figure>
+        <figure class="g-item"><button type="button" class="g-btn" data-i="0" aria-label="View photo 1 larger"><img src="assets/photo-3.webp?v=2" alt="Ritik and Aradhana together in front of a temple at night, he in an ivory sherwani and she in a blush pink saree" style="object-position:50% 50%" loading="lazy" decoding="async" width="960" height="1280"></button></figure>
+        <figure class="g-item"><button type="button" class="g-btn" data-i="1" aria-label="View photo 2 larger"><img src="assets/photo-1.webp?v=2" alt="Ritik and Aradhana holding hands on the beach, he in an ivory kurta and she in a sky blue saree" style="object-position:50% 50%" loading="lazy" decoding="async" width="960" height="1280"></button></figure>
+        <figure class="g-item"><button type="button" class="g-btn" data-i="2" aria-label="View photo 3 larger"><img src="assets/photo-2.webp?v=2" alt="Ritik and Aradhana walking hand in hand through the waves, both in brown" style="object-position:50% 50%" loading="lazy" decoding="async" width="960" height="1280"></button></figure>
     </div>
     <div class="dots" id="dots"><i class="on"></i><i></i><i></i></div>
     <img class="corner br" src="assets/corner-floral.webp" alt="">
@@ -430,42 +441,53 @@ a{color:inherit}
   </section>
 </main>
 
+<button class="mute" id="mute" type="button" aria-label="Pause music"><span class="bars"><i></i><i></i><i></i><i></i></span></button>
 <div class="box" id="box" role="dialog" aria-label="Photo"><img alt=""><button type="button" class="x" aria-label="Close">&times;</button><button type="button" class="nav prev" aria-label="Previous photo">&#8249;</button><button type="button" class="nav next" aria-label="Next photo">&#8250;</button></div>
 <div class="petals" id="petals" aria-hidden="true"></div>
+<audio id="music" src="assets/music.mp3" loop preload="none"></audio>
 
 <script>
 (function(){
   "use strict";
-  var PHOTOS=[{"src":"assets/photo-3.webp?v=1","alt":"Ritik and Aradhana together in front of a temple at night, he in an ivory sherwani and she in a blush pink saree"},{"src":"assets/photo-1.webp?v=1","alt":"Ritik and Aradhana holding hands on the beach, he in an ivory kurta and she in a sky blue saree"},{"src":"assets/photo-2.webp?v=1","alt":"Ritik and Aradhana walking hand in hand through the waves, both in brown"}], COUNT_TO="2027-01-29T22:25:00+05:30";
-  var intro=document.getElementById("intro"), film=document.getElementById("film"), audio=document.getElementById("music"), mute=document.getElementById("mute");
+  var PHOTOS=[{"src":"assets/photo-3.webp?v=2","alt":"Ritik and Aradhana together in front of a temple at night, he in an ivory sherwani and she in a blush pink saree"},{"src":"assets/photo-1.webp?v=2","alt":"Ritik and Aradhana holding hands on the beach, he in an ivory kurta and she in a sky blue saree"},{"src":"assets/photo-2.webp?v=2","alt":"Ritik and Aradhana walking hand in hand through the waves, both in brown"}], COUNT_TO="2027-01-29T22:25:00+05:30";
+  var env=document.getElementById("env"), intro=document.getElementById("intro"), film=document.getElementById("film"), audio=document.getElementById("music"), mute=document.getElementById("mute");
+  var q=new URLSearchParams(location.search), to=(q.get("to")||"").trim().slice(0,40);
+  if(to){var d=env.querySelector(".dear");d.hidden=false;d.querySelector(".nm").textContent=to;document.title=to+" — "+document.title}
   var muted=false;try{muted=localStorage.getItem("inv-muted")==="1"}catch(e){}
   function fadeIn(){audio.volume=0;var v=0,t=setInterval(function(){v=Math.min(.7,v+.05);audio.volume=v;if(v>=.7)clearInterval(t)},120)}
   function play(){if(!audio||muted)return;var p=audio.play();if(p&&p.then)p.then(fadeIn).catch(function(){})}
   function setMute(m){muted=m;mute.classList.toggle("off",m);mute.setAttribute("aria-label",m?"Play music":"Pause music");try{localStorage.setItem("inv-muted",m?"1":"0")}catch(e){}m?audio.pause():play()}
-  if(mute&&audio)mute.addEventListener("click",function(){setMute(!muted)});
+  if(mute&&audio)mute.addEventListener("click",function(e){e.stopPropagation();setMute(!muted)});
 
-  // the opening film: one tap plays it (and starts the music, when there is any); it then gives way to the
-  // invitation. A second tap, a film that cannot start, or one that stalls, goes straight in.
-  var entered=false, opened=false, timer;
+  // 1. the sealed envelope: a tap on it starts the music and opens the flaps over the film
+  // 2. the film (Lord Shiva and Goddess Parvati) plays once and gives way to the invitation; a tap on it, a film
+  //    that cannot start, or one that stalls, goes straight in
+  var sealed=true, opened=false, timer;
   function finish(){
     if(opened)return;opened=true;clearTimeout(timer);
     intro.classList.add("leaving");document.body.classList.remove("locked");
     document.getElementById("couple").classList.add("in");
-    setTimeout(function(){try{film.pause()}catch(e){}intro.remove();if(mute&&audio){mute.classList.add("on");mute.classList.toggle("off",muted)}petals();fit()},1300);
+    setTimeout(function(){try{film.pause()}catch(e){}intro.remove();petals();fit()},1300);
   }
-  function enter(){
-    if(entered){finish();return}
-    entered=true;intro.classList.add("tapped");play();
+  function startFilm(){
     film.addEventListener("playing",function(){intro.classList.add("playing");clearTimeout(timer);timer=setTimeout(finish,((film.duration||10)*1000)+900)},{once:true});
     film.addEventListener("ended",function(){setTimeout(finish,200)});
     film.addEventListener("error",finish);
     try{film.currentTime=0;var p=film.play();if(p&&p.catch)p.catch(finish)}catch(e){finish();return}
     timer=setTimeout(function(){if(!intro.classList.contains("playing"))finish()},4500);
   }
-  intro.addEventListener("click",enter);
-  intro.addEventListener("keydown",function(e){if(e.key==="Enter"||e.key===" "){e.preventDefault();enter()}});
-  if(new URLSearchParams(location.search).has("nodoor"))finish();
-  document.addEventListener("visibilitychange",function(){if(!audio)return;if(document.hidden)audio.pause();else if(opened)play()});
+  function unseal(){
+    if(!sealed)return;sealed=false;
+    play();env.classList.add("open");
+    if(mute&&audio){mute.classList.add("on");mute.classList.toggle("off",muted)}
+    setTimeout(startFilm,650);
+    setTimeout(function(){env.classList.add("gone")},1500);
+  }
+  env.addEventListener("click",unseal);
+  intro.addEventListener("click",function(){if(!sealed)finish()});
+  intro.addEventListener("keydown",function(e){if(!sealed&&(e.key==="Enter"||e.key===" ")){e.preventDefault();finish()}});
+  if(q.has("nodoor")){sealed=false;env.classList.add("gone");if(mute&&audio){mute.classList.add("on");mute.classList.add("off")}finish()}
+  document.addEventListener("visibilitychange",function(){if(!audio)return;if(document.hidden)audio.pause();else if(!sealed)play()});
 
   // shrink a line that would overflow its place
   function fit(){document.querySelectorAll(".slot").forEach(function(s){s.style.setProperty("--fit",1);var r=1;for(var i=0;i<12;i++){var over=false;s.querySelectorAll(".ln").forEach(function(l){if(l.scrollWidth>s.clientWidth)over=true});if(s.scrollHeight>s.clientHeight+2)over=true;if(!over)break;r*=.92;s.style.setProperty("--fit",r)}})}

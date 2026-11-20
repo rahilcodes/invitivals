@@ -23,7 +23,7 @@ const FILM = path.join(ROOT, 'public', 'aashna-sanket-wedding', 'assets');
 const SRC = path.join(ROOT, 'invites', 'src', SLUG);
 const OUT = path.join(ROOT, 'public', SLUG);
 const URL_ = `https://invitivals.com/${SLUG}/`;
-const V = 1;                                   // raise when a picture or the film changes
+const V = 2;                                   // raise when a picture or the film changes
 
 /* ── the client's details ─────────────────────────────────────────────────────────────── */
 const GROOM = { short: 'Ritik', full: 'Ayushman Rebatiraman' };
@@ -32,7 +32,7 @@ const PAIR = `${GROOM.short} & ${BRIDE.short}`;
 const VENUE = 'Kalyan Mandap, Ghodaghatpada';
 const MAP = 'https://share.google/yMOyoN7oD9wsi5qre';   // the client's own link: marriage and reception are at the same place
 const HOME = 'Family residence';                          // no address was supplied: no map, no calendar entry
-const MUSIC = null;                                       // e.g. 'assets/music.mp3' once the client's DJ track arrives
+const MUSIC = 'assets/music.mp3';                         // the design's own song (client, 20 Nov: the same track as the reference)
 const COUNT_TO = '2027-01-29T22:25:00+05:30';             // Bibaha Panigrahana
 
 const EVENTS = [
@@ -112,42 +112,54 @@ if (!js.includes(COUNT_TO)) throw new Error('countdown date not set');
 cut('  var env=document.getElementById("env")', '  // shrink a line that would overflow its place');
 cut('  // blessings: opens WhatsApp', '  // share');
 swap('document.addEventListener("visibilitychange",function(){if(document.hidden)audio.pause();else if(opened)play()});', '');
-const OPENING_JS = `  var intro=document.getElementById("intro"), film=document.getElementById("film"), audio=document.getElementById("music"), mute=document.getElementById("mute");
+const OPENING_JS = `  var env=document.getElementById("env"), intro=document.getElementById("intro"), film=document.getElementById("film"), audio=document.getElementById("music"), mute=document.getElementById("mute");
+  var q=new URLSearchParams(location.search), to=(q.get("to")||"").trim().slice(0,40);
+  if(to){var d=env.querySelector(".dear");d.hidden=false;d.querySelector(".nm").textContent=to;document.title=to+" — "+document.title}
   var muted=false;try{muted=localStorage.getItem("inv-muted")==="1"}catch(e){}
   function fadeIn(){audio.volume=0;var v=0,t=setInterval(function(){v=Math.min(.7,v+.05);audio.volume=v;if(v>=.7)clearInterval(t)},120)}
   function play(){if(!audio||muted)return;var p=audio.play();if(p&&p.then)p.then(fadeIn).catch(function(){})}
   function setMute(m){muted=m;mute.classList.toggle("off",m);mute.setAttribute("aria-label",m?"Play music":"Pause music");try{localStorage.setItem("inv-muted",m?"1":"0")}catch(e){}m?audio.pause():play()}
-  if(mute&&audio)mute.addEventListener("click",function(){setMute(!muted)});
+  if(mute&&audio)mute.addEventListener("click",function(e){e.stopPropagation();setMute(!muted)});
 
-  // the opening film: one tap plays it (and starts the music, when there is any); it then gives way to the
-  // invitation. A second tap, a film that cannot start, or one that stalls, goes straight in.
-  var entered=false, opened=false, timer;
+  // 1. the sealed envelope: a tap on it starts the music and opens the flaps over the film
+  // 2. the film (Lord Shiva and Goddess Parvati) plays once and gives way to the invitation; a tap on it, a film
+  //    that cannot start, or one that stalls, goes straight in
+  var sealed=true, opened=false, timer;
   function finish(){
     if(opened)return;opened=true;clearTimeout(timer);
     intro.classList.add("leaving");document.body.classList.remove("locked");
     document.getElementById("couple").classList.add("in");
-    setTimeout(function(){try{film.pause()}catch(e){}intro.remove();if(mute&&audio){mute.classList.add("on");mute.classList.toggle("off",muted)}petals();fit()},1300);
+    setTimeout(function(){try{film.pause()}catch(e){}intro.remove();petals();fit()},1300);
   }
-  function enter(){
-    if(entered){finish();return}
-    entered=true;intro.classList.add("tapped");play();
+  function startFilm(){
     film.addEventListener("playing",function(){intro.classList.add("playing");clearTimeout(timer);timer=setTimeout(finish,((film.duration||10)*1000)+900)},{once:true});
     film.addEventListener("ended",function(){setTimeout(finish,200)});
     film.addEventListener("error",finish);
     try{film.currentTime=0;var p=film.play();if(p&&p.catch)p.catch(finish)}catch(e){finish();return}
     timer=setTimeout(function(){if(!intro.classList.contains("playing"))finish()},4500);
   }
-  intro.addEventListener("click",enter);
-  intro.addEventListener("keydown",function(e){if(e.key==="Enter"||e.key===" "){e.preventDefault();enter()}});
-  if(new URLSearchParams(location.search).has("nodoor"))finish();
-  document.addEventListener("visibilitychange",function(){if(!audio)return;if(document.hidden)audio.pause();else if(opened)play()});
+  function unseal(){
+    if(!sealed)return;sealed=false;
+    play();env.classList.add("open");
+    if(mute&&audio){mute.classList.add("on");mute.classList.toggle("off",muted)}
+    setTimeout(startFilm,650);
+    setTimeout(function(){env.classList.add("gone")},1500);
+  }
+  env.addEventListener("click",unseal);
+  intro.addEventListener("click",function(){if(!sealed)finish()});
+  intro.addEventListener("keydown",function(e){if(!sealed&&(e.key==="Enter"||e.key===" ")){e.preventDefault();finish()}});
+  if(q.has("nodoor")){sealed=false;env.classList.add("gone");if(mute&&audio){mute.classList.add("on");mute.classList.add("off")}finish()}
+  document.addEventListener("visibilitychange",function(){if(!audio)return;if(document.hidden)audio.pause();else if(!sealed)play()});
 
 `;
 swap('  // shrink a line that would overflow its place', OPENING_JS + '  // shrink a line that would overflow its place');
 
 const EXTRA_CSS = `
 /* ── Ritik & Aradhana (client, 2026-11-20): what this invitation adds to the design ── */
-/* the opening film (Lord Shiva and Goddess Parvati), in place of the envelope */
+/* the sealed envelope opens first (the design's own, above everything); behind it waits the film of Lord Shiva
+   and Goddess Parvati, without its opening words; the music button stays reachable over the film */
+#env{z-index:60}
+.mute{z-index:55}
 #intro{position:fixed;inset:0;z-index:50;background:#1c0b0c;cursor:pointer;overflow:hidden;-webkit-tap-highlight-color:transparent;transition:opacity 1.2s ease,visibility 1.2s}
 #intro .stage{position:absolute;top:0;bottom:0;left:50%;width:min(100vw,max(480px,calc(100vh*9/16)));transform:translateX(-50%);overflow:hidden}
 #intro video,#intro .poster{position:absolute;inset:0;width:100%;height:100%;max-width:none;object-fit:cover;object-position:50% 60%}
@@ -194,17 +206,25 @@ const html = `<!doctype html>
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
-<link rel="preload" as="image" href="assets/intro-poster.webp" fetchpriority="high">
+<link rel="preload" as="image" href="assets/envelope.webp">
 <link rel="preload" as="font" type="font/woff2" href="assets/fonts/pinyon-script-latin-400-normal.woff2" crossorigin>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+Devanagari:wght@600;700&amp;display=swap">
 <style>${css}${EXTRA_CSS}</style>
 </head>
 <body class="locked">
-<div id="intro" role="button" tabindex="0" aria-label="Open the wedding invitation">
+<div id="env" role="dialog" aria-label="Invitation envelope">
+  <div class="stage">
+    <div class="flap f-top"></div><div class="flap f-right"></div><div class="flap f-bottom"></div><div class="flap f-left"></div>
+    <button class="seal" type="button" aria-label="Open the invitation"></button>
+  </div>
+  <div class="dear" hidden><div class="to">Dear</div><div class="nm"></div></div>
+  <div class="hint"><span>Tap the seal to open</span></div>
+</div>
+<div id="intro" role="button" tabindex="0" aria-label="Lord Shiva and Goddess Parvati. Tap to go to the invitation">
   <div class="stage">
     <video id="film" muted playsinline preload="auto" aria-hidden="true"><source src="assets/intro.mp4?v=${V}" type="video/mp4"></video>
-    <img class="poster" src="assets/intro-poster.webp" alt="Lord Shiva and Goddess Parvati seated in a flower-hung temple by the mountains. Wedding Invitation. Tap to enter." width="720" height="1280" fetchpriority="high">
+    <img class="poster" src="assets/intro-poster.webp?v=${V}" alt="Lord Shiva and Goddess Parvati seated in a flower-hung temple by the mountains" width="720" height="1280">
   </div>
 </div>
 
@@ -321,17 +341,18 @@ ${js}</script>
 
 /* ── files ────────────────────────────────────────────────────────────────────────────── */
 fs.mkdirSync(path.join(OUT, 'assets', 'fonts'), { recursive: true });
-for (const f of ['corner-floral.webp', 'couple-page.webp', 'damask.webp', 'date-cover.webp', 'date-page.webp', 'ganesh-wm.webp', 'spark.webp', 'thanks-page.webp', 'venue-page.webp'])
+for (const f of ['envelope.webp', 'music.mp3', 'corner-floral.webp', 'couple-page.webp', 'damask.webp', 'date-cover.webp', 'date-page.webp', 'ganesh-wm.webp', 'spark.webp', 'thanks-page.webp', 'venue-page.webp'])
   fs.copyFileSync(path.join(TPL, 'assets', f), path.join(OUT, 'assets', f));
 for (const f of fs.readdirSync(path.join(TPL, 'assets', 'fonts'))) fs.copyFileSync(path.join(TPL, 'assets', 'fonts', f), path.join(OUT, 'assets', 'fonts', f));
-fs.copyFileSync(path.join(FILM, 'intro.mp4'), path.join(OUT, 'assets', 'intro.mp4'));
-fs.copyFileSync(path.join(FILM, 'intro-poster.webp'), path.join(OUT, 'assets', 'intro-poster.webp'));
+/* the film without its opening words, and its first frame: made by tools/ritik-aradhana-film.mjs */
+fs.copyFileSync(path.join(SRC, 'shiva-clean.mp4'), path.join(OUT, 'assets', 'intro.mp4'));
+fs.copyFileSync(path.join(SRC, 'shiva-clean-poster.webp'), path.join(OUT, 'assets', 'intro-poster.webp'));
 for (const p of PHOTOS)   // the client's photographs: re-encoded only, whole, at their own size
   await sharp(path.join(SRC, p.id + '.jpg')).rotate().webp({ quality: 90 }).toFile(path.join(OUT, 'assets', p.id + '.webp'));
 fs.writeFileSync(path.join(OUT, 'index.html'), html);
 
 /* link preview: the film's opening picture beside the names and the day */
-const poster = await sharp(path.join(FILM, 'intro-poster.webp')).resize({ width: 430 }).extract({ left: 0, top: 30, width: 430, height: 630 }).toBuffer();
+const poster = await sharp(path.join(SRC, 'shiva-clean-poster.webp')).resize({ width: 430 }).extract({ left: 0, top: 30, width: 430, height: 630 }).toBuffer();
 const text = Buffer.from(`<svg width="1200" height="630" xmlns="http://www.w3.org/2000/svg">
   <defs><linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#4a1022"/><stop offset="1" stop-color="#2a0611"/></linearGradient>
   <linearGradient id="g" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f9e2a8"/><stop offset="1" stop-color="#d9aa5a"/></linearGradient></defs>
