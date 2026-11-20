@@ -19,7 +19,7 @@ const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const SRC = path.join(ROOT, 'public', 'poornajnana', 'index.html');
 const D = path.join(ROOT, 'public', 'choudhari-gruhapravesh');
 const { invite: C } = await import(pathToFileURL(path.join(D, 'config.js')).href + '?t=' + Date.now());
-const V = 3;   // raise when css/invite.css, js/app.js or config.js change, so phones fetch the new files
+const V = 4;   // raise when css/invite.css, js/app.js or config.js change, so phones fetch the new files
 
 const esc = (s) => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 const put = (rel, data) => {
@@ -123,14 +123,14 @@ const html = `<!DOCTYPE html>
           ${img('cow-calf', 'style="display:block;width:100%" alt="Kamadhenu cow and calf"')}
         </div>
       </div>
-      <div class="hero-words hero-words--g" style="position:absolute;left:8%;right:8%;text-align:center;display:flex;flex-direction:column;align-items:center;color:#7a4a12">
+      <div class="hero-words hero-words--g${C.hero.showFamily === false ? ' hero-words--nofam' : ''}" style="position:absolute;left:8%;right:8%;text-align:center;display:flex;flex-direction:column;align-items:center;color:#7a4a12">
         ${img('ganesha', 'class="t-in hero-ganesha" style="transition:opacity 1.1s ease .1s, transform 1.1s ease .1s" alt="Shree Ganesha" width="720" height="583"')}
         <div class="t-in hero-deva" lang="mr" style="transition:opacity 1.1s ease .3s, transform 1.1s ease .3s">${C.hero.deva.map((l) => `<div>${esc(l)}</div>`).join('')}</div>
 ${C.hero.invite ? `        <div class="t-in hero-invite" style="transition:opacity 1.2s ease .6s, transform 1.2s ease .6s">${esc(C.hero.invite)}</div>
 ` : ''}        <h1 class="t-in" style="margin:${U(C.hero.invite ? 2 : 8)} 0 0;font-size:${U(C.hero.invite ? 46 : 42)};font-weight:600;color:#8a4a1a;line-height:1.05;transition:opacity 1.2s ease .8s, transform 1.2s ease .8s">${esc(C.hero.ceremony)}</h1>
 ${C.hero.sub ? `        <div class="t-in" style="font-size:${U(17)};font-style:italic;margin-top:${U(4)};transition:opacity 1.2s ease 1.2s, transform 1.2s ease 1.2s">${esc(C.hero.sub)}</div>
-` : ''}        <div class="t-in hero-home" style="transition:opacity 1.2s ease 1.6s, transform 1.2s ease 1.6s">${esc(C.hero.family)}</div>
-      </div>
+` : ''}${C.hero.showFamily === false ? '' : `        <div class="t-in hero-home" style="transition:opacity 1.2s ease 1.6s, transform 1.2s ease 1.6s">${esc(C.hero.family)}</div>
+`}      </div>
     </div>
     <!-- ============ CONTENT ============ -->
     <div style="position:relative;width:100%;max-width:520px;margin:0 auto;background:linear-gradient(180deg,#f6ecd6 0%,#f3e5c8 50%,#f6ecd6 100%);padding:${U(52)} ${U(30)} ${U(70)};box-sizing:border-box;display:flex;flex-direction:column;gap:${U(52)};color:#6b3f10;text-align:center" id="contentCol">

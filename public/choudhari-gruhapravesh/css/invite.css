@@ -75,3 +75,7 @@ h1,h2,h3{font-family:inherit}
 .card-diya .diya-glow{width:calc(32 * var(--u));height:calc(32 * var(--u));top:calc(-9 * var(--u))}
 .hero-words--g{top:7.6%}
 .hero-ganesha{width:calc(122 * var(--u))}
+
+/* cover without the family name (client, 20 Nov): the words sit a touch lower so the space above the garden stays even */
+.hero-words--nofam{margin-top:calc(8 * var(--u))}
+.hero-words--nofam .hero-invite{margin-top:calc(12 * var(--u))}

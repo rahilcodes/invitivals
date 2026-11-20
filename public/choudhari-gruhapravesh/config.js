@@ -15,6 +15,7 @@ export const invite = {
     ceremony: 'Gruhapravesh',
     sub: null,                                    // 'Housewarming Ceremony' removed with the new wording (client, 20 Nov)
     family: 'Choudhari Family',
+    showFamily: false,                            // the family name is no longer shown on the cover (client, 20 Nov); it stays in the closing and the link preview
     scrollCue: 'SCROLL TO EXPLORE',
   },
 
