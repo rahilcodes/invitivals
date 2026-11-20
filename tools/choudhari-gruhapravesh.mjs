@@ -19,7 +19,7 @@ const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const SRC = path.join(ROOT, 'public', 'poornajnana', 'index.html');
 const D = path.join(ROOT, 'public', 'choudhari-gruhapravesh');
 const { invite: C } = await import(pathToFileURL(path.join(D, 'config.js')).href + '?t=' + Date.now());
-const V = 2;   // raise when css/invite.css, js/app.js or config.js change, so phones fetch the new files
+const V = 3;   // raise when css/invite.css, js/app.js or config.js change, so phones fetch the new files
 
 const esc = (s) => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 const put = (rel, data) => {
@@ -126,9 +126,10 @@ const html = `<!DOCTYPE html>
       <div class="hero-words hero-words--g" style="position:absolute;left:8%;right:8%;text-align:center;display:flex;flex-direction:column;align-items:center;color:#7a4a12">
         ${img('ganesha', 'class="t-in hero-ganesha" style="transition:opacity 1.1s ease .1s, transform 1.1s ease .1s" alt="Shree Ganesha" width="720" height="583"')}
         <div class="t-in hero-deva" lang="mr" style="transition:opacity 1.1s ease .3s, transform 1.1s ease .3s">${C.hero.deva.map((l) => `<div>${esc(l)}</div>`).join('')}</div>
-        <h1 class="t-in" style="margin:${U(8)} 0 0;font-size:${U(42)};font-weight:600;color:#8a4a1a;line-height:1.05;transition:opacity 1.2s ease .8s, transform 1.2s ease .8s">${esc(C.hero.ceremony)}</h1>
-        <div class="t-in" style="font-size:${U(17)};font-style:italic;margin-top:${U(4)};transition:opacity 1.2s ease 1.2s, transform 1.2s ease 1.2s">${esc(C.hero.sub)}</div>
-        <div class="t-in hero-home" style="transition:opacity 1.2s ease 1.6s, transform 1.2s ease 1.6s">${esc(C.hero.family)}</div>
+${C.hero.invite ? `        <div class="t-in hero-invite" style="transition:opacity 1.2s ease .6s, transform 1.2s ease .6s">${esc(C.hero.invite)}</div>
+` : ''}        <h1 class="t-in" style="margin:${U(C.hero.invite ? 2 : 8)} 0 0;font-size:${U(C.hero.invite ? 46 : 42)};font-weight:600;color:#8a4a1a;line-height:1.05;transition:opacity 1.2s ease .8s, transform 1.2s ease .8s">${esc(C.hero.ceremony)}</h1>
+${C.hero.sub ? `        <div class="t-in" style="font-size:${U(17)};font-style:italic;margin-top:${U(4)};transition:opacity 1.2s ease 1.2s, transform 1.2s ease 1.2s">${esc(C.hero.sub)}</div>
+` : ''}        <div class="t-in hero-home" style="transition:opacity 1.2s ease 1.6s, transform 1.2s ease 1.6s">${esc(C.hero.family)}</div>
       </div>
     </div>
     <!-- ============ CONTENT ============ -->
@@ -136,10 +137,10 @@ const html = `<!DOCTYPE html>
       <div class="toran-wrap">${img('toran', 'alt=""')}</div>
 
       <!-- the invitation, in the client's words -->
-      <section data-reveal="1" style="opacity:0;display:flex;flex-direction:column;gap:${U(14)};align-items:center" aria-labelledby="h-inv">
-        <h2 class="sec-title inv-title" id="h-inv">${esc(C.heading)}</h2>
+      <section data-reveal="1" style="opacity:0;display:flex;flex-direction:column;gap:${U(14)};align-items:center" ${C.heading ? 'aria-labelledby="h-inv"' : 'aria-label="Invitation"'}>
+${C.heading ? `        <h2 class="sec-title inv-title" id="h-inv">${esc(C.heading)}</h2>
         ${DIVIDER}
-${C.paragraphs.map((p) => `        <p class="inv-p">${esc(p)}</p>`).join('\n')}
+` : ''}${C.paragraphs.map((p) => `        <p class="inv-p">${esc(p)}</p>`).join('\n')}
       </section>
 
       <!-- EVENT DETAILS: the one event, with Save the Date -->

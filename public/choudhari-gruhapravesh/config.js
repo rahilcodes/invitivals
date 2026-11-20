@@ -11,23 +11,24 @@ export const invite = {
   /* the cover: Shree Ganesha and the two lines of the greeting, exactly as supplied */
   hero: {
     deva: ['॥ श्री गणेश प्रसन्न ॥', 'श्री गणेशाय नमः'],
+    invite: 'We cordially invite you to our',   // small line above the title (client, 20 Nov)
     ceremony: 'Gruhapravesh',
-    sub: 'Housewarming Ceremony',
+    sub: null,                                    // 'Housewarming Ceremony' removed with the new wording (client, 20 Nov)
     family: 'Choudhari Family',
     scrollCue: 'SCROLL TO EXPLORE',
   },
 
   /* the invitation, in the client's words */
-  heading: 'GRUHAPRAVESH',
+  heading: null,   // the second GRUHAPRAVESH heading and its lotus divider were removed (client, 20 Nov)
   paragraphs: [
-    'With the blessings of the Shree Ganesha, we are delighted to invite you and your family to grace the auspicious occasion of our Gruhapravesh (Housewarming Ceremony).',
+    'With the blessings of Shree Ganesha, we are delighted to invite you and your family to grace the auspicious occasion of our Gruhapravesh (Housewarming Ceremony).',
     'As we step into our new home and begin a beautiful new chapter of life, your presence and blessings would make this occasion even more special.',
   ],
 
   /* the one event. India time. */
   timeZone: 'Asia/Kolkata',
   utcOffset: '+05:30',
-  event: { name: 'Gruhapravesh', date: '2026-11-25', dateText: '25th November 2026', time: '19:00', label: '7:00 PM onwards' },
+  event: { name: 'Celebratory Dinner', date: '2026-11-25', dateText: '25th November 2026', time: '19:00', label: '7:00 PM onwards' },
 
   venue: {
     lines: ['N-74, First Floor,', 'Near Reshimbagh Garden, Nagpur'],
@@ -42,7 +43,7 @@ export const invite = {
     details: 'Gruhapravesh (Housewarming Ceremony) of the Choudhari Family.\n25th November 2026, 7:00 PM onwards.\nVenue: N-74, First Floor, Near Reshimbagh Garden, Nagpur.\nContact: +91 7028788669',
   },
 
-  closing: { message: 'We look forward to celebrating this special milestone with you.', regards: 'With warm regards,', sign: 'Choudhari Family' },
+  closing: { message: 'We look forward to celebrating this special milestone with you.', regards: 'Awaiting the pleasure of your company', sign: 'Choudhari Family' },
 
   /* the client's own song; null = no song and no music button */
   music: 'assets/music.mp3',   // the client's file (OM GAN GANPATAYE, received 2026-11-19): its first two minutes, on a loop

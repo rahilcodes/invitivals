@@ -57,6 +57,7 @@ h1,h2,h3{font-family:inherit}
 .hero-ganesha{display:block;width:calc(132 * var(--u));height:auto;filter:drop-shadow(0 calc(4 * var(--u)) calc(8 * var(--u)) rgba(110,60,10,.22))}
 .hero-deva{margin-top:calc(6 * var(--u));font-family:'Tiro Devanagari Sanskrit','Noto Serif Devanagari','Nirmala UI','Kohinoor Devanagari',serif;font-size:calc(17 * var(--u));line-height:1.55;color:#8a4a1a;text-shadow:0 0 6px rgba(246,236,214,.95),0 0 12px rgba(246,236,214,.75)}
 .hero-deva div{white-space:nowrap}
+.hero-invite{margin-top:calc(9 * var(--u));font-size:calc(16.5 * var(--u));font-style:italic;letter-spacing:calc(.4 * var(--u));line-height:1.3;color:#7a4a12;white-space:nowrap;text-shadow:0 0 6px rgba(246,236,214,.95)}
 .hero-home{margin-top:calc(8 * var(--u));font-size:calc(22 * var(--u));font-weight:700;letter-spacing:calc(2 * var(--u));text-transform:uppercase;color:#9c3d2e;line-height:1.2;white-space:nowrap}
 /* the invitation */
 .inv-title{font-size:calc(27 * var(--u));letter-spacing:calc(4 * var(--u));text-indent:calc(4 * var(--u))}
