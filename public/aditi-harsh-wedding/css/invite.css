@@ -831,3 +831,15 @@ html.is-sealed .swipe-cue { opacity: 0; transform: translateY(10px); }
 .t-actions a + a::before { content: ""; width: 4px; height: 4px; margin: 0 9px; transform: rotate(45deg); background: var(--gold-deep); opacity: .7; }
 @media (max-width: 379px) { .t-actions a { font-size: 8.5px; letter-spacing: .05em; } .t-actions a + a::before { margin: 0 7px; } }
 @media (max-width: 345px) { .t-actions { flex-direction: column; align-items: flex-start; } .t-actions a + a::before { display: none; } }
+
+/* the venue's map button (client, 20 Nov): its one-line label was wider than the text column on phones and ran off
+   the right edge. It may now use part of the section's side margin, equally on both sides, and its padding, size and
+   tracking ease down on narrow screens, so it sits centred and whole. Wider screens are as before. */
+.venue [data-maps="venue"] { box-sizing: border-box; max-width: 100%; }
+@media (max-width: 480px) {
+  .venue [data-maps="venue"] {
+    margin-left: -30px; margin-right: -30px; max-width: calc(100% + 60px);
+    padding-left: clamp(14px, 5vw, 28px); padding-right: clamp(14px, 5vw, 28px);
+    font-size: clamp(10px, 3vw, 11.5px); letter-spacing: clamp(1.2px, .5vw, 2.3px);
+  }
+}
