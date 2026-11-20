@@ -14,6 +14,7 @@ import { EventsSection, ScheduleSection } from './sections/events.js';
 import { CountdownSection, initCountdown } from './sections/countdown.js';
 import { GallerySection, initGallery } from './sections/gallery.js';
 import { GettingHereSection, initGettingHere } from './sections/getting-here.js';
+import { RsvpSection } from './sections/rsvp.js';
 import { ClosingSection, initClosing } from './sections/closing.js';
 import { initReveals, initParallax, initParticles } from './motion.js';
 import { createMusic } from './music.js';
@@ -41,6 +42,7 @@ const chapters = [
   CountdownSection(view),
   view.gallery ? GallerySection(view) : '',
   view.gettingHere ? GettingHereSection(view) : '',
+  view.rsvp ? RsvpSection(view) : '',
 ].filter(Boolean);
 const markup = GoldDefs() + (view.sideBorders ? PageBorders(view.sideBorders) : '')
   + chapters.join(GoldThread())

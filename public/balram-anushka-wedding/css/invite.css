@@ -705,3 +705,10 @@ html.is-open .intro{opacity:0;pointer-events:none}
 .tl-dress{display:flex;flex-wrap:wrap;align-items:center;gap:4px 7px;grid-column:2;margin-top:3px;font-style:italic;font-size:.86rem;white-space:nowrap;color:var(--ink-soft)}
 .tl-dress b{display:inline-flex;gap:3px}
 .tl-dress b em{display:block;width:9px;height:9px;border-radius:50%;background:var(--sw);box-shadow:0 0 0 1px rgba(184,137,47,.55)}
+
+/* ── RSVP on WhatsApp (client, 2026-11-20): the contact's name and one WhatsApp-green button ── */
+.rsvp-who{font-family:var(--script);font-size:2rem;line-height:1.2;color:var(--ink-navy);margin:0 0 4px}
+.btn-wa{background:linear-gradient(180deg,#2bb673,#1c9a5c);color:#fff;border-color:rgba(231,200,122,.75);max-width:100%;box-sizing:border-box;
+  padding:12px 20px;letter-spacing:.12em;line-height:1.5;text-align:center;justify-content:center;box-shadow:0 10px 24px -12px rgba(15,60,36,.7)}
+.btn-wa:hover{transform:translateY(-2px)}
+.btn-wa .ico-btn{flex:none;width:18px;height:18px;stroke:#fff}

@@ -79,7 +79,7 @@ export const weddingConfig = {
   families: {
     heading: 'With the Blessings of Our Families',
     sub: '',
-    groom: { label: 'The Groom', person: 'Balram Singh', relation: 'Son of', parents: ['Sr. Jaspal Singh', 'Sdn. Sarabjeet Kaur'] },
+    groom: { label: 'The Groom', person: 'Balram Singh', relation: 'Son of', parents: ['Sr. Jaspal Singh', 'Sdn. Sarbjeet Kaur'] },
     bride: { label: 'The Bride', person: 'Anushka Kairon', relation: 'Daughter of', parents: ['Late Pramod Passi', 'Mrs. Sandeep Pramod Passi'] },
   },
 
@@ -138,7 +138,14 @@ export const weddingConfig = {
 
   gallery: null,
   gettingHere: null,
-  rsvp: null,                              // no RSVP contact was supplied
+  /* attendance is confirmed on WhatsApp (client, 2026-11-20); the number itself is not printed */
+  rsvp: {
+    title: 'Kindly Confirm Your Attendance',
+    name: 'Sandeep Passi',
+    whatsapp: '917016976099',
+    button: 'Confirm Attendance on WhatsApp',
+    message: 'Hello, I would like to confirm my attendance for the wedding of Balram & Anushka.',
+  },
 
   closing: {
     title: ['With Love', 'and Blessings'],
