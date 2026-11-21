@@ -42,40 +42,38 @@ for (const e of C.events) fs.writeFileSync(path.join(CAL, U.icsSlug(e) + '.ics')
 fs.writeFileSync(path.join(CAL, 'all-events.ics'), wrap(C.events));
 console.log('✓ cal/', C.events.map((e) => U.icsSlug(e)).join(', '), '+ all-events');
 
-/* sharing tags */
+/* sharing tags: the whole block, written fresh (WhatsApp, iMessage, Facebook and X read it from the HTML itself) */
+const OG_V = 2;   // raise when the cover changes: WhatsApp keeps a picture per address, a new address is fetched anew
 const TITLE = `${C.fullPair} · Wedding Invitation`;
 const DESC = `With the blessings of our families, ${C.fullPair} invite you to their wedding on Monday, 14 December 2026 at Tulsi Resort, Baran Road, Kota.`;
-const OGD = '14 December 2026 · Tulsi Resort, Baran Road, Kota. Tap to open the invitation.';
-const h = (s) => s.replace(/&/g, '&amp;').replace(/"/g, '&quot;');
+const OGD = 'Monday, 14 December 2026 · Tulsi Resort, Baran Road, Kota. Tap to open the invitation.';
+const IMG = `${URL_}assets/og.jpg?v=${OG_V}`;
+const ALT = `Wedding invitation of ${C.fullPair}, Monday 14 December 2026, Tulsi Resort, Kota`;
+const h = (x) => x.replace(/&/g, '&amp;').replace(/"/g, '&quot;');
+const block = [
+  ['property', 'og:type', 'website'], ['property', 'og:site_name', 'Invitivals'], ['property', 'og:locale', 'en_IN'],
+  ['property', 'og:url', URL_], ['property', 'og:title', TITLE], ['property', 'og:description', OGD],
+  ['property', 'og:image', IMG], ['property', 'og:image:secure_url', IMG], ['property', 'og:image:type', 'image/jpeg'],
+  ['property', 'og:image:width', '1200'], ['property', 'og:image:height', '630'], ['property', 'og:image:alt', ALT],
+  ['name', 'twitter:card', 'summary_large_image'], ['name', 'twitter:title', TITLE], ['name', 'twitter:description', OGD],
+  ['name', 'twitter:image', IMG], ['name', 'twitter:image:alt', ALT],
+].map(([k, n, v]) => `<meta ${k}="${n}" content="${h(v)}">`).join('\n');
 const ix = path.join(DIR, 'index.html');
 let html = fs.readFileSync(ix, 'utf8')
   .replace(/<title>[^<]*<\/title>/, `<title>${h(TITLE)} · Designed by Invitivals</title>`)
   .replace(/<meta name="description" content="[^"]*">/, `<meta name="description" content="${h(DESC)}">`)
-  .replace(/<meta property="og:url" content="[^"]*">/, `<meta property="og:url" content="${URL_}">`)
-  .replace(/<meta property="og:title" content="[^"]*">/, `<meta property="og:title" content="${h(TITLE)}">`)
-  .replace(/<meta property="og:description" content="[^"]*">/, `<meta property="og:description" content="${h(OGD)}">`)
-  .replace(/<meta property="og:image" content="[^"]*">/, `<meta property="og:image" content="${URL_}assets/og.jpg">`);
-if (!html.includes(URL_ + 'assets/og.jpg') || html.includes('nandini')) throw new Error('index.html tags not replaced');
+  .replace(/<meta property="og:type"[\s\S]*?<meta name="twitter:card"[^>]*>(\r?\n<meta name="twitter:[^>]*>)*/, block);
+if (!html.includes(IMG) || !html.includes('twitter:image') || html.includes('nandini')) throw new Error('index.html tags not replaced');
 fs.writeFileSync(ix, html);
 console.log('✓ index.html tags');
 
-/* link preview */
-const A = path.join(DIR, 'assets'), W = 1200, H = 630;
-const arch = await sharp(path.join(A, 'hero-arch.webp')).resize({ width: W, height: H, fit: 'cover', position: 'top' }).toBuffer();
-const couple = await sharp(path.join(A, 'couple.webp')).resize({ height: 560 }).toBuffer();
-const cm = await sharp(couple).metadata();
-const text = Buffer.from(`<svg width="${W}" height="${H}" xmlns="http://www.w3.org/2000/svg">
-  <defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#7d5518"/><stop offset=".3" stop-color="#b88932"/><stop offset=".5" stop-color="#8c621d"/><stop offset=".75" stop-color="#b88932"/><stop offset="1" stop-color="#7d5518"/></linearGradient>
-  <radialGradient id="v" cx=".62" cy=".45" r=".55"><stop offset="0" stop-color="#f7ebd2" stop-opacity=".92"/><stop offset="1" stop-color="#f7ebd2" stop-opacity="0"/></radialGradient></defs>
-  <rect width="${W}" height="${H}" fill="url(#v)"/>
-  <g text-anchor="middle" font-family="Georgia,'Times New Roman',serif">
-    <text x="760" y="150" font-size="22" letter-spacing="8" fill="#8c621d">THE WEDDING OF</text>
-    <text x="760" y="250" font-size="70" font-weight="bold" fill="url(#g)">CA Punit</text>
-    <text x="760" y="292" font-size="28" font-style="italic" fill="#651522">(Shubham)</text>
-    <text x="760" y="346" font-size="34" font-style="italic" fill="#651522">&amp;</text>
-    <text x="760" y="426" font-size="70" font-weight="bold" fill="url(#g)">Dr. Saloni</text>
-    <text x="760" y="500" font-size="24" letter-spacing="5" fill="#651522">MONDAY · 14 DECEMBER 2026</text>
-    <text x="760" y="540" font-size="22" font-style="italic" fill="#6a4b35">Tulsi Resort, Baran Road, Kota</text>
-  </g></svg>`);
-const og = await sharp(arch).composite([{ input: text, left: 0, top: 0 }, { input: couple, left: 40, top: H - cm.height }]).jpeg({ quality: 86, mozjpeg: true }).toFile(path.join(A, 'og.jpg'));
+/* link preview: tools/punit-saloni-wedding-og.html shot with headless Chrome (real fonts), saved as assets/og.jpg */
+const { execFileSync } = await import('node:child_process');
+const os = await import('node:os');
+const CHROME = process.env.CHROME || 'C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe';
+const png = path.join(os.tmpdir(), 'punit-saloni-og.png');
+execFileSync(CHROME, ['--headless=new', '--disable-gpu', '--hide-scrollbars', '--force-device-scale-factor=1', '--window-size=1200,630',
+  '--virtual-time-budget=8000', '--allow-file-access-from-files', `--screenshot=${png}`, pathToFileURL(path.join(ROOT, 'tools', 'punit-saloni-wedding-og.html')).href], { stdio: 'ignore' });
+const og = await sharp(png).flatten({ background: '#f4e4ca' }).jpeg({ quality: 88, mozjpeg: true, chromaSubsampling: '4:4:4' }).toFile(path.join(DIR, 'assets', 'og.jpg'));
+if (og.width !== 1200 || og.height !== 630) throw new Error('cover is ' + og.width + 'x' + og.height);
 console.log('✓ assets/og.jpg', og.width + 'x' + og.height, og.size, 'bytes');

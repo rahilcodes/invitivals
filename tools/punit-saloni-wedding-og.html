@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<!-- Link-preview card for public/punit-saloni-wedding (1200×630), redrawn 2026-11-22 so it reads well in WhatsApp:
+     everything is centred and symmetrical (the design's arch of garlands and drapes framing both sides), and the names,
+     date and place sit inside the middle square, the part WhatsApp keeps when it shows a small square thumbnail.
+     Shot with headless Chrome:
+       chrome --headless=new --hide-scrollbars --window-size=1200,630 --virtual-time-budget=6000 \
+              --screenshot=<png> file:///…/tools/punit-saloni-wedding-og.html
+     then saved as public/punit-saloni-wedding/assets/og.jpg -->
+<html><head><meta charset="utf-8">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600&family=Cormorant+Garamond:ital,wght@0,600;0,700;1,500&display=block" rel="stylesheet">
+<style>
+  html, body { margin: 0; width: 1200px; height: 630px; overflow: hidden; background: #f4e4ca; }
+  /* the design's own arch (garlands, bells, maroon drapes), widened to the card and kept to its upper part */
+  .art { position: absolute; inset: 0; background: url(../public/punit-saloni-wedding/assets/hero-arch.webp) center 8% / 1200px auto no-repeat; }
+  .art::after { content: ''; position: absolute; inset: 0;
+    background: radial-gradient(ellipse 470px 330px at 50% 54%, rgba(248, 237, 214, .97) 0 55%, rgba(248, 237, 214, .82) 72%, rgba(248, 237, 214, 0) 100%),
+                linear-gradient(180deg, rgba(244, 228, 202, 0) 62%, rgba(244, 228, 202, .9) 100%); }
+  /* a fine double gold keyline, the same distance from every edge */
+  .frame { position: absolute; inset: 18px; border: 1.5px solid rgba(184, 137, 50, .75); border-radius: 6px; }
+  .frame::after { content: ''; position: absolute; inset: 6px; border: 1px solid rgba(184, 137, 50, .4); border-radius: 3px; }
+  .copy { position: absolute; left: 0; right: 0; top: 0; bottom: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding-top: 14px; }
+  .kalasha { width: 46px; height: 46px; margin-bottom: 8px; }
+  .eyebrow { font: 500 18px Cinzel, serif; letter-spacing: .4em; text-indent: .4em; color: #8c621d; }
+  .name { margin-top: 2px; font: 700 76px/1.02 'Cormorant Garamond', serif; letter-spacing: .01em; padding: 0 .1em .08em;
+    background: linear-gradient(100deg, #7d5518, #b88932 30%, #d9b770 50%, #a87a2a 70%, #7d5518); -webkit-background-clip: text; background-clip: text; color: transparent; }
+  .name small { font: 600 26px Cinzel, serif; letter-spacing: .08em; vertical-align: .95em; margin-right: .3em; color: #8c621d; -webkit-text-fill-color: #8c621d; }
+  .alias { margin-top: -6px; font: italic 500 26px 'Cormorant Garamond', serif; color: #651522; }
+  .amp { margin: 2px 0 -4px; font: italic 500 38px 'Cormorant Garamond', serif; color: #651522; }
+  .rule { display: flex; align-items: center; gap: 12px; margin: 14px 0 12px; }
+  .rule i { width: 120px; height: 1px; background: linear-gradient(90deg, transparent, #b88932); }
+  .rule i:last-child { transform: scaleX(-1); }
+  .rule b { width: 7px; height: 7px; background: #b88932; transform: rotate(45deg); }
+  .date { font: 600 22px Cinzel, serif; letter-spacing: .2em; text-indent: .2em; color: #651522; }
+  .place { margin-top: 4px; font: italic 500 23px 'Cormorant Garamond', serif; color: #6a4b35; }
+</style></head>
+<body>
+  <div class="art"></div>
+  <div class="frame"></div>
+  <div class="copy">
+    <svg class="kalasha" viewBox="0 0 48 48" fill="none" stroke="#b88932" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <path d="M24 7c3 0 5 2.4 5 5.2 0 2.2-1.5 3.6-5 3.6s-5-1.4-5-3.6C19 9.4 21 7 24 7z"/>
+      <path d="M19 14c-4-1.5-7-.5-9 1.5 3 .5 5.5 1.5 7 3.2M29 14c4-1.5 7-.5 9 1.5-3 .5-5.5 1.5-7 3.2M21 16.5c-2 2-2.6 4-2.2 6M27 16.5c2 2 2.6 4 2.2 6"/>
+      <path d="M16 22h16M17.5 22c-4 3.5-5.5 8-4.2 12.5C14.6 39 18.7 42 24 42s9.4-3 10.7-7.5c1.3-4.5-.2-9-4.2-12.5"/>
+      <path d="M15 31h18M24 26v10"/>
+    </svg>
+    <div class="eyebrow">THE WEDDING OF</div>
+    <div class="name"><small>CA</small>Punit</div>
+    <div class="alias">(Shubham)</div>
+    <div class="amp">&amp;</div>
+    <div class="name"><small>DR.</small>Saloni</div>
+    <div class="rule"><i></i><b></b><i></i></div>
+    <div class="date">MONDAY · 14 DECEMBER 2026</div>
+    <div class="place">Tulsi Resort, Baran Road, Kota</div>
+  </div>
+</body></html>
