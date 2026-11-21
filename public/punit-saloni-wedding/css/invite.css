@@ -783,3 +783,5 @@ html.is-open .intro.is-skipped .intro-video { transform: none; transition: none;
 .hero-copy { top: 9.6svh; }
 .names .name { font-size: min(13.4vw, 6.1svh, 58px); }
 .names .name-alias { line-height: 1.05; }
+/* the couple's photographs: two to a row, each frame a fixed shape set in the config */
+.plate-pair { align-self: start; }

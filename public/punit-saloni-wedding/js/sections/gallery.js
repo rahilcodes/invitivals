@@ -10,8 +10,8 @@ export const GallerySection = (cfg) => `
     ${Heading('Moments', 'Glimpses we will treasure forever', { id: 'gallery-h' })}
     <div class="plates">
       ${cfg.gallery.map((g, i) => `
-        <button class="plate plate-${g.shape}" type="button" data-index="${i}" data-reveal aria-label="View photo: ${g.alt}">
-          <img src="${g.src}" alt="${g.alt}" loading="lazy" decoding="async">
+        <button class="plate plate-${g.shape}" type="button" data-index="${i}" data-reveal aria-label="View photo: ${g.alt}"${g.ratio ? ` style="aspect-ratio:${g.ratio}"` : ""}>
+          <img src="${g.src}" alt="${g.alt}" loading="lazy" decoding="async"${g.pos ? ` style="object-position:${g.pos}"` : ""}>
         </button>`).join('')}
     </div>
   </div>

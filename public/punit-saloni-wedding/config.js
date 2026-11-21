@@ -94,7 +94,15 @@ export const weddingConfig = {
     { icon: 'reception', name: 'Reception & Dinner', date: at(14, '19:00'), time: '07:00 PM onwards', hours: 3, place: RESORT },
   ],
 
-  gallery: [], // the couple's photographs go here once they arrive
+  /* the couple's own photographs (client, 2026-11-21), only resized and re-encoded; each frame keeps both faces whole.
+     ratio = the frame's shape (the two slim pictures keep their own), pos = which part of the picture the frame keeps */
+  gallery: [
+    { src: 'assets/photo-garlands.webp', alt: 'Punit and Saloni in ivory with rose and jasmine garlands, at their ceremony', shape: 'arch', pos: '50% 22%' },
+    { src: 'assets/photo-mirror.webp', alt: 'Punit and Saloni smiling together in a mirrored hall', shape: 'pair', ratio: '591 / 1280' },
+    { src: 'assets/photo-bougainvillea.webp', alt: 'Punit and Saloni seated under bougainvillea and a paper lantern', shape: 'pair', ratio: '924 / 2000' },
+    { src: 'assets/photo-sofa.webp', alt: 'Punit and Saloni on a red velvet sofa beneath red flowers', shape: 'pair', ratio: '2 / 3', pos: '62% 50%' },
+    { src: 'assets/photo-black.webp', alt: 'Punit and Saloni dressed in black, standing together', shape: 'pair', ratio: '2 / 3', pos: '50% 30%' },
+  ],
 
   rsvp: {
     whatsapp: '919461308655',
