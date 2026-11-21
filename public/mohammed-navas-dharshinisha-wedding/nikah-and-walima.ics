@@ -1,0 +1,49 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Invitivals//Wedding Invitation//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VTIMEZONE
+TZID:Asia/Kolkata
+BEGIN:STANDARD
+DTSTART:19700101T000000
+TZOFFSETFROM:+0530
+TZOFFSETTO:+0530
+TZNAME:IST
+END:STANDARD
+END:VTIMEZONE
+BEGIN:VEVENT
+UID:mohammed-navas-dharshinisha-wedding-nikah@invitivals.com
+DTSTAMP:20261122T000000Z
+DTSTART;TZID=Asia/Kolkata:20261213T110000
+SUMMARY:Nikah Ceremony — Mohammed Navas & Dharshinisha
+LOCATION:Nahar Gardens\, Near Muttukadu Lake
+DESCRIPTION:Sunday\, 13th December 2026\nNikah – 11:00 AM\nWalima – 1:0
+ 0 PM\nVenue: Nahar Gardens\, Near Muttukadu Lake\nLocation: https://maps.a
+ pp.goo.gl/d5x6Pb8irgB74yTT9?g_st=aw\n\nhttps://invitivals.com/mohammed-nav
+ as-dharshinisha-wedding/
+URL:https://maps.app.goo.gl/d5x6Pb8irgB74yTT9?g_st=aw
+BEGIN:VALARM
+TRIGGER:-PT3H
+ACTION:DISPLAY
+DESCRIPTION:Nikah Ceremony
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:mohammed-navas-dharshinisha-wedding-walima@invitivals.com
+DTSTAMP:20261122T000000Z
+DTSTART;TZID=Asia/Kolkata:20261213T130000
+SUMMARY:Walima Ceremony — Mohammed Navas & Dharshinisha
+LOCATION:Nahar Gardens\, Near Muttukadu Lake
+DESCRIPTION:Sunday\, 13th December 2026\nNikah – 11:00 AM\nWalima – 1:0
+ 0 PM\nVenue: Nahar Gardens\, Near Muttukadu Lake\nLocation: https://maps.a
+ pp.goo.gl/d5x6Pb8irgB74yTT9?g_st=aw\n\nhttps://invitivals.com/mohammed-nav
+ as-dharshinisha-wedding/
+URL:https://maps.app.goo.gl/d5x6Pb8irgB74yTT9?g_st=aw
+BEGIN:VALARM
+TRIGGER:-PT3H
+ACTION:DISPLAY
+DESCRIPTION:Walima Ceremony
+END:VALARM
+END:VEVENT
+END:VCALENDAR
