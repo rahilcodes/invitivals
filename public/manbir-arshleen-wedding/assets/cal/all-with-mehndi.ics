@@ -1,0 +1,132 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Invitivals//Manbir & Arshleen Wedding//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+X-WR-CALNAME:Manbir & Arshleen · Wedding
+X-WR-TIMEZONE:Asia/Kolkata
+BEGIN:VTIMEZONE
+TZID:Asia/Kolkata
+BEGIN:STANDARD
+DTSTART:19700101T000000
+TZOFFSETFROM:+0530
+TZOFFSETTO:+0530
+TZNAME:IST
+END:STANDARD
+END:VTIMEZONE
+BEGIN:VEVENT
+UID:20270104T130000-path-da-bhog@manbir-arshleen.invitivals.com
+DTSTAMP:20261121T000000Z
+DTSTART;TZID=Asia/Kolkata:20270104T130000
+SUMMARY:Path Da Bhog — Manbir & Arshleen
+LOCATION:At Home
+DESCRIPTION:Manbir Singh & Arshleen Kaur · Wedding\nhttps://invitivals.com
+ /manbir-arshleen-wedding/
+URL:https://invitivals.com/manbir-arshleen-wedding/
+STATUS:CONFIRMED
+BEGIN:VALARM
+TRIGGER:-P1D
+ACTION:DISPLAY
+DESCRIPTION:Path Da Bhog — Manbir & Arshleen
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:20270115T110000-shagun@manbir-arshleen.invitivals.com
+DTSTAMP:20261121T000000Z
+DTSTART;TZID=Asia/Kolkata:20270115T110000
+SUMMARY:Shagun — Manbir & Arshleen
+LOCATION:Riviera\, Airport Road\, Amritsar
+DESCRIPTION:Manbir Singh & Arshleen Kaur · Wedding\nMap: https://maps.app.
+ goo.gl/NGEKpNvX8zY6oawU7?g_st=ic\nhttps://invitivals.com/manbir-arshleen-w
+ edding/
+URL:https://invitivals.com/manbir-arshleen-wedding/
+STATUS:CONFIRMED
+BEGIN:VALARM
+TRIGGER:-P1D
+ACTION:DISPLAY
+DESCRIPTION:Shagun — Manbir & Arshleen
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:20270116T120000-haldi@manbir-arshleen.invitivals.com
+DTSTAMP:20261121T000000Z
+DTSTART;TZID=Asia/Kolkata:20270116T120000
+SUMMARY:Haldi — Manbir & Arshleen
+DESCRIPTION:Manbir Singh & Arshleen Kaur · Wedding\nhttps://invitivals.com
+ /manbir-arshleen-wedding/
+URL:https://invitivals.com/manbir-arshleen-wedding/
+STATUS:CONFIRMED
+BEGIN:VALARM
+TRIGGER:-P1D
+ACTION:DISPLAY
+DESCRIPTION:Haldi — Manbir & Arshleen
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:20270117T190000-cocktail@manbir-arshleen.invitivals.com
+DTSTAMP:20261121T000000Z
+DTSTART;TZID=Asia/Kolkata:20270117T190000
+SUMMARY:Cocktail Party — Manbir & Arshleen
+LOCATION:Azure Parin\, Verka Bypass\, Amritsar
+DESCRIPTION:Manbir Singh & Arshleen Kaur · Wedding\nMap: https://maps.app.
+ goo.gl/o8CETveDosF7ZmAF9?g_st=ic\nhttps://invitivals.com/manbir-arshleen-w
+ edding/
+URL:https://invitivals.com/manbir-arshleen-wedding/
+STATUS:CONFIRMED
+BEGIN:VALARM
+TRIGGER:-P1D
+ACTION:DISPLAY
+DESCRIPTION:Cocktail Party — Manbir & Arshleen
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:20270119T080000-sehra-bandi@manbir-arshleen.invitivals.com
+DTSTAMP:20261121T000000Z
+DTSTART;TZID=Asia/Kolkata:20270119T080000
+SUMMARY:Sehra Bandi — Manbir & Arshleen
+DESCRIPTION:Manbir Singh & Arshleen Kaur · Wedding\nhttps://invitivals.com
+ /manbir-arshleen-wedding/
+URL:https://invitivals.com/manbir-arshleen-wedding/
+STATUS:CONFIRMED
+BEGIN:VALARM
+TRIGGER:-P1D
+ACTION:DISPLAY
+DESCRIPTION:Sehra Bandi — Manbir & Arshleen
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:20270119T100000-anand-karaj@manbir-arshleen.invitivals.com
+DTSTAMP:20261121T000000Z
+DTSTART;TZID=Asia/Kolkata:20270119T100000
+SUMMARY:Anand Karaj — Manbir & Arshleen
+LOCATION:Gurudwara Chhevin Patshahi\, ਗੁਰਦੁਆਰਾ ਛੇਵੀ
+ ਂ ਪਾਤਸ਼ਾਹੀ
+DESCRIPTION:Manbir Singh & Arshleen Kaur · Wedding\nhttps://invitivals.com
+ /manbir-arshleen-wedding/
+URL:https://invitivals.com/manbir-arshleen-wedding/
+STATUS:CONFIRMED
+BEGIN:VALARM
+TRIGGER:-P1D
+ACTION:DISPLAY
+DESCRIPTION:Anand Karaj — Manbir & Arshleen
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:20270119T000000-wedding-party@manbir-arshleen.invitivals.com
+DTSTAMP:20261121T000000Z
+DTSTART;VALUE=DATE:20270119
+DTEND;VALUE=DATE:20270120
+SUMMARY:Wedding Celebration — Manbir & Arshleen
+LOCATION:Lily Resort\, Vallah\, Amritsar
+DESCRIPTION:Manbir Singh & Arshleen Kaur · Wedding\nTime to be announced.\
+ nMap: https://maps.app.goo.gl/JwHjUbnXJEcEe7XJ6?g_st=ic\nhttps://invitival
+ s.com/manbir-arshleen-wedding/
+URL:https://invitivals.com/manbir-arshleen-wedding/
+STATUS:CONFIRMED
+BEGIN:VALARM
+TRIGGER:-P1D
+ACTION:DISPLAY
+DESCRIPTION:Wedding Celebration — Manbir & Arshleen
+END:VALARM
+END:VEVENT
+END:VCALENDAR

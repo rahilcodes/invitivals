@@ -1,0 +1,33 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Invitivals//Manbir & Arshleen Wedding//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+X-WR-CALNAME:Manbir & Arshleen · Wedding
+X-WR-TIMEZONE:Asia/Kolkata
+BEGIN:VTIMEZONE
+TZID:Asia/Kolkata
+BEGIN:STANDARD
+DTSTART:19700101T000000
+TZOFFSETFROM:+0530
+TZOFFSETTO:+0530
+TZNAME:IST
+END:STANDARD
+END:VTIMEZONE
+BEGIN:VEVENT
+UID:20270104T130000-path-da-bhog@manbir-arshleen.invitivals.com
+DTSTAMP:20261121T000000Z
+DTSTART;TZID=Asia/Kolkata:20270104T130000
+SUMMARY:Path Da Bhog — Manbir & Arshleen
+LOCATION:At Home
+DESCRIPTION:Manbir Singh & Arshleen Kaur · Wedding\nhttps://invitivals.com
+ /manbir-arshleen-wedding/
+URL:https://invitivals.com/manbir-arshleen-wedding/
+STATUS:CONFIRMED
+BEGIN:VALARM
+TRIGGER:-P1D
+ACTION:DISPLAY
+DESCRIPTION:Path Da Bhog — Manbir & Arshleen
+END:VALARM
+END:VEVENT
+END:VCALENDAR

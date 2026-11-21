@@ -1,0 +1,34 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Invitivals//Manbir & Arshleen Wedding//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+X-WR-CALNAME:Manbir & Arshleen · Wedding
+X-WR-TIMEZONE:Asia/Kolkata
+BEGIN:VTIMEZONE
+TZID:Asia/Kolkata
+BEGIN:STANDARD
+DTSTART:19700101T000000
+TZOFFSETFROM:+0530
+TZOFFSETTO:+0530
+TZNAME:IST
+END:STANDARD
+END:VTIMEZONE
+BEGIN:VEVENT
+UID:20270115T110000-shagun@manbir-arshleen.invitivals.com
+DTSTAMP:20261121T000000Z
+DTSTART;TZID=Asia/Kolkata:20270115T110000
+SUMMARY:Shagun — Manbir & Arshleen
+LOCATION:Riviera\, Airport Road\, Amritsar
+DESCRIPTION:Manbir Singh & Arshleen Kaur · Wedding\nMap: https://maps.app.
+ goo.gl/NGEKpNvX8zY6oawU7?g_st=ic\nhttps://invitivals.com/manbir-arshleen-w
+ edding/
+URL:https://invitivals.com/manbir-arshleen-wedding/
+STATUS:CONFIRMED
+BEGIN:VALARM
+TRIGGER:-P1D
+ACTION:DISPLAY
+DESCRIPTION:Shagun — Manbir & Arshleen
+END:VALARM
+END:VEVENT
+END:VCALENDAR
