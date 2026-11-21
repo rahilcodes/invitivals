@@ -5,10 +5,15 @@
    after a change run  node tools/punit-saloni-wedding.mjs  (it rewrites the .ics files from it).
    Dates are ISO strings in India time (+05:30). Every name, date, time and venue is the client's.
    ───────────────────────────────────────────────────────────── */
+/* the 10–12 December functions are all at the residence (client, 2026-11-22): their cards carry no map button of
+   their own; one common card with the address and Get Directions follows the last of them in the Festivities.
+   The map link resolves to "265, Swami Vivekananda Nagar, Kota, Rajasthan 324005" (checked 2026-11-22). */
 const RESIDENCE = {
   name: 'At Our Residence',
   maps: 'https://maps.app.goo.gl/GVUtrttTHw3wPqpW8?g_st=aw',
   button: 'View Residence Location',
+  address: ['265, Vivekanand Nagar,', 'Kota, Rajasthan.'],
+  common: true,
 };
 const RESORT = {
   name: 'Tulsi Resort, Baran Road, Kota',

@@ -1,6 +1,6 @@
 /* WelcomeSection — the first words on the paper, picked up by the pillars that continue from the hero arch.
    Opens like a printed patrika: invocation, the guest's own name, the couple's monogram. */
-import { FloralVine, GoldDivider, Mandala, Monogram } from '../decor.js';
+import { FloralVine, GoldDivider, Mandala, MonogramArt } from '../decor.js';
 import { escScript } from '../util.js';
 
 export const WelcomeSection = (cfg, guest) => `
@@ -10,7 +10,7 @@ export const WelcomeSection = (cfg, guest) => `
   <div class="sec-inner">
     ${Mandala('welcome-mandala')}
     <p class="invocation" data-reveal>|| ${cfg.invocation} ||</p>
-    <div data-reveal>${Monogram(cfg.pair[0], cfg.pair[1], 'welcome-mono')}</div>
+    <div data-reveal>${MonogramArt('welcome-mono')}</div>
     <p class="script-title" data-reveal>${cfg.welcome.title}</p>
     <p class="eyebrow" data-reveal>to our wedding celebration</p>
     ${guest ? `<p class="dear" data-reveal>Dear <span>${escScript(guest)}</span>,</p>` : ''}

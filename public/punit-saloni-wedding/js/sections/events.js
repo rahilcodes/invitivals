@@ -1,5 +1,6 @@
 /* EventsSection — the days of celebration on one vertical gold line, in the client's order.
-   Each event: its time, its venue with the right map (residence or resort), and its own calendar entry
+   Each event: its time, its venue (the resort with its map; the residence days share one address card with
+   Get Directions after the last of them), and its own calendar entry
    (Google Calendar, or an .ics file for Apple Calendar / Outlook). The line knows what is today. */
 import { Heading, Icon, FloralVine } from '../decor.js';
 import { $$, day, monthShort, weekdayShort, dayState, googleCalUrl, icsUrl } from '../util.js';
@@ -13,7 +14,30 @@ export const EventsSection = (cfg) => `
   <div class="sec-inner">
     ${Heading('Wedding Festivities', `${WORDS[dayCount(cfg.events)] || ''} days of rituals, music and blessings`.trim(), { id: 'events-h' })}
     <ol class="timeline">
-      ${cfg.events.map((e, i) => `
+      ${cfg.events.map((e, i) => `${EventItem(cfg, e, i)}${commonAfter(cfg, i)}`).join('')}
+    </ol>
+  </div>
+</section>`;
+
+/* a place marked `common` (the residence) gets one card, with its address and Get Directions, right after the
+   last event held there; those events show no map button of their own */
+const commonAfter = (cfg, i) => {
+  const p = cfg.events[i].place;
+  if (!p.common || cfg.events.map((e) => e.place).lastIndexOf(p) !== i) return '';
+  const held = cfg.events.filter((e) => e.place === p), first = held[0].date, last = held[held.length - 1].date;
+  return `
+        <li class="t-common" data-reveal>
+          <div class="t-common-card">
+            <span class="t-common-pin">${Icon('pin')}</span>
+            <p class="t-date">${day(first)}–${day(last)} ${monthShort(last)} · All functions</p>
+            <h3 class="t-common-name">${p.name}</h3>
+            <p class="t-common-addr">${p.address.join('<br>')}</p>
+            <a class="btn t-common-btn" href="${p.maps}" target="_blank" rel="noopener" data-maps="residence">${Icon('pin', 'ico ico-btn')}<span>Get Directions</span></a>
+          </div>
+        </li>`;
+};
+
+const EventItem = (cfg, e, i) => `
         <li class="t-item ${e.main ? 'is-main' : ''}" data-reveal data-event="${i}">
           <span class="t-medal">${Icon(e.icon)}</span>
           <div class="t-body">
@@ -24,15 +48,12 @@ export const EventsSection = (cfg) => `
             ${e.note ? `<p class="t-text">${e.note}</p>` : ''}
             <p class="t-venue">${e.place.name}</p>
             <p class="t-actions">
-              <a href="${e.place.maps}" target="_blank" rel="noopener">${Icon('pin', 'ico ico-xs')}Map</a>
+              ${e.place.common ? '' : `<a href="${e.place.maps}" target="_blank" rel="noopener">${Icon('pin', 'ico ico-xs')}Map</a>`}
               <a href="${googleCalUrl(cfg, e)}" target="_blank" rel="noopener">${Icon('calendar', 'ico ico-xs')}Google Calendar</a>
               <a href="${icsUrl(e)}" download>${Icon('calendar', 'ico ico-xs')}.ics</a>
             </p>
           </div>
-        </li>`).join('')}
-    </ol>
-  </div>
-</section>`;
+        </li>`;
 
 export function initEvents(cfg) {
   let next = false;

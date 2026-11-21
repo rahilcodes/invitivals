@@ -785,3 +785,35 @@ html.is-open .intro.is-skipped .intro-video { transform: none; transition: none;
 .names .name-alias { line-height: 1.05; }
 /* the couple's photographs: two to a row, each frame a fixed shape set in the config */
 .plate-pair { align-self: start; }
+
+/* ── client, 2026-11-22 ─────────────────────────────────────
+   1. the common residence card after the 12 December functions */
+/* the card spans the whole timeline, the gold line running into it */
+.t-common { position: relative; z-index: 1; padding: 6px 0 34px; }
+.t-common-pin { display: grid; place-items: center; width: 44px; height: 44px; margin: -22px auto 8px; border-radius: 50%;
+  background: radial-gradient(circle at 50% 35%, #fbf3e2, #f1dfbf); box-shadow: 0 0 0 1px rgba(184, 137, 50, .8), 0 0 0 4px var(--paper); }
+.t-common-pin .ico { width: 22px; height: 22px; }
+.t-common-card {
+  margin-top: 22px; padding: 0 16px 18px; border-radius: 16px; text-align: center;
+  background: linear-gradient(180deg, rgba(255, 250, 238, .96), rgba(248, 236, 212, .96));
+  box-shadow: 0 0 0 1px rgba(184, 137, 50, .55), 0 0 0 4px rgba(255, 250, 238, .9), 0 0 0 5px rgba(184, 137, 50, .28), 0 12px 26px -14px rgba(74, 14, 24, .4);
+}
+.t-common-card .t-date { margin: 0 0 4px; }
+.t-common-name { margin: 0; font-family: var(--serif); font-weight: 600; font-size: 22px; line-height: 1.2; color: var(--maroon); }
+.t-common-addr { margin: 6px 0 14px; font-style: italic; font-size: 16.5px; line-height: 1.45; color: var(--ink); }
+.t-common-btn { min-height: 46px; white-space: nowrap; }
+
+/* 2. small gold metadata (the date labels and their kin) a shade deeper and a step heavier, for reading on the cream
+      paper; names, headings and the invitation text keep their own styling */
+:root { --meta: #6f4a12; }
+.t-date { font-size: 11px; font-weight: 600; letter-spacing: .15em; color: var(--meta); }
+.t-details dt, .t-dress span { font-size: 9px; font-weight: 600; color: var(--meta); }
+.t-actions a, .t-actions button { font-weight: 600; color: var(--meta); }
+.when, .hero-date span, .clock-l, .c-muhurtham, .save-ics, .field > span, .rsvp-choice legend span { font-weight: 600; color: var(--meta); }
+
+/* 3. the couple's monogram artwork (assets/monogram.webp: the supplied picture with its plain cream ground made
+      transparent, nothing else touched): straight on the paper, and in the pale evening sky above the temple */
+.monogram-art img { display: block; width: 100%; height: auto; }
+.welcome-mono { width: min(74vw, 290px); margin: 6px auto 4px; }
+.finale-mono { position: absolute; left: 50%; top: 6%; width: min(44%, 230px); height: auto; margin: 0; transform: translateX(-50%); }
+.finale-mono img { filter: drop-shadow(0 0 10px rgba(255, 246, 228, .9)); }

@@ -68,7 +68,14 @@ export const Kalasha = () => `<span class="kalasha" aria-hidden="true">${svg(`
   <path d="M8.5 25.2h17M38.5 25.2h17" stroke-width=".5"/>
   <path d="M25 58.5h14M22 61.5h20"/>`, '0 0 64 64', 'ico ico-kalasha')}</span>`;
 
-/* the couple's initials inside a ring of lotus petals */
+/* the couple's own monogram artwork (client, 2026-11-22), used as supplied: only its empty cream margin is cropped,
+   never redrawn or stretched (width/height keep its ratio) */
+export const MonogramArt = (cls = '') => `
+  <div class="monogram-art ${cls}">
+    <img src="assets/monogram.webp" alt="P &amp; S monogram: Punit &amp; Saloni, December 14, 2026, Tax Saver Marries Life Saver" width="870" height="838" decoding="async" loading="lazy">
+  </div>`;
+
+/* the couple's initials inside a ring of lotus petals (the design's own; this page now uses MonogramArt) */
 export const Monogram = (a, b, cls = '') => `
   <div class="monogram ${cls}" aria-label="${a} and ${b}">
     ${svg(

@@ -1,5 +1,5 @@
 /* ThankYouSection — the paper stays clean and warm, then the temple tank rises slowly out of it. */
-import { LotusDecoration, Icon, Monogram, Button } from '../decor.js';
+import { LotusDecoration, Icon, MonogramArt, Button } from '../decor.js';
 
 /* floating diya flames measured on finale.webp (percent), with relative size */
 const DIYAS = [[20.7, 83.4, 1.3], [87.5, 87.1, 1.4], [79.3, 87.9, 1], [3.5, 80.3, .8], [29.2, 79, .7], [86.3, 76.7, .7], [95.4, 71.9, .6], [19.1, 75.6, .6]];
@@ -18,6 +18,6 @@ export const ThankYouSection = (cfg) => `
   <div class="finale" aria-hidden="true">
     <img src="assets/finale.webp" alt="" loading="lazy" decoding="async">
     ${DIYAS.map(([x, y, s], i) => `<span class="diya-glow" style="left:${x}%;top:${y}%;--i:${i};--s:${s}"></span>`).join('')}
-    ${Monogram(cfg.pair[0], cfg.pair[1], 'finale-mono')}
+    ${MonogramArt('finale-mono')}
   </div>
 </section>`;
