@@ -8,7 +8,7 @@ const Family = (f) => `
     <p class="family-person">${f.person}</p>
     ${f.note ? `<p class="family-note">${f.note}</p>` : ''}
     <p class="family-rel">${f.relation}</p>
-    <p class="family-parents">${f.parents.join('<br>')}</p>
+    <p class="family-parents">${f.parents.map((l) => `<span class="fp-line">${l}</span>`).join("<br>")}</p>
     ${f.grandparents ? `<p class="family-gp">${f.grandparents}</p>` : ''}
   </div>`;
 

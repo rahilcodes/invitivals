@@ -1,9 +1,10 @@
 /* EventsSection — the days of celebration on one vertical gold line, in the client's order.
-   Each event: its time, its venue (the resort with its map; the residence days share one address card with
-   Get Directions after the last of them), and its own calendar entry
-   (Google Calendar, or an .ics file for Apple Calendar / Outlook). The line knows what is today. */
+   Each event shows its date, name, time and venue only. The functions are grouped by venue (the residence on
+   10–12 December, the resort on 13–14 December; client, 2026-11-22): after the last event of each group one common
+   card gives the venue, its address, Get Directions and one Google Calendar entry for the whole group. No map or
+   calendar buttons sit under single events. The line knows what is today. */
 import { Heading, Icon, FloralVine } from '../decor.js';
-import { $$, day, monthShort, weekdayShort, dayState, googleCalUrl, icsUrl } from '../util.js';
+import { $$, day, monthShort, weekdayShort, dayState, groupCalUrl } from '../util.js';
 
 const WORDS = ['', 'One', 'Two', 'Three', 'Four', 'Five', 'Six', 'Seven'];
 const dayCount = (events) => new Set(events.map((e) => e.date.slice(0, 10))).size;
@@ -19,8 +20,8 @@ export const EventsSection = (cfg) => `
   </div>
 </section>`;
 
-/* a place marked `common` (the residence) gets one card, with its address and Get Directions, right after the
-   last event held there; those events show no map button of their own */
+
+/* a place marked `common` gets one card right after the last event held there */
 const commonAfter = (cfg, i) => {
   const p = cfg.events[i].place;
   if (!p.common || cfg.events.map((e) => e.place).lastIndexOf(p) !== i) return '';
@@ -30,9 +31,12 @@ const commonAfter = (cfg, i) => {
           <div class="t-common-card">
             <span class="t-common-pin">${Icon('pin')}</span>
             <p class="t-date">${day(first)}–${day(last)} ${monthShort(last)} · All functions</p>
-            <h3 class="t-common-name">${p.name}</h3>
+            <h3 class="t-common-name">${p.title || p.name}</h3>
             <p class="t-common-addr">${p.address.join('<br>')}</p>
-            <a class="btn t-common-btn" href="${p.maps}" target="_blank" rel="noopener" data-maps="residence">${Icon('pin', 'ico ico-btn')}<span>Get Directions</span></a>
+            <div class="t-common-btns">
+              <a class="btn t-common-btn" href="${p.maps}" target="_blank" rel="noopener" data-maps>${Icon('pin', 'ico ico-btn')}<span>Get Directions</span></a>
+              <a class="btn btn-ghost t-common-btn" href="${groupCalUrl(cfg, p, held)}" target="_blank" rel="noopener" data-group-cal aria-label="Save the date: all ${held.length} functions of ${day(first)} to ${day(last)} ${monthShort(last)} in Google Calendar">${Icon('calendar', 'ico ico-btn')}<span>Save the Date</span></a>
+            </div>
           </div>
         </li>`;
 };
@@ -47,11 +51,6 @@ const EventItem = (cfg, e, i) => `
             <dl class="t-details"><div><dt>Time</dt><dd>${e.time}</dd></div></dl>
             ${e.note ? `<p class="t-text">${e.note}</p>` : ''}
             <p class="t-venue">${e.place.name}</p>
-            <p class="t-actions">
-              ${e.place.common ? '' : `<a href="${e.place.maps}" target="_blank" rel="noopener">${Icon('pin', 'ico ico-xs')}Map</a>`}
-              <a href="${googleCalUrl(cfg, e)}" target="_blank" rel="noopener">${Icon('calendar', 'ico ico-xs')}Google Calendar</a>
-              <a href="${icsUrl(e)}" download>${Icon('calendar', 'ico ico-xs')}.ics</a>
-            </p>
           </div>
         </li>`;
 

@@ -100,5 +100,25 @@ export const googleCalDirect = (cfg, e) => 'https://calendar.google.com/calendar
   details: calDetails(cfg, e),
   location: e.place.name,
 }).toString();
+/* one Google Calendar entry for a group of functions at one venue (client, 2026-11-22): an all-day entry across the
+   group's days (Google takes one event per link), its description listing every function with its own start time,
+   so no end time is invented */
+const ymd = (iso) => iso.slice(0, 10).replace(/-/g, '');
+const dayAfter = (iso) => { const d = new Date(Date.UTC(+iso.slice(0, 4), +iso.slice(5, 7) - 1, +iso.slice(8, 10) + 1)); return d.toISOString().slice(0, 10).replace(/-/g, ''); };
+export const groupCalDirect = (cfg, place, events) => {
+  const first = events[0].date, last = events[events.length - 1].date;
+  const where = (place.title || place.name).replace(/^At /, '');   // "At Our Residence" reads "at Our Residence"
+  return 'https://calendar.google.com/calendar/render?' + new URLSearchParams({
+    action: 'TEMPLATE',
+    text: `${cfg.pair[0]} & ${cfg.pair[1]} · Wedding functions at ${where}`,
+    dates: `${ymd(first)}/${dayAfter(last)}`,
+    ctz: TZ,
+    details: [`Wedding celebrations of ${cfg.fullPair}.`, '',
+      ...events.map((e) => `${weekdayShort(e.date)} ${day(e.date)} ${monthShort(e.date)} · ${e.time} · ${e.name}${e.subtitle ? ' ' + e.subtitle : ''}`), '',
+      `Venue: ${where}, ${place.address.join(' ')}`, `Google Maps: ${place.maps}`].join('\n'),
+    location: `${where}, ${place.address.join(' ')}`,
+  }).toString();
+};
+export const groupCalUrl = (cfg, place, events) => 'https://accounts.google.com/ServiceLogin?service=cl&continue=' + encodeURIComponent(groupCalDirect(cfg, place, events));
 export const icsSlug = (e) => e.name.toLowerCase().replace(/&/g, 'and').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
 export const icsUrl = (e) => `cal/${icsSlug(e)}.ics`;

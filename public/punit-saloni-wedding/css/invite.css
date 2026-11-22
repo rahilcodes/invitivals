@@ -279,7 +279,7 @@ html.is-sealed .petal { animation-play-state: paused; }
 .family { padding: 4px 0; }
 .family-person { margin: 2px 0 0; font-family: var(--names); font-weight: 600; font-size: 44px; letter-spacing: .02em; line-height: 1.2; padding: 0 .2em; }
 .family-rel { margin: 0; font-style: italic; font-size: 16px; color: var(--ink-soft); }
-.family-parents { margin: 6px 0 0; font-family: var(--caps); font-size: 13.5px; letter-spacing: .07em; line-height: 1.75; color: var(--maroon); }
+.family-parents { margin: 6px 0 0; text-wrap: balance; font-family: var(--caps); font-size: 13.5px; letter-spacing: .07em; line-height: 1.75; color: var(--maroon); }
 .family-gp { margin: 8px auto 0; max-width: 250px; font-style: italic; font-size: 14.5px; line-height: 1.45; color: var(--ink-soft); }
 .family-amp { position: relative; height: 120px; display: grid; place-items: center; }
 .family-amp span { font-family: var(--serif); font-style: italic; font-size: 52px; color: var(--gold); line-height: 1; }
@@ -295,10 +295,11 @@ html.is-sealed .petal { animation-play-state: paused; }
   box-shadow: 0 0 0 1px rgba(184, 137, 50, .8), 0 0 0 4px var(--paper);
 }
 .t-medal .ico { width: 28px; height: 28px; }
-.t-date { margin: 2px 0 2px; font-family: var(--caps); font-size: 10px; letter-spacing: .16em; text-transform: uppercase; color: var(--gold-deep); }
-.t-name { margin: 0; font-family: var(--serif); font-weight: 600; font-size: 23px; line-height: 1.15; color: var(--maroon); }
-.t-venue { margin: 2px 0 0; font-style: italic; font-size: 15.5px; line-height: 1.35; color: var(--ink); }
-.t-text { margin: 4px 0 0; font-size: 15.5px; line-height: 1.45; color: var(--ink-soft); }
+/* sizes raised for reading on phones (client, 2026-11-22) */
+.t-date { margin: 2px 0 3px; font-family: var(--caps); font-size: 12.5px; font-weight: 600; letter-spacing: .13em; text-transform: uppercase; color: var(--meta); }
+.t-name { margin: 0; font-family: var(--serif); font-weight: 600; font-size: 26px; line-height: 1.15; color: var(--maroon); }
+.t-venue { margin: 2px 0 0; font-style: italic; font-size: 17.5px; line-height: 1.35; color: var(--ink); }
+.t-text { margin: 4px 0 0; font-size: 17px; line-height: 1.45; color: var(--ink-soft); }
 .t-item.is-main .t-medal { background: radial-gradient(circle at 50% 35%, #7c1d2c, #4a0e18); box-shadow: 0 0 0 1px var(--gold), 0 0 0 4px var(--paper), 0 0 0 5px rgba(184, 137, 50, .5), 0 8px 18px -6px rgba(74, 14, 24, .5); }
 
 /* ══ ceremony ════════════════════════════════════════════ */
@@ -713,12 +714,12 @@ html.is-open .intro.is-skipped .intro-video { transform: none; transition: none;
 
 /* groom-side copy: the family's own words on each event — subtitle, verse, timing rows */
 .t-name { overflow-wrap: anywhere; }
-.t-sub { margin: 3px 0 0; font-style: italic; font-size: 16.5px; line-height: 1.4; color: var(--maroon); }
+.t-sub { margin: 3px 0 0; font-style: italic; font-size: 18px; line-height: 1.4; color: var(--maroon); }
 .t-verse { margin: 8px 0 0; padding-left: 12px; border-left: 1px solid rgba(184, 137, 50, .55); font-style: italic; font-size: 15.5px; line-height: 1.5; color: var(--ink); }
 .t-details { margin: 8px 0 0; display: flex; flex-wrap: wrap; gap: 4px 18px; }
 .t-details div { display: flex; align-items: baseline; gap: 7px; }
-.t-details dt { font-family: var(--caps); font-size: 8.5px; letter-spacing: .22em; text-transform: uppercase; color: var(--gold-deep); }
-.t-details dd { margin: 0; font-size: 16px; font-weight: 600; color: var(--maroon); }
+.t-details dt { font-family: var(--caps); font-size: 10.5px; font-weight: 600; letter-spacing: .18em; text-transform: uppercase; color: var(--meta); }
+.t-details dd { margin: 0; font-size: 18.5px; font-weight: 600; color: var(--maroon); }
 .t-item .t-venue { margin-top: 6px; }
 .t-name .amp-i { font-family: var(--serif); font-style: italic; font-size: .62em; padding: 0 .12em; }
 
@@ -787,7 +788,8 @@ html.is-open .intro.is-skipped .intro-video { transform: none; transition: none;
 .plate-pair { align-self: start; }
 
 /* ── client, 2026-11-22 ─────────────────────────────────────
-   1. the common residence card after the 12 December functions */
+   1. one common card after each venue's functions (residence 10–12 Dec, resort 13–14 Dec): address, Get Directions,
+      Save the Date (one Google Calendar entry for the group) */
 /* the card spans the whole timeline, the gold line running into it */
 .t-common { position: relative; z-index: 1; padding: 6px 0 34px; }
 .t-common-pin { display: grid; place-items: center; width: 44px; height: 44px; margin: -22px auto 8px; border-radius: 50%;
@@ -801,14 +803,13 @@ html.is-open .intro.is-skipped .intro-video { transform: none; transition: none;
 .t-common-card .t-date { margin: 0 0 4px; }
 .t-common-name { margin: 0; font-family: var(--serif); font-weight: 600; font-size: 22px; line-height: 1.2; color: var(--maroon); }
 .t-common-addr { margin: 6px 0 14px; font-style: italic; font-size: 16.5px; line-height: 1.45; color: var(--ink); }
-.t-common-btn { min-height: 46px; white-space: nowrap; }
+.t-common-btns { display: flex; flex-direction: column; align-items: center; gap: 10px; }
+.t-common-btn { width: min(100%, 250px); min-height: 48px; padding-left: 18px; padding-right: 18px; white-space: nowrap; }
 
 /* 2. small gold metadata (the date labels and their kin) a shade deeper and a step heavier, for reading on the cream
       paper; names, headings and the invitation text keep their own styling */
 :root { --meta: #6f4a12; }
-.t-date { font-size: 11px; font-weight: 600; letter-spacing: .15em; color: var(--meta); }
-.t-details dt, .t-dress span { font-size: 9px; font-weight: 600; color: var(--meta); }
-.t-actions a, .t-actions button { font-weight: 600; color: var(--meta); }
+.t-dress span { font-size: 9px; font-weight: 600; color: var(--meta); }
 .when, .hero-date span, .clock-l, .c-muhurtham, .save-ics, .field > span, .rsvp-choice legend span { font-weight: 600; color: var(--meta); }
 
 /* 3. the couple's monogram artwork (assets/monogram.webp: the supplied picture with its plain cream ground made
@@ -817,3 +818,4 @@ html.is-open .intro.is-skipped .intro-video { transform: none; transition: none;
 .welcome-mono { width: min(74vw, 290px); margin: 6px auto 4px; }
 .finale-mono { position: absolute; left: 50%; top: 6%; width: min(44%, 230px); height: auto; margin: 0; transform: translateX(-50%); }
 .finale-mono img { filter: drop-shadow(0 0 10px rgba(255, 246, 228, .9)); }
+.fp-line { white-space: nowrap; }   /* each parent line stays whole, e.g. "& Mrs. Reena Vijay" (client, 2026-11-22) */

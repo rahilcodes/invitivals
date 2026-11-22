@@ -15,10 +15,15 @@ const RESIDENCE = {
   address: ['265, Vivekanand Nagar,', 'Kota, Rajasthan.'],
   common: true,
 };
+/* the 13–14 December functions are all at the resort (client, 2026-11-22): the same kind of common card follows the
+   last of them. `title` is the card's heading; `name` stays the venue line under each event */
 const RESORT = {
   name: 'Tulsi Resort, Baran Road, Kota',
+  title: 'Tulsi Resort',
   maps: 'https://maps.app.goo.gl/tkwgdkJu5rKo2pvy5?g_st=aw',
   button: 'View Venue on Google Maps',
+  address: ['Baran Road, Kota, Rajasthan.'],
+  common: true,
 };
 const at = (d, t) => `2026-12-${d}T${t}:00+05:30`;
 
@@ -76,7 +81,7 @@ export const weddingConfig = {
       person: 'Dr. Saloni',
       initial: 'S',
       relation: 'Daughter of',
-      parents: ['Mr. Banwari Ji Vijay', '& Mrs. Reena', 'Vijay Fatehpur Wale, Kota'],
+      parents: ['Mr. Banwari Ji Vijay', '& Mrs. Reena Vijay', 'Fatehpur Wale, Kota'],   // "Mrs. Reena Vijay" on one line (client, 2026-11-22)
       grandparents: 'Granddaughter of Late Shri Bherulal Ji & Late Smt. Kalyani Bai',
     },
   },
