@@ -1,0 +1,36 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Invitivals//Wedding Invitation//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VTIMEZONE
+TZID:Asia/Kolkata
+BEGIN:STANDARD
+DTSTART:19700101T000000
+TZOFFSETFROM:+0530
+TZOFFSETTO:+0530
+TZNAME:IST
+END:STANDARD
+END:VTIMEZONE
+BEGIN:VEVENT
+UID:punit-saloni-wedding-without-sangeet-reception-and-dinner@invitivals.co
+ m
+DTSTAMP:20261121T000000Z
+DTSTART;TZID=Asia/Kolkata:20261214T190000
+DTEND;TZID=Asia/Kolkata:20261214T220000
+SUMMARY:Reception & Dinner · Punit & Saloni
+LOCATION:Tulsi Resort\, Baran Road\, Kota
+DESCRIPTION:Reception & Dinner: wedding celebrations of CA Punit (Shubham) 
+ & Dr. Saloni.\nStarts 07:00 PM onwards. The end time in this entry is an e
+ stimate\; the invitation gives the start time only.\nVenue: Tulsi Resort\,
+  Baran Road\, Kota\nGoogle Maps: https://maps.app.goo.gl/tkwgdkJu5rKo2pvy5
+ ?g_st=aw\nInvitation: https://invitivals.com/punit-saloni-wedding-without-
+ sangeet/
+URL:https://invitivals.com/punit-saloni-wedding-without-sangeet/
+BEGIN:VALARM
+TRIGGER:-PT3H
+ACTION:DISPLAY
+DESCRIPTION:Reception & Dinner · Punit & Saloni
+END:VALARM
+END:VEVENT
+END:VCALENDAR

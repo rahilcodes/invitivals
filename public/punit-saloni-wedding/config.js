@@ -73,7 +73,7 @@ export const weddingConfig = {
       initial: 'P',
       note: '(Shubham)',
       relation: 'Son of',
-      parents: ['Mr. Amar Nath Singhal', '& Mrs. Vimla, Kota'],
+      parents: ['Mr. Amar Nath Singhal', '& Mrs. Vimla Agrawal, Kota'],   // "Agrawal" added (client, 2026-11-22)
       grandparents: 'Grandson of Late Shri Rambabu & Late Smt. Premvati',
     },
     bride: {

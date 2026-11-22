@@ -1,0 +1,34 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Invitivals//Wedding Invitation//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VTIMEZONE
+TZID:Asia/Kolkata
+BEGIN:STANDARD
+DTSTART:19700101T000000
+TZOFFSETFROM:+0530
+TZOFFSETTO:+0530
+TZNAME:IST
+END:STANDARD
+END:VTIMEZONE
+BEGIN:VEVENT
+UID:punit-saloni-wedding-without-sangeet-mehendi@invitivals.com
+DTSTAMP:20261121T000000Z
+DTSTART;TZID=Asia/Kolkata:20261212T150000
+DTEND;TZID=Asia/Kolkata:20261212T180000
+SUMMARY:Mehendi · Punit & Saloni
+LOCATION:At Our Residence
+DESCRIPTION:Mehendi: wedding celebrations of CA Punit (Shubham) & Dr. Salon
+ i.\nStarts 03:00 PM. The end time in this entry is an estimate\; the invit
+ ation gives the start time only.\nVenue: At Our Residence\nGoogle Maps: ht
+ tps://maps.app.goo.gl/GVUtrttTHw3wPqpW8?g_st=aw\nInvitation: https://invit
+ ivals.com/punit-saloni-wedding-without-sangeet/
+URL:https://invitivals.com/punit-saloni-wedding-without-sangeet/
+BEGIN:VALARM
+TRIGGER:-PT3H
+ACTION:DISPLAY
+DESCRIPTION:Mehendi · Punit & Saloni
+END:VALARM
+END:VEVENT
+END:VCALENDAR

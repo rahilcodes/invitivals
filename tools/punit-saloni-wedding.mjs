@@ -15,7 +15,11 @@ import { fileURLToPath, pathToFileURL } from 'node:url';
 import sharp from 'sharp';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
-const DIR = path.join(ROOT, 'public', 'punit-saloni-wedding');
+/* the folder: punit-saloni-wedding (all events, the default) or punit-saloni-wedding-without-sangeet (the second link,
+   client 2026-11-22), e.g.  node tools/punit-saloni-wedding.mjs punit-saloni-wedding-without-sangeet */
+const FOLDER = process.argv[2] || 'punit-saloni-wedding';
+if (!/^punit-saloni-wedding(-without-sangeet)?$/.test(FOLDER)) throw new Error('unknown folder: ' + FOLDER);
+const DIR = path.join(ROOT, 'public', FOLDER);
 const { weddingConfig: C } = await import(pathToFileURL(path.join(DIR, 'config.js')).href + '?t=' + Date.now());
 /* the page's own helpers, so the .ics files and the Google links can never disagree */
 globalThis.window ??= { matchMedia: () => ({ matches: false }) };
