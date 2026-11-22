@@ -1,0 +1,35 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Invitivals//Balram & Anushka Wedding//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+X-WR-CALNAME:Balram & Anushka · Wedding
+X-WR-TIMEZONE:Asia/Kolkata
+BEGIN:VTIMEZONE
+TZID:Asia/Kolkata
+BEGIN:STANDARD
+DTSTART:19700101T000000
+TZOFFSETFROM:+0530
+TZOFFSETTO:+0530
+TZNAME:IST
+END:STANDARD
+END:VTIMEZONE
+BEGIN:VEVENT
+UID:20270201T103000-sampoornta-bhog@balram-anushka-groom.invitivals.com
+DTSTAMP:20261122T000000Z
+DTSTART;TZID=Asia/Kolkata:20270201T103000
+SUMMARY:Sampoornta & Bhog – Shri Akhand Path Sahib — Balram & Anushka
+LOCATION:Village Fatehpur Kalan
+DESCRIPTION:The wedding of Balram Singh & Anushka Kairon\, with love from t
+ he Nagra Family.\nStarts 10:30 AM.\nMap: https://maps.app.goo.gl/JyZYdV9Fu
+ jdq64788?g_st=i\nhttps://invitivals.com/balram-anushka-groom-wedding/
+URL:https://invitivals.com/balram-anushka-groom-wedding/
+STATUS:CONFIRMED
+BEGIN:VALARM
+TRIGGER:-P1D
+ACTION:DISPLAY
+DESCRIPTION:Sampoornta & Bhog – Shri Akhand Path Sahib — Balram & Anush
+ ka
+END:VALARM
+END:VEVENT
+END:VCALENDAR
