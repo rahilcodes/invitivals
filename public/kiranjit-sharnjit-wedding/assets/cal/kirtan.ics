@@ -1,0 +1,36 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Invitivals//Kiranjit & Sharnjit Wedding//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+X-WR-CALNAME:Kiranjit & Sharnjit · Wedding
+X-WR-TIMEZONE:Asia/Kolkata
+BEGIN:VTIMEZONE
+TZID:Asia/Kolkata
+BEGIN:STANDARD
+DTSTART:19700101T000000
+TZOFFSETFROM:+0530
+TZOFFSETTO:+0530
+TZNAME:IST
+END:STANDARD
+END:VTIMEZONE
+BEGIN:VEVENT
+UID:20261203T110000-kirtan@kiranjit-sharnjit.invitivals.com
+DTSTAMP:20261122T000000Z
+DTSTART;TZID=Asia/Kolkata:20261203T110000
+DTEND;TZID=Asia/Kolkata:20261203T120000
+SUMMARY:Kirtan — Kiranjit & Sharnjit
+LOCATION:At Our Residence\, H. No. 87\, Green Avenue Colony\, Mukerian\, Di
+ stt. Hoshiarpur.
+DESCRIPTION:Kirtan · the wedding of Kiranjit Singh & Sharnjit Kaur.\nTime:
+  11:00 AM to 12:00 Noon.\nMap: https://maps.app.goo.gl/Ya4BPxBXY5s9TKW3A?g
+ _st=iw\nhttps://invitivals.com/kiranjit-sharnjit-wedding/
+URL:https://invitivals.com/kiranjit-sharnjit-wedding/
+STATUS:CONFIRMED
+BEGIN:VALARM
+TRIGGER:-P1D
+ACTION:DISPLAY
+DESCRIPTION:Kirtan — Kiranjit & Sharnjit
+END:VALARM
+END:VEVENT
+END:VCALENDAR

@@ -1,0 +1,35 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Invitivals//Kiranjit & Sharnjit Wedding//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+X-WR-CALNAME:Kiranjit & Sharnjit · Wedding
+X-WR-TIMEZONE:Asia/Kolkata
+BEGIN:VTIMEZONE
+TZID:Asia/Kolkata
+BEGIN:STANDARD
+DTSTART:19700101T000000
+TZOFFSETFROM:+0530
+TZOFFSETTO:+0530
+TZNAME:IST
+END:STANDARD
+END:VTIMEZONE
+BEGIN:VEVENT
+UID:20261203T100000-bhog@kiranjit-sharnjit.invitivals.com
+DTSTAMP:20261122T000000Z
+DTSTART;TZID=Asia/Kolkata:20261203T100000
+SUMMARY:Bhog – Shri Akhand Path Sahib — Kiranjit & Sharnjit
+LOCATION:At Our Residence\, H. No. 87\, Green Avenue Colony\, Mukerian\, Di
+ stt. Hoshiarpur.
+DESCRIPTION:Bhog – Shri Akhand Path Sahib · the wedding of Kiranjit Sing
+ h & Sharnjit Kaur.\nTime: 10:00 AM.\nMap: https://maps.app.goo.gl/Ya4BPxBX
+ Y5s9TKW3A?g_st=iw\nhttps://invitivals.com/kiranjit-sharnjit-wedding/
+URL:https://invitivals.com/kiranjit-sharnjit-wedding/
+STATUS:CONFIRMED
+BEGIN:VALARM
+TRIGGER:-P1D
+ACTION:DISPLAY
+DESCRIPTION:Bhog – Shri Akhand Path Sahib — Kiranjit & Sharnjit
+END:VALARM
+END:VEVENT
+END:VCALENDAR

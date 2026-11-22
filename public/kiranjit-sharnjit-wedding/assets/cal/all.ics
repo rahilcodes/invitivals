@@ -1,0 +1,146 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Invitivals//Kiranjit & Sharnjit Wedding//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+X-WR-CALNAME:Kiranjit & Sharnjit · Wedding
+X-WR-TIMEZONE:Asia/Kolkata
+BEGIN:VTIMEZONE
+TZID:Asia/Kolkata
+BEGIN:STANDARD
+DTSTART:19700101T000000
+TZOFFSETFROM:+0530
+TZOFFSETTO:+0530
+TZNAME:IST
+END:STANDARD
+END:VTIMEZONE
+BEGIN:VEVENT
+UID:20261201T100000-arambh@kiranjit-sharnjit.invitivals.com
+DTSTAMP:20261122T000000Z
+DTSTART;TZID=Asia/Kolkata:20261201T100000
+SUMMARY:Arambh – Shri Akhand Path Sahib — Kiranjit & Sharnjit
+LOCATION:At Our Residence\, H. No. 87\, Green Avenue Colony\, Mukerian\, Di
+ stt. Hoshiarpur.
+DESCRIPTION:Arambh – Shri Akhand Path Sahib · the wedding of Kiranjit Si
+ ngh & Sharnjit Kaur.\nTime: 10:00 AM.\nMap: https://maps.app.goo.gl/Ya4BPx
+ BXY5s9TKW3A?g_st=iw\nhttps://invitivals.com/kiranjit-sharnjit-wedding/
+URL:https://invitivals.com/kiranjit-sharnjit-wedding/
+STATUS:CONFIRMED
+BEGIN:VALARM
+TRIGGER:-P1D
+ACTION:DISPLAY
+DESCRIPTION:Arambh – Shri Akhand Path Sahib — Kiranjit & Sharnjit
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:20261203T100000-bhog@kiranjit-sharnjit.invitivals.com
+DTSTAMP:20261122T000000Z
+DTSTART;TZID=Asia/Kolkata:20261203T100000
+SUMMARY:Bhog – Shri Akhand Path Sahib — Kiranjit & Sharnjit
+LOCATION:At Our Residence\, H. No. 87\, Green Avenue Colony\, Mukerian\, Di
+ stt. Hoshiarpur.
+DESCRIPTION:Bhog – Shri Akhand Path Sahib · the wedding of Kiranjit Sing
+ h & Sharnjit Kaur.\nTime: 10:00 AM.\nMap: https://maps.app.goo.gl/Ya4BPxBX
+ Y5s9TKW3A?g_st=iw\nhttps://invitivals.com/kiranjit-sharnjit-wedding/
+URL:https://invitivals.com/kiranjit-sharnjit-wedding/
+STATUS:CONFIRMED
+BEGIN:VALARM
+TRIGGER:-P1D
+ACTION:DISPLAY
+DESCRIPTION:Bhog – Shri Akhand Path Sahib — Kiranjit & Sharnjit
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:20261203T110000-kirtan@kiranjit-sharnjit.invitivals.com
+DTSTAMP:20261122T000000Z
+DTSTART;TZID=Asia/Kolkata:20261203T110000
+DTEND;TZID=Asia/Kolkata:20261203T120000
+SUMMARY:Kirtan — Kiranjit & Sharnjit
+LOCATION:At Our Residence\, H. No. 87\, Green Avenue Colony\, Mukerian\, Di
+ stt. Hoshiarpur.
+DESCRIPTION:Kirtan · the wedding of Kiranjit Singh & Sharnjit Kaur.\nTime:
+  11:00 AM to 12:00 Noon.\nMap: https://maps.app.goo.gl/Ya4BPxBXY5s9TKW3A?g
+ _st=iw\nhttps://invitivals.com/kiranjit-sharnjit-wedding/
+URL:https://invitivals.com/kiranjit-sharnjit-wedding/
+STATUS:CONFIRMED
+BEGIN:VALARM
+TRIGGER:-P1D
+ACTION:DISPLAY
+DESCRIPTION:Kirtan — Kiranjit & Sharnjit
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:20261203T130000-langar@kiranjit-sharnjit.invitivals.com
+DTSTAMP:20261122T000000Z
+DTSTART;TZID=Asia/Kolkata:20261203T130000
+SUMMARY:Guru Ka Langar — Kiranjit & Sharnjit
+LOCATION:At Our Residence\, H. No. 87\, Green Avenue Colony\, Mukerian\, Di
+ stt. Hoshiarpur.
+DESCRIPTION:Guru Ka Langar · the wedding of Kiranjit Singh & Sharnjit Kaur
+ .\nTime: 01:00 PM.\nMap: https://maps.app.goo.gl/Ya4BPxBXY5s9TKW3A?g_st=iw
+ \nhttps://invitivals.com/kiranjit-sharnjit-wedding/
+URL:https://invitivals.com/kiranjit-sharnjit-wedding/
+STATUS:CONFIRMED
+BEGIN:VALARM
+TRIGGER:-P1D
+ACTION:DISPLAY
+DESCRIPTION:Guru Ka Langar — Kiranjit & Sharnjit
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:20261204T193000-jaggo@kiranjit-sharnjit.invitivals.com
+DTSTAMP:20261122T000000Z
+DTSTART;TZID=Asia/Kolkata:20261204T193000
+SUMMARY:Jaggo & DJ Night — Kiranjit & Sharnjit
+LOCATION:At Our Residence\, H. No. 87\, Green Avenue Colony\, Mukerian\, Di
+ stt. Hoshiarpur.
+DESCRIPTION:Jaggo & DJ Night · the wedding of Kiranjit Singh & Sharnjit Ka
+ ur.\nTime: 07:30 PM.\nMap: https://maps.app.goo.gl/Ya4BPxBXY5s9TKW3A?g_st=
+ iw\nhttps://invitivals.com/kiranjit-sharnjit-wedding/
+URL:https://invitivals.com/kiranjit-sharnjit-wedding/
+STATUS:CONFIRMED
+BEGIN:VALARM
+TRIGGER:-P1D
+ACTION:DISPLAY
+DESCRIPTION:Jaggo & DJ Night — Kiranjit & Sharnjit
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:20261206T090000-baraat@kiranjit-sharnjit.invitivals.com
+DTSTAMP:20261122T000000Z
+DTSTART;TZID=Asia/Kolkata:20261206T090000
+SUMMARY:Baraat – Departure — Kiranjit & Sharnjit
+LOCATION:J.S. Resorts\, Begowal to Nadala Road\, Adda Sikri.
+DESCRIPTION:Baraat – Departure · the wedding of Kiranjit Singh & Sharnji
+ t Kaur.\nTime: 09:00 AM.\nMap: https://maps.google.com/maps/place//data=!4
+ m2!3m1!1s0x391bb3dd3360106d:0xdb2ba2b3f21cd7fc?entry=s&sa=X&ved=2ahUKEwi3k
+ I_Y05qYAxVTkOEIHYeiETEQ4kB6BAgfEAA&hl=en\nhttps://invitivals.com/kiranjit-
+ sharnjit-wedding/
+URL:https://invitivals.com/kiranjit-sharnjit-wedding/
+STATUS:CONFIRMED
+BEGIN:VALARM
+TRIGGER:-P1D
+ACTION:DISPLAY
+DESCRIPTION:Baraat – Departure — Kiranjit & Sharnjit
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:20261206T103000-lavaan@kiranjit-sharnjit.invitivals.com
+DTSTAMP:20261122T000000Z
+DTSTART;TZID=Asia/Kolkata:20261206T103000
+SUMMARY:Lavaan — Kiranjit & Sharnjit
+LOCATION:J.S. Resorts\, Begowal to Nadala Road\, Adda Sikri.
+DESCRIPTION:Lavaan · the wedding of Kiranjit Singh & Sharnjit Kaur.\nTime:
+  10:30 AM.\nMap: https://maps.google.com/maps/place//data=!4m2!3m1!1s0x391
+ bb3dd3360106d:0xdb2ba2b3f21cd7fc?entry=s&sa=X&ved=2ahUKEwi3kI_Y05qYAxVTkOE
+ IHYeiETEQ4kB6BAgfEAA&hl=en\nhttps://invitivals.com/kiranjit-sharnjit-weddi
+ ng/
+URL:https://invitivals.com/kiranjit-sharnjit-wedding/
+STATUS:CONFIRMED
+BEGIN:VALARM
+TRIGGER:-P1D
+ACTION:DISPLAY
+DESCRIPTION:Lavaan — Kiranjit & Sharnjit
+END:VALARM
+END:VEVENT
+END:VCALENDAR

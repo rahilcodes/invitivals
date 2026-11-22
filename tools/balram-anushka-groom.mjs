@@ -68,7 +68,7 @@ const svg = Buffer.from(`<svg width="1200" height="630" xmlns="http://www.w3.org
   <g text-anchor="middle" font-family="Georgia, 'Times New Roman', serif">
     <text x="600" y="444" font-size="25" letter-spacing="9" fill="#e7c87a">THE WEDDING OF</text>
     <text x="600" y="520" font-size="62" font-style="italic" fill="#f8f0df">${x(cfg.groomName)} &amp; ${x(cfg.brideName)}</text>
-    <text x="600" y="578" font-size="24" letter-spacing="6" fill="#f1e6cf">ANAND KARAJ · 3 FEBRUARY 2027 ·${x(cfg.venueCity).toUpperCase()}</text>
+    <text x="600" y="578" font-size="24" letter-spacing="6" fill="#f1e6cf">ANAND KARAJ · 3 FEBRUARY 2027 · ${x(cfg.venueCity).toUpperCase()}</text>
   </g></svg>`);
 const info = await sharp(bg).composite([{ input: svg }]).jpeg({ quality: 86, mozjpeg: true }).toFile(path.join(DIR, 'assets', 'og.jpg'));
 console.log('✓ assets/og.jpg', info.width + 'x' + info.height, info.size, 'bytes');

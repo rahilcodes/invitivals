@@ -1,0 +1,36 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Invitivals//Kiranjit & Sharnjit Wedding//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+X-WR-CALNAME:Kiranjit & Sharnjit · Wedding
+X-WR-TIMEZONE:Asia/Kolkata
+BEGIN:VTIMEZONE
+TZID:Asia/Kolkata
+BEGIN:STANDARD
+DTSTART:19700101T000000
+TZOFFSETFROM:+0530
+TZOFFSETTO:+0530
+TZNAME:IST
+END:STANDARD
+END:VTIMEZONE
+BEGIN:VEVENT
+UID:20261206T090000-wedding@kiranjit-sharnjit.invitivals.com
+DTSTAMP:20261122T000000Z
+DTSTART;TZID=Asia/Kolkata:20261206T090000
+SUMMARY:Wedding of Kiranjit Singh & Sharnjit Kaur
+LOCATION:J.S. Resorts\, Begowal to Nadala Road\, Adda Sikri.
+DESCRIPTION:Wedding of Kiranjit Singh & Sharnjit Kaur. Baraat departure 09:
+ 00 AM\, Lavaan 10:30 AM.\nTime: 09:00 AM.\nMap: https://maps.google.com/ma
+ ps/place//data=!4m2!3m1!1s0x391bb3dd3360106d:0xdb2ba2b3f21cd7fc?entry=s&sa
+ =X&ved=2ahUKEwi3kI_Y05qYAxVTkOEIHYeiETEQ4kB6BAgfEAA&hl=en\nhttps://invitiv
+ als.com/kiranjit-sharnjit-wedding/
+URL:https://invitivals.com/kiranjit-sharnjit-wedding/
+STATUS:CONFIRMED
+BEGIN:VALARM
+TRIGGER:-P1D
+ACTION:DISPLAY
+DESCRIPTION:Wedding of Kiranjit Singh & Sharnjit Kaur
+END:VALARM
+END:VEVENT
+END:VCALENDAR
