@@ -31,9 +31,10 @@ cfg.pair = cfg.brideFirst ? [cfg.brideName, cfg.groomName] : [cfg.groomName, cfg
 const SECTIONS = [
   HeroSection, WelcomeSection, cfg.story && StorySection, FamilySection, EventsSection, CeremonySection,
   VenueSection, CountdownSection, cfg.gallery?.length && GallerySection, SaveTheDateSection,
-  cfg.contact && ContactSection, cfg.gifting && GiftingSection, WishesSection, ThankYouSection,
+  /* the ending (client, 2026-11-23): the thank-you is the second-last page, Warm Wishes with Share the Invitation the last */
+  cfg.contact && ContactSection, cfg.gifting && GiftingSection, ThankYouSection, WishesSection,
 ].filter(Boolean);
-const NO_THREAD_AFTER = new Set([HeroSection, ThankYouSection]);
+const NO_THREAD_AFTER = new Set([HeroSection, WishesSection]);
 const guest = guestName();
 
 const page = document.getElementById('invitation');

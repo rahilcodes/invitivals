@@ -1,8 +1,6 @@
-/* ThankYouSection — the paper stays clean and warm, then the temple tank rises slowly out of it. */
-import { LotusDecoration, Icon, Monogram, Button } from '../decor.js';
-
-/* floating diya flames measured on finale.webp (percent), with relative size */
-const DIYAS = [[20.7, 83.4, 1.3], [87.5, 87.1, 1.4], [79.3, 87.9, 1], [3.5, 80.3, .8], [29.2, 79, .7], [86.3, 76.7, .7], [95.4, 71.9, .6], [19.1, 75.6, .6]];
+/* ThankYouSection — the second-last page (client, 2026-11-23): the couple's thank-you, the heart and their AH
+   monogram, on the clean paper. Share the Invitation and the closing scene now end the Warm Wishes page after it. */
+import { LotusDecoration, Icon, Monogram } from '../decor.js';
 
 export const ThankYouSection = (cfg) => `
 <section class="sec thanks" id="thanks" aria-labelledby="thanks-h">
@@ -12,12 +10,6 @@ export const ThankYouSection = (cfg) => `
     <p class="prose thanks-msg" data-reveal>${cfg.thankYou.lines.map((l) => `<span>${l}</span>`).join('')}</p>
     <span class="thanks-heart" data-reveal>${Icon('heart')}</span>
     ${cfg.thankYou.signoff ? `<p class="signoff" data-reveal>${cfg.thankYou.signoff}</p>` : ''}
-    <div class="thanks-share" data-reveal>${Button({ label: 'Share the Invitation', icon: 'send', cls: 'btn-ghost js-share' })}</div>
-    <p class="credit">Designed by <a href="https://invitivals.com/?utm_source=invitation&amp;utm_medium=footer&amp;utm_campaign=${cfg.creditCampaign || 'hindu-south-wedding'}" target="_blank" rel="noopener">Invitivals</a></p>
-  </div>
-  <div class="finale" aria-hidden="true">
-    <img src="assets/finale.webp" alt="" loading="lazy" decoding="async">
-    ${DIYAS.map(([x, y, s], i) => `<span class="diya-glow" style="left:${x}%;top:${y}%;--i:${i};--s:${s}"></span>`).join('')}
-    ${Monogram(cfg.pair[0], cfg.pair[1], 'finale-mono')}
+    <div data-reveal>${Monogram(cfg.pair[0], cfg.pair[1], 'thanks-mono')}</div>
   </div>
 </section>`;

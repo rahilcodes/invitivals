@@ -843,3 +843,19 @@ html.is-sealed .swipe-cue { opacity: 0; transform: translateY(10px); }
     font-size: clamp(10px, 3vw, 11.5px); letter-spacing: clamp(1.2px, .5vw, 2.3px);
   }
 }
+
+/* ── client, 2026-11-23 ──────────────────────────────────────────────
+   Our Story: no horizontal or divider lines (the dashes beside the years and the thread between the chapters go) */
+.story .when span::before, .story .when span::after { content: none; }
+.story .when { font-size: 13px; font-weight: 600; letter-spacing: .3em; padding-left: .3em; }
+.story .chapter + .chapter::before { content: none; }
+.story .chapter + .chapter { margin-top: 14px; }
+/* Welcome: the greeting stands as its own line above the invitation */
+.welcome-greeting { margin-bottom: 4px; font-style: italic; color: var(--maroon); }
+.welcome-greeting + .prose { margin-top: 6px; }
+/* the ending: thank-you page (text, heart, AH monogram), then Warm Wishes with Share and the closing scene */
+.thanks { padding-bottom: 8px; }
+.thanks-mono { margin-top: 18px; }
+.wishes { padding-bottom: 0; }
+.wishes .thanks-share { margin-top: 26px; }
+.story .chapter h3 { line-height: 1.35; } .story .when { margin-top: 4px; }

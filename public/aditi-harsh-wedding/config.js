@@ -48,10 +48,21 @@ export const weddingConfig = {
 
   welcome: {
     title: 'Welcome',
-    lines: ['With love and blessings,', 'we invite you to celebrate', 'the wedding festivities of'],
+    /* the client's wording of 2026-11-23: a greeting, then the invitation, which runs on into "Aditi weds Harsh" below */
+    greeting: 'Welcome to the celebration of love.',
+    lines: ['With the love and blessings of Lord Ganesha,', 'we invite you to celebrate', 'the wedding festivities of'],
   },
 
-  story: null,
+  /* Our Story, the client's own words (2026-11-23). `image` is the couple's photograph: none has been supplied yet,
+     so the arch frame is left out until it is set (e.g. 'assets/story-couple.webp'); never a stand-in picture */
+  story: {
+    intro: '',
+    image: null,
+    chapters: [
+      { icon: 'love', title: 'We fell in love', when: '2014', text: 'From school corridors to college campus, our story slowly unfolded. We grew together, navigating life’s many chapters hand in hand.' },
+      { icon: 'forever', title: 'Now we begin forever', when: '2027', text: 'Twelve years, countless milestones and one big decision; to do life together. A journey of friendship, love and togetherness now begins a new chapter.' },
+    ],
+  },
 
   families: {
     bride: {
@@ -92,8 +103,9 @@ export const weddingConfig = {
   contact: null,
   gifting: null,
 
-  /* Send Wishes opens a WhatsApp chat with the bride (+91 83209 79534); the number itself is not printed anywhere */
-  wishes: { prompt: 'Leave your blessings for the couple.', whatsapp: '918320979534' },
+  /* Send Wishes opens a WhatsApp chat with the client's UK number +44 7442 087724 (changed 2026-11-23; it was the
+     bride's Indian number). The number itself is not printed anywhere. It is the page's only WhatsApp link. */
+  wishes: { prompt: 'Leave your blessings for the couple.', whatsapp: '447442087724' },
 
   /* the final message, exactly as the client wrote it */
   thankYou: {

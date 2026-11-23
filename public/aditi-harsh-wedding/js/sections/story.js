@@ -8,9 +8,9 @@ export const StorySection = (cfg) => `
   ${FloralVine({ side: 'r', top: '520px', height: '820px', crop: 55, depth: 0.06 })}
   <div class="sec-inner">
     ${Heading('Our Story', cfg.story.intro, { id: 'story-h' })}
-    <figure class="arch-window" data-reveal>
-      <div class="arch-window-img"><img src="${cfg.story.image}" alt="${cfg.pair[0]} and ${cfg.pair[1]} beneath a garlanded temple arch" loading="lazy" decoding="async" data-parallax="0.04"></div>
-    </figure>
+    ${cfg.story.image ? `<figure class="arch-window" data-reveal>
+      <div class="arch-window-img"><img src="${cfg.story.image}" alt="${cfg.pair[0]} and ${cfg.pair[1]}" loading="lazy" decoding="async" data-parallax="0.04"></div>
+    </figure>` : ''}
     <ol class="chapters">
       ${cfg.story.chapters.map((c, i) => `
         <li class="chapter" data-reveal>

@@ -14,6 +14,7 @@ export const WelcomeSection = (cfg, guest) => `
     <p class="script-title" data-reveal>${cfg.welcome.title}</p>
     <p class="eyebrow" data-reveal>to our wedding celebration</p>
     ${guest ? `<p class="dear" data-reveal>Dear <span>${escScript(guest)}</span>,</p>` : ''}
+    ${cfg.welcome.greeting ? `<p class="prose welcome-greeting" data-reveal>${cfg.welcome.greeting}</p>` : ''}
     <p class="prose" data-reveal>${cfg.welcome.lines.join('<br>')}</p>
     <div data-reveal>${GoldDivider('diamond')}</div>
     <p class="pair" data-reveal>
