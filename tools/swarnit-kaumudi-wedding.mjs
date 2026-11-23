@@ -6,8 +6,7 @@
    From the client's pictures in invites/src/swarnit-kaumudi-wedding/ it writes:
    - assets/hero-arch.webp   the hill fort through the marigold arch (fort-hill-arch.jpg), the hero's scene;
      assets/intro-last.webp  the same scene at the film's size;
-   - assets/closing-lake.webp, closing-gate.webp, closing-hill.webp  the three plates of the closing slide
-     (only resized and cropped to their frames, never stretched);
+   - assets/venue.webp  the client's photograph of the venue (venue.jpg), only resized;
    - assets/og.jpg  the WhatsApp / link-preview cover (1200 x 630), shot from tools/swarnit-kaumudi-wedding-og.html;
    - index.html's title, description and sharing tags.
    The couple (assets/couple.webp) is cut from couple-on-black.jpg by tools/varun-diksha-couple.mjs:
@@ -30,9 +29,7 @@ const webp = (img, name, q = 84) => img.webp({ quality: q, effort: 6 }).toFile(p
 /* ── artwork ── */
 await webp(sharp(path.join(SRC, 'fort-hill-arch.jpg')).resize(941, 1672, { fit: 'cover' }), 'hero-arch.webp', 86);
 await webp(sharp(path.join(SRC, 'fort-hill-arch.jpg')).resize(720, 1280, { fit: 'cover' }), 'intro-last.webp', 80);
-await webp(sharp(path.join(SRC, 'fort-lake-wide.jpg')).resize(1200, 628, { fit: 'cover' }), 'closing-lake.webp');
-await webp(sharp(path.join(SRC, 'fort-gate-arch.jpg')).extract({ left: 0, top: 330, width: 900, height: 1200 }).resize(700, 933), 'closing-gate.webp');
-await webp(sharp(path.join(SRC, 'fort-hill-arch.jpg')).extract({ left: 0, top: 330, width: 864, height: 1152 }).resize(700, 933), 'closing-hill.webp');
+await webp(sharp(path.join(SRC, 'venue.jpg')).resize({ width: 1000 }), 'venue.webp', 86);   // the client's venue photograph, whole
 
 /* ── link preview ── */
 const CHROME = process.env.CHROME || 'C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe';

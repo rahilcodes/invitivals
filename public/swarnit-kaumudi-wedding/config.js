@@ -8,8 +8,8 @@
    Every name, date, time and address is the client's, as transcribed from their invitation card.
    The venue's name follows its own Google listing (the client's link): "Mahalaxmi Celebrations and Lawns".
    Only start times were supplied: calendar entries carry no invented end.
-   No song has arrived yet (music: null → no music button). No RSVP contact was on the card: replies are
-   stored by rsvp.php on the server.
+   The song and the venue photograph are the client's own files (2026-11-23). No RSVP contact was on the card:
+   replies are stored by rsvp.php on the server.
    ───────────────────────────────────────────────────────────── */
 /* the venue's Google Maps place, taken from the listing the client's link (share.google/0I4GVkC40WAhZx0W0) opens:
    "Mahalaxmi Celebrations and Lawns Washim", Washim, Maharashtra 444505 */
@@ -41,6 +41,8 @@ export const weddingConfig = {
   venueAddress: 'Risod Road, Washim, Maharashtra',
   venueCity: 'Washim, Maharashtra',
   mapsUrl: MAPS,
+  /* the client's photograph of the venue (2026-11-23), whole: only resized */
+  venueImage: { src: 'assets/venue.webp', w: 1000, h: 1103, alt: 'Mahalaxmi Celebrations and Lawns: the white hall with its name in Marathi on the roof, at dusk' },
 
   welcome: {
     title: 'Welcome',
@@ -86,14 +88,10 @@ export const weddingConfig = {
     lines: ['Your presence and blessings', 'will mean the world to us.'],
     signoff: 'With love, the Wayal & Shewale families',
   },
-  /* the closing slide: three framed pictures of the invitation's own scenes */
-  closingImages: [
-    { src: 'assets/closing-lake.webp', w: 1200, h: 628, alt: 'The fort across the lake at sunset, framed by a stone arch with brass lamps', shape: 'wide' },
-    { src: 'assets/closing-gate.webp', w: 700, h: 933, alt: 'A garlanded fort gate at golden hour', shape: 'tall' },
-    { src: 'assets/closing-hill.webp', w: 700, h: 933, alt: 'The hill fort under a saffron flag, through a marigold arch', shape: 'tall' },
-  ],
+  /* the closing: the couple themselves, the last thing on the invitation (client, 2026-11-23; the three framed
+     fort pictures were removed at the client's request) */
 
-  music: null,   // the client's song has not arrived; set to 'assets/audio/music.mp3' when it does
+  music: 'assets/audio/music.mp3',   // the client's own song (2026-11-23), the file exactly as supplied
   intro: {
     video: 'assets/intro-wedding.mp4',
     poster: 'assets/intro-poster.webp',
