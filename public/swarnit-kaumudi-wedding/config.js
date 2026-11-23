@@ -88,8 +88,9 @@ export const weddingConfig = {
     lines: ['Your presence and blessings', 'will mean the world to us.'],
     signoff: 'With love, the Wayal & Shewale families',
   },
-  /* the closing: the couple themselves, the last thing on the invitation (client, 2026-11-23; the three framed
-     fort pictures were removed at the client's request) */
+  /* the closing: the client's fort-and-lake picture, whole, the last thing on the invitation (client, 2026-11-23;
+     it replaced the couple, and the three framed pictures before that: neither comes back) */
+  closingImage: { src: 'assets/closing-scene.webp', w: 1600, h: 837, alt: 'A hill fort across a lake at sunset, seen through a carved stone arch with brass lamps, a dhol and a rangoli' },
 
   music: 'assets/audio/music.mp3',   // the client's own song (2026-11-23), the file exactly as supplied
   intro: {

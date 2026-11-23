@@ -760,17 +760,13 @@ html.is-open .intro.is-skipped .intro-video { transform: none; transition: none;
 .rsvp-status.is-error { font-style: normal; color: var(--maroon); }
 .rsvp-again { margin-top: 6px; min-height: 44px; padding: 0 12px; border: 0; background: none; cursor: pointer; font-family: var(--caps); font-size: 10.5px; letter-spacing: .2em; text-transform: uppercase; color: var(--saffron); text-decoration: underline; text-underline-offset: 4px; }
 
-/* closing: the monogram and thanks, then the couple as the invitation's last picture, standing on the paper
-   (their own transparent image, whole, with a soft ground shadow and a warm glow behind) */
-.thanks { padding-bottom: 30px; }
+/* closing: the monogram, thanks, share button and credit; then the client's fort-and-lake picture ends the page:
+   whole (its own 1600 x 837), edge to edge, its top edge melting out of the paper, nothing over or after it */
+.thanks { padding-bottom: 0; }
 .thanks-mono { margin-top: 10px; }
-.closing-couple { position: relative; margin: 30px auto 0; width: min(78%, 330px); }
-.closing-couple::before { content: ''; position: absolute; left: -14%; right: -14%; top: 6%; bottom: 4%; z-index: 0; border-radius: 50%;
-  background: radial-gradient(closest-side, rgba(255, 226, 170, .75), rgba(255, 226, 170, .28) 55%, rgba(255, 226, 170, 0)); pointer-events: none; }
-.closing-couple::after { content: ''; position: absolute; left: 6%; right: 6%; bottom: -8px; height: 22px; z-index: 0; border-radius: 50%;
-  background: radial-gradient(closest-side, rgba(74, 30, 14, .3), transparent); pointer-events: none; }
-.closing-couple .couple { position: relative; z-index: 1; }
-.closing-couple img { display: block; width: 100%; height: auto; filter: drop-shadow(0 10px 12px rgba(60, 24, 6, .28)); }
+.closing-scene { margin: 30px 0 0; }
+.closing-scene img { display: block; width: 100%; height: auto;
+  -webkit-mask-image: linear-gradient(transparent 0, #000 9%); mask-image: linear-gradient(transparent 0, #000 9%); }
 .thanks .credit { margin-top: 26px; }
 .family-person { font-size: min(9.4vw, 42px); white-space: nowrap; padding: 0 .3em; }
 @media (min-width: 700px) and (max-height: 820px) { .tagline { display: none; } .hero-date { margin-top: min(8px, 1svh); } }

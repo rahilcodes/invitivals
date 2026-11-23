@@ -29,6 +29,7 @@ const webp = (img, name, q = 84) => img.webp({ quality: q, effort: 6 }).toFile(p
 /* ── artwork ── */
 await webp(sharp(path.join(SRC, 'fort-hill-arch.jpg')).resize(941, 1672, { fit: 'cover' }), 'hero-arch.webp', 86);
 await webp(sharp(path.join(SRC, 'fort-hill-arch.jpg')).resize(720, 1280, { fit: 'cover' }), 'intro-last.webp', 80);
+await webp(sharp(path.join(SRC, 'fort-lake-wide.jpg')), 'closing-scene.webp', 88);   // the closing picture, whole, at its own size
 await webp(sharp(path.join(SRC, 'venue.jpg')).resize({ width: 1000 }), 'venue.webp', 86);   // the client's venue photograph, whole
 
 /* ── link preview ── */
