@@ -1,65 +1,47 @@
 BEGIN:VCALENDAR
 VERSION:2.0
-PRODID:-//Invitivals//Balram & Anushka Wedding//EN
+PRODID:-//Creativals//Wedding Invitation//EN
 CALSCALE:GREGORIAN
 METHOD:PUBLISH
-X-WR-CALNAME:Balram & Anushka · Wedding
-X-WR-TIMEZONE:Asia/Kolkata
-BEGIN:VTIMEZONE
-TZID:Asia/Kolkata
-BEGIN:STANDARD
-DTSTART:19700101T000000
-TZOFFSETFROM:+0530
-TZOFFSETTO:+0530
-TZNAME:IST
-END:STANDARD
-END:VTIMEZONE
 BEGIN:VEVENT
-UID:20270130T100000-shubh-arambh@balram-anushka-groom.invitivals.com
-DTSTAMP:20261122T000000Z
-DTSTART;TZID=Asia/Kolkata:20270130T100000
-SUMMARY:Shubh Arambh – Shri Akhand Path Sahib — Balram & Anushka
-LOCATION:Village Fatehpur Kalan
-DESCRIPTION:The wedding of Balram Singh & Anushka Kairon\, with love from t
- he Nagra Family.\nStarts 10:00 AM.\nMap: https://maps.app.goo.gl/JyZYdV9Fu
- jdq64788?g_st=i\nhttps://invitivals.com/balram-anushka-groom-wedding/
+UID:20270130T043000Z-shubh-arambh@invitivals.com
+DTSTAMP:20261124T033802Z
+DTSTART:20270130T043000Z
+DTEND:20270130T073000Z
+SUMMARY:Shubh Arambh — Balram & Anushka
+DESCRIPTION:Shri Akhand Path Sahib
+LOCATION:Village Fatehpur Kalan\, 
 URL:https://invitivals.com/balram-anushka-groom-wedding/
-STATUS:CONFIRMED
 BEGIN:VALARM
 TRIGGER:-P1D
 ACTION:DISPLAY
-DESCRIPTION:Shubh Arambh – Shri Akhand Path Sahib — Balram & Anushka
+DESCRIPTION:Shubh Arambh — Balram & Anushka
 END:VALARM
 END:VEVENT
 BEGIN:VEVENT
-UID:20270201T103000-sampoornta-bhog@balram-anushka-groom.invitivals.com
-DTSTAMP:20261122T000000Z
-DTSTART;TZID=Asia/Kolkata:20270201T103000
-SUMMARY:Sampoornta & Bhog – Shri Akhand Path Sahib — Balram & Anushka
-LOCATION:Village Fatehpur Kalan
-DESCRIPTION:The wedding of Balram Singh & Anushka Kairon\, with love from t
- he Nagra Family.\nStarts 10:30 AM.\nMap: https://maps.app.goo.gl/JyZYdV9Fu
- jdq64788?g_st=i\nhttps://invitivals.com/balram-anushka-groom-wedding/
+UID:20270201T050000Z-sampoornta-bhog@invitivals.com
+DTSTAMP:20261124T033802Z
+DTSTART:20270201T050000Z
+DTEND:20270201T080000Z
+SUMMARY:Sampoornta & Bhog — Balram & Anushka
+DESCRIPTION:Shri Akhand Path Sahib
+LOCATION:Village Fatehpur Kalan\, 
 URL:https://invitivals.com/balram-anushka-groom-wedding/
-STATUS:CONFIRMED
 BEGIN:VALARM
 TRIGGER:-P1D
 ACTION:DISPLAY
-DESCRIPTION:Sampoornta & Bhog – Shri Akhand Path Sahib — Balram & Anush
- ka
+DESCRIPTION:Sampoornta & Bhog — Balram & Anushka
 END:VALARM
 END:VEVENT
 BEGIN:VEVENT
-UID:20270202T100000-shagun@balram-anushka-groom.invitivals.com
-DTSTAMP:20261122T000000Z
-DTSTART;TZID=Asia/Kolkata:20270202T100000
+UID:20270202T043000Z-shagun@invitivals.com
+DTSTAMP:20261124T033802Z
+DTSTART:20270202T043000Z
+DTEND:20270202T073000Z
 SUMMARY:Shagun — Balram & Anushka
+DESCRIPTION:
 LOCATION:Rani Mahal Palace\, Garshankar
-DESCRIPTION:The wedding of Balram Singh & Anushka Kairon\, with love from t
- he Nagra Family.\nStarts 10:00 AM.\nMap: https://maps.app.goo.gl/GG9wrR1E5
- kuCB6VPA?g_st=i\nhttps://invitivals.com/balram-anushka-groom-wedding/
 URL:https://invitivals.com/balram-anushka-groom-wedding/
-STATUS:CONFIRMED
 BEGIN:VALARM
 TRIGGER:-P1D
 ACTION:DISPLAY
@@ -67,16 +49,14 @@ DESCRIPTION:Shagun — Balram & Anushka
 END:VALARM
 END:VEVENT
 BEGIN:VEVENT
-UID:20270202T170000-jaggo@balram-anushka-groom.invitivals.com
-DTSTAMP:20261122T000000Z
-DTSTART;TZID=Asia/Kolkata:20270202T170000
+UID:20270202T113000Z-jaggo@invitivals.com
+DTSTAMP:20261124T033802Z
+DTSTART:20270202T113000Z
+DTEND:20270202T143000Z
 SUMMARY:Jaggo — Balram & Anushka
+DESCRIPTION:
 LOCATION:Rani Mahal Palace\, Garshankar
-DESCRIPTION:The wedding of Balram Singh & Anushka Kairon\, with love from t
- he Nagra Family.\nStarts 5:00 PM.\nMap: https://maps.app.goo.gl/GG9wrR1E5k
- uCB6VPA?g_st=i\nhttps://invitivals.com/balram-anushka-groom-wedding/
 URL:https://invitivals.com/balram-anushka-groom-wedding/
-STATUS:CONFIRMED
 BEGIN:VALARM
 TRIGGER:-P1D
 ACTION:DISPLAY
@@ -84,16 +64,14 @@ DESCRIPTION:Jaggo — Balram & Anushka
 END:VALARM
 END:VEVENT
 BEGIN:VEVENT
-UID:20270203T093000-baraat@balram-anushka-groom.invitivals.com
-DTSTAMP:20261122T000000Z
-DTSTART;TZID=Asia/Kolkata:20270203T093000
+UID:20270203T040000Z-baraat@invitivals.com
+DTSTAMP:20261124T033802Z
+DTSTART:20270203T040000Z
+DTEND:20270203T070000Z
 SUMMARY:Baraat — Balram & Anushka
-LOCATION:Fatehpur Kalan
-DESCRIPTION:The wedding of Balram Singh & Anushka Kairon\, with love from t
- he Nagra Family.\nStarts 9:30 AM.\nMap: https://maps.app.goo.gl/JyZYdV9Fuj
- dq64788?g_st=i\nhttps://invitivals.com/balram-anushka-groom-wedding/
+DESCRIPTION:
+LOCATION:Fatehpur Kalan\, 
 URL:https://invitivals.com/balram-anushka-groom-wedding/
-STATUS:CONFIRMED
 BEGIN:VALARM
 TRIGGER:-P1D
 ACTION:DISPLAY
@@ -101,16 +79,14 @@ DESCRIPTION:Baraat — Balram & Anushka
 END:VALARM
 END:VEVENT
 BEGIN:VEVENT
-UID:20270203T103000-anand-karaj@balram-anushka-groom.invitivals.com
-DTSTAMP:20261122T000000Z
-DTSTART;TZID=Asia/Kolkata:20270203T103000
+UID:20270203T050000Z-anand-karaj@invitivals.com
+DTSTAMP:20261124T033802Z
+DTSTART:20270203T050000Z
+DTEND:20270203T080000Z
 SUMMARY:Anand Karaj — Balram & Anushka
+DESCRIPTION:
 LOCATION:Gurdwara Baba Chart Singh\, Banga-Garshankar Road\, 144508\, India
-DESCRIPTION:The wedding of Balram Singh & Anushka Kairon\, with love from t
- he Nagra Family.\nStarts 10:30 AM.\nMap: https://maps.app.goo.gl/bfaseQHsV
- ytEttHM9?g_st=i\nhttps://invitivals.com/balram-anushka-groom-wedding/
 URL:https://invitivals.com/balram-anushka-groom-wedding/
-STATUS:CONFIRMED
 BEGIN:VALARM
 TRIGGER:-P1D
 ACTION:DISPLAY
@@ -118,16 +94,14 @@ DESCRIPTION:Anand Karaj — Balram & Anushka
 END:VALARM
 END:VEVENT
 BEGIN:VEVENT
-UID:20270203T130000-lunch@balram-anushka-groom.invitivals.com
-DTSTAMP:20261122T000000Z
-DTSTART;TZID=Asia/Kolkata:20270203T130000
+UID:20270203T073000Z-lunch@invitivals.com
+DTSTAMP:20261124T033802Z
+DTSTART:20270203T073000Z
+DTEND:20270203T103000Z
 SUMMARY:Wedding Lunch — Balram & Anushka
+DESCRIPTION:
 LOCATION:Rani Mahal Palace\, Garshankar
-DESCRIPTION:The wedding of Balram Singh & Anushka Kairon\, with love from t
- he Nagra Family.\nStarts 1:00 PM.\nMap: https://maps.app.goo.gl/GG9wrR1E5k
- uCB6VPA?g_st=i\nhttps://invitivals.com/balram-anushka-groom-wedding/
 URL:https://invitivals.com/balram-anushka-groom-wedding/
-STATUS:CONFIRMED
 BEGIN:VALARM
 TRIGGER:-P1D
 ACTION:DISPLAY
@@ -135,16 +109,14 @@ DESCRIPTION:Wedding Lunch — Balram & Anushka
 END:VALARM
 END:VEVENT
 BEGIN:VEVENT
-UID:20270203T160000-doli@balram-anushka-groom.invitivals.com
-DTSTAMP:20261122T000000Z
-DTSTART;TZID=Asia/Kolkata:20270203T160000
+UID:20270203T103000Z-doli@invitivals.com
+DTSTAMP:20261124T033802Z
+DTSTART:20270203T103000Z
+DTEND:20270203T133000Z
 SUMMARY:Doli — Balram & Anushka
+DESCRIPTION:
 LOCATION:Rani Mahal Palace\, Garshankar
-DESCRIPTION:The wedding of Balram Singh & Anushka Kairon\, with love from t
- he Nagra Family.\nStarts 4:00 PM.\nMap: https://maps.app.goo.gl/GG9wrR1E5k
- uCB6VPA?g_st=i\nhttps://invitivals.com/balram-anushka-groom-wedding/
 URL:https://invitivals.com/balram-anushka-groom-wedding/
-STATUS:CONFIRMED
 BEGIN:VALARM
 TRIGGER:-P1D
 ACTION:DISPLAY

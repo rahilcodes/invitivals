@@ -1,30 +1,17 @@
 BEGIN:VCALENDAR
 VERSION:2.0
-PRODID:-//Invitivals//Balram & Anushka Wedding//EN
+PRODID:-//Creativals//Wedding Invitation//EN
 CALSCALE:GREGORIAN
 METHOD:PUBLISH
-X-WR-CALNAME:Balram & Anushka · Wedding
-X-WR-TIMEZONE:Asia/Kolkata
-BEGIN:VTIMEZONE
-TZID:Asia/Kolkata
-BEGIN:STANDARD
-DTSTART:19700101T000000
-TZOFFSETFROM:+0530
-TZOFFSETTO:+0530
-TZNAME:IST
-END:STANDARD
-END:VTIMEZONE
 BEGIN:VEVENT
-UID:20270203T103000-anand-karaj@balram-anushka-groom.invitivals.com
-DTSTAMP:20261122T000000Z
-DTSTART;TZID=Asia/Kolkata:20270203T103000
+UID:20270203T050000Z-anand-karaj@invitivals.com
+DTSTAMP:20261124T033802Z
+DTSTART:20270203T050000Z
+DTEND:20270203T080000Z
 SUMMARY:Anand Karaj — Balram & Anushka
+DESCRIPTION:
 LOCATION:Gurdwara Baba Chart Singh\, Banga-Garshankar Road\, 144508\, India
-DESCRIPTION:The wedding of Balram Singh & Anushka Kairon\, with love from t
- he Nagra Family.\nStarts 10:30 AM.\nMap: https://maps.app.goo.gl/bfaseQHsV
- ytEttHM9?g_st=i\nhttps://invitivals.com/balram-anushka-groom-wedding/
 URL:https://invitivals.com/balram-anushka-groom-wedding/
-STATUS:CONFIRMED
 BEGIN:VALARM
 TRIGGER:-P1D
 ACTION:DISPLAY

@@ -32,7 +32,7 @@ const fold = (l) => { const out = []; let b = Buffer.from(l, 'utf8'), lim = 75;
 const wall = (iso) => { if (!/\+05:30$/.test(iso)) throw new Error('expected an India-time date: ' + iso); return iso.slice(0, 19).replace(/[-:]/g, ''); };
 const vevent = (ev) => {
   const title = `${ev.name}${ev.subtitle ? ' – ' + ev.subtitle : ''} — ${PAIR}`;
-  const desc = [`The wedding of ${cfg.groomName} & ${cfg.brideName}, with love from the Nagra Family.`, `Starts ${ev.time}.`, `Map: ${ev.maps}`, URL_].join('\n');
+  const desc = [`The wedding of ${cfg.groomName} & ${cfg.brideName}, with love from Nagra Family.`, `Starts ${ev.time}.`, `Map: ${ev.maps}`, URL_].join('\n');
   return [
     'BEGIN:VEVENT', `UID:${wall(ev.date)}-${ev.id}@balram-anushka-groom.invitivals.com`, 'DTSTAMP:20261122T000000Z',
     `DTSTART;TZID=${TZ}:${wall(ev.date)}`,                       /* no DTEND: only the start time was supplied */
@@ -80,8 +80,8 @@ const set = (re, val) => { if (!re.test(html)) throw new Error('tag not found: '
 const NAMES = `${cfg.groomName} &amp; ${cfg.brideName}`;
 set(/<title>[^<]*<\/title>/, `<title>${NAMES} | Wedding Invitation</title>`);
 set(/(<meta property="og:title" content=")[^"]*(")/, `$1${NAMES} | Wedding Invitation$2`);
-set(/(<meta name="description" content=")[^"]*(")/, `$1Sdn. Baljinder Kaur (W/o Late S. Avtar Singh Nagra) requests the pleasure of your company on the auspicious occasion of the marriage of her loving grandson ${cfg.groomName} with ${cfg.brideName}. Anand Karaj: Wednesday, 3 February 2027, 10:30 AM at Gurdwara Baba Chart Singh. The Nagra Family, Dadke &amp; Nanke.$2`);
-set(/(<meta property="og:description" content=")[^"]*(")/, `$1Anand Karaj · Wednesday, 3 February 2027 · Gurdwara Baba Chart Singh. With love, the Nagra Family. Tap to open the invitation.$2`);
+set(/(<meta name="description" content=")[^"]*(")/, `$1Sdn. Baljinder Kaur (W/o Late S. Avtar Singh Nagra) requests the pleasure of your company on the auspicious occasion of the marriage of her loving grandson ${cfg.groomName} with ${cfg.brideName}. Anand Karaj: Wednesday, 3 February 2027, 10:30 AM at Gurdwara Baba Chart Singh. Nagra Family, Dadke &amp; Nanke.$2`);
+set(/(<meta property="og:description" content=")[^"]*(")/, `$1Anand Karaj · Wednesday, 3 February 2027 · Gurdwara Baba Chart Singh. With love, Nagra Family. Tap to open the invitation.$2`);
 set(/(<meta property="og:image:alt" content=")[^"]*(")/, `$1${NAMES} — Wedding Invitation, Anand Karaj 3 February 2027$2`);
 set(/(<meta name="author" content=")[^"]*(")/, `$1Invitivals$2`);
 set(/(<meta property="og:site_name" content=")[^"]*(")/, `$1Invitivals$2`);

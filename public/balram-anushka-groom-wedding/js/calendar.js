@@ -16,7 +16,7 @@ export const eventDetails = (cfg, ev) => ({
   start: ev.date,
   end: ev.main && cfg.weddingEnd ? cfg.weddingEnd : ev.date,   // only start times were supplied: no invented end (Google Calendar gets start = end)
   /* a short description: whose wedding, from whom, the map */
-  details: [`The wedding of ${cfg.groomName} & ${cfg.brideName}, with love from the Nagra Family.`, ev.note, ev.etiquette,
+  details: [`The wedding of ${cfg.groomName} & ${cfg.brideName}, with love from Nagra Family.`, ev.note, ev.etiquette,
     ev.maps ? `Map: ${ev.maps}` : ''].filter(Boolean).join('\n'),
   location: [ev.venue, ev.address].filter(Boolean).join(", "),
 });

@@ -1,6 +1,6 @@
 /* ─────────────────────────────────────────────────────────────
    Balram Singh & Anushka Kairon — the GROOM-SIDE invitation (client brief 2026-11-22), from Sdn. Baljinder Kaur
-   and the Nagra Family. A separate copy of the bride-side page public/balram-anushka-wedding (never edited for this),
+   and Nagra Family. A separate copy of the bride-side page public/balram-anushka-wedding (never edited for this),
    which is itself a copy of the design the client chose (public/amandeep-ishpreet-wedding).
 
    Everything a family would change lives here; the page (js/app.js) renders only from this object.
@@ -10,8 +10,9 @@
    then deploy the folder.
 
    Names, honorifics, parents, events, times, venues and map links are the client's, as typed. Only start times were
-   supplied, so no calendar entry carries an end time. No RSVP and no dress code were given for this side, so none is
-   shown. The couple on the cover is the design's own illustration; the Gurbani in the arch and the closing lines are
+   supplied, so no calendar entry carries an end time. No RSVP was given for this side, so none is shown. The
+   Anand Karaj dress code is Shades of Blue (client, 2026-11-24; swatches sampled from the client's blue reference), and
+   the family is written "Nagra Family", never "The Nagra Family" (client, 2026-11-24). The couple on the cover is the design's own illustration; the Gurbani in the arch and the closing lines are
    the design's own wording, as on the bride-side page.
    ───────────────────────────────────────────────────────────── */
 
@@ -46,7 +47,7 @@ export const weddingConfig = {
     tagline: [],
     eyebrow: ['You are', 'cordially invited'],
     line: 'to celebrate the wedding of Balram Singh and Anushka Kairon, in the presence of Guru Sahib.',
-    from: { label: 'Invitation From', lines: ['The Nagra Family', 'Dadke & Nanke'] },
+    from: { label: 'Invitation From', lines: ['Nagra Family', 'Dadke & Nanke'] },
   },
 
   sideBorders: null,
@@ -122,6 +123,7 @@ export const weddingConfig = {
       date: '2027-02-03T10:30:00+05:30', time: '10:30 AM',
       venue: 'Gurdwara Baba Chart Singh', address: 'Banga-Garshankar Road, 144508, India',
       maps: MAP.gurdwara,
+      dressCode: { label: 'Dress Code', text: 'Shades of Blue', swatches: ['#cbeafe', '#b3defe', '#a2d7fd', '#93ccf8'] },
     },
     {
       id: 'lunch', icon: 'lunch', menu: 'Wedding Lunch',
@@ -150,7 +152,7 @@ export const weddingConfig = {
   closing: {
     title: ['With Love', 'and Blessings'],
     lines: ['We look forward to celebrating', 'this special chapter with you.'],
-    signoff: 'The Nagra Family · Dadke & Nanke',
+    signoff: 'Nagra Family · Dadke & Nanke',
     farewell: 'Until we meet in the presence of Guru Sahib',
     credit: 'Designed by Invitivals',
   },
