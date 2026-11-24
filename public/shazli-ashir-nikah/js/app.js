@@ -4,7 +4,7 @@
      doors (tap) → main invitation → Save the Date (scratch card) → Our Functions (View Details opens each
      function's own page) → RSVP → thank you.
    Both links run this file; config.js decides which function cards are shown. */
-import { config as C } from '../config.js?v=3';
+import { config as C } from '../config.js?v=4';
 
 const h = (tag, attrs = {}, ...kids) => {
   const el = document.createElement(tag);
@@ -44,7 +44,7 @@ const stamp = (d) => new Date(d).toISOString().replace(/[-:]/g, '').replace(/\.\
 const isApple = () => /iPhone|iPad|iPod|Macintosh/.test(navigator.userAgent) && !/Android/.test(navigator.userAgent);
 function addToCalendar(ev) {
   const title = `${ev.title} · ${C.bride} & ${C.groomFull}`;
-  const where = ev.venue ? C.venue.full : '';
+  const where = ev.venue ? (ev.location || C.venue.full) : '';
   if (isApple()) {
     const ics = ['BEGIN:VCALENDAR', 'VERSION:2.0', 'PRODID:-//Invitivals//Invitation//EN', 'BEGIN:VEVENT', `UID:${ev.key}-${C.slug}@invitivals.com`, `DTSTAMP:${stamp(Date.now())}`, `DTSTART:${stamp(ev.start)}`,
       `SUMMARY:${title}`, `LOCATION:${where.replace(/,/g, '\\,')}`, 'END:VEVENT', 'END:VCALENDAR', ''].join('\r\n');
@@ -174,8 +174,7 @@ function detailPage(ev) {
       h('p', { class: 'tm' }, ev.time),
       ev.extra && h('p', { class: 'tm' }, ev.extra),
       ev.venue && h('i', { class: 'rule', 'aria-hidden': 'true' }),
-      ev.venue && h('p', { class: 'vn' }, C.venue.name),
-      ev.venue && h('p', { class: 'vc' }, C.venue.place),
+      ev.venue && h('p', { class: 'vline' }, ev.venueLine),   // the client's own words for each function (25 Nov)
       h('div', { class: 'acts' }, ev.venue && mapLink(), pill('Add to Calendar', 'cal', { onclick: () => addToCalendar(ev) }, ev.venue ? 'line' : 'solid'))), { y, w: 84, top: true }));
 }
 function openDetail(ev, opener) {
@@ -202,51 +201,57 @@ addEventListener('popstate', () => {
   opener.focus({ preventScroll: true });
 });
 
-/* ── 4 · RSVP: the invitation's own form, stored on our server (both links, each reply marked with its link).
-   The section is the reference's paper arch made taller (rsvp.webp, 941 x 2272): the choices and fields on the
-   first screen, the Send Response button (a submit button of the same form) and the help line on the second. ── */
-const form = h('form', { class: 'rsvp-form', id: 'rsvp-form', novalidate: true, 'aria-label': 'RSVP' },
-  h('fieldset', { class: 'choices' }, h('legend', { class: 'vh' }, 'Will you attend?'),
-    h('label', {}, h('input', { type: 'radio', name: 'attending', value: 'yes' }), h('i', { class: 'ring', 'aria-hidden': 'true' }), h('span', {}, 'Yes, I’ll be attending')),
-    h('label', {}, h('input', { type: 'radio', name: 'attending', value: 'no' }), h('i', { class: 'ring', 'aria-hidden': 'true' }), h('span', {}, 'Sorry, I can’t make it'))),
-  h('div', { class: 'fields' },
-    h('label', { class: 'field' }, h('span', { class: 'vh' }, 'Guest name'), h('input', { name: 'name', autocomplete: 'name', maxlength: 80, placeholder: 'Guest name' })),
-    h('label', { class: 'field guests' }, h('span', { class: 'vh' }, 'Number of guests'), h('input', { name: 'guests', type: 'number', inputmode: 'numeric', min: 1, max: 20, placeholder: 'Number of guests' }))),
-  h('input', { name: 'website', class: 'vh', tabindex: -1, autocomplete: 'off', 'aria-hidden': 'true' }));
-const send = pill('Send Response', 'send', { type: 'submit', class: 'send', form: 'rsvp-form' });
+/* ── 4 · RSVP (25 Nov): the reference's compact form on its own paper arch (paper.webp, 941 x 1672) — heading, the
+   reference's wording, then Guest Name, Contact Number, Joyfully Accepts / Regretfully Declines, Number of Guests (only
+   for an acceptance), Send Response and the help line, in one flow. Replies are stored on our server by
+   /shazli-ashir-wedding/rsvp.php (both links; each reply records its link) and are read by the family at
+   /admin/shazli-ashir-rsvp/ (sign-in) with a CSV at /admin/shazli-ashir-rsvp/export/. ── */
+const field = (label, attrs, cls = '') => h('label', { class: `field ${cls}` }, h('span', { class: 'vh' }, label), h('input', { placeholder: label, ...attrs }));
+const choice = (value, text) => h('label', {}, h('input', { type: 'radio', name: 'attending', value }), h('i', { class: 'ring', 'aria-hidden': 'true' }), h('span', {}, text));
+const send = pill('Send Response', 'send', { type: 'submit', class: 'send' });
 send.type = 'submit';
 const note = h('p', { class: 'note', role: 'status', 'aria-live': 'polite' });
-const sendBox = h('div', { class: 'send-box' }, send, note);
-form.addEventListener('change', () => { form.querySelector('.guests').classList.toggle('off', form.elements.attending.value === 'no'); });
+const form = h('form', { class: 'rsvp-form', novalidate: true, 'aria-label': 'RSVP' },
+  field('Guest Name', { name: 'name', autocomplete: 'name', maxlength: 80, required: true }),
+  field('Contact Number', { name: 'phone', type: 'tel', inputmode: 'tel', autocomplete: 'tel', maxlength: 24, required: true }),
+  h('fieldset', { class: 'choices' }, h('legend', { class: 'vh' }, 'Will you attend?'), choice('yes', 'Joyfully Accepts'), choice('no', 'Regretfully Declines')),
+  field('Number of Guests', { name: 'guests', type: 'number', inputmode: 'numeric', min: 1, max: 20 }, 'guests'),
+  h('input', { name: 'website', class: 'vh', tabindex: -1, autocomplete: 'off', 'aria-hidden': 'true' }),
+  send, note);
+/* a guest who declines is not asked for a number */
+form.addEventListener('change', () => { const no = form.elements.attending.value === 'no'; const g = form.querySelector('.guests'); g.hidden = no; if (no) g.querySelector('input').value = ''; });
+let sending = false;
 form.addEventListener('submit', async (e) => {
   e.preventDefault();
-  const name = form.elements.name.value.trim(), attending = form.elements.attending.value;
-  note.className = 'note bad';
-  if (!attending) { note.textContent = 'Please choose “Yes, I’ll be attending” or “Sorry, I can’t make it”.'; return; }
-  if (name.length < 2) { note.textContent = 'Please enter your name.'; form.elements.name.focus(); return; }
-  const guests = attending === 'yes' ? Math.round(+form.elements.guests.value || 0) : 0;
-  if (attending === 'yes' && (guests < 1 || guests > 20)) { note.textContent = 'Please enter the number of guests (1 to 20).'; form.elements.guests.focus(); return; }
-  send.disabled = true; note.className = 'note'; note.textContent = 'Sending…';
+  if (sending) return;                                         // no second send while one is on its way
+  const el = form.elements;
+  const name = el.name.value.trim(), phone = el.phone.value.trim(), attending = el.attending.value;
+  const digits = phone.replace(/\D/g, '').length;
+  const bad = (msg, input) => { note.className = 'note bad'; note.textContent = msg; if (input) input.focus(); };
+  if (name.length < 2) return bad('Please enter your name.', el.name);
+  if (!/^\+?[0-9\s().-]+$/.test(phone) || digits < 7 || digits > 15) return bad('Please enter a valid contact number.', el.phone);
+  if (!attending) return bad('Please choose Joyfully Accepts or Regretfully Declines.');
+  const guests = attending === 'yes' ? Math.round(+el.guests.value || 0) : 0;
+  if (attending === 'yes' && (guests < 1 || guests > 20)) return bad('Please enter the number of guests attending (1 to 20).', el.guests);
+  sending = true; send.disabled = true; note.className = 'note'; note.textContent = 'Sending…';
   try {
-    const r = await fetch(C.rsvp.endpoint, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ name, attending, guests, link: C.link, website: form.elements.website.value }) });
+    const r = await fetch(C.rsvp.endpoint, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ name, phone, attending, guests, link: C.link, website: el.website.value }) });
     const j = await r.json().catch(() => ({}));
     if (!r.ok || !j.ok) throw new Error(j.error || 'Your reply could not be sent. Please try again.');
-    form.querySelectorAll('input').forEach((i) => { i.disabled = true; });
-    form.classList.add('sent');
-    sendBox.replaceChildren(h('p', { class: 'done', role: 'status' }, attending === 'yes' ? 'Thank you! Your reply has been received. We look forward to welcoming you.' : 'Thank you for letting us know. You will be missed.'));
-  } catch (err) { send.disabled = false; note.className = 'note bad'; note.textContent = /fetch|network/i.test(err.message) ? 'Your reply could not be sent. Please check your connection and try again.' : err.message; }
+    /* shown only after the server has confirmed that the reply is stored */
+    form.replaceChildren(h('p', { class: 'done' }, attending === 'yes' ? 'Thank you! Your reply has been received. We look forward to welcoming you.' : 'Thank you for letting us know. You will be missed.'));
+  } catch (err) {
+    sending = false; send.disabled = false; note.className = 'note bad';
+    note.textContent = /fetch|network/i.test(err.message) ? 'Your reply could not be sent. Please check your connection and try again.' : err.message;
+  }
 });
-const RH = 2272, ry = (px) => (px / RH) * 100;
-const rsvp = page('rsvp', 'rsvp.webp', 941, RH,
+const rsvp = page('rsvp', 'paper.webp', 941, 1672,
   at(h('div', { class: 'rsvp-in' },
     h('h2', {}, 'RSVP'),
     h('p', { class: 'lead' }, 'Your presence and blessings mean the world to us.', h('br'), 'Kindly let us know if you will be joining', h('br'), 'our celebrations.'),
     form,
-    C.rsvp.googleForm && h('div', { class: 'gform' }, h('p', {}, 'Or reply on Google Forms (the family’s Google Sheet)'), pill('Open Google Form', 'form', { href: C.rsvp.googleForm, target: '_blank', rel: 'noopener' }, 'line'))), { y: ry(222), w: 66, top: true }),
-  at(h('div', { class: 'rsvp-end' },
-    sendBox,
-    h('i', { class: 'orn-line', 'aria-hidden': 'true' }),
-    h('p', { class: 'help' }, `${C.rsvp.help} `, h('a', { href: `tel:${C.rsvp.tel}` }, C.rsvp.phone), '.')), { y: ry(1360), w: 66, top: true }));
+    C.rsvp.googleForm && h('div', { class: 'gform' }, h('p', {}, 'Or reply on Google Forms (the family’s Google Sheet)'), pill('Open Google Form', 'form', { href: C.rsvp.googleForm, target: '_blank', rel: 'noopener' }, 'line')),
+    h('p', { class: 'help' }, `${C.rsvp.help} `, h('a', { href: `tel:${C.rsvp.tel}` }, C.rsvp.phone), '.')), { y: 14.2, w: 64, top: true }));
 
 /* ── 5 · thank you (the reference's closing plate; its Call / WhatsApp / Email bars are painted out) ── */
 const thanks = page('thanks', 'thanks.webp', 941, 1672,

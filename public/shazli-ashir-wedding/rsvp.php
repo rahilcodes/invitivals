@@ -3,10 +3,11 @@
  * data folder and its own key; no email is sent). BOTH links post here: shazli-ashir-wedding (all events) and
  * shazli-ashir-nikah (Nikah + Rukhsati only); each reply records which link it came from.
  *
- *   POST rsvp.php  (JSON {name, attending: "yes"|"no", guests, link})
+ *   POST rsvp.php  (JSON {name, phone, attending: "yes"|"no", guests, link})
  *       → appends one JSON line to data/entries.php and answers {ok:true} (ok means STORED)
- *   GET  rsvp.php?key=ADMIN_KEY          → the replies as a page (for the hosts)
- *   GET  rsvp.php?key=ADMIN_KEY&csv=1    → the replies as a CSV download
+ *   The family reads the replies at /admin/shazli-ashir-rsvp/ (sign-in) and downloads them as a CSV from
+ *   /admin/shazli-ashir-rsvp/export/ (same sign-in): public/admin/shazli-ashir-rsvp/. Since 25 Nov the contact
+ *   number is required. The old private link (rsvp.php?key=ADMIN_KEY) now only leads to that sign-in page.
  *
  * data/ is created next to this file and closed to the web by its own .htaccess; the entries file is also a .php
  * that exits on its first line, so even a server that ignores .htaccess never shows it.
@@ -69,7 +70,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $len = function_exists('mb_strlen') ? mb_strlen($name, 'UTF-8') : strlen($name);
     if ($len < 2) reply(422, ['ok' => false, 'error' => 'Please enter your full name']);
     $digits = strlen(preg_replace('/\D/', '', $phone));   // any country's number: 7 to 15 digits, with + ( ) - . and spaces allowed
-    if ($phone !== '' && (!preg_match('/^\+?[0-9\s().-]+$/', $phone) || $digits < 7 || $digits > 15)) reply(422, ['ok' => false, 'error' => 'Please enter a valid contact number']);
+    if (!preg_match('/^\+?[0-9\s().-]+$/', $phone) || $digits < 7 || $digits > 15) reply(422, ['ok' => false, 'error' => 'Please enter a valid contact number']);
     if ($email !== '' && !filter_var($email, FILTER_VALIDATE_EMAIL)) reply(422, ['ok' => false, 'error' => 'Please enter a valid email address']);
     if (!in_array($attending, ['yes', 'no'], true)) reply(422, ['ok' => false, 'error' => 'Please choose whether you will attend']);
     if ($attending === 'yes' && ($guests < 1 || $guests > MAX_GUESTS)) reply(422, ['ok' => false, 'error' => 'The number of guests must be from 1 to ' . MAX_GUESTS]);
@@ -114,42 +115,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     reply(200, ['ok' => true, 'mailed' => $mailed === true]);   // mailed: the server itself emailed the hosts (false while the host has mail switched off)
 }
 
-/* ── the hosts' view ── */
+/* ── the old private link: replies are read only at the signed-in dashboard now ── */
 $key = (string)($_GET['key'] ?? '');
-if ($key === '' || ADMIN_KEY === '' || !hash_equals(ADMIN_KEY, $key)) { http_response_code(404); header('Content-Type: text/plain'); echo 'Not found'; exit; }
-$rows = array_reverse(rows());
-function linkName($l) { return $l === 'nikah-rukhsati' ? 'Nikah + Rukhsati' : ($l === 'all-events' ? 'All events' : ''); }
-if (isset($_GET['csv'])) {
-    header('Content-Type: text/csv; charset=utf-8');
-    header('Content-Disposition: attachment; filename="rsvp-shazli-ashir-wedding.csv"');
-    $out = fopen('php://output', 'w');
-    fwrite($out, "\xEF\xBB\xBF");
-    fputcsv($out, ['Time (UTC)', 'Name', 'Attending', 'Guests', 'Invitation link', 'Test']);
-    foreach ($rows as $r) fputcsv($out, [$r['at'] ?? '', $r['name'] ?? '', $r['attending'] ?? '', $r['guests'] ?? '', linkName($r['link'] ?? ''), empty($r['test']) ? '' : 'test']);
-    exit;
-}
-$e = fn($s) => htmlspecialchars((string)$s, ENT_QUOTES, 'UTF-8');
-$real = array_filter($rows, fn($r) => empty($r['test']));
-$yes = array_filter($real, fn($r) => ($r['attending'] ?? '') === 'yes');
-$no = count(array_filter($real, fn($r) => ($r['attending'] ?? '') === 'no'));
-$heads = array_sum(array_map(fn($r) => (int)($r['guests'] ?? 0), $yes));
-header('Content-Type: text/html; charset=utf-8');
-?>
-<!DOCTYPE html>
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="robots" content="noindex">
-<title>Shazli &amp; Ashir · RSVP replies</title>
-<style>
-body{font-family:Georgia,serif;background:#f6ecd6;color:#5a3209;margin:0;padding:24px}
-h1{font-weight:400;margin:0 0 6px} .sum{color:#8a5a1e;margin:0 0 18px} a{color:#8a4a1a}
-.wrap{overflow-x:auto} table{width:100%;border-collapse:collapse;background:#fffdf6;border:1px solid #d8b878} th,td{padding:8px 10px;border-bottom:1px solid #eedfbd;text-align:left;vertical-align:top;font-size:14px}
-th{background:#f3e5c8;font-weight:600} td.msg{white-space:pre-wrap;max-width:46ch} .yes{color:#2f5a35} .no{color:#9c3d2e} tr.test td{opacity:.5}
-</style></head><body>
-<h1>Shazli &amp; Ashir · RSVP replies</h1>
-<p class="sum"><?= count($real) ?> replies · <?= count($yes) ?> attending (<?= $heads ?> guests in all) · <?= $no ?> not attending · <a href="?key=<?= $e($key) ?>&amp;csv=1">Download CSV</a></p>
-<div class="wrap"><table><thead><tr><th>Time (UTC)</th><th>Name</th><th>Attending</th><th>Guests</th><th>Invitation link</th></tr></thead><tbody>
-<?php if (!$rows): ?><tr><td colspan="5">No replies yet.</td></tr><?php endif; ?>
-<?php foreach ($rows as $r): ?>
-<tr<?= empty($r['test']) ? '' : ' class="test"' ?>><td><?= $e($r['at'] ?? '') ?></td><td><?= $e($r['name'] ?? '') ?><?= empty($r['test']) ? '' : ' (test)' ?></td><td class="<?= $e($r['attending'] ?? '') ?>"><?= ($r['attending'] ?? '') === 'yes' ? 'Attending' : 'Not attending' ?></td><td><?= $e($r['guests'] ?? '') ?></td><td><?= $e(linkName($r['link'] ?? '')) ?></td></tr>
-<?php endforeach; ?>
-</tbody></table></div>
-</body></html>
+if ($key !== '' && ADMIN_KEY !== '' && hash_equals(ADMIN_KEY, $key)) { header('Location: /admin/shazli-ashir-rsvp/', true, 302); exit; }
+http_response_code(404); header('Content-Type: text/plain'); echo 'Not found';

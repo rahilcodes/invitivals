@@ -25,12 +25,18 @@ export const config = {
 
   saveTheDate: { day: '20', month: 'January 2027', arabic: 'إِنْ شَاءَ ٱللَّٰهُ', line: 'A new chapter begins' },
 
-  /* the Our Functions cards, in date order; only Nikah and Rukhsati carry the venue and its map */
+  /* the Our Functions cards, in date order; only Nikah and Rukhsati carry the venue and its map. The cards show
+     venue.name; each View Details page shows the function's own venueLine, worded by the client (25 Nov: the Nikah
+     line says "Nirwana", the Rukhsati line "Nirvana", both exactly as supplied) */
   events: [
     { key: 'mayun', title: 'Mayun', weekday: 'Monday', date: '18 January 2027', time: '3:00 PM onwards', start: '2027-01-18T15:00:00+05:30' },
     { key: 'mehendi', title: 'Mehendi', weekday: 'Tuesday', date: '19 January 2027', time: '11:00 AM onwards', start: '2027-01-19T11:00:00+05:30' },
-    { key: 'nikah', title: 'Nikah', weekday: 'Wednesday', date: '20 January 2027', time: '7:00 PM', extra: 'Dinner at 8:00 PM onwards', start: '2027-01-20T19:00:00+05:30', venue: true },
-    { key: 'rukhsati', title: 'Rukhsati', weekday: 'Thursday', date: '21 January 2027', time: '10:00 AM', start: '2027-01-21T10:00:00+05:30', venue: true },
+    { key: 'nikah', title: 'Nikah', weekday: 'Wednesday', date: '20 January 2027', time: '7:00 PM', extra: 'Dinner at 8:00 PM onwards', start: '2027-01-20T19:00:00+05:30', venue: true,
+      venueLine: 'Venue - Majestic Heaven, Nirwana Grand Hotel and Resort, Bodhgaya.',   // client's exact words (25 Nov)
+      location: 'Majestic Heaven, Nirwana Grand Hotel and Resort, Bodhgaya' },
+    { key: 'rukhsati', title: 'Rukhsati', weekday: 'Thursday', date: '21 January 2027', time: '10:00 AM', start: '2027-01-21T10:00:00+05:30', venue: true,
+      venueLine: 'Venue - Nirvana Grand Hotel and Resort',                              // client's exact words (25 Nov)
+      location: 'Nirvana Grand Hotel and Resort, Bodhgaya' },
   ],
 
   rsvp: {

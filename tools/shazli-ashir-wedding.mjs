@@ -8,7 +8,7 @@
  *   monogram-sa-new.jpg  the client's emerald and gold S/A monogram (24 Nov; only its black background is removed)
  *   monogram.jpeg  the first SA crest (no longer used)
  *   music.mp3      the client's song (copied byte for byte)
- * Writes into each folder's assets/: doors + door-l/door-r/door-in (the opening), hero + ornament (from ref2), save, rsvp, thanks (the pack's thank-you plate with its
+ * Writes into each folder's assets/: doors + door-l/door-r/door-in (the opening), hero + ornament (from ref2), save, paper (RSVP), thanks (the pack's thank-you plate with its
  * painted Call / WhatsApp / Email bars filled with the plate's own paper), monogram.webp, music.mp3, og.jpg. */
 import fs from 'node:fs';
 import path from 'node:path';
@@ -96,20 +96,8 @@ const lum = (b, k) => 0.3 * b[k * 3] + 0.59 * b[k * 3 + 1] + 0.11 * b[k * 3 + 2]
   files['door-in.webp'] = await sharp(view).ensureAlpha().composite([{ input: shape, blend: 'dest-in' }]).webp({ quality: 84, alphaQuality: 100 }).toBuffer();
 }
 
-/* RSVP (24 Nov): the reference's paper arch made taller so the section runs over two screens and the Send Response
-   button sits on the second, clear of the fields: rows 0–1000 of bg10, then rows 330–1672 (the straight sides
-   repeat), cross-faded over 70 rows. 941 x 2342. */
-{
-  const src = path.join(REF, 'bg10.webp'), A1 = 1000, B0 = 330, F = 70;
-  const top = await sharp(src).extract({ left: 0, top: 0, width: 941, height: A1 }).png().toBuffer();
-  const bottom = await sharp(src).extract({ left: 0, top: B0, width: 941, height: 1672 - B0 }).png().toBuffer();
-  const fade = Buffer.from(`<svg width="941" height="${A1}"><defs><linearGradient id="g" x1="0" y1="0" x2="0" y2="1"><stop offset="${(A1 - F) / A1}" stop-color="#fff"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></linearGradient></defs><rect width="941" height="${A1}" fill="url(#g)"/></svg>`);
-  const topFaded = await sharp(top).ensureAlpha().composite([{ input: fade, blend: 'dest-in' }]).png().toBuffer();
-  const H = A1 - F + 1672 - B0;
-  files['rsvp.webp'] = await sharp({ create: { width: 941, height: H, channels: 3, background: '#f6ecd6' } })
-    .composite([{ input: bottom, left: 0, top: A1 - F }, { input: topFaded, left: 0, top: 0 }]).webp({ quality: 86 }).toBuffer();
-  console.log('rsvp plate height', H);
-}
+/* RSVP: the reference's paper arch as it is (25 Nov: the compact form sits on it, as in the reference) */
+await plate('paper.webp', 'bg10.webp');
 /* the four function detail pages (the reference's pages 6–9, clean) */
 await plate('d-mayun.webp', 'bg6.webp');
 await plate('d-mehendi.webp', 'bg7.webp');

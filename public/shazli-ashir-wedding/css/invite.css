@@ -118,40 +118,38 @@ p, h2, h3 { margin: 0; font-weight: 400; }
 .d-info .dt { font-family: 'Playfair Display', serif; font-weight: 600; font-size: 6.4cqw; color: var(--green); line-height: 1.1; }
 .d-info .tm { font-family: 'Playfair Display', serif; font-style: italic; font-size: 3.9cqw; }
 .d-info .rule { display: block; width: 36cqw; height: 1px; margin: 1cqw 0 .6cqw; background: linear-gradient(90deg, transparent, var(--gold), transparent); }
-.d-info .vn { font-family: 'Playfair Display', serif; font-weight: 600; font-size: 4.9cqw; white-space: nowrap; color: var(--green); }
-.d-info .vc { font-family: 'Playfair Display', serif; font-style: italic; font-size: 3.6cqw; }
+/* the client's venue line for each function, shown whole (wraps onto two lines where it must) */
+.d-info .vline { font-family: 'Playfair Display', serif; font-weight: 600; font-size: 4.3cqw; line-height: 1.3; color: var(--green); max-width: 74cqw; text-wrap: balance; }
 .d-info .acts { display: flex; gap: 2.4cqw; justify-content: center; margin-top: 2.2cqw; width: 100%; }
 .d-info .acts .pill { width: auto; flex: 0 1 auto; min-width: 34cqw; text-shadow: none; }
 
-/* ── 4 RSVP ── */
-.rsvp-in { display: flex; flex-direction: column; align-items: stretch; gap: 2.4cqw; }
+/* ── 4 RSVP (compact, as the reference: one flow from the heading to the help line) ── */
+.rsvp-in { display: flex; flex-direction: column; align-items: stretch; gap: 3.4cqw; }
 .rsvp-in > * { text-align: center; }
-.rsvp-in h2 { font-family: 'Playfair Display', serif; font-weight: 700; font-size: 8.4cqw; letter-spacing: .06em; color: var(--green); }
-.rsvp-in .lead { font-size: 3.2cqw; line-height: 1.35; color: var(--ink); font-weight: 500; }
-.rsvp-form { display: flex; flex-direction: column; gap: 2.2cqw; }
-.choices { margin: 0; padding: 1.2cqw 2.6cqw; border: 1px solid rgba(201,162,79,.65); border-radius: 2.6cqw; background: rgba(255,252,244,.92); box-shadow: 0 .6cqw 2cqw rgba(120,90,30,.08); }
-.choices label { display: flex; align-items: center; gap: 2.6cqw; min-height: 44px; padding: 1cqw 1.4cqw; font-size: 3.6cqw; font-weight: 600; color: var(--ink); cursor: pointer; text-align: left; border-radius: 1.6cqw; }
+.rsvp-in h2 { font-family: 'Playfair Display', serif; font-weight: 700; font-size: 8.4cqw; line-height: 1.05; letter-spacing: .06em; color: var(--green); }
+.rsvp-in .lead { font-size: 3.05cqw; line-height: 1.4; color: var(--ink); font-weight: 500; margin: -1cqw 0 .4cqw; }
+.rsvp-form { display: flex; flex-direction: column; gap: 2.5cqw; }
+.choices { margin: 0; padding: .4cqw 2.4cqw; border: 1px solid rgba(201,162,79,.65); border-radius: 2.4cqw; background: rgba(255,252,244,.92); box-shadow: 0 .6cqw 2cqw rgba(120,90,30,.08); }
+.choices label { display: flex; align-items: center; gap: 2.6cqw; min-height: 42px; padding: .4cqw 1.2cqw; font-family: 'Playfair Display', serif; font-size: 3.5cqw; color: var(--ink); cursor: pointer; text-align: left; }
 .choices label + label { border-top: 1px solid rgba(201,162,79,.25); }
 .choices input { position: absolute; opacity: 0; width: 1px; height: 1px; }
-.choices .ring { width: 4.6cqw; height: 4.6cqw; min-width: 18px; min-height: 18px; border-radius: 50%; border: 1.5px solid var(--gold-deep); display: grid; place-items: center; flex: none; }
+.choices .ring { width: 4.4cqw; height: 4.4cqw; min-width: 17px; min-height: 17px; border-radius: 50%; border: 1.5px solid var(--gold-deep); display: grid; place-items: center; flex: none; }
 .choices .ring::after { content: ''; width: 55%; height: 55%; border-radius: 50%; background: var(--green); opacity: 0; transition: opacity .2s; }
 .choices input:checked + .ring::after { opacity: 1; }
 .choices input:focus-visible + .ring { outline: 2px solid var(--gold); outline-offset: 2px; }
-.fields { display: flex; flex-direction: column; gap: 1.8cqw; }
-.field input { width: 100%; min-height: 44px; padding: 2cqw 3.4cqw; border: 1px solid rgba(201,162,79,.65); border-radius: 2.6cqw; background: rgba(255,252,244,.94); color: var(--ink); font: 500 16px/1.2 'Cormorant Garamond', Georgia, serif; font-size: max(16px, 3.8cqw); }
+.field { display: block; }
+.field[hidden] { display: none; }
+.field input { width: 100%; height: 42px; padding: 0 3.2cqw; border: 1px solid rgba(201,162,79,.65); border-radius: 2.4cqw; background: rgba(255,252,244,.94); color: var(--ink); font: 500 16px/1.2 'Cormorant Garamond', Georgia, serif; font-size: max(16px, 3.7cqw); -moz-appearance: textfield; }
+.field input::-webkit-outer-spin-button, .field input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
 .field input::placeholder { color: #8c7c5c; font-style: italic; }
 .field input:focus { outline: 2px solid var(--green-2); outline-offset: 0; }
-.field.off { opacity: .4; pointer-events: none; }
-.send-box { display: flex; flex-direction: column; gap: 2cqw; }
-.send-box .send { min-height: 46px; font-size: 2.9cqw; }
-.rsvp-form.sent { opacity: .6; }
-.rsvp-end { display: flex; flex-direction: column; align-items: stretch; gap: 2.4cqw; text-align: center; }
-.orn-line { display: block; height: 1px; width: 60%; margin: 1cqw auto 0; background: linear-gradient(90deg, transparent, var(--gold), transparent); }
-.help { font-family: 'Playfair Display', serif; font-style: italic; font-size: 3.4cqw; line-height: 1.45; color: var(--ink); padding: 0 5cqw; }
-.help a { color: var(--green); font-style: normal; font-weight: 600; text-decoration: none; border-bottom: 1px solid var(--gold); white-space: nowrap; }
-.note { min-height: 1.2em; font-size: 3.2cqw; font-style: italic; color: var(--green); }
+.rsvp-form .send { min-height: 44px; font-size: 2.9cqw; margin-top: 1.2cqw; }
+.note { min-height: 1.1em; font-size: 3.1cqw; font-style: italic; color: var(--green); }
+.note:empty { min-height: 0; }
 .note.bad { color: #9c3d2e; }
-.done { font-family: 'Playfair Display', serif; font-style: italic; font-size: 4.4cqw; line-height: 1.35; color: var(--green); padding: 3cqw 2cqw; border: 1px solid rgba(201,162,79,.65); border-radius: 2.6cqw; background: rgba(255,252,244,.92); }
+.done { font-family: 'Playfair Display', serif; font-style: italic; font-size: 4.2cqw; line-height: 1.35; color: var(--green); padding: 3cqw 2cqw; border: 1px solid rgba(201,162,79,.65); border-radius: 2.4cqw; background: rgba(255,252,244,.92); }
+.help { font-family: 'Playfair Display', serif; font-style: italic; font-size: 3.3cqw; line-height: 1.45; color: var(--ink); padding: 0 3cqw; }
+.help a { color: var(--green); font-style: normal; font-weight: 600; text-decoration: none; border-bottom: 1px solid var(--gold); white-space: nowrap; }
 .gform p { font-size: 3.2cqw; margin-bottom: 1.4cqw; }
 
 /* ── 5 thank you ── */
