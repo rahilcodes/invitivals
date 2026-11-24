@@ -4,7 +4,7 @@
      doors (tap) → main invitation → Save the Date (scratch card) → Our Functions (View Details opens each
      function's own page) → RSVP → thank you.
    Both links run this file; config.js decides which function cards are shown. */
-import { config as C } from '../config.js?v=4';
+import { config as C } from '../config.js?v=5';
 
 const h = (tag, attrs = {}, ...kids) => {
   const el = document.createElement(tag);
@@ -162,7 +162,7 @@ const functions = page(`functions n${C.events.length}`, FN.art, 941, FN.H,
   cards);
 
 /* ── function details: the reference's pages 6–9 as a full-screen view over the invitation ── */
-const PLATES = { mayun: ['d-mayun.webp', 73.4], mehendi: ['d-mehendi.webp', 73.4], nikah: ['d-nikah.webp', 65.9], rukhsati: ['d-rukhsati.webp', 70.2] };
+const PLATES = { mayun: ['d-mayun.webp', 73.4], mehendi: ['d-mehendi.webp', 70.5], nikah: ['d-nikah.webp', 65.1], rukhsati: ['d-rukhsati.webp', 70.2] };
 let current = null;
 function detailPage(ev) {
   const [art, y] = PLATES[ev.key];
@@ -174,7 +174,9 @@ function detailPage(ev) {
       h('p', { class: 'tm' }, ev.time),
       ev.extra && h('p', { class: 'tm' }, ev.extra),
       ev.venue && h('i', { class: 'rule', 'aria-hidden': 'true' }),
-      ev.venue && h('p', { class: 'vline' }, ev.venueLine),   // the client's own words for each function (25 Nov)
+      /* the venue as the client set it (26 Nov), one line each: the name lines in the venue type, the city under them */
+      ev.venue && ev.venueLines.slice(0, -1).map((l) => h('p', { class: 'vn' }, l)),
+      ev.venue && h('p', { class: 'vc' }, ev.venueLines.at(-1)),
       h('div', { class: 'acts' }, ev.venue && mapLink(), pill('Add to Calendar', 'cal', { onclick: () => addToCalendar(ev) }, ev.venue ? 'line' : 'solid'))), { y, w: 84, top: true }));
 }
 function openDetail(ev, opener) {
@@ -202,40 +204,41 @@ addEventListener('popstate', () => {
 });
 
 /* ── 4 · RSVP (25 Nov): the reference's compact form on its own paper arch (paper.webp, 941 x 1672) — heading, the
-   reference's wording, then Guest Name, Contact Number, Joyfully Accepts / Regretfully Declines, Number of Guests (only
-   for an acceptance), Send Response and the help line, in one flow. Replies are stored on our server by
+   reference's wording, the form, Send Response and the help line, in one flow. Replies are stored on our server by
    /shazli-ashir-wedding/rsvp.php (both links; each reply records its link) and are read by the family at
-   /admin/shazli-ashir-rsvp/ (sign-in) with a CSV at /admin/shazli-ashir-rsvp/export/. ── */
-const field = (label, attrs, cls = '') => h('label', { class: `field ${cls}` }, h('span', { class: 'vh' }, label), h('input', { placeholder: label, ...attrs }));
+   /admin/shazli-ashir-rsvp/ with a CSV at /admin/shazli-ashir-rsvp/export/ (both open without sign-in since 26 Nov). ── */
+/* 26 Nov (client): only three fields, in this order — attendance, guest name, number of guests attending (a list,
+   shown only for "Yes") — then Send Response and the help line. No contact number. */
 const choice = (value, text) => h('label', {}, h('input', { type: 'radio', name: 'attending', value }), h('i', { class: 'ring', 'aria-hidden': 'true' }), h('span', {}, text));
 const send = pill('Send Response', 'send', { type: 'submit', class: 'send' });
 send.type = 'submit';
 const note = h('p', { class: 'note', role: 'status', 'aria-live': 'polite' });
+const guestList = h('select', { name: 'guests', 'aria-label': 'Number of guests attending' },
+  h('option', { value: '', selected: true, disabled: true }, 'Number of Guests Attending'),
+  ...Array.from({ length: C.rsvp.maxGuests }, (_, i) => h('option', { value: String(i + 1) }, i ? `${i + 1} Guests` : '1 Guest')));
 const form = h('form', { class: 'rsvp-form', novalidate: true, 'aria-label': 'RSVP' },
-  field('Guest Name', { name: 'name', autocomplete: 'name', maxlength: 80, required: true }),
-  field('Contact Number', { name: 'phone', type: 'tel', inputmode: 'tel', autocomplete: 'tel', maxlength: 24, required: true }),
-  h('fieldset', { class: 'choices' }, h('legend', { class: 'vh' }, 'Will you attend?'), choice('yes', 'Joyfully Accepts'), choice('no', 'Regretfully Declines')),
-  field('Number of Guests', { name: 'guests', type: 'number', inputmode: 'numeric', min: 1, max: 20 }, 'guests'),
+  h('fieldset', { class: 'choices' }, h('legend', { class: 'vh' }, 'Will you attend?'), choice('yes', C.rsvp.choices[0]), choice('no', C.rsvp.choices[1])),
+  h('label', { class: 'field' }, h('span', { class: 'vh' }, 'Guest name'), h('input', { name: 'name', autocomplete: 'name', maxlength: 80, required: true, placeholder: 'Guest Name' })),
+  h('label', { class: 'field select guests' }, h('span', { class: 'vh' }, 'Number of guests attending'), guestList, h('i', { class: 'caret', 'aria-hidden': 'true' })),
   h('input', { name: 'website', class: 'vh', tabindex: -1, autocomplete: 'off', 'aria-hidden': 'true' }),
   send, note);
 /* a guest who declines is not asked for a number */
-form.addEventListener('change', () => { const no = form.elements.attending.value === 'no'; const g = form.querySelector('.guests'); g.hidden = no; if (no) g.querySelector('input').value = ''; });
+form.addEventListener('change', () => { const no = form.elements.attending.value === 'no'; form.querySelector('.guests').hidden = no; if (no) guestList.selectedIndex = 0; });
+guestList.addEventListener('change', () => guestList.classList.toggle('picked', !!guestList.value));
 let sending = false;
 form.addEventListener('submit', async (e) => {
   e.preventDefault();
   if (sending) return;                                         // no second send while one is on its way
   const el = form.elements;
-  const name = el.name.value.trim(), phone = el.phone.value.trim(), attending = el.attending.value;
-  const digits = phone.replace(/\D/g, '').length;
+  const name = el.name.value.trim(), attending = el.attending.value;
   const bad = (msg, input) => { note.className = 'note bad'; note.textContent = msg; if (input) input.focus(); };
+  if (!attending) return bad(`Please choose “${C.rsvp.choices[0]}” or “${C.rsvp.choices[1]}”.`);
   if (name.length < 2) return bad('Please enter your name.', el.name);
-  if (!/^\+?[0-9\s().-]+$/.test(phone) || digits < 7 || digits > 15) return bad('Please enter a valid contact number.', el.phone);
-  if (!attending) return bad('Please choose Joyfully Accepts or Regretfully Declines.');
-  const guests = attending === 'yes' ? Math.round(+el.guests.value || 0) : 0;
-  if (attending === 'yes' && (guests < 1 || guests > 20)) return bad('Please enter the number of guests attending (1 to 20).', el.guests);
+  const guests = attending === 'yes' ? Math.round(+guestList.value || 0) : 0;
+  if (attending === 'yes' && (guests < 1 || guests > C.rsvp.maxGuests)) return bad('Please choose the number of guests attending.', guestList);
   sending = true; send.disabled = true; note.className = 'note'; note.textContent = 'Sending…';
   try {
-    const r = await fetch(C.rsvp.endpoint, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ name, phone, attending, guests, link: C.link, website: el.website.value }) });
+    const r = await fetch(C.rsvp.endpoint, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ name, attending, guests, link: C.link, website: el.website.value }) });
     const j = await r.json().catch(() => ({}));
     if (!r.ok || !j.ok) throw new Error(j.error || 'Your reply could not be sent. Please try again.');
     /* shown only after the server has confirmed that the reply is stored */

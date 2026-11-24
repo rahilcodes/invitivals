@@ -26,20 +26,22 @@ export const config = {
   saveTheDate: { day: '20', month: 'January 2027', arabic: 'إِنْ شَاءَ ٱللَّٰهُ', line: 'A new chapter begins' },
 
   /* the Our Functions cards, in date order; only Nikah and Rukhsati carry the venue and its map. The cards show
-     venue.name; each View Details page shows the function's own venueLine, worded by the client (25 Nov: the Nikah
-     line says "Nirwana", the Rukhsati line "Nirvana", both exactly as supplied) */
+     venue.name; each View Details page shows the function's own venueLines, one line each, as the client set them
+     on 26 Nov (Nikah: hall, property, city; Rukhsati: property, city) */
   events: [
     { key: 'nikah', title: 'Nikah', weekday: 'Wednesday', date: '20 January 2027', time: '7:00 PM', extra: 'Dinner at 8:00 PM onwards', start: '2027-01-20T19:00:00+05:30', venue: true,
-      venueLine: 'Venue - Majestic Heaven, Nirwana Grand Hotel and Resort, Bodhgaya.',   // client's exact words (25 Nov)
-      location: 'Majestic Heaven, Nirwana Grand Hotel and Resort, Bodhgaya' },
+      venueLines: ['Majestic Heaven', 'Nirvana Grand Hotel and Resort', 'Bodhgaya'],     // hall, property, city (client, 26 Nov)
+      location: 'Majestic Heaven, Nirvana Grand Hotel and Resort, Bodhgaya' },
     { key: 'rukhsati', title: 'Rukhsati', weekday: 'Thursday', date: '21 January 2027', time: '10:00 AM', start: '2027-01-21T10:00:00+05:30', venue: true,
-      venueLine: 'Venue - Nirvana Grand Hotel and Resort',                              // client's exact words (25 Nov)
+      venueLines: ['Nirvana Grand Hotel and Resort', 'Bodhgaya'],                        // no "Venue" (client, 26 Nov)
       location: 'Nirvana Grand Hotel and Resort, Bodhgaya' },
   ],
 
   rsvp: {
     endpoint: '/shazli-ashir-wedding/rsvp.php',      // both links store their replies here, each marked with its link
     help: 'Please feel free to reach out for any help or query on',   // the client's exact sentence (24 Nov)
+    choices: ['Yes, I’ll be attending', 'No, apologies can’t make it'],   // the client's wording (26 Nov)
+    maxGuests: 20,
     phone: '7280979429', tel: '+917280979429',
     googleForm: null,                                // the family's Google Form (responses in a Google Sheet): pending
   },

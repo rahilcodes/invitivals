@@ -111,15 +111,19 @@ p, h2, h3 { margin: 0; font-weight: 400; }
 .detail .column { min-height: 100vh; min-height: 100dvh; display: flex; flex-direction: column; justify-content: center; }
 .back { position: fixed; top: calc(12px + env(safe-area-inset-top, 0px)); left: calc(12px + env(safe-area-inset-left, 0px)); z-index: 45; min-height: 44px; padding: 0 16px; border-radius: 999px; border: 1px solid var(--gold); background: rgba(15,47,36,.82); color: var(--cream); font: 600 12px/1 'Cinzel', serif; letter-spacing: .1em; text-transform: uppercase; cursor: pointer; backdrop-filter: blur(4px); }
 .d-title { display: flex; flex-direction: column; align-items: center; gap: 1.4cqw; }
-.d-title h2 { font-family: 'Playfair Display', serif; font-weight: 600; font-size: 11cqw; letter-spacing: .02em; line-height: 1; text-transform: uppercase; color: var(--green); text-shadow: 0 0 2cqw rgba(255,247,226,.9); }
+/* 26 Nov: the reference's own typography on the function pages (its pages 6–9): titles in classical capitals (Cinzel),
+   weekday, date, time and venue in an upright Garamond with lining figures (Cormorant Garamond), no italics */
+.d-title h2 { font-family: 'Cinzel', serif; font-weight: 700; font-size: 11.6cqw; letter-spacing: .03em; padding-left: .03em; line-height: 1.02; text-transform: uppercase; color: var(--green); text-shadow: 0 .15cqw 0 rgba(201,162,79,.55), 0 0 2cqw rgba(255,247,226,.9); }
 .flour { display: block; width: 46cqw; height: 1.6cqw; background: radial-gradient(circle, var(--gold-deep) 0 .5cqw, transparent .6cqw) center / 1.6cqw 1.6cqw no-repeat, linear-gradient(90deg, transparent, var(--gold) 20%, var(--gold) 80%, transparent) center / 100% 1px no-repeat; }
-.d-info { display: flex; flex-direction: column; align-items: center; gap: .5cqw; color: var(--ink); text-shadow: 0 0 1.6cqw rgba(255,247,226,.95), 0 0 3cqw rgba(255,247,226,.8); }
-.d-info .wd { font-family: 'Playfair Display', serif; font-style: italic; font-size: 4cqw; }
-.d-info .dt { font-family: 'Playfair Display', serif; font-weight: 600; font-size: 6.4cqw; color: var(--green); line-height: 1.1; }
-.d-info .tm { font-family: 'Playfair Display', serif; font-style: italic; font-size: 3.9cqw; }
+.d-info { display: flex; flex-direction: column; align-items: center; gap: .3cqw; color: var(--ink); text-shadow: 0 0 1.6cqw rgba(255,247,226,.95), 0 0 3cqw rgba(255,247,226,.8); }
+.d-info { font-family: 'Cormorant Garamond', Georgia, serif; font-variant-numeric: lining-nums; }
+.d-info .wd { font-weight: 600; font-size: 4.9cqw; line-height: 1.1; color: var(--ink); }
+.d-info .dt { font-weight: 700; font-size: 7.4cqw; color: var(--green); line-height: 1.05; }
+.d-info .tm { font-weight: 600; font-size: 4.5cqw; line-height: 1.15; color: #7a5a22; }
 .d-info .rule { display: block; width: 36cqw; height: 1px; margin: 1cqw 0 .6cqw; background: linear-gradient(90deg, transparent, var(--gold), transparent); }
 /* the client's venue line for each function, shown whole (wraps onto two lines where it must) */
-.d-info .vline { font-family: 'Playfair Display', serif; font-weight: 600; font-size: 4.3cqw; line-height: 1.3; color: var(--green); max-width: 74cqw; text-wrap: balance; }
+.d-info .vn { font-weight: 700; font-size: 5.7cqw; line-height: 1.08; color: var(--green); white-space: nowrap; }
+.d-info .vc { font-weight: 600; font-size: 4.5cqw; line-height: 1.2; color: #7a5a22; margin-top: .2cqw; }
 .d-info .acts { display: flex; gap: 2.4cqw; justify-content: center; margin-top: 2.2cqw; width: 100%; }
 .d-info .acts .pill { width: auto; flex: 0 1 auto; min-width: 34cqw; text-shadow: none; }
 
@@ -142,6 +146,13 @@ p, h2, h3 { margin: 0; font-weight: 400; }
 .field input { width: 100%; height: 42px; padding: 0 3.2cqw; border: 1px solid rgba(201,162,79,.65); border-radius: 2.4cqw; background: rgba(255,252,244,.94); color: var(--ink); font: 500 16px/1.2 'Cormorant Garamond', Georgia, serif; font-size: max(16px, 3.7cqw); -moz-appearance: textfield; }
 .field input::-webkit-outer-spin-button, .field input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
 .field input::placeholder { color: #8c7c5c; font-style: italic; }
+/* the number of guests: a list in the same box as the name field */
+.field.select { position: relative; }
+.field select { width: 100%; height: 42px; padding: 0 9cqw 0 3.2cqw; border: 1px solid rgba(201,162,79,.65); border-radius: 2.4cqw; background: rgba(255,252,244,.94); color: #8c7c5c; font: italic 500 16px/1.2 'Cormorant Garamond', Georgia, serif; font-size: max(16px, 3.7cqw); -webkit-appearance: none; appearance: none; cursor: pointer; }
+.field select.picked { color: var(--ink); font-style: normal; }
+.field select option { color: var(--ink); font-style: normal; }
+.field select:focus { outline: 2px solid var(--green-2); outline-offset: 0; }
+.field .caret { position: absolute; right: 4cqw; top: 50%; width: 1.8cqw; height: 1.8cqw; min-width: 7px; min-height: 7px; border-right: 1.5px solid var(--gold-deep); border-bottom: 1.5px solid var(--gold-deep); transform: translateY(-70%) rotate(45deg); pointer-events: none; }
 .field input:focus { outline: 2px solid var(--green-2); outline-offset: 0; }
 .rsvp-form .send { min-height: 44px; font-size: 2.9cqw; margin-top: 1.2cqw; }
 .note { min-height: 1.1em; font-size: 3.1cqw; font-style: italic; color: var(--green); }
@@ -165,6 +176,17 @@ p, h2, h3 { margin: 0; font-weight: 400; }
 }
 /* detail plates: the Nikah stage has its own painted rule under the times, so the venue sits below it and the
    drawn rule is only spacing; on the Rukhsati hall the words get a soft paper glow over the floor */
-.d-nikah .d-info .rule { visibility: hidden; margin: 2.4cqw 0 1.4cqw; }
+.d-nikah .d-info .rule { visibility: hidden; margin: 1.2cqw 0 .4cqw; }
 .d-rukhsati .d-info { padding: 2cqw 2cqw 0; background: radial-gradient(ellipse 62% 58% at 50% 40%, rgba(253,246,230,.88) 50%, rgba(253,246,230,0) 100%); }
 .d-nikah .d-info { padding: 1.6cqw 2cqw 0; background: radial-gradient(ellipse 58% 40% at 50% 16%, rgba(253,246,230,.85) 45%, rgba(253,246,230,0) 100%); }
+/* Mehendi: its plate paints a diamond above the weekday and a rule under the time, as the reference's page 7 does */
+.d-mehendi .d-info { gap: 0; }
+.d-mehendi .d-info .wd { font-size: 4.3cqw; }
+.d-mehendi .d-info .dt { font-size: 6.6cqw; }
+.d-mehendi .d-info .tm { font-size: 4.1cqw; }
+/* 26 Nov: the RSVP boxes scale with the page (never under the 42 px a finger needs), so a wide screen keeps the
+   phone's proportions instead of leaving the lower arch empty */
+.choices label { min-height: max(42px, 11.4cqw); }
+.field input, .field select { height: max(42px, 11.4cqw); }
+.rsvp-form .send { min-height: max(44px, 12cqw); }
+.field .caret { right: 4.4cqw; }

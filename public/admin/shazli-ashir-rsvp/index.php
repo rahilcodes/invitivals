@@ -1,53 +1,20 @@
 <?php
-/* Shazli & Ashir — the family's private RSVP dashboard (25 Nov). Signed out: the sign-in page only, no guest data.
- * Signed in: totals, All / Joyfully Accepts / Regretfully Declines, the invitation version, search by name or
- * contact number, every reply with its date and time (India time), and the CSV download (export/). */
+/* Shazli & Ashir — the family's RSVP dashboard. Since 26 Nov (client) it opens directly from its link, no sign-in:
+ * totals, All / Attending / Not attending, the invitation version, search by name, every reply with its number of
+ * guests and its date and time (India time), and the CSV download (export/). Read only. */
 define('SA_RSVP', 1);
 require __DIR__ . '/_lib.php';
-sa_session();
-
-$error = '';
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $action = $_POST['action'] ?? '';
-    if (!sa_csrf_ok()) { $error = 'The page had expired. Please try again.'; }
-    elseif ($action === 'logout') {
-        $_SESSION = [];
-        session_destroy();
-        header('Location: ' . SA_BASE, true, 303); exit;
-    } elseif ($action === 'login') {
-        $ip = (string)($_SERVER['REMOTE_ADDR'] ?? '');
-        $creds = sa_creds();
-        if (!$creds) { $error = 'Sign-in is not set up on the server.'; }
-        elseif (sa_fails($ip) >= SA_MAX_FAILS) { $error = 'Too many attempts. Please wait 15 minutes and try again.'; }
-        else {
-            $user = trim((string)($_POST['user'] ?? ''));
-            $pass = (string)($_POST['pass'] ?? '');
-            if (hash_equals(strtolower($creds['user']), strtolower($user)) && password_verify($pass, $creds['hash'])) {
-                session_regenerate_id(true);
-                $_SESSION['ok'] = true;
-                $_SESSION['exp'] = time() + SA_SESSION_HOURS * 3600;
-                $_SESSION['csrf'] = bin2hex(random_bytes(16));
-                header('Location: ' . SA_BASE, true, 303); exit;
-            }
-            sa_fails($ip, true);
-            $error = 'The name or password is not correct.';
-        }
-    }
-}
 header('Content-Type: text/html; charset=utf-8');
-$authed = sa_authed();
-if ($authed) {
-    $all = sa_rows();
-    $p = sa_params();
-    $rows = sa_filter($all, $p);
-    $acc = array_filter($all, fn($r) => $r['attending'] === 'yes');
-    $stats = [
-        'Total responses' => count($all),
-        'Joyfully Accepts' => count($acc),
-        'Regretfully Declines' => count($all) - count($acc),
-        'Total attendees' => array_sum(array_column($acc, 'guests')),
-    ];
-}
+$all = sa_rows();
+$p = sa_params();
+$rows = sa_filter($all, $p);
+$acc = array_filter($all, fn($r) => $r['attending'] === 'yes');
+$stats = [
+    'Total responses' => count($all),
+    'Attending' => count($acc),
+    'Not attending' => count($all) - count($acc),
+    'Total guests attending' => array_sum(array_column($acc, 'guests')),
+];
 ?><!DOCTYPE html>
 <html lang="en"><head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="robots" content="noindex, nofollow">
@@ -89,13 +56,6 @@ td.n{color:#8b7a55;width:42px}
 .st.yes{background:#e3efe6;color:#1f5a35}.st.no{background:#f6e3dd;color:var(--red)}
 .ver{font-size:15px;color:#6b5a36;white-space:nowrap}
 .empty{padding:28px;text-align:center;color:#6b5a36;background:var(--paper);border:1px solid var(--line);border-radius:14px}
-.login{max-width:400px;margin:8vh auto 0;background:var(--paper);border:1px solid var(--line);border-radius:18px;padding:28px 26px;box-shadow:0 10px 30px rgba(80,60,20,.12)}
-.login h2{margin:0 0 4px;font:600 22px 'Cinzel',serif;color:var(--green);text-align:center}
-.login p{margin:0 0 18px;text-align:center;color:#6b5a36}
-.login label{display:block;font-weight:700;margin:12px 0 6px}
-.login input{width:100%;min-height:46px;padding:0 12px;border:1px solid var(--line);border-radius:10px;font:500 17px 'Cormorant Garamond',Georgia,serif;background:#fff}
-.login .btn{width:100%;margin-top:18px}
-.err{color:var(--red);font-weight:700;text-align:center;margin:12px 0 0}
 @media (max-width:760px){
   .stats{grid-template-columns:repeat(2,1fr)}
   form.find{margin-left:0;width:100%}.find input{flex:1;width:auto}
@@ -108,31 +68,17 @@ td.n{color:#8b7a55;width:42px}
 }
 </style></head><body>
 <header class="top"><div class="in">
-  <h1>Shazli &amp; Ashir · RSVP Responses<small>Private: for the family only</small></h1>
+  <h1>Shazli &amp; Ashir · RSVP Responses<small>For the family</small></h1>
   <span class="sp"></span>
-  <?php if ($authed): ?>
   <a class="btn solid" href="export/<?= sa_e(sa_query($p)) ?>">Download CSV</a>
-  <form method="post" style="margin:0"><input type="hidden" name="csrf" value="<?= sa_e($_SESSION['csrf']) ?>"><button class="btn light" name="action" value="logout">Sign out</button></form>
-  <?php endif; ?>
 </div></header>
 <main>
-<?php if (!$authed): ?>
-  <form class="login" method="post" autocomplete="on">
-    <h2>Sign in</h2>
-    <p>The RSVP replies for Shazli &amp; Ashir's wedding.</p>
-    <input type="hidden" name="csrf" value="<?= sa_e($_SESSION['csrf']) ?>">
-    <label for="user">Name</label><input id="user" name="user" autocomplete="username" required>
-    <label for="pass">Password</label><input id="pass" name="pass" type="password" autocomplete="current-password" required>
-    <button class="btn solid" name="action" value="login">Sign in</button>
-    <?php if ($error): ?><p class="err" role="alert"><?= sa_e($error) ?></p><?php endif; ?>
-  </form>
-<?php else: ?>
   <section class="stats">
     <?php foreach ($stats as $label => $n): ?><div class="stat"><b><?= (int)$n ?></b><span><?= sa_e($label) ?></span></div><?php endforeach; ?>
   </section>
   <div class="tools">
     <nav class="tabs" aria-label="Filter">
-      <?php foreach (['all' => 'All responses', 'accepts' => 'Joyfully Accepts', 'declines' => 'Regretfully Declines'] as $k => $label): ?>
+      <?php foreach (['all' => 'All responses', 'accepts' => 'Attending', 'declines' => 'Not attending'] as $k => $label): ?>
       <a class="tab<?= $p['status'] === $k ? ' on' : '' ?>" href="<?= sa_e(SA_BASE . sa_query($p, ['status' => $k])) ?>"><?= sa_e($label) ?></a>
       <?php endforeach; ?>
     </nav>
@@ -142,7 +88,7 @@ td.n{color:#8b7a55;width:42px}
         <option value="">Both invitations</option>
         <?php foreach (SA_LINKS as $k => $label): ?><option value="<?= sa_e($k) ?>"<?= $p['link'] === $k ? ' selected' : '' ?>><?= sa_e($label) ?></option><?php endforeach; ?>
       </select>
-      <input type="search" name="q" value="<?= sa_e($p['q']) ?>" placeholder="Search name or number" aria-label="Search by guest name or contact number">
+      <input type="search" name="q" value="<?= sa_e($p['q']) ?>" placeholder="Search by guest name" aria-label="Search by guest name">
       <button class="btn line">Search</button>
     </form>
   </div>
@@ -151,13 +97,12 @@ td.n{color:#8b7a55;width:42px}
     <div class="empty"><?= $all ? 'No responses match this filter.' : 'No responses yet.' ?></div>
   <?php else: ?>
   <table>
-    <thead><tr><th>#</th><th>Guest name</th><th>Contact number</th><th>Attendance</th><th>Guests</th><th>Invitation</th><th>Submitted</th></tr></thead>
+    <thead><tr><th>#</th><th>Guest name</th><th>Attendance</th><th>Guests</th><th>Invitation</th><th>Submitted</th></tr></thead>
     <tbody>
     <?php foreach ($rows as $i => $r): ?>
       <tr>
         <td class="n"><?= $i + 1 ?></td>
         <td data-l="Guest"><strong><?= sa_e($r['name']) ?></strong></td>
-        <td data-l="Contact"><?= $r['phone'] !== '' ? '<a href="tel:' . sa_e(preg_replace('/[^\d+]/', '', $r['phone'])) . '">' . sa_e($r['phone']) . '</a>' : '<span class="ver">Not given</span>' ?></td>
         <td data-l="Attendance"><span class="st <?= $r['attending'] ?>"><?= sa_status_label($r['attending']) ?></span></td>
         <td data-l="Guests"><?= $r['attending'] === 'yes' ? (int)$r['guests'] : '–' ?></td>
         <td data-l="Invitation"><span class="ver"><?= sa_e(sa_link_label($r['link'])) ?></span></td>
@@ -167,6 +112,5 @@ td.n{color:#8b7a55;width:42px}
     </tbody>
   </table>
   <?php endif; ?>
-<?php endif; ?>
 </main>
 </body></html>

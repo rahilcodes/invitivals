@@ -3,11 +3,11 @@
  * data folder and its own key; no email is sent). BOTH links post here: shazli-ashir-wedding (all events) and
  * shazli-ashir-nikah (Nikah + Rukhsati only); each reply records which link it came from.
  *
- *   POST rsvp.php  (JSON {name, phone, attending: "yes"|"no", guests, link})
+ *   POST rsvp.php  (JSON {name, attending: "yes"|"no", guests, link}; a phone is accepted but the form no longer asks)
  *       → appends one JSON line to data/entries.php and answers {ok:true} (ok means STORED)
- *   The family reads the replies at /admin/shazli-ashir-rsvp/ (sign-in) and downloads them as a CSV from
- *   /admin/shazli-ashir-rsvp/export/ (same sign-in): public/admin/shazli-ashir-rsvp/. Since 25 Nov the contact
- *   number is required. The old private link (rsvp.php?key=ADMIN_KEY) now only leads to that sign-in page.
+ *   The family reads the replies at /admin/shazli-ashir-rsvp/ and downloads them as a CSV from
+ *   /admin/shazli-ashir-rsvp/export/: public/admin/shazli-ashir-rsvp/ (no sign-in since 26 Nov). Since 26 Nov the form
+ *   asks only attendance, name and number of guests. The old private link (rsvp.php?key=ADMIN_KEY) leads to the dashboard.
  *
  * data/ is created next to this file and closed to the web by its own .htaccess; the entries file is also a .php
  * that exits on its first line, so even a server that ignores .htaccess never shows it.
@@ -70,7 +70,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $len = function_exists('mb_strlen') ? mb_strlen($name, 'UTF-8') : strlen($name);
     if ($len < 2) reply(422, ['ok' => false, 'error' => 'Please enter your full name']);
     $digits = strlen(preg_replace('/\D/', '', $phone));   // any country's number: 7 to 15 digits, with + ( ) - . and spaces allowed
-    if (!preg_match('/^\+?[0-9\s().-]+$/', $phone) || $digits < 7 || $digits > 15) reply(422, ['ok' => false, 'error' => 'Please enter a valid contact number']);
+    if ($phone !== '' && (!preg_match('/^\+?[0-9\s().-]+$/', $phone) || $digits < 7 || $digits > 15)) reply(422, ['ok' => false, 'error' => 'Please enter a valid contact number']);
     if ($email !== '' && !filter_var($email, FILTER_VALIDATE_EMAIL)) reply(422, ['ok' => false, 'error' => 'Please enter a valid email address']);
     if (!in_array($attending, ['yes', 'no'], true)) reply(422, ['ok' => false, 'error' => 'Please choose whether you will attend']);
     if ($attending === 'yes' && ($guests < 1 || $guests > MAX_GUESTS)) reply(422, ['ok' => false, 'error' => 'The number of guests must be from 1 to ' . MAX_GUESTS]);
