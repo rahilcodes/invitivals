@@ -859,3 +859,9 @@ html.is-sealed .swipe-cue { opacity: 0; transform: translateY(10px); }
 .wishes { padding-bottom: 0; }
 .wishes .thanks-share { margin-top: 26px; }
 .story .chapter h3 { line-height: 1.35; } .story .when { margin-top: 4px; }
+
+/* Our Story: the couple's own photograph (client, 2026-11-24) in the arch frame at its own 2:3 proportions, so the
+   couple is shown whole; only a 3% margin is kept for the gentle parallax */
+.story .arch-window { width: min(262px, 72vw); margin-bottom: 34px; }
+.story .arch-window-img { height: auto; aspect-ratio: 2 / 3; }
+.story .arch-window-img img { height: 106%; margin-top: -3%; object-position: 50% 50%; display: block; }

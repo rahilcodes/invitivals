@@ -48,16 +48,18 @@ export const weddingConfig = {
 
   welcome: {
     title: 'Welcome',
-    /* the client's wording of 2026-11-23: a greeting, then the invitation, which runs on into "Aditi weds Harsh" below */
-    greeting: 'Welcome to the celebration of love.',
+    /* the client's wording: "TO THE CELEBRATION OF LOVE" under Welcome (2026-11-24, replacing "to our wedding
+       celebration"; the separate greeting line is removed), then the invitation, which runs on into "Aditi weds Harsh" */
+    eyebrow: 'to the celebration of love',
+    greeting: '',
     lines: ['With the love and blessings of Lord Ganesha,', 'we invite you to celebrate', 'the wedding festivities of'],
   },
 
-  /* Our Story, the client's own words (2026-11-23). `image` is the couple's photograph: none has been supplied yet,
-     so the arch frame is left out until it is set (e.g. 'assets/story-couple.webp'); never a stand-in picture */
+  /* Our Story, the client's own words (2026-11-23). `image` is the couple's own photograph, supplied 2026-11-24 and
+     used as it is (only resized), in the arch frame at its own 2:3 proportions */
   story: {
     intro: '',
-    image: null,
+    image: 'assets/story-couple.webp',
     chapters: [
       { icon: 'love', title: 'We fell in love', when: '2014', text: 'From school corridors to college campus, our story slowly unfolded. We grew together, navigating life’s many chapters hand in hand.' },
       { icon: 'forever', title: 'Now we begin forever', when: '2027', text: 'Twelve years, countless milestones and one big decision; to do life together. A journey of friendship, love and togetherness now begins a new chapter.' },
@@ -110,7 +112,7 @@ export const weddingConfig = {
   /* the final message, exactly as the client wrote it */
   thankYou: {
     title: 'Thank You',
-    lines: ['Thank you for being part of this journey.', 'Your love and presence mean the world to us.'],
+    lines: ['Thank you for being part of this beautiful journey.', 'Your love and presence mean the world to us.'],   // one thank-you only (client, 2026-11-24)
     signoff: '',
   },
 
