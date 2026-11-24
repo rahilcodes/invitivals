@@ -1,0 +1,217 @@
+/* Mohammed Navas & Dharshinisha, on the design of dr-mohammed-nihal-nooha (Modern Wedding): every page is a canvas with its plate's aspect ratio;
+   the wording is live text set in units of the page width (cqw), so plate, lettering and buttons scale as one. */
+:root {
+  --col: min(100vw, calc(100dvh * 941 / 1672));
+  --plum: #4a1f35;
+  --mauve: #8a5a74;
+  --gold: #d8b36a;
+  --cream: #fbf1ea;
+  --serif: 'Cormorant Garamond', 'Cormorant', Georgia, serif;
+  --script: 'Great Vibes', 'Pinyon Script', cursive;
+  --names: 'Playfair Display', 'Cormorant Garamond', Georgia, serif;   /* the couple's names (client, 2026-11-17) */
+}
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+html, body { margin: 0; min-height: 100%; }
+body {
+  background: #d6c0b8 radial-gradient(ellipse at 50% 20%, #efe0d6 0%, #d9c3bd 55%, #bfa3a6 100%) fixed;
+  color: var(--plum);
+  font-family: var(--serif);
+  overflow-x: hidden;
+}
+body.locked { overflow: hidden; }
+img { display: block; max-width: 100%; }
+button { font: inherit; cursor: pointer; }
+.sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+/* the portrait column: full phone width, or the width that fits the viewport height */
+.app { width: 100%; }
+.column { width: var(--col); margin: 0 auto; position: relative; }
+.invitation { position: relative; opacity: 0; }
+.invitation.shown { opacity: 1; }
+
+/* ── page canvas ── */
+.page { position: relative; width: 100%; container-type: inline-size; background: #e6d3dc; }
+.page img.plate { position: absolute; inset: 0; width: 100%; height: 100%; }
+
+/* the satin band across every joining line: centred on the boundary, above both pages */
+.satin { position: absolute; left: -1%; top: 0; width: 102%; aspect-ratio: 1400 / 148; transform: translateY(-50%); z-index: 9; pointer-events: none; }
+.satin img { width: 100%; height: 100%; }
+
+/* ── motion ── */
+/* text enters once, as its page scrolls into view: a fade with a 12px rise, eased out, lines staggered by --d.
+   Only opacity and transform change, so the final position is exactly the reference's. */
+.reveal { opacity: 0; transform: translateY(12px); transition: opacity .8s cubic-bezier(.22, .61, .36, 1), transform .8s cubic-bezier(.22, .61, .36, 1); transition-delay: var(--d, 0s); will-change: opacity, transform; }
+.page.on.ready .reveal, .no-io .reveal { opacity: 1; transform: none; }
+.created { position: absolute; left: 50%; bottom: 1.4%; transform: translateX(-50%); z-index: 4; color: var(--cream); font-size: 2.2cqw; letter-spacing: .14em; white-space: nowrap; text-decoration: none; padding: .7cqw 2.4cqw; border-radius: 99px; background: rgba(74,31,53,.55); }
+.created b { font-weight: 700; letter-spacing: .2em; }
+
+/* ── opening screen: the film's first frame, Tap to Play ── */
+.opening { position: fixed; inset: 0; z-index: 50; background: #c9afc0 radial-gradient(ellipse at 50% 20%, #e8d3dd 0%, #cfb5c4 55%, #b596a9 100%); display: flex; align-items: flex-start; justify-content: center; overflow: hidden; transition: opacity .8s ease; }
+.opening.out { opacity: 0; pointer-events: none; }
+/* the poster fills the whole viewport (its satin runs to every edge), so a phone taller than 9:16 never shows a bare strip */
+.opening .frame { position: relative; width: 100%; height: 100dvh; container-type: inline-size; }
+.opening .art { width: 100%; height: 100%; object-fit: cover; }
+.tap { position: absolute; left: 50%; bottom: 9%; transform: translateX(-50%); display: flex; flex-direction: column; align-items: center; gap: 10px; background: none; border: 0; color: var(--cream); letter-spacing: .3em; text-transform: uppercase; font-size: clamp(11px, 2.8cqw, 15px); padding: 12px 20px; }
+.tap .ring { width: 62px; height: 62px; border-radius: 50%; border: 1px solid rgba(251,241,234,.9); display: grid; place-items: center; box-shadow: 0 0 0 0 rgba(251,241,234,.5); animation: pulse 2.4s ease-out infinite; backdrop-filter: blur(3px); background: rgba(74,31,53,.28); }
+.tap .ring::before { content: ''; width: 0; height: 0; border-left: 15px solid var(--cream); border-top: 9px solid transparent; border-bottom: 9px solid transparent; margin-left: 4px; }
+.tap span { text-shadow: 0 1px 8px rgba(40,10,25,.6); }
+@keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(251,241,234,.55); } 100% { box-shadow: 0 0 0 18px rgba(251,241,234,0); } }
+
+/* ── opening film: same box as the poster and as page 1, so nothing jumps ── */
+.film { position: fixed; inset: 0; z-index: 45; background: #c9afc0 radial-gradient(ellipse at 50% 20%, #e8d3dd 0%, #cfb5c4 55%, #b596a9 100%); display: none; align-items: flex-start; justify-content: center; overflow: hidden; }
+.film.playing { display: flex; }
+/* the film fills the viewport like the poster; as it ends it settles to the hero's exact box while dissolving onto it */
+.film video { width: 100%; height: 100%; object-fit: cover; background: transparent; display: block; }
+.film.fade { transition: opacity .9s ease; opacity: 0; pointer-events: none; }
+.skip { position: fixed; right: calc(14px + env(safe-area-inset-right, 0px)); bottom: calc(18px + env(safe-area-inset-bottom, 0px)); z-index: 46; background: rgba(74,31,53,.5); border: 1px solid rgba(251,241,234,.5); color: var(--cream); border-radius: 999px; padding: 8px 16px; font-size: 12px; letter-spacing: .2em; text-transform: uppercase; }
+
+/* ── music control ── */
+.audio { position: fixed; top: calc(12px + env(safe-area-inset-top, 0px)); right: calc(12px + env(safe-area-inset-right, 0px)); z-index: 60; height: 42px; min-width: 42px; padding: 0 10px; border-radius: 999px; border: 1px solid rgba(251,241,234,.7); background: rgba(74,31,53,.55); color: var(--cream); display: none; align-items: center; justify-content: center; gap: 8px; backdrop-filter: blur(4px); }
+.audio.shown { display: flex; }
+.audio svg { width: 20px; height: 20px; flex: none; }
+.audio .off, .audio .lbl { display: none; }
+.audio.muted .on { display: none; }
+.audio.muted .off { display: block; }
+.audio.blocked .lbl { display: inline; font-size: 12px; letter-spacing: .16em; text-transform: uppercase; }
+.audio.blocked { animation: nudge 2.2s ease-in-out infinite; }
+.audio .on { animation: beat 1.6s ease-in-out infinite; }
+@keyframes beat { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.12); } }
+@keyframes nudge { 0%, 100% { box-shadow: 0 0 0 0 rgba(251,241,234,.5); } 50% { box-shadow: 0 0 0 8px rgba(251,241,234,0); } }
+
+
+/* ── toast ── */
+.toast { position: fixed; left: 50%; bottom: calc(24px + env(safe-area-inset-bottom, 0px)); transform: translate(-50%, 20px); z-index: 80; background: rgba(74,31,53,.93); color: var(--cream); border: 1px solid rgba(216,179,106,.6); padding: 12px 18px; border-radius: 12px; font-size: 15px; max-width: min(92vw, 420px); text-align: center; opacity: 0; transition: opacity .3s, transform .3s; pointer-events: none; }
+.toast.shown { opacity: 1; transform: translate(-50%, 0); }
+
+/* ── sparkle overlay ── */
+.sparkle { position: fixed; inset: 0; z-index: 30; pointer-events: none; opacity: 0; transition: opacity 2s ease; }
+.sparkle.shown { opacity: 1; }
+
+/* ═════════ this invitation's own pages ═════════ */
+:root { --ink: #4a1f35; --plum2: #5a2a47; --rose: #8a5a74; --champagne: #b08a4e; }
+.page > .card, .page > .reveal, .page > .digit, .page > .digit-label, .page > .s, .page > .hit, .page > .reveal-hit, .page > .legend { position: absolute; z-index: 2; }
+.page:not(.ready) > :not(.plate) { visibility: hidden; }
+.card { display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; color: var(--ink); }
+.card p, .card h1, .card h2 { margin: 0; }
+.card img { width: 100%; height: auto; -webkit-user-drag: none; user-select: none; }
+
+/* ── page 1: Bismillah, the couple's ND monogram, the invitation line, the couple and the date, inside the ivory card.
+      The card's arch peaks at 50% of the page and is 38% wide where the calligraphy sits, so the calligraphy (its
+      picture is trimmed to its ink, so its box is its true width) is centred on that axis with air on both sides. ── */
+.p-hero .card { left: 20%; right: 19.5%; top: 21.6%; bottom: 22.6%; }
+.bismillah { width: 29cqw; }
+/* the ND monogram is the client's own artwork, only recoloured plum: its frame is taller than wide (1086 x 1448) */
+.p-hero .mono { width: 15.5cqw; margin-top: 2cqw; }
+.card .request { margin-top: 2.4cqw; font-style: italic; font-weight: 500; font-size: 3.25cqw; line-height: 1.34; color: var(--ink); }
+/* the couple's names: Playfair Display italic, both names in one size and weight */
+.card .name { margin-top: 2.2cqw; font-family: var(--names); font-style: italic; font-weight: 500; font-size: 5.9cqw; line-height: 1.2; letter-spacing: .005em; color: var(--plum2); white-space: nowrap; }
+.name span { display: block; }
+.card .and { display: flex; align-items: center; gap: 2.2cqw; margin: 2cqw 0 1.6cqw; font-weight: 600; font-size: 2.7cqw; letter-spacing: .34em; padding-left: .34em; color: var(--champagne); }
+.and i { display: block; width: 9cqw; height: 1px; background: linear-gradient(90deg, rgba(176,138,78,0), var(--champagne)); }
+.and i:last-child { transform: scaleX(-1); }
+.card .name--bride { margin-top: 0; }
+.card .when { margin-top: 2.6cqw; font-weight: 600; font-size: 3.4cqw; letter-spacing: .04em; line-height: 1.3; color: var(--ink); }
+
+/* ── pieces placed by the reference's own boxes (pages 2 and 3) ── */
+.s { pointer-events: none; }
+.s > img { display: block; width: 100%; height: 100%; max-width: none; -webkit-user-drag: none; user-select: none; }
+.hit { z-index: 6 !important; display: block; padding: 0; border: 0; border-radius: 99px; background: transparent; -webkit-tap-highlight-color: transparent; transition: background .2s; cursor: pointer; }
+.hit::before { content: ''; position: absolute; inset: -5px -2px; }           /* a finger-sized target around the painted pill */
+.hit:active { background: rgba(255, 255, 255, .26); }
+.hit:focus-visible, .reveal-hit:focus-visible { outline: 2px solid var(--champagne); outline-offset: 2px; }
+
+/* ── page 2: Save Our Date ── */
+.orn2 img { height: auto; }
+.month { margin: 0; display: flex; align-items: center; justify-content: center; font-weight: 500; font-size: 3.6cqw; letter-spacing: .14em; padding-left: .14em; text-transform: uppercase; white-space: nowrap; line-height: 1; color: var(--ink); }
+/* the figures stand in the painted panel's own seven columns (SUN … SAT are in the plate), five rows for December 2026 */
+.cal { left: 21.4%; width: 56.9%; top: 45.3%; height: 15.5%; display: grid; grid-template-columns: repeat(7, 1fr); grid-auto-rows: 1fr; align-items: center; justify-items: center; color: var(--ink); font-weight: 500; font-size: 3.25cqw; line-height: 1; font-variant-numeric: lining-nums; }
+.day { position: relative; display: flex; align-items: center; justify-content: center; width: 100%; height: 100%; }
+.day--mark b { position: relative; font-weight: 600; transition: color .5s ease .3s; }
+.day__heart { position: absolute; left: 50%; top: 50%; width: 7.6cqw; max-width: none; height: auto; transform: translate(-50%, -47%) scale(.35); opacity: 0; transition: opacity .7s ease .25s, transform .9s cubic-bezier(.2, 1.4, .4, 1) .25s; pointer-events: none; }
+.day--mark:nth-of-type(n) + .day--mark .day__heart, .day--mark ~ .day--mark .day__heart { transition-delay: .55s; }
+.revealed .day__heart { opacity: 1; transform: translate(-50%, -47%); }
+.reveal-pill { transition: opacity .6s ease; }
+.reveal-pill > img { animation: pill-glow 2.6s ease-in-out infinite; }
+@keyframes pill-glow { 0%, 100% { filter: drop-shadow(0 0 0 rgba(255, 220, 235, 0)); } 50% { filter: drop-shadow(0 0 1.2cqw rgba(255, 214, 232, .9)); } }
+.reveal-hit { z-index: 6 !important; padding: 0; border: 0; border-radius: 99px; background: transparent; -webkit-tap-highlight-color: transparent; cursor: pointer; }
+.revealed .reveal-pill { opacity: 0; }
+.revealed .reveal-hit { pointer-events: none; }
+.legend { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: .9cqw; opacity: 0; transform: translateY(6px); transition: opacity .7s ease .5s, transform .7s ease .5s; pointer-events: none; }
+.legend p { margin: 0; font-size: 3.4cqw; line-height: 1.2; white-space: nowrap; color: var(--ink); }
+.legend b { font-weight: 700; color: var(--plum2); }
+.legend .legend__sub { font-size: 3.05cqw; }
+.legend .legend__sub::before { content: none; }
+.legend .legend__sub b { font-weight: 600; color: var(--ink); }
+.legend p::before { content: '♥'; margin-right: .5em; font-size: .8em; color: #c79a4a; }
+.revealed .legend { opacity: 1; transform: none; }
+
+/* ── page 3: Our Functions ── */
+.ev-title { margin: 0; display: flex; align-items: center; justify-content: center; font-family: var(--serif); font-weight: 500; font-size: 4.7cqw; line-height: 1; white-space: nowrap; color: var(--ink); }
+.ev-line { margin: 0; display: flex; align-items: center; font-weight: 500; font-size: 2.9cqw; line-height: 1; white-space: nowrap; color: var(--ink); }
+.ev-line.ev-venue { display: block; line-height: 1.28; }
+
+/* ── the chooser sheet (page 2's two buttons each serve both ceremonies) ── */
+.sheet { position: fixed; inset: 0; z-index: 70; display: flex; align-items: flex-end; justify-content: center; padding: 16px 16px calc(16px + env(safe-area-inset-bottom, 0px)); }
+.sheet[hidden] { display: none; }
+.sheet__veil { position: absolute; inset: 0; background: rgba(60, 25, 45, .55); backdrop-filter: blur(3px); }
+.sheet__card { position: relative; width: min(100%, 420px); max-height: calc(100dvh - 32px); overflow: auto; display: flex; flex-direction: column; gap: 10px; padding: 22px 18px 16px; border: 1px solid rgba(216, 179, 106, .8); border-radius: 18px; background: linear-gradient(180deg, #fdf6f0, #f3e3df); box-shadow: 0 20px 60px rgba(40, 10, 25, .45); color: var(--ink); text-align: center; }
+.sheet__title { margin: 0 0 2px; font-family: var(--script); font-weight: 400; font-size: 36px; line-height: 1.1; color: var(--plum2); }
+.sheet__note { margin: 6px 0 -2px; font-size: 12px; font-weight: 700; letter-spacing: .2em; text-transform: uppercase; color: var(--champagne); }
+.sheet__btn { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px; min-height: 52px; padding: 9px 14px; border-radius: 14px; border: 1px solid rgba(233, 207, 154, .9); background: linear-gradient(180deg, #8a5574, #5a2a47); color: #fbf1ea; text-decoration: none; -webkit-tap-highlight-color: transparent; }
+.sheet__btn b { font-weight: 700; font-size: 17px; letter-spacing: .04em; }
+.sheet__btn span { font-size: 14px; opacity: .92; }
+.sheet__btn--quiet { min-height: 46px; background: linear-gradient(180deg, #fffaf3, #f1e2d2); border-color: #c8a468; color: var(--plum2); }
+.sheet__btn:focus-visible, .sheet__close:focus-visible { outline: 2px solid var(--champagne); outline-offset: 2px; }
+.sheet__close { margin-top: 4px; min-height: 44px; border: 0; background: none; color: var(--rose); font: 600 15px var(--serif); letter-spacing: .16em; text-transform: uppercase; }
+
+/* ── page 4: Counting Down to Forever (client, 2026-11-17). The plaque's field is painted clean in the plate; the
+      heading stands on the axis of the four boxes below it (54.1% of the page): two lines of the same script and
+      size, each centred on it. ── */
+.until { left: 32.1%; width: 44%; top: 24.4%; height: 22%; margin: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 0; text-align: center; font-weight: 400; }
+.until span { font-family: var(--serif); font-weight: 500; font-size: 3.3cqw; letter-spacing: .06em; padding-left: .06em; line-height: 1.1; color: #f7e9de; text-shadow: 0 .2cqw .6cqw rgba(60, 20, 40, .45); }
+.until b { display: block; white-space: nowrap; font-family: var(--script); font-weight: 400; font-size: 5.9cqw; line-height: 1.2; padding: 0 .16em; background: linear-gradient(180deg, #fff6df 10%, #e9cf9a 55%, #cfa765 95%); -webkit-background-clip: text; background-clip: text; color: transparent; -webkit-text-fill-color: transparent; filter: drop-shadow(0 .25cqw .5cqw rgba(50, 15, 35, .5)); }
+.until-rule { left: 43.95%; width: 20.3%; top: 47.6%; }
+.until-rule img { width: 100%; height: auto; }
+.digit { top: 57.386%; width: 8.378%; height: 10.627%; display: flex; align-items: center; justify-content: center; color: #f7e9de; font-weight: 600; font-size: 5.3cqw; line-height: 1; font-variant-numeric: tabular-nums lining-nums; letter-spacing: .02em; text-shadow: 0 .15cqw .4cqw rgba(60, 20, 40, .45); }
+.digit span { display: block; min-width: 2.2ch; text-align: center; }
+.digit span.n3 { font-size: .78em; }
+.digit-label { top: 68%; width: 8.378%; text-align: center; color: #f3dfd3; font-weight: 500; font-size: 1.75cqw; letter-spacing: .04em; line-height: 1.2; }
+
+/* ── page 5: the closing. "Thank You" stands between the plate's two gold rules; the message is centred in the
+      cartouche (which spans 18% to 82% of the page, 55% to 72% down). ── */
+.p-end .mono { left: 39.2%; width: 21.6%; top: 20.6%; }
+.p-end .mono img { width: 100%; height: auto; filter: drop-shadow(0 .4cqw .8cqw rgba(40, 10, 25, .45)); }
+.thanks { left: 14%; right: 14%; top: 39.4%; height: 10.4%; margin: 0; display: flex; align-items: center; justify-content: center; font-family: var(--script); font-weight: 400; font-size: 11.6cqw; line-height: 1; white-space: nowrap; background: linear-gradient(180deg, #fff6df 10%, #e9cf9a 55%, #cfa765 95%); -webkit-background-clip: text; background-clip: text; color: transparent; -webkit-text-fill-color: transparent; filter: drop-shadow(0 .25cqw .5cqw rgba(40, 10, 25, .5)); }
+.closing { left: 25%; right: 25%; top: 56.6%; height: 14.2%; margin: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; font-style: italic; font-weight: 600; font-size: 3.75cqw; line-height: 1.42; color: var(--plum2); }
+.created { z-index: 4; }
+
+@media (prefers-reduced-motion: reduce) {
+  .tap .ring, .audio .on, .audio.blocked, .reveal-pill > img { animation: none !important; }
+  .reveal, .invitation, .film.fade { transition-duration: .01s !important; transition-delay: 0s !important; }
+  .reveal { opacity: 1; transform: none; }
+  .sparkle { display: none; }
+}
+
+/* ── the poster and the film share one box: 9:16, as wide as the column and at least as tall as the screen (the
+      picture's satin runs to every edge, so a tall phone never shows a bare strip); the ND seal is in the film's own pixels ── */
+.cover { position: absolute; left: 50%; top: 0; height: max(100dvh, calc(var(--col) * 16 / 9)); aspect-ratio: 9 / 16; transform: translateX(-50%); transition: height .9s ease; }
+.film .column, .opening .column { height: 100dvh; }
+.film.fade .cover { height: calc(var(--col) * 16 / 9); }
+.seal { position: absolute; aspect-ratio: 480 / 436; transform: translate(-50%, -50%); transition: opacity .3s ease; pointer-events: none; }
+.seal img { display: block; width: 100%; height: 100%; }
+.burst { position: absolute; aspect-ratio: 1; transform: translate(-50%, -50%) scale(.3); border-radius: 50%; opacity: 0; pointer-events: none; background: radial-gradient(circle, rgba(255, 250, 236, 1) 0%, rgba(255, 244, 220, .96) 34%, rgba(255, 236, 205, .55) 56%, rgba(255, 236, 205, 0) 72%); transition: opacity .28s ease, transform .5s ease; }
+.film.broken .seal { opacity: 0; }
+.film.broken .burst { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+.film.cleared .burst { opacity: 0; transform: translate(-50%, -50%) scale(1.25); transition: opacity .7s ease, transform .9s ease; }
+
+/* ── Ashar & Rufeda: each name with its family under it (the reference's own "of" lines), and the function titles on
+      one line each, set to fit the card's text column ── */
+.p-hero .card { top: 19.6%; bottom: 19.6%; }
+.p-hero .mono { width: 12.5cqw; margin-top: 1.4cqw; }
+.p-hero .card .request { margin-top: 1.6cqw; font-size: 3.05cqw; line-height: 1.3; }
+.p-hero .card .name { margin-top: 1.6cqw; }
+.p-hero .card .and { margin: 1.5cqw 0 1.2cqw; }
+.card .of { margin-top: .8cqw; font-weight: 600; font-size: 2.95cqw; line-height: 1.3; color: var(--ink); }
+.of em { display: block; font-weight: 500; font-size: 2.7cqw; color: var(--rose); }
+.p-func .ev-title { font-size: 3.3cqw; }
