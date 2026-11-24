@@ -225,10 +225,17 @@ button { font: inherit; cursor: pointer; }
 .fn-title span { display: block; margin-top: .6cqw; font-weight: 600; font-size: 2.9cqw; letter-spacing: .34em; padding-left: .34em; text-transform: uppercase; color: var(--champagne); }
 .p-func .ev-venue b { font-weight: 700; letter-spacing: .01em; white-space: nowrap; }
 .p-func .ev-line.ev-venue { font-size: 2.5cqw; line-height: 1.3; white-space: normal; }
-.families { position: absolute; z-index: 2; left: 38.5%; width: 47.5%; top: 69.4%; height: 18%; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2.6cqw; text-align: center; color: var(--ink); }
+/* the families card (27 Nov): one block centred on the card's own axis (the frame's inside runs from 28.6% to 89% of
+   the page; the axis sits a little right of its middle, clear of the flowers at its top left), the content centred
+   top to bottom between the frame's upper and lower edges */
+.fam-card { position: absolute; z-index: 2; left: 36%; width: 48%; top: 61.2%; height: 25.4%; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; color: var(--ink); }
+.fam-card .ev-title { width: 100%; }
+.fam-rule { width: 32%; margin: 1.4cqw 0 2.8cqw; }
+.fam-rule img { display: block; width: 100%; height: auto; }
+.fam + .fam { margin-top: 2.6cqw; }
 .fam p { margin: 0; }
-.fam__label { font-weight: 700; font-size: 2.4cqw; letter-spacing: .24em; padding-left: .24em; text-transform: uppercase; color: var(--champagne); }
-.fam__names { margin-top: .6cqw !important; font-weight: 600; font-size: 3cqw; line-height: 1.3; }
+.fam__label { font-weight: 700; font-size: 2.3cqw; letter-spacing: .22em; padding-left: .22em; line-height: 1.2; text-transform: uppercase; color: var(--champagne); }
+.fam__names { margin-top: .7cqw !important; font-weight: 600; font-size: 3cqw; line-height: 1.32; }
 
 /* page 5: the client's closing words and the families, in the cartouche */
 .p-end .closing { top: 54.8%; height: 18.4%; left: 21%; right: 21%; gap: 1.2cqw; font-size: 2.9cqw; line-height: 1.38; }
@@ -236,12 +243,4 @@ button { font: inherit; cursor: pointer; }
 .closing__from { font-style: normal; font-weight: 700; font-size: 2.9cqw; letter-spacing: .02em; }
 .closing__from em { font-weight: 500; font-style: italic; }
 
-/* after the closing: Share on WhatsApp / Copy Link, in the reference's own sheet buttons */
-.share { padding: 22px 18px calc(26px + env(safe-area-inset-bottom, 0px)); background: linear-gradient(180deg, #5a2a47, #3e1a2e); text-align: center; color: var(--cream); }
-.share__title { margin: 0 0 12px; font-family: var(--script); font-size: 30px; line-height: 1.1; color: #f3dfae; }
-.share__row { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
-.share__btn { flex: 1 1 150px; max-width: 220px; min-height: 48px; cursor: pointer; font: inherit; }
-.share__btn { padding: 9px 10px; }
-.share__btn b { font-size: 15px; white-space: nowrap; }
-.share__note { min-height: 1.3em; margin: 10px 0 0; font-size: 15px; font-style: italic; }
 .confetti { position: fixed; inset: 0; width: 100vw; height: 100vh; z-index: 65; pointer-events: none; }

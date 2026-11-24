@@ -2,7 +2,7 @@
    design of dr-mohammed-nihal-nooha kept exactly as it is (only the wording and the monogram are this couple's).
    Scroll order: 1 the invitation card (invocation, SS monogram, the hosts and the couple) · 2 Save the Date
    (December 2026, the 4th revealed) · 3 the ceremony and the families (the reference's two cards) · 4 the countdown
-   to the ceremony (landscape) · 5 the closing (SS monogram, Thank You) · then Share / Copy Link.
+   to the ceremony (landscape) · 5 the closing (SS monogram, Thank You).
    Pages 2 and 3 follow the reference's layout: their pieces take the boxes the reference measured (js/art.js).
    There is no RSVP. */
 import { config as C } from '../config.js?v=1';
@@ -130,9 +130,11 @@ const page3 = Page(3, 'p-func', [
   r(1.03, 'p', { class: 'ev-line ev-venue', style: at('p3-n-venue', { w: 37, dy: -0.9, h: 6.2 }) }, h('b', {}, C.venue), h('br'), C.address),
   h('button', { class: 'hit', type: 'button', style: at('p3-n-save-hit'), 'data-cal': EV.key, 'aria-label': `Save the date: ${EV.title}, ${EV.date}, ${EV.time}`, onclick: saveSheet }),
   h('a', { class: 'hit', style: at('p3-n-maps-hit'), href: C.mapsUrl, target: '_blank', rel: 'noopener', 'data-maps': EV.key, 'aria-label': `View location on Google Maps: ${EV.venue}` }),
-  r(1.0, 'h3', { class: 'ev-title', style: at('p3-r-title', { dx: -7, w: 32 }) }, 'Our Families'),
-  r(1.12, 'div', { class: 's', style: at('p3-r-divider', { dx: -1.9 }) }, pic('p3-r-divider', '', '')),
-  r(1.25, 'div', { class: 'families' }, ...C.families.map((f) => h('div', { class: 'fam' }, h('p', { class: 'fam__label' }, f.label), h('p', { class: 'fam__names' }, ...br(f.lines))))),
+  /* the families card: heading, divider and both families in one block on one centre line inside the frame (27 Nov) */
+  r(1.0, 'div', { class: 'fam-card' },
+    h('h3', { class: 'ev-title' }, 'Our Families'),
+    h('div', { class: 'fam-rule' }, pic('p3-r-divider', '', '')),
+    ...C.families.map((f) => h('div', { class: 'fam' }, h('p', { class: 'fam__label' }, f.label), h('p', { class: 'fam__names' }, ...br(f.lines))))),
 ]);
 
 /* ── page 4: counting down to forever (landscape) ── */
@@ -150,25 +152,7 @@ const page5 = Page(5, 'p-end', [
   h('a', { class: 'created', href: `https://invitivals.com/?utm_source=invitation&utm_medium=footer&utm_campaign=${C.slug}`, target: '_blank', rel: 'noopener' }, 'Created by ', h('b', {}, 'INVITIVALS')),
 ]);
 
-/* ── share: WhatsApp with the invitation's link, and Copy Link (with a fallback where the clipboard is closed) ── */
-const shareText = `You are cordially invited to the Engagement Ceremony of ${C.couple} on ${EV.date}, ${EV.time} at ${C.venue}, ${C.address}\n${URL_}`;
-const note = h('p', { class: 'share__note', role: 'status', 'aria-live': 'polite' });
-async function copyLink() {
-  let ok = false;
-  try { await navigator.clipboard.writeText(URL_); ok = true; } catch {
-    const t = h('textarea', { style: { position: 'fixed', top: '-100px', opacity: '0' }, readonly: true }); t.value = URL_; document.body.append(t); t.select();
-    try { ok = document.execCommand('copy'); } catch { ok = false; } t.remove();
-  }
-  note.textContent = ok ? 'Invitation link copied.' : `Copy this link: ${URL_}`;
-}
-const share = h('section', { class: 'share', 'aria-label': 'Share this invitation' },
-  h('p', { class: 'share__title' }, 'Share this Invitation'),
-  h('div', { class: 'share__row' },
-    h('a', { class: 'sheet__btn share__btn', href: `https://wa.me/?text=${encodeURIComponent(shareText)}`, target: '_blank', rel: 'noopener', 'data-share': 'whatsapp' }, h('b', {}, 'Share on WhatsApp')),
-    h('button', { class: 'sheet__btn sheet__btn--quiet share__btn', type: 'button', 'data-share': 'copy', onclick: copyLink }, h('b', {}, 'Copy Link'))),
-  note);
-
-const invitation = h('main', { class: 'invitation column', id: 'invitation' }, page1, page2, page3, page4, page5, share);
+const invitation = h('main', { class: 'invitation column', id: 'invitation' }, page1, page2, page3, page4, page5);
 app.append(invitation);
 
 /* ── confetti: a light shower of champagne, blush and plum paper, as the invitation opens and as the date is revealed ── */
