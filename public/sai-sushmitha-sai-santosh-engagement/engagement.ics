@@ -1,0 +1,32 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Invitivals//Engagement Invitation//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VTIMEZONE
+TZID:Asia/Kolkata
+BEGIN:STANDARD
+DTSTART:19700101T000000
+TZOFFSETFROM:+0530
+TZOFFSETTO:+0530
+TZNAME:IST
+END:STANDARD
+END:VTIMEZONE
+BEGIN:VEVENT
+UID:sai-sushmitha-sai-santosh-engagement-engagement@invitivals.com
+DTSTAMP:20261124T000000Z
+DTSTART;TZID=Asia/Kolkata:20261204T193000
+SUMMARY:Engagement Ceremony — Dr. Sai Sushmitha Reddy & Sai Santosh Reddy
+LOCATION:BMR SARTHA CONVENTION\, Exit No. 12\, Manneguda\, Telangana.
+DESCRIPTION:Friday\, 4th December 2026\nEngagement Ceremony – 7:30 PM onw
+ ards\nVenue: BMR SARTHA CONVENTION\, Exit No. 12\, Manneguda\, Telangana.\
+ nLocation: https://maps.app.goo.gl/cxGwBMV6bjLJPHjt9?g_st=iw\n\nhttps://in
+ vitivals.com/sai-sushmitha-sai-santosh-engagement/
+URL:https://maps.app.goo.gl/cxGwBMV6bjLJPHjt9?g_st=iw
+BEGIN:VALARM
+TRIGGER:-PT3H
+ACTION:DISPLAY
+DESCRIPTION:Engagement Ceremony
+END:VALARM
+END:VEVENT
+END:VCALENDAR
