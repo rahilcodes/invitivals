@@ -1,0 +1,10 @@
+# This invitation may be corrected in place, so browsers re-check the page, its scripts, styles and pictures
+# (a quick "not modified" when nothing changed). The film and the song are large and stay cached.
+<IfModule mod_headers.c>
+  <FilesMatch "\.(html|js|css|ics|webp|jpg|svg)$">
+    Header set Cache-Control "no-cache"
+  </FilesMatch>
+</IfModule>
+<IfModule mod_mime.c>
+  AddType text/calendar .ics
+</IfModule>
