@@ -1,14 +1,14 @@
 /* Shazli Haider & Syed Mohammed Ashir Kamal — COMPLETE invitation (all four functions).
    The Nikah + Rukhsati link is public/shazli-ashir-nikah/ (same code, its own config.js).
-   Hosted by the bride's mother (client): mother-only wording, never "Late". The bride's father, Syed Shamshad Haider,
-   was named in the 24 Nov brief but no line was given for him, so he is not printed (the first brief asked that he
-   stay out of the host wording).
+   Hosted by the bride's mother (client): mother-only host wording, never "Late". Since the 24 Nov refinement the
+   bride's parents (Syed Shamshad Haider, named in the client's brief, and Roomana Haider) are printed under her name,
+   as the groom's are under his. Venue since 24 Nov: Nirvana Grand Hotel and Resort, Bodhgaya (no hall name).
    Dates are India time (+05:30); weekdays checked: 18 Jan 2027 Monday, 19 Tuesday, 20 Wednesday, 21 Thursday. */
 const VENUE = {
-  name: 'Majestic Heaven',
+  name: 'Nirvana Grand Hotel and Resort',
   city: 'Bodhgaya',
-  place: 'Nirvana Grand Hotel and Resort, Bodhgaya',
-  full: 'Majestic Heaven, Nirvana Grand Hotel and Resort, Bodhgaya',
+  place: 'Bodhgaya',
+  full: 'Nirvana Grand Hotel and Resort, Bodhgaya',
   mapsUrl: 'https://maps.app.goo.gl/cTws4DmJN9qvzTcq9?g_st=ac',
 };
 
@@ -19,7 +19,8 @@ export const config = {
   groom: ['Syed Mohammed', 'Ashir Kamal'],          // "Syed Mohammed Ashir Kamal", set on two lines
   groomFull: 'Syed Mohammed Ashir Kamal',
   host: 'Mrs. Roomana Haider',
-  groomParents: 'Md. Kamal Hassan & Sarwer Naz',
+  brideParents: ['Syed Shamshad Haider', 'Roomana Haider'],
+  groomParents: ['Md. Kamal Hassan', 'Sarwer Naz'],
   venue: VENUE,
 
   saveTheDate: { day: '20', month: 'January 2027', arabic: 'إِنْ شَاءَ ٱللَّٰهُ', line: 'A new chapter begins' },
@@ -34,7 +35,8 @@ export const config = {
 
   rsvp: {
     endpoint: '/shazli-ashir-wedding/rsvp.php',      // both links store their replies here, each marked with its link
-    phone: '+91 9572630015', tel: '+919572630015',
+    help: 'Please feel free to reach out for any help or query on',   // the client's exact sentence (24 Nov)
+    phone: '7280979429', tel: '+917280979429',
     googleForm: null,                                // the family's Google Form (responses in a Google Sheet): pending
   },
 

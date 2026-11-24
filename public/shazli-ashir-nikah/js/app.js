@@ -4,7 +4,7 @@
      doors (tap) → main invitation → Save the Date (scratch card) → Our Functions (View Details opens each
      function's own page) → RSVP → thank you.
    Both links run this file; config.js decides which function cards are shown. */
-import { config as C } from '../config.js?v=2';
+import { config as C } from '../config.js?v=3';
 
 const h = (tag, attrs = {}, ...kids) => {
   const el = document.createElement(tag);
@@ -57,16 +57,21 @@ function addToCalendar(ev) {
 }
 const mapLink = (cls = 'solid') => pill('View on Map', 'pin', { href: C.venue.mapsUrl, target: '_blank', rel: 'noopener', 'aria-label': `Open ${C.venue.full} in Google Maps` }, cls);
 
-/* ── 1 · main invitation (sunlit arch) ── */
+/* ── 1 · main invitation: the reference's own plate (its painted Bismillah, "Wedding Invitation" and ornaments are
+   kept exactly); below the first divider the client's wording is set in the reference's hierarchy — tracked caps for
+   the invitation lines (the mother's name in bold at the same size), the reference's ornament, the names in bold
+   serif with each family's names in small caps under them (as "MBBS" sits in the reference). ── */
+const orn = () => h('img', { class: 'orn', src: 'assets/ornament.webp', alt: '', width: 200, height: 48, 'aria-hidden': 'true' });
 const hero = page('hero', 'hero.webp', 941, 1672,
+  h('p', { class: 'vh', lang: 'ar' }, 'بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ — Wedding Invitation'),
   at(h('div', { class: 'invite-text' },
-    h('p', { class: 'bismillah', lang: 'ar', dir: 'rtl' }, 'بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ'),
-    h('p', { class: 'host' }, C.host),
-    h('p', { class: 'words' }, 'requests the pleasure of', h('br'), 'your company on the joyous', h('br'), 'occasion of the wedding', h('br'), 'ceremony of her daughter'),
+    h('p', { class: 'caps' }, h('b', {}, C.host), h('br'), 'requests the pleasure of', h('br'), 'your company on the joyous', h('br'), 'occasion of the wedding', h('br'), 'ceremony of her daughter'),
+    orn(),
     h('p', { class: 'name' }, C.bride),
+    h('p', { class: 'sub' }, `Daughter of ${C.brideParents[0]}`, h('br'), `& ${C.brideParents[1]}`),
     h('p', { class: 'with' }, 'with'),
     h('p', { class: 'name' }, C.groom[0], h('br'), C.groom[1]),
-    h('p', { class: 'words son' }, 'son of Md. Kamal Hassan', h('br'), '& Sarwer Naz')), { y: 5.8, w: 56, top: true }));
+    h('p', { class: 'sub' }, `Son of ${C.groomParents[0]}`, h('br'), `& ${C.groomParents[1]}`)), { y: 25.2, w: 58, top: true }));
 
 /* ── 2 · Save the Date: the reference's scratch card. The date sits on the revealed plaque UNDER an opaque gold
    cover drawn on a canvas; nothing of it shows until the cover is rubbed away with a finger or the mouse. ── */
@@ -78,11 +83,12 @@ const under = h('div', { class: 'under' }, h('img', { src: 'assets/plate-reveal.
 const box = h('div', { class: 'scratch-box', role: 'img', 'aria-label': 'Scratch the gold plate to reveal the date' }, under, canvas);
 const live = h('p', { class: 'vh', role: 'status', 'aria-live': 'polite' });
 const hint = h('button', { type: 'button', class: 'pill hint-pill', 'aria-label': 'Scratch to reveal the date (keyboard: press to reveal)', html: `<span>Scratch to Reveal</span>${ICON.hand}` });
+/* "Save the Date" stays where the reference has it; In shaa Allah (gold calligraphy, the Bismillah's gold) and
+   "A new chapter begins" directly under it form one block where the reference's tagline sits, under the plaque */
 const save = page('save', 'save.webp', 941, 1672,
-  at(h('p', { class: 'inshallah', lang: 'ar', dir: 'rtl' }, S.arabic), { y: 28.3, w: 70 }),
   at(h('p', { class: 'std' }, 'Save the Date'), { y: 35.2, w: 80 }),
   h('div', { class: 'el plate', style: `left:${PLATE.x}%;top:${PLATE.y}%;width:${PLATE.w}%;height:${PLATE.h}%` }, box),
-  at(h('p', { class: 'line' }, h('i', { class: 'heart', 'aria-hidden': 'true' }, '♥'), h('br'), S.line), { y: 67.6, w: 70 }),
+  at(h('div', { class: 'blessing' }, h('p', { class: 'inshallah', lang: 'ar', dir: 'rtl' }, S.arabic), h('p', { class: 'line' }, S.line)), { y: 63.2, w: 72, top: true }),
   at(hint, { y: 79.4, w: 50 }), at(live, { y: 90, w: 10 }));
 {
   const ctx = canvas.getContext('2d', { willReadFrequently: true });
@@ -141,7 +147,7 @@ const cards = C.events.map((ev, k) => {
   open.insertAdjacentHTML('beforeend', chev);
   open.addEventListener('click', () => openDetail(ev, open));
   return [
-    h('div', { class: 'el card-text', style: `left:57%;top:${py(top - 6)}%;width:31.5%;height:${py(214)}%` },
+    h('div', { class: 'el card-text', style: `left:57%;top:${py(top - 8)}%;width:34%;height:${py(216)}%` },
       h('h3', {}, ev.title),
       icoRow('cal', ev.date),
       icoRow('clock', ev.time),
@@ -156,7 +162,7 @@ const functions = page(`functions n${C.events.length}`, FN.art, 941, FN.H,
   cards);
 
 /* ── function details: the reference's pages 6–9 as a full-screen view over the invitation ── */
-const PLATES = { mayun: ['d-mayun.webp', 73.4], mehendi: ['d-mehendi.webp', 73.4], nikah: ['d-nikah.webp', 66.4], rukhsati: ['d-rukhsati.webp', 71.6] };
+const PLATES = { mayun: ['d-mayun.webp', 73.4], mehendi: ['d-mehendi.webp', 73.4], nikah: ['d-nikah.webp', 65.9], rukhsati: ['d-rukhsati.webp', 70.2] };
 let current = null;
 function detailPage(ev) {
   const [art, y] = PLATES[ev.key];
@@ -196,22 +202,24 @@ addEventListener('popstate', () => {
   opener.focus({ preventScroll: true });
 });
 
-/* ── 4 · RSVP: the invitation's own form, stored on our server (both links, each reply marked with its link) ── */
-const form = h('form', { class: 'rsvp-form', novalidate: true, 'aria-label': 'RSVP' },
+/* ── 4 · RSVP: the invitation's own form, stored on our server (both links, each reply marked with its link).
+   The section is the reference's paper arch made taller (rsvp.webp, 941 x 2272): the choices and fields on the
+   first screen, the Send Response button (a submit button of the same form) and the help line on the second. ── */
+const form = h('form', { class: 'rsvp-form', id: 'rsvp-form', novalidate: true, 'aria-label': 'RSVP' },
   h('fieldset', { class: 'choices' }, h('legend', { class: 'vh' }, 'Will you attend?'),
     h('label', {}, h('input', { type: 'radio', name: 'attending', value: 'yes' }), h('i', { class: 'ring', 'aria-hidden': 'true' }), h('span', {}, 'Yes, I’ll be attending')),
     h('label', {}, h('input', { type: 'radio', name: 'attending', value: 'no' }), h('i', { class: 'ring', 'aria-hidden': 'true' }), h('span', {}, 'Sorry, I can’t make it'))),
   h('div', { class: 'fields' },
     h('label', { class: 'field' }, h('span', { class: 'vh' }, 'Guest name'), h('input', { name: 'name', autocomplete: 'name', maxlength: 80, placeholder: 'Guest name' })),
     h('label', { class: 'field guests' }, h('span', { class: 'vh' }, 'Number of guests'), h('input', { name: 'guests', type: 'number', inputmode: 'numeric', min: 1, max: 20, placeholder: 'Number of guests' }))),
-  h('input', { name: 'website', class: 'vh', tabindex: -1, autocomplete: 'off', 'aria-hidden': 'true' }),
-  pill('Send Response', 'send', { type: 'submit', class: 'send' }),
-  h('p', { class: 'note', role: 'status', 'aria-live': 'polite' }));
-form.querySelector('.send').type = 'submit';
+  h('input', { name: 'website', class: 'vh', tabindex: -1, autocomplete: 'off', 'aria-hidden': 'true' }));
+const send = pill('Send Response', 'send', { type: 'submit', class: 'send', form: 'rsvp-form' });
+send.type = 'submit';
+const note = h('p', { class: 'note', role: 'status', 'aria-live': 'polite' });
+const sendBox = h('div', { class: 'send-box' }, send, note);
 form.addEventListener('change', () => { form.querySelector('.guests').classList.toggle('off', form.elements.attending.value === 'no'); });
 form.addEventListener('submit', async (e) => {
   e.preventDefault();
-  const note = form.querySelector('.note'), send = form.querySelector('.send');
   const name = form.elements.name.value.trim(), attending = form.elements.attending.value;
   note.className = 'note bad';
   if (!attending) { note.textContent = 'Please choose “Yes, I’ll be attending” or “Sorry, I can’t make it”.'; return; }
@@ -223,20 +231,26 @@ form.addEventListener('submit', async (e) => {
     const r = await fetch(C.rsvp.endpoint, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ name, attending, guests, link: C.link, website: form.elements.website.value }) });
     const j = await r.json().catch(() => ({}));
     if (!r.ok || !j.ok) throw new Error(j.error || 'Your reply could not be sent. Please try again.');
-    form.replaceChildren(h('p', { class: 'done' }, attending === 'yes' ? 'Thank you! Your reply has been received. We look forward to welcoming you.' : 'Thank you for letting us know. You will be missed.'));
+    form.querySelectorAll('input').forEach((i) => { i.disabled = true; });
+    form.classList.add('sent');
+    sendBox.replaceChildren(h('p', { class: 'done', role: 'status' }, attending === 'yes' ? 'Thank you! Your reply has been received. We look forward to welcoming you.' : 'Thank you for letting us know. You will be missed.'));
   } catch (err) { send.disabled = false; note.className = 'note bad'; note.textContent = /fetch|network/i.test(err.message) ? 'Your reply could not be sent. Please check your connection and try again.' : err.message; }
 });
-const rsvp = page('rsvp', 'paper.webp', 941, 1672,
+const RH = 2272, ry = (px) => (px / RH) * 100;
+const rsvp = page('rsvp', 'rsvp.webp', 941, RH,
   at(h('div', { class: 'rsvp-in' },
     h('h2', {}, 'RSVP'),
     h('p', { class: 'lead' }, 'Your presence and blessings mean the world to us.', h('br'), 'Kindly let us know if you will be joining', h('br'), 'our celebrations.'),
     form,
-    C.rsvp.googleForm && h('div', { class: 'gform' }, h('p', {}, 'Or reply on Google Forms (the family’s Google Sheet)'), pill('Open Google Form', 'form', { href: C.rsvp.googleForm, target: '_blank', rel: 'noopener' }, 'line')),
-    h('p', { class: 'call' }, 'For RSVP: ', h('a', { href: `tel:${C.rsvp.tel}`, html: `${ICON.phone}<span>${C.rsvp.phone}</span>` }))), { y: 13.6, w: 66, top: true }));
+    C.rsvp.googleForm && h('div', { class: 'gform' }, h('p', {}, 'Or reply on Google Forms (the family’s Google Sheet)'), pill('Open Google Form', 'form', { href: C.rsvp.googleForm, target: '_blank', rel: 'noopener' }, 'line'))), { y: ry(222), w: 66, top: true }),
+  at(h('div', { class: 'rsvp-end' },
+    sendBox,
+    h('i', { class: 'orn-line', 'aria-hidden': 'true' }),
+    h('p', { class: 'help' }, `${C.rsvp.help} `, h('a', { href: `tel:${C.rsvp.tel}` }, C.rsvp.phone), '.')), { y: ry(1360), w: 66, top: true }));
 
 /* ── 5 · thank you (the reference's closing plate; its Call / WhatsApp / Email bars are painted out) ── */
 const thanks = page('thanks', 'thanks.webp', 941, 1672,
-  at(h('img', { class: 'mono', src: 'assets/monogram.webp', alt: 'SA monogram', width: 560, height: 797, loading: 'lazy' }), { y: 42.6, w: 15 }),
+  at(h('img', { class: 'mono', src: 'assets/monogram.webp', alt: 'SA monogram', width: 600, height: 641, loading: 'lazy' }), { y: 42.2, w: 22 }),
   at(h('div', { class: 'thanks-text' }, h('p', { class: 't1' }, C.thanks[0]), h('p', { class: 't2' }, C.thanks[1], h('br'), C.thanks[2])), { y: 56.2, w: 64 }));
 
 const main = h('main', { class: 'invitation', id: 'invitation' }, hero, save, functions, rsvp, thanks);
@@ -257,19 +271,65 @@ music.addEventListener('play', showMusic); music.addEventListener('pause', showM
 document.addEventListener('visibilitychange', () => { if (!document.documentElement.classList.contains('is-open')) return; if (document.hidden) music.pause(); else if (wanted) music.play().catch(showMusic); });
 document.body.append(mbtn);
 
-/* ── opening: the doors; one tap starts the song and opens straight onto the invitation (no film) ── */
+/* ── opening (24 Nov): no film. One tap starts the song; the two door leaves (lifted out of the door plate) swing
+   open inwards, warm light and the palace walk show through the doorway, gold confetti bursts from the opening,
+   and the view moves through the doorway onto the invitation. About 2.4 s in all. ── */
 const tap = h('button', { class: 'tap', type: 'button', 'aria-label': 'Tap to open the invitation' }, h('span', { class: 'ring', 'aria-hidden': 'true' }));
-const opening = h('div', { class: 'opening' }, h('div', { class: 'frame' }, h('img', { class: 'art', src: 'assets/doors.webp', alt: 'Emerald and gold doors of the invitation', fetchpriority: 'high' }), tap));
+const doorway = h('div', { class: 'doorway' },
+  h('img', { class: 'art', src: 'assets/doors.webp', alt: 'Emerald and gold doors of the invitation', fetchpriority: 'high' }),
+  h('div', { class: 'through', 'aria-hidden': 'true' }, h('img', { src: 'assets/door-in.webp', alt: '' }), h('i', { class: 'light' })),
+  h('img', { class: 'leaf l', src: 'assets/door-l.webp', alt: '', 'aria-hidden': 'true' }),
+  h('img', { class: 'leaf r', src: 'assets/door-r.webp', alt: '', 'aria-hidden': 'true' }),
+  tap);
+const opening = h('div', { class: 'opening' }, h('div', { class: 'frame' }, doorway));
 document.body.append(opening);
+
+/* confetti: gold, ivory and emerald paper; a burst from the doorway, then a light fall over the invitation */
+function confetti(ox, oy) {
+  if (reduced()) return;
+  const c = h('canvas', { class: 'confetti', 'aria-hidden': 'true' });
+  document.body.append(c);
+  const ctx = c.getContext('2d'), dpr = Math.min(2, devicePixelRatio || 1);
+  const W = innerWidth, H = innerHeight; c.width = W * dpr; c.height = H * dpr; ctx.scale(dpr, dpr);
+  const COLORS = ['#d9b45a', '#f3dfa2', '#b8862e', '#fff7e2', '#1f6b4c', '#e8c873', '#0f4a35'];
+  const k = Math.max(0.8, Math.min(1.4, W / 420));
+  const P = [];
+  const add = (x, y, vx, vy, delay) => P.push({ x, y, vx, vy, delay, w: (5 + Math.random() * 6) * k, h: (3 + Math.random() * 4) * k, r: Math.random() * 6.28, vr: (Math.random() - 0.5) * 0.3, flip: Math.random() * 6.28, vf: 0.08 + Math.random() * 0.12, col: COLORS[(Math.random() * COLORS.length) | 0], round: Math.random() < 0.22 });
+  for (let i = 0; i < 150; i++) { const a = -Math.PI / 2 + (Math.random() - 0.5) * 2.3, s = (5 + Math.random() * 9) * k; add(ox + (Math.random() - 0.5) * 30, oy + (Math.random() - 0.5) * 60, Math.cos(a) * s, Math.sin(a) * s - 2, 0); }
+  for (let i = 0; i < 70; i++) add(Math.random() * W, -20 - Math.random() * 120, (Math.random() - 0.5) * 1.5, 1 + Math.random() * 1.5, 30 + Math.random() * 60);
+  let t = 0;
+  const tick = () => {
+    t++; ctx.clearRect(0, 0, W, H); let alive = 0;
+    const fade = t > 200 ? Math.max(0, 1 - (t - 200) / 60) : 1;
+    for (const p of P) {
+      if (t < p.delay) { alive++; continue; }
+      p.vx *= 0.985; p.vy = p.vy * 0.985 + 0.18; p.x += p.vx + Math.sin(p.flip) * 0.6; p.y += p.vy; p.r += p.vr; p.flip += p.vf;
+      if (p.y > H + 30) continue; alive++;
+      ctx.save(); ctx.globalAlpha = fade; ctx.translate(p.x, p.y); ctx.rotate(p.r); ctx.fillStyle = p.col;
+      if (p.round) { ctx.beginPath(); ctx.arc(0, 0, p.h * 0.6, 0, 6.28); ctx.fill(); } else ctx.fillRect(-p.w / 2, (-p.h / 2) * Math.abs(Math.cos(p.flip)), p.w, p.h * Math.abs(Math.cos(p.flip)) + 0.5);
+      ctx.restore();
+    }
+    if (alive && fade > 0) requestAnimationFrame(tick); else c.remove();
+  };
+  requestAnimationFrame(tick);
+}
+
 opening.addEventListener('click', () => {
-  if (document.documentElement.classList.contains('is-open')) return;
+  if (opening.classList.contains('opening-doors')) return;
   try { music.volume = C.musicVolume; } catch { /* iOS: fixed volume */ }
   music.play().catch(showMusic);
   mbtn.classList.add('shown'); showMusic();
-  document.documentElement.classList.add('is-open');
-  document.body.classList.remove('locked');
-  window.scrollTo(0, 0);
-  opening.classList.add('out');
-  setTimeout(() => opening.remove(), 1000);
-  main.querySelectorAll('.page').forEach((p) => (io ? io.observe(p) : p.classList.add('on')));
+  opening.classList.add('opening-doors');
+  const r = doorway.getBoundingClientRect();
+  const enter = () => {
+    document.documentElement.classList.add('is-open');
+    document.body.classList.remove('locked');
+    window.scrollTo(0, 0);
+    opening.classList.add('out');
+    setTimeout(() => opening.remove(), 1300);
+    main.querySelectorAll('.page').forEach((p) => (io ? io.observe(p) : p.classList.add('on')));
+  };
+  if (reduced()) { enter(); return; }
+  setTimeout(() => confetti(r.left + r.width * 0.5, r.top + r.height * 0.45), 420);
+  setTimeout(enter, 1350);
 });
