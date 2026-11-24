@@ -30,7 +30,7 @@ export const config = {
      on 26 Nov (Nikah: hall, property, city; Rukhsati: property, city) */
   events: [
     { key: 'nikah', title: 'Nikah', weekday: 'Wednesday', date: '20 January 2027', time: '7:00 PM', extra: 'Dinner at 8:00 PM onwards', start: '2027-01-20T19:00:00+05:30', venue: true,
-      venueLines: ['Majestic Heaven', 'Nirvana Grand Hotel and Resort', 'Bodhgaya'],     // hall, property, city (client, 26 Nov)
+      venueLines: ['“Majestic Heaven”', 'Nirvana Grand Hotel and Resort', 'Bodhgaya'],   // hall (in quotes, client 27 Nov), property, city
       location: 'Majestic Heaven, Nirvana Grand Hotel and Resort, Bodhgaya' },
     { key: 'rukhsati', title: 'Rukhsati', weekday: 'Thursday', date: '21 January 2027', time: '10:00 AM', start: '2027-01-21T10:00:00+05:30', venue: true,
       venueLines: ['Nirvana Grand Hotel and Resort', 'Bodhgaya'],                        // no "Venue" (client, 26 Nov)

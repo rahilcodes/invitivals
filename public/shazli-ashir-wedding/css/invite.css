@@ -114,7 +114,7 @@ p, h2, h3 { margin: 0; font-weight: 400; }
 /* 26 Nov: the reference's own typography on the function pages (its pages 6–9): titles in classical capitals (Cinzel),
    weekday, date, time and venue in an upright Garamond with lining figures (Cormorant Garamond), no italics */
 .d-title h2 { font-family: 'Cinzel', serif; font-weight: 700; font-size: 11.6cqw; letter-spacing: .03em; padding-left: .03em; line-height: 1.02; text-transform: uppercase; color: var(--green); text-shadow: 0 .15cqw 0 rgba(201,162,79,.55), 0 0 2cqw rgba(255,247,226,.9); }
-.flour { display: block; width: 46cqw; height: 1.6cqw; background: radial-gradient(circle, var(--gold-deep) 0 .5cqw, transparent .6cqw) center / 1.6cqw 1.6cqw no-repeat, linear-gradient(90deg, transparent, var(--gold) 20%, var(--gold) 80%, transparent) center / 100% 1px no-repeat; }
+.flour { display: block; width: 100%; height: 1.6cqw; background: radial-gradient(circle, var(--gold-deep) 0 .5cqw, transparent .6cqw) center / 1.6cqw 1.6cqw no-repeat, linear-gradient(90deg, transparent, var(--gold) 20%, var(--gold) 80%, transparent) center / 100% 1px no-repeat; }
 .d-info { display: flex; flex-direction: column; align-items: center; gap: .3cqw; color: var(--ink); text-shadow: 0 0 1.6cqw rgba(255,247,226,.95), 0 0 3cqw rgba(255,247,226,.8); }
 .d-info { font-family: 'Cormorant Garamond', Georgia, serif; font-variant-numeric: lining-nums; }
 .d-info .wd { font-weight: 600; font-size: 4.9cqw; line-height: 1.1; color: var(--ink); }
@@ -190,3 +190,10 @@ p, h2, h3 { margin: 0; font-weight: 400; }
 .field input, .field select { height: max(42px, 11.4cqw); }
 .rsvp-form .send { min-height: max(44px, 12cqw); }
 .field .caret { right: 4.4cqw; }
+
+/* 27 Nov: the date blocks one notch lower; Mehendi's lines stay between its painted diamond and its rule, Nikah's
+   times above its painted rule (79.6%) and its venue below it, with the buttons clear of the page's foot */
+.d-mehendi .d-info .wd, .d-mehendi .d-info .dt { line-height: 1; }
+.d-mehendi .d-info .tm { line-height: 1.05; }
+.d-nikah .d-info .vn { line-height: 1.04; }
+.d-nikah .d-info .acts { margin-top: 1.6cqw; }

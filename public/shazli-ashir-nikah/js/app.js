@@ -4,7 +4,7 @@
      doors (tap) → main invitation → Save the Date (scratch card) → Our Functions (View Details opens each
      function's own page) → RSVP → thank you.
    Both links run this file; config.js decides which function cards are shown. */
-import { config as C } from '../config.js?v=5';
+import { config as C } from '../config.js?v=6';
 
 const h = (tag, attrs = {}, ...kids) => {
   const el = document.createElement(tag);
@@ -162,12 +162,20 @@ const functions = page(`functions n${C.events.length}`, FN.art, 941, FN.H,
   cards);
 
 /* ── function details: the reference's pages 6–9 as a full-screen view over the invitation ── */
-const PLATES = { mayun: ['d-mayun.webp', 73.4], mehendi: ['d-mehendi.webp', 70.5], nikah: ['d-nikah.webp', 65.1], rukhsati: ['d-rukhsati.webp', 70.2] };
+/* [plate, top of the date block in % of the page, the plate paints its own gold lines around the title].
+   27 Nov: the Mehendi and Nikah plates paint a gold line at 7.9% and 16.8% of the page (x 268–672 of 941, centred on
+   the page); every title is centred between those two heights, and on Mayun and Rukhsati (plain plates) the same two
+   lines are drawn at the same places, so all four pages share one heading geometry. The date blocks sit lower than
+   before, each by what its own artwork allows (Mehendi between its painted diamond and its rule at 79.6%). */
+const PLATES = { mayun: ['d-mayun.webp', 75.2, false], mehendi: ['d-mehendi.webp', 70.5, true], nikah: ['d-nikah.webp', 66.6, true], rukhsati: ['d-rukhsati.webp', 72.0, false] };
+const LINE_TOP = 7.9, LINE_BOTTOM = 16.8;
 let current = null;
 function detailPage(ev) {
-  const [art, y] = PLATES[ev.key];
+  const [art, y, painted] = PLATES[ev.key];
   return page(`detail-page d-${ev.key}`, art, 941, 1672,
-    at(h('div', { class: 'd-title' }, h('i', { class: 'flour', 'aria-hidden': 'true' }), h('h2', {}, ev.title), h('i', { class: 'flour', 'aria-hidden': 'true' })), { y: 10.6, w: 86 }),
+    !painted && at(h('i', { class: 'flour', 'aria-hidden': 'true' }), { y: LINE_TOP, w: 43 }),
+    at(h('div', { class: 'd-title' }, h('h2', {}, ev.title)), { y: (LINE_TOP + LINE_BOTTOM) / 2, w: 86 }),
+    !painted && at(h('i', { class: 'flour', 'aria-hidden': 'true' }), { y: LINE_BOTTOM, w: 43 }),
     at(h('div', { class: 'd-info' },
       h('p', { class: 'wd' }, ev.weekday),
       h('p', { class: 'dt' }, ev.date),
