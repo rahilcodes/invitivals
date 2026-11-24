@@ -24,8 +24,57 @@ const plate = async (name, from) => { files[name] = await sharp(path.join(REF, f
 await plate('doors.webp', 'bg1.webp');
 await plate('hero.webp', 'bg2.webp');
 await plate('save.webp', 'bg3.webp');
-await plate('stage.webp', 'bg8.webp');
 await plate('paper.webp', 'bg10.webp');
+/* the four function detail pages (the reference's pages 6–9, clean) */
+await plate('d-mayun.webp', 'bg6.webp');
+await plate('d-mehendi.webp', 'bg7.webp');
+await plate('d-nikah.webp', 'bg8.webp');
+await plate('d-rukhsati.webp', 'bg9.webp');
+/* Our Functions: the reference's clean four-card plate as it is; for the Nikah + Rukhsati link the first two cards
+   are taken out (rows 228–907 of 1672, two card pitches) and the two halves are cross-faded over 48 rows */
+await plate('functions.webp', 'bg5.webp');
+{
+  const src = path.join(REF, 'bg5.webp'), CUT0 = 228, CUT1 = 907, F = 48;
+  const top = await sharp(src).extract({ left: 0, top: 0, width: 941, height: CUT0 + F }).png().toBuffer();
+  const bottom = await sharp(src).extract({ left: 0, top: CUT1, width: 941, height: 1672 - CUT1 }).png().toBuffer();
+  const fade = Buffer.from(`<svg width="941" height="${CUT0 + F}"><defs><linearGradient id="g" x1="0" y1="0" x2="0" y2="1"><stop offset="${CUT0 / (CUT0 + F)}" stop-color="#fff"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></linearGradient></defs><rect width="941" height="${CUT0 + F}" fill="url(#g)"/></svg>`);
+  const topFaded = await sharp(top).ensureAlpha().composite([{ input: fade, blend: 'dest-in' }]).png().toBuffer();
+  const H = CUT0 + 1672 - CUT1;
+  files['functions-2.webp'] = await sharp({ create: { width: 941, height: H, channels: 3, background: '#f6ecd6' } })
+    .composite([{ input: bottom, left: 0, top: CUT0 }, { input: topFaded, left: 0, top: 0 }]).webp({ quality: 86 }).toBuffer();
+}
+/* scratch card: the cover is the reference's plain gold plate; beneath it the reference's revealed plaque with its
+   sample date ("13 December 2025") painted out by diffusion from the surrounding cream, so our date is live text */
+files['plate-cover.webp'] = fs.readFileSync(path.join(REF, 'plate-cover.webp'));
+{
+  const { data, info } = await sharp(path.join(REF, 'plate-after.webp')).removeAlpha().raw().toBuffer({ resolveWithObject: true });
+  const W = info.width, H = info.height, C = info.channels;
+  const mask = new Uint8Array(W * H);
+  /* the sample date's box (measured on the 880 x 581 plate); inside it the ink and its soft edges are darker and
+     less red than the cream paper and the gold flakes */
+  for (let y = 150; y < 462; y++) for (let x = 135; x < 752; x++) {
+    const i = (y * W + x) * C, r = data[i], g = data[i + 1];
+    if (r < 205 && r - g < 25) mask[y * W + x] = 1;   // gold, even in shadow, is much redder than green
+  }
+  for (let pass = 0; pass < 4; pass++) {             // grow the ink mask so the letters' soft edges go too
+    const m2 = mask.slice();
+    for (let y = 1; y < H - 1; y++) for (let x = 1; x < W - 1; x++) if (!mask[y * W + x] && (mask[y * W + x - 1] || mask[y * W + x + 1] || mask[(y - 1) * W + x] || mask[(y + 1) * W + x])) m2[y * W + x] = 1;
+    mask.set(m2);
+  }
+  const idx = []; for (let k = 0; k < W * H; k++) if (mask[k]) idx.push(k);
+  const f = new Float32Array(W * H * 3);
+  for (let k = 0; k < W * H; k++) for (let c = 0; c < 3; c++) f[k * 3 + c] = mask[k] ? 0 : data[k * C + c];
+  const known = Uint8Array.from(mask, (v) => 1 - v);
+  for (let it = 0; it < 600; it++) {
+    for (const k of idx) {
+      let s0 = 0, s1 = 0, s2 = 0, n = 0;
+      for (const d of [-1, 1, -W, W, -W - 1, -W + 1, W - 1, W + 1]) { const j = k + d; if (known[j]) { s0 += f[j * 3]; s1 += f[j * 3 + 1]; s2 += f[j * 3 + 2]; n++; } }
+      if (n) { f[k * 3] = s0 / n; f[k * 3 + 1] = s1 / n; f[k * 3 + 2] = s2 / n; known[k] = 1; }
+    }
+  }
+  for (const k of idx) for (let c = 0; c < 3; c++) data[k * C + c] = Math.round(f[k * 3 + c]);
+  files['plate-reveal.webp'] = await sharp(data, { raw: info }).webp({ quality: 90 }).toBuffer();
+}
 
 /* thank-you plate: the three painted contact bars (x 240–703, y 780–1045 of 941 × 1672) are replaced row by row with
    a blend between the paper just left and just right of them, then softened so no seam shows */
@@ -73,8 +122,11 @@ files['music.mp3'] = fs.readFileSync(path.join(SRC, 'music.mp3'));
   files['og.jpg'] = og;
 }
 
+/* each link gets only the plates it shows */
+const SKIP = { 'shazli-ashir-wedding': ['functions-2.webp'], 'shazli-ashir-nikah': ['functions.webp', 'd-mayun.webp', 'd-mehendi.webp'] };
 for (const out of OUTS) {
   fs.mkdirSync(out, { recursive: true });
-  for (const [name, buf] of Object.entries(files)) fs.writeFileSync(path.join(out, name), buf);
+  const skip = SKIP[path.basename(path.dirname(out))];
+  for (const [name, buf] of Object.entries(files)) if (!skip.includes(name)) fs.writeFileSync(path.join(out, name), buf);
   console.log('wrote', path.relative(ROOT, out), Object.keys(files).join(' '));
 }

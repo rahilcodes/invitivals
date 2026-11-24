@@ -1,151 +1,263 @@
-/* Shazli & Ashir — emerald & gold Muslim wedding invitation (live text on the Muslim Emerald design's clean plates).
-   Doors (tap) → straight into the first page, no film. Pages: welcome · invitation · save the date · functions ·
-   venue · RSVP · thank you. Both links run this file; config.js decides the functions shown. */
-import { config as C } from '../config.js?v=1';
+/* Shazli & Ashir — the Muslim Emerald invitation (reference: /muslim-emerald-wedding/) with the client's text set
+   live on the design's clean plates. Same order and interactions as the reference, without its film, its couple
+   page and its Need Help panel (client):
+     doors (tap) → main invitation → Save the Date (scratch card) → Our Functions (View Details opens each
+     function's own page) → RSVP → thank you.
+   Both links run this file; config.js decides which function cards are shown. */
+import { config as C } from '../config.js?v=2';
 
 const h = (tag, attrs = {}, ...kids) => {
   const el = document.createElement(tag);
   for (const [k, v] of Object.entries(attrs)) {
     if (v == null || v === false) continue;
-    if (k === 'class') el.className = v; else if (k === 'html') el.innerHTML = v;
+    if (k === 'class') el.className = v; else if (k === 'html') el.innerHTML = v; else if (k === 'style') el.style.cssText = v;
     else if (k.startsWith('on')) el.addEventListener(k.slice(2), v); else el.setAttribute(k, v === true ? '' : v);
   }
   for (const c of kids.flat()) if (c != null && c !== false) el.append(c.nodeType ? c : document.createTextNode(String(c)));
   return el;
 };
+const reduced = () => matchMedia('(prefers-reduced-motion: reduce)').matches;
 const ICON = {
   pin: '<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a7 7 0 0 0-7 7c0 5.2 7 13 7 13s7-7.8 7-13a7 7 0 0 0-7-7zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5z"/></svg>',
   cal: '<svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3.5" y="5" width="17" height="15" rx="2"/><path d="M3.5 9.5h17M8 3v4M16 3v4"/></svg>',
+  clock: '<svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.2 2"/></svg>',
+  dish: '<svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M3 17h18M5 17a7 7 0 0 1 14 0M12 8V6M10 6h4"/></svg>',
+  send: '<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M2.5 11.2 21 3.5l-7.7 18.5-2.4-7.4-8.4-3.4zm8.9 3.1 1.5 4.6L18.2 6l-12.9 5.3 5.3 2.1 4.9-4.9-4.1 5.8z"/></svg>',
+  hand: '<svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11V5.5a1.5 1.5 0 0 1 3 0V11m0-1.5a1.5 1.5 0 0 1 3 0V11m0-.5a1.5 1.5 0 0 1 3 0V15a6 6 0 0 1-6 6h-1a6 6 0 0 1-4.8-2.4L4.6 15.4a1.5 1.5 0 0 1 2.3-1.9L9 15.5"/></svg>',
   phone: '<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1A17 17 0 0 1 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1z"/></svg>',
   form: '<svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="M8 8h8M8 12h8M8 16h5"/></svg>',
 };
-const btn = (label, icon, attrs = {}) => h(attrs.href ? 'a' : 'button', { class: 'btn', type: attrs.href ? null : 'button', ...attrs, html: `${ICON[icon] || ''}<span>${label}</span>` });
-const page = (cls, art, ...kids) => h('section', { class: `page ${cls}` }, h('img', { class: 'bg', src: `assets/${art}`, alt: '', decoding: 'async', loading: cls === 'hero' ? 'eager' : 'lazy' }), h('div', { class: 'in' }, ...kids));
+const chev = '<i class="chev" aria-hidden="true"></i>';
+const pill = (label, icon, attrs = {}, cls = 'solid') => h(attrs.href ? 'a' : 'button', { type: attrs.href ? null : 'button', ...attrs, class: `pill ${cls} ${attrs.class || ''}`, html: `${icon ? ICON[icon] : ''}<span>${label}</span>` });
+
+/* a page = one plate at its own proportions; overlays are placed in percent of the plate (x, y = centre) */
+function page(cls, art, w, hgt, ...kids) {
+  const p = h('section', { class: `page ${cls}`, style: `aspect-ratio:${w}/${hgt}` },
+    h('img', { class: 'bg', src: `assets/${art}`, alt: '', width: w, height: hgt, decoding: 'async', loading: cls.includes('hero') ? 'eager' : 'lazy' }));
+  p.append(...kids.flat(3).filter(Boolean));
+  return p;
+}
+const at = (node, { x = 50, y, w, top = false, cls = '' }) => h('div', { class: `el ${top ? 'from-top' : ''} ${cls}`, style: `left:${x}%;top:${y}%;${w ? `width:${w}%;` : ''}` }, node);
 
 /* ── calendar: Google Calendar on Android/desktop, an .ics on Apple; start time only (no end time was supplied) ── */
 const stamp = (d) => new Date(d).toISOString().replace(/[-:]/g, '').replace(/\.\d{3}/, '');
 const isApple = () => /iPhone|iPad|iPod|Macintosh/.test(navigator.userAgent) && !/Android/.test(navigator.userAgent);
 function addToCalendar(ev) {
   const title = `${ev.title} · ${C.bride} & ${C.groomFull}`;
+  const where = ev.venue ? C.venue.full : '';
   if (isApple()) {
     const ics = ['BEGIN:VCALENDAR', 'VERSION:2.0', 'PRODID:-//Invitivals//Invitation//EN', 'BEGIN:VEVENT', `UID:${ev.key}-${C.slug}@invitivals.com`, `DTSTAMP:${stamp(Date.now())}`, `DTSTART:${stamp(ev.start)}`,
-      `SUMMARY:${title}`, `LOCATION:${ev.venue ? C.venue.full.replace(/,/g, '\\,') : ''}`, 'END:VEVENT', 'END:VCALENDAR', ''].join('\r\n');
+      `SUMMARY:${title}`, `LOCATION:${where.replace(/,/g, '\\,')}`, 'END:VEVENT', 'END:VCALENDAR', ''].join('\r\n');
     const a = h('a', { href: URL.createObjectURL(new Blob([ics], { type: 'text/calendar' })), download: `${ev.key}.ics` });
     document.body.append(a); a.click(); a.remove();
     return;
   }
-  const q = new URLSearchParams({ action: 'TEMPLATE', text: title, dates: `${stamp(ev.start)}/${stamp(ev.start)}`, location: ev.venue ? C.venue.full : '', ctz: 'Asia/Kolkata' });
+  const q = new URLSearchParams({ action: 'TEMPLATE', text: title, dates: `${stamp(ev.start)}/${stamp(ev.start)}`, location: where, ctz: 'Asia/Kolkata' });
   window.open(`https://calendar.google.com/calendar/render?${q}`, '_blank', 'noopener');
 }
-const nikah = C.events.find((e) => e.key === 'nikah');
+const mapLink = (cls = 'solid') => pill('View on Map', 'pin', { href: C.venue.mapsUrl, target: '_blank', rel: 'noopener', 'aria-label': `Open ${C.venue.full} in Google Maps` }, cls);
 
-/* ── pages ── */
-const hero = page('hero', 'hero.webp',
-  h('img', { class: 'mono', src: 'assets/monogram.webp', alt: 'SA monogram', width: 560, height: 797 }),
-  h('p', { class: 'kicker' }, 'Wedding Invitation'),
-  h('h1', { class: 'names' }, h('span', {}, C.bride), h('span', { class: 'amp' }, '&'), h('span', {}, C.groom[0]), h('span', {}, C.groom[1])),
-  h('p', { class: 'when' }, '20 · 01 · 2027'));
+/* ── 1 · main invitation (sunlit arch) ── */
+const hero = page('hero', 'hero.webp', 941, 1672,
+  at(h('div', { class: 'invite-text' },
+    h('p', { class: 'bismillah', lang: 'ar', dir: 'rtl' }, 'بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ'),
+    h('p', { class: 'host' }, C.host),
+    h('p', { class: 'words' }, 'requests the pleasure of', h('br'), 'your company on the joyous', h('br'), 'occasion of the wedding', h('br'), 'ceremony of her daughter'),
+    h('p', { class: 'name' }, C.bride),
+    h('p', { class: 'with' }, 'with'),
+    h('p', { class: 'name' }, C.groom[0], h('br'), C.groom[1]),
+    h('p', { class: 'words son' }, 'son of Md. Kamal Hassan', h('br'), '& Sarwer Naz')), { y: 5.8, w: 56, top: true }));
 
-const invite = page('invite', 'paper.webp',
-  h('p', { class: 'host' }, C.host),
-  h('p', { class: 'prose' }, 'requests the pleasure of your company on the joyous occasion of the wedding ceremony of her daughter'),
-  h('p', { class: 'name' }, C.bride),
-  h('p', { class: 'with' }, 'with'),
-  h('p', { class: 'name' }, C.groom[0], h('br'), C.groom[1]),
-  h('p', { class: 'parents' }, `son of ${C.groomParents}`),
-  h('span', { class: 'rule', 'aria-hidden': 'true' }),
-  h('p', { class: 'ev' }, 'Nikah'),
-  h('p', { class: 'evd' }, `${nikah.date} · ${nikah.time}`),
-  h('p', { class: 'evd' }, nikah.extra),
-  h('p', { class: 'venue' }, C.venue.full));
-
+/* ── 2 · Save the Date: the reference's scratch card. The date sits on the revealed plaque UNDER an opaque gold
+   cover drawn on a canvas; nothing of it shows until the cover is rubbed away with a finger or the mouse. ── */
 const S = C.saveTheDate;
-const save = page('save', 'save.webp',
-  h('p', { class: 'std' }, 'Save the Date'),
-  h('p', { class: 'ar', lang: 'ar', dir: 'rtl' }, S.arabic),
-  h('p', { class: 'lat' }, S.latin),
-  h('div', { class: 'plaque' }, h('span', { class: 'd' }, S.day), h('span', { class: 'm' }, S.month), h('span', { class: 'w' }, S.weekday)),
-  h('p', { class: 'line' }, S.line),
-  btn('Add to Calendar', 'cal', { class: 'btn btn-gold', onclick: () => addToCalendar(nikah) }));
+const PLATE = { x: 50.2, y: 51, w: 57.8, h: 21.6 }, SEAL = { cx: 1.03, cy: 0.79, r: 0.112 }; // the reference's measures
+const canvas = h('canvas', { class: 'scratch', 'aria-hidden': 'true' });
+const under = h('div', { class: 'under' }, h('img', { src: 'assets/plate-reveal.webp', alt: '', width: 880, height: 581 }),
+  h('div', { class: 'date' }, h('b', {}, S.day), h('span', {}, S.month)));
+const box = h('div', { class: 'scratch-box', role: 'img', 'aria-label': 'Scratch the gold plate to reveal the date' }, under, canvas);
+const live = h('p', { class: 'vh', role: 'status', 'aria-live': 'polite' });
+const hint = h('button', { type: 'button', class: 'pill hint-pill', 'aria-label': 'Scratch to reveal the date (keyboard: press to reveal)', html: `<span>Scratch to Reveal</span>${ICON.hand}` });
+const save = page('save', 'save.webp', 941, 1672,
+  at(h('p', { class: 'inshallah', lang: 'ar', dir: 'rtl' }, S.arabic), { y: 28.3, w: 70 }),
+  at(h('p', { class: 'std' }, 'Save the Date'), { y: 35.2, w: 80 }),
+  h('div', { class: 'el plate', style: `left:${PLATE.x}%;top:${PLATE.y}%;width:${PLATE.w}%;height:${PLATE.h}%` }, box),
+  at(h('p', { class: 'line' }, h('i', { class: 'heart', 'aria-hidden': 'true' }, '♥'), h('br'), S.line), { y: 67.6, w: 70 }),
+  at(hint, { y: 79.4, w: 50 }), at(live, { y: 90, w: 10 }));
+{
+  const ctx = canvas.getContext('2d', { willReadFrequently: true });
+  const cover = new Image(); cover.src = 'assets/plate-cover.webp';
+  let W = 0, H = 0, revealed = false, painted = false, strokes = 0;
+  const paint = () => {
+    const r = box.getBoundingClientRect(); if (!r.width) return;
+    const dpr = Math.min(2, devicePixelRatio || 1); W = r.width; H = r.height;
+    canvas.width = Math.round(W * dpr); canvas.height = Math.round(H * dpr);
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    ctx.globalCompositeOperation = 'source-over';
+    if (cover.complete && cover.naturalWidth) ctx.drawImage(cover, 0, 0, W, H); else { ctx.fillStyle = '#c99c45'; ctx.fillRect(0, 0, W, H); }
+    ctx.globalCompositeOperation = 'destination-out';
+    ctx.beginPath(); ctx.arc(SEAL.cx * W, SEAL.cy * H, SEAL.r * W, 0, Math.PI * 2); ctx.fill(); // the painted seal stays in view
+    painted = true; box.classList.add('ready');
+  };
+  cover.onload = () => { if (!revealed) paint(); };
+  new ResizeObserver(() => { if (!revealed && (!painted || Math.abs(W - box.clientWidth) > 1)) paint(); }).observe(box);
+  /* the share of the plate actually cleared, read from the canvas itself */
+  const cleared = () => {
+    const d = ctx.getImageData(0, 0, canvas.width, canvas.height).data; let clear = 0, n = 0;
+    for (let i = 3; i < d.length; i += 4 * 16) { n++; if (d[i] < 40) clear++; }
+    return clear / n;
+  };
+  const rub = (x, y) => { ctx.beginPath(); ctx.arc(x, y, Math.max(14, W * 0.075), 0, Math.PI * 2); ctx.fill(); };
+  const reveal = () => {
+    if (revealed) return; revealed = true;
+    canvas.classList.add('gone'); box.classList.add('revealed'); hint.classList.add('is-done');
+    live.textContent = `The date: ${S.day} ${S.month}`;
+    setTimeout(() => canvas.remove(), reduced() ? 50 : 1300);
+  };
+  let down = false, last = null;
+  const pos = (e) => { const r = canvas.getBoundingClientRect(); return [e.clientX - r.left, e.clientY - r.top]; };
+  canvas.addEventListener('pointerdown', (e) => { if (revealed) return; down = true; canvas.setPointerCapture(e.pointerId); last = pos(e); rub(...last); e.preventDefault(); });
+  canvas.addEventListener('pointermove', (e) => {
+    if (!down || revealed) return;
+    const p = pos(e), d = Math.hypot(p[0] - last[0], p[1] - last[1]), n = Math.ceil(d / 5);
+    for (let i = 1; i <= n; i++) rub(last[0] + (p[0] - last[0]) * i / n, last[1] + (p[1] - last[1]) * i / n);
+    last = p; e.preventDefault();
+    if (++strokes % 8 === 0 && cleared() > 0.55) reveal();
+  });
+  const up = () => { if (down && !revealed && cleared() > 0.55) reveal(); down = false; };
+  canvas.addEventListener('pointerup', up); canvas.addEventListener('pointercancel', up);
+  /* the pill is the instruction; only a keyboard press (no pointer) uses it to reveal, for guests who cannot scratch */
+  hint.addEventListener('click', (e) => { if (e.detail === 0) reveal(); else { hint.classList.add('nudge'); setTimeout(() => hint.classList.remove('nudge'), 600); } });
+}
 
-const card = (ev) => h('article', { class: `fn${ev.venue ? ' fn-venue' : ''}` },
-  h('h3', {}, ev.title),
-  h('p', { class: 'fd' }, `${ev.date} · ${ev.time.replace(/ /g, ' ')}`),
-  ev.extra && h('p', { class: 'fx' }, ev.extra),
-  ev.venue && h('p', { class: 'fv' }, C.venue.full),
-  ev.venue && h('div', { class: 'row' }, btn('Map', 'pin', { href: C.venue.mapsUrl, target: '_blank', rel: 'noopener', class: 'btn btn-sm' }), btn('Calendar', 'cal', { class: 'btn btn-sm btn-line', onclick: () => addToCalendar(ev) })));
-const functions = page(`functions n${C.events.length}`, 'paper.webp',
-  h('h2', {}, C.events.length > 2 ? 'Wedding Functions' : 'Nikah & Rukhsati'),
-  h('div', { class: 'fns' }, C.events.map(card)));
+/* ── 3 · Our Functions: the reference's card plate; text and the green View Details pills on each card ──
+   Positions are in pixels of the 941-wide plate: card k's text panel starts 277.6 + 340.3·k from the top. */
+const FN = C.events.length > 2 ? { art: 'functions.webp', H: 1672 } : { art: 'functions-2.webp', H: 993 };
+const py = (px) => (px / FN.H) * 100;
+const icoRow = (icon, text, cls = '') => h('p', { class: `row ${cls}`, html: `${ICON[icon]}<span>${text}</span>` });
+const cards = C.events.map((ev, k) => {
+  const top = 277.6 + 340.3 * k;
+  const open = pill('View Details', '', { 'aria-haspopup': 'dialog', 'aria-label': `View details of ${ev.title}`, class: 'view' });
+  open.insertAdjacentHTML('beforeend', chev);
+  open.addEventListener('click', () => openDetail(ev, open));
+  return [
+    h('div', { class: 'el card-text', style: `left:57%;top:${py(top - 6)}%;width:31.5%;height:${py(214)}%` },
+      h('h3', {}, ev.title),
+      icoRow('cal', ev.date),
+      icoRow('clock', ev.time),
+      ev.extra && icoRow('dish', ev.extra),
+      ev.venue && icoRow('pin', C.venue.name, 'venue')),
+    at(open, { x: 69.8, y: py(top + 248), w: 27.6 }),
+  ];
+});
+const functions = page(`functions n${C.events.length}`, FN.art, 941, FN.H,
+  at(h('h2', {}, 'Our Functions'), { y: py(122), w: 80 }),
+  at(h('p', { class: 'intro' }, 'Join us in a beautiful celebration', h('br'), 'of love, faith and family.'), { y: py(181), w: 70 }),
+  cards);
 
-const venue = page('venue', 'stage.webp',
-  h('h2', {}, 'The Venue'),
-  h('p', { class: 'sub' }, 'Nikah & Rukhsati'),
-  h('p', { class: 'vn' }, C.venue.name),
-  h('p', { class: 'vp' }, C.venue.place),
-  btn('View on Map', 'pin', { href: C.venue.mapsUrl, target: '_blank', rel: 'noopener', class: 'btn' }));
+/* ── function details: the reference's pages 6–9 as a full-screen view over the invitation ── */
+const PLATES = { mayun: ['d-mayun.webp', 73.4], mehendi: ['d-mehendi.webp', 73.4], nikah: ['d-nikah.webp', 66.4], rukhsati: ['d-rukhsati.webp', 71.6] };
+let current = null;
+function detailPage(ev) {
+  const [art, y] = PLATES[ev.key];
+  return page(`detail-page d-${ev.key}`, art, 941, 1672,
+    at(h('div', { class: 'd-title' }, h('i', { class: 'flour', 'aria-hidden': 'true' }), h('h2', {}, ev.title), h('i', { class: 'flour', 'aria-hidden': 'true' })), { y: 10.6, w: 86 }),
+    at(h('div', { class: 'd-info' },
+      h('p', { class: 'wd' }, ev.weekday),
+      h('p', { class: 'dt' }, ev.date),
+      h('p', { class: 'tm' }, ev.time),
+      ev.extra && h('p', { class: 'tm' }, ev.extra),
+      ev.venue && h('i', { class: 'rule', 'aria-hidden': 'true' }),
+      ev.venue && h('p', { class: 'vn' }, C.venue.name),
+      ev.venue && h('p', { class: 'vc' }, C.venue.place),
+      h('div', { class: 'acts' }, ev.venue && mapLink(), pill('Add to Calendar', 'cal', { onclick: () => addToCalendar(ev) }, ev.venue ? 'line' : 'solid'))), { y, w: 84, top: true }));
+}
+function openDetail(ev, opener) {
+  if (current) return;
+  const scrollY = window.scrollY;
+  history.pushState({ detail: ev.key }, '');
+  const back = h('button', { class: 'back', type: 'button' }, 'Back to Functions');
+  const view = h('div', { class: 'detail', role: 'dialog', 'aria-modal': 'true', 'aria-label': `${ev.title} details` }, back, h('div', { class: 'column' }, detailPage(ev)));
+  document.body.append(view);
+  document.body.style.cssText = `position:fixed;top:-${scrollY}px;width:100%`;
+  requestAnimationFrame(() => { view.classList.add('shown'); view.querySelector('.page').classList.add('on'); });
+  back.focus({ preventScroll: true });
+  current = { view, scrollY, opener };
+  back.addEventListener('click', () => history.back());
+  view.addEventListener('keydown', (e) => { if (e.key === 'Escape') history.back(); });
+}
+addEventListener('popstate', () => {
+  if (!current) return;
+  const { view, scrollY, opener } = current; current = null;
+  view.classList.remove('shown');
+  document.body.style.cssText = '';
+  window.scrollTo(0, scrollY);
+  setTimeout(() => view.remove(), 450);
+  opener.focus({ preventScroll: true });
+});
 
-/* ── RSVP: the invitation's own form (stored on our server) and, once the family's form exists, their Google Form ── */
-const form = h('form', { class: 'rsvp-form', novalidate: true },
-  h('label', { class: 'field' }, h('span', {}, 'Your name'), h('input', { name: 'name', autocomplete: 'name', maxlength: 80, required: true })),
-  h('fieldset', { class: 'choice' }, h('legend', { class: 'vh' }, 'Will you attend?'),
-    h('label', {}, h('input', { type: 'radio', name: 'attending', value: 'yes' }), h('span', {}, 'Yes, I’ll be attending')),
-    h('label', {}, h('input', { type: 'radio', name: 'attending', value: 'no' }), h('span', {}, 'Sorry, I can’t make it'))),
-  h('label', { class: 'field guests', hidden: true }, h('span', {}, 'Number of guests'), h('input', { name: 'guests', type: 'number', inputmode: 'numeric', min: 1, max: 20, value: 1 })),
+/* ── 4 · RSVP: the invitation's own form, stored on our server (both links, each reply marked with its link) ── */
+const form = h('form', { class: 'rsvp-form', novalidate: true, 'aria-label': 'RSVP' },
+  h('fieldset', { class: 'choices' }, h('legend', { class: 'vh' }, 'Will you attend?'),
+    h('label', {}, h('input', { type: 'radio', name: 'attending', value: 'yes' }), h('i', { class: 'ring', 'aria-hidden': 'true' }), h('span', {}, 'Yes, I’ll be attending')),
+    h('label', {}, h('input', { type: 'radio', name: 'attending', value: 'no' }), h('i', { class: 'ring', 'aria-hidden': 'true' }), h('span', {}, 'Sorry, I can’t make it'))),
+  h('div', { class: 'fields' },
+    h('label', { class: 'field' }, h('span', { class: 'vh' }, 'Guest name'), h('input', { name: 'name', autocomplete: 'name', maxlength: 80, placeholder: 'Guest name' })),
+    h('label', { class: 'field guests' }, h('span', { class: 'vh' }, 'Number of guests'), h('input', { name: 'guests', type: 'number', inputmode: 'numeric', min: 1, max: 20, placeholder: 'Number of guests' }))),
   h('input', { name: 'website', class: 'vh', tabindex: -1, autocomplete: 'off', 'aria-hidden': 'true' }),
-  btn('Send Response', '', { type: 'submit', class: 'btn' }),
-  h('p', { class: 'msg', role: 'status', 'aria-live': 'polite' }));
-form.querySelector('button').type = 'submit';
-form.addEventListener('change', () => { form.querySelector('.guests').hidden = form.elements.attending.value !== 'yes'; });
+  pill('Send Response', 'send', { type: 'submit', class: 'send' }),
+  h('p', { class: 'note', role: 'status', 'aria-live': 'polite' }));
+form.querySelector('.send').type = 'submit';
+form.addEventListener('change', () => { form.querySelector('.guests').classList.toggle('off', form.elements.attending.value === 'no'); });
 form.addEventListener('submit', async (e) => {
   e.preventDefault();
-  const msg = form.querySelector('.msg'), send = form.querySelector('button');
+  const note = form.querySelector('.note'), send = form.querySelector('.send');
   const name = form.elements.name.value.trim(), attending = form.elements.attending.value;
-  msg.className = 'msg bad';
-  if (name.length < 2) { msg.textContent = 'Please enter your name.'; form.elements.name.focus(); return; }
-  if (!attending) { msg.textContent = 'Please choose whether you will attend.'; return; }
+  note.className = 'note bad';
+  if (!attending) { note.textContent = 'Please choose “Yes, I’ll be attending” or “Sorry, I can’t make it”.'; return; }
+  if (name.length < 2) { note.textContent = 'Please enter your name.'; form.elements.name.focus(); return; }
   const guests = attending === 'yes' ? Math.round(+form.elements.guests.value || 0) : 0;
-  if (attending === 'yes' && (guests < 1 || guests > 20)) { msg.textContent = 'The number of guests must be from 1 to 20.'; return; }
-  send.disabled = true; msg.className = 'msg'; msg.textContent = 'Sending…';
+  if (attending === 'yes' && (guests < 1 || guests > 20)) { note.textContent = 'Please enter the number of guests (1 to 20).'; form.elements.guests.focus(); return; }
+  send.disabled = true; note.className = 'note'; note.textContent = 'Sending…';
   try {
     const r = await fetch(C.rsvp.endpoint, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ name, attending, guests, link: C.link, website: form.elements.website.value }) });
     const j = await r.json().catch(() => ({}));
     if (!r.ok || !j.ok) throw new Error(j.error || 'Your reply could not be sent. Please try again.');
-    form.replaceChildren(h('p', { class: 'done' }, attending === 'yes' ? 'Thank you! Your reply is received. We look forward to welcoming you.' : 'Thank you for letting us know. You will be missed.'));
-  } catch (err) { send.disabled = false; msg.className = 'msg bad'; msg.textContent = err.message.includes('fetch') ? 'Your reply could not be sent. Please check your connection and try again.' : err.message; }
+    form.replaceChildren(h('p', { class: 'done' }, attending === 'yes' ? 'Thank you! Your reply has been received. We look forward to welcoming you.' : 'Thank you for letting us know. You will be missed.'));
+  } catch (err) { send.disabled = false; note.className = 'note bad'; note.textContent = /fetch|network/i.test(err.message) ? 'Your reply could not be sent. Please check your connection and try again.' : err.message; }
 });
-const rsvp = page('rsvp', 'paper.webp',
-  h('h2', {}, 'RSVP'),
-  h('p', { class: 'sub' }, 'Kindly let us know if you will be joining us.'),
-  h('div', { class: 'opt' }, h('p', { class: 'opt-h' }, 'Reply here'), form),
-  C.rsvp.googleForm && h('div', { class: 'opt' }, h('p', { class: 'opt-h' }, 'Or reply on Google Forms'), h('p', { class: 'opt-n' }, 'Opens a Google Form; replies go to the family’s Google Sheet.'),
-    btn('Open the Google Form', 'form', { href: C.rsvp.googleForm, target: '_blank', rel: 'noopener', class: 'btn btn-line' })),
-  h('p', { class: 'call' }, 'For RSVP: ', h('a', { href: `tel:${C.rsvp.tel}` }, C.rsvp.phone)));
+const rsvp = page('rsvp', 'paper.webp', 941, 1672,
+  at(h('div', { class: 'rsvp-in' },
+    h('h2', {}, 'RSVP'),
+    h('p', { class: 'lead' }, 'Your presence and blessings mean the world to us.', h('br'), 'Kindly let us know if you will be joining', h('br'), 'our celebrations.'),
+    form,
+    C.rsvp.googleForm && h('div', { class: 'gform' }, h('p', {}, 'Or reply on Google Forms (the family’s Google Sheet)'), pill('Open Google Form', 'form', { href: C.rsvp.googleForm, target: '_blank', rel: 'noopener' }, 'line')),
+    h('p', { class: 'call' }, 'For RSVP: ', h('a', { href: `tel:${C.rsvp.tel}`, html: `${ICON.phone}<span>${C.rsvp.phone}</span>` }))), { y: 13.6, w: 66, top: true }));
 
-const thanks = page('thanks', 'thanks.webp',
-  h('img', { class: 'mono', src: 'assets/monogram.webp', alt: '', width: 560, height: 797, loading: 'lazy' }),
-  h('p', { class: 't1' }, C.thanks[0]),
-  h('p', { class: 't2' }, C.thanks[1]));
+/* ── 5 · thank you (the reference's closing plate; its Call / WhatsApp / Email bars are painted out) ── */
+const thanks = page('thanks', 'thanks.webp', 941, 1672,
+  at(h('img', { class: 'mono', src: 'assets/monogram.webp', alt: 'SA monogram', width: 560, height: 797, loading: 'lazy' }), { y: 42.6, w: 15 }),
+  at(h('div', { class: 'thanks-text' }, h('p', { class: 't1' }, C.thanks[0]), h('p', { class: 't2' }, C.thanks[1], h('br'), C.thanks[2])), { y: 56.2, w: 64 }));
 
-const main = h('main', { class: 'invitation', id: 'invitation' }, hero, invite, save, functions, venue, rsvp, thanks);
+const main = h('main', { class: 'invitation', id: 'invitation' }, hero, save, functions, rsvp, thanks);
 document.getElementById('app').append(main);
 
-/* fade each page's text in as it arrives */
+/* each page fades its words in as it arrives */
 const io = 'IntersectionObserver' in window ? new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) { e.target.classList.add('on'); io.unobserve(e.target); } }), { threshold: 0.15 }) : null;
 
-/* ── music: one player, started by the opening tap ── */
+/* ── music: ONE player for the whole invitation, started by the opening tap; never restarted ── */
 const music = new Audio(C.music); music.loop = true; music.preload = 'auto';
 const mbtn = h('button', { class: 'audio', type: 'button', 'aria-label': 'Pause music', html:
   '<svg class="on" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M9 18V6l10-2v12"/><circle cx="6.5" cy="18" r="2.5"/><circle cx="16.5" cy="16" r="2.5"/></svg>' +
   '<svg class="off" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M9 18V6l10-2v12"/><circle cx="6.5" cy="18" r="2.5"/><circle cx="16.5" cy="16" r="2.5"/><path d="M3 3l18 18" stroke-width="1.8"/></svg>' });
 const showMusic = () => { const off = music.paused; mbtn.classList.toggle('muted', off); mbtn.setAttribute('aria-label', off ? 'Play music' : 'Pause music'); };
-mbtn.addEventListener('click', () => { if (music.paused) music.play().catch(showMusic); else music.pause(); });
-music.addEventListener('play', showMusic); music.addEventListener('pause', showMusic);
 let wanted = true;
-document.addEventListener('visibilitychange', () => { if (document.hidden) { wanted = !music.paused; music.pause(); } else if (wanted && document.documentElement.classList.contains('is-open')) music.play().catch(showMusic); });
+mbtn.addEventListener('click', () => { if (music.paused) { wanted = true; music.play().catch(showMusic); } else { wanted = false; music.pause(); } });
+music.addEventListener('play', showMusic); music.addEventListener('pause', showMusic);
+document.addEventListener('visibilitychange', () => { if (!document.documentElement.classList.contains('is-open')) return; if (document.hidden) music.pause(); else if (wanted) music.play().catch(showMusic); });
 document.body.append(mbtn);
 
-/* ── opening: the doors; one tap starts the song and goes straight to the first page ── */
+/* ── opening: the doors; one tap starts the song and opens straight onto the invitation (no film) ── */
 const tap = h('button', { class: 'tap', type: 'button', 'aria-label': 'Tap to open the invitation' }, h('span', { class: 'ring', 'aria-hidden': 'true' }));
 const opening = h('div', { class: 'opening' }, h('div', { class: 'frame' }, h('img', { class: 'art', src: 'assets/doors.webp', alt: 'Emerald and gold doors of the invitation', fetchpriority: 'high' }), tap));
 document.body.append(opening);
