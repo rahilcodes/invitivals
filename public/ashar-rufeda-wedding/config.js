@@ -1,5 +1,5 @@
 /* ─────────────────────────────────────────────────────────────
-   Ashar & Rufeda — Nikah (Friday 25 December 2026, After Jumma Namaz) and Walima Ceremony & Reception (Saturday
+   Ashar & Rufeda — Nikah (Friday 25 December 2026, After Jumma Namaz) and Walima Ceremony (Saturday
    26 December 2026, 8:00 PM – 11:00 PM), client brief 2026-11-24: a separate invitation on the design of
    public/dr-mohammed-nihal-nooha (never edited for this page; this folder began as a copy of its Navas & Dharshinisha copy).
    Every word is the client's own. The Nikah has no clock time ("After Jumma Namaz"): its calendar entry is an
@@ -24,7 +24,7 @@ export const config = {
   /* page 2, Save Our Date: December 2026, the 25th and 26th marked once the guest taps Reveal Date */
   saveOurDate: {
     year: 2026, month: 12,
-    marks: [{ day: 25, label: 'Nikah Ceremony' }, { day: 26, label: 'Walima Ceremony & Reception' }],
+    marks: [{ day: 25, label: 'Nikah Ceremony' }, { day: 26, label: 'Walima Ceremony' }],
     legend: [['25 December', ' · Nikah, After Jumma Namaz'], ['26 December', ' · Walima, 8:00 PM – 11:00 PM']],
   },
 
@@ -38,7 +38,7 @@ export const config = {
       mapsUrl: 'https://maps.app.goo.gl/wv5pznntaszpF1Ww8?g_st=iwb', ics: 'nikah.ics',
     },
     {
-      key: 'walima', title: 'Walima Ceremony & Reception', titleLines: ['Walima Ceremony', '& Reception'],
+      key: 'walima', title: 'Walima Ceremony', titleLines: ['Walima Ceremony'],
       date: 'Saturday, 26 December 2026', time: '8:00 PM – 11:00 PM',
       start: '2026-12-26T20:00:00+05:30', local: '20261226T200000', minutes: 180,   // 8:00 PM – 11:00 PM (client, 25 Nov)
       venue: 'GG Ground, Near Bus Depot, Vasai Gaon, Vasai West – 401201', venueLines: ['GG Ground, Near Bus Depot,', 'Vasai Gaon, Vasai West – 401201'],

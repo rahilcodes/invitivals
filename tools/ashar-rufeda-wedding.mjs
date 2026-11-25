@@ -1,4 +1,4 @@
-/* Ashar & Rufeda — Nikah and Walima Ceremony & Reception (client brief 2026-11-24), public/ashar-rufeda-wedding, a
+/* Ashar & Rufeda — Nikah and Walima Ceremony (client brief 2026-11-24), public/ashar-rufeda-wedding, a
    separate page on the design of public/dr-mohammed-nihal-nooha (read only; this folder began as a copy of its Navas &
    Dharshinisha copy, which is not edited either).
 
@@ -96,8 +96,8 @@ console.log('✓ ics', C.events.map((e) => e.ics).join(', '), '+', C.dayIcs);
 const COVER = 'cover-ashar-rufeda.jpg';
 const TITLE = `${C.couple} · Nikah & Walima`;
 const OGT = `${C.couple} · Wedding Invitation`;
-const OGD = 'Nikah · Friday, 25 December 2026, After Jumma Namaz | Walima Ceremony & Reception · Saturday, 26 December 2026, 8:00 PM – 11:00 PM | Vasai';
-const DESC = 'With the blessings of Almighty Allah and the love of our families, we request the honour of your presence at the Nikah of Ashar & Rufeda: Friday, 25 December 2026, After Jumma Namaz, Jama Masjid, Mussagalli, Vasai; Walima Ceremony & Reception, Saturday, 26 December 2026, 8:00 PM – 11:00 PM, GG Ground, Vasai West.';
+const OGD = 'Nikah · Friday, 25 December 2026, After Jumma Namaz | Walima Ceremony · Saturday, 26 December 2026, 8:00 PM – 11:00 PM | Vasai';
+const DESC = 'With the blessings of Almighty Allah and the love of our families, we request the honour of your presence at the Nikah of Ashar & Rufeda: Friday, 25 December 2026, After Jumma Namaz, Jama Masjid, Mussagalli, Vasai; Walima Ceremony, Saturday, 26 December 2026, 8:00 PM – 11:00 PM, GG Ground, Vasai West.';
 const IMG = `${URL_}assets/${COVER}`;
 const ALT = `${C.couple} · Nikah, 25 December 2026 · Walima, 26 December 2026`;
 const hx = (x) => x.replace(/&/g, '&amp;').replace(/"/g, '&quot;');

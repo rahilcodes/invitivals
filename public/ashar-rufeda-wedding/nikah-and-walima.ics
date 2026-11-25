@@ -30,7 +30,7 @@ UID:ashar-rufeda-wedding-walima@invitivals.com
 DTSTAMP:20261124T000000Z
 DTSTART;TZID=Asia/Kolkata:20261226T200000
 DTEND;TZID=Asia/Kolkata:20261226T230000
-SUMMARY:Walima Ceremony & Reception — Ashar & Rufeda
+SUMMARY:Walima Ceremony — Ashar & Rufeda
 LOCATION:GG Ground\, Near Bus Depot\, Vasai Gaon\, Vasai West – 401201
 DESCRIPTION:Saturday\, 26 December 2026\nTime: 8:00 PM – 11:00 PM\nVenue:
   GG Ground\, Near Bus Depot\, Vasai Gaon\, Vasai West – 401201\nLocation
@@ -40,7 +40,7 @@ URL:https://maps.app.goo.gl/4aDhjrSJnavqqW2FA?g_st=iwb
 BEGIN:VALARM
 TRIGGER:-PT3H
 ACTION:DISPLAY
-DESCRIPTION:Walima Ceremony & Reception
+DESCRIPTION:Walima Ceremony
 END:VALARM
 END:VEVENT
 END:VCALENDAR

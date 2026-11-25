@@ -1,10 +1,10 @@
 /* Ashar & Rufeda: the invitation, one continuous column (the design of dr-mohammed-nihal-nooha).
    Scroll order: 1 the invitation (Bismillah, A R monogram, the invitation, the couple with their families) · 2 Save Our
-   Date (December 2026, the 25th and 26th revealed) · 3 Our Functions (Nikah, and Walima Ceremony & Reception, each with
+   Date (December 2026, the 25th and 26th revealed) · 3 Our Functions (Nikah, and Walima Ceremony, each with
    its own venue, Save the Date and map) · 4 the countdown to the Nikah day (landscape) · 5 the closing (A R monogram, Thank You).
    Pages 2 and 3 follow the reference's layout: their pieces take the boxes the reference measured (js/art.js).
    There is no RSVP. */
-import { config as C } from '../config.js?v=2';
+import { config as C } from '../config.js?v=3';
 import { art, box } from './art.js?v=1';
 import { h, observePages, calendarHref } from './util.js?v=1';
 import { OpeningScreen } from './opening.js?v=1';
@@ -99,7 +99,7 @@ const page2 = Page(2, 'p-date', [
       'Apple / Outlook calendar (.ics)',
       { label: 'Nikah & Walima', sub: 'Both in one file', href: C.dayIcs, download: C.dayIcs, quiet: true },
       { label: NIKAH.title, href: NIKAH.ics, download: 'nikah-ceremony.ics', quiet: true },
-      { label: WALIMA.title, href: WALIMA.ics, download: 'walima-ceremony-and-reception.ics', quiet: true },
+      { label: WALIMA.title, href: WALIMA.ics, download: 'walima-ceremony.ics', quiet: true },
     ]) }),
   /* two venues: the painted Google Maps pill offers both, each with the family's own link */
   h('button', { class: 'hit', type: 'button', style: at('p2-maps-hit'), 'aria-label': 'View the venues on Google Maps', 'data-open': 'maps',
