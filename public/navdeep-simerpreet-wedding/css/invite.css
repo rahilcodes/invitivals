@@ -726,3 +726,32 @@ html.is-open .intro{opacity:0;pointer-events:none}
 .cal-one .cal-one-when{margin:0 0 18px;color:var(--gold-deep);letter-spacing:.04em}
 .cal-one .btn{display:flex;width:100%;max-width:340px;margin:0 auto 10px;justify-content:center}
 .cal-one .cal-hint{margin:6px auto 0;max-width:340px;font-size:.92rem;opacity:.8}
+
+/* ── Navdeep & Simerpreet: alignment and spacing pass (client, 25 Nov 2026) ─────────────────────────
+   One rhythm for the event cards: every card starts 50px below the card before it (the art may rise
+   into that space but never reaches the card above), both action buttons share one size, and nothing
+   decorative sits on text or buttons. */
+.event.art-lantern{padding-top:118px}                     /* was 50px: the Wedding card rode 18px over the Anand Karaj card */
+.card-art-lantern{height:170px}                           /* the lanterns rise 10px above the frame (the dhol: 20px), not 30px */
+.event-actions{gap:12px;margin-top:22px}
+.event-actions .btn{width:min(100%,232px);min-height:44px;justify-content:center;box-sizing:border-box;padding:10px 18px;font-size:.62rem}
+.event-actions .btn .ico-btn{flex:none}
+.bd-actions .btn{min-height:44px;justify-content:center}
+/* save the date: the 7 of 27 no longer drops into "February" */
+.bd-day{font-variant-numeric:lining-nums;margin:6px 0 10px}
+/* who invites: each name on its own line, never one word left alone */
+.invite-from{max-width:none;padding:0 4px}
+.if-name{font-size:min(2.1rem,7.6vw);text-wrap:balance}
+.if-sub{font-size:min(1.6rem,6.3vw);text-wrap:balance;margin-top:2px}
+/* the families garland hangs above the heading instead of over "of" */
+.families .garland.g-right{width:46%;right:-20%;top:-74px}
+.families .sec-head{margin-top:14px}
+/* the Gurbani arch ends with its scene: its lower edge no longer draws a line across the families section */
+.blessing-arch img{-webkit-mask-image:linear-gradient(180deg,#000 76%,transparent 81%);mask-image:linear-gradient(180deg,#000 76%,transparent 81%)}
+/* the families: one card under the other on every screen (side by side they were 198px wide in the 412px column
+   of tablets and desktops, and the names broke over three lines); names wrap evenly on the narrowest phones */
+@media (min-width:430px){.fam-grid{flex-direction:column}.card-fam{flex:none}}
+.fam-person{font-size:min(1.9rem,8.2vw);text-wrap:balance}
+.fam-parents{text-wrap:balance}
+/* section headings break evenly ("With the Blessings of / Our Families", never "… of Our / Families") */
+.sec-head > *{text-wrap:balance}
