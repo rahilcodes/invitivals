@@ -1,6 +1,6 @@
 /* ─────────────────────────────────────────────────────────────
    Ashar & Rufeda — Nikah (Friday 25 December 2026, After Jumma Namaz) and Walima Ceremony & Reception (Saturday
-   26 December 2026, 7:00 PM – 10:00 PM), client brief 2026-11-24: a separate invitation on the design of
+   26 December 2026, 8:00 PM – 11:00 PM), client brief 2026-11-24: a separate invitation on the design of
    public/dr-mohammed-nihal-nooha (never edited for this page; this folder began as a copy of its Navas & Dharshinisha copy).
    Every word is the client's own. The Nikah has no clock time ("After Jumma Namaz"): its calendar entry is an
    all-day entry on 25 December whose text says "After Jumma Namaz" — no time is invented. The Walima has its
@@ -25,7 +25,7 @@ export const config = {
   saveOurDate: {
     year: 2026, month: 12,
     marks: [{ day: 25, label: 'Nikah Ceremony' }, { day: 26, label: 'Walima Ceremony & Reception' }],
-    legend: [['25 December', ' · Nikah, After Jumma Namaz'], ['26 December', ' · Walima, 7:00 PM – 10:00 PM']],
+    legend: [['25 December', ' · Nikah, After Jumma Namaz'], ['26 December', ' · Walima, 8:00 PM – 11:00 PM']],
   },
 
   /* page 3, Our Functions (and the buttons of page 2) */
@@ -39,8 +39,8 @@ export const config = {
     },
     {
       key: 'walima', title: 'Walima Ceremony & Reception', titleLines: ['Walima Ceremony', '& Reception'],
-      date: 'Saturday, 26 December 2026', time: '7:00 PM – 10:00 PM',
-      start: '2026-12-26T19:00:00+05:30', local: '20261226T190000', minutes: 180,
+      date: 'Saturday, 26 December 2026', time: '8:00 PM – 11:00 PM',
+      start: '2026-12-26T20:00:00+05:30', local: '20261226T200000', minutes: 180,   // 8:00 PM – 11:00 PM (client, 25 Nov)
       venue: 'GG Ground, Near Bus Depot, Vasai Gaon, Vasai West – 401201', venueLines: ['GG Ground, Near Bus Depot,', 'Vasai Gaon, Vasai West – 401201'],
       mapsUrl: 'https://maps.app.goo.gl/4aDhjrSJnavqqW2FA?g_st=iwb', ics: 'walima.ics',
     },
@@ -55,7 +55,7 @@ export const config = {
   },
 
   /* page 5 */
-  closing: { title: 'Thank You', lines: ['We look forward to', 'your presence and Duas.'] },
+  closing: { title: 'Thank You', lines: ['We look forward to', 'your presence and Duas.'], from: 'Best wishes from Bhimani Family' },   // from: client, 25 Nov
 
   opening: {
     /* the design's film, rebuilt with the couple's A R monogram on the wax seal (tools/ashar-rufeda-film) */

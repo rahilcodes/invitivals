@@ -214,4 +214,13 @@ button { font: inherit; cursor: pointer; }
 .p-hero .card .and { margin: 1.5cqw 0 1.2cqw; }
 .card .of { margin-top: .8cqw; font-weight: 600; font-size: 2.95cqw; line-height: 1.3; color: var(--ink); }
 .of em { display: block; font-weight: 500; font-size: 2.7cqw; color: var(--rose); }
-.p-func .ev-title { font-size: 3.3cqw; }
+/* 25 Nov (client): the card text easier to read — titles and lines in a heavier weight, a size up, a deeper ink, and
+   a steady gap between each icon and its line */
+.p-func .ev-title { font-size: 3.5cqw; font-weight: 600; color: var(--plum2); }
+.p-func .ev-line { font-weight: 600; font-size: 3.05cqw; color: #3e1a2d; }
+.p-func .ev-line.ev-venue { font-size: 2.85cqw; line-height: 1.24; }
+
+/* 25 Nov: "Best wishes from Bhimani Family" closes the cartouche, under the closing words */
+.p-end .closing { top: 56.2%; height: 15%; gap: 1.2cqw; }
+.closing p { margin: 0; }
+.closing__from { font-style: normal; font-weight: 700; font-size: 3.3cqw; letter-spacing: .02em; line-height: 1.25; color: var(--plum2); }

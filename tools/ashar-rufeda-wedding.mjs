@@ -12,7 +12,7 @@
      reference does with its own monogram. Without the file it stops and says so — nothing is drawn in its place;
    - js/art.js with the monogram's sizes;
    - nikah.ics (an ALL-DAY entry on 25 December: the family gave "After Jumma Namaz", not a clock time),
-     walima.ics (26 December, 7:00 PM to 10:00 PM, as supplied) and nikah-and-walima.ics;
+     walima.ics (26 December, 8:00 PM to 11:00 PM, as supplied) and nikah-and-walima.ics;
    - index.html's title, description and sharing tags;
    - assets/cover-ashar-rufeda.jpg, the link preview, shot from tools/ashar-rufeda-wedding-og.html.
    The opening film with the A R seal is made separately (tools/ashar-rufeda-film/README.md). */
@@ -96,8 +96,8 @@ console.log('✓ ics', C.events.map((e) => e.ics).join(', '), '+', C.dayIcs);
 const COVER = 'cover-ashar-rufeda.jpg';
 const TITLE = `${C.couple} · Nikah & Walima`;
 const OGT = `${C.couple} · Wedding Invitation`;
-const OGD = 'Nikah · Friday, 25 December 2026, After Jumma Namaz | Walima Ceremony & Reception · Saturday, 26 December 2026, 7:00 PM – 10:00 PM | Vasai';
-const DESC = 'With the blessings of Almighty Allah and the love of our families, we request the honour of your presence at the Nikah of Ashar & Rufeda: Friday, 25 December 2026, After Jumma Namaz, Jama Masjid, Mussagalli, Vasai; Walima Ceremony & Reception, Saturday, 26 December 2026, 7:00 PM – 10:00 PM, GG Ground, Vasai West.';
+const OGD = 'Nikah · Friday, 25 December 2026, After Jumma Namaz | Walima Ceremony & Reception · Saturday, 26 December 2026, 8:00 PM – 11:00 PM | Vasai';
+const DESC = 'With the blessings of Almighty Allah and the love of our families, we request the honour of your presence at the Nikah of Ashar & Rufeda: Friday, 25 December 2026, After Jumma Namaz, Jama Masjid, Mussagalli, Vasai; Walima Ceremony & Reception, Saturday, 26 December 2026, 8:00 PM – 11:00 PM, GG Ground, Vasai West.';
 const IMG = `${URL_}assets/${COVER}`;
 const ALT = `${C.couple} · Nikah, 25 December 2026 · Walima, 26 December 2026`;
 const hx = (x) => x.replace(/&/g, '&amp;').replace(/"/g, '&quot;');
