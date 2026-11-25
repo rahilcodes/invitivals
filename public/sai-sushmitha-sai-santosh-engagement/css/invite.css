@@ -250,3 +250,22 @@ button { font: inherit; cursor: pointer; }
 .p-end .closing__from { font-size: 2.6cqw; line-height: 1.3; }
 /* the families card's labels in a deeper mauve so they read clearly on the cream card */
 .fam__label { color: #7a3f62; }
+
+/* 26 Nov: the bride's parents' longer names stay on one line each inside the card */
+.fam__names { font-size: 2.75cqw; }
+/* the From slide: the pages' own satin colour with a soft sheen, a compact cream card in the closing's gold frame */
+.p-from { padding: 10cqw 7cqw 13cqw; background: radial-gradient(ellipse 80% 60% at 30% 20%, #f3e4ea 0%, rgba(243,228,234,0) 70%), linear-gradient(180deg, #e9d6de, #dcc4cf); }
+.p-from .satin { z-index: 9; }
+.from-card { position: relative; margin: 0 auto; max-width: 86cqw; padding: 6cqw 6cqw 5.6cqw; text-align: center; color: var(--ink);
+  background: linear-gradient(180deg, #fdf7f2, #f7ebe4); border: 1px solid #c9a462; border-radius: 3cqw;
+  box-shadow: 0 0 0 .9cqw #f7ebe4, 0 0 0 1.05cqw #c9a462, 0 2.4cqw 5cqw rgba(74, 31, 53, .22); }
+.from-card p { margin: 0; }
+.from-orn { width: 15cqw; margin: 0 auto 1.6cqw; }
+.from-orn img { width: 100%; height: auto; display: block; }
+.from-title { font-family: var(--script); font-size: 9cqw; line-height: 1.05; color: var(--plum2); }
+.from-names { margin-top: 2cqw !important; font-weight: 700; font-size: 4cqw; line-height: 1.4; color: var(--plum2); }
+.from-rule { display: block; width: 34cqw; height: 1px; margin: 3cqw auto 2.6cqw; background: linear-gradient(90deg, transparent, #c9a462, transparent); }
+.from-addr { font-weight: 500; font-size: 3.4cqw; line-height: 1.45; text-wrap: balance; }
+.from-cell { margin-top: 2cqw !important; font-weight: 600; font-size: 3.4cqw; line-height: 1.4; }
+.from-cell a { color: var(--plum2); text-decoration: none; border-bottom: 1px solid rgba(201,164,98,.7); white-space: nowrap; }
+.p-from .created { bottom: 3.4cqw; }

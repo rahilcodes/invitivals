@@ -5,7 +5,7 @@
    to the ceremony (landscape) · 5 the closing (SS monogram, Thank You).
    Pages 2 and 3 follow the reference's layout: their pieces take the boxes the reference measured (js/art.js).
    There is no RSVP. */
-import { config as C } from '../config.js?v=2';
+import { config as C } from '../config.js?v=3';
 import { art, box } from './art.js?v=1';
 import { h, observePages, calendarHref, reducedMotion } from './util.js?v=1';
 import { OpeningScreen } from './opening.js?v=1';
@@ -149,10 +149,23 @@ const page5 = Page(5, 'p-end', [
   r(0.1, 'div', { class: 'mono' }, pic('ss-gold', 'S S monogram', '')),
   r(0.4, 'h2', { class: 'thanks' }, C.closing.title),
   r(0.65, 'div', { class: 'closing' }, h('p', {}, ...br(C.closing.lines)), h('p', { class: 'closing__from' }, h('em', {}, 'With Love,'), h('br'), C.closing.from)),
-  h('a', { class: 'created', href: `https://invitivals.com/?utm_source=invitation&utm_medium=footer&utm_campaign=${C.slug}`, target: '_blank', rel: 'noopener' }, 'Created by ', h('b', {}, 'INVITIVALS')),
 ]);
 
-const invitation = h('main', { class: 'invitation column', id: 'invitation' }, page1, page2, page3, page4, page5);
+/* ── the last slide: From (client, 26 Nov) — a compact card on the same satin, joined to page 5 by the satin band ── */
+const F = C.from;
+const fromSlide = h('section', { class: 'page p-from', id: 'page-6', 'aria-label': 'From' },
+  h('div', { class: 'from-card' },
+    r(0.05, 'div', { class: 'from-orn' }, pic('p5-ornament', '', '')),
+    r(0.15, 'p', { class: 'from-title' }, F.title),
+    r(0.3, 'p', { class: 'from-names' }, ...br(F.names)),
+    r(0.45, 'i', { class: 'from-rule', 'aria-hidden': 'true' }),
+    r(0.55, 'p', { class: 'from-addr' }, ...br(F.address)),
+    r(0.7, 'p', { class: 'from-cell' }, 'Cell: ', ...F.phones.flatMap((p, i) => [i ? ', ' : '', h('a', { href: `tel:+91${p}` }, p)]))),
+  h('a', { class: 'created', href: `https://invitivals.com/?utm_source=invitation&utm_medium=footer&utm_campaign=${C.slug}`, target: '_blank', rel: 'noopener' }, 'Created by ', h('b', {}, 'INVITIVALS')),
+  h('div', { class: 'satin', 'aria-hidden': 'true' }, h('img', { src: 'assets/satin.webp', alt: '', decoding: 'async', loading: 'lazy', width: art.satin[0], height: art.satin[1] })));
+fromSlide.classList.add('ready');
+
+const invitation = h('main', { class: 'invitation column', id: 'invitation' }, page1, page2, page3, page4, page5, fromSlide);
 app.append(invitation);
 
 /* ── confetti: a light shower of champagne, blush and plum paper, as the invitation opens and as the date is revealed ── */

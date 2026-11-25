@@ -50,7 +50,7 @@ export const config = {
     },
   ],
   families: [
-    { label: "Bride's Parents", lines: ['Smt. Beeravally Padmavathi', 'Sri Beeravally Gopal Reddy'] },
+    { label: "Bride's Parents", lines: ['Smt. Kotha Venkata Beeravally Padmavathi', 'Sri Kotha Venkata Beeravally Gopal Reddy'] },   // client, 26 Nov
     { label: "Groom's Parents", lines: ['Smt. & Sri Kotha Venkata', 'Sandhya Rani - Laxma Reddy'] },
   ],
   /* written into the calendar entry's description */
@@ -68,6 +68,14 @@ export const config = {
     title: 'Thank You',
     lines: ['Your presence and blessings will make', 'this special occasion even more memorable.', 'We look forward to celebrating', 'this beautiful beginning with you.'],
     from: 'Beeravally & Kotha Venkata Families',   // client, 25 Nov
+  },
+
+  /* the last slide (client, 26 Nov): the sender, exactly as supplied */
+  from: {
+    title: 'From:',
+    names: ['Smt. Beeravally Padmavathi', 'Sri Beeravally Gopal Reddy'],
+    address: ['Villa No. 167, Indu Aranya (Haritha),', 'Bandlaguda, Nagole, Hyderabad.'],
+    phones: ['9848052445', '9948566744'],
   },
 
   opening: {
