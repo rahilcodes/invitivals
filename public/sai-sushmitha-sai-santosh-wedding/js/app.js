@@ -1,5 +1,5 @@
 /* InvitationPage — composes one continuous invitation from weddingConfig. */
-import { weddingConfig as cfg } from '../config.js';
+import { weddingConfig as cfg } from '../config.js?v=2';
 import { GoldDefs, GoldThread } from './decor.js';
 import { guestName } from './util.js';
 import { IntroExperience, initIntro } from './sections/intro.js';
@@ -19,6 +19,7 @@ import { ContactSection } from './sections/contact.js';
 import { GiftingSection, initGifting } from './sections/gifting.js';
 import { WishesSection, initWishes } from './sections/wishes.js';
 import { ThankYouSection } from './sections/thank-you.js';
+import { FromSection } from './sections/from.js';
 import { initReveals, initParallax, initParticles } from './motion.js';
 import { createMusic } from './music.js';
 import { createMenu } from './menu.js';
@@ -31,10 +32,10 @@ cfg.pair = cfg.brideFirst ? [cfg.brideName, cfg.groomName] : [cfg.groomName, cfg
 
 const SECTIONS = [
   HeroSection, WelcomeSection, cfg.story && StorySection, FamilySection, cfg.events.length > 1 && EventsSection, CeremonySection,
-  VenueSection, CountdownSection, cfg.gallery?.length && GallerySection, SaveTheDateSection, RSVPSection,
-  cfg.travel?.length && TravelSection, cfg.contact && ContactSection, cfg.gifting && GiftingSection, cfg.wishes && WishesSection, ThankYouSection,
+  VenueSection, CountdownSection, cfg.gallery?.length && GallerySection, SaveTheDateSection, cfg.showRsvp !== false && RSVPSection,
+  cfg.travel?.length && TravelSection, cfg.contact && ContactSection, cfg.gifting && GiftingSection, cfg.wishes && WishesSection, ThankYouSection, cfg.from && FromSection,
 ].filter(Boolean);
-const NO_THREAD_AFTER = new Set([HeroSection, ThankYouSection]);
+const NO_THREAD_AFTER = new Set([HeroSection, ThankYouSection, FromSection]);
 const guest = guestName();
 
 const page = document.getElementById('invitation');
@@ -56,7 +57,7 @@ if (cfg.events.length > 1) initEvents(cfg);
 initCountdown(cfg);
 if (cfg.gallery?.length) initGallery(cfg);
 initSaveTheDate(cfg);
-initRSVP(cfg, guest);
+if (cfg.showRsvp !== false) initRSVP(cfg, guest);
 if (cfg.gifting) initGifting();
 if (cfg.wishes) initWishes(cfg, guest);
 

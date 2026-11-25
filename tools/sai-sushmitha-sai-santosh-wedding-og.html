@@ -1,26 +1,44 @@
 <!DOCTYPE html>
-<!-- Link preview (1200×630) for public/sai-sushmitha-sai-santosh-wedding, on the page's own hero art; the names sit in
-     the middle 600 px so WhatsApp's square crop keeps them whole. Shot with headless Chrome to assets/og-sai-sushmitha-sai-santosh.jpg. -->
+<!-- Link preview (1200×630) for public/sai-sushmitha-sai-santosh-wedding (26 Nov: richer, on the layout of the Nandini &
+     Satyam cover): the page's own hero scene with the couple on the right, and on the left a framed cream panel with the
+     invocation, the SS monogram ring, the names in gold and the date. Shot with headless Chrome to
+     assets/og-sai-sushmitha-sai-santosh-v2.jpg (a new file name, so WhatsApp fetches the new picture). -->
 <html><head><meta charset="utf-8">
-<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600&family=Cormorant+Garamond:ital,wght@0,600;1,500&family=Pinyon+Script&display=block" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Cormorant+Garamond:ital,wght@0,600;0,700;1,500&family=Pinyon+Script&display=block" rel="stylesheet">
 <style>
-  html, body { margin: 0; width: 1200px; height: 630px; overflow: hidden; background: #f6ead6; }
-  .bg { position: absolute; inset: 0; background: url(../public/sai-sushmitha-sai-santosh-wedding/assets/hero-arch.webp) center 38% / cover; }
-  .glow { position: absolute; inset: 0; background: radial-gradient(ellipse 34% 70% at 50% 48%, rgba(252,244,228,.97), rgba(252,244,228,.9) 58%, rgba(252,244,228,0) 100%); }
-  .card { position: absolute; left: 300px; width: 600px; top: 0; bottom: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; color: #651522; }
-  .inv { font: 600 19px 'Cinzel', serif; letter-spacing: .14em; color: #8a5a1e; }
-  .h { margin-top: 10px; font: 500 20px 'Cinzel', serif; letter-spacing: .3em; color: #8a5a1e; }
-  .n { margin-top: 12px; font: 600 50px/1.1 'Cormorant Garamond', serif; white-space: nowrap; }
-  .w { font: 400 40px/1.1 'Pinyon Script', cursive; color: #9a7428; margin: 2px 0; }
-  .d { margin-top: 16px; font: 600 22px 'Cinzel', serif; letter-spacing: .12em; color: #4a0e18; }
-</style></head><body>
-  <div class="bg"></div><div class="glow"></div>
-  <div class="card">
+  html, body { margin: 0; width: 1200px; height: 630px; overflow: hidden; background: #f4e4ca; }
+  .art { position: absolute; inset: 0; background: url(../public/sai-sushmitha-sai-santosh-wedding/assets/hero-arch.webp) center 64% / cover; }
+  .art::after { content: ''; position: absolute; inset: 0; background: linear-gradient(90deg, rgba(247, 235, 210, .96) 0 46%, rgba(247, 235, 210, .6) 60%, rgba(247, 235, 210, 0) 76%); }
+  .couple { position: absolute; right: 70px; bottom: -8px; height: 590px; filter: drop-shadow(0 10px 20px rgba(60, 20, 10, .25)); }
+  .frame { position: absolute; left: 34px; top: 30px; bottom: 30px; width: 590px; border: 1.5px solid rgba(184, 137, 50, .85); border-radius: 10px; }
+  .frame::after { content: ''; position: absolute; inset: 7px; border: 1px solid rgba(184, 137, 50, .45); border-radius: 6px; }
+  .copy { position: absolute; left: 34px; top: 30px; bottom: 30px; width: 590px; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; }
+  .inv { font: 600 17px Cinzel, serif; letter-spacing: .16em; color: #8c621d; }
+  .mono { position: relative; width: 92px; height: 92px; margin: 12px 0 8px; }
+  .mono svg { position: absolute; inset: 0; width: 100%; height: 100%; fill: none; stroke: #b88932; stroke-width: 1.4; }
+  .mono span { position: absolute; font: 600 40px 'Cormorant Garamond', serif; color: #651522; }
+  .mono .a { left: 24px; top: 14px; } .mono .b { left: 44px; top: 34px; }
+  .eyebrow { font: 600 18px Cinzel, serif; letter-spacing: .36em; color: #8c621d; padding-left: .36em; }
+  .name { font: 700 52px/1.08 'Cormorant Garamond', serif; letter-spacing: .01em; padding: 0 .1em .08em; margin-bottom: -.08em; white-space: nowrap;
+    background: linear-gradient(100deg, #7d5518, #b88932 30%, #d9b770 50%, #a87a2a 70%, #7d5518); -webkit-background-clip: text; background-clip: text; color: transparent; }
+  .weds { font: 400 42px/1 'Pinyon Script', cursive; color: #651522; margin: 2px 0 0; }
+  .rule { width: 300px; height: 1px; margin: 16px auto 14px; background: linear-gradient(90deg, transparent, #b88932, transparent); }
+  .date { font: 700 23px Cinzel, serif; letter-spacing: .14em; color: #651522; }
+  .place { margin-top: 6px; font: italic 500 23px 'Cormorant Garamond', serif; color: #6a4b35; }
+</style></head>
+<body>
+  <div class="art"></div>
+  <img class="couple" src="../public/sai-sushmitha-sai-santosh-wedding/assets/couple.webp" alt="">
+  <div class="frame"></div>
+  <div class="copy">
     <div class="inv">॥ Sree Ganeshaaya Namaha ॥</div>
-    <div class="h">WEDDING INVITATION</div>
-    <div class="n">Dr. Sai Sushmitha Reddy</div>
-    <div class="w">weds</div>
-    <div class="n">Sai Santosh Reddy</div>
-    <div class="d">13 DECEMBER 2026 · 8:19 AM</div>
+    <div class="mono"><svg viewBox="0 0 120 120"><circle cx="60" cy="60" r="55"/><circle cx="60" cy="60" r="49.5" stroke-dasharray=".6 3.4" stroke-width="1.6"/></svg><span class="a">S</span><span class="b">S</span></div>
+    <div class="eyebrow">WEDDING INVITATION</div>
+    <div class="name" style="margin-top:8px">Dr. Sai Sushmitha Reddy</div>
+    <div class="weds">weds</div>
+    <div class="name">Sai Santosh Reddy</div>
+    <div class="rule"></div>
+    <div class="date">SUNDAY · 13 DECEMBER 2026 · 8:19 AM</div>
+    <div class="place">Parinaya Conventions, Hyderabad</div>
   </div>
 </body></html>

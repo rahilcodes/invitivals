@@ -13,7 +13,7 @@ export const ThankYouSection = (cfg) => `
     <span class="thanks-heart" data-reveal>${Icon('heart')}</span>
     <p class="signoff" data-reveal>${cfg.thankYou.signoff}</p>
     <div class="thanks-share" data-reveal>${Button({ label: 'Share the Invitation', icon: 'send', cls: 'btn-ghost js-share' })}</div>
-    <p class="credit">Designed by <a href="https://invitivals.com/?utm_source=invitation&amp;utm_medium=footer&amp;utm_campaign=${cfg.creditCampaign || 'hindu-south-wedding'}" target="_blank" rel="noopener">Invitivals</a></p>
+    ${cfg.from ? '' : `<p class="credit">Designed by <a href="https://invitivals.com/?utm_source=invitation&amp;utm_medium=footer&amp;utm_campaign=${cfg.creditCampaign || 'hindu-south-wedding'}" target="_blank" rel="noopener">Invitivals</a></p>`}
   </div>
   <div class="finale" aria-hidden="true">
     <img src="assets/finale.webp" alt="" loading="lazy" decoding="async">

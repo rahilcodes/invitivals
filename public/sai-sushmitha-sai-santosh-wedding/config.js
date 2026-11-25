@@ -32,7 +32,7 @@ export const weddingConfig = {
   venue: 'PARINAYA CONVENTIONS',
   venueAddress: 'Brahmanpally Road, Turkayamjal, Hyderabad.',
   venueCity: 'Hyderabad',
-  mapsUrl: '',               // PENDING: the client's exact Google Maps link (no guessed location goes live)
+  mapsUrl: 'https://maps.app.goo.gl/e9xyPPBUfnDuNSb89?g_st=iw',   // the client's own link (26 Nov)
   venueImage: 'assets/venue-parinaya.webp', // the client's own photograph of the venue
   venueImageRatio: '16 / 9',
 
@@ -49,7 +49,7 @@ export const weddingConfig = {
       person: 'Dr. Sai Sushmitha Reddy',
       initial: 'S',
       relation: 'Daughter of',
-      parents: ['Smt. Beeravally Padmavathi', 'Sri Beeravally Gopal Reddy'],
+      parents: ['Smt. Kotha Venkata Beeravally Padmavathi', 'Sri Kotha Venkata Beeravally Gopal Reddy'],   // client, 26 Nov
       grandparents: '',
     },
     groom: {
@@ -71,7 +71,8 @@ export const weddingConfig = {
 
   gallery: [],
 
-  /* the RSVP is stored on our server (rsvp.php next to this file): name, attendance, number of guests only */
+  /* 26 Nov (client): the RSVP section is removed from the page (rsvp: kept only as a record of the old setup; not shown)
+     the RSVP was stored on our server (rsvp.php next to this file): name, attendance, number of guests only */
   rsvp: {
     endpoint: '/sai-sushmitha-sai-santosh-wedding/rsvp.php',
     choices: ['Yes, I’ll be attending', 'Sorry, I won’t be able to attend'],
@@ -83,6 +84,15 @@ export const weddingConfig = {
   contact: null,
   gifting: null,
   wishes: null,
+
+  /* the last slide (client, 26 Nov), exactly as supplied */
+  from: {
+    title: 'From:',
+    names: ['Smt. Beeravally Padmavathi', 'Sri Beeravally Gopal Reddy'],
+    address: ['Villa No. 167, Indu Aranya (Haritha),', 'Bandlaguda, Nagole, Hyderabad.'],
+    phones: ['9848052445', '9948566744'],
+  },
+  showRsvp: false,
 
   thankYou: {
     title: 'Thank You',

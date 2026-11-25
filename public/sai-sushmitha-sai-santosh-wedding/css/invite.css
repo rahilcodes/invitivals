@@ -749,3 +749,29 @@ html.is-open .intro.is-skipped .intro-video { transform: none; transition: none;
 .families .family-person { font-size: clamp(30px, 8.8vw, 40px); line-height: 1.14; text-wrap: balance; }
 .welcome .prose { text-wrap: balance; }
 .welcome .pair-name { font-size: clamp(17px, 5.2vw, 24px); letter-spacing: .14em; text-wrap: balance; }
+
+/* ── 26 Nov (client) ── */
+/* the venue under the muhurtham, larger and clearer */
+.ceremony .c-muhurtham { max-width: 250px; font-size: 13px; letter-spacing: .1em; line-height: 1.55; color: var(--maroon); font-weight: 600; }
+/* the bride's parents' longer names keep the families' size, balanced over two lines where needed */
+.family-parents { text-wrap: balance; }
+/* the From slide: the invitation's paper, a compact card in its gold frame, directly after the temple-tank finale */
+.from { padding: 0 0 26px; margin-top: -2px; }
+.from-card { position: relative; margin: 34px auto 0; padding: 34px 22px 26px; max-width: 320px; text-align: center; border-radius: 6px;
+  background: linear-gradient(180deg, rgba(255, 250, 238, .75), rgba(250, 238, 214, .55));
+  box-shadow: 0 0 0 1px rgba(184, 137, 50, .8), 0 0 0 5px var(--paper), 0 0 0 6px rgba(184, 137, 50, .4), 0 16px 26px -18px rgba(74, 14, 24, .45); }
+.from-card p { margin: 0; }
+.from-seal { position: absolute; left: 50%; top: -22px; width: 44px; height: 44px; padding: 5px; transform: translateX(-50%); border-radius: 50%; background: var(--paper); box-shadow: 0 0 0 1px rgba(184, 137, 50, .6); }
+.from-seal svg { width: 100%; height: 100%; }
+.from .from-title { font-size: 46px; line-height: 1.05; margin: 0; }
+.from-names { margin-top: 8px !important; font-family: var(--caps); font-size: 14px; letter-spacing: .06em; line-height: 1.8; color: var(--maroon); font-weight: 600; }
+.from-rule { display: block; width: 150px; height: 1px; margin: 14px auto 12px; background: linear-gradient(90deg, transparent, var(--gold), transparent); }
+.from-addr { font-size: 17px; line-height: 1.5; color: var(--ink); text-wrap: balance; }
+.from-cell { margin-top: 8px !important; font-size: 17px; font-weight: 600; color: var(--maroon); }
+.from-cell a { color: inherit; text-decoration: none; border-bottom: 1px solid rgba(184, 137, 50, .6); white-space: nowrap; }
+.from .credit { margin-top: 22px; }
+.from-card { padding: 34px 16px 24px; }
+.from-names { font-size: 12.5px; letter-spacing: .03em; line-height: 1.9; white-space: nowrap; }
+.from-addr, .from-cell { font-size: 15.5px; }
+/* the temple-tank finale melts into the paper of the From slide (no hard edge) */
+.thanks .finale { -webkit-mask-image: linear-gradient(180deg, #000 86%, transparent 100%); mask-image: linear-gradient(180deg, #000 86%, transparent 100%); }
