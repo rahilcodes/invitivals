@@ -1,0 +1,150 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Invitivals//Arshleen & Manbir Wedding//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+X-WR-CALNAME:Arshleen & Manbir · Wedding
+X-WR-TIMEZONE:Asia/Kolkata
+BEGIN:VTIMEZONE
+TZID:Asia/Kolkata
+BEGIN:STANDARD
+DTSTART:19700101T000000
+TZOFFSETFROM:+0530
+TZOFFSETTO:+0530
+TZNAME:IST
+END:STANDARD
+END:VTIMEZONE
+BEGIN:VEVENT
+UID:20270101T120000-akhand-path-12pm@arshleen-manbir.invitivals.com
+DTSTAMP:20261126T000000Z
+DTSTART;TZID=Asia/Kolkata:20270101T120000
+SUMMARY:Akhand Path — Arshleen & Manbir
+LOCATION:At Residence
+DESCRIPTION:Arshleen Kaur & Manbir Singh · Wedding\nhttps://invitivals.com
+ /arshleen-manbir-wedding/
+URL:https://invitivals.com/arshleen-manbir-wedding/
+STATUS:CONFIRMED
+BEGIN:VALARM
+TRIGGER:-P1D
+ACTION:DISPLAY
+DESCRIPTION:Akhand Path — Arshleen & Manbir
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:20270101T150000-bangle-ceremony@arshleen-manbir.invitivals.com
+DTSTAMP:20261126T000000Z
+DTSTART;TZID=Asia/Kolkata:20270101T150000
+SUMMARY:Bangle Ceremony — Arshleen & Manbir
+LOCATION:At Residence
+DESCRIPTION:Arshleen Kaur & Manbir Singh · Wedding\nhttps://invitivals.com
+ /arshleen-manbir-wedding/
+URL:https://invitivals.com/arshleen-manbir-wedding/
+STATUS:CONFIRMED
+BEGIN:VALARM
+TRIGGER:-P1D
+ACTION:DISPLAY
+DESCRIPTION:Bangle Ceremony — Arshleen & Manbir
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:20270115T110000-din-shagna-da@arshleen-manbir.invitivals.com
+DTSTAMP:20261126T000000Z
+DTSTART;TZID=Asia/Kolkata:20270115T110000
+SUMMARY:Din Shagna Da — Arshleen & Manbir
+LOCATION:Riviera\, Airport Road\, Amritsar
+DESCRIPTION:Arshleen Kaur & Manbir Singh · Wedding\nMap: https://maps.app.
+ goo.gl/NGEKpNvX8zY6oawU7?g_st=ic\nhttps://invitivals.com/arshleen-manbir-w
+ edding/
+URL:https://invitivals.com/arshleen-manbir-wedding/
+STATUS:CONFIRMED
+BEGIN:VALARM
+TRIGGER:-P1D
+ACTION:DISPLAY
+DESCRIPTION:Din Shagna Da — Arshleen & Manbir
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:20270116T120000-haldi@arshleen-manbir.invitivals.com
+DTSTAMP:20261126T000000Z
+DTSTART;TZID=Asia/Kolkata:20270116T120000
+SUMMARY:The Golden Glow (Haldi) — Arshleen & Manbir
+LOCATION:Farmhouse
+DESCRIPTION:Arshleen Kaur & Manbir Singh · Wedding\nhttps://invitivals.com
+ /arshleen-manbir-wedding/
+URL:https://invitivals.com/arshleen-manbir-wedding/
+STATUS:CONFIRMED
+BEGIN:VALARM
+TRIGGER:-P1D
+ACTION:DISPLAY
+DESCRIPTION:The Golden Glow (Haldi) — Arshleen & Manbir
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:20270117T110000-mehndi@arshleen-manbir.invitivals.com
+DTSTAMP:20261126T000000Z
+DTSTART;TZID=Asia/Kolkata:20270117T110000
+SUMMARY:Jashn-e-Heena (Mehndi) — Arshleen & Manbir
+LOCATION:At Residence
+DESCRIPTION:Arshleen Kaur & Manbir Singh · Wedding\nhttps://invitivals.com
+ /arshleen-manbir-wedding/
+URL:https://invitivals.com/arshleen-manbir-wedding/
+STATUS:CONFIRMED
+BEGIN:VALARM
+TRIGGER:-P1D
+ACTION:DISPLAY
+DESCRIPTION:Jashn-e-Heena (Mehndi) — Arshleen & Manbir
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:20270118T190000-jaggo@arshleen-manbir.invitivals.com
+DTSTAMP:20261126T000000Z
+DTSTART;TZID=Asia/Kolkata:20270118T190000
+SUMMARY:Ashi’s Jaggo Night — Arshleen & Manbir
+LOCATION:Bhullar Farms
+DESCRIPTION:Arshleen Kaur & Manbir Singh · Wedding\nhttps://invitivals.com
+ /arshleen-manbir-wedding/
+URL:https://invitivals.com/arshleen-manbir-wedding/
+STATUS:CONFIRMED
+BEGIN:VALARM
+TRIGGER:-P1D
+ACTION:DISPLAY
+DESCRIPTION:Ashi’s Jaggo Night — Arshleen & Manbir
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:20270119T100000-anand-karaj@arshleen-manbir.invitivals.com
+DTSTAMP:20261126T000000Z
+DTSTART;TZID=Asia/Kolkata:20270119T100000
+SUMMARY:Anand Karaj — Arshleen & Manbir
+LOCATION:Gurudwara Chhevin Patshahi\, ਗੁਰਦੁਆਰਾ ਛੇਵੀ
+ ਂ ਪਾਤਸ਼ਾਹੀ
+DESCRIPTION:Arshleen Kaur & Manbir Singh · Wedding\nMap: https://maps.app.
+ goo.gl/JwHjUbnXJEcEe7XJ6?g_st=ic\nhttps://invitivals.com/arshleen-manbir-w
+ edding/
+URL:https://invitivals.com/arshleen-manbir-wedding/
+STATUS:CONFIRMED
+BEGIN:VALARM
+TRIGGER:-P1D
+ACTION:DISPLAY
+DESCRIPTION:Anand Karaj — Arshleen & Manbir
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:20270119T000000-wedding-celebration@arshleen-manbir.invitivals.com
+DTSTAMP:20261126T000000Z
+DTSTART;VALUE=DATE:20270119
+DTEND;VALUE=DATE:20270120
+SUMMARY:Wedding Celebration — Arshleen & Manbir
+LOCATION:Lily Resort\, Vallah\, Amritsar
+DESCRIPTION:Arshleen Kaur & Manbir Singh · Wedding\nTime to be announced.\
+ nMap: https://maps.app.goo.gl/JwHjUbnXJEcEe7XJ6?g_st=ic\nhttps://invitival
+ s.com/arshleen-manbir-wedding/
+URL:https://invitivals.com/arshleen-manbir-wedding/
+STATUS:CONFIRMED
+BEGIN:VALARM
+TRIGGER:-P1D
+ACTION:DISPLAY
+DESCRIPTION:Wedding Celebration — Arshleen & Manbir
+END:VALARM
+END:VEVENT
+END:VCALENDAR

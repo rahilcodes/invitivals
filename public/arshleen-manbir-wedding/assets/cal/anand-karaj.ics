@@ -1,0 +1,35 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Invitivals//Arshleen & Manbir Wedding//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+X-WR-CALNAME:Arshleen & Manbir · Wedding
+X-WR-TIMEZONE:Asia/Kolkata
+BEGIN:VTIMEZONE
+TZID:Asia/Kolkata
+BEGIN:STANDARD
+DTSTART:19700101T000000
+TZOFFSETFROM:+0530
+TZOFFSETTO:+0530
+TZNAME:IST
+END:STANDARD
+END:VTIMEZONE
+BEGIN:VEVENT
+UID:20270119T100000-anand-karaj@arshleen-manbir.invitivals.com
+DTSTAMP:20261126T000000Z
+DTSTART;TZID=Asia/Kolkata:20270119T100000
+SUMMARY:Anand Karaj — Arshleen & Manbir
+LOCATION:Gurudwara Chhevin Patshahi\, ਗੁਰਦੁਆਰਾ ਛੇਵੀ
+ ਂ ਪਾਤਸ਼ਾਹੀ
+DESCRIPTION:Arshleen Kaur & Manbir Singh · Wedding\nMap: https://maps.app.
+ goo.gl/JwHjUbnXJEcEe7XJ6?g_st=ic\nhttps://invitivals.com/arshleen-manbir-w
+ edding/
+URL:https://invitivals.com/arshleen-manbir-wedding/
+STATUS:CONFIRMED
+BEGIN:VALARM
+TRIGGER:-P1D
+ACTION:DISPLAY
+DESCRIPTION:Anand Karaj — Arshleen & Manbir
+END:VALARM
+END:VEVENT
+END:VCALENDAR

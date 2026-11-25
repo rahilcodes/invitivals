@@ -1,0 +1,35 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Invitivals//Arshleen & Manbir Wedding//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+X-WR-CALNAME:Arshleen & Manbir · Wedding
+X-WR-TIMEZONE:Asia/Kolkata
+BEGIN:VTIMEZONE
+TZID:Asia/Kolkata
+BEGIN:STANDARD
+DTSTART:19700101T000000
+TZOFFSETFROM:+0530
+TZOFFSETTO:+0530
+TZNAME:IST
+END:STANDARD
+END:VTIMEZONE
+BEGIN:VEVENT
+UID:20270119T000000-wedding-celebration@arshleen-manbir.invitivals.com
+DTSTAMP:20261126T000000Z
+DTSTART;VALUE=DATE:20270119
+DTEND;VALUE=DATE:20270120
+SUMMARY:Wedding Celebration — Arshleen & Manbir
+LOCATION:Lily Resort\, Vallah\, Amritsar
+DESCRIPTION:Arshleen Kaur & Manbir Singh · Wedding\nTime to be announced.\
+ nMap: https://maps.app.goo.gl/JwHjUbnXJEcEe7XJ6?g_st=ic\nhttps://invitival
+ s.com/arshleen-manbir-wedding/
+URL:https://invitivals.com/arshleen-manbir-wedding/
+STATUS:CONFIRMED
+BEGIN:VALARM
+TRIGGER:-P1D
+ACTION:DISPLAY
+DESCRIPTION:Wedding Celebration — Arshleen & Manbir
+END:VALARM
+END:VEVENT
+END:VCALENDAR
