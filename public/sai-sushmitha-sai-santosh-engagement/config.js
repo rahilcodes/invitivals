@@ -67,7 +67,7 @@ export const config = {
   closing: {
     title: 'Thank You',
     lines: ['Your presence and blessings will make', 'this special occasion even more memorable.', 'We look forward to celebrating', 'this beautiful beginning with you.'],
-    from: 'Beeravally & Kotha Families',
+    from: 'Beeravally & Kotha Venkata Families',   // client, 25 Nov
   },
 
   opening: {

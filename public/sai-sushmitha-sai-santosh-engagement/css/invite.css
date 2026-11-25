@@ -244,3 +244,9 @@ button { font: inherit; cursor: pointer; }
 .closing__from em { font-weight: 500; font-style: italic; }
 
 .confetti { position: fixed; inset: 0; width: 100vw; height: 100vh; z-index: 65; pointer-events: none; }
+/* 25 Nov (client): the closing words and "With Love, / Beeravally & Kotha Venkata Families" sit wholly inside the
+   cartouche's inner panel (about 57% to 70% of the page, 23% to 77% across), in a slightly smaller size */
+.p-end .closing { top: 56.4%; height: 14.6%; left: 23%; right: 23%; gap: .8cqw; font-size: 2.6cqw; line-height: 1.32; }
+.p-end .closing__from { font-size: 2.6cqw; line-height: 1.3; }
+/* the families card's labels in a deeper mauve so they read clearly on the cream card */
+.fam__label { color: #7a3f62; }

@@ -5,7 +5,7 @@
    to the ceremony (landscape) · 5 the closing (SS monogram, Thank You).
    Pages 2 and 3 follow the reference's layout: their pieces take the boxes the reference measured (js/art.js).
    There is no RSVP. */
-import { config as C } from '../config.js?v=1';
+import { config as C } from '../config.js?v=2';
 import { art, box } from './art.js?v=1';
 import { h, observePages, calendarHref, reducedMotion } from './util.js?v=1';
 import { OpeningScreen } from './opening.js?v=1';
@@ -148,7 +148,7 @@ const page4 = Page(4, 'p-count', [
 const page5 = Page(5, 'p-end', [
   r(0.1, 'div', { class: 'mono' }, pic('ss-gold', 'S S monogram', '')),
   r(0.4, 'h2', { class: 'thanks' }, C.closing.title),
-  r(0.65, 'div', { class: 'closing' }, h('p', {}, ...br(C.closing.lines)), h('p', { class: 'closing__from' }, h('em', {}, 'With love,'), h('br'), C.closing.from)),
+  r(0.65, 'div', { class: 'closing' }, h('p', {}, ...br(C.closing.lines)), h('p', { class: 'closing__from' }, h('em', {}, 'With Love,'), h('br'), C.closing.from)),
   h('a', { class: 'created', href: `https://invitivals.com/?utm_source=invitation&utm_medium=footer&utm_campaign=${C.slug}`, target: '_blank', rel: 'noopener' }, 'Created by ', h('b', {}, 'INVITIVALS')),
 ]);
 
