@@ -4,7 +4,7 @@
      doors (tap) → main invitation → Save the Date (scratch card) → Our Functions (View Details opens each
      function's own page) → RSVP → thank you.
    Both links run this file; config.js decides which function cards are shown. */
-import { config as C } from '../config.js?v=6';
+import { config as C } from '../config.js?v=7';
 
 const h = (tag, attrs = {}, ...kids) => {
   const el = document.createElement(tag);
@@ -167,7 +167,9 @@ const functions = page(`functions n${C.events.length}`, FN.art, 941, FN.H,
    the page); every title is centred between those two heights, and on Mayun and Rukhsati (plain plates) the same two
    lines are drawn at the same places, so all four pages share one heading geometry. The date blocks sit lower than
    before, each by what its own artwork allows (Mehendi between its painted diamond and its rule at 79.6%). */
-const PLATES = { mayun: ['d-mayun.webp', 75.2, false], mehendi: ['d-mehendi.webp', 70.5, true], nikah: ['d-nikah.webp', 66.6, true], rukhsati: ['d-rukhsati.webp', 72.0, false] };
+/* 25 Nov: the gold rule painted across the Mehendi and Nikah date blocks is taken out of those plates (the build tool), so
+   Mehendi's group sits where Mayun's does, in the same sizes, and Nikah's lines get room to breathe */
+const PLATES = { mayun: ['d-mayun.webp', 75.2, false], mehendi: ['d-mehendi.webp', 75.2, true], nikah: ['d-nikah.webp', 64.8, true], rukhsati: ['d-rukhsati.webp', 72.0, false] };
 const LINE_TOP = 7.9, LINE_BOTTOM = 16.8;
 let current = null;
 function detailPage(ev) {

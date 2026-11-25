@@ -176,14 +176,9 @@ p, h2, h3 { margin: 0; font-weight: 400; }
 }
 /* detail plates: the Nikah stage has its own painted rule under the times, so the venue sits below it and the
    drawn rule is only spacing; on the Rukhsati hall the words get a soft paper glow over the floor */
-.d-nikah .d-info .rule { visibility: hidden; margin: 1.2cqw 0 .4cqw; }
+.d-nikah .d-info .rule { visibility: hidden; margin: .6cqw 0 0; }
 .d-rukhsati .d-info { padding: 2cqw 2cqw 0; background: radial-gradient(ellipse 62% 58% at 50% 40%, rgba(253,246,230,.88) 50%, rgba(253,246,230,0) 100%); }
 .d-nikah .d-info { padding: 1.6cqw 2cqw 0; background: radial-gradient(ellipse 58% 40% at 50% 16%, rgba(253,246,230,.85) 45%, rgba(253,246,230,0) 100%); }
-/* Mehendi: its plate paints a diamond above the weekday and a rule under the time, as the reference's page 7 does */
-.d-mehendi .d-info { gap: 0; }
-.d-mehendi .d-info .wd { font-size: 4.3cqw; }
-.d-mehendi .d-info .dt { font-size: 6.6cqw; }
-.d-mehendi .d-info .tm { font-size: 4.1cqw; }
 /* 26 Nov: the RSVP boxes scale with the page (never under the 42 px a finger needs), so a wide screen keeps the
    phone's proportions instead of leaving the lower arch empty */
 .choices label { min-height: max(42px, 11.4cqw); }
@@ -193,7 +188,11 @@ p, h2, h3 { margin: 0; font-weight: 400; }
 
 /* 27 Nov: the date blocks one notch lower; Mehendi's lines stay between its painted diamond and its rule, Nikah's
    times above its painted rule (79.6%) and its venue below it, with the buttons clear of the page's foot */
-.d-mehendi .d-info .wd, .d-mehendi .d-info .dt { line-height: 1; }
-.d-mehendi .d-info .tm { line-height: 1.05; }
-.d-nikah .d-info .vn { line-height: 1.04; }
-.d-nikah .d-info .acts { margin-top: 1.6cqw; }
+
+/* 25 Nov: Nikah — its painted rule is gone; weekday, date, time, dinner and the three venue lines each get their own
+   space (one even step), the venue a touch smaller so "Nirvana Grand Hotel and Resort" stays on one line */
+.d-nikah .d-info { gap: .9cqw; }
+.d-nikah .d-info .dt { font-size: 7cqw; }
+.d-nikah .d-info .vn { font-size: 5.3cqw; line-height: 1.06; }
+.d-nikah .d-info .vn + .vn { margin-top: -.5cqw; }
+.d-nikah .d-info .acts { margin-top: 1.4cqw; }

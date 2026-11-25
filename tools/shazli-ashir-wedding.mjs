@@ -100,8 +100,28 @@ const lum = (b, k) => 0.3 * b[k * 3] + 0.59 * b[k * 3 + 1] + 0.11 * b[k * 3 + 2]
 await plate('paper.webp', 'bg10.webp');
 /* the four function detail pages (the reference's pages 6–9, clean) */
 await plate('d-mayun.webp', 'bg6.webp');
-await plate('d-mehendi.webp', 'bg7.webp');
-await plate('d-nikah.webp', 'bg8.webp');
+/* 25 Nov (client): the Mehendi and Nikah plates paint a thin gold rule with small end ornaments across the date block
+   (x 280–662, y 1322–1342 of 941 × 1672); it cut through "Dinner at 8:00 PM onwards" and held the Mehendi lines up.
+   It is taken out of these two plates: each column of that strip is refilled by a blend of the paper just above and
+   just below it, then the patch is softened at its edge. */
+async function withoutRule(from) {
+  const { data, info } = await sharp(path.join(REF, from)).removeAlpha().raw().toBuffer({ resolveWithObject: true });
+  const W = info.width, X0 = 280, X1 = 662, Y0 = 1322, Y1 = 1342;
+  const px = (x, y, c) => data[(y * W + x) * 3 + c];
+  const avg = (x, y, c) => { let t = 0, n = 0; for (let dx = -2; dx <= 2; dx++) for (let dy = -1; dy <= 1; dy++) { t += px(x + dx, y + dy, c); n++; } return t / n; };
+  for (let x = X0; x <= X1; x++) {
+    const T = [0, 1, 2].map((c) => avg(x, Y0 - 3, c)), B = [0, 1, 2].map((c) => avg(x, Y1 + 3, c));
+    for (let y = Y0; y <= Y1; y++) { const t = (y - Y0) / (Y1 - Y0); for (let c = 0; c < 3; c++) data[(y * W + x) * 3 + c] = Math.round(T[c] * (1 - t) + B[c] * t); }
+  }
+  const patched = sharp(data, { raw: info });
+  const soft = await sharp(await patched.clone().png().toBuffer()).extract({ left: X0 - 8, top: Y0 - 8, width: X1 - X0 + 16, height: Y1 - Y0 + 16 }).blur(2.5).toBuffer();
+  const mask = Buffer.from(`<svg width="${X1 - X0 + 16}" height="${Y1 - Y0 + 16}"><defs><filter id="f"><feGaussianBlur stdDeviation="3"/></filter></defs><rect x="6" y="6" width="${X1 - X0 + 4}" height="${Y1 - Y0 + 4}" fill="#fff" filter="url(#f)"/></svg>`);
+  const softMasked = await sharp(soft).ensureAlpha().composite([{ input: mask, blend: 'dest-in' }]).png().toBuffer();
+  const base = await patched.png().toBuffer();
+  return sharp(base).composite([{ input: softMasked, left: X0 - 8, top: Y0 - 8 }]).webp({ quality: 86 }).toBuffer();
+}
+files['d-mehendi.webp'] = await withoutRule('bg7.webp');
+files['d-nikah.webp'] = await withoutRule('bg8.webp');
 await plate('d-rukhsati.webp', 'bg9.webp');
 /* Our Functions: the reference's clean four-card plate as it is; for the Nikah + Rukhsati link the first two cards
    are taken out (rows 228–907 of 1672, two card pitches) and the two halves are cross-faded over 48 rows */
