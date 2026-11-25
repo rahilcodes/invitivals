@@ -18,18 +18,18 @@ BEGIN:VEVENT
 UID:20261201T100000-arambh@kiranjit-sharnjit.invitivals.com
 DTSTAMP:20261122T000000Z
 DTSTART;TZID=Asia/Kolkata:20261201T100000
-SUMMARY:Arambh – Shri Akhand Path Sahib — Kiranjit & Sharnjit
+SUMMARY:Shri Akhand Path Sahib Arambh — Kiranjit & Sharnjit
 LOCATION:At Our Residence\, H. No. 87\, Green Avenue Colony\, Mukerian\, Di
  stt. Hoshiarpur.
-DESCRIPTION:Arambh – Shri Akhand Path Sahib · the wedding of Kiranjit Si
- ngh & Sharnjit Kaur.\nTime: 10:00 AM.\nMap: https://maps.app.goo.gl/Ya4BPx
- BXY5s9TKW3A?g_st=iw\nhttps://invitivals.com/kiranjit-sharnjit-wedding/
+DESCRIPTION:Shri Akhand Path Sahib Arambh · the wedding of Kiranjit Singh 
+ & Sharnjit Kaur.\nTime: 10:00 AM.\nMap: https://maps.app.goo.gl/Ya4BPxBXY5
+ s9TKW3A?g_st=iw\nhttps://invitivals.com/kiranjit-sharnjit-wedding/
 URL:https://invitivals.com/kiranjit-sharnjit-wedding/
 STATUS:CONFIRMED
 BEGIN:VALARM
 TRIGGER:-P1D
 ACTION:DISPLAY
-DESCRIPTION:Arambh – Shri Akhand Path Sahib — Kiranjit & Sharnjit
+DESCRIPTION:Shri Akhand Path Sahib Arambh — Kiranjit & Sharnjit
 END:VALARM
 END:VEVENT
 END:VCALENDAR

@@ -100,7 +100,7 @@ export const weddingConfig = {
   events: [
     {
       id: 'arambh', icon: 'faith', menu: 'Arambh',
-      name: 'Arambh', subtitle: 'Shri Akhand Path Sahib',
+      name: 'Shri Akhand Path Sahib Arambh',   // client, 26 Nov (was 'Arambh' with this subtitle)
       date: '2026-12-01T10:00:00+05:30', time: '10:00 AM', ...HOME,
     },
     {
@@ -131,7 +131,10 @@ export const weddingConfig = {
     {
       id: 'lavaan', art: 'gurudwara', main: true, menu: 'Lavaan',
       name: 'Lavaan',
-      date: '2026-12-06T10:30:00+05:30', time: '10:30 AM', ...RESORT,
+      date: '2026-12-06T10:30:00+05:30', time: '10:30 AM',
+      /* client, 26 Nov: the Lavaan moved from J.S. Resorts to Bhadas Begowal. No map link was supplied for it, so it has
+         none (the resort's map is not reused) and it no longer belongs to the resort's venue card. */
+      venue: 'Bhadas Begowal', address: '',
     },
   ],
 
