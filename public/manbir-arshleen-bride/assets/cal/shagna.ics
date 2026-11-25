@@ -1,0 +1,35 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Invitivals//Arshleen and Manbir//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+X-WR-CALNAME:Arshleen & Manbir · Wedding
+X-WR-TIMEZONE:Asia/Kolkata
+BEGIN:VTIMEZONE
+TZID:Asia/Kolkata
+BEGIN:STANDARD
+DTSTART:19700101T000000
+TZOFFSETFROM:+0530
+TZOFFSETTO:+0530
+TZNAME:IST
+END:STANDARD
+END:VTIMEZONE
+BEGIN:VEVENT
+UID:20270115-shagna-1@manbir-arshleen-bride.invitivals.com
+DTSTAMP:20261125T000000Z
+DTSTART;TZID=Asia/Kolkata:20270115T110000
+SUMMARY:Din Shagna Da – Arshleen Kaur & Manbir Singh
+LOCATION:Riviera\, Airport Road\, Amritsar
+DESCRIPTION:With the blessings of Waheguru Ji\, you are warmly invited to t
+ he Din Shagna Da of Arshleen Kaur & Manbir Singh.\nVenue: Riviera\, Airpor
+ t Road\, Amritsar\nMap: https://maps.app.goo.gl/NGEKpNvX8zY6oawU7?g_st=ic\
+ nInvitation: https://invitivals.com/manbir-arshleen-bride/
+URL:https://invitivals.com/manbir-arshleen-bride/
+STATUS:CONFIRMED
+BEGIN:VALARM
+TRIGGER:-P1D
+ACTION:DISPLAY
+DESCRIPTION:Din Shagna Da – Arshleen Kaur & Manbir Singh
+END:VALARM
+END:VEVENT
+END:VCALENDAR

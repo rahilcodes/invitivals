@@ -444,6 +444,7 @@ const SCREENS = {
         { x: 186, y: 360, w: 414, h: 150, r: 40, f: 20, ...dk },   // Valima
         { x: 262, y: 962, w: 340, h: 96, ...card },                // painted date
         { x: 262, y: 1082, w: 340, h: 132, ...card },              // painted venue
+        { x: 196, y: 1372, w: 372, h: 110, ...card, r: 64, p: .8, f: 22 },              // painted map pill: the page's own map + calendar buttons sit here side by side
       ],
       html: [
         text(150, 282, 460, 120, 'Wedding', script(104) + goldText + 'filter:drop-shadow(0 2px 3px rgba(10,0,4,.6));padding-top:16px'),

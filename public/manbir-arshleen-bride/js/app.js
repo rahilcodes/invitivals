@@ -40,7 +40,7 @@
       jaggo:       { title: 'Ashi\u2019s Jaggo Night', date: '2027-01-18', time: '19:00',
                      venue: { name: 'Bhullar Farms', address: '' } },
       anand:       { title: 'Anand Karaj', date: '2027-01-19', time: '10:00',
-                     venue: { name: 'Gurudwara Chhevin Patshahi', local: 'ਗੁਰਦੁਆਰਾ ਛੇਵੀਂ ਪਾਤਸ਼ਾਹੀ', address: '' } },
+                     venue: { name: 'Gurudwara Chhevin Patshahi', local: 'ਗੁਰਦੁਆਰਾ ਛੇਵੀਂ ਪਾਤਸ਼ਾਹੀ', address: '' }, mapsUrl: MAP.wedding },   // the client's wedding-day link (brief of 25 Nov)
       celebration: { title: 'Wedding Celebration', date: '2027-01-19', time: '',      // no time supplied: none is shown
                      venue: { name: 'Lily Resort', address: 'Vallah, Amritsar' }, mapsUrl: MAP.wedding }
     }
@@ -50,6 +50,8 @@
   var MONTHS = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 
   var doc = document, body = doc.body, root = doc.documentElement;
+  var IOS = /iPad|iPhone|iPod/.test(navigator.userAgent) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+  var ANDROID = /Android/i.test(navigator.userAgent);
   var $ = function (s, c) { return (c || doc).querySelector(s); };
   var $$ = function (s, c) { return Array.prototype.slice.call((c || doc).querySelectorAll(s)); };
   var reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -522,7 +524,7 @@
       unlockScroll();                               // normal document scrolling begins here
       window.scrollTo(0, 0);
       warm(['scratch', 'functions', 'countdown', 'closing', 'akhand', 'shagna', 'haldi', 'mehndi', 'jaggo', 'anand', 'celebration']
-        .map(function (n) { return 'assets/screens/' + n + '.jpg?v=1'; }));
+        .map(function (n) { return 'assets/screens/' + n + '.jpg?v=' + (n === 'celebration' ? 2 : 1); }));   // the celebration was repainted (25 Nov)
     }, reduceMotion ? 300 : 1150);
   }
   function openEnvelope() {
@@ -776,23 +778,13 @@
     var details = 'With the blessings of Waheguru Ji, you are warmly invited to the Anand Karaj of Arshleen Kaur and Manbir Singh.';
     var esc = function (s) { return String(s).replace(/\\/g, '\\\\').replace(/([,;])/g, '\\$1').replace(/\n/g, '\\n'); };
 
-    var ics = [
-      'BEGIN:VCALENDAR', 'VERSION:2.0', 'PRODID:-//Invitivals//Arshleen and Manbir//EN', 'CALSCALE:GREGORIAN', 'METHOD:PUBLISH',
-      'BEGIN:VEVENT',
-      'UID:' + utcStamp(start) + '-' + CONFIG.mainEvent + '@wedding-invitation',
-      'DTSTAMP:' + utcStamp(Date.now()),
-      'DTSTART:' + utcStamp(start),
-      'SUMMARY:' + esc(title),
-      'LOCATION:' + esc(venueLine(main)),
-      'DESCRIPTION:' + esc(details),
-      'BEGIN:VALARM', 'TRIGGER:-P1D', 'ACTION:DISPLAY', 'DESCRIPTION:' + esc(title), 'END:VALARM',
-      'END:VEVENT', 'END:VCALENDAR'
-    ].join('\r\n');
 
-    var icsHref = 'data:text/calendar;charset=utf-8,' + encodeURIComponent(ics);
-    try { if (window.Blob && window.URL && URL.createObjectURL) icsHref = URL.createObjectURL(new Blob([ics], { type: 'text/calendar;charset=utf-8' })); } catch (e) {}
+    /* the Anand Karaj's own calendar file (written by tools/manbir-arshleen-bride-cal.mjs): a real file opens straight
+       into Calendar on iPhone and inside WhatsApp, where a generated (blob) file often does not */
+    var icsHref = 'assets/cal/anand.ics';
     ['#calSave', '#calApple'].forEach(function (id) {
-      var a = $(id); a.href = icsHref; a.setAttribute('download', 'Arshleen-Manbir-Anand-Karaj.ics');
+      var a = $(id); a.href = icsHref;
+      if (!IOS) a.setAttribute('download', 'Arshleen-Manbir-Anand-Karaj.ics');
     });
 
     $('#calGoogle').href = 'https://calendar.google.com/calendar/render?action=TEMPLATE' +
@@ -807,5 +799,99 @@
       '&enddt=' + encodeURIComponent(new Date(start).toISOString()) +
       '&body=' + encodeURIComponent(details) +
       '&location=' + encodeURIComponent(venueLine(main));
+  })();
+
+  /* ------------------------------------------------------------
+     EVERY EVENT: "Add to Calendar" opens a small sheet with both ways (the guest chooses; no device is assumed):
+       · Google Calendar, filled in — one button per activity (the Akhand Path and the Bangle Ceremony are two
+         entries with their own times, never merged); through Google's sign-in address except on Android
+       · the event's own .ics file (assets/cal/<event>.ics, tools/manbir-arshleen-bride-cal.mjs) for Apple
+         Calendar, Outlook and every other calendar app
+     No end times are invented: timed entries start and end at the supplied start; the Wedding Celebration, which
+     has no time, is an all-day entry. Without JavaScript the button is simply the .ics file.
+     ------------------------------------------------------------ */
+  (function eventCalendars() {
+    var SITE = 'https://invitivals.com/manbir-arshleen-bride/';
+    var sheet = doc.createElement('div');
+    sheet.className = 'calsheet'; sheet.hidden = true;
+    sheet.setAttribute('role', 'dialog'); sheet.setAttribute('aria-modal', 'true'); sheet.setAttribute('aria-labelledby', 'calsheetTitle');
+    sheet.innerHTML =
+      '<div class="calsheet__card">' +
+        '<button class="calsheet__x" type="button" aria-label="Close">×</button>' +
+        '<p class="calsheet__eyebrow">Add to Calendar</p>' +
+        '<h3 class="calsheet__title" id="calsheetTitle"></h3>' +
+        '<p class="calsheet__when"></p>' +
+        '<div class="calsheet__google"></div>' +
+        '<a class="calsheet__btn calsheet__btn--file" href="#"><span>Apple Calendar · Outlook · Others</span></a>' +
+        '<p class="calsheet__hint">The calendar file opens in Apple Calendar on iPhone, iPad and Mac, and in Outlook or any other calendar app.</p>' +
+      '</div>';
+    body.appendChild(sheet);
+    var q = function (c) { return sheet.querySelector(c); };
+    var last = null;
+
+    function where(ev) { var v = venueOf(ev); return v.local ? v.name + ' (' + v.local + ')' : venueLine(ev); }
+    function googleUrl(ev, name, time) {
+      var dates;
+      if (time) { var st = utcStamp(Date.parse(ev.date + 'T' + time + ':00' + CONFIG.utcOffset)); dates = st + '/' + st; }
+      else {
+        var p = parts(ev), a = ev.date.replace(/-/g, ''), b = new Date(Date.UTC(p.y, p.m - 1, p.d + 1)).toISOString().slice(0, 10).replace(/-/g, '');
+        dates = a + '/' + b;                                                         // the day itself: no time was supplied
+      }
+      var details = ['With the blessings of Waheguru Ji, you are warmly invited to the ' + name + ' of ' + CONFIG.couple + '.',
+        ev.times ? ev.title + ': ' + ev.times.map(function (x) { return x[0] + ' ' + clock(ev, x[1]); }).join(', ') + '.' : '',
+        time ? '' : 'Time to be announced.',
+        'Venue: ' + where(ev), safeMapsUrl(ev) ? 'Map: ' + safeMapsUrl(ev) : '', 'Invitation: ' + SITE].filter(Boolean).join('\n');
+      return 'https://calendar.google.com/calendar/render?action=TEMPLATE' +
+        '&text=' + encodeURIComponent(name + ' – ' + CONFIG.couple) + '&dates=' + dates +
+        '&details=' + encodeURIComponent(details) + '&location=' + encodeURIComponent(where(ev)) + '&ctz=Asia%2FKolkata';
+    }
+    function open(link) {
+      var id = link.getAttribute('data-cal'), ev = CONFIG.events[id];
+      if (!ev) return;
+      var acts = ev.times || [[ev.title, ev.time || null]];
+      q('.calsheet__title').textContent = ev.title;
+      q('.calsheet__when').textContent = longDate(ev) + (ev.times ? '' : (ev.time ? ' · ' + clock(ev) : ''));
+      var g = q('.calsheet__google'); g.innerHTML = '';
+      acts.forEach(function (x) {
+        var a = doc.createElement('a');
+        a.className = 'calsheet__btn calsheet__btn--google'; a.target = '_blank'; a.rel = 'noopener';
+        a.href = googleUrl(ev, x[0], x[1]);
+        a.innerHTML = '<span></span>';
+        a.firstChild.textContent = 'Google Calendar';
+        if (acts.length > 1) { var sm = doc.createElement('small'); sm.textContent = x[0] + ' · ' + clock(ev, x[1]); a.appendChild(sm); }
+        g.appendChild(a);
+      });
+      var f = q('.calsheet__btn--file');
+      f.href = link.getAttribute('href');
+      if (IOS) f.removeAttribute('download'); else f.setAttribute('download', 'Arshleen-Manbir-' + id + '.ics');
+      last = link;
+      sheet.hidden = false;
+      requestAnimationFrame(function () { sheet.classList.add('is-on'); });
+      var first = q('.calsheet__btn'); if (first) first.focus({ preventScroll: true });
+    }
+    function close() {
+      sheet.classList.remove('is-on');
+      setTimeout(function () { sheet.hidden = true; }, 300);
+      if (last) try { last.focus({ preventScroll: true }); } catch (e) {}
+    }
+    q('.calsheet__x').addEventListener('click', close);
+    sheet.addEventListener('click', function (e) {
+      if (e.target === sheet) return close();
+      var a = e.target.closest && e.target.closest('.calsheet__btn--google');
+      if (!a || ANDROID) return;                                   // Android: the Google Calendar app takes the plain link
+      e.preventDefault();
+      var url = 'https://accounts.google.com/ServiceLogin?service=cl&continue=' + encodeURIComponent(a.href);
+      var w = null; try { w = window.open(url, '_blank'); } catch (err) {}
+      if (w) { try { w.opener = null; } catch (err) {} } else location.href = url;
+    });
+    doc.addEventListener('keydown', function (e) {                 // Escape closes the sheet first, not the event page
+      if (e.key === 'Escape' && !sheet.hidden) { e.stopImmediatePropagation(); close(); }
+    }, true);
+    doc.addEventListener('click', function (e) {
+      var a = e.target.closest && e.target.closest('a[data-cal]');
+      if (!a) return;
+      e.preventDefault(); e.stopPropagation();
+      open(a);
+    }, true);
   })();
 })();
