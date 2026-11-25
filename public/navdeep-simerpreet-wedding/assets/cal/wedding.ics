@@ -1,0 +1,37 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Invitivals//Navdeep & Simerpreet Wedding//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+X-WR-CALNAME:Navdeep & Simerpreet · Wedding
+X-WR-TIMEZONE:Asia/Kolkata
+BEGIN:VTIMEZONE
+TZID:Asia/Kolkata
+BEGIN:STANDARD
+DTSTART:19700101T000000
+TZOFFSETFROM:+0530
+TZOFFSETTO:+0530
+TZNAME:IST
+END:STANDARD
+END:VTIMEZONE
+BEGIN:VEVENT
+UID:20270227T110000-wedding@navdeep-simerpreet.invitivals.com
+DTSTAMP:20261125T000000Z
+DTSTART;TZID=Asia/Kolkata:20270227T110000
+SUMMARY:Wedding – Navdeep Singh Kahlon & Simerpreet Kaur Brar
+LOCATION:Sheesh Mahal Resorts\, Fatehabad
+DESCRIPTION:Navdeep Singh Kahlon & Simerpreet Kaur Brar · Wedding\nSheesh 
+ Mahal Resorts\, Dhani Masitaw Wali\, Fatehabad\, Haryana 125050\, India\nM
+ ap: https://maps.google.com?ftid=0x3911658b176a40d7:0x9266586d0890376a&ent
+ ry=gps&shh=CAE&lucs=\,94231188\,100821555\,47071704\,94218641\,100849091\,
+ 100838877\,121816461\,100798797\,100848091&g_st=iwb\nhttps://invitivals.co
+ m/navdeep-simerpreet-wedding/
+URL:https://invitivals.com/navdeep-simerpreet-wedding/
+STATUS:CONFIRMED
+BEGIN:VALARM
+TRIGGER:-P1D
+ACTION:DISPLAY
+DESCRIPTION:Wedding – Navdeep Singh Kahlon & Simerpreet Kaur Brar
+END:VALARM
+END:VEVENT
+END:VCALENDAR
