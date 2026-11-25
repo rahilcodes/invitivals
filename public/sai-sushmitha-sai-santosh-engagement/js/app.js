@@ -5,7 +5,7 @@
    to the ceremony (landscape) · 5 the closing (SS monogram, Thank You).
    Pages 2 and 3 follow the reference's layout: their pieces take the boxes the reference measured (js/art.js).
    There is no RSVP. */
-import { config as C } from '../config.js?v=3';
+import { config as C } from '../config.js?v=4';
 import { art, box } from './art.js?v=1';
 import { h, observePages, calendarHref, reducedMotion } from './util.js?v=1';
 import { OpeningScreen } from './opening.js?v=1';

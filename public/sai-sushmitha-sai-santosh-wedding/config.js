@@ -49,14 +49,14 @@ export const weddingConfig = {
       person: 'Dr. Sai Sushmitha Reddy',
       initial: 'S',
       relation: 'Daughter of',
-      parents: ['Smt. Kotha Venkata Beeravally Padmavathi', 'Sri Kotha Venkata Beeravally Gopal Reddy'],   // client, 26 Nov
+      parents: ['Smt. Beeravally Padmavathi', 'Sri Beeravally Gopal Reddy'],   // client, 27 Nov
       grandparents: '',
     },
     groom: {
       label: "Groom's Family",
       person: 'Sai Santosh Reddy',
       relation: 'Only S/o.',
-      parents: ['Smt. & Sri Kotha Venkata', 'Sandhya Rani - Laxma Reddy'],
+      parents: ['Smt. Kotha Venkata Sandhya Rani', 'Sri Kotha Venkata Laxma Reddy'],   // client, 27 Nov
       grandparents: '',
     },
   },

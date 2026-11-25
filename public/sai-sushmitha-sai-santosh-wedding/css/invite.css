@@ -775,3 +775,6 @@ html.is-open .intro.is-skipped .intro-video { transform: none; transition: none;
 .from-addr, .from-cell { font-size: 15.5px; }
 /* the temple-tank finale melts into the paper of the From slide (no hard edge) */
 .thanks .finale { -webkit-mask-image: linear-gradient(180deg, #000 86%, transparent 100%); mask-image: linear-gradient(180deg, #000 86%, transparent 100%); }
+/* 27 Nov (client): each parent's full name stays on its own single line (never broken mid-name), a touch smaller
+   only on narrow phones so the longest name fits inside the column */
+.family-parents { white-space: nowrap; font-size: min(13.5px, 3.55vw); letter-spacing: min(.07em, .2vw); }

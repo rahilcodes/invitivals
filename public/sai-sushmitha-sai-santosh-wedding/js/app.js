@@ -1,5 +1,5 @@
 /* InvitationPage — composes one continuous invitation from weddingConfig. */
-import { weddingConfig as cfg } from '../config.js?v=2';
+import { weddingConfig as cfg } from '../config.js?v=3';
 import { GoldDefs, GoldThread } from './decor.js';
 import { guestName } from './util.js';
 import { IntroExperience, initIntro } from './sections/intro.js';

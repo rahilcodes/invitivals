@@ -26,7 +26,7 @@ export const config = {
     bride: 'Dr. Sai Sushmitha Reddy',
     and: 'AND',
     groom: 'Sai Santosh Reddy',
-    groomOf: ['S/o.', 'Smt. & Sri Kotha Venkata', 'Sandhya Rani - Laxma Reddy'],
+    groomOf: ['S/o.', 'Smt. Kotha Venkata Sandhya Rani', '& Sri Kotha Venkata Laxma Reddy'],   // client, 27 Nov
     blessing: 'With the blessings and love of our families.',
   },
 
@@ -50,8 +50,8 @@ export const config = {
     },
   ],
   families: [
-    { label: "Bride's Parents", lines: ['Smt. Kotha Venkata Beeravally Padmavathi', 'Sri Kotha Venkata Beeravally Gopal Reddy'] },   // client, 26 Nov
-    { label: "Groom's Parents", lines: ['Smt. & Sri Kotha Venkata', 'Sandhya Rani - Laxma Reddy'] },
+    { label: "Bride's Parents", lines: ['Smt. Beeravally Padmavathi', 'Sri Beeravally Gopal Reddy'] },   // client, 27 Nov
+    { label: "Groom's Parents", lines: ['Smt. Kotha Venkata Sandhya Rani', 'Sri Kotha Venkata Laxma Reddy'] },   // client, 27 Nov
   ],
   /* written into the calendar entry's description */
   programme: ['Engagement Ceremony – 7:30 PM onwards'],
