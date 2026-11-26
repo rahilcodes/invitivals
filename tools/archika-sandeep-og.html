@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<!-- Link-preview covers (1200×630) of the four Archika & Sandeep links. Rendered by `node tools/archika-sandeep.mjs covers`
+     (headless Chrome, ?v=<slug>), saved as public/<slug>/assets/cover-<slug>.jpg.
+     The Save the Date cover: the couple's AS monogram, the names and the date, centred (a square crop keeps all of it).
+     The three event covers: the client's photograph of Hotel Mukut Regency whole on the left, in the invitation's
+     gold frame; the monogram, the names, what the link is, the date(s) and the venue on the right. -->
+<html><head><meta charset="utf-8">
+<link href="https://fonts.googleapis.com/css2?family=Pinyon+Script&family=Cinzel:wght@600;700&family=Cormorant+Garamond:ital,wght@1,600&display=block" rel="stylesheet">
+<style>
+  html, body { margin: 0; width: 1200px; height: 630px; overflow: hidden; background: #ecd4ba; }
+  .half { position: absolute; top: 0; width: 600px; height: 630px; overflow: hidden; }
+  .half img { position: absolute; left: 0; top: -60px; width: 1200px; }
+  .half.r { left: 600px; transform: scaleX(-1); }
+  .glow { position: absolute; inset: 0; background: radial-gradient(ellipse 44% 80% at 50% 50%, rgba(246, 231, 208, .97), rgba(246, 231, 208, .82) 62%, rgba(246, 231, 208, .2)); }
+  .rim { position: absolute; inset: 14px; border: 1.5px solid rgba(169, 122, 43, .55); border-radius: 6px; }
+  .rim::after { content: ''; position: absolute; inset: 5px; border: 1px solid rgba(169, 122, 43, .3); border-radius: 3px; }
+  .card { position: absolute; top: 0; bottom: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; }
+  .mono { width: 150px; height: 150px; filter: drop-shadow(0 8px 12px rgba(96, 58, 12, .35)); }
+  .k { font: 44px/1.1 'Pinyon Script', cursive; color: #9a6c22; margin-top: 2px; }
+  .n { font: 700 54px/1.1 Cinzel, serif; letter-spacing: .05em; padding-left: .05em; color: #6e1630; white-space: nowrap; }
+  .amp { display: flex; align-items: center; gap: 14px; width: 300px; margin: -4px 0 -2px; } .amp i { flex: 1; height: 1.5px; background: linear-gradient(to right, transparent, #c99a46, transparent); } .amp b { font: 400 64px/.6 'Pinyon Script', cursive; color: #9a6c22; }
+  .line { display: flex; align-items: center; gap: 12px; width: 300px; margin: 8px 0 10px; }
+  .line i { flex: 1; height: 1.5px; background: linear-gradient(to right, transparent, #c99a46); } .line i + s + i { transform: scaleX(-1); }
+  .line s { width: 8px; height: 8px; transform: rotate(45deg); background: #b98a2e; }
+  .d { font: 700 30px Cinzel, serif; letter-spacing: .1em; padding-left: .1em; color: #6e1630; }
+  .p { margin-top: 6px; font: 600 18px Cinzel, serif; letter-spacing: .26em; padding-left: .26em; color: #9a6c22; }
+  .photo { position: absolute; left: 64px; top: 125px; width: 496px; height: 372px; border-radius: 10px; overflow: hidden;
+    box-shadow: 0 0 0 8px #fbf1e1, 0 0 0 9.5px #c99a46, 0 18px 34px rgba(90, 40, 25, .35); }
+  .photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  body.save .card { left: 300px; width: 600px; }
+  body.ev .card { left: 584px; width: 540px; }
+  body.ev .p { font-size: 16px; letter-spacing: .14em; padding-left: .14em; }
+  body.ev .mono { width: 118px; height: 118px; }
+  body.ev .n { font-size: 46px; }
+  body.save .photo { display: none; }
+</style></head>
+<body>
+  <div class="half"><img src="../public/archika-sandeep-wedding/assets/bg/p1.webp" alt=""></div>
+  <div class="half r"><img src="../public/archika-sandeep-wedding/assets/bg/p1.webp" alt=""></div>
+  <div class="glow"></div><div class="rim"></div>
+  <div class="photo"><img src="../public/archika-sandeep-wedding/assets/el/mukut-regency.webp" alt=""></div>
+  <div class="card">
+    <img class="mono" src="../public/archika-sandeep-wedding/assets/el/as-logo.webp" alt="">
+    <div class="k" id="k"></div>
+    <div class="n">ARCHIKA</div><div class="amp"><i></i><b>&amp;</b><i></i></div><div class="n">SANDEEP</div>
+    <div class="line"><i></i><s></s><i></i></div>
+    <div class="d" id="d"></div>
+    <div class="p" id="p"></div>
+  </div>
+<script>
+  const v = new URLSearchParams(location.search).get('v') || 'archika-sandeep-wedding';
+  const T = {
+    'archika-sandeep-save-the-date': ['save', 'Save the Date', 'MONDAY · 18 JANUARY 2027', ''],
+    'archika-sandeep-wedding': ['ev', 'Wedding Invitation', '18 JANUARY 2027', 'HOTEL MUKUT REGENCY · GHAZIABAD'],
+    'archika-sandeep-wedding-celebrations': ['ev', 'Wedding Celebrations', '17 – 18 JANUARY 2027', 'HOTEL MUKUT REGENCY · GHAZIABAD'],
+    'archika-sandeep-complete-celebrations': ['ev', 'All the Celebrations', '17 – 18 JANUARY 2027', 'HOTEL MUKUT REGENCY · GHAZIABAD'],
+  }[v];
+  document.body.className = T[0]; k.textContent = T[1]; d.textContent = T[2]; p.textContent = T[3];
+</script>
+</body></html>

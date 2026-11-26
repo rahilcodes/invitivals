@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<!-- written by tools/archika-sandeep.mjs — edit the tool, not this file -->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex">
+<title>Save the Date · Archika &amp; Sandeep</title>
+<meta name="description" content="Save the Date for the wedding of Archika &amp; Sandeep · Monday, 18 January 2027.">
+<meta name="author" content="Invitivals">
+<meta name="theme-color" content="#eacfb3">
+<link rel="canonical" href="https://invitivals.com/archika-sandeep-save-the-date/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Invitivals">
+<meta property="og:locale" content="en_IN">
+<meta property="og:url" content="https://invitivals.com/archika-sandeep-save-the-date/">
+<meta property="og:title" content="Save the Date · Archika &amp; Sandeep">
+<meta property="og:description" content="Save the Date for the wedding of Archika &amp; Sandeep · Monday, 18 January 2027.">
+<meta property="og:image" content="https://invitivals.com/archika-sandeep-save-the-date/assets/cover-archika-sandeep-save-the-date.jpg?v=1">
+<meta property="og:image:secure_url" content="https://invitivals.com/archika-sandeep-save-the-date/assets/cover-archika-sandeep-save-the-date.jpg?v=1">
+<meta property="og:image:type" content="image/jpeg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Archika &amp; Sandeep · Save the Date · 18 January 2027">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Save the Date · Archika &amp; Sandeep">
+<meta name="twitter:description" content="Save the Date for the wedding of Archika &amp; Sandeep · Monday, 18 January 2027.">
+<meta name="twitter:image" content="https://invitivals.com/archika-sandeep-save-the-date/assets/cover-archika-sandeep-save-the-date.jpg?v=1">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="preload" as="image" href="assets/bg/opening-as.webp" fetchpriority="high">
+<link rel="modulepreload" href="js/app.js?v=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Pinyon+Script&family=Cinzel:wght@500;600&family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Noto+Serif+Devanagari:wght@500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/invite.css?v=1">
+</head>
+<body class="is-closed">
+
+<!-- opening: the sealed envelope with the couple's gold AS monogram on its wax seal; one tap plays the film, which fades into the cover -->
+<div class="opening" id="opening">
+  <img class="opening__art" src="assets/bg/opening-as.webp" alt="A sealed cream envelope with the couple's gold A S monogram on its wax seal" width="941" height="1672" decoding="async" fetchpriority="high">
+  <video class="opening__film" id="film" playsinline webkit-playsinline muted preload="auto" src="assets/media/opening-as-v2.mp4" aria-hidden="true"></video>
+  <button class="tap" id="tap" type="button"><span class="tap__ring" aria-hidden="true"></span><span>Tap to Open</span></button>
+</div>
+
+<audio id="music" loop preload="none"></audio>
+<button class="mute" id="mute" type="button" aria-pressed="false" aria-label="Pause music" hidden>
+  <svg viewBox="0 0 24 24" aria-hidden="true"><path class="mute__note" d="M9 18.5a2.5 2.5 0 1 1-2-2.45V6l10-2v11.5a2.5 2.5 0 1 1-2-2.45V7.4l-6 1.2z"/><path class="mute__bar" d="M4 4l16 16"/></svg>
+</button>
+<canvas class="petals" id="petals" aria-hidden="true"></canvas>
+
+<main class="stage" id="stage" aria-label="Save the Date: Archika and Sandeep">
+
+  <!-- 1 · the cover: Ganesha, the shloka, the couple's AS monogram, the couple (the bride first) -->
+  <section class="page page--1" id="p1">
+    <div class="art art--fit" style="--h:177.68">
+      <img class="bg" src="assets/bg/p1.webp" alt="" width="941" height="1672" decoding="async">
+      <img class="el swing" style="left:12%;top:calc(var(--cq) * 9.8);width:5%;--d:0.9s" src="assets/el/bell.webp" alt="">
+      <img class="el swing" style="left:6%;top:calc(var(--cq) * 20.4);width:5.6%;--d:1.1s" src="assets/el/bell.webp" alt="">
+      <img class="el swing" style="right:12%;top:calc(var(--cq) * 9.8);width:5%;--d:1s" src="assets/el/bell.webp" alt="">
+      <img class="el swing" style="right:6%;top:calc(var(--cq) * 20.4);width:5.6%;--d:1.2s" src="assets/el/bell.webp" alt="">
+      <div class="flow" style="--top:13.5;--side:13;--bottom:2">
+        <img class="orn drop" style="width:calc(var(--cq) * 11);margin-top:0;--d:.2s" src="assets/el/ganesha.webp" alt="Ganesha">
+        <img class="orn rise" style="width:calc(var(--cq) * 22);margin:calc(var(--cq) * 1.6) auto calc(var(--cq) * 1.6);--d:.4s" src="assets/el/garland.webp" alt="">
+        <p class="shloka shloka--2 rise" lang="sa" style="--d:.55s"><span>शिवशक्त्यात्मरूपाय दम्पत्योः प्रीतये सदा।</span><span>दाम्पत्यं सफलं भूयात् मङ्गलम् च दिने दिने॥</span></p>
+        <img class="mono pop" style="--w:26;--d:.7s" src="assets/el/as-logo.webp" alt="The couple's monogram: the letters A and S in gold, in a ring of laurel with a lotus" width="900" height="900" decoding="async">
+        <p class="kicker-script rise" style="--d:.85s">Save the Date</p>
+        <p class="caps caps--sm rise" style="--d:.9s">for the wedding of</p>
+        <h1 class="couple-names">
+          <span class="script script--xl rise" style="--d:1s">Archika</span>
+          <span class="amp rise" style="--d:1.15s" aria-label="and"><span class="amp__line" aria-hidden="true"></span><span class="amp__and" aria-hidden="true">&amp;</span><span class="amp__line" aria-hidden="true"></span></span>
+          <span class="script script--xl rise" style="--d:1.3s">Sandeep</span>
+        </h1>
+        <img class="orn rise" style="width:calc(var(--cq) * 18);--d:1.45s" src="assets/el/garland.webp" alt="" loading="lazy">
+        <p class="datebar rise" style="--d:1.6s">Monday<small>18 January 2027</small></p>
+        <button class="cue rise" id="cue" type="button" style="--d:1.9s" aria-label="Scroll down to the rest of the invitation">Scroll to explore<svg viewBox="0 0 22 20" aria-hidden="true"><path d="M4 3l7 6 7-6"/><path d="M4 10l7 6 7-6"/></svg></button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Save the Date: the design's gold-foil scratch card (the AS monogram on the foil); underneath, the date -->
+  <section class="page" id="p-save">
+    <div class="art art--fit" style="--h:169.29">
+      <img class="bg" src="assets/bg/p2.webp" alt="" width="964" height="1632" loading="lazy" decoding="async">
+      <img class="el swing" style="left:5.5%;top:calc(var(--cq) * 60.9);width:8%;--d:.6s" src="assets/el/tasselB.webp" alt="" loading="lazy">
+      <img class="el swing" style="right:5.5%;top:calc(var(--cq) * 64.3);width:7%;--d:.8s" src="assets/el/tasselA.webp" alt="" loading="lazy">
+      <div class="flow" style="--top:33;--side:14">
+        <h2 class="script script--lg rise">Save the Date</h2>
+        <div class="scard rise" id="scard" style="--d:.3s">
+          <div class="scard__face" id="scardFace">
+            <p class="scard__kicker">Our Wedding</p>
+            <p class="scard__day">Monday</p>
+            <p class="scard__num">18</p>
+            <p class="scard__month">January <span>2027</span></p>
+            <img class="scard__orn" src="assets/el/garland.webp" alt="" loading="lazy">
+            <p class="scard__place">Archika &amp; Sandeep</p>
+          </div>
+          <canvas class="scard__foil" id="foil" role="button" tabindex="0" aria-label="Scratch card: rub it with your finger or the mouse to reveal our wedding date. Press Enter to reveal." aria-describedby="scardNote"></canvas>
+          <span class="scard__hint" id="scardHint" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M9 11.2V5.5a1.5 1.5 0 0 1 3 0v4.7l.1-1.2a1.5 1.5 0 0 1 3 .1v1.3a1.5 1.5 0 0 1 3 .2V12a1.5 1.5 0 0 1 2.9.3v3.4c0 3.5-2.6 6.3-6.2 6.3h-1.3c-2 0-3.4-.8-4.7-2.4L5.7 15.6a1.6 1.6 0 0 1 2.3-2.2z"/></svg></span>
+          <p class="sr-only" id="scardNote" aria-live="polite">Scratch the card to reveal the date.</p>
+        </div>
+        <button class="maps cal-btn rise" type="button" data-sheet="sheet-all" style="--d:.4s" aria-haspopup="dialog"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 2h2v2h6V2h2v2h3v18H4V4h3zm-1 7v11h12V9zm2 2h3v3H8z"/></svg><span>Add to Calendar</span></button>
+      </div>
+    </div>
+  </section>
+
+  <!-- the families: the bride's first, then the groom's, exactly as the family wrote them -->
+  <section class="page" id="p-fam">
+    <div class="art art--fit" style="--h:177.68">
+      <img class="bg" src="assets/bg/p1.webp" alt="" width="941" height="1672" loading="lazy" decoding="async">
+      <img class="el swing" style="left:12%;top:calc(var(--cq) * 9.8);width:5%;--d:0.9s" src="assets/el/bell.webp" alt="" loading="lazy">
+      <img class="el swing" style="left:6%;top:calc(var(--cq) * 20.4);width:5.6%;--d:1.1s" src="assets/el/bell.webp" alt="" loading="lazy">
+      <img class="el swing" style="right:12%;top:calc(var(--cq) * 9.8);width:5%;--d:1s" src="assets/el/bell.webp" alt="" loading="lazy">
+      <img class="el swing" style="right:6%;top:calc(var(--cq) * 20.4);width:5.6%;--d:1.2s" src="assets/el/bell.webp" alt="" loading="lazy">
+      <div class="flow" style="--top:24;--side:12">
+        <h2 class="script script--lg rise">Our Families</h2>
+        <img class="orn rise" style="width:calc(var(--cq) * 18);--d:.15s" src="assets/el/garland.webp" alt="" loading="lazy">
+        <div class="fam rise" style="--d:.25s">
+          <p class="fam__l">The Bride</p>
+          <h3 class="fam__n">Archika</h3>
+          <p class="fam__k">Granddaughter of</p>
+          <p class="fam__g">Lt Smt Pushplata and<br>Lt Shri Jai Bhagwan Goel</p>
+          <p class="fam__k">Daughter of</p>
+          <p class="fam__p">Smt Parul and Shri Yogesh Goel</p>
+        </div>
+        <p class="fam-weds rise" style="--d:.1s">WEDS</p>
+        <div class="fam rise" style="--d:.1s">
+          <p class="fam__l">The Groom</p>
+          <h3 class="fam__n">Sandeep</h3>
+          <p class="fam__k">Son of</p>
+          <p class="fam__p">Smt Urmila and Shri Sunder Lal Bhatt</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- the countdown (2027-01-18T00:00:00+05:30), worked out live -->
+  <section class="page" id="p-countdown">
+    <div class="art art--fit" style="--h:177.68">
+      <img class="bg" src="assets/bg/p1.webp" alt="" width="941" height="1672" loading="lazy" decoding="async">
+      <img class="el swing" style="left:12%;top:calc(var(--cq) * 9.8);width:5%;--d:0.9s" src="assets/el/bell.webp" alt="" loading="lazy">
+      <img class="el swing" style="left:6%;top:calc(var(--cq) * 20.4);width:5.6%;--d:1.1s" src="assets/el/bell.webp" alt="" loading="lazy">
+      <img class="el swing" style="right:12%;top:calc(var(--cq) * 9.8);width:5%;--d:1s" src="assets/el/bell.webp" alt="" loading="lazy">
+      <img class="el swing" style="right:6%;top:calc(var(--cq) * 20.4);width:5.6%;--d:1.2s" src="assets/el/bell.webp" alt="" loading="lazy">
+      <div class="flow" style="--top:26;--side:14">
+        <p class="caps caps--sm rise">Counting down to</p>
+        <h2 class="script script--lg gap-s rise" style="--d:.1s">Our Big Day</h2>
+        <img class="orn rise" style="width:calc(var(--cq) * 18);--d:.2s" src="assets/el/garland.webp" alt="" loading="lazy">
+        <div class="cd rise" id="countdown" data-target="2027-01-18T00:00:00+05:30" style="--d:.3s" role="timer" aria-live="off">
+          <div class="cd__u"><b data-cd="d">--</b><span>Days</span></div>
+          <div class="cd__u"><b data-cd="h">--</b><span>Hours</span></div>
+          <div class="cd__u"><b data-cd="m">--</b><span>Minutes</span></div>
+          <div class="cd__u"><b data-cd="s">--</b><span>Seconds</span></div>
+        </div>
+        <p class="script script--md cd__done" id="cdDone" hidden>The Big Day Is Here!</p>
+        <p class="datebar gap-m rise" style="--d:.4s">Monday<small>18 January 2027</small></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- the last page: With Love; "Thank You" in the painted arch -->
+  <section class="page page--end" id="p-end">
+    <div class="art" style="--h:150">
+      <img class="bg" src="assets/bg/p6.webp" alt="" width="1024" height="1536" loading="lazy" decoding="async">
+      <img class="el glide" style="left:6%;top:12%;width:15%;--d:.4s" src="assets/el/bird.webp" alt="" loading="lazy">
+      <div class="flow" style="--top:6;--side:20;--bottom:0">
+        <h2 class="script script--xl rise">With Love</h2>
+        <img class="orn rise" style="width:calc(var(--cq) * 18);margin:calc(var(--cq) * 1.2) auto calc(var(--cq) * 2);--d:.2s" src="assets/el/garland.webp" alt="" loading="lazy">
+        <p class="message rise" style="--d:.3s">Kindly save the date and bless Archika &amp; Sandeep as they begin their journey together.</p>
+      </div>
+      <div class="arch-words"><p class="thanks rise" style="--d:.3s">Thank You</p><img class="orn rise" style="width:calc(var(--cq) * 13);margin:calc(var(--cq) * .6) auto 0;--d:.45s" src="assets/el/garland.webp" alt="" loading="lazy"></div>
+      <p class="credit">Created by <a href="https://invitivals.com/?utm_source=invitation&amp;utm_medium=footer&amp;utm_campaign=archika-sandeep-save-the-date" target="_blank" rel="noopener">Invitivals</a></p>
+    </div>
+  </section>
+</main>
+
+<div class="sheet" id="sheet-all" hidden>
+  <div class="sheet__veil" data-close></div>
+  <div class="sheet__card" role="dialog" aria-modal="true" aria-labelledby="sheet-all-t">
+    <p class="sheet__kicker">Monday · 18 January 2027</p>
+    <h2 class="sheet__title" id="sheet-all-t">Add to Calendar</h2>
+      <div class="sheet__row"><p class="sheet__ev">The Wedding of Archika &amp; Sandeep<small>Monday, 18 January 2027 · all day</small></p>
+        <a class="sheet__pill sheet__pill--g" href="https://calendar.google.com/calendar/render?action=TEMPLATE&amp;text=Wedding+of+Archika+%26+Sandeep&amp;dates=20270118%2F20270119&amp;ctz=Asia%2FKolkata&amp;details=Save+the+Date+%E2%80%94+the+wedding+of+Archika+%26+Sandeep%2C+Monday+18+January+2027.%0A%0Ahttps%3A%2F%2Finvitivals.com%2Farchika-sandeep-save-the-date%2F" target="_blank" rel="noopener" data-gcal="save-the-date" aria-label="The Wedding of Archika &amp; Sandeep: add to Google Calendar">Google</a>
+        <a class="sheet__pill sheet__pill--f" href="assets/cal/save-the-date.ics" download="save-the-date.ics" data-ics="save-the-date" aria-label="The Wedding of Archika &amp; Sandeep: calendar file for Apple Calendar or Outlook">Apple · Outlook</a></div>
+    <p class="sheet__hint">Each event is added on its own, at its start time.</p>
+    <button class="sheet__close" type="button" data-close>Close</button>
+  </div>
+</div>
+<noscript><p style="padding:40px 24px;text-align:center;font-family:Georgia,serif;color:#5a3a30">Please enable JavaScript to open this invitation.</p></noscript>
+<script type="module" src="js/app.js?v=1"></script>
+</body>
+</html>

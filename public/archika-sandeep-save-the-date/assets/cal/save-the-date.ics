@@ -1,0 +1,32 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Invitivals//Archika & Sandeep Wedding//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+X-WR-CALNAME:Archika & Sandeep · Wedding
+X-WR-TIMEZONE:Asia/Kolkata
+BEGIN:VTIMEZONE
+TZID:Asia/Kolkata
+BEGIN:STANDARD
+DTSTART:19700101T000000
+TZOFFSETFROM:+0530
+TZOFFSETTO:+0530
+TZNAME:IST
+END:STANDARD
+END:VTIMEZONE
+BEGIN:VEVENT
+UID:archika-sandeep-save-the-date-save-the-date@invitivals.com
+DTSTAMP:20261126T000000Z
+DTSTART;VALUE=DATE:20270118
+DTEND;VALUE=DATE:20270119
+SUMMARY:Wedding of Archika & Sandeep
+DESCRIPTION:Save the Date — the wedding of Archika & Sandeep\, Monday 1
+ 8 January 2027.\n\nhttps://invitivals.com/archika-sandeep-save-the-date/
+URL:https://invitivals.com/archika-sandeep-save-the-date/
+BEGIN:VALARM
+TRIGGER:-P1D
+ACTION:DISPLAY
+DESCRIPTION:Wedding of Archika & Sandeep
+END:VALARM
+END:VEVENT
+END:VCALENDAR

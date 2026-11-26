@@ -1,0 +1,36 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Invitivals//Archika & Sandeep Wedding//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+X-WR-CALNAME:Archika & Sandeep · Wedding
+X-WR-TIMEZONE:Asia/Kolkata
+BEGIN:VTIMEZONE
+TZID:Asia/Kolkata
+BEGIN:STANDARD
+DTSTART:19700101T000000
+TZOFFSETFROM:+0530
+TZOFFSETTO:+0530
+TZNAME:IST
+END:STANDARD
+END:VTIMEZONE
+BEGIN:VEVENT
+UID:archika-sandeep-wedding-celebrations-drinks-dance-dinner@invitivals.c
+ om
+DTSTAMP:20261126T000000Z
+DTSTART;TZID=Asia/Kolkata:20270117T190000
+SUMMARY:Drinks\, Dance & Dinner — Archika & Sandeep
+LOCATION:Hotel Mukut Regency\, Vasundhra Sector 13\, Ghaziabad
+DESCRIPTION:Sunday\, 17 January 2027 · 7:00 PM onwards\nThe wedding cele
+ brations of Archika & Sandeep\nVenue: Hotel Mukut Regency\, Vasundhra Se
+ ctor 13\, Ghaziabad\nMap: https://www.google.com/travel/hotels/s/8nWmmRP
+ HJeWCmbm36\n\nhttps://invitivals.com/archika-sandeep-wedding-celebration
+ s/
+URL:https://invitivals.com/archika-sandeep-wedding-celebrations/
+BEGIN:VALARM
+TRIGGER:-P1D
+ACTION:DISPLAY
+DESCRIPTION:Drinks\, Dance & Dinner — Archika & Sandeep
+END:VALARM
+END:VEVENT
+END:VCALENDAR

@@ -1,0 +1,157 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Invitivals//Archika & Sandeep Wedding//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+X-WR-CALNAME:Archika & Sandeep · Wedding
+X-WR-TIMEZONE:Asia/Kolkata
+BEGIN:VTIMEZONE
+TZID:Asia/Kolkata
+BEGIN:STANDARD
+DTSTART:19700101T000000
+TZOFFSETFROM:+0530
+TZOFFSETTO:+0530
+TZNAME:IST
+END:STANDARD
+END:VTIMEZONE
+BEGIN:VEVENT
+UID:archika-sandeep-complete-celebrations-haldi@invitivals.com
+DTSTAMP:20261126T000000Z
+DTSTART;TZID=Asia/Kolkata:20270117T100000
+SUMMARY:Haldi — Archika & Sandeep
+LOCATION:Hotel Mukut Regency\, Vasundhra Sector 13\, Ghaziabad
+DESCRIPTION:Sunday\, 17 January 2027 · 10:00 AM\nThe wedding celebration
+ s of Archika & Sandeep\nVenue: Hotel Mukut Regency\, Vasundhra Sector 13
+ \, Ghaziabad\nMap: https://www.google.com/travel/hotels/s/8nWmmRPHJeWCmb
+ m36\n\nhttps://invitivals.com/archika-sandeep-complete-celebrations/
+URL:https://invitivals.com/archika-sandeep-complete-celebrations/
+BEGIN:VALARM
+TRIGGER:-P1D
+ACTION:DISPLAY
+DESCRIPTION:Haldi — Archika & Sandeep
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:archika-sandeep-complete-celebrations-mehndi@invitivals.com
+DTSTAMP:20261126T000000Z
+DTSTART;TZID=Asia/Kolkata:20270117T113000
+SUMMARY:Mehndi — Archika & Sandeep
+LOCATION:Hotel Mukut Regency\, Vasundhra Sector 13\, Ghaziabad
+DESCRIPTION:Sunday\, 17 January 2027 · 11:30 AM\nThe wedding celebration
+ s of Archika & Sandeep\nVenue: Hotel Mukut Regency\, Vasundhra Sector 13
+ \, Ghaziabad\nMap: https://www.google.com/travel/hotels/s/8nWmmRPHJeWCmb
+ m36\n\nhttps://invitivals.com/archika-sandeep-complete-celebrations/
+URL:https://invitivals.com/archika-sandeep-complete-celebrations/
+BEGIN:VALARM
+TRIGGER:-P1D
+ACTION:DISPLAY
+DESCRIPTION:Mehndi — Archika & Sandeep
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:archika-sandeep-complete-celebrations-bhaat@invitivals.com
+DTSTAMP:20261126T000000Z
+DTSTART;TZID=Asia/Kolkata:20270117T170000
+SUMMARY:Bhaat — Archika & Sandeep
+LOCATION:Hotel Mukut Regency\, Vasundhra Sector 13\, Ghaziabad
+DESCRIPTION:Sunday\, 17 January 2027 · 5:00 PM onwards\nThe wedding cele
+ brations of Archika & Sandeep\nVenue: Hotel Mukut Regency\, Vasundhra Se
+ ctor 13\, Ghaziabad\nMap: https://www.google.com/travel/hotels/s/8nWmmRP
+ HJeWCmbm36\n\nhttps://invitivals.com/archika-sandeep-complete-celebratio
+ ns/
+URL:https://invitivals.com/archika-sandeep-complete-celebrations/
+BEGIN:VALARM
+TRIGGER:-P1D
+ACTION:DISPLAY
+DESCRIPTION:Bhaat — Archika & Sandeep
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:archika-sandeep-complete-celebrations-drinks-dance-dinner@invitivals.
+ com
+DTSTAMP:20261126T000000Z
+DTSTART;TZID=Asia/Kolkata:20270117T190000
+SUMMARY:Drinks\, Dance & Dinner — Archika & Sandeep
+LOCATION:Hotel Mukut Regency\, Vasundhra Sector 13\, Ghaziabad
+DESCRIPTION:Sunday\, 17 January 2027 · 7:00 PM onwards\nThe wedding cele
+ brations of Archika & Sandeep\nVenue: Hotel Mukut Regency\, Vasundhra Se
+ ctor 13\, Ghaziabad\nMap: https://www.google.com/travel/hotels/s/8nWmmRP
+ HJeWCmbm36\n\nhttps://invitivals.com/archika-sandeep-complete-celebratio
+ ns/
+URL:https://invitivals.com/archika-sandeep-complete-celebrations/
+BEGIN:VALARM
+TRIGGER:-P1D
+ACTION:DISPLAY
+DESCRIPTION:Drinks\, Dance & Dinner — Archika & Sandeep
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:archika-sandeep-complete-celebrations-baraat-swagat@invitivals.com
+DTSTAMP:20261126T000000Z
+DTSTART;TZID=Asia/Kolkata:20270118T160000
+SUMMARY:Baraat Swagat — Archika & Sandeep
+LOCATION:Hotel Mukut Regency\, Vasundhra Sector 13\, Ghaziabad
+DESCRIPTION:Monday\, 18 January 2027 · 4:00 PM\nThe wedding celebrations
+  of Archika & Sandeep\nVenue: Hotel Mukut Regency\, Vasundhra Sector 13\
+ , Ghaziabad\nMap: https://www.google.com/travel/hotels/s/8nWmmRPHJeWCmbm
+ 36\n\nhttps://invitivals.com/archika-sandeep-complete-celebrations/
+URL:https://invitivals.com/archika-sandeep-complete-celebrations/
+BEGIN:VALARM
+TRIGGER:-P1D
+ACTION:DISPLAY
+DESCRIPTION:Baraat Swagat — Archika & Sandeep
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:archika-sandeep-complete-celebrations-phere@invitivals.com
+DTSTAMP:20261126T000000Z
+DTSTART;TZID=Asia/Kolkata:20270118T170000
+SUMMARY:Phere — Archika & Sandeep
+LOCATION:Hotel Mukut Regency\, Vasundhra Sector 13\, Ghaziabad
+DESCRIPTION:Monday\, 18 January 2027 · 5:00 PM\nThe wedding celebrations
+  of Archika & Sandeep\nVenue: Hotel Mukut Regency\, Vasundhra Sector 13\
+ , Ghaziabad\nMap: https://www.google.com/travel/hotels/s/8nWmmRPHJeWCmbm
+ 36\n\nhttps://invitivals.com/archika-sandeep-complete-celebrations/
+URL:https://invitivals.com/archika-sandeep-complete-celebrations/
+BEGIN:VALARM
+TRIGGER:-P1D
+ACTION:DISPLAY
+DESCRIPTION:Phere — Archika & Sandeep
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:archika-sandeep-complete-celebrations-jai-mala@invitivals.com
+DTSTAMP:20261126T000000Z
+DTSTART;TZID=Asia/Kolkata:20270118T200000
+SUMMARY:Jai Mala — Archika & Sandeep
+LOCATION:Hotel Mukut Regency\, Vasundhra Sector 13\, Ghaziabad
+DESCRIPTION:Monday\, 18 January 2027 · 8:00 PM\nThe wedding celebrations
+  of Archika & Sandeep\nVenue: Hotel Mukut Regency\, Vasundhra Sector 13\
+ , Ghaziabad\nMap: https://www.google.com/travel/hotels/s/8nWmmRPHJeWCmbm
+ 36\n\nhttps://invitivals.com/archika-sandeep-complete-celebrations/
+URL:https://invitivals.com/archika-sandeep-complete-celebrations/
+BEGIN:VALARM
+TRIGGER:-P1D
+ACTION:DISPLAY
+DESCRIPTION:Jai Mala — Archika & Sandeep
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:archika-sandeep-complete-celebrations-dinner@invitivals.com
+DTSTAMP:20261126T000000Z
+DTSTART;TZID=Asia/Kolkata:20270118T203000
+SUMMARY:Dinner — Archika & Sandeep
+LOCATION:Hotel Mukut Regency\, Vasundhra Sector 13\, Ghaziabad
+DESCRIPTION:Monday\, 18 January 2027 · 8:30 PM onwards\nThe wedding cele
+ brations of Archika & Sandeep\nVenue: Hotel Mukut Regency\, Vasundhra Se
+ ctor 13\, Ghaziabad\nMap: https://www.google.com/travel/hotels/s/8nWmmRP
+ HJeWCmbm36\n\nhttps://invitivals.com/archika-sandeep-complete-celebratio
+ ns/
+URL:https://invitivals.com/archika-sandeep-complete-celebrations/
+BEGIN:VALARM
+TRIGGER:-P1D
+ACTION:DISPLAY
+DESCRIPTION:Dinner — Archika & Sandeep
+END:VALARM
+END:VEVENT
+END:VCALENDAR

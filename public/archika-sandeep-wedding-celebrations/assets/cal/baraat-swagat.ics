@@ -1,0 +1,34 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Invitivals//Archika & Sandeep Wedding//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+X-WR-CALNAME:Archika & Sandeep · Wedding
+X-WR-TIMEZONE:Asia/Kolkata
+BEGIN:VTIMEZONE
+TZID:Asia/Kolkata
+BEGIN:STANDARD
+DTSTART:19700101T000000
+TZOFFSETFROM:+0530
+TZOFFSETTO:+0530
+TZNAME:IST
+END:STANDARD
+END:VTIMEZONE
+BEGIN:VEVENT
+UID:archika-sandeep-wedding-celebrations-baraat-swagat@invitivals.com
+DTSTAMP:20261126T000000Z
+DTSTART;TZID=Asia/Kolkata:20270118T160000
+SUMMARY:Baraat Swagat — Archika & Sandeep
+LOCATION:Hotel Mukut Regency\, Vasundhra Sector 13\, Ghaziabad
+DESCRIPTION:Monday\, 18 January 2027 · 4:00 PM\nThe wedding celebrations
+  of Archika & Sandeep\nVenue: Hotel Mukut Regency\, Vasundhra Sector 13\
+ , Ghaziabad\nMap: https://www.google.com/travel/hotels/s/8nWmmRPHJeWCmbm
+ 36\n\nhttps://invitivals.com/archika-sandeep-wedding-celebrations/
+URL:https://invitivals.com/archika-sandeep-wedding-celebrations/
+BEGIN:VALARM
+TRIGGER:-P1D
+ACTION:DISPLAY
+DESCRIPTION:Baraat Swagat — Archika & Sandeep
+END:VALARM
+END:VEVENT
+END:VCALENDAR
