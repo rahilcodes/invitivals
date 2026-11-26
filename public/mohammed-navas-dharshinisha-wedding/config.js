@@ -44,7 +44,9 @@ export const config = {
     {
       key: 'walima', title: 'Walima Ceremony', date: 'Sunday, 13th December 2026', time: '1:00 PM',
       start: '2026-12-13T13:00:00+05:30', local: '20261213T130000', minutes: null,
-      venue: VENUE, venueLines: ['Nahar Gardens,', 'Near Muttukadu Lake'], mapsUrl: MAPS, ics: 'walima.ics',
+      /* the Walima's address in full (client, 2026-11-26); the map link is the same one, as no other was supplied */
+      venue: 'Nahar Gardens, Near Muttukadu Lake Bridge, Near Bus Stand, ECR',
+      venueLines: ['Nahar Gardens,', 'Near Muttukadu Lake Bridge,', 'Near Bus Stand, ECR'], mapsUrl: MAPS, ics: 'walima.ics',
     },
   ],
   /* the day's programme, written into every calendar entry's description */

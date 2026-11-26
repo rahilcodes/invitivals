@@ -204,3 +204,25 @@ button { font: inherit; cursor: pointer; }
 .film.broken .seal { opacity: 0; }
 .film.broken .burst { opacity: 1; transform: translate(-50%, -50%) scale(1); }
 .film.cleared .burst { opacity: 0; transform: translate(-50%, -50%) scale(1.25); transition: opacity .7s ease, transform .9s ease; }
+
+/* ── the Walima's three-line address (client, 2026-11-26): a touch smaller and tighter, so its third line ends above
+      the card's painted buttons ── */
+.ev-line.ev-venue--3 { font-size: 2.75cqw; line-height: 1.22; }
+
+/* ── page 1: the scroll cue (client, 2026-11-26). In the satin between the card and the wave at the page's foot:
+      a small "Scroll" in champagne caps over a blush glass ring with two plum chevrons that bob gently; it fades
+      once the guest starts scrolling. ── */
+.p-hero > .scroll-cue { position: absolute; z-index: 3; left: 50%; top: 84.2%; width: 16cqw; margin-left: -8cqw; display: flex; flex-direction: column; align-items: center; gap: 1.1cqw; pointer-events: none; }
+.page.on.ready > .scroll-cue { transition: opacity .8s cubic-bezier(.22, .61, .36, 1), transform .8s cubic-bezier(.22, .61, .36, 1); transition-delay: var(--d, 0s); }
+.page.p-hero.scrolled > .scroll-cue.reveal { opacity: 0; transition: opacity .6s ease; transition-delay: 0s; }
+.scroll-cue__word { font-family: var(--serif); font-weight: 700; font-size: 2.6cqw; letter-spacing: .34em; padding-left: .34em; text-transform: uppercase; color: var(--plum2); text-shadow: 0 0 1.6cqw rgba(255, 246, 240, 1), 0 0 .6cqw rgba(255, 246, 240, 1), 0 0 .2cqw rgba(255, 246, 240, 1); }
+.scroll-cue__ring { position: relative; width: 8.4cqw; height: 8.4cqw; border-radius: 50%; display: block;
+  background: radial-gradient(circle at 50% 35%, rgba(255, 250, 246, .92), rgba(246, 226, 230, .78));
+  border: .25cqw solid rgba(201, 160, 98, .9); box-shadow: 0 .6cqw 1.8cqw rgba(74, 31, 53, .28), inset 0 0 1cqw rgba(255, 255, 255, .7);
+  animation: cue-bob 2.2s ease-in-out infinite; }
+.scroll-cue__ring i { position: absolute; left: 50%; width: 2.6cqw; height: 2.6cqw; margin-left: -1.3cqw; border-right: .42cqw solid var(--plum2); border-bottom: .42cqw solid var(--plum2); transform: rotate(45deg); border-radius: 0 0 .3cqw 0; }
+.scroll-cue__ring i:first-child { top: 1.5cqw; opacity: .45; animation: cue-fade 2.2s ease-in-out infinite; }
+.scroll-cue__ring i:last-child { top: 3.3cqw; }
+@keyframes cue-bob { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(1.3cqw); } }
+@keyframes cue-fade { 0%, 100% { opacity: .25; } 50% { opacity: .8; } }
+@media (prefers-reduced-motion: reduce) { .scroll-cue__ring, .scroll-cue__ring i { animation: none !important; } }

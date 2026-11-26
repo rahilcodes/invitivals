@@ -4,7 +4,7 @@
    5 the closing (ND monogram, Thank You).
    Pages 2 and 3 follow the reference's layout: their pieces take the boxes the reference measured (js/art.js).
    There is no RSVP. */
-import { config as C } from '../config.js?v=1';
+import { config as C } from '../config.js?v=2';
 import { art, box } from './art.js?v=1';
 import { h, observePages, calendarHref } from './util.js?v=1';
 import { OpeningScreen } from './opening.js?v=1';
@@ -66,7 +66,14 @@ const page1 = Page(1, 'p-hero', [h('div', { class: 'card' },
   r(1.05, 'p', { class: 'and' }, h('i'), H.and, h('i')),
   r(1.2, 'p', { class: 'name name--bride' }, H.bride),
   r(1.4, 'p', { class: 'when' }, H.when),
-)], { satin: false });
+),
+  /* the scroll cue (client, 2026-11-26): below the card, above the satin wave; it bobs gently and fades once the guest scrolls */
+  r(2.0, 'div', { class: 'scroll-cue', 'aria-hidden': 'true' }, h('span', { class: 'scroll-cue__word' }, 'Scroll'),
+    h('span', { class: 'scroll-cue__ring' }, h('i'), h('i'))),
+], { satin: false });
+addEventListener('scroll', function onScroll() {
+  if (scrollY > 60) { page1.classList.add('scrolled'); removeEventListener('scroll', onScroll); }
+}, { passive: true });
 
 /* ── page 2: Save Our Date. The reference's frame, panel (its SUN … SAT heading is painted in the plate) and painted
       buttons; the month and its figures are live. The 9th and the 11th wear the golden heart once the guest taps
@@ -122,7 +129,7 @@ const card = (k, ev, d0) => [
   spr(`p3-${k}-icon-time`, d0 + 0.36),
   r(d0 + 0.36, 'p', { class: 'ev-line', style: at(`p3-${k}-time`, { w: 37 }) }, ev.time),
   spr(`p3-${k}-icon-venue`, d0 + 0.48),
-  r(d0 + 0.48, 'p', { class: 'ev-line ev-venue', style: at(`p3-${k}-venue`, { w: 37 }) }, ...ev.venueLines.flatMap((l, i) => (i ? [h('br'), l] : [l]))),
+  r(d0 + 0.48, 'p', { class: `ev-line ev-venue${ev.venueLines.length > 2 ? ' ev-venue--3' : ''}`, style: at(`p3-${k}-venue`, { w: 37 }) }, ...ev.venueLines.flatMap((l, i) => (i ? [h('br'), l] : [l]))),
   h('a', { class: 'hit', style: at(`p3-${k}-save-hit`), href: calendarHref(calOf(ev)), target: '_blank', rel: 'noopener', 'data-cal': ev.key, 'aria-label': `Save the date: ${ev.title}, ${ev.date}, ${ev.time} (Google Calendar)` }),
   h('a', { class: 'hit', style: at(`p3-${k}-maps-hit`), href: ev.mapsUrl, target: '_blank', rel: 'noopener', 'data-maps': ev.key, 'aria-label': `View the ${ev.title} venue on Google Maps: ${ev.venue}` }),
 ];
