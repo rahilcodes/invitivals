@@ -4,7 +4,7 @@
    5 the closing (ND monogram, Thank You).
    Pages 2 and 3 follow the reference's layout: their pieces take the boxes the reference measured (js/art.js).
    There is no RSVP. */
-import { config as C } from '../config.js?v=2';
+import { config as C } from '../config.js?v=3';
 import { art, box } from './art.js?v=1';
 import { h, observePages, calendarHref } from './util.js?v=1';
 import { OpeningScreen } from './opening.js?v=1';
@@ -129,7 +129,7 @@ const card = (k, ev, d0) => [
   spr(`p3-${k}-icon-time`, d0 + 0.36),
   r(d0 + 0.36, 'p', { class: 'ev-line', style: at(`p3-${k}-time`, { w: 37 }) }, ev.time),
   spr(`p3-${k}-icon-venue`, d0 + 0.48),
-  r(d0 + 0.48, 'p', { class: `ev-line ev-venue${ev.venueLines.length > 2 ? ' ev-venue--3' : ''}`, style: at(`p3-${k}-venue`, { w: 37 }) }, ...ev.venueLines.flatMap((l, i) => (i ? [h('br'), l] : [l]))),
+  r(d0 + 0.48, 'p', { class: `ev-line ev-venue${ev.venueLines.length > 2 ? ' ev-venue--3' : ''}`, style: at(`p3-${k}-venue`, { w: 37 }) }, ...ev.venueLines.flatMap((l, i) => (i ? [h('br'), l] : [h('b', { class: 'ev-venue__name' }, l)]))),   // the venue's name stands out
   h('a', { class: 'hit', style: at(`p3-${k}-save-hit`), href: calendarHref(calOf(ev)), target: '_blank', rel: 'noopener', 'data-cal': ev.key, 'aria-label': `Save the date: ${ev.title}, ${ev.date}, ${ev.time} (Google Calendar)` }),
   h('a', { class: 'hit', style: at(`p3-${k}-maps-hit`), href: ev.mapsUrl, target: '_blank', rel: 'noopener', 'data-maps': ev.key, 'aria-label': `View the ${ev.title} venue on Google Maps: ${ev.venue}` }),
 ];

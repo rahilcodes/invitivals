@@ -7,7 +7,9 @@
    There is no RSVP on this invitation, by the client's instruction.
    After a change run  node tools/mohammed-navas-dharshinisha-wedding.mjs  (it rewrites the .ics files and the tags).
    ───────────────────────────────────────────────────────────── */
-const VENUE = 'Nahar Gardens, Near Muttukadu Lake';
+/* the venue in full (client, 2026-11-26): the first line, Nahar Gardens, is the venue's name and is set in bold on the cards */
+const VENUE = 'Nahar Gardens, Near Muttukadu Lake Bridge, Near Bus Stand, ECR';
+const VENUE_LINES = ['Nahar Gardens,', 'Near Muttukadu Lake Bridge,', 'Near Bus Stand, ECR'];
 const MAPS = 'https://maps.app.goo.gl/d5x6Pb8irgB74yTT9?g_st=aw';
 
 export const config = {
@@ -39,14 +41,12 @@ export const config = {
     {
       key: 'nikah', title: 'Nikah Ceremony', date: 'Sunday, 13th December 2026', time: '11:00 AM',
       start: '2026-12-13T11:00:00+05:30', local: '20261213T110000', minutes: null,
-      venue: VENUE, venueLines: ['Nahar Gardens,', 'Near Muttukadu Lake'], mapsUrl: MAPS, ics: 'nikah.ics',
+      venue: VENUE, venueLines: VENUE_LINES, mapsUrl: MAPS, ics: 'nikah.ics',
     },
     {
       key: 'walima', title: 'Walima Ceremony', date: 'Sunday, 13th December 2026', time: '1:00 PM',
       start: '2026-12-13T13:00:00+05:30', local: '20261213T130000', minutes: null,
-      /* the Walima's address in full (client, 2026-11-26); the map link is the same one, as no other was supplied */
-      venue: 'Nahar Gardens, Near Muttukadu Lake Bridge, Near Bus Stand, ECR',
-      venueLines: ['Nahar Gardens,', 'Near Muttukadu Lake Bridge,', 'Near Bus Stand, ECR'], mapsUrl: MAPS, ics: 'walima.ics',
+      venue: VENUE, venueLines: VENUE_LINES, mapsUrl: MAPS, ics: 'walima.ics',   // the same map link: no other was supplied
     },
   ],
   /* the day's programme, written into every calendar entry's description */

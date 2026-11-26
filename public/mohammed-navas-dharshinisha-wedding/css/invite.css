@@ -207,7 +207,7 @@ button { font: inherit; cursor: pointer; }
 
 /* ── the Walima's three-line address (client, 2026-11-26): a touch smaller and tighter, so its third line ends above
       the card's painted buttons ── */
-.ev-line.ev-venue--3 { font-size: 2.75cqw; line-height: 1.22; }
+.ev-line.ev-venue--3 { font-size: 2.75cqw; line-height: 1.17; margin-top: -.6cqw; }
 
 /* ── page 1: the scroll cue (client, 2026-11-26). In the satin between the card and the wave at the page's foot:
       a small "Scroll" in champagne caps over a blush glass ring with two plum chevrons that bob gently; it fades
@@ -226,3 +226,5 @@ button { font: inherit; cursor: pointer; }
 @keyframes cue-bob { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(1.3cqw); } }
 @keyframes cue-fade { 0%, 100% { opacity: .25; } 50% { opacity: .8; } }
 @media (prefers-reduced-motion: reduce) { .scroll-cue__ring, .scroll-cue__ring i { animation: none !important; } }
+/* the venue's name, Nahar Gardens, set apart on both cards (client, 2026-11-26) */
+.ev-venue__name { font-weight: 700; color: var(--plum2); letter-spacing: .03em; }
