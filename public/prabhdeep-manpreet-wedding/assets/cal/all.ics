@@ -1,0 +1,135 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Invitivals//Prabhdeep Kaur & Manpreet Singh Sabharwal//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+X-WR-CALNAME:Prabhdeep Kaur & Manpreet Singh Sabharwal
+X-WR-TIMEZONE:Asia/Kolkata
+BEGIN:VTIMEZONE
+TZID:Asia/Kolkata
+BEGIN:STANDARD
+DTSTART:19700101T000000
+TZOFFSETFROM:+0530
+TZOFFSETTO:+0530
+TZNAME:IST
+END:STANDARD
+END:VTIMEZONE
+BEGIN:VEVENT
+UID:20270124T103000-anand-karaj@prabhdeep-manpreet-wedding.invitivals.com
+DTSTAMP:20261127T000000Z
+DTSTART;TZID=Asia/Kolkata:20270124T103000
+SUMMARY:Anand Karaj – Prabhdeep Kaur & Manpreet Singh Sabharwal
+LOCATION:Gurudwara Sant Kutia\, 10A\, Harish Mukherjee Road\, Bhowanipore\,
+  Kolkata\, West Bengal – 700025
+DESCRIPTION:Anand Karaj · the wedding of Prabhdeep Kaur & Manpreet Singh S
+ abharwal\nVenue: Gurudwara Sant Kutia\, 10A\, Harish Mukherjee Road\, Bhow
+ anipore\, Kolkata\, West Bengal – 700025\nMap: https://maps.app.goo.gl/V
+ top9y7PtRvWTN6X6?g_st=ic\nhttps://invitivals.com/prabhdeep-manpreet-weddin
+ g/
+URL:https://invitivals.com/prabhdeep-manpreet-wedding/
+STATUS:CONFIRMED
+BEGIN:VALARM
+TRIGGER:-P1D
+ACTION:DISPLAY
+DESCRIPTION:Anand Karaj – Prabhdeep Kaur & Manpreet Singh Sabharwal
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:20270124T090000-reception-of-baraat@prabhdeep-manpreet-wedding.invitiva
+ ls.com
+DTSTAMP:20261127T000000Z
+DTSTART;TZID=Asia/Kolkata:20270124T090000
+SUMMARY:Reception of Baraat – Prabhdeep Kaur & Manpreet Singh Sabharwal
+LOCATION:Punjab Bradree\, 7 Mayfair Road\, Park Circus\, Ballygunge\, Kolka
+ ta\, West Bengal – 700019
+DESCRIPTION:Reception of Baraat · the wedding of Prabhdeep Kaur & Manpreet
+  Singh Sabharwal\nVenue: Punjab Bradree\, 7 Mayfair Road\, Park Circus\, B
+ allygunge\, Kolkata\, West Bengal – 700019\nMap: https://maps.app.goo.gl
+ /BorqKVyKNi8RF8nV7?g_st=ic\nhttps://invitivals.com/prabhdeep-manpreet-wedd
+ ing/
+URL:https://invitivals.com/prabhdeep-manpreet-wedding/
+STATUS:CONFIRMED
+BEGIN:VALARM
+TRIGGER:-P1D
+ACTION:DISPLAY
+DESCRIPTION:Reception of Baraat – Prabhdeep Kaur & Manpreet Singh Sabharw
+ al
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:20270124T091500-milni@prabhdeep-manpreet-wedding.invitivals.com
+DTSTAMP:20261127T000000Z
+DTSTART;TZID=Asia/Kolkata:20270124T091500
+SUMMARY:Milni – Prabhdeep Kaur & Manpreet Singh Sabharwal
+LOCATION:Punjab Bradree\, 7 Mayfair Road\, Park Circus\, Ballygunge\, Kolka
+ ta\, West Bengal – 700019
+DESCRIPTION:Milni · the wedding of Prabhdeep Kaur & Manpreet Singh Sabharw
+ al\nVenue: Punjab Bradree\, 7 Mayfair Road\, Park Circus\, Ballygunge\, Ko
+ lkata\, West Bengal – 700019\nMap: https://maps.app.goo.gl/BorqKVyKNi8RF
+ 8nV7?g_st=ic\nhttps://invitivals.com/prabhdeep-manpreet-wedding/
+URL:https://invitivals.com/prabhdeep-manpreet-wedding/
+STATUS:CONFIRMED
+BEGIN:VALARM
+TRIGGER:-P1D
+ACTION:DISPLAY
+DESCRIPTION:Milni – Prabhdeep Kaur & Manpreet Singh Sabharwal
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:20270124T093000-breakfast@prabhdeep-manpreet-wedding.invitivals.com
+DTSTAMP:20261127T000000Z
+DTSTART;TZID=Asia/Kolkata:20270124T093000
+SUMMARY:Breakfast – Prabhdeep Kaur & Manpreet Singh Sabharwal
+LOCATION:Punjab Bradree\, 7 Mayfair Road\, Park Circus\, Ballygunge\, Kolka
+ ta\, West Bengal – 700019
+DESCRIPTION:Breakfast · the wedding of Prabhdeep Kaur & Manpreet Singh Sab
+ harwal\nVenue: Punjab Bradree\, 7 Mayfair Road\, Park Circus\, Ballygunge\
+ , Kolkata\, West Bengal – 700019\nMap: https://maps.app.goo.gl/BorqKVyKN
+ i8RF8nV7?g_st=ic\nhttps://invitivals.com/prabhdeep-manpreet-wedding/
+URL:https://invitivals.com/prabhdeep-manpreet-wedding/
+STATUS:CONFIRMED
+BEGIN:VALARM
+TRIGGER:-P1D
+ACTION:DISPLAY
+DESCRIPTION:Breakfast – Prabhdeep Kaur & Manpreet Singh Sabharwal
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:20270124T133000-lunch@prabhdeep-manpreet-wedding.invitivals.com
+DTSTAMP:20261127T000000Z
+DTSTART;TZID=Asia/Kolkata:20270124T133000
+SUMMARY:Lunch – Prabhdeep Kaur & Manpreet Singh Sabharwal
+LOCATION:Punjab Bradree\, 7 Mayfair Road\, Park Circus\, Ballygunge\, Kolka
+ ta\, West Bengal – 700019
+DESCRIPTION:Lunch · the wedding of Prabhdeep Kaur & Manpreet Singh Sabharw
+ al\nVenue: Punjab Bradree\, 7 Mayfair Road\, Park Circus\, Ballygunge\, Ko
+ lkata\, West Bengal – 700019\nMap: https://maps.app.goo.gl/BorqKVyKNi8RF
+ 8nV7?g_st=ic\nhttps://invitivals.com/prabhdeep-manpreet-wedding/
+URL:https://invitivals.com/prabhdeep-manpreet-wedding/
+STATUS:CONFIRMED
+BEGIN:VALARM
+TRIGGER:-P1D
+ACTION:DISPLAY
+DESCRIPTION:Lunch – Prabhdeep Kaur & Manpreet Singh Sabharwal
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:20270124T160000-doli@prabhdeep-manpreet-wedding.invitivals.com
+DTSTAMP:20261127T000000Z
+DTSTART;TZID=Asia/Kolkata:20270124T160000
+SUMMARY:Doli – Prabhdeep Kaur & Manpreet Singh Sabharwal
+LOCATION:Punjab Bradree\, 7 Mayfair Road\, Park Circus\, Ballygunge\, Kolka
+ ta\, West Bengal – 700019
+DESCRIPTION:Doli · the wedding of Prabhdeep Kaur & Manpreet Singh Sabharwa
+ l\nVenue: Punjab Bradree\, 7 Mayfair Road\, Park Circus\, Ballygunge\, Kol
+ kata\, West Bengal – 700019\nMap: https://maps.app.goo.gl/BorqKVyKNi8RF8
+ nV7?g_st=ic\nhttps://invitivals.com/prabhdeep-manpreet-wedding/
+URL:https://invitivals.com/prabhdeep-manpreet-wedding/
+STATUS:CONFIRMED
+BEGIN:VALARM
+TRIGGER:-P1D
+ACTION:DISPLAY
+DESCRIPTION:Doli – Prabhdeep Kaur & Manpreet Singh Sabharwal
+END:VALARM
+END:VEVENT
+END:VCALENDAR

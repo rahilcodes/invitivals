@@ -1,0 +1,36 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Invitivals//Prabhdeep Kaur & Manpreet Singh Sabharwal//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+X-WR-CALNAME:Prabhdeep Kaur & Manpreet Singh Sabharwal
+X-WR-TIMEZONE:Asia/Kolkata
+BEGIN:VTIMEZONE
+TZID:Asia/Kolkata
+BEGIN:STANDARD
+DTSTART:19700101T000000
+TZOFFSETFROM:+0530
+TZOFFSETTO:+0530
+TZNAME:IST
+END:STANDARD
+END:VTIMEZONE
+BEGIN:VEVENT
+UID:20270124T093000-breakfast@prabhdeep-manpreet-wedding.invitivals.com
+DTSTAMP:20261127T000000Z
+DTSTART;TZID=Asia/Kolkata:20270124T093000
+SUMMARY:Breakfast – Prabhdeep Kaur & Manpreet Singh Sabharwal
+LOCATION:Punjab Bradree\, 7 Mayfair Road\, Park Circus\, Ballygunge\, Kolka
+ ta\, West Bengal – 700019
+DESCRIPTION:Breakfast · the wedding of Prabhdeep Kaur & Manpreet Singh Sab
+ harwal\nVenue: Punjab Bradree\, 7 Mayfair Road\, Park Circus\, Ballygunge\
+ , Kolkata\, West Bengal – 700019\nMap: https://maps.app.goo.gl/BorqKVyKN
+ i8RF8nV7?g_st=ic\nhttps://invitivals.com/prabhdeep-manpreet-wedding/
+URL:https://invitivals.com/prabhdeep-manpreet-wedding/
+STATUS:CONFIRMED
+BEGIN:VALARM
+TRIGGER:-P1D
+ACTION:DISPLAY
+DESCRIPTION:Breakfast – Prabhdeep Kaur & Manpreet Singh Sabharwal
+END:VALARM
+END:VEVENT
+END:VCALENDAR

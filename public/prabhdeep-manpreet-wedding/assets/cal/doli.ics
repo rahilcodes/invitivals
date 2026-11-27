@@ -1,0 +1,36 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Invitivals//Prabhdeep Kaur & Manpreet Singh Sabharwal//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+X-WR-CALNAME:Prabhdeep Kaur & Manpreet Singh Sabharwal
+X-WR-TIMEZONE:Asia/Kolkata
+BEGIN:VTIMEZONE
+TZID:Asia/Kolkata
+BEGIN:STANDARD
+DTSTART:19700101T000000
+TZOFFSETFROM:+0530
+TZOFFSETTO:+0530
+TZNAME:IST
+END:STANDARD
+END:VTIMEZONE
+BEGIN:VEVENT
+UID:20270124T160000-doli@prabhdeep-manpreet-wedding.invitivals.com
+DTSTAMP:20261127T000000Z
+DTSTART;TZID=Asia/Kolkata:20270124T160000
+SUMMARY:Doli – Prabhdeep Kaur & Manpreet Singh Sabharwal
+LOCATION:Punjab Bradree\, 7 Mayfair Road\, Park Circus\, Ballygunge\, Kolka
+ ta\, West Bengal – 700019
+DESCRIPTION:Doli · the wedding of Prabhdeep Kaur & Manpreet Singh Sabharwa
+ l\nVenue: Punjab Bradree\, 7 Mayfair Road\, Park Circus\, Ballygunge\, Kol
+ kata\, West Bengal – 700019\nMap: https://maps.app.goo.gl/BorqKVyKNi8RF8
+ nV7?g_st=ic\nhttps://invitivals.com/prabhdeep-manpreet-wedding/
+URL:https://invitivals.com/prabhdeep-manpreet-wedding/
+STATUS:CONFIRMED
+BEGIN:VALARM
+TRIGGER:-P1D
+ACTION:DISPLAY
+DESCRIPTION:Doli – Prabhdeep Kaur & Manpreet Singh Sabharwal
+END:VALARM
+END:VEVENT
+END:VCALENDAR

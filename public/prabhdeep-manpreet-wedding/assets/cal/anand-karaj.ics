@@ -1,0 +1,37 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Invitivals//Prabhdeep Kaur & Manpreet Singh Sabharwal//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+X-WR-CALNAME:Prabhdeep Kaur & Manpreet Singh Sabharwal
+X-WR-TIMEZONE:Asia/Kolkata
+BEGIN:VTIMEZONE
+TZID:Asia/Kolkata
+BEGIN:STANDARD
+DTSTART:19700101T000000
+TZOFFSETFROM:+0530
+TZOFFSETTO:+0530
+TZNAME:IST
+END:STANDARD
+END:VTIMEZONE
+BEGIN:VEVENT
+UID:20270124T103000-anand-karaj@prabhdeep-manpreet-wedding.invitivals.com
+DTSTAMP:20261127T000000Z
+DTSTART;TZID=Asia/Kolkata:20270124T103000
+SUMMARY:Anand Karaj – Prabhdeep Kaur & Manpreet Singh Sabharwal
+LOCATION:Gurudwara Sant Kutia\, 10A\, Harish Mukherjee Road\, Bhowanipore\,
+  Kolkata\, West Bengal – 700025
+DESCRIPTION:Anand Karaj · the wedding of Prabhdeep Kaur & Manpreet Singh S
+ abharwal\nVenue: Gurudwara Sant Kutia\, 10A\, Harish Mukherjee Road\, Bhow
+ anipore\, Kolkata\, West Bengal – 700025\nMap: https://maps.app.goo.gl/V
+ top9y7PtRvWTN6X6?g_st=ic\nhttps://invitivals.com/prabhdeep-manpreet-weddin
+ g/
+URL:https://invitivals.com/prabhdeep-manpreet-wedding/
+STATUS:CONFIRMED
+BEGIN:VALARM
+TRIGGER:-P1D
+ACTION:DISPLAY
+DESCRIPTION:Anand Karaj – Prabhdeep Kaur & Manpreet Singh Sabharwal
+END:VALARM
+END:VEVENT
+END:VCALENDAR

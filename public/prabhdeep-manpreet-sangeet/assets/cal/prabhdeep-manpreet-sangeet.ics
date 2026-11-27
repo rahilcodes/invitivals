@@ -1,0 +1,35 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Invitivals//Prabhdeep & Manpreet//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+X-WR-CALNAME:Prabhdeep & Manpreet
+X-WR-TIMEZONE:Asia/Kolkata
+BEGIN:VTIMEZONE
+TZID:Asia/Kolkata
+BEGIN:STANDARD
+DTSTART:19700101T000000
+TZOFFSETFROM:+0530
+TZOFFSETTO:+0530
+TZNAME:IST
+END:STANDARD
+END:VTIMEZONE
+BEGIN:VEVENT
+UID:20270121T150000-sangeet@prabhdeep-manpreet-sangeet.invitivals.com
+DTSTAMP:20261127T000000Z
+DTSTART;TZID=Asia/Kolkata:20270121T150000
+SUMMARY:Sangeet – Prabhdeep & Manpreet
+LOCATION:Bika Banquet\, Rangoli Mall\, Howrah
+DESCRIPTION:An evening of music and dance celebrating the upcoming wedding 
+ of Prabhdeep and Manpreet.\nVenue: Bika Banquet\, Rangoli Mall\, Howrah\nM
+ ap: https://maps.app.goo.gl/c8UDaxwoxvNTqnZRA?g_st=ic\nhttps://invitivals.
+ com/prabhdeep-manpreet-sangeet/
+URL:https://invitivals.com/prabhdeep-manpreet-sangeet/
+STATUS:CONFIRMED
+BEGIN:VALARM
+TRIGGER:-P1D
+ACTION:DISPLAY
+DESCRIPTION:Sangeet – Prabhdeep & Manpreet
+END:VALARM
+END:VEVENT
+END:VCALENDAR
