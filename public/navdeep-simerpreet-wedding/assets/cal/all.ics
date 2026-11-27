@@ -18,56 +18,56 @@ BEGIN:VEVENT
 UID:20270226T180000-jago-night@navdeep-simerpreet.invitivals.com
 DTSTAMP:20261125T000000Z
 DTSTART;TZID=Asia/Kolkata:20270226T180000
-SUMMARY:Jago Night – Navdeep Singh Kahlon & Simerpreet Kaur Brar
+SUMMARY:Jago Night – Navdeep Singh Kahlon & Simerpreet Brar
 LOCATION:Dhani Bikaneri\, Fatehabad
-DESCRIPTION:Navdeep Singh Kahlon & Simerpreet Kaur Brar · Wedding\nDhani B
- ikaneri\, Fatehabad\, GF8M+RFX\, Fatehabad\, Haryana 125050\, India\nMap: 
- https://maps.app.goo.gl/ibdaQgNajddaZxqK6?g_st=iwb\nhttps://invitivals.com
- /navdeep-simerpreet-wedding/
+DESCRIPTION:Navdeep Singh Kahlon & Simerpreet Brar · Wedding\nDhani Bikane
+ ri\, Fatehabad\, GF8M+RFX\, Fatehabad\, Haryana 125050\, India\nMap: https
+ ://maps.app.goo.gl/ibdaQgNajddaZxqK6?g_st=iwb\nhttps://invitivals.com/navd
+ eep-simerpreet-wedding/
 URL:https://invitivals.com/navdeep-simerpreet-wedding/
 STATUS:CONFIRMED
 BEGIN:VALARM
 TRIGGER:-P1D
 ACTION:DISPLAY
-DESCRIPTION:Jago Night – Navdeep Singh Kahlon & Simerpreet Kaur Brar
+DESCRIPTION:Jago Night – Navdeep Singh Kahlon & Simerpreet Brar
 END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:20270227T100000-anand-karaj@navdeep-simerpreet.invitivals.com
 DTSTAMP:20261125T000000Z
 DTSTART;TZID=Asia/Kolkata:20270227T100000
-SUMMARY:Anand Karaj – Navdeep Singh Kahlon & Simerpreet Kaur Brar
+SUMMARY:Anand Karaj – Navdeep Singh Kahlon & Simerpreet Brar
 LOCATION:Gurudwara Jhad Sahib\, Khanpur\, Haryana
-DESCRIPTION:Navdeep Singh Kahlon & Simerpreet Kaur Brar · Wedding\nGurudwa
- ra Jhad Sahib\, GFW8+7CP\, Khanpur\, Haryana 125050\, India\nMap: https://
- maps.app.goo.gl/BHyM9MKuM3f4jho9A?g_st=iwb\nhttps://invitivals.com/navdeep
- -simerpreet-wedding/
+DESCRIPTION:Navdeep Singh Kahlon & Simerpreet Brar · Wedding\nGurudwara Jh
+ ad Sahib\, GFW8+7CP\, Khanpur\, Haryana 125050\, India\nMap: https://maps.
+ app.goo.gl/BHyM9MKuM3f4jho9A?g_st=iwb\nhttps://invitivals.com/navdeep-sime
+ rpreet-wedding/
 URL:https://invitivals.com/navdeep-simerpreet-wedding/
 STATUS:CONFIRMED
 BEGIN:VALARM
 TRIGGER:-P1D
 ACTION:DISPLAY
-DESCRIPTION:Anand Karaj – Navdeep Singh Kahlon & Simerpreet Kaur Brar
+DESCRIPTION:Anand Karaj – Navdeep Singh Kahlon & Simerpreet Brar
 END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:20270227T110000-wedding@navdeep-simerpreet.invitivals.com
 DTSTAMP:20261125T000000Z
 DTSTART;TZID=Asia/Kolkata:20270227T110000
-SUMMARY:Wedding – Navdeep Singh Kahlon & Simerpreet Kaur Brar
+SUMMARY:Wedding – Navdeep Singh Kahlon & Simerpreet Brar
 LOCATION:Sheesh Mahal Resorts\, Fatehabad
-DESCRIPTION:Navdeep Singh Kahlon & Simerpreet Kaur Brar · Wedding\nSheesh 
- Mahal Resorts\, Dhani Masitaw Wali\, Fatehabad\, Haryana 125050\, India\nM
- ap: https://maps.google.com?ftid=0x3911658b176a40d7:0x9266586d0890376a&ent
- ry=gps&shh=CAE&lucs=\,94231188\,100821555\,47071704\,94218641\,100849091\,
- 100838877\,121816461\,100798797\,100848091&g_st=iwb\nhttps://invitivals.co
- m/navdeep-simerpreet-wedding/
+DESCRIPTION:Navdeep Singh Kahlon & Simerpreet Brar · Wedding\nSheesh Mahal
+  Resorts\, Dhani Masitaw Wali\, Fatehabad\, Haryana 125050\, India\nMap: h
+ ttps://maps.google.com?ftid=0x3911658b176a40d7:0x9266586d0890376a&entry=gp
+ s&shh=CAE&lucs=\,94231188\,100821555\,47071704\,94218641\,100849091\,10083
+ 8877\,121816461\,100798797\,100848091&g_st=iwb\nhttps://invitivals.com/nav
+ deep-simerpreet-wedding/
 URL:https://invitivals.com/navdeep-simerpreet-wedding/
 STATUS:CONFIRMED
 BEGIN:VALARM
 TRIGGER:-P1D
 ACTION:DISPLAY
-DESCRIPTION:Wedding – Navdeep Singh Kahlon & Simerpreet Kaur Brar
+DESCRIPTION:Wedding – Navdeep Singh Kahlon & Simerpreet Brar
 END:VALARM
 END:VEVENT
 END:VCALENDAR

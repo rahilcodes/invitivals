@@ -19,7 +19,7 @@ const whenLine = (ev) => new Date(ev.date).toLocaleDateString('en-GB', { weekday
 const attr = (s) => String(s ?? '').replace(/&/g, '&amp;').replace(/"/g, '&quot;');
 
 export const eventDetails = (cfg, ev) => ({
-  title: `${ev.name} – ${couple(cfg).join(' & ')}`,   // the client's calendar title, e.g. Jago Night – Navdeep Singh Kahlon & Simerpreet Kaur Brar
+  title: `${ev.name} – ${couple(cfg).join(' & ')}`,   // the client's calendar title, e.g. Jago Night – Navdeep Singh Kahlon & Simerpreet Brar
   start: ev.date,
   end: ev.main && cfg.weddingEnd ? cfg.weddingEnd : ev.date,   // only start times were supplied: no invented end (Google Calendar gets start = end)
   /* a short description: whose wedding, the Gurmukhi name of the venue, its map, the invitation's address */

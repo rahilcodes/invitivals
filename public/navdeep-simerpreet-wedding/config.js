@@ -1,5 +1,5 @@
 /* ─────────────────────────────────────────────────────────────
-   Navdeep Singh Kahlon & Simerpreet Kaur Brar — Sikh wedding invitation from
+   Navdeep Singh Kahlon & Simerpreet Brar — Sikh wedding invitation from
    the groom's family (client brief 2026-11-25). A separate page on the design
    the client chose (public/amandeep-ishpreet-wedding, never edited for this),
    copied from the engine of public/manbir-arshleen-wedding (also never edited
@@ -27,7 +27,7 @@ const MAP = {
 
 export const weddingConfig = {
   groomName: 'Navdeep Singh Kahlon',
-  brideName: 'Simerpreet Kaur Brar',
+  brideName: 'Simerpreet Brar',
   shortGroom: 'Navdeep',
   shortBride: 'Simerpreet',
   /* the invitation is from the groom's family: the groom and his family stand first */
@@ -39,8 +39,12 @@ export const weddingConfig = {
   invite: {
     motto: ['Together in Faith', 'Forever in Love'],
     tagline: ['Two Souls', 'One Journey', 'Blessed by Guru Sahib'],
-    eyebrow: ['With the blessings of Waheguru Ji,', 'we joyfully invite you'],
-    line: 'to grace the wedding of our son Navdeep Singh Kahlon with Simerpreet Kaur Brar, and to bless the couple in the presence of Guru Sahib.',
+    /* the client's own wording (2026-11-28), exactly: the opening line, then two paragraphs */
+    eyebrow: ['With the blessings of Waheguru Ji,'],
+    line: [
+      'We joyfully invite you to grace the wedding ceremony of our beloved son Navdeep Singh Kahlon with Simerpreet Brar.',
+      'We warmly invite you to join us and shower the couple with your love and blessings in the divine presence of Guru Sahib.',
+    ],
     /* who the invitation is from: the groom's parents, as the client gave their names */
     from: { label: 'Invitation From', lines: ['Sardar Amarjeet Singh Kahlon', '& Sardarni Harpreet Kaur'] },
   },
@@ -49,7 +53,7 @@ export const weddingConfig = {
 
   /* ?to=Name in the link greets each guest personally; this is used when there is none */
   guestFallback: 'You & Your Family',
-  shareText: 'With the blessings of Guru Sahib — the wedding of Navdeep Singh Kahlon & Simerpreet Kaur Brar · Anand Karaj, Saturday 27 February 2027, Fatehabad',
+  shareText: 'With the blessings of Guru Sahib — the wedding of Navdeep Singh Kahlon & Simerpreet Brar · Anand Karaj, Saturday 27 February 2027, Fatehabad',
 
   /* the Anand Karaj — the main ceremony everything counts down to */
   weddingDate: '2027-02-27T10:00:00+05:30',
@@ -75,7 +79,7 @@ export const weddingConfig = {
     heading: 'With the Blessings of Our Families',
     sub: '',
     groom: { label: 'Groom’s Family', person: 'Navdeep Singh Kahlon', relation: 'Son of', parents: ['Sardar Amarjeet Singh Kahlon', 'Sardarni Harpreet Kaur'] },
-    bride: { label: 'Bride’s Family', person: 'Simerpreet Kaur Brar', relation: 'Daughter of', parents: ['Sardar Lakhbir Singh Brar', 'Sardarni Rajwinder Kaur'] },
+    bride: { label: 'Bride’s Family', person: 'Simerpreet Brar', relation: 'Daughter of', parents: ['Sardar Lakhbir Singh Brar', 'Sardarni Rajwinder Kaur'] },
   },
 
   story: null,

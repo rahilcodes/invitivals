@@ -18,18 +18,18 @@ BEGIN:VEVENT
 UID:20270226T180000-jago-night@navdeep-simerpreet.invitivals.com
 DTSTAMP:20261125T000000Z
 DTSTART;TZID=Asia/Kolkata:20270226T180000
-SUMMARY:Jago Night – Navdeep Singh Kahlon & Simerpreet Kaur Brar
+SUMMARY:Jago Night – Navdeep Singh Kahlon & Simerpreet Brar
 LOCATION:Dhani Bikaneri\, Fatehabad
-DESCRIPTION:Navdeep Singh Kahlon & Simerpreet Kaur Brar · Wedding\nDhani B
- ikaneri\, Fatehabad\, GF8M+RFX\, Fatehabad\, Haryana 125050\, India\nMap: 
- https://maps.app.goo.gl/ibdaQgNajddaZxqK6?g_st=iwb\nhttps://invitivals.com
- /navdeep-simerpreet-wedding/
+DESCRIPTION:Navdeep Singh Kahlon & Simerpreet Brar · Wedding\nDhani Bikane
+ ri\, Fatehabad\, GF8M+RFX\, Fatehabad\, Haryana 125050\, India\nMap: https
+ ://maps.app.goo.gl/ibdaQgNajddaZxqK6?g_st=iwb\nhttps://invitivals.com/navd
+ eep-simerpreet-wedding/
 URL:https://invitivals.com/navdeep-simerpreet-wedding/
 STATUS:CONFIRMED
 BEGIN:VALARM
 TRIGGER:-P1D
 ACTION:DISPLAY
-DESCRIPTION:Jago Night – Navdeep Singh Kahlon & Simerpreet Kaur Brar
+DESCRIPTION:Jago Night – Navdeep Singh Kahlon & Simerpreet Brar
 END:VALARM
 END:VEVENT
 END:VCALENDAR

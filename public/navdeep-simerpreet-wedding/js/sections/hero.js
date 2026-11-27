@@ -58,7 +58,7 @@ export const InviteBlock = (cfg, guest) => {
   ${guest ? `<p class="invite-guest" data-reveal><small>Dear</small><span>${escScript(guest)}</span></p>` : ''}
   ${cfg.invite.placement === 'blessing' ? '' : `
   <p class="eyebrow-lines" data-reveal>${cfg.invite.eyebrow.map(esc).join('<br>')}</p>
-  <p class="invite-line" data-reveal>${esc(cfg.invite.line)}</p>`}
+  ${[].concat(cfg.invite.line).map((l) => `<p class="invite-line" data-reveal>${esc(l)}</p>`).join('')}`}
   ${cfg.invite.from ? `<div class="invite-from" data-reveal>
     <p class="if-label">${esc(cfg.invite.from.label)}</p>
     ${cfg.invite.from.lines.map((l, i) => `<p class="${i ? 'if-sub' : 'if-name'}">${escScript(l)}</p>`).join('')}

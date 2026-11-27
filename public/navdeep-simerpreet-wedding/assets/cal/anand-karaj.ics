@@ -18,18 +18,18 @@ BEGIN:VEVENT
 UID:20270227T100000-anand-karaj@navdeep-simerpreet.invitivals.com
 DTSTAMP:20261125T000000Z
 DTSTART;TZID=Asia/Kolkata:20270227T100000
-SUMMARY:Anand Karaj – Navdeep Singh Kahlon & Simerpreet Kaur Brar
+SUMMARY:Anand Karaj – Navdeep Singh Kahlon & Simerpreet Brar
 LOCATION:Gurudwara Jhad Sahib\, Khanpur\, Haryana
-DESCRIPTION:Navdeep Singh Kahlon & Simerpreet Kaur Brar · Wedding\nGurudwa
- ra Jhad Sahib\, GFW8+7CP\, Khanpur\, Haryana 125050\, India\nMap: https://
- maps.app.goo.gl/BHyM9MKuM3f4jho9A?g_st=iwb\nhttps://invitivals.com/navdeep
- -simerpreet-wedding/
+DESCRIPTION:Navdeep Singh Kahlon & Simerpreet Brar · Wedding\nGurudwara Jh
+ ad Sahib\, GFW8+7CP\, Khanpur\, Haryana 125050\, India\nMap: https://maps.
+ app.goo.gl/BHyM9MKuM3f4jho9A?g_st=iwb\nhttps://invitivals.com/navdeep-sime
+ rpreet-wedding/
 URL:https://invitivals.com/navdeep-simerpreet-wedding/
 STATUS:CONFIRMED
 BEGIN:VALARM
 TRIGGER:-P1D
 ACTION:DISPLAY
-DESCRIPTION:Anand Karaj – Navdeep Singh Kahlon & Simerpreet Kaur Brar
+DESCRIPTION:Anand Karaj – Navdeep Singh Kahlon & Simerpreet Brar
 END:VALARM
 END:VEVENT
 END:VCALENDAR

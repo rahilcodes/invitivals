@@ -8,7 +8,7 @@
      assets/cal/<event>.ics                       one event each
      assets/cal/navdeep-simerpreet-wedding.ics    all three events ("Add All to Calendar"); all.ics, which the
                                                   finishing tool leaves behind, is made the same file
-   Titles and places are the client's: "Jago Night – Navdeep Singh Kahlon & Simerpreet Kaur Brar", "Dhani Bikaneri,
+   Titles and places are the client's: "Jago Night – Navdeep Singh Kahlon & Simerpreet Brar", "Dhani Bikaneri,
    Fatehabad" and so on (config.js `cal`). Times are in Asia/Kolkata (TZID with its VTIMEZONE); lines folded at 75 octets.
    It also draws assets/og.jpg (1200 x 630) on the invitation's own Gurudwara scene, and sets the sharing tags. */
 import fs from 'node:fs';
@@ -97,11 +97,12 @@ set(/(<meta name="author" content=")[^"]*(")/, `$1Invitivals$2`);
 set(/(<meta property="og:site_name" content=")[^"]*(")/, `$1Invitivals$2`);
 if (!/rel="canonical"/.test(html)) set(/(<meta property="og:url"[^>]*>)/, `<link rel="canonical" href="${URL_}">\n$1`);
 html = html.replace(/(<link rel="canonical" href=")[^"]*(")/, `$1${URL_}$2`);
-html = html.replace(/(<meta property="og:image" content=")[^"]*(")/, `$1${URL_}assets/og.jpg?v=1$2`);
-if (!/twitter:title/.test(html)) html = html.replace(/(<meta name="twitter:card"[^>]*>)/, `$1
+html = html.replace(/(<meta property="og:image" content=")[^"]*(")/, `$1${URL_}assets/og.jpg?v=2$2`);
+html = html.replace(/\n<meta name="twitter:title"[^>]*>\n<meta name="twitter:description"[^>]*>\n<meta name="twitter:image"[^>]*>/, '');   // rewritten every time (names can change)
+html = html.replace(/(<meta name="twitter:card"[^>]*>)/, `$1
 <meta name="twitter:title" content="${NAMES} | Wedding Invitation">
 <meta name="twitter:description" content="Anand Karaj · Saturday, 27 February 2027 · Fatehabad. Tap to open the invitation.">
-<meta name="twitter:image" content="${URL_}assets/og.jpg?v=1">`);
+<meta name="twitter:image" content="${URL_}assets/og.jpg?v=2">`);
 if (/manbir|arshleen|bamrah|bhullar|amritsar|balram|anushka|passi/i.test(html)) throw new Error('index.html still carries the earlier couple');
 fs.writeFileSync(ix, html);
 console.log('✓ index.html sharing tags');
