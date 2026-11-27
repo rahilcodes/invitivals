@@ -755,3 +755,48 @@ html.is-open .intro.is-skipped .intro-video { transform: none; transition: none;
 .mo-bl { left: -9px; bottom: -9px; transform: scaleY(-1); } .mo-br { right: -9px; bottom: -9px; transform: scale(-1); }
 /* the groom's full name on one line of his family leaf */
 .family-person.is-long { white-space: nowrap; margin-left: -40px; margin-right: -40px; padding: 0; font-size: min(calc((100vw - 40px) / 9.6), 40px); }
+
+/* ══ opening and cover cues (client, 2026-11-27) ══════════════════════════════════════════════════════════════
+   "Tap to Open": the words are painted small into the foot of the doors (91% down the 9 : 16 film, which fills the
+   screen like object-fit: cover). A real label in the doors' own maroon and gold now sits exactly over them — larger,
+   with a slow glow — and fades the moment the doors begin to open. The whole screen stays the button (intro-tap). On
+   a landscape screen, where the film's foot is cropped away, the label rests just above the bottom edge instead. */
+.intro-tap-label {
+  position: absolute; z-index: 1; left: 50%;
+  top: min(calc(50% + max(100dvh, 177.78vw) * .412), calc(100% - 62px));
+  transform: translate(-50%, -50%); pointer-events: none;
+  display: inline-flex; align-items: center; justify-content: center;
+  padding: 13px 30px; min-width: 224px; border-radius: 999px;
+  background: linear-gradient(180deg, #5d1724, #3f0d16);
+  border: 1px solid rgba(231, 200, 122, .85);
+  box-shadow: 0 0 0 4px rgba(63, 13, 22, .55), 0 8px 22px rgba(20, 3, 6, .5);
+  font-family: var(--caps); font-weight: 600; font-size: clamp(14px, 4vw, 17px); letter-spacing: .3em; padding-left: calc(30px + .3em);
+  text-transform: uppercase; color: #f4dca4; white-space: nowrap; text-shadow: 0 1px 6px rgba(20, 3, 6, .6);
+  animation: tap-glow 2.6s ease-in-out infinite;
+  transition: opacity .35s ease;
+}
+@keyframes tap-glow {
+  0%, 100% { box-shadow: 0 0 0 4px rgba(63, 13, 22, .55), 0 8px 22px rgba(20, 3, 6, .5), 0 0 0 0 rgba(244, 220, 164, 0); }
+  50% { box-shadow: 0 0 0 4px rgba(63, 13, 22, .55), 0 8px 22px rgba(20, 3, 6, .5), 0 0 22px 6px rgba(244, 220, 164, .38); }
+}
+.intro.is-playing .intro-tap-label { opacity: 0; animation: none; }
+
+/* the cover's scroll cue: an ivory pill, larger words, an arrow that bounces gently; under the couple, over nothing */
+.scroll-cue {
+  bottom: max(10px, env(safe-area-inset-bottom)); flex-direction: row; gap: 8px;
+  padding: 8px 16px 8px 20px; border-radius: 999px;
+  background: rgba(255, 249, 238, .9); border: 1px solid rgba(184, 137, 47, .65);
+  box-shadow: 0 6px 18px rgba(74, 14, 24, .22);
+  font-size: 12.5px; font-weight: 600; letter-spacing: .3em; color: var(--maroon);
+  animation: cue-nudge 2.2s ease-in-out 3.2s infinite;
+}
+.scroll-cue svg { width: 18px; height: 18px; fill: none; stroke: var(--maroon); stroke-width: 1.9; stroke-linecap: round; stroke-linejoin: round; animation: cue-arrow 1.4s ease-in-out infinite; }
+.scroll-cue svg path + path { opacity: .5; }
+@keyframes cue-nudge { 0%, 100% { transform: translateX(var(--cue-x, -50%)) translateY(0); } 50% { transform: translateX(var(--cue-x, -50%)) translateY(-5px); } }
+/* narrow phones (under 380px): the centred pill would meet the menu and music buttons at the bottom right, so it
+   moves to the bottom left */
+@media (max-width: 379px) { .scroll-cue { --cue-x: 0; left: 14px; transform: none; } }
+@keyframes cue-arrow { 0%, 100% { transform: translateY(-2px); } 50% { transform: translateY(3px); } }
+@media (prefers-reduced-motion: reduce) { .intro-tap-label, .scroll-cue, .scroll-cue svg { animation: none !important; } }
+/* from 600px wide the film is shown whole in a 9 : 16 column (see .intro-video above), so the painted words stand 91.2% down */
+@media (min-width: 600px) { .intro-tap-label { top: 91.2%; } }

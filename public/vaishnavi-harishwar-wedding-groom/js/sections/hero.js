@@ -33,6 +33,6 @@ export const HeroSection = (cfg) => `
       </p>
     </div>
     <div class="hero-couple-wrap" data-parallax="0.05">${WeddingCouple({ cls: 'hero-couple', eager: true })}</div>
-    <a class="scroll-cue" href="#welcome" aria-label="Scroll to the invitation"><span>Scroll</span><i></i></a>
+    <a class="scroll-cue" href="#welcome" aria-label="Scroll down to the invitation"><span>Scroll</span><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M5 6.5l5 5 5-5"/><path d="M5 11l5 5 5-5"/></svg></a>
   </div>
 </section>`;

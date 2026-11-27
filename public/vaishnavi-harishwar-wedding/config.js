@@ -84,7 +84,7 @@ export const weddingConfig = {
      Each copy shows its own family's ceremony and the wedding (client, 2026-11-13): the bride's has no Pellikoduku,
      the groom's has no Pellikuthuru. The reception is for a few invited guests only and is on neither copy. */
   events: [
-    { only: 'bride', icon: 'haldi', name: 'Pellikuthuru', sub: 'Bride’s Ceremony', date: '2026-11-30T17:00:00+05:30', time: '5:00 PM',   /* 5:00 PM (client, 2026-11-14; was 10:00 AM) */
+    { only: 'bride', icon: 'haldi', name: 'Pellikuthuru', sub: 'Bride’s Ceremony', date: '2026-12-01T11:00:00+05:30', time: '11:00 AM',   /* 1 December, 11:00 AM (client, 2026-11-27; was 30 Nov 5:00 PM, before that 10:00 AM) */
       venue: 'Plot No. 61, Road No. 1, R. Ranga Raju Colony, Turkayamjal, Brahmanpally Road.',
       maps: 'https://maps.app.goo.gl/Bki9Vce6XxJDiKo3A' },
     { only: 'groom', icon: 'vratham', name: 'Pellikoduku', sub: 'Groom’s Ceremony', date: '2026-12-02T16:00:00+05:30', time: '4:00 PM',

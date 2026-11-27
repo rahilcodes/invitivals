@@ -9,6 +9,7 @@ export const IntroExperience = (cfg, guest) => `
   <span class="intro-glow" aria-hidden="true"></span>
   <p class="intro-guest"><small>Specially for</small><span>${escScript(guest || cfg.guestFallback)}</span></p>
   <span class="intro-bloom" aria-hidden="true"></span>
+  <span class="intro-tap-label" aria-hidden="true"><span>Tap to Open</span></span>
   <button class="intro-tap" id="intro-tap" type="button" aria-label="Tap to open the invitation"></button>
   <p class="intro-wait" aria-live="polite">Opening…</p>
   <button class="intro-skip" id="intro-skip" type="button">Skip</button>

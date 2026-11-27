@@ -1,12 +1,12 @@
 /* InvitationPage — composes one continuous invitation from weddingConfig. */
 /* ?v=3 on every import = the files as of the 2026-11-13 revisions. The site lets browsers and its CDN keep scripts for a week, so a
    changed file is asked for under a new address; raise the number (here and in index.html) whenever one changes again. */
-import { weddingConfig as cfg } from '../config.js?v=4';
+import { weddingConfig as cfg } from '../config.js?v=6';
 import { GoldDefs, GoldThread } from './decor.js?v=3';
 import { guestName } from './util.js?v=3';
 import { initMapLinks } from './links.js?v=3';
-import { IntroExperience, initIntro } from './sections/intro.js?v=3';
-import { HeroSection } from './sections/hero.js?v=3';
+import { IntroExperience, initIntro } from './sections/intro.js?v=6';
+import { HeroSection } from './sections/hero.js?v=6';
 import { WelcomeSection } from './sections/welcome.js?v=3';
 import { FamilySection } from './sections/families.js?v=3';
 import { EventsSection, initEvents } from './sections/events.js?v=3';
