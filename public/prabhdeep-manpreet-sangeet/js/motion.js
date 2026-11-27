@@ -83,7 +83,7 @@ export function initParticles() {
       if (m.y < -0.02) { m.y = 1.02; m.x = Math.random(); }
       const x = (m.x + Math.sin(m.sway) * 0.015) * w, y = m.y * h, a = 0.25 + 0.35 * (0.5 + 0.5 * Math.sin(m.tw));
       const g = ctx.createRadialGradient(x, y, 0, x, y, m.r * 3 * dpr);
-      g.addColorStop(0, `rgba(236, 200, 120, ${a})`); g.addColorStop(1, 'rgba(236,200,120, 0)');
+      g.addColorStop(0, `rgba(236, 200, 120, ${a})`); g.addColorStop(1, 'rgba(236, 200, 120, 0)');
       ctx.fillStyle = g; ctx.beginPath(); ctx.arc(x, y, m.r * 3 * dpr, 0, Math.PI * 2); ctx.fill();
     }
     requestAnimationFrame(draw);

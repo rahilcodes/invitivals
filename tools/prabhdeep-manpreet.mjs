@@ -3,8 +3,8 @@
      public/prabhdeep-manpreet-wedding   the Sikh wedding, Sunday 24 January 2027, Kolkata (six events, two venues)
      public/prabhdeep-manpreet-sangeet   the Sangeet, Thursday 21 January 2027, 3:00 PM onwards, Howrah
 
-     node tools/prabhdeep-manpreet.mjs theme          once: the Sangeet's plum evening skin (pictures, film, styles),
-                                                      graded from the kiranjit-sharnjit originals by tools/lib/plum-grade.mjs
+     node tools/prabhdeep-manpreet.mjs theme          RETIRED (client, 2026-11-28): the Sangeet uses exactly the wedding page's
+                                                      colours, pictures and film; do not run (it would plum-grade the page again)
      node tools/sikh-finish.mjs public/<slug>         meta tags and cache stamps (each page)
      node tools/prabhdeep-manpreet.mjs                calendar files, link-preview pictures and sharing tags (both)
 
@@ -24,6 +24,7 @@ const FF = process.env.FFMPEG || 'C:/Program Files/DownloadHelper CoApp/ffmpeg.e
 
 /* ── the Sangeet's skin ─────────────────────────────────────── */
 if (process.argv[2] === 'theme') {
+  throw new Error('retired: the Sangeet keeps the wedding page’s own colours (client, 2026-11-28)');
   const D = path.join(ROOT, 'public/prabhdeep-manpreet-sangeet');
   for (const f of fs.readdirSync(path.join(ORIG, 'assets')).filter((f) => f.endsWith('.webp') && f !== 'horse.webp')) {
     const { data, info } = await sharp(path.join(ORIG, 'assets', f)).ensureAlpha().raw().toBuffer({ resolveWithObject: true });
@@ -78,7 +79,7 @@ const PAGES = {
     ogd: 'Sangeet · Thursday, 21 January 2027 · 3:00 PM onwards · Bika Banquet, Howrah. Tap to open the invitation.',
     alt: 'Sangeet of Prabhdeep &amp; Manpreet — 21 January 2027, Bika Banquet, Howrah',
     detail: (cfg, ev) => ev.calDetails,
-    og: { bg: 'finale-bg.webp', tint: '#1b2a52', deep: '#0f1a38', kicker: 'AN EVENING OF MUSIC & DANCE', script: 'Sangeet', lines: ['Prabhdeep & Manpreet'], foot: 'THURSDAY · 21 JANUARY 2027 · 3:00 PM ONWARDS', dhol: true, plum: true },
+    og: { bg: 'finale-bg.webp', tint: '#1b2a52', deep: '#0f1a38', kicker: 'AN EVENING OF MUSIC & DANCE', script: 'Sangeet', lines: ['Prabhdeep & Manpreet'], foot: 'THURSDAY · 21 JANUARY 2027 · 3:00 PM ONWARDS', dhol: true },   // the wedding page's colours (client, 2026-11-28: no plum)
   },
 };
 
@@ -150,7 +151,7 @@ for (const [SLUG, P] of Object.entries(PAGES)) {
   set(/(<meta property="og:image:alt" content=")[^"]*(")/, `$1${P.alt}$2`);
   set(/(<meta name="author" content=")[^"]*(")/, '$1Invitivals$2');
   set(/(<meta property="og:site_name" content=")[^"]*(")/, '$1Invitivals$2');
-  if (O.plum) html = html.replace(/(<meta name="theme-color" content=")[^"]*(")/, `$1${plumText('#1b2a52')}$2`);
+  html = html.replace(/(<meta name="theme-color" content=")[^"]*(")/, "$1#1b2a52$2");   // both pages: the wedding page’s navy
   html = html.replace(/(<meta name="apple-mobile-web-app-title" content=")[^"]*(")/, `$1${O.script ? 'Sangeet' : 'Prabhdeep &amp; Manpreet'}$2`);
   if (!/rel="canonical"/.test(html)) set(/(<meta property="og:url"[^>]*>)/, `<link rel="canonical" href="${URL_}">\n$1`);
   html = html.replace(/(<link rel="canonical" href=")[^"]*(")/, `$1${URL_}$2`).replace(/(<meta property="og:url" content=")[^"]*(")/, `$1${URL_}$2`);

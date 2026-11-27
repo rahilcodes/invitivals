@@ -2,7 +2,7 @@
    The Sangeet of Prabhdeep & Manpreet — Thursday 21 January 2027, 3:00 PM onwards, Bika Banquet, Rangoli Mall,
    Howrah (client brief 2026-11-27). Its own page, separate from the wedding (public/prabhdeep-manpreet-wedding),
    on the same design (public/amandeep-ishpreet-wedding, never edited for this) dressed for an evening of music:
-   the dhol, the plum skin of tools/prabhdeep-manpreet.mjs theme.
+   the dhol; the very same colours, pictures and film as the wedding page (client, 2026-11-28).
 
    After editing:
      node tools/sikh-finish.mjs public/prabhdeep-manpreet-sangeet
