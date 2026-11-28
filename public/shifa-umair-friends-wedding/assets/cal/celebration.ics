@@ -1,0 +1,34 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Invitivals//Shifa & Mohammad Umair//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VTIMEZONE
+TZID:Asia/Kolkata
+BEGIN:STANDARD
+DTSTART:19700101T000000
+TZOFFSETFROM:+0530
+TZOFFSETTO:+0530
+TZNAME:IST
+END:STANDARD
+END:VTIMEZONE
+BEGIN:VEVENT
+UID:20261226T193000-celebration@shifa-umair-friends-wedding.invitivals.com
+DTSTAMP:20261128T000000Z
+DTSTART;TZID=Asia/Kolkata:20261226T193000
+DTEND;TZID=Asia/Kolkata:20261226T233000
+SUMMARY:Wedding Celebration – Shifa & Mohammad Umair
+LOCATION:Mewar Vatika
+DESCRIPTION:With immense joy\, Parvez & Nazima Kazi invite you to celebrate
+  the wedding of their daughter Shifa with Mohammad Umair.\n\nVenue: Mewar 
+ Vatika\n\nGoogle Maps: https://maps.app.goo.gl/6HpYV38HwLzFL1GV8\n\nInvita
+ tion: https://invitivals.com/shifa-umair-friends-wedding/
+URL:https://invitivals.com/shifa-umair-friends-wedding/
+STATUS:CONFIRMED
+BEGIN:VALARM
+TRIGGER:-P1D
+ACTION:DISPLAY
+DESCRIPTION:Wedding Celebration – Shifa & Mohammad Umair
+END:VALARM
+END:VEVENT
+END:VCALENDAR

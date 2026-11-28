@@ -1,0 +1,36 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Invitivals//Shifa & Mohammad Umair//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VTIMEZONE
+TZID:Asia/Kolkata
+BEGIN:STANDARD
+DTSTART:19700101T000000
+TZOFFSETFROM:+0530
+TZOFFSETTO:+0530
+TZNAME:IST
+END:STANDARD
+END:VTIMEZONE
+BEGIN:VEVENT
+UID:20261224T160000-quboolHai@shifa-umair-family-wedding.invitivals.com
+DTSTAMP:20261128T000000Z
+DTSTART;TZID=Asia/Kolkata:20261224T160000
+DTEND;TZID=Asia/Kolkata:20261224T223000
+SUMMARY:Qubool Hai (Nikah & Dinner) – Shifa & Mohammad Umair
+LOCATION:Silverador Resort Club
+DESCRIPTION:Qubool Hai\, the Nikah of Shifa & Mohammad Umair\, followed by 
+ a dinner gathering. With love\, Parvez & Nazima.\n\nNikah: 4:00 PM\nDinner
+  Gathering: 7:30 PM\n\nDress code: Traditional dress in White\, Golden\, C
+ hampagne\n\nVenue: Silverador Resort Club\n\nGoogle Maps: https://maps.app
+ .goo.gl/D9CiqynYA1Qug2hd7\n\nInvitation: https://invitivals.com/shifa-umai
+ r-family-wedding/
+URL:https://invitivals.com/shifa-umair-family-wedding/
+STATUS:CONFIRMED
+BEGIN:VALARM
+TRIGGER:-P1D
+ACTION:DISPLAY
+DESCRIPTION:Qubool Hai (Nikah & Dinner) – Shifa & Mohammad Umair
+END:VALARM
+END:VEVENT
+END:VCALENDAR

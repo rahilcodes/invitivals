@@ -1,0 +1,52 @@
+
+/* ============================================================
+   Shifa & Mohammad Umair — additions to the design's stylesheet
+   (live event details and the two buttons on every event)
+   ============================================================ */
+
+/* live date, times, venue and dress code, in the design's serif, scaled with the artwork */
+.info {
+  z-index: 6; pointer-events: none;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  gap: calc(var(--s) * var(--gap, 8));
+  font-family: var(--serif); text-align: center; line-height: 1.12;
+}
+.info > * { margin: 0; display: block; }
+.info [data-date], .info__time, .info [data-venue] { white-space: nowrap; }
+.info [data-date] { font-weight: 600; font-size: calc(var(--s) * var(--fd, 38)); letter-spacing: .01em; }
+.info [data-times] { display: flex; flex-direction: column; align-items: center; gap: calc(var(--s) * 4); }
+.info__time { display: block; font-weight: 500; font-size: calc(var(--s) * var(--ft, 33)); }
+.info__time b { font-weight: 600; }
+.info [data-venue] { font-weight: 600; font-size: calc(var(--s) * var(--fv, 36)); }
+.info [data-venue] small { display: block; margin-top: .2em; font-weight: 500; font-size: .8em; }
+.info [data-dress] { font-style: italic; font-weight: 500; font-size: calc(var(--s) * var(--fdc, 27)); line-height: 1.25; max-width: 100%; white-space: normal; }
+.info [data-dress] b {
+  display: block; margin-bottom: .25em; font-style: normal; font-weight: 600;
+  font-size: .72em; letter-spacing: .24em; text-transform: uppercase;
+}
+.info--ink  { color: #3a0c12; }
+.info--ink [data-dress] b { color: #8c5a22; }
+.info--gold { color: #f0d9ab; text-shadow: 0 1px 3px rgba(0, 0, 0, .6); }
+.info--gold [data-dress] b { color: #d9b46e; }
+.info__lbl {                                     /* small caps label over a block (Venue) */
+  font-weight: 600; font-size: calc(var(--s) * 19) !important; letter-spacing: .26em; text-transform: uppercase; opacity: .8;
+}
+
+/* the two buttons: the design's gold-rimmed Maps pill, and a cream twin for the calendar */
+.maps { position: absolute; }
+.maps--cal {
+  color: #4a0d12;
+  background:
+    linear-gradient(#fbecd2, #ecd0a6) padding-box,
+    linear-gradient(135deg, #f6e2b0, #b98a3e 40%, #f3d896 60%, #a9772f) border-box;
+}
+.maps--cal > i { background: linear-gradient(100deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, .5) 50%, rgba(255, 255, 255, 0) 100%); }
+@media (hover: hover) {
+  .maps:hover { filter: brightness(1.08); box-shadow: 0 calc(var(--s) * 6) calc(var(--s) * 18) rgba(0, 0, 0, .5), 0 0 calc(var(--s) * 18) rgba(255, 205, 130, .35); }
+}
+
+/* in-page event sections: the details and buttons fade in when the section arrives */
+.sec .info, .sec .maps { opacity: 0; transform: translate3d(0, calc(var(--u) * 2), 0); transition: opacity .9s ease .25s, transform .9s ease .25s; }
+.sec.is-in .info, .sec.is-in .maps, body.no-anim .sec .info, body.no-anim .sec .maps { opacity: 1; transform: none; }
+.art:not(.is-ready) .maps { opacity: 0; pointer-events: none; }
+@media (prefers-reduced-motion: reduce) { .sec .info, .sec .maps { opacity: 1; transform: none; transition: none; } }
