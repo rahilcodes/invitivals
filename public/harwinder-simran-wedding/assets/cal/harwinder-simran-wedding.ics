@@ -1,0 +1,102 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Invitivals//Harwinder & Simran Wedding//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+X-WR-CALNAME:Harwinder & Simran · Wedding
+X-WR-TIMEZONE:Asia/Kolkata
+BEGIN:VTIMEZONE
+TZID:Asia/Kolkata
+BEGIN:STANDARD
+DTSTART:19700101T000000
+TZOFFSETFROM:+0530
+TZOFFSETTO:+0530
+TZNAME:IST
+END:STANDARD
+END:VTIMEZONE
+BEGIN:VEVENT
+UID:20270101T100000-arambh-shri-akhand-path-sahib@harwinder-simran.invitiva
+ ls.com
+DTSTAMP:20261128T000000Z
+DTSTART;TZID=Asia/Kolkata:20270101T100000
+SUMMARY:Arambh Shri Akhand Path Sahib – Harwinder Singh & Simran
+DESCRIPTION:Harwinder Singh & Simran · Wedding\nMap: https://maps.app.goo.
+ gl/uEmrpX9QTTzV4aiA9?g_st=iw\nhttps://invitivals.com/harwinder-simran-wedd
+ ing/
+URL:https://invitivals.com/harwinder-simran-wedding/
+STATUS:CONFIRMED
+BEGIN:VALARM
+TRIGGER:-P1D
+ACTION:DISPLAY
+DESCRIPTION:Arambh Shri Akhand Path Sahib – Harwinder Singh & Simran
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:20270103T100000-bhog-shri-akhand-path-sahib@harwinder-simran.invitivals
+ .com
+DTSTAMP:20261128T000000Z
+DTSTART;TZID=Asia/Kolkata:20270103T100000
+SUMMARY:Bhog Shri Akhand Path Sahib – Harwinder Singh & Simran
+DESCRIPTION:Harwinder Singh & Simran · Wedding\nMap: https://maps.app.goo.
+ gl/uEmrpX9QTTzV4aiA9?g_st=iw\nhttps://invitivals.com/harwinder-simran-wedd
+ ing/
+URL:https://invitivals.com/harwinder-simran-wedding/
+STATUS:CONFIRMED
+BEGIN:VALARM
+TRIGGER:-P1D
+ACTION:DISPLAY
+DESCRIPTION:Bhog Shri Akhand Path Sahib – Harwinder Singh & Simran
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:20270103T130000-lunch@harwinder-simran.invitivals.com
+DTSTAMP:20261128T000000Z
+DTSTART;TZID=Asia/Kolkata:20270103T130000
+SUMMARY:Lunch – Harwinder Singh & Simran
+LOCATION:At Our Residence\, Vill. Baghthala (Kurukshetra)
+DESCRIPTION:Harwinder Singh & Simran · Wedding\nAt Our Residence\, Vill. B
+ aghthala (Kurukshetra)\nMap: https://maps.app.goo.gl/uEmrpX9QTTzV4aiA9?g_s
+ t=iw\nhttps://invitivals.com/harwinder-simran-wedding/
+URL:https://invitivals.com/harwinder-simran-wedding/
+STATUS:CONFIRMED
+BEGIN:VALARM
+TRIGGER:-P1D
+ACTION:DISPLAY
+DESCRIPTION:Lunch – Harwinder Singh & Simran
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:20270103T190000-jagoo@harwinder-simran.invitivals.com
+DTSTAMP:20261128T000000Z
+DTSTART;TZID=Asia/Kolkata:20270103T190000
+SUMMARY:Jagoo – Harwinder Singh & Simran
+LOCATION:At Our Residence\, Vill. Baghthala (Kurukshetra)
+DESCRIPTION:Harwinder Singh & Simran · Wedding\nAt Our Residence\, Vill. B
+ aghthala (Kurukshetra)\nMap: https://maps.app.goo.gl/uEmrpX9QTTzV4aiA9?g_s
+ t=iw\nhttps://invitivals.com/harwinder-simran-wedding/
+URL:https://invitivals.com/harwinder-simran-wedding/
+STATUS:CONFIRMED
+BEGIN:VALARM
+TRIGGER:-P1D
+ACTION:DISPLAY
+DESCRIPTION:Jagoo – Harwinder Singh & Simran
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:20270104T080000-departure-of-baraat@harwinder-simran.invitivals.com
+DTSTAMP:20261128T000000Z
+DTSTART;TZID=Asia/Kolkata:20270104T080000
+SUMMARY:Departure of Baraat – Harwinder Singh & Simran
+LOCATION:Punia Farm House\, Patiala Cheeka Road\, Panjola
+DESCRIPTION:Harwinder Singh & Simran · Wedding\nPunia Farm House\, Patiala
+  Cheeka Road\, Panjola.\nMap: https://maps.app.goo.gl/ZFy4kuZ7wVWQvcF18?g_
+ st=iw\nhttps://invitivals.com/harwinder-simran-wedding/
+URL:https://invitivals.com/harwinder-simran-wedding/
+STATUS:CONFIRMED
+BEGIN:VALARM
+TRIGGER:-P1D
+ACTION:DISPLAY
+DESCRIPTION:Departure of Baraat – Harwinder Singh & Simran
+END:VALARM
+END:VEVENT
+END:VCALENDAR

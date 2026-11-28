@@ -1,0 +1,34 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Invitivals//Harwinder & Simran Wedding//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+X-WR-CALNAME:Harwinder & Simran · Wedding
+X-WR-TIMEZONE:Asia/Kolkata
+BEGIN:VTIMEZONE
+TZID:Asia/Kolkata
+BEGIN:STANDARD
+DTSTART:19700101T000000
+TZOFFSETFROM:+0530
+TZOFFSETTO:+0530
+TZNAME:IST
+END:STANDARD
+END:VTIMEZONE
+BEGIN:VEVENT
+UID:20270103T100000-bhog-shri-akhand-path-sahib@harwinder-simran.invitivals
+ .com
+DTSTAMP:20261128T000000Z
+DTSTART;TZID=Asia/Kolkata:20270103T100000
+SUMMARY:Bhog Shri Akhand Path Sahib – Harwinder Singh & Simran
+DESCRIPTION:Harwinder Singh & Simran · Wedding\nMap: https://maps.app.goo.
+ gl/uEmrpX9QTTzV4aiA9?g_st=iw\nhttps://invitivals.com/harwinder-simran-wedd
+ ing/
+URL:https://invitivals.com/harwinder-simran-wedding/
+STATUS:CONFIRMED
+BEGIN:VALARM
+TRIGGER:-P1D
+ACTION:DISPLAY
+DESCRIPTION:Bhog Shri Akhand Path Sahib – Harwinder Singh & Simran
+END:VALARM
+END:VEVENT
+END:VCALENDAR
