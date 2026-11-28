@@ -1,5 +1,5 @@
 /* ─────────────────────────────────────────────────────────────
-   Harwinder Singh & Simran — the wedding, Sunday 3 January 2027 (client brief 2026-11-28), the groom's family
+   Harwinder Singh & Simran — the wedding, Monday 4 January 2027 (client brief 2026-11-28; date corrected from Sunday 3 January, 29 Nov), the groom's family
    inviting. A separate page on the design the client chose (public/amandeep-ishpreet-wedding, never edited for
    this), on a copy of the engine of public/prabhdeep-manpreet-wedding (not edited for this).
 
@@ -47,14 +47,14 @@ export const weddingConfig = {
     from: { label: 'Invitation From', lines: ['S. Manjeet Singh', 'Vill. Baghthala (Kurukshetra)'], phones: [{ label: '90531-47737', tel: '+919053147737' }, { label: '94166-57723', tel: '+919416657723' }] },
   },
   /* the cover's date in the Save the Date card, without naming one ceremony */
-  saveTheDate: { details: false, calendar: false },
+  saveTheDate: { details: false, calendar: false, event: { date: '2027-01-04T08:00:00+05:30' } },   // the wedding day (client, 29 Nov)
 
   sideBorders: null,
   guestFallback: 'You & Your Family',
-  shareText: 'The wedding of Harwinder Singh & Simran · Sunday, 3rd January 2027',
+  shareText: 'The wedding of Harwinder Singh & Simran · Monday, 4th January 2027',
 
-  /* the wedding date as supplied (Sunday 3 January 2027); the time is the Bhog's, the first event that day */
-  weddingDate: '2027-01-03T10:00:00+05:30',
+  /* the wedding date as corrected by the client (Monday 4 January 2027, 29 Nov); the time is the Baraat's, the first event that day */
+  weddingDate: '2027-01-04T08:00:00+05:30',
   weddingEnd: null,
   venueCity: 'Kurukshetra',
 
@@ -98,7 +98,7 @@ export const weddingConfig = {
 
   countdown: {
     title: 'Until We Celebrate',
-    sub: 'Counting down to Sunday, 3rd January 2027',
+    sub: 'Counting down to Monday, 4th January 2027',
     passed: 'The celebrations have begun. Thank you for your blessings.',
     today: 'Today is the day. Blessings to all who gather.',
   },
@@ -118,7 +118,7 @@ export const weddingConfig = {
     title: [],
     lines: [],
     signoff: '',
-    date: '03.01.2027',
+    date: '04.01.2027',
     logo: null,
     monogram: true,
     farewell: null,

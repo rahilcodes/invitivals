@@ -78,7 +78,7 @@ const svg = Buffer.from(`<svg width="1200" height="630" xmlns="http://www.w3.org
     <text x="600" y="430" font-size="40" font-style="italic" fill="#e7c87a">&amp;</text>
     <text x="600" y="498" font-size="60" font-style="italic" fill="#f8f0df">${x(cfg.brideName)}</text>
     <line x1="430" y1="530" x2="770" y2="530" stroke="#e7c87a" stroke-opacity="0.7" stroke-width="1.5"/>
-    <text x="600" y="576" font-size="24" letter-spacing="5" fill="#f1e6cf">SUNDAY · 3 JANUARY 2027</text>
+    <text x="600" y="576" font-size="24" letter-spacing="5" fill="#f1e6cf">MONDAY · 4 JANUARY 2027</text>
   </g></svg>`);
 const info = await sharp(bg).composite([{ input: svg }]).jpeg({ quality: 86, mozjpeg: true }).toFile(path.join(DIR, 'assets', 'og.jpg'));
 console.log('✓ assets/og.jpg', info.width + 'x' + info.height, info.size, 'bytes');
@@ -90,19 +90,19 @@ const set = (re, val) => { if (!re.test(html)) throw new Error('tag not found: '
 const NAMES = `${cfg.groomName} &amp; ${cfg.brideName}`;
 set(/<title>[^<]*<\/title>/, `<title>${NAMES} | Wedding Invitation</title>`);
 set(/(<meta property="og:title" content=")[^"]*(")/, `$1${NAMES} | Wedding Invitation$2`);
-set(/(<meta name="description" content=")[^"]*(")/, `$1Sardarni Amarjit Kaur &amp; Sardar Manjeet Singh cordially invite you to the wedding ceremony of their son ${cfg.groomName} with ${cfg.brideName}, Sunday, 3rd January 2027. Arambh Shri Akhand Path Sahib: Friday, 1 January, 10:00 AM. Bhog: Sunday, 3 January, 10:00 AM. Lunch 1:00 PM and Jagoo 7:00 PM at our residence, Vill. Baghthala (Kurukshetra). Departure of Baraat: Monday, 4 January, 8:00 AM, Punia Farm House, Patiala Cheeka Road, Panjola.$2`);
-set(/(<meta property="og:description" content=")[^"]*(")/, `$1Wedding Invitation · Sunday, 3rd January 2027. Tap to open the invitation.$2`);
-set(/(<meta property="og:image:alt" content=")[^"]*(")/, `$1${NAMES} — Wedding Invitation, Sunday 3 January 2027$2`);
+set(/(<meta name="description" content=")[^"]*(")/, `$1Sardarni Amarjit Kaur &amp; Sardar Manjeet Singh cordially invite you to the wedding ceremony of their son ${cfg.groomName} with ${cfg.brideName}, Monday, 4th January 2027. Arambh Shri Akhand Path Sahib: Friday, 1 January, 10:00 AM. Bhog: Sunday, 3 January, 10:00 AM. Lunch 1:00 PM and Jagoo 7:00 PM at our residence, Vill. Baghthala (Kurukshetra). Departure of Baraat: Monday, 4 January, 8:00 AM, Punia Farm House, Patiala Cheeka Road, Panjola.$2`);
+set(/(<meta property="og:description" content=")[^"]*(")/, `$1Wedding Invitation · Monday, 4th January 2027. Tap to open the invitation.$2`);
+set(/(<meta property="og:image:alt" content=")[^"]*(")/, `$1${NAMES} — Wedding Invitation, Monday 4 January 2027$2`);
 set(/(<meta name="author" content=")[^"]*(")/, `$1Invitivals$2`);
 set(/(<meta property="og:site_name" content=")[^"]*(")/, `$1Invitivals$2`);
 if (!/rel="canonical"/.test(html)) set(/(<meta property="og:url"[^>]*>)/, `<link rel="canonical" href="${URL_}">\n$1`);
 html = html.replace(/(<link rel="canonical" href=")[^"]*(")/, `$1${URL_}$2`);
-html = html.replace(/(<meta property="og:image" content=")[^"]*(")/, `$1${URL_}assets/og.jpg?v=1$2`);
+html = html.replace(/(<meta property="og:image" content=")[^"]*(")/, `$1${URL_}assets/og.jpg?v=2$2`);
 html = html.replace(/\n<meta name="twitter:title"[^>]*>\n<meta name="twitter:description"[^>]*>\n<meta name="twitter:image"[^>]*>/, '');   // rewritten every time (names can change)
 html = html.replace(/(<meta name="twitter:card"[^>]*>)/, `$1
 <meta name="twitter:title" content="${NAMES} | Wedding Invitation">
-<meta name="twitter:description" content="Wedding Invitation · Sunday, 3rd January 2027. Tap to open the invitation.">
-<meta name="twitter:image" content="${URL_}assets/og.jpg?v=1">`);
+<meta name="twitter:description" content="Wedding Invitation · Monday, 4th January 2027. Tap to open the invitation.">
+<meta name="twitter:image" content="${URL_}assets/og.jpg?v=2">`);
 if (/prabhdeep|manpreet|sabharwal|kolkata|bradree|kutia|navdeep|simerpreet/i.test(html)) throw new Error('index.html still carries the earlier couple');
 fs.writeFileSync(ix, html);
 console.log('✓ index.html sharing tags');
