@@ -1,0 +1,26 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Invitivals//Rose Red Engagement//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VTIMEZONE
+TZID:Asia/Kolkata
+BEGIN:STANDARD
+DTSTART:19700101T000000
+TZOFFSETFROM:+0530
+TZOFFSETTO:+0530
+TZNAME:IST
+END:STANDARD
+END:VTIMEZONE
+BEGIN:VEVENT
+UID:pallavi-vasudev-engagement-0@invitivals.com
+DTSTAMP:20261128T093037Z
+DTSTART;TZID=Asia/Kolkata:20261203T123000
+SUMMARY:Engagement Ceremony – Pallavi R & Vasudev K S
+LOCATION:Sri Krishna Grand Party Hall\, Bengaluru\, Karnataka\, India.
+DESCRIPTION:Engagement ceremony of Pallavi R and Vasudev K S.\nMap: https:/
+ /maps.app.goo.gl/mr7vmh8DSgvXYLzw6?g_st=awb\nhttps://invitivals.com/pallav
+ i-vasudev-engagement/
+URL:https://invitivals.com/pallavi-vasudev-engagement/
+END:VEVENT
+END:VCALENDAR
