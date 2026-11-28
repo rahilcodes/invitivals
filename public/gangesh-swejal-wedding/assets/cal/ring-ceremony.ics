@@ -1,0 +1,32 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Invitivals//Gangesh & Swejal Wedding//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VTIMEZONE
+TZID:Asia/Kolkata
+BEGIN:STANDARD
+DTSTART:19700101T000000
+TZOFFSETFROM:+0530
+TZOFFSETTO:+0530
+TZNAME:IST
+END:STANDARD
+END:VTIMEZONE
+BEGIN:VEVENT
+UID:20261224T100000-ring-ceremony@gangesh-swejal.invitivals.com
+DTSTAMP:20261128T000000Z
+DTSTART;TZID=Asia/Kolkata:20261224T100000
+SUMMARY:Ring Ceremony – Gangesh Dhuri & Swejal Shirgavkar
+LOCATION:https://maps.app.goo.gl/CxbjWeeQPmGfZYcZA
+DESCRIPTION:Ring Ceremony celebration of Gangesh Dhuri and Swejal Shirgavka
+ r.\nMap: https://maps.app.goo.gl/CxbjWeeQPmGfZYcZA\nhttps://invitivals.com
+ /gangesh-swejal-wedding/
+URL:https://invitivals.com/gangesh-swejal-wedding/
+STATUS:CONFIRMED
+BEGIN:VALARM
+TRIGGER:-P1D
+ACTION:DISPLAY
+DESCRIPTION:Ring Ceremony – Gangesh Dhuri & Swejal Shirgavkar
+END:VALARM
+END:VEVENT
+END:VCALENDAR

@@ -1,0 +1,32 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Invitivals//Gangesh & Swejal Wedding//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VTIMEZONE
+TZID:Asia/Kolkata
+BEGIN:STANDARD
+DTSTART:19700101T000000
+TZOFFSETFROM:+0530
+TZOFFSETTO:+0530
+TZNAME:IST
+END:STANDARD
+END:VTIMEZONE
+BEGIN:VEVENT
+UID:20261225T180000-haldi@gangesh-swejal.invitivals.com
+DTSTAMP:20261128T000000Z
+DTSTART;TZID=Asia/Kolkata:20261225T180000
+SUMMARY:Haldi – Gangesh Dhuri & Swejal Shirgavkar
+LOCATION:https://goo.gl/maps/gCMjnkjGacSA3Jgh9?g_st=aw
+DESCRIPTION:Haldi ceremony of Gangesh Dhuri and Swejal Shirgavkar.\nMap: ht
+ tps://goo.gl/maps/gCMjnkjGacSA3Jgh9?g_st=aw\nhttps://invitivals.com/ganges
+ h-swejal-wedding/
+URL:https://invitivals.com/gangesh-swejal-wedding/
+STATUS:CONFIRMED
+BEGIN:VALARM
+TRIGGER:-P1D
+ACTION:DISPLAY
+DESCRIPTION:Haldi – Gangesh Dhuri & Swejal Shirgavkar
+END:VALARM
+END:VEVENT
+END:VCALENDAR
